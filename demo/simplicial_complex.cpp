@@ -1,6 +1,7 @@
 #include <simplicial_complex.h>
 #include <sparse_vector.h>
 #include <col_matrix.h>
+#include <filtration.h>
 #include <iostream>
 
 int main() {
@@ -33,6 +34,11 @@ int main() {
   v.print();
 
   auto B = X.boundary<SparseVector<size_t, int>>(1);
+
+  auto F = LowerStarFiltration<SimplicialComplex, float>(X, {1., 2., 3.});
+
+  F.print();
+
   return 0;
 
 }

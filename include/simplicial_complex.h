@@ -72,6 +72,14 @@ public:
     return;
   }
 
+  // return 0-skeleton of cell
+  std::vector<size_t> skeleton0(size_t dim, size_t i) {
+    if (dim == 0) {
+      return {i};
+    }
+    return spx_list[dim-1][i];
+  }
+
 
 
   size_t ncells(size_t dim) {
@@ -89,17 +97,25 @@ public:
     }
   }
 
+  void print_cell(size_t dim, size_t i) {
+    if (dim == 0) {
+      std::cout << i << std::endl;
+      return;
+    }
+    for (size_t j = 0; j < dim; j++) {
+      std::cout << spx_list[dim - 1][i][j] << ",";
+    }
+    std::cout << spx_list[dim - 1][i][dim] << std::endl;
+  }
+
   void print(size_t dim) {
     if (dim == 0) {
       for (size_t i = 0; i < ncells0; i++) {
-        std::cout << i << std::endl;
+        print_cell(0, i);
       }
     } else {
       for (size_t i = 0; i < ncells(dim); i++) {
-        for (size_t j = 0; j < dim; j++) {
-          std::cout << spx_list[dim - 1][i][j] << ",";
-        }
-        std::cout << spx_list[dim - 1][i][dim] << std::endl;
+        print_cell(dim, i);
       }
     }
   }
