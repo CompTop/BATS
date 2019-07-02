@@ -34,12 +34,14 @@ int main() {
   v.print();
 
   auto B = X.boundary<SparseVector<size_t, int>>(1);
+  B.print();
 
   auto F = LowerStarFiltration<SimplicialComplex, float>(X, {1., 2., 3.});
 
   F.print();
 
   B = F.boundary<SparseVector<size_t, int>>(1);
+  B.print();
 
   return 0;
 

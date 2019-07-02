@@ -127,6 +127,7 @@ public:
     }
   }
 
+
   // get boundary of simplex i in dimension dim
   template <typename TV>
   SparseVector<size_t, TV> boundary(size_t dim, size_t i) {
@@ -162,6 +163,8 @@ public:
     std::vector<int> bdr_val;
     std::vector<size_t> face;
     for (size_t i = 0; i < ncells(dim); i++) {
+      bdr_ind.clear();
+      bdr_val.clear();
       int coeff = -1;
       // loop over faces in lexicographical order
       for (size_t k = 0; k < dim+1; k++) {

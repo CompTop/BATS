@@ -54,6 +54,13 @@ public:
       std::cout << indval[i].first << " : " << indval[i].second << std::endl;
     }
   }
+
+  void print_row() {
+    for (size_t i = 0; i < nnz(); i++) {
+      std::cout << "(" << indval[i].first << "," << indval[i].second << ") ";
+    }
+    std::cout << std::endl;
+  }
 };
 
 // TODO: sparse F2 vector implementation

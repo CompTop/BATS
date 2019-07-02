@@ -58,5 +58,13 @@ public:
 
   // schur complement friend
 
+  void print() {
+    std::cout << "transpose: " << std::endl;
+    for (size_t i = 0; i < col.size(); i++) {
+      std::cout << i << " : ";
+      col[i].print_row();
+    }
+  }
+
   // dense matrix
 };
