@@ -39,6 +39,8 @@ int main() {
 
   F.print();
 
+  B = F.boundary<SparseVector<size_t, int>>(1);
+
   return 0;
 
 }

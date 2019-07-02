@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <numeric>
 #include "abstract_complex.h"
+#include "simplicial_complex.h"
+#include "sparse_vector.h"
+#include "col_matrix.h"
 
 // template over
 //  TC - complex type
@@ -68,6 +71,15 @@ public:
   }
 
   // create boundary in dimension dim
+  // template over column type
+  template <class TVec>
+  ColumnMatrix<TVec> boundary(size_t dim) {
+    // first get column matrix of boundary
+    ColumnMatrix<TVec> B = cpx.template boundary<TVec>(dim);
+    // // TODO: permute rows and columns
+    B.permute(filt_perm[dim-1], filt_perm[dim]);
+    return B;
+  }
 
 };
 
@@ -100,3 +112,5 @@ Filtration<TC,TF> LowerStarFiltration(TC cpx, std::vector<TF> f) {
   F.sort();
   return F;
 }
+
+// TODO: flag filtration

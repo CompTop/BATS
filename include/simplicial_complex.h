@@ -154,10 +154,10 @@ public:
   }
 
   // template over column type
-  template <class TC>
-  ColumnMatrix<TC> boundary(size_t dim) {
+  template <class TVec>
+  ColumnMatrix<TVec> boundary(size_t dim) {
     //assert(dim > 0);
-    std::vector<TC> col;
+    std::vector<TVec> col;
     std::vector<size_t> bdr_ind;
     std::vector<int> bdr_val;
     std::vector<size_t> face;
@@ -178,9 +178,9 @@ public:
         bdr_val.push_back(coeff);
         coeff = -coeff;
       }
-      col.push_back(TC(bdr_ind, bdr_val));
+      col.push_back(TVec(bdr_ind, bdr_val));
     }
-    return ColumnMatrix<TC>(col);
+    return ColumnMatrix<TVec>(col);
   }
 
 
