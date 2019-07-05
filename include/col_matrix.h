@@ -16,6 +16,10 @@ public:
 
   ColumnMatrix(std::vector<TC> col) : col(col) {}
 
+  inline size_t width() {
+    return col.size();
+  }
+
   // permutations: permute, permute_rows, permute_cols
 
   // permute columns in-place

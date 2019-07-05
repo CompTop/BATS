@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <iostream>
 #include <algorithm>
 
@@ -18,15 +19,21 @@ public:
 
   SparseVector(std::vector<TI> ind, std::vector<TV> val) {
     size_t nz = ind.size();
-    indval = std::vector<std::pair<TI, TV>>(nz);
+    indval = std::vector<std::pair<TI, TV>>();
     for (size_t i = 0; i < nz; i++) {
-      indval[i] = std::pair<TI, TV>(ind[i], val[i]);
+      indval.push_back(std::make_pair(ind[i], val[i]));
     }
   }
   // get index and set index
 
+
+  // return last nonzero
+  std::pair<TI, TV> last() const {
+    return indval.back();
+  }
+
   // nnz
-  inline size_t nnz() {
+  inline size_t nnz() const {
     return indval.size();
   }
 
@@ -42,6 +49,49 @@ public:
       indval[i].first = perm[indval[i].first];
     }
     sort();
+  }
+
+  // set
+  // y <- ax + y
+  void axpy(const TV &a, const SparseVector &x) {
+    // first check if there is anything to do.
+    if (x.nnz() == 0) { return; }
+    if (nnz() == 0) { indval = x.indval; return; }
+
+    // where to put new vector
+    std::vector<std::pair<TI, TV>> tmp;
+    auto i1 = indval.cbegin();
+		auto i2 = x.indval.cbegin();
+		do {
+			if ((*i1).first == (*i2).first) {
+				TV val = a* ((*i2).second) + (*i1).first;
+				if (!val.iszero()) {
+					tmp.push_back(std::make_pair((*i1).first, val));
+				}
+				++i1;
+				++i2;
+			} else if ((*i1).first < (*i2).first) {
+				tmp.push_back(*i1);
+				++i1;
+			} else {
+				tmp.push_back(std::make_pair((*i2).first, a * (*i2).second));
+				++i2;
+			}
+		} while (i1 < indval.cend() && i2 < x.indval.cend());
+		// run through rest of entries and dump in
+		// at most one of the loops does anything
+		while (i1 < indval.cend()) {
+			tmp.push_back(*i1);
+			++i1;
+		}
+		while (i2 < x.indval.cend()) {
+			tmp.push_back(std::make_pair((*i2).first, a * (*i2).second));
+			++i2;
+		}
+		indval = tmp;
+		return;
+
+
   }
 
   // axpy - in place
