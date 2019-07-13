@@ -1,6 +1,6 @@
-#include <simplicial_complex.h>
-#include <sparse_vector.h>
-#include <col_matrix.h>
+#include <complex/simplicial_complex.h>
+#include <linalg/sparse_vector.h>
+#include <linalg/col_matrix.h>
 #include <filtration.h>
 #include <iostream>
 

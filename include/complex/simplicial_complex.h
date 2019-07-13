@@ -1,8 +1,8 @@
 #pragma once
 
 #include "abstract_complex.h"
-#include "sparse_vector.h"
-#include "col_matrix.h"
+#include <linalg/sparse_vector.h>
+#include <linalg/col_matrix.h>
 #include <vector>
 #include <cstddef>
 #include <iostream>

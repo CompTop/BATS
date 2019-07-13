@@ -1,5 +1,5 @@
-#include <field.h>
-#include <sparse_vector.h>
+#include <linalg/field.h>
+#include <linalg/sparse_vector.h>
 #include <vector>
 
 #define F2 ModP<int, 2>
