@@ -20,11 +20,17 @@ private:
   std::vector<std::vector<size_t>> filt_perm; // filtration perumation for each dimension
   std::vector<std::vector<size_t>> inv_perm; // inverse permutation for each dimension
 public:
+
+  // empty initializer
+  Filtration() : cpx(TC()) {}
+
   // initialize with only complex
   Filtration(TC cpx) : cpx(cpx) {}
 
   Filtration(TC cpx,
     std::vector<std::vector<TF>> val) : cpx(cpx), val(val) {}
+
+  bool add(std::vector<size_t>, const TF t);
 
   // assume filtration value has been set for each cell.  Find sort permutaion in each dimension
   void sort() {
@@ -82,6 +88,23 @@ public:
   }
 
 };
+
+// add cell c to complex at value t
+// Special method fo Simplicial Complexes
+// template <class TC, typename TF> class Filtration; // primary template
+// template <typename TF>
+template <>
+bool Filtration<SimplicialComplex, float>::add(std::vector<size_t> c, const float t) {
+  bool added = cpx.add(c);
+  if (added) {
+    size_t dim = c.size() - 1;
+    while (val.size() < dim + 1) {
+      val.push_back(std::vector<float>());
+    }
+    val[dim].push_back(t);
+  }
+  return added;
+}
 
 
 // create a lower-star filtraiton on a cell complex of type TC

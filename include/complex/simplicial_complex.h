@@ -46,13 +46,29 @@ public:
   // default constructor
   SimplicialComplex() : ncells0(0) {}
 
+  // constructor that initializes to set dimension
+  SimplicialComplex(size_t maxdim) : ncells0(0), spx_list(maxdim), spx_to_idx(maxdim) {}
 
-  // add simplex to complex
-  void add(std::vector<size_t> s) {
+  // adds a simplex to the complex without doing any checks
+  bool add_unsafe(const std::vector<size_t> &s) {
+    size_t dim = s.size() - 1;
+    if (dim == 0) {
+      ncells0 = std::max(s[0] + 1, ncells0);
+    } else {
+      // add simplex to appropriate dimension
+      spx_list[dim-1].push_back(s);
+      // set reverse map
+      spx_to_idx[dim-1][s] = spx_list[dim-1].size() - 1;
+    }
+    return true;
+  }
+
+  // add simplex to complex with appropriate checks
+  bool add(std::vector<size_t> s) {
     size_t dim = s.size() - 1;
     if (dim == 0){
       ncells0 = std::max(s[0] + 1, ncells0);
-      return;
+      return true;
     }
 
     // ensure simplex is sorted
@@ -64,12 +80,13 @@ public:
       spx_to_idx.push_back(std::map<std::vector<size_t>, size_t>());
     }
 
-    // add simplex to appropriate dimension
-    spx_list[dim-1].push_back(s);
-    // set reverse map
-    spx_to_idx[dim-1][s] = spx_list[dim-1].size() - 1;
+    // check if simplex is already in complex
+    if (spx_to_idx[dim-1].count(s) > 0) {
+      // simplex is already in complex
+      return false;
+    }
 
-    return;
+    return add_unsafe(s);
   }
 
   // return 0-skeleton of cell
@@ -121,6 +138,7 @@ public:
   }
 
   void print() {
+    std::cout << "SimplicialComplex of dimension " << maxdim() << std::endl;
     for (size_t dim = 0; dim < maxdim() + 1; dim ++) {
       std::cout << "dim " << dim << " : " << ncells(dim) << " cells" << std::endl;
       print(dim);

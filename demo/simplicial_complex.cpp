@@ -9,12 +9,18 @@ int main() {
   SimplicialComplex X = SimplicialComplex();
   X.add({0});
   X.add({1});
-  X.add({0, 1});
+  auto ret0 = X.add({0, 1});
+  std::cout << ret0 << std::endl;
+  auto ret = X.add({0, 1});
+  std::cout << ret << std::endl;
   X.add({2});
   X.add({0,2});
   X.add({2,1});
   X.add({0,1,2});
   X.print();
+
+  SimplicialComplex Y = SimplicialComplex(3);
+  Y.print();
 
   // std::cout << "{1} loc : " << X.find_idx({1}) << std::endl;
   // std::cout << "{3} loc : " << X.find_idx({3}) << std::endl;
