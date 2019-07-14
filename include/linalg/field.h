@@ -13,7 +13,7 @@ private:
 
 public:
 
-  ModP(IntT val) : val(val % P) {}
+  ModP(IntT val) : val((val + P) % P) {}
 
   ModP operator+( const ModP &b) const {
     return ModP(val + b.val);
@@ -35,6 +35,10 @@ public:
     return val == b.val;
   }
 
+  inline bool operator<( const ModP &b) const {
+    return false;
+  }
+
   ModP inv() const {
     IntT b = 1;
     IntT c = val;
@@ -51,6 +55,7 @@ public:
   }
 
   bool iszero() const {
+    // std::cout << val << " == 0:" << (val == 0) << std::endl;
     return val == 0;
   }
 

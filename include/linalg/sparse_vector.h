@@ -24,7 +24,17 @@ public:
       indval.push_back(std::make_pair(ind[i], val[i]));
     }
   }
+
+	// constructor that takes in integers for val
+	SparseVector(std::vector<TI> ind, std::vector<int> val) {
+		size_t nz = ind.size();
+		indval = std::vector<std::pair<TI, TV>>();
+		for (size_t i = 0; i < nz; i++) {
+      indval.push_back(std::make_pair(ind[i], TV(val[i])));
+    }
+	}
   // get index and set index
+
 
 
   // return last nonzero
@@ -64,7 +74,8 @@ public:
 		auto i2 = x.indval.cbegin();
 		do {
 			if ((*i1).first == (*i2).first) {
-				TV val = a* ((*i2).second) + (*i1).first;
+				TV val = (a * ((*i2).second)) + (*i1).second;
+				// std::cout << "a: " << a << " x: " << ((*i2).second)) << " y: " << (*i1).second << std::endl;
 				if (!val.iszero()) {
 					tmp.push_back(std::make_pair((*i1).first, val));
 				}

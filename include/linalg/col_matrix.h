@@ -20,6 +20,10 @@ public:
     return col.size();
   }
 
+  TC & operator[](size_t index)  {
+    return col[index];
+  }
+
   // permutations: permute, permute_rows, permute_cols
 
   // permute columns in-place
