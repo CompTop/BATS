@@ -46,7 +46,8 @@ int main() {
   auto y = gemv(U, VecT(2));
   y.print_row();
 
-
+  y = ut_solve(U, VecT(2));
+  y.print_row();
 
   return 0;
 }

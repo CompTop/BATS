@@ -105,7 +105,20 @@ TC gemv(ColumnMatrix<TC> &A, const TC &x) {
 // return y = U \ x
 // solves x = U * y
 // Assumes U is upper triangular, with unit diagonal
+// pseudo-code
+// for i = n:-1:1
+//    y[i] = y[i] - U[i,j]x[j]
 template <class TC>
 TC ut_solve(ColumnMatrix<TC> &U, const TC &x) {
   TC y(x);
+  auto yi = y.nzend();
+  while (yi > y.nzbegin()) {
+    //auto yp = y.nzpair(yi);
+    // y[yi->first] /= U[i][i]
+    // but U is unit triangular
+    y.axpy(-(yi->second), U[yi->first], 1); //y.axpy(-yp.second, U[i][:i-1])
+    // find next nonzero index
+    yi = y.find_last_nz(yi->first - 1);
+  }
+  return y;
 }

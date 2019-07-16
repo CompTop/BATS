@@ -45,8 +45,19 @@ public:
 		return indval.cbegin();
 	}
 
+	// get const iterator end of nzs
 	auto nzend() const {
 		return indval.cend();
+	}
+
+	// find last element with index < i
+	auto find_last_nz(TI i) {
+		auto it = std::lower_bound(
+			indval.cbegin(),
+			indval.cend(),
+			std::make_pair(i, TV(0))
+		);
+		return it--;
 	}
 
 
@@ -54,6 +65,21 @@ public:
   std::pair<TI, TV> last() const {
     return indval.back();
   }
+
+	// return ith nonzero value
+	TV nzval(size_t i) const {
+		return indval[i].second;
+	}
+
+	// return ith nonzero index
+	TV nzind(size_t i) const {
+		return indval[i].first;
+	}
+
+	// return ith nonzero pair
+	std::pair<TI, TV> nzpair(size_t i) const {
+		return indval[i];
+	}
 
   // nnz
   inline size_t nnz() const {
@@ -76,10 +102,15 @@ public:
 
   // set
   // y <- ax + y
-  void axpy(const TV &a, const SparseVector &x) {
+  void axpy(const TV &a, const SparseVector &x, size_t xoffset=0) {
     // first check if there is anything to do.
     if (x.nnz() == 0) { return; }
-    if (nnz() == 0) { indval = x.indval; return; }
+		auto xend = x.indval.cend() - xoffset;
+    if (nnz() == 0) {
+			std::copy(x.indval.begin(), xend, std::back_inserter(indval));
+			//indval = x.indval;
+			return;
+		}
 
     // where to put new vector
     std::vector<std::pair<TI, TV>> tmp;
@@ -101,14 +132,14 @@ public:
 				tmp.push_back(std::make_pair((*i2).first, a * (*i2).second));
 				++i2;
 			}
-		} while (i1 < indval.cend() && i2 < x.indval.cend());
+		} while (i1 < indval.cend() && i2 < xend);
 		// run through rest of entries and dump in
 		// at most one of the loops does anything
 		while (i1 < indval.cend()) {
 			tmp.push_back(*i1);
 			++i1;
 		}
-		while (i2 < x.indval.cend()) {
+		while (i2 < xend) {
 			tmp.push_back(std::make_pair((*i2).first, a * (*i2).second));
 			++i2;
 		}
