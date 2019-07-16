@@ -36,12 +36,15 @@ int main() {
   B.print();
 
   std::cout << "\nidentity:" << std::endl;
-  MatT I = identity<VecT>(3);
-  I.print();
+  MatT U = identity<VecT>(3);
+  U.print();
 
   B = F.boundary<VecT>(1);
-  p2c = reduce_matrix(B, I);
-  I.print();
+  p2c = reduce_matrix(B, U);
+  U.print();
+
+  auto y = gemv(U, VecT(2));
+  y.print_row();
 
 
 

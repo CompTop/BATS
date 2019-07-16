@@ -40,6 +40,14 @@ public:
 	}
   // get index and set index
 
+	// get const iterator through nzs
+	auto nzbegin() const {
+		return indval.cbegin();
+	}
+
+	auto nzend() const {
+		return indval.cend();
+	}
 
 
   // return last nonzero

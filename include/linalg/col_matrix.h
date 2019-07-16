@@ -23,6 +23,10 @@ public:
   TC & operator[](size_t index)  {
     return col[index];
   }
+  //
+  // TC& constcol const (size_t index) {
+  //   return col[index];
+  // }
 
   // permutations: permute, permute_rows, permute_cols
 
@@ -84,4 +88,24 @@ ColumnMatrix<TC> identity(size_t n) {
     col[j] = TC(j);
   }
   return ColumnMatrix<TC>(col);
+}
+
+
+// return y = A*x
+template <class TC>
+TC gemv(ColumnMatrix<TC> &A, const TC &x) {
+  TC y;  // zero initializer
+  // loop over nonzero indices of v
+  for (auto p = x.nzbegin(); p < x.nzend(); ++p) {
+    y.axpy(p->second, A[p->first]); // y <- x[j]*A[j]
+  }
+  return y;
+}
+
+// return y = U \ x
+// solves x = U * y
+// Assumes U is upper triangular, with unit diagonal
+template <class TC>
+TC ut_solve(ColumnMatrix<TC> &U, const TC &x) {
+  TC y(x);
 }
