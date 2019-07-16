@@ -39,6 +39,11 @@ int main() {
   MatT I = identity<VecT>(3);
   I.print();
 
+  B = F.boundary<VecT>(1);
+  p2c = reduce_matrix(B, I);
+  I.print();
+
+
 
   return 0;
 }
