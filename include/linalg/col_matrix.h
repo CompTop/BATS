@@ -110,15 +110,38 @@ TC gemv(ColumnMatrix<TC> &A, const TC &x) {
 //    y[i] = y[i] - U[i,j]x[j]
 template <class TC>
 TC ut_solve(ColumnMatrix<TC> &U, const TC &x) {
+  //std::cout << "entering solve" << std::endl;
   TC y(x);
-  auto yi = y.nzend();
-  while (yi > y.nzbegin()) {
+  auto yi = y.nzend() - 1;
+  //std::cout << yi->first << " : " << yi->second << std::endl;
+  while (yi >= y.nzbegin() && yi < y.nzend() && yi->first > 0) {
+    //std::cout << yi->first << " : " << yi->second << std::endl;
+    auto i = yi->first;
     //auto yp = y.nzpair(yi);
     // y[yi->first] /= U[i][i]
     // but U is unit triangular
-    y.axpy(-(yi->second), U[yi->first], 1); //y.axpy(-yp.second, U[i][:i-1])
+    y.axpy(-(yi->second), U[i], 1); //y.axpy(-yp.second, U[i][:i-1])
     // find next nonzero index
-    yi = y.find_last_nz(yi->first - 1);
+    yi = y.find_last_nz(i - 1);
+    //y.print_row();
   }
   return y;
+}
+
+// solve U \ A
+template <class TC>
+ColumnMatrix<TC> ut_solve(ColumnMatrix<TC> &U, ColumnMatrix<TC> &A) {
+  //std::cout << "entering solve" << std::endl;
+  std::vector<TC> col;
+  for (size_t j = 0; j < A.width(); j++) {
+    std::cout << j << std::endl;
+    A[j].print_row();
+    std::cout << "\nU" << std::endl;
+    U.print();
+    auto Uinvj = ut_solve(U, A[j]);
+    std::cout << "sol:" << std::endl;
+    Uinvj.print_row();
+    col.push_back(Uinvj);
+  }
+  return ColumnMatrix<TC>(col);
 }

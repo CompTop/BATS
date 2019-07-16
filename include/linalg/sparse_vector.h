@@ -57,7 +57,9 @@ public:
 			indval.cend(),
 			std::make_pair(i, TV(0))
 		);
-		return it--;
+		// if there is no element with index < i, return pointer to end
+		return it == indval.cend() ? it : --it;
+		//return it--;
 	}
 
 
@@ -104,8 +106,10 @@ public:
   // y <- ax + y
   void axpy(const TV &a, const SparseVector &x, size_t xoffset=0) {
     // first check if there is anything to do.
-    if (x.nnz() == 0) { return; }
 		auto xend = x.indval.cend() - xoffset;
+		// if we won't update, return
+    if (x.indval.cbegin() >= xend) { return; }
+		// if all nzs are in x, dump
     if (nnz() == 0) {
 			std::copy(x.indval.begin(), xend, std::back_inserter(indval));
 			//indval = x.indval;
@@ -145,11 +149,7 @@ public:
 		}
 		indval = tmp;
 		return;
-
-
   }
-
-  // axpy - in place
   // scal - in place
 
   // add, subtract, multiply by scalar

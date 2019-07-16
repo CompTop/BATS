@@ -6,8 +6,8 @@
 #include <homology_reduction.h>
 
 #include <linalg/field.h>
-#define F2 ModP<int, 2>
-#define VecT SparseVector<size_t, F2>
+#define FF ModP<int, 3>
+#define VecT SparseVector<size_t, FF>
 #define MatT ColumnMatrix<VecT>
 
 int main() {
@@ -41,13 +41,23 @@ int main() {
 
   B = F.boundary<VecT>(1);
   p2c = reduce_matrix(B, U);
+  std::cout << "\nU:" << std::endl;
   U.print();
 
-  auto y = gemv(U, VecT(2));
+  std::vector<size_t> inds({0,2});
+  std::vector<FF> vals({FF(1), FF(1)});
+  VecT x(inds, vals);
+  x.print_row();
+  auto y = gemv(U, x);
   y.print_row();
 
-  y = ut_solve(U, VecT(2));
-  y.print_row();
+  auto z = ut_solve(U, x);
+  z.print_row();
+
+  MatT I = identity<VecT>(3);
+  auto Uinv = ut_solve(U, I);
+  std::cout << "\nUinv:" << std::endl;
+  Uinv.print();
 
   return 0;
 }

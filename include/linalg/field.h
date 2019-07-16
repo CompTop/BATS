@@ -59,7 +59,7 @@ public:
     return val == 0;
   }
 
-  friend std::ostream& operator<<( std::ostream& os, ModP &x) {
+  friend std::ostream& operator<<( std::ostream& os, const ModP &x) {
     os << x.val << " mod " << P;
     return os;
   }
