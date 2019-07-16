@@ -76,3 +76,12 @@ public:
 
   // dense matrix
 };
+
+template <class TC>
+ColumnMatrix<TC> identity(size_t n) {
+  std::vector<TC> col(n);
+  for (size_t j = 0; j < n; j++) {
+    col[j] = TC(j);
+  }
+  return ColumnMatrix<TC>(col);
+}

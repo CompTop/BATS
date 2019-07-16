@@ -7,6 +7,8 @@
 
 #include <linalg/field.h>
 #define F2 ModP<int, 2>
+#define VecT SparseVector<size_t, F2>
+#define MatT ColumnMatrix<VecT>
 
 int main() {
 
@@ -23,18 +25,19 @@ int main() {
   F.print();
 
   std::cout << "\n1 boundary:" << std::endl;
-  auto B = F.boundary<SparseVector<size_t, F2>>(1);
+  auto B = F.boundary<VecT>(1);
   B.print();
 
   // auto v = B[0];
   // v.print();
 
-  std::cout << "\nreduced\n" << std::endl;
+  std::cout << "\nreduced:" << std::endl;
   auto p2c = reduce_matrix(B);
   B.print();
 
-
-
+  std::cout << "\nidentity:" << std::endl;
+  MatT I = identity<VecT>(3);
+  I.print();
 
 
   return 0;

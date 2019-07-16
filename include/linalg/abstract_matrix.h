@@ -13,3 +13,7 @@ public:
 
 
 };
+
+// identity matrix
+// template <class TM>
+// TM identity(size_t n);

@@ -21,7 +21,7 @@ std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M) {
 				size_t k = pivot_to_col[piv.first];
 				// get coefficient
 				auto pivk = M[k].last();
-				auto alpha = piv.second / pivk.second;
+				auto alpha = - piv.second / pivk.second;
 				// std::cout << "alpha = " << alpha << std::endl;
 				M[j].axpy(alpha, M[k]);
 			} else {
@@ -32,6 +32,8 @@ std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M) {
 	}
 	return pivot_to_col;
 }
+
+
 
   /*
 Function to reduce boundary matrix.

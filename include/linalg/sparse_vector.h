@@ -17,9 +17,10 @@ private:
   // std::vector<TV> val;
 public:
 
+	SparseVector() {}
+
   SparseVector(std::vector<TI> ind, std::vector<TV> val) {
     size_t nz = ind.size();
-    indval = std::vector<std::pair<TI, TV>>();
     for (size_t i = 0; i < nz; i++) {
       indval.push_back(std::make_pair(ind[i], val[i]));
     }
@@ -28,10 +29,14 @@ public:
 	// constructor that takes in integers for val
 	SparseVector(std::vector<TI> ind, std::vector<int> val) {
 		size_t nz = ind.size();
-		indval = std::vector<std::pair<TI, TV>>();
 		for (size_t i = 0; i < nz; i++) {
       indval.push_back(std::make_pair(ind[i], TV(val[i])));
     }
+	}
+
+	// cosntructor that returns indicator in given index
+	SparseVector(TI i) {
+		indval.push_back(std::make_pair(i, TV(1)));
 	}
   // get index and set index
 

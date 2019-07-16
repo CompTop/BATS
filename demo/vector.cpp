@@ -25,6 +25,9 @@ int main() {
   y.axpy(F2(1), x);
   y.print_row();
 
+  VecT z(3);
+  z.print_row();
+
 
   return 0;
 }
