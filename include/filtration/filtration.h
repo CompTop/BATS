@@ -3,10 +3,10 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
-#include "complex/abstract_complex.h"
-#include "complex/simplicial_complex.h"
-#include "linalg/sparse_vector.h"
-#include "linalg/col_matrix.h"
+#include <complex/abstract_complex.h>
+#include <complex/simplicial_complex.h>
+#include <linalg/sparse_vector.h>
+#include <linalg/col_matrix.h>
 
 // template over
 //  TC - complex type
