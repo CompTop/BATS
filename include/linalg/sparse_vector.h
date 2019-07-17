@@ -19,6 +19,7 @@ public:
 
 	SparseVector() {}
 
+
   SparseVector(std::vector<TI> ind, std::vector<TV> val) {
     size_t nz = ind.size();
     for (size_t i = 0; i < nz; i++) {

@@ -3,12 +3,14 @@
 #include "abstract_complex.h"
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
+#include <correspondence/correspondence.h>
 #include <vector>
 #include <cstddef>
 #include <iostream>
 #include <map>
 #include <limits>
 #include <algorithm>
+
 
 // no index
 #define NO_IND std::numeric_limits<size_t>::max();
@@ -204,6 +206,13 @@ public:
     return ColumnMatrix<TVec>(col);
   }
 
+  // return indices of simplices in dimension dim whose vertex set is all in vtx_list
+  std::vector<size_t> sub_complex(std::vector<size_t> vtx_list, size_t dim);
+  // step 1: sort vtx_list
+  // step 2: run through all dim simplices and see if simplex is a subset of vtx_list
 
+  // construct a quotient complex by a relation
+  //
+  SimplicialComplex quotient(Function &R);
 
 };

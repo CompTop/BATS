@@ -11,10 +11,19 @@ template <class TC>
 class ColumnMatrix : public AbstractMatrix
 {
 private:
+  size_t m; // number of rows
+  size_t n; // number of columns
   std::vector<TC> col;
 public:
 
-  ColumnMatrix(std::vector<TC> col) : col(col) {}
+  // construct empty matrix.  same as zero matrix
+  ColumnMatrix(size_t m, size_t n) : m(m), n(n) {
+    col.resize(n);
+  }
+
+  ColumnMatrix(std::vector<TC> col) : col(col) {
+    n = col.size();
+  }
 
   inline size_t width() {
     return col.size();
@@ -71,7 +80,7 @@ public:
   // schur complement friend
 
   void print() {
-    std::cout << "transpose: " << std::endl;
+    std::cout << m << " x " << n << " matrix. transpose: " << std::endl;
     for (size_t i = 0; i < col.size(); i++) {
       std::cout << i << " : ";
       col[i].print_row();

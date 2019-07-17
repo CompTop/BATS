@@ -59,5 +59,8 @@ int main() {
   std::cout << "\nUinv:" << std::endl;
   Uinv.print();
 
+  MatT A = MatT(4, 4);
+  A.print();
+
   return 0;
 }
