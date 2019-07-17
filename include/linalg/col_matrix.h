@@ -11,8 +11,8 @@ template <class TC>
 class ColumnMatrix : public AbstractMatrix
 {
 private:
-  size_t m; // number of rows
-  size_t n; // number of columns
+  size_t m = 0; // number of rows
+  size_t n = 0; // number of columns
   std::vector<TC> col;
 public:
 

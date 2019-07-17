@@ -2,6 +2,7 @@
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 #include <filtration/filtration.h>
+#include <filtration/star.h>
 #include <iostream>
 #include <homology_reduction.h>
 
