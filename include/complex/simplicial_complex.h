@@ -212,7 +212,13 @@ public:
   // step 2: run through all dim simplices and see if simplex is a subset of vtx_list
 
   // construct a quotient complex by a relation
-  //
+  // x_1 ~ x_2 if f(x_1) = f(x_2)
   SimplicialComplex quotient(Function &R);
 
 };
+
+
+// construct a Clique Complex on n vertices up to dimension k
+SimplicialComplex CliqueComplex(size_t n, size_t k) {
+
+}

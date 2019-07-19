@@ -106,7 +106,4 @@ bool Filtration<SimplicialComplex, float>::add(std::vector<size_t> c, const floa
   return added;
 }
 
-
-
-
-// TODO: flag filtration
+// construct clique complex on n vertices
