@@ -3,9 +3,12 @@
 
 #define F2 ModP<bool, 2>
 #define F3 ModP<int, 3>
+// should throw compile-time error because not prime
+//#define FF ModP<int, 10>
 
 int main() {
 
+  //FF t(1);
 
   F2 x(1);
   F2 y(0);
