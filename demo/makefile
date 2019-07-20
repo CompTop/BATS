@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -g -std=c++14
+CXXFLAGS = -Wall -g -std=c++17
 CXX = g++
 IFLAGS = -I../include
 

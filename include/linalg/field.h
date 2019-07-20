@@ -5,6 +5,7 @@ TODO: this could be swapped out for some library
 */
 
 #include <iostream>
+#include <numeric>
 
 
 template<class Derived>
@@ -180,6 +181,72 @@ public:
 
   friend std::ostream& operator<<( std::ostream& os, const ModP &x) {
     os << (x.val & 0x1) << " mod " << 2;
+    return os;
+  }
+
+};
+
+// sign function
+template <typename T>
+inline int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
+template<typename IntT>
+class Rational : public AbstractField<Rational<IntT>> {
+private:
+  IntT n; // numerator
+  IntT d; // denominator
+
+public:
+
+  Rational(IntT n0, IntT d0) {
+    IntT gcd = std::gcd(n0, d0);
+    int s = sgn(d0);
+    n = s * (n0 / gcd);
+    d = s * (d0 / gcd);
+  }
+
+  Rational operator+( const Rational &b) const {
+    return Rational(n * b.d + b.n * d, d * b.d);
+  }
+
+  Rational operator-( const Rational &b) const  {
+    return Rational(n * b.d - b.n * d, d * b.d);
+  }
+
+  Rational operator-() const {
+    return Rational(-n, d);
+  }
+
+  Rational operator*( const Rational &b) const {
+    return Rational(n * b.n, d * b.d);
+  }
+
+  inline bool operator==( const Rational &b) const {
+    return (n == b.n) && (d == b.n);
+  }
+
+  inline bool operator<( const Rational &b) const {
+    return (n * b.d) < (b.n * d);
+  }
+
+  Rational inv() const {
+    if (n == 0) {throw "Inversion of zero!";}
+    return Rational(d, n);
+  }
+
+  Rational operator/( const Rational &b) const {
+    if (b.n == 0) {throw "Division by zero!";}
+    return Rational(n * b.d, d * b.n);
+  }
+
+  bool iszero() const {
+    return n == 0;
+  }
+
+  friend std::ostream& operator<<( std::ostream& os, const Rational &x) {
+    os << x.n << "//" << x.d;
     return os;
   }
 
