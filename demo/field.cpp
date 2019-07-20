@@ -1,16 +1,10 @@
 #include <linalg/field.h>
 #include <iostream>
 
-#define F2 ModP<int, 2>
+#define F2 ModP<bool, 2>
 #define F3 ModP<int, 3>
-#define FF Mod2<int>
 
 int main() {
-
-  FF t(1);
-  t.print();
-  FF s = t + t;
-  s.print();
 
 
   F2 x(1);
