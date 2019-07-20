@@ -207,6 +207,8 @@ public:
     d = s * (d0 / gcd);
   }
 
+  Rational(IntT n) : n(n), d(1) {}
+
   Rational operator+( const Rational &b) const {
     return Rational(n * b.d + b.n * d, d * b.d);
   }

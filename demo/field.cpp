@@ -22,6 +22,9 @@ int main() {
   r.print();
   r = t/s;
   r.print();
+  Q q(5);
+  q.print();
+
 
   F2 x(1);
   F2 y(0);
