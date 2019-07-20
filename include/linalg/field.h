@@ -91,6 +91,7 @@ public:
   }
 
   ModP inv() const {
+    if (val == 0) {throw "Inversion of zero!";}
     IntT b = 1;
     IntT c = val;
     while (c % P != 1) {
@@ -101,6 +102,7 @@ public:
   }
 
   ModP operator/( const ModP &b) const {
+    if (b.val == 0) {throw "Division by zero!";}
     ModP binv = b.inv();
     return (val * binv.val);
   }
@@ -116,6 +118,20 @@ public:
   }
 
 };
+
+// specialization for P=2
+template<>
+ModP<int, 2> ModP<int, 2>::inv() const {
+  if (val == 0) {throw "Inversion of zero!";}
+  return ModP<int, 2>(1);
+}
+
+// specialization for P=3
+template<>
+ModP<int, 3> ModP<int, 3>::inv() const {
+  if (val == 0) {throw "Inversion of zero!";}
+  return ModP<int, 3>(val == 1 ? 1 : 2);
+}
 
 // specialized Mod2 implementation
 template<typename IntT>
