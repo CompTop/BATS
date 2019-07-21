@@ -4,6 +4,7 @@
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 #include <correspondence/correspondence.h>
+#include <util/sorted.h>
 #include <vector>
 #include <cstddef>
 #include <iostream>
@@ -51,6 +52,12 @@ public:
   // constructor that initializes to set dimension
   SimplicialComplex(size_t maxdim) : ncells0(0), spx_list(maxdim), spx_to_idx(maxdim) {}
 
+   bool set_ncells0(size_t n) {
+     ncells0 = n;
+     return true;
+   }
+
+
   // adds a simplex to the complex without doing any checks
   bool add_unsafe(const std::vector<size_t> &s) {
     size_t dim = s.size() - 1;
@@ -89,6 +96,47 @@ public:
     }
 
     return add_unsafe(s);
+  }
+
+  void add_dimension_recursive_flag_unsafe(
+          std::vector<std::vector<size_t>> &nbrs,
+          size_t d, size_t maxd,
+          std::vector<size_t> &iter_idxs,
+          std::vector<size_t> &spx_idxs) {
+
+    if (d == maxd) {
+      // maximum dimension
+      for (size_t j : iter_idxs) {
+        // add each simplex
+        spx_idxs.emplace_back(j);
+        std::vector<size_t> s(spx_idxs);
+        std::sort(s.begin(), s.end()); // TODO: is this sorted?
+        add_unsafe(s);
+        spx_idxs.pop_back();
+        // no recursion
+      }
+    } else {
+      std::vector<size_t> iter_idxs2; // allocate once
+      iter_idxs2.reserve(iter_idxs.size());
+      for (size_t j : iter_idxs) {
+        spx_idxs.emplace_back(j);
+        std::vector<size_t> s(spx_idxs);
+        std::sort(s.begin(), s.end());
+        add_unsafe(s);
+
+        // recurse
+        // get list of indices to recurse on
+        intersect_sorted_lt(iter_idxs, nbrs[j], j, iter_idxs2);
+        if (!(iter_idxs2.empty())) {
+          // only recurse if there is something to do
+          add_dimension_recursive_flag_unsafe(nbrs, d+1, maxd, iter_idxs2, s);
+        }
+
+        // ready for next simplex
+        spx_idxs.pop_back();
+      }
+    }
+
   }
 
   // return 0-skeleton of cell
@@ -217,8 +265,46 @@ public:
 
 };
 
+// return a Flag Complex using an adjacency list of vertices.
+// complex is constructed up to maxdim
+// ASSUME:
+// if (i,j) in edge set and j < i, then j in nbrs[i], and i not in nbrs[j]
+SimplicialComplex FlagComplex(std::vector<std::vector<size_t>> nbrs, size_t maxdim) {
+  SimplicialComplex X = SimplicialComplex(maxdim);
+  // sets 0-cells
+  X.set_ncells0(nbrs.size());
 
-// construct a Clique Complex on n vertices up to dimension k
-SimplicialComplex CliqueComplex(size_t n, size_t k) {
+  std::vector<size_t> spx_idxs(2);
+  std::vector<size_t> iter_idxs;
+  iter_idxs.reserve(nbrs.size()); // maximum size
 
+  for (size_t i = 0; i < nbrs.size(); i++) {
+    std::cout << "i = " << i << std::endl;
+    // make sure neighbor list is sorted
+    std::sort(nbrs[i].begin(), nbrs[i].end());
+    for (size_t j : nbrs[i]) {
+      if (j > i) {break;}
+      std::cout << "  j = " << j << std::endl;
+      spx_idxs[0] = j;
+      spx_idxs[1] = i;
+      X.add_unsafe(spx_idxs);
+
+      // get common neighbors for higher dim simplices
+      intersect_sorted_lt(nbrs[i], nbrs[j], i, iter_idxs);
+      std::cout << "iter idxs:" << std::endl;
+      for (auto val : iter_idxs) {
+        std::cout << val << std::endl;
+      }
+      X.add_dimension_recursive_flag_unsafe(nbrs, 2, maxdim, iter_idxs, spx_idxs);
+    }
+  }
+  return X;
 }
+
+// Flag complex using list of edges
+// SimplicialComplex FlagComplex(std::vector)
+//
+// // construct a Clique Complex on n vertices up to dimension k
+// SimplicialComplex CliqueComplex(size_t n, size_t k) {
+//
+// }

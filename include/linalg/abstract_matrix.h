@@ -14,7 +14,7 @@ AbstractMatrix
 Provides a CRTP base class that specifies operations that all matrix
 implementations should support
 */
-template <class Derived>
+//template <class Derived>
 class AbstractMatrix
 {
 public:
