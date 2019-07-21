@@ -46,6 +46,11 @@ public:
     return static_cast<Derived *>(this)->operator==(b);
   }
 
+  // integer equivalence
+  inline Derived operator==(const int b) {
+    return static_cast<Derived *>(this)->operator==(b);
+  }
+
   friend std::ostream& operator<<( std::ostream& os, AbstractField &x) {
     os << *static_cast<Derived*>(&x);
     return os;
@@ -96,8 +101,12 @@ public:
     return val == b.val;
   }
 
+  inline bool operator==( const int b) const {
+    return val == b;
+  }
+
   inline bool operator<( const ModP &b) const {
-    return false;
+    return true;
   }
 
   ModP inv() const;
@@ -176,7 +185,15 @@ public:
   }
 
   bool operator==(const ModP &b) const {
-    return (val & 0x1) == (b.val == 0x1);
+    return (val & 0x1) == (b & 0x1);
+  }
+
+  inline bool operator==( const int b) const {
+    return (val & 0x1) == b;
+  }
+
+  inline bool operator<( const ModP &b) const {
+    return true;
   }
 
   friend std::ostream& operator<<( std::ostream& os, const ModP &x) {
@@ -227,6 +244,10 @@ public:
 
   inline bool operator==( const Rational &b) const {
     return (n == b.n) && (d == b.n);
+  }
+
+  inline bool operator==( const int b) const {
+    return (n == b) && (d == 1);
   }
 
   inline bool operator<( const Rational &b) const {
