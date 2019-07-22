@@ -192,6 +192,11 @@ public:
     return (val & 0x1) == b;
   }
 
+  bool iszero() const {
+    // std::cout << val << " == 0:" << (val == 0) << std::endl;
+    return (val & 0x1) == 0;
+  }
+
   inline bool operator<( const ModP &b) const {
     return true;
   }
