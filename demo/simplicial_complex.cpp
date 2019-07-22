@@ -11,8 +11,17 @@ int main() {
   nbrs[1] = {0};
   nbrs[2] = {0,1};
   nbrs[3] = {0,1,2};
-  SimplicialComplex X = FlagComplex(nbrs, 3);
+  SimplicialComplex X = FlagComplex(nbrs, 2);
   X.print();
+
+  std::vector<size_t> edges = {0,1,\
+                               0,2,\
+                               0,3,\
+                               1,2,\
+                               1,3,\
+                               2,3};
+  SimplicialComplex Y = FlagComplex(edges, 4, 3);
+  Y.print();
 
   // X.add({0});
   // X.add({1});
