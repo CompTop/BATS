@@ -77,6 +77,8 @@ public:
     return;
   }
 
+  inline size_t ncells() {return cpx.ncells(); }
+
   void print(size_t dim) {
     for (auto i : filt_perm[dim]) {
       std::cout << val[dim][i] << " | ";

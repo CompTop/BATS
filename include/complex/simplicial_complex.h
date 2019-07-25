@@ -148,12 +148,19 @@ public:
   }
 
 
+  const size_t ncells() const {
+    size_t ct = 0;
+    for (size_t k = 0; k < maxdim() + 1; k++) {
+      ct += ncells(k);
+    }
+    return ct;
+  }
 
   const size_t ncells(size_t dim) const {
     return dim == 0 ? ncells0 : spx_list[dim - 1].size();
   }
 
-  size_t maxdim() {
+  const size_t maxdim() const {
     return spx_list.size();
   }
 
