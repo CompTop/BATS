@@ -1,22 +1,24 @@
 #pragma once
 #include <vector>
-#include <filtraiton/filtration.h>
+#include <filtration/filtration.h>
 #include <complex/simplicial_complex.h>
 // flag filtrations
 
 // Flag complex using list of edges
 // (edges[2*k], edges[2*k+1]) = (i, j) is an edge
+// t - vector of filtration times
+// t0 - time for 0-simplices
 // n - number of vertices
 // maxdim - maximum dimension of simplices
-Filtration<SimplicialComplex, float> FlagComplex(
-  std::vector<size_t> edges,
-  std::vector<float> vals;
-  size_t n,
-  size_t maxdim
-) {
-  Filtration<SimplicialComplex, float> X(maxdim);
+template <typename T>
+Filtration<SimplicialComplex, T> FlagFiltration(std::vector<size_t> edges, std::vector<T> t, T t0, size_t n, size_t maxdim) {
+
+  Filtration<SimplicialComplex, T> F = Filtration<SimplicialComplex, T>(maxdim);
+
   // sets 0-cells
-  X.set_ncells0(n);
+  for (size_t k = 0; k < n; k++) {
+    F.add_unsafe({k}, t0);
+  }
 
   std::vector<std::vector<size_t>> nbrs(n);
 
@@ -30,7 +32,7 @@ Filtration<SimplicialComplex, float> FlagComplex(
     size_t j = edges[2*k + 1];
     spx_idxs[0] = i;
     spx_idxs[1] = j;
-    X.add_unsafe(spx_idxs);
+    F.add_unsafe(spx_idxs, t[k]);
 
     intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
@@ -39,8 +41,8 @@ Filtration<SimplicialComplex, float> FlagComplex(
     nbrs[j].emplace_back(i);
     std::sort(nbrs[j].begin(), nbrs[j].end());
 
-    X.add_dimension_recursive_flag_unsafe(nbrs, 2, maxdim, iter_idxs, spx_idxs);
+    F.add_dimension_recursive_flag_unsafe(nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k]);
   }
 
-  return X;
+  return F;
 }
