@@ -7,6 +7,7 @@
 #include <complex/simplicial_complex.h>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
+#include <util/sorted.h>
 
 // template over
 //  TC - complex type
@@ -24,13 +25,27 @@ public:
   // empty initializer
   Filtration() : cpx(TC()) {}
 
+  // initialize with maxdim
+  Filtration(size_t maxdim) : cpx(TC(maxdim)) {
+    val = std::vector<std::vector<TF>>(maxdim+1);
+  }
+
   // initialize with only complex
   Filtration(TC cpx) : cpx(cpx) {}
 
   Filtration(TC cpx,
     std::vector<std::vector<TF>> val) : cpx(cpx), val(val) {}
 
+  bool add_unsafe(std::vector<size_t>, const TF t);
+
   bool add(std::vector<size_t>, const TF t);
+
+  void add_dimension_recursive_flag_unsafe(std::vector<std::vector<size_t>> &nbrs,
+    size_t d, size_t maxd,
+    std::vector<size_t> &iter_idxs,
+    std::vector<size_t> &spx_idxs,
+    const TF t
+  );
 
   // assume filtration value has been set for each cell.  Find sort permutaion in each dimension
   void sort() {
@@ -99,11 +114,79 @@ bool Filtration<SimplicialComplex, float>::add(std::vector<size_t> c, const floa
   if (added) {
     size_t dim = c.size() - 1;
     while (val.size() < dim + 1) {
-      val.push_back(std::vector<float>());
+      val.emplace_back(std::vector<float>());
     }
-    val[dim].push_back(t);
+    val[dim].emplace_back(t);
   }
   return added;
 }
 
-// construct clique complex on n vertices
+template <>
+bool Filtration<SimplicialComplex, float>::add_unsafe(std::vector<size_t> c, const float t) {
+  bool added = cpx.add_unsafe(c);
+  if (added) {
+    size_t dim = c.size() - 1;
+    val[dim].emplace_back(t);
+  }
+  return added;
+}
+
+template<>
+void Filtration<SimplicialComplex, float>::add_dimension_recursive_flag_unsafe(
+  std::vector<std::vector<size_t>> &nbrs,
+  size_t d, size_t maxd,
+  std::vector<size_t> &iter_idxs,
+  std::vector<size_t> &spx_idxs,
+  const float t
+) {
+  cpx.add_dimension_recursive_flag_unsafe(nbrs, d, maxd, iter_idxs, spx_idxs);
+  // add filtration time until val arrays have same number of elements as complex
+  for (size_t dim = d; dim < maxd + 1; dim++) {
+    while (val[dim].size() < cpx.ncells(dim)) {
+      val[dim].emplace_back(t);
+    }
+  }
+}
+
+// Flag complex using list of edges
+// (edges[2*k], edges[2*k+1]) = (i, j) is an edge
+// t - vector of filtration times
+// t0 - time for 0-simplices
+// n - number of vertices
+// maxdim - maximum dimension of simplices
+template <typename T>
+Filtration<SimplicialComplex, T> FlagFiltration(std::vector<size_t> edges, std::vector<T> t, T t0, size_t n, size_t maxdim) {
+
+  Filtration<SimplicialComplex, T> F = Filtration<SimplicialComplex, T>(maxdim);
+
+  // sets 0-cells
+  for (size_t k = 0; k < n; k++) {
+    F.add_unsafe({k}, t0);
+  }
+
+  std::vector<std::vector<size_t>> nbrs(n);
+
+  std::vector<size_t> spx_idxs(2);
+  std::vector<size_t> iter_idxs;
+  iter_idxs.reserve(n); // maximum size
+
+  size_t m = edges.size() / 2;
+  for (size_t k = 0; k < m; k++) {
+    size_t i = edges[2*k];
+    size_t j = edges[2*k + 1];
+    spx_idxs[0] = i;
+    spx_idxs[1] = j;
+    F.add_unsafe(spx_idxs, t[k]);
+
+    intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
+
+    nbrs[i].emplace_back(j);
+    std::sort(nbrs[i].begin(), nbrs[i].end());
+    nbrs[j].emplace_back(i);
+    std::sort(nbrs[j].begin(), nbrs[j].end());
+
+    F.add_dimension_recursive_flag_unsafe(nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k]);
+  }
+
+  return F;
+}

@@ -1,7 +1,7 @@
 #include <complex/simplicial_complex.h>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
-#include <filtration/filtration.h>
+//#include <filtration/filtration.h>
 #include <iostream>
 
 int main() {

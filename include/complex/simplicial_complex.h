@@ -149,7 +149,7 @@ public:
 
 
 
-  size_t ncells(size_t dim) {
+  const size_t ncells(size_t dim) const {
     return dim == 0 ? ncells0 : spx_list[dim - 1].size();
   }
 
