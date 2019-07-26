@@ -17,6 +17,7 @@ int main() {
   F.print();
 
   std::cout << F.ncells() << std::endl;
+  std::cout << F.maxdim() << std::endl;
 
   return 0;
 }

@@ -44,7 +44,7 @@ public:
   void permute_cols(const std::vector<size_t> &colperm) {
     size_t ncols = col.size();
     // record swapped columns
-    bool visited[ncols] = {0};
+    std::vector<bool> visited(ncols, false);
     for (size_t j = 0; j < ncols; j++)   {
        size_t next_j = j;
        while(!visited[next_j] && !visited[colperm[next_j]]) {

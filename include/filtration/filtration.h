@@ -77,7 +77,8 @@ public:
     return;
   }
 
-  inline size_t ncells() {return cpx.ncells(); }
+  inline size_t ncells() { return cpx.ncells(); }
+  inline size_t maxdim() { return cpx.maxdim(); }
 
   void print(size_t dim) {
     for (auto i : filt_perm[dim]) {
