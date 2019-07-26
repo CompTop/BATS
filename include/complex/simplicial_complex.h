@@ -22,17 +22,19 @@ simplicial complex implementation
 class SimplicialComplex : public AbstractComplex
 {
 private:
+  // maybe make template parameter for container?
+  using spx_map = std::vector<std::map<std::vector<size_t>, size_t>>;
   // hold number of 0-cells
   size_t ncells0;
   // spx_list[k][i] holds i'th simplex in dimension k+1
   std::vector<std::vector<std::vector<size_t>>> spx_list;
   // map to find simplices when forming boundary
-  std::vector<std::map<std::vector<size_t>, size_t>> spx_to_idx;
+  spx_map spx_to_idx;
   // TODO: if forming full clique complex
   // can give all simplices unique location for lookup
 
   // returns index of simplex
-  size_t find_idx(std::vector<size_t> s) {
+  size_t find_idx(std::vector<size_t> &s) {
     size_t dim = s.size() - 1;
     if (dim == 0) {
       return s[0] < ncells0 ? s[0] : NO_IND;
@@ -73,7 +75,7 @@ public:
   }
 
   // add simplex to complex with appropriate checks
-  bool add(std::vector<size_t> s) {
+  bool add(std::vector<size_t> &s) {
     size_t dim = s.size() - 1;
     if (dim == 0){
       ncells0 = std::max(s[0] + 1, ncells0);
@@ -262,7 +264,7 @@ public:
   }
 
   // return indices of simplices in dimension dim whose vertex set is all in vtx_list
-  std::vector<size_t> sub_complex(std::vector<size_t> vtx_list, size_t dim);
+  std::vector<size_t> sub_complex(std::vector<size_t> &vtx_list, size_t dim);
   // step 1: sort vtx_list
   // step 2: run through all dim simplices and see if simplex is a subset of vtx_list
 
@@ -276,7 +278,7 @@ public:
 // complex is constructed up to maxdim
 // ASSUME:
 // if (i,j) in edge set and j < i, then j in nbrs[i], and i not in nbrs[j]
-SimplicialComplex FlagComplex(std::vector<std::vector<size_t>> nbrs, size_t maxdim) {
+SimplicialComplex FlagComplex(std::vector<std::vector<size_t>> &nbrs, size_t maxdim) {
   SimplicialComplex X = SimplicialComplex(maxdim);
   // sets 0-cells
   X.set_ncells0(nbrs.size());
@@ -312,7 +314,7 @@ SimplicialComplex FlagComplex(std::vector<std::vector<size_t>> nbrs, size_t maxd
 // (edges[2*k], edges[2*k+1]) = (i, j) is an edge
 // n - number of vertices
 // maxdim - maximum dimension of simplices
-SimplicialComplex FlagComplex(std::vector<size_t> edges, size_t n, size_t maxdim) {
+SimplicialComplex FlagComplex(std::vector<size_t> &edges, size_t n, size_t maxdim) {
   SimplicialComplex X = SimplicialComplex(maxdim);
   // sets 0-cells
   X.set_ncells0(n);

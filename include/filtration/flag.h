@@ -11,13 +11,15 @@
 // n - number of vertices
 // maxdim - maximum dimension of simplices
 template <typename T>
-Filtration<SimplicialComplex, T> FlagFiltration(std::vector<size_t> edges, std::vector<T> t, T t0, size_t n, size_t maxdim) {
+Filtration<SimplicialComplex, T> FlagFiltration(std::vector<size_t> &edges, std::vector<T> &t, T t0, size_t n, size_t maxdim) {
 
   Filtration<SimplicialComplex, T> F = Filtration<SimplicialComplex, T>(maxdim);
 
   // sets 0-cells
+  std::vector<size_t> s(1);
   for (size_t k = 0; k < n; k++) {
-    F.add_unsafe({k}, t0);
+    s[0] = k;
+    F.add_unsafe(s, t0);
   }
 
   std::vector<std::vector<size_t>> nbrs(n);

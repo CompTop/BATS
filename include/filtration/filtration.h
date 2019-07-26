@@ -34,11 +34,11 @@ public:
   Filtration(TC cpx) : cpx(cpx) {}
 
   Filtration(TC cpx,
-    std::vector<std::vector<TF>> val) : cpx(cpx), val(val) {}
+    std::vector<std::vector<TF>> &val) : cpx(cpx), val(val) {}
 
-  bool add_unsafe(std::vector<size_t>, const TF t);
+  bool add_unsafe(std::vector<size_t> &c, const TF t);
 
-  bool add(std::vector<size_t>, const TF t);
+  bool add(std::vector<size_t> &c, const TF t);
 
   void add_dimension_recursive_flag_unsafe(std::vector<std::vector<size_t>> &nbrs,
     size_t d, size_t maxd,
@@ -112,7 +112,7 @@ public:
 // template <class TC, typename TF> class Filtration; // primary template
 // template <typename TF>
 template <>
-bool Filtration<SimplicialComplex, float>::add(std::vector<size_t> c, const float t) {
+bool Filtration<SimplicialComplex, float>::add(std::vector<size_t> &c, const float t) {
   bool added = cpx.add(c);
   if (added) {
     size_t dim = c.size() - 1;
@@ -125,7 +125,7 @@ bool Filtration<SimplicialComplex, float>::add(std::vector<size_t> c, const floa
 }
 
 template <>
-bool Filtration<SimplicialComplex, float>::add_unsafe(std::vector<size_t> c, const float t) {
+bool Filtration<SimplicialComplex, float>::add_unsafe(std::vector<size_t> &c, const float t) {
   bool added = cpx.add_unsafe(c);
   if (added) {
     size_t dim = c.size() - 1;

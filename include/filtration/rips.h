@@ -22,6 +22,23 @@ std::ostream& operator<<( std::ostream& os, tedge<TF, TI> &x) {
   return os;
 }
 
+// construct edges for rips complex
+template <typename T>
+void rips_edges(std::vector<T> &x, std::vector<size_t> &edges, std::vector<T> &t) {
+    edges.clear();
+    size_t nedges = x.size() * (x.size() - 1) / 2;
+    edges.reserve(2*nedges);
+    t.clear();
+    t.reserve(nedges);
+    for (size_t i = 0; i < x.size(); i++) {
+        for (size_t j = 0; j < i; j++) {
+            edges.push_back(j);
+            edges.push_back(i);
+            t.push_back(std::abs(x[i] - x[j]));
+        }
+    }
+    return;
+}
 
 // template <typename TF, typename TI>
 // std::vector<tedge<TF, TI>> adj_edges_vec(std::vector<TF> D, TF thresh) {
