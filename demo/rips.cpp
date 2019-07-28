@@ -12,7 +12,7 @@ int main() {
   std::default_random_engine generator;
   std::uniform_real_distribution<float> distribution(0.0,1.0);
 
-  size_t n = 150;
+  size_t n = 100;
   std::vector<float> v(n);
   for (size_t i = 0; i < n; i++) {
       v[i] = distribution(generator);

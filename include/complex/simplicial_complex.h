@@ -74,11 +74,11 @@ public:
       spx_to_idx.emplace(s, _ncells[dim]);
     } else {
       // add simplex to appropriate dimension
-      // spx_list[dim-1].emplace_back(s);
+      spx_list[dim-1].emplace_back(s);
       // set reverse map
       spx_to_idx.emplace(s, _ncells[dim]);
     }
-    ++_ncells[dim];
+    _ncells[dim]++;
     return true;
   }
 
