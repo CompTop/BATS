@@ -5,12 +5,14 @@
 #include <linalg/col_matrix.h>
 #include <correspondence/correspondence.h>
 #include <util/sorted.h>
+#include <util/trie.h>
 #include <vector>
 #include <cstddef>
 #include <iostream>
 #include <map>
 #include <limits>
 #include <algorithm>
+#include <util/simplex.h> // for hash function
 
 
 // no index
@@ -23,11 +25,15 @@ class SimplicialComplex : public AbstractComplex
 {
 private:
   // maybe make template parameter for container?
-  using spx_map = std::vector<std::map<std::vector<size_t>, size_t>>;
+  // using spx_map = std::unordered_map<std::vector<size_t>, size_t, SimplexHasher>;
+  // using spx_map = std::map<std::vector<size_t>, size_t>;
+  using spx_map = SparseTrie<size_t, size_t>;
   // hold number of 0-cells
   size_t ncells0;
   // spx_list[k][i] holds i'th simplex in dimension k+1
   std::vector<std::vector<std::vector<size_t>>> spx_list;
+  // keeps track of how many cells are in given dimension
+  std::vector<size_t> _ncells;
   // map to find simplices when forming boundary
   spx_map spx_to_idx;
   // TODO: if forming full clique complex
@@ -39,8 +45,8 @@ private:
     if (dim == 0) {
       return s[0] < ncells0 ? s[0] : NO_IND;
     } else {
-      if (spx_to_idx[dim-1].count(s)) {
-        return spx_to_idx[dim-1][s];
+      if (spx_to_idx.count(s)) {
+        return spx_to_idx[s];
       }
     }
     return NO_IND;
@@ -52,7 +58,7 @@ public:
   SimplicialComplex() : ncells0(0) {}
 
   // constructor that initializes to set dimension
-  SimplicialComplex(size_t maxdim) : ncells0(0), spx_list(maxdim), spx_to_idx(maxdim) {}
+  SimplicialComplex(size_t maxdim) : ncells0(0), spx_list(maxdim), _ncells(maxdim+1, 0) {}
 
    bool set_ncells0(size_t n) {
      ncells0 = n;
@@ -61,16 +67,18 @@ public:
 
 
   // adds a simplex to the complex without doing any checks
-  bool add_unsafe(const std::vector<size_t> &s) {
+  bool add_unsafe(std::vector<size_t> &s) {
     size_t dim = s.size() - 1;
     if (dim == 0) {
       ncells0 = std::max(s[0] + 1, ncells0);
+      spx_to_idx.emplace(s, _ncells[dim]);
     } else {
       // add simplex to appropriate dimension
-      spx_list[dim-1].push_back(s);
+      // spx_list[dim-1].emplace_back(s);
       // set reverse map
-      spx_to_idx[dim-1][s] = spx_list[dim-1].size() - 1;
+      spx_to_idx.emplace(s, _ncells[dim]);
     }
+    ++_ncells[dim];
     return true;
   }
 
@@ -88,11 +96,10 @@ public:
     // add dimensions if necessary
     while (spx_list.size() < dim) {
       spx_list.push_back(std::vector<std::vector<size_t>>());
-      spx_to_idx.push_back(std::map<std::vector<size_t>, size_t>());
     }
 
     // check if simplex is already in complex
-    if (spx_to_idx[dim-1].count(s) > 0) {
+    if (spx_to_idx.count(s) > 0) {
       // simplex is already in complex
       return false;
     }
@@ -159,7 +166,7 @@ public:
   }
 
   const size_t ncells(size_t dim) const {
-    return dim == 0 ? ncells0 : spx_list[dim - 1].size();
+    return dim == 0 ? ncells0 : _ncells[dim];
   }
 
   const size_t maxdim() const {

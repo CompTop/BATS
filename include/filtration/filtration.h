@@ -145,6 +145,7 @@ void Filtration<SimplicialComplex, float>::add_dimension_recursive_flag_unsafe(
   cpx.add_dimension_recursive_flag_unsafe(nbrs, d, maxd, iter_idxs, spx_idxs);
   // add filtration time until val arrays have same number of elements as complex
   for (size_t dim = d; dim < maxd + 1; dim++) {
+    //val[dim].reserve(cpx.ncells(dim));
     while (val[dim].size() < cpx.ncells(dim)) {
       val[dim].emplace_back(t);
     }
