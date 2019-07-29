@@ -1,5 +1,6 @@
 // utilities for simplices
 #include <functional> // for hash
+#include <vector>
 
 
 
@@ -23,4 +24,36 @@ struct SimplexHasher
     }
     return ret;
   }
+};
+
+
+class SimplexContainer {
+private:
+  std::vector<size_t> data;
+  size_t k; // number of vertices in this simplex size
+public:
+
+  // empty constructor - not available
+  // constructor with dimension specified
+  SimplexContainer(size_t d) : k(d+1) {}
+
+  // emplace_back with vector
+  void emplace_back(std::vector<size_t> &s) {
+    if (data.size() != k) {throw "unexpected simplex size!";}
+    for (auto i : s) {
+      data.emplace_back(i);
+    }
+  }
+
+  // size - number of simplices
+  size_t size() const {
+    return data.size() / k;
+  }
+  // operator[] - return vector
+  // reserve - reserve space for a fixed number of simplices
+  // dim - dimension
+  inline size_t dim() const {
+    return k-1;
+  }
+  // function to return iterator over vertices of simplex i
 };

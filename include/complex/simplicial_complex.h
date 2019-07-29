@@ -28,10 +28,14 @@ private:
   // using spx_map = std::unordered_map<std::vector<size_t>, size_t, SimplexHasher>;
   // using spx_map = std::map<std::vector<size_t>, size_t>;
   using spx_map = SparseTrie<size_t, size_t>;
+
+  // container for simplices of a fixed dimension
+  using spx_container = std::vector<std::vector<size_t>>;
+  // using spx_container = SimplexContainer;
   // hold number of 0-cells
   size_t ncells0;
   // spx_list[k][i] holds i'th simplex in dimension k+1
-  std::vector<std::vector<std::vector<size_t>>> spx_list;
+  std::vector<spx_container> spx_list;
   // keeps track of how many cells are in given dimension
   std::vector<size_t> _ncells;
   // map to find simplices when forming boundary
@@ -58,7 +62,13 @@ public:
   SimplicialComplex() : ncells0(0) {}
 
   // constructor that initializes to set dimension
-  SimplicialComplex(size_t maxdim) : ncells0(0), spx_list(maxdim), _ncells(maxdim+1, 0) {}
+  SimplicialComplex(size_t maxdim) : ncells0(0), _ncells(maxdim+1, 0) {
+    spx_list.reserve(maxdim);
+    for (size_t i = 0; i < maxdim; i++) {
+      // spx_list.emplace_back(spx_container(i+1));
+      spx_list.emplace_back(spx_container());
+    }
+  }
 
    bool set_ncells0(size_t n) {
      ncells0 = n;
@@ -95,7 +105,8 @@ public:
 
     // add dimensions if necessary
     while (spx_list.size() < dim) {
-      spx_list.push_back(std::vector<std::vector<size_t>>());
+      // spx_list.push_back(spx_container(spx_list.size() + 1));
+      spx_list.emplace_back(spx_container());
     }
 
     // check if simplex is already in complex
@@ -149,12 +160,12 @@ public:
   }
 
   // return 0-skeleton of cell
-  std::vector<size_t> skeleton0(size_t dim, size_t i) {
-    if (dim == 0) {
-      return {i};
-    }
-    return spx_list[dim-1][i];
-  }
+  // std::vector<size_t> skeleton0(size_t dim, size_t i) {
+  //   if (dim == 0) {
+  //     return {i};
+  //   }
+  //   return spx_list[dim-1][i];
+  // }
 
 
   const size_t ncells() const {
@@ -180,95 +191,95 @@ public:
     }
   }
 
-  void print_cell(size_t dim, size_t i) {
-    if (dim == 0) {
-      std::cout << i << std::endl;
-      return;
-    }
-    for (size_t j = 0; j < dim; j++) {
-      std::cout << spx_list[dim - 1][i][j] << ",";
-    }
-    std::cout << spx_list[dim - 1][i][dim] << std::endl;
-  }
+  // void print_cell(size_t dim, size_t i) {
+  //   if (dim == 0) {
+  //     std::cout << i << std::endl;
+  //     return;
+  //   }
+  //   for (size_t j = 0; j < dim; j++) {
+  //     std::cout << spx_list[dim - 1][i][j] << ",";
+  //   }
+  //   std::cout << spx_list[dim - 1][i][dim] << std::endl;
+  // }
 
-  void print(size_t dim) {
-    if (dim == 0) {
-      for (size_t i = 0; i < ncells0; i++) {
-        print_cell(0, i);
-      }
-    } else {
-      for (size_t i = 0; i < ncells(dim); i++) {
-        print_cell(dim, i);
-      }
-    }
-  }
+  // void print(size_t dim) {
+  //   if (dim == 0) {
+  //     for (size_t i = 0; i < ncells0; i++) {
+  //       print_cell(0, i);
+  //     }
+  //   } else {
+  //     for (size_t i = 0; i < ncells(dim); i++) {
+  //       print_cell(dim, i);
+  //     }
+  //   }
+  // }
 
-  void print() {
-    std::cout << "SimplicialComplex of dimension " << maxdim() << std::endl;
-    for (size_t dim = 0; dim < maxdim() + 1; dim ++) {
-      std::cout << "dim " << dim << " : " << ncells(dim) << " cells" << std::endl;
-      print(dim);
-    }
-  }
+  // void print() {
+  //   std::cout << "SimplicialComplex of dimension " << maxdim() << std::endl;
+  //   for (size_t dim = 0; dim < maxdim() + 1; dim ++) {
+  //     std::cout << "dim " << dim << " : " << ncells(dim) << " cells" << std::endl;
+  //     print(dim);
+  //   }
+  // }
 
 
   // get boundary of simplex i in dimension dim
-  template <typename TV>
-  SparseVector<size_t, TV> boundary(size_t dim, size_t i) {
-    //assert(dim > 0);
-    std::vector<size_t> bdr_ind;
-    std::vector<int> bdr_val;
-    std::vector<size_t> face;
-    int coeff = -1;
-    // loop over faces in lexicographical order
-    for (size_t k = 0; k < dim+1; k++) {
-      size_t k2 = dim-k; // index to skip
-      face.clear();
-      for (size_t j = 0; j < k2; j++) {
-        face.push_back(spx_list[dim-1][i][j]);
-      }
-      for (size_t j = k2+1; j < dim+1; j++) {
-        face.push_back(spx_list[dim-1][i][j]);
-      }
-
-      bdr_ind.push_back(find_idx(face));
-      bdr_val.push_back(coeff);
-      coeff = -coeff;
-    }
-    return SparseVector<size_t, TV>(bdr_ind, bdr_val);
-  }
+  // template <typename TV>
+  // SparseVector<size_t, TV> boundary(size_t dim, size_t i) {
+  //   //assert(dim > 0);
+  //   std::vector<size_t> bdr_ind;
+  //   std::vector<int> bdr_val;
+  //   std::vector<size_t> face;
+  //   int coeff = -1;
+  //   // loop over faces in lexicographical order
+  //   for (size_t k = 0; k < dim+1; k++) {
+  //     size_t k2 = dim-k; // index to skip
+  //     face.clear();
+  //     for (size_t j = 0; j < k2; j++) {
+  //       face.push_back(spx_list[dim-1][i][j]);
+  //     }
+  //     for (size_t j = k2+1; j < dim+1; j++) {
+  //       face.push_back(spx_list[dim-1][i][j]);
+  //     }
+  //
+  //     bdr_ind.push_back(find_idx(face));
+  //     bdr_val.push_back(coeff);
+  //     coeff = -coeff;
+  //   }
+  //   return SparseVector<size_t, TV>(bdr_ind, bdr_val);
+  // }
 
   // template over column type
-  template <class TVec>
-  ColumnMatrix<TVec> boundary(size_t dim) {
-    //assert(dim > 0);
-    std::vector<TVec> col;
-    std::vector<size_t> bdr_ind;
-    std::vector<int> bdr_val;
-    std::vector<size_t> face;
-    for (size_t i = 0; i < ncells(dim); i++) {
-      bdr_ind.clear();
-      bdr_val.clear();
-      int coeff = -1;
-      // loop over faces in lexicographical order
-      for (size_t k = 0; k < dim+1; k++) {
-        size_t k2 = dim-k; // index to skip
-        face.clear();
-        for (size_t j = 0; j < k2; j++) {
-          face.push_back(spx_list[dim-1][i][j]);
-        }
-        for (size_t j = k2+1; j < dim+1; j++) {
-          face.push_back(spx_list[dim-1][i][j]);
-        }
-
-        bdr_ind.push_back(find_idx(face));
-        bdr_val.push_back(coeff);
-        coeff = -coeff;
-      }
-      col.push_back(TVec(bdr_ind, bdr_val));
-    }
-    return ColumnMatrix<TVec>(col);
-  }
+  // template <class TVec>
+  // ColumnMatrix<TVec> boundary(size_t dim) {
+  //   //assert(dim > 0);
+  //   std::vector<TVec> col;
+  //   std::vector<size_t> bdr_ind;
+  //   std::vector<int> bdr_val;
+  //   std::vector<size_t> face;
+  //   for (size_t i = 0; i < ncells(dim); i++) {
+  //     bdr_ind.clear();
+  //     bdr_val.clear();
+  //     int coeff = -1;
+  //     // loop over faces in lexicographical order
+  //     for (size_t k = 0; k < dim+1; k++) {
+  //       size_t k2 = dim-k; // index to skip
+  //       face.clear();
+  //       for (size_t j = 0; j < k2; j++) {
+  //         face.push_back(spx_list[dim-1][i][j]);
+  //       }
+  //       for (size_t j = k2+1; j < dim+1; j++) {
+  //         face.push_back(spx_list[dim-1][i][j]);
+  //       }
+  //
+  //       bdr_ind.push_back(find_idx(face));
+  //       bdr_val.push_back(coeff);
+  //       coeff = -coeff;
+  //     }
+  //     col.push_back(TVec(bdr_ind, bdr_val));
+  //   }
+  //   return ColumnMatrix<TVec>(col);
+  // }
 
   // return indices of simplices in dimension dim whose vertex set is all in vtx_list
   std::vector<size_t> sub_complex(std::vector<size_t> &vtx_list, size_t dim);
