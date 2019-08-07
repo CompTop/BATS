@@ -63,19 +63,28 @@ public:
 
 };
 
+constexpr bool isprime(unsigned p) {
+     if (p < 2) { return false; }
+     for (unsigned i = 2; i < (p>>1) + 1; i++) {
+         if (p % i == 0) { return false; }
+     }
+     return true;
+}
+
 template<typename IntT, unsigned P>
 class ModP : public AbstractField<ModP<IntT, P>> {
 private:
   IntT val;
   // Check whether P is prime before compiling
   // only checks for small numbers. doesn't cover all primes
-  static_assert(!(P == 1), "not prime!");
-  static_assert(!((P > 2) && (P % 2 == 0)), "not prime!");
-  static_assert(!((P > 3) && (P % 3 == 0)), "not prime!");
-  static_assert(!((P > 2) && (P % 2 == 0)), "not prime!");
-  static_assert(!((P > 5) && (P % 5 == 0)), "not prime!");
-  static_assert(!((P > 7) && (P % 7 == 0)), "not prime!");
-  static_assert(!((P > 11) && (P % 11 == 0)), "not prime!");
+  // static_assert(!(P == 1), "not prime!");
+  // static_assert(!((P > 2) && (P % 2 == 0)), "not prime!");
+  // static_assert(!((P > 3) && (P % 3 == 0)), "not prime!");
+  // static_assert(!((P > 2) && (P % 2 == 0)), "not prime!");
+  // static_assert(!((P > 5) && (P % 5 == 0)), "not prime!");
+  // static_assert(!((P > 7) && (P % 7 == 0)), "not prime!");
+  // static_assert(!((P > 11) && (P % 11 == 0)), "not prime!");
+  static_assert(isprime(P), "not prime!");
 
 public:
 
