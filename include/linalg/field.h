@@ -1,3 +1,4 @@
+#pragma once
 /*
 Implementation of fields
 
@@ -184,12 +185,12 @@ public:
   }
 
   ModP operator/(const ModP &b) const {
-    if (b.val & 0x1 == 0) {throw "Division by zero!";}
+    if ((b.val & 0x1) == 0) {throw "Division by zero!";}
     return ModP(val); // or
   }
 
   ModP inv() const {
-    if (val & 0x1 == 0) {throw "Inversion of zero!";}
+    if ((val & 0x1) == 0) {throw "Inversion of zero!";}
     return ModP(0x1);
   }
 

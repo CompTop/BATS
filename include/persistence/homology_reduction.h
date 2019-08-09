@@ -1,8 +1,8 @@
 #pragma once
 
 #include <map>
-#include "linalg/sparse_vector.h"
-#include "linalg/col_matrix.h"
+#include <linalg/sparse_vector.h>
+#include <linalg/col_matrix.h>
 
 // perform reduction algorithm on a column matrix in-place
 template <class TVec>

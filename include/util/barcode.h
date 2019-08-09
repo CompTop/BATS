@@ -1,5 +1,6 @@
 // barcode utilities
 #include <limits>
+#include <iostream>
 
 // template over filtration type
 template <typename T>
@@ -10,4 +11,9 @@ public:
 
   BarcodePair()    : birth(T(0)), death(T(0)) {}
   BarcodePair(T b) : birth(b), death(std::numeric_limits<T>::infinity()) {}
+  BarcodePair(T b, T d) : birth(b), death(d) {}
+
+  void print() {
+    std::cout << "( " << birth << " , " << death << " )" << std::endl;
+  }
 };
