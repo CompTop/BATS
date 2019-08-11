@@ -34,9 +34,9 @@ private:
         // first reserve for dimension
         reserve(dim);
         dim--;
-        if ( ptr[dim].size() < k ) { ptr[dim].reserve(k); }
-        if ( bdr[dim].size() < k ) { bdr[dim].reserve(k); }
-        if ( coeff[dim].size() < k ) { coeff[dim].reserve(k); }
+        if ( ptr[dim].capacity() < k ) { ptr[dim].reserve(k); }
+        if ( bdr[dim].capacity() < k ) { bdr[dim].reserve(k); }
+        if ( coeff[dim].capacity() < k ) { coeff[dim].reserve(k); }
         return;
     }
 
@@ -101,6 +101,14 @@ public:
     inline size_t maxdim() const { return _ncells.size() - 1; }
     // number of cells in dimension k
     inline size_t ncells(size_t k) const { return _ncells[k]; }
+    // total number of cells
+    size_t ncells() const {
+      size_t ct = 0;
+      for (size_t k = 0; k < maxdim() + 1; k++) {
+        ct += ncells(k);
+      }
+      return ct;
+    }
 
     // add cell with boundary b, coeffeicents c to dimension k
     inline size_t add(
@@ -117,8 +125,8 @@ public:
     // get CSC integer matrix boundary in dimension dim
     inline CSCMatrix<int, size_t> boundary_csc(size_t dim) {
         return CSCMatrix<int, size_t>(
-            _ncells[dim-1],
-            _ncells[dim],
+            ncells(dim-1),
+            ncells(dim),
             ptr[dim-1],
             bdr[dim-1],
             coeff[dim-1]
