@@ -1,14 +1,9 @@
+#pragma once
+
 #include <vector>
 
 // class that wraps pre-pairing of complex
-// functions that compute morse pairings
-
-// CRTP general pairing, then specialize to filtration pairing vs non-filtration pairing
-
-
-// template over
-//  TC - complex type
-template <class TC>
+// no template type
 class MorsePairing
 {
 private:
@@ -43,7 +38,7 @@ private:
 		while (down.size() < dim) {
 			down.emplace_back(std::vector<size_t>());
 		}
-		_maxdim = std::max(maxdim, dim);
+		_maxdim = std::max(_maxdim, dim);
 	}
 
 	void reserve(size_t dim, size_t n) {
@@ -69,7 +64,7 @@ private:
 		}
 
 		// check up vector
-		if (dim < maxdim())
+		if (dim < maxdim()) {
 			if (up[dim].size() < n) {
 				up[dim].reserve(n);
 			}
@@ -84,7 +79,7 @@ private:
 	}
 
 	// set pair (i,j) in dimension dim
-	bool set_pair_unsafe(size_t dim, size_t i, size_t j) {
+	bool _set_pair_unsafe(size_t dim, size_t i, size_t j) {
 		up[dim].emplace_back(i);
 		down[dim].emplace_back(j);
 		ispaired[dim][i] = true;
@@ -92,8 +87,8 @@ private:
 		return true;
 	}
 
-	// set pair with checks
-	bool set_pair_safe(size_t dim, size_t i, size_t j) {
+	// set pair with reservation checks
+	bool _set_pair_supersafe(size_t dim, size_t i, size_t j) {
 		if (maxdim() < dim + 1) {
 			reserve(dim + 1);
 		}
@@ -109,11 +104,21 @@ private:
 			// was already paired
 			return false;
 		}
-		return set_pair_unsafe(dim, i, j);
+		return _set_pair_unsafe(dim, i, j);
+	}
+
+	// set pair with checks
+	bool _set_pair_safe(size_t dim, size_t i, size_t j) {
+		// check if already paired
+		if (ispaired[dim][i] || ispaired[dim+1][j]) {
+			// was already paired
+			return false;
+		}
+		return _set_pair_unsafe(dim, i, j);
 	}
 
 	// add an edge (i, j) with index ei
-	bool set_edge(size_t i, size_t j, size_t ei) {
+	bool _set_edge(size_t i, size_t j, size_t ei) {
 		size_t pi = find_parent(i);
 		size_t pj = find_parent(j);
 		if (pi == pj) { return false; } // no pair set
@@ -123,12 +128,12 @@ private:
 			// component with pi was born first
 			parent[pj] = pi;
 			// homology born at pj dies with ei
-			return set_pair_unsafe(0, pj, ei);
+			return _set_pair_unsafe(0, pj, ei);
 		} else {
 			// component with pj was born first
 			parent[pi] = pj;
 			// homology born at pi dies with ei
-			return set_pair_unsafe(0, pi, ei);
+			return _set_pair_unsafe(0, pi, ei);
 		}
 		return true;
 	}
@@ -137,13 +142,38 @@ private:
 public:
 
 	// morse pairing for complex up to maxdim cells
-	MorsePairing(size_t maxdim) : ispaired(std::vector<std::vector<bool>>(maxdim+1)),
-	                            up(std::vector<std::vector<size_t>>(maxdim)),
-	                            down(std::vector<std::vector<size_t>>(maxdim)),
-	                            _maxdim(maxdim) {}
+	MorsePairing(size_t maxdim) { reserve(maxdim); }
+
+	// morse pairing on complex with given number of cells in each dim
+	MorsePairing(std::vector<size_t> ncells) {
+		for (size_t dim = 0; dim < ncells.size(); dim++) {
+			reserve(dim, ncells[dim]);
+		}
+	}
 
 	inline size_t maxdim() const { return _maxdim; }
 	inline size_t size(size_t dim) const { return ispaired[dim].size(); }
+
+	// return whether or not cell i in dimension dim is paired
+	inline bool is_paired(size_t dim, size_t i) const { return ispaired[dim][i]; }
+
+	// set pair between cell i in dimension dim, and cell j in dimension dim+1
+	inline bool set_pair(size_t dim, size_t i, size_t j) { return _set_pair_safe(dim, i, j); }
+
+	// set pair between vertices and edge
+	inline bool set_pair_edge(size_t i, size_t j, size_t ei) {return _set_edge(i, j, ei); }
+
+	inline const std::vector<size_t>& up_paired(size_t dim) const {return up[dim]; }
+	inline const std::vector<size_t>& down_paired(size_t dim) const {return down[dim-1]; }
+	std::vector<size_t> unpaired(size_t dim) const {
+		std::vector<size_t> ind;
+		for (size_t i = 0; i < ispaired[dim].size(); i++ ){
+			if (!ispaired[dim][i]) {
+				ind.emplace_back(i);
+			}
+		}
+		return ind;
+	}
 
 
 };
