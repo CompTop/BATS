@@ -1,14 +1,17 @@
 #pragma once
 
 #include <map>
+#include <unordered_map>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
+
+#define p2c_type std::unordered_map<size_t, size_t>
 
 // perform reduction algorithm on a column matrix in-place
 template <class TVec>
 std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M) {
 
-	std::map<size_t, size_t> pivot_to_col;
+	p2c_type pivot_to_col;
 
   // loop over columns
 	for (size_t j = 0; j < M.width(); j++) {
@@ -16,16 +19,12 @@ std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M) {
 			// std::cout << j << " : ";
 			// M[j].print_row();
 			// piv is index-value pair
-			auto piv = M[j].last();
+			auto piv = M[j].last_nzind();
 			if (pivot_to_col.count(piv.first) > 0) {
-				size_t k = pivot_to_col[piv.first];
-				// get coefficient
-				auto pivk = M[k].last();
-				auto alpha = - piv.second / pivk.second;
-				// std::cout << "alpha = " << alpha << std::endl;
-				M[j].axpy(alpha, M[k]);
+				size_t k = pivot_to_col[piv];
+				M[j].eliminate_pivot(M[k]);
 			} else {
-				pivot_to_col[piv.first] = j;
+				pivot_to_col[piv] = j;
 				break;
 			}
 		}
@@ -40,7 +39,7 @@ std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M) {
 template <class TVec>
 std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
-	std::map<size_t, size_t> pivot_to_col;
+	p2c_type pivot_to_col;
 
   // loop over columns
 	for (size_t j = 0; j < M.width(); j++) {

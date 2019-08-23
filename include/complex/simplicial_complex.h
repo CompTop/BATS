@@ -228,6 +228,8 @@ public:
 
 };
 
+// TODO: make flag complex friend functions
+
     // void add_dimension_recursive_flag_unsafe(
     //         std::vector<std::vector<size_t>> &nbrs,
     //         size_t d, size_t maxd,

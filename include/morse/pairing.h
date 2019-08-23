@@ -31,16 +31,6 @@ private:
 		}
 		return parent[i];
 	}
-public:
-
-	// morse pairing for complex up to maxdim cells
-	MorsePairing(size_t maxdim) : ispaired(std::vector<std::vector<bool>>(maxdim+1)),
-	                            up(std::vector<std::vector<size_t>>(maxdim)),
-	                            down(std::vector<std::vector<size_t>>(maxdim)),
-	                            _maxdim(maxdim) {}
-
-	inline size_t maxdim() const { return _maxdim; }
-	inline size_t size(size_t dim) const { return ispaired[dim].size(); }
 
 	// make sure that we can store pairs up to cells in dimension dim
 	void reserve(size_t dim) {
@@ -142,6 +132,18 @@ public:
 		}
 		return true;
 	}
+
+
+public:
+
+	// morse pairing for complex up to maxdim cells
+	MorsePairing(size_t maxdim) : ispaired(std::vector<std::vector<bool>>(maxdim+1)),
+	                            up(std::vector<std::vector<size_t>>(maxdim)),
+	                            down(std::vector<std::vector<size_t>>(maxdim)),
+	                            _maxdim(maxdim) {}
+
+	inline size_t maxdim() const { return _maxdim; }
+	inline size_t size(size_t dim) const { return ispaired[dim].size(); }
 
 
 };
