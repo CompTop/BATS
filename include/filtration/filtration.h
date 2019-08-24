@@ -16,11 +16,15 @@ template <class TC, typename TF>
 class Filtration
 {
 private:
-  TC cpx;
+  TC cpx; // TC* cpx
+  // MorsePairing over cpx
   std::vector<std::vector<TF>> val; // filtration value for each cell
   std::vector<std::vector<size_t>> filt_perm; // filtration perumation for each dimension
   std::vector<std::vector<size_t>> inv_perm; // inverse permutation for each dimension
 public:
+
+  // TODO: complete pairs in MorsePairing
+  // TODO: extract pairs in MorseParing to get barcode
 
   // empty initializer
   Filtration() : cpx(TC()) {}

@@ -168,8 +168,8 @@ public:
     return ModP(val ^ b.val); // xor
   }
 
-  ModP operator-() const {
-    return ModP(val); // xor
+  inline ModP& operator-() {
+    return *this; // no-op
   }
 
   ModP operator*(const ModP &b) const {
