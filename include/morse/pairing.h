@@ -1,12 +1,17 @@
 #pragma once
 
 #include <vector>
+#include <complex/abstract_complex.h>
 
 // class that wraps pre-pairing of complex
-// no template type
+// template over complex type
+template <class CpxT>
 class MorsePairing
 {
 private:
+	// pointer to complex
+	CpxT* cpx;
+
 	// keeps track of whether a cell is paired
 	std::vector<std::vector<bool>> ispaired;
 	// cells that are paired up - dimensions 0 -- maxdim-1
@@ -20,7 +25,7 @@ private:
 	std::vector<size_t> parent;
 
  	// find root node of tree containing 0-cell i
-	size_t find_parent(size_t i) {
+	size_t find_parent(const size_t i) {
 		if (i != parent[i]) {
 			parent[i] = find_parent(parent[i]);
 		}
@@ -28,7 +33,7 @@ private:
 	}
 
 	// make sure that we can store pairs up to cells in dimension dim
-	void reserve(size_t dim) {
+	void reserve(const size_t dim) {
 		while (ispaired.size() < dim+1) {
 			ispaired.emplace_back(std::vector<bool>());
 		}
@@ -41,7 +46,7 @@ private:
 		_maxdim = std::max(_maxdim, dim);
 	}
 
-	void reserve(size_t dim, size_t n) {
+	void reserve(const size_t dim, const size_t n) {
 		// first make sure there are enough dimensions available
 		reserve(dim);
 
@@ -79,7 +84,7 @@ private:
 	}
 
 	// set pair (i,j) in dimension dim
-	bool _set_pair_unsafe(size_t dim, size_t i, size_t j) {
+	bool _set_pair_unsafe(const size_t dim, const size_t i, const size_t j) {
 		up[dim].emplace_back(i);
 		down[dim].emplace_back(j);
 		ispaired[dim][i] = true;
@@ -88,7 +93,7 @@ private:
 	}
 
 	// set pair with reservation checks
-	bool _set_pair_supersafe(size_t dim, size_t i, size_t j) {
+	bool _set_pair_supersafe(const size_t dim, const size_t i, const size_t j) {
 		if (maxdim() < dim + 1) {
 			reserve(dim + 1);
 		}
@@ -108,7 +113,7 @@ private:
 	}
 
 	// set pair with checks
-	bool _set_pair_safe(size_t dim, size_t i, size_t j) {
+	bool _set_pair_safe(const size_t dim, const size_t i, const size_t j) {
 		// check if already paired
 		if (ispaired[dim][i] || ispaired[dim+1][j]) {
 			// was already paired
@@ -118,7 +123,7 @@ private:
 	}
 
 	// add an edge (i, j) with index ei
-	bool _set_edge(size_t i, size_t j, size_t ei) {
+	bool _set_edge(const size_t i, const size_t j, const size_t ei) {
 		size_t pi = find_parent(i);
 		size_t pj = find_parent(j);
 		if (pi == pj) { return false; } // no pair set
@@ -140,6 +145,12 @@ private:
 
 
 public:
+
+	MorsePairing(CpxT &C) : cpx(&C) {
+		for (size_t dim = 0; dim < C.maxdim(); dim++){
+			reserve(dim, C.ncells(dim));
+		}
+	};
 
 	// morse pairing for complex up to maxdim cells
 	MorsePairing(size_t maxdim) { reserve(maxdim); }
@@ -175,5 +186,42 @@ public:
 		return ind;
 	}
 
+	// add to underlying complex
+	template <class ...Ts>
+	inline cell_ind add(Ts (&...args)) {
+		cell_ind ret = cpx->add(args...);
+		reserve(ret.dim, ret.ind+1);
+		return ret;
+	}
+
+	// add to underlying complex and if possible pair with face
+	template <class ...Ts>
+	cell_ind add_pair(Ts (&...args)) {
+		// first add to complex
+		cell_ind ret = add(args...);
+		// now iterate over boundary
+		if (ret.dim > 1) {
+			for (auto k = cpx->faces_begin(ret.dim, ret.ind); k < cpx->faces_end(ret.dim, ret.ind); k++) {
+				if (!ispaired[ret.dim-1][*k]) {
+					// set the pair then exit
+					_set_pair_unsafe(ret.dim - 1, *k, ret.ind);
+					return ret;
+				}
+			}
+		} else if (ret.dim == 1) {
+			auto k = cpx->faces_begin(ret.dim, ret.ind);
+			_set_edge(*k, *(k+1), ret.ind);
+		}
+		return ret;
+	}
+
+	template <class ...Ts>
+	inline auto faces_begin(Ts (&...args)) {
+		return cpx->faces_begin(args...);
+	}
+	template <class ...Ts>
+	inline auto faces_end(Ts (&...args)) {
+		return cpx->faces_end(args...);
+	}
 
 };
