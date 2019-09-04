@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <complex/abstract_complex.h>
+#include <linalg/csc_matrix.h>
 
 // class that wraps pre-pairing of complex
 // template over complex type
@@ -129,7 +130,31 @@ private:
 		if (pi == pj) { return false; } // no pair set
 
 		// merge components with i and j
+		// TODO: should be able to call a rank vector
 		if (pi < pj) {
+			// component with pi was born first
+			parent[pj] = pi;
+			// homology born at pj dies with ei
+			return _set_pair_unsafe(0, pj, ei);
+		} else {
+			// component with pj was born first
+			parent[pi] = pj;
+			// homology born at pi dies with ei
+			return _set_pair_unsafe(0, pi, ei);
+		}
+		return true;
+	}
+
+	// add an edge (i, j) with index ei
+	// use rank vector to compare
+	template <typename TR>
+	bool _set_edge(const size_t i, const size_t j, const size_t ei, const std::vector<TR> &rank) {
+		size_t pi = find_parent(i);
+		size_t pj = find_parent(j);
+		if (pi == pj) { return false; } // no pair set
+
+		// merge components with i and j
+		if ( (rank[pi] < rank[pj]) || ((rank[pi] == rank[pj]) && (pi < pj)) ) {
 			// component with pi was born first
 			parent[pj] = pi;
 			// homology born at pj dies with ei
@@ -172,10 +197,14 @@ public:
 	inline bool set_pair(size_t dim, size_t i, size_t j) { return _set_pair_safe(dim, i, j); }
 
 	// set pair between vertices and edge
-	inline bool set_pair_edge(size_t i, size_t j, size_t ei) {return _set_edge(i, j, ei); }
+	inline bool set_pair_edge(const size_t i, const size_t j, const size_t ei) {return _set_edge(i, j, ei); }
+	template <typename TR>
+	inline bool set_pair_edge(const size_t i, const size_t j, const size_t ei, const std::vector<TR> &rank) {
+		return _set_edge(i, j, ei, rank);
+	}
 
-	inline const std::vector<size_t>& up_paired(size_t dim) const {return up[dim]; }
-	inline const std::vector<size_t>& down_paired(size_t dim) const {return down[dim-1]; }
+	inline std::vector<size_t> up_paired(size_t dim) const {return up[dim]; }
+	inline std::vector<size_t> down_paired(size_t dim) const {return down[dim-1]; }
 	std::vector<size_t> unpaired(size_t dim) const {
 		std::vector<size_t> ind;
 		for (size_t i = 0; i < ispaired[dim].size(); i++ ){
@@ -223,5 +252,7 @@ public:
 	inline auto faces_end(Ts (&...args)) {
 		return cpx->faces_end(args...);
 	}
+
+	inline CSCMatrix<int, size_t> boundary_csc(const size_t dim) const { return cpx->boundary_csc(dim); }
 
 };

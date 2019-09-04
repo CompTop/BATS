@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iterator>
 
+#include <util/common.h>
 #include "abstract_complex.h"
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
@@ -20,9 +21,6 @@
 
 #include <util/simplex.h> // for hash function
 
-
-// no index
-#define NO_IND std::numeric_limits<size_t>::max();
 
 /*
 simplicial complex implementation
@@ -54,7 +52,7 @@ private:
         if (spx_to_idx.count(s)) {
             return spx_to_idx[s];
         }
-        return NO_IND;
+        return bats::NO_IND;
     }
 
     // reserve for maxdim dimensional simplices
@@ -180,7 +178,7 @@ public:
     inline auto faces_end(const cell_ind &ci) const { return faces_end(ci.dim, ci.ind); }
 
     // get CSC integer matrix boundary in dimension dim
-    CSCMatrix<int, size_t> boundary_csc(size_t dim) {
+    CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {
         size_t m = ncells(dim-1);
         size_t n = ncells(dim);
         // create colptr

@@ -42,6 +42,9 @@ public:
 		}
     };
 
+	inline size_t maxdim() const { return val.size() - 1; }
+	inline size_t ncells(const size_t dim) const { return val[dim].size(); }
+
 	// add to underlying complex
 	template <class ...Ts>
 	inline cell_ind add(TF t, Ts (&...args)) {
@@ -65,8 +68,9 @@ public:
 				}
 			}
 		} else if (ret.dim == 1) {
+			// TODO: check if boundary is zero e.g. for cell complexes
 			auto k = P.faces_begin(ret.dim, ret.ind);
-			P.set_pair_edge(*k, *(k+1), ret.ind);
+			P.set_pair_edge(*k, *(k+1), ret.ind, val[0]);
 		}
 		return ret;
 	}
@@ -74,6 +78,13 @@ public:
 	MorsePairing<CpxT>& pairing() {
 		return P;
 	}
+
+	inline std::vector<size_t> sortperm(const size_t dim) const { return bats::sortperm(val[dim]); }
+
+	
+
+	// TODO:
+	// functions that extend filtrations on a pre-existing complex
 
 
     // // empty initializer
