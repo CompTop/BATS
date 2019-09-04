@@ -66,7 +66,7 @@ private:
 
 public:
 
-    CSCMatrix() {};
+    CSCMatrix() : m(0), n(0) {};
 
     CSCMatrix(
         size_t m,
@@ -107,6 +107,8 @@ public:
         return;
     }
 
+    // obtain block A from M from columns cind and
+    // row permutation prow
     friend void block_select(
         const CSCMatrix &M,
         const std::vector<size_t> &cind,
@@ -118,8 +120,12 @@ public:
         A.colptr.resize(n+1);
         A.colptr[0] = 0;
         // reserve enough space for 1 nonzero in each column.  This can always be expanded
+        A.rowind.clear();
         A.rowind.reserve(m);
+        A.val.clear();
         A.val.reserve(m);
+        A.m = m;
+        A.n = n;
 
         size_t j = 0;
         // loop in column permutation order
@@ -135,70 +141,52 @@ public:
             j++;
             A.colptr[j] = A.rowind.size();
         }
-        A.m = m;
-        A.n = n;
+    }
+
+    /*
+    operates on multiple row blocks
+    WARNING: assumes that row blocks have unique indices
+    */
+    template <size_t N>
+    friend void block_select(
+        const CSCMatrix &M,
+        const std::vector<size_t> &cind,
+        const std::vector<size_t>* (&&prow)[N],
+        const size_t (&&m)[N],
+        CSCMatrix* (&&A)[N]
+    ) {
+        size_t n = cind.size(); // number of columns
+        for (size_t i = 0; i < N; i++) {
+            (*A[i]).colptr.resize(n+1);
+            (*A[i]).colptr[0] = 0;
+            // reserve enough space for 1 nonzero in each column.  This can always be expanded
+            (*A[i]).rowind.clear();
+            (*A[i]).rowind.reserve(m[i]);
+            (*A[i]).val.clear();
+            (*A[i]).val.reserve(m[i]);
+            (*A[i]).m = m[i];
+            (*A[i]).n = n;
+        }
+
+        size_t j = 0;
+        // loop in column permutation order
+        for ( size_t Mj : cind) {
+            // loop over nzs in the jth column of M
+            for (size_t Mp = M.colptr[j]; Mp < M.colptr[j+1]; Mp++) {
+                for (size_t i = 0; i < N; i++) {
+                    if ((*prow[i])[M.rowind[Mp]] != bats::NO_IND) {
+                        // this item makes it to the block
+                        (*A[i]).rowind.emplace_back((*prow[i])[M.rowind[Mp]]);
+                        (*A[i]).val.emplace_back(M.val[Mp]);
+                        break;
+                    }
+                }
+            }
+            j++;
+            for (size_t i = 0; i < N; i++) {
+                (*A[i]).colptr[j] = (*A[i]).rowind.size();
+            }
+        }
     }
 
 };
-
-/*
-Paritions M into a block matrix [A1, A2; A3, A4]
-blocks are given by partial row permutations p1, p2
-and paritial column permutations p3, p4
-size of index set pi is ni i = 1,2,3,4
-*/
-// template <typename TV, typename TI>
-// void block_partition(
-//     CSCMatrix<TV, TI> &M,
-//     const std::vector<size_t>* p[4],
-//     const size_t n[4],
-//     CSCMatrix<TV, TI>* A[4]
-// ) {
-//     std::vector<TI> colptr[4];
-//     std::vector<TI> rowind[4];
-//     std::vector<TV> val[4];
-//
-//     // loop over columns
-//     for (size_t j = 0; j < M.n; j++) {
-//         // loop over nzs in the jth column of M
-//     }
-//
-// }
-
-/*
-form a block of matrix M from
-column indices in cin
-as well as partial row permutation prow of size m
-*/
-// template <typename TV, typename TI>
-// void block_select(
-//     const CSCMatrix<TV, TI> &M,
-//     const std::vector<size_t> &cind,
-//     const std::vector<size_t> &prow,
-//     const size_t m,
-//     CSCMatrix<TV, TI> &A
-// ) {
-//     size_t n = cind.size(); // number of columns
-//     A.colptr.resize(n+1);
-//     A.colptr[0] = 0;
-//     // reserve enough space for 1 nonzero in each column.  This can always be expanded
-//     A.rowind.reserve(m);
-//     A.val.reserve(m);
-//
-//     size_t j = 0;
-//     // loop in column permutation order
-//     for ( size_t Mj : cind) {
-//         // loop over nzs in the jth column of M
-//         for (size_t Mp = M.colptr[j]; Mp < M.colptr[j+1]; Mp++) {
-//             if (prow[M.rowind[Mp]] != bats::NO_IND) {
-//                 // this item makes it to the block
-//                 A.rowind.emplace_back(prow[M.rowind[Mp]]);
-//                 A.val.emplace_back(M.val[Mp]);
-//             }
-//         }
-//         j++;
-//         A.colptr[j] = A.rowind.size();
-//     }
-//     A.m = m;
-//     A.n = n;
-// }
