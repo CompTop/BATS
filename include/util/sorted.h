@@ -65,6 +65,16 @@ void intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, T max
     }
 }
 
+// copy x into y, then sort y
+template <typename T>
+void sort_into(const std::vector<T> &x, std::vector<T> &y) {
+    // copy x into y
+    y.resize(x.size());
+    std::copy(x.cbegin(), x.cend(), y.begin());
+    // sort y
+    std::sort(y.begin(), y.end());
+}
+
 
 // fill a vector that will return a sort permutation on data
 template <typename T>

@@ -38,7 +38,7 @@ private:
 		while (ispaired.size() < dim+1) {
 			ispaired.emplace_back(std::vector<bool>());
 		}
-		while (up.size() < dim) {
+		while (up.size() < dim+1) {
 			up.emplace_back(std::vector<size_t>());
 		}
 		while (down.size() < dim) {
@@ -171,8 +171,10 @@ private:
 
 public:
 
+	MorsePairing() {};
+
 	MorsePairing(CpxT &C) : cpx(&C) {
-		for (size_t dim = 0; dim < C.maxdim(); dim++){
+		for (size_t dim = 0; dim < C.maxdim() + 1; dim++){
 			reserve(dim, C.ncells(dim));
 		}
 	};
@@ -188,7 +190,8 @@ public:
 	}
 
 	inline size_t maxdim() const { return _maxdim; }
-	inline size_t size(size_t dim) const { return ispaired[dim].size(); }
+	inline size_t size(const size_t dim) const { return ispaired[dim].size(); }
+	inline size_t ncells(const size_t dim) const { return ispaired[dim].size(); }
 
 	// return whether or not cell i in dimension dim is paired
 	inline bool is_paired(size_t dim, size_t i) const { return ispaired[dim][i]; }
