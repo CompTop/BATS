@@ -189,4 +189,164 @@ public:
         }
     }
 
+    // gemm implementation
+    // TV can be arbitrary ring
+    // C = A * B
+    // C is over-written
+    friend void gemm(const CSCMatrix &A, const CSCMatrix &B, CSCMatrix &C) {
+
+        assert (A.n == B.m);
+        size_t m = A.m;
+        size_t n = B.n;
+        size_t k = A.n;
+
+        C.m = m;
+        C.n = n;
+        C.colptr.resize(n+1);
+        C.colptr[0] = 0;
+        C.rowind.clear();
+        C.val.clear();
+
+        // loop over columns of C
+        // C[:,j] = A[:,k] * B[k, j]
+        // allocations for temp
+        std::vector<size_t> perm;
+        std::vector<TI> tmp1;
+        std::vector<TV> tmp2;
+        for (size_t j = 0; j < n; j++) {
+            // loop over nonzeros in jth column of B
+            for (size_t pBj = B.colptr[j]; pBj < B.colptr[j+1]; pBj++) {
+                TI k = B.rowind[pBj];
+                TV v = B.val[pBj];
+                // push onto jth column of C
+                for (size_t pAk = A.colptr[k]; pAk < A.colptr[k+1]; pAk++) {
+                    C.rowind.emplace_back(A.rowind[pAk]);
+                    C.val.emplace_back(v * A.val[pAk]);
+                }
+            }
+            // sort & sum reduce column C[j]
+            sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
+            C.colptr[j+1] = C.rowind.size();
+        }
+
+    }
+
+    // gemm implementation
+    // TV can be arbitrary ring
+    // C = A + B
+    // C is over-written
+    friend void sum(const CSCMatrix &A, const CSCMatrix &B, CSCMatrix &C) {
+
+        assert (A.n == B.n);
+        assert (A.m == B.m);
+        size_t n = B.n;
+        size_t m = A.m;
+
+        C.m = m;
+        C.n = n;
+        C.colptr.resize(n+1);
+        C.colptr[0] = 0;
+        C.rowind.clear();
+        C.val.clear();
+
+        // loop over columns of C
+        // C[:,j] = A[:,k] * B[k, j]
+        // allocations for temp
+        std::vector<size_t> perm;
+        std::vector<TI> tmp1;
+        std::vector<TV> tmp2;
+        for (size_t j = 0; j < n; j++) {
+            // loop over noneros in jth column of B
+            for (size_t pBj = B.colptr[j]; pBj < B.colptr[j+1]; pBj++) {
+                C.rowind.emplace_back(B.rowind[pBj]);
+                C.val.emplace_back(B.val[pBj]);
+            }
+            for (size_t pAj = A.colptr[j]; pAj < A.colptr[j+1]; pAj++) {
+                C.rowind.emplace_back(A.rowind[pAj]);
+                C.val.emplace_back(A.val[pAj]);
+            }
+
+            // sort & sum reduce column C[j]
+            sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
+            C.colptr[j+1] = C.rowind.size();
+        }
+
+    }
+
+    // upper triangular solve implementation
+    // TV can be arbitrary ring, assuming diagonal has units
+    // C = A \ B
+    // C is over-written
+    // WARNING: assumes A is upper-triangular, with units on diagonal
+    // TODO: this may be faster with a symbolic factorization first
+    // or using temporary arrays for storage as with sorted sparse vectors
+    friend void trilu(const CSCMatrix &A, const CSCMatrix &B, CSCMatrix &C) {
+
+        assert (A.n == B.m);
+        assert (A.n == A.m); // square = invertible
+        size_t m = A.m;
+        size_t n = B.n;
+        size_t k = A.n;
+
+        C.m = m;
+        C.n = n;
+        C.colptr.resize(n+1);
+        C.colptr[0] = 0;
+        C.rowind.clear();
+        C.val.clear();
+
+        // loop over columns of C
+        // C[:,j] = A \ B[:,j]
+        // allocations for temp
+        std::vector<size_t> perm;
+        std::vector<TI> tmp1;
+        std::vector<TV> tmp2;
+        for (size_t j = 0; j < n; j++) {
+            // y = U \ x:
+            // y = x
+            // for i = m:-1:1:
+            //      y[i] = y[i] / U[i,i]
+            //      y[:i-1] += y[i]*U[:i-1,i]
+            // first copy B[:,j] into C[:,j]
+            size_t offsetCj = C.colptr[j];
+            for (size_t pBj = B.colptr[j]; pBj < B.colptr[j+1]; pBj++) {
+                C.rowind.emplace_back(B.rowind[pBj]);
+                C.val.emplace_back(B.val[pBj]);
+            }
+
+            size_t lastnz = find_sorted_lt(C.rowind.cbegin() + offsetCj, C.rowind.cend(), m);
+
+            while (lastnz != bats::NO_IND) {
+
+                TI i = *(C.rowind.cbegin() + offsetCj + lastnz);
+                TV yi = *(C.val.cbegin() + offsetCj + lastnz);
+                *(C.val.begin() + offsetCj + lastnz) /= A.val[A.colptr[i+1] - 1]; // y[i] = y[i] / U[i,i]
+                // y[:i-1] += y[i]*U[:i-1, i]
+                size_t offsetAi = A.colptr[i];
+
+                auto Cr = C.rowind.begin() + offsetCj;
+                auto Cv = C.val.begin() + offsetCj;
+                auto Ar = A.rowind.cbegin() + offsetAi;
+                auto Av = A.val.cbegin() + offsetAi;
+                while (*Cr < i || *Ar < i) {
+
+                    if (*Cr == *Ar) {
+                        *Cv -= *Av * yi;
+                        ++Cr; ++Cv; ++Ar; ++Av;
+                    } else if (*Cr < *Ar) {
+                        // no update
+                        ++Cr; ++Cv;
+                    } else { // *Cr > *Ar, and we need to insert
+                        Cr = C.rowind.insert(Cr, *Ar) + 1;
+                        Cv = C.val.insert(Cv, -(*Av)*yi) + 1;
+                        ++Ar; ++Av;
+                    }
+                }
+
+                lastnz = find_sorted_lt(C.rowind.cbegin() + offsetCj, C.rowind.cend(), i);
+            }
+            C.colptr[j+1] = C.rowind.size();
+        }
+    }
+
 };

@@ -206,3 +206,65 @@ void sort_ind_pair_by_perm(
 //     std::vector<size_t> &ind2,
 //     const std::vector<size_t> &perm
 // )
+
+// sort and reduce ind and val
+template <typename TI, typename TV>
+void sort_sum_reduce(
+    std::vector<TI> &ind,
+    std::vector<TV> &val,
+    const size_t offset,
+    std::vector<size_t> &perm,
+    std::vector<TI> &tmpind,
+    std::vector<TV> &tmpval
+) {
+    // sort ind and val simultaneously
+    fill_sortperm(ind.cbegin() + offset, ind.cend(), perm);
+    apply_perm(ind.data() + offset, tmpind, perm);
+    apply_perm(val.data() + offset, tmpval, perm);
+
+    size_t fill_ptr = offset;
+    size_t look_ptr = offset + 1;
+    while (ind.cbegin() + look_ptr < ind.cend()) {
+        if (ind[look_ptr] == ind[fill_ptr]) {
+            // keep adding to index at fill_ptr
+            val[fill_ptr] += val[look_ptr];
+            ++look_ptr;
+        } else {
+            // if accumulation was zero, start accumulating at same spot
+            if (!(val[fill_ptr] == 0)) {
+                fill_ptr++;
+            }
+            // start accumulating at new next fill_ptr
+            ind[fill_ptr] = ind[look_ptr];
+            val[fill_ptr] = val[look_ptr];
+            ++look_ptr;
+        }
+    }
+
+    // resize to fill_ptr
+    // if last accumulation is zero, ignore
+    if (!(val[fill_ptr] == 0)) {
+        fill_ptr++;
+    }
+    ind.resize(fill_ptr);
+    val.resize(fill_ptr);
+
+}
+
+
+// find nonzero index of last element with index < i
+template<typename T, typename TI>
+size_t find_sorted_lt(const TI &begin, const TI &end, const T &v) {
+    if (begin == end) { return bats::NO_IND; }
+    TI it = std::lower_bound(
+        begin,
+        end,
+        v
+    );
+    it--;
+    if (*it < v) {
+        return it - begin;
+    }
+    return bats::NO_IND;
+    //return it--;
+}
