@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <numeric>
 #include <complex/abstract_complex.h>
-#include <complex/simplicial_complex.h>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 #include <util/sorted.h>
@@ -31,6 +30,25 @@ private:
           val[dim].resize(n);
         }
     }
+
+	// add to underlying complex
+	template <class ...Ts>
+	inline cell_ind _add_unsafe(const TF t, Ts (&...args)) {
+		cell_ind ret = P._add_unsafe(args...);
+		val[ret.dim][ret.ind] = t;
+		return ret;
+	}
+	// add to underlying complex
+	template <class ...Ts>
+	inline cell_ind _add_unsafe_reserve(const TF t, Ts (&...args)) {
+		cell_ind ret = P._add_unsafe_reserve(args...);
+		reserve(ret.dim, ret.ind+1);
+		val[ret.dim][ret.ind] = t;
+		return ret;
+	}
+
+
+
 public:
 
     // TODO: complete pairs in MorsePairing
@@ -39,8 +57,8 @@ public:
 
     // initialize on complex
     Filtration(CpxT &C) : P(C) {
-        for (size_t dim = 0; dim < C.maxdim() + 1; dim++){
-			reserve(dim, C.ncells(dim));
+        for (size_t dim = 0; dim < P.maxdim(); dim++){
+			reserve(dim, P.ncells(dim));
 		}
     };
 
@@ -77,11 +95,46 @@ public:
 		return ret;
 	}
 
+	// add to underlying complex and if possible pair with face
+	template <class ...Ts>
+	cell_ind _add_pair_unsafe(TF t, Ts (&...args)) {
+		// first add to complex
+		cell_ind ret = _add_unsafe_reserve(t, args...);
+		// now iterate over boundary
+		if (ret.dim > 1) {
+			for (auto k = P.faces_begin(ret.dim, ret.ind); k < P.faces_end(ret.dim, ret.ind); k++) {
+				if (val[ret.dim-1][*k] == t) {
+					// only return if pair set successfully
+					if (P.set_pair(ret.dim-1, *k, ret.ind)) {return ret;}
+				}
+			}
+		} else if (ret.dim == 1) {
+			// TODO: check if boundary is zero e.g. for cell complexes
+			auto k = P.faces_begin(ret.dim, ret.ind);
+			P.set_pair_edge(*k, *(k+1), ret.ind, val[0]);
+		}
+		return ret;
+	}
+
 	MorsePairing<CpxT>& pairing() {
 		return P;
 	}
 
 	inline std::vector<size_t> sortperm(const size_t dim) const { return bats::sortperm(val[dim]); }
+
+	// friend void add_dimension_recursive_flag_unsafe(
+	//     Filtration&,
+	//     const std::vector<std::vector<size_t>>&,
+	//     const size_t,
+	//     const size_t,
+	//     const std::vector<size_t>&,
+	//     std::vector<size_t>&,
+	//     const TF
+	// );
+
+	~Filtration() {
+		//std::cout << "in Filtration destructor" << std::endl;
+	}
 
 };
 

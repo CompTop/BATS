@@ -16,6 +16,8 @@
 #include <util/trie.h>
 #include <iostream>
 #include <map>
+#include <filtration/filtration.h>
+#include <morse/pairing.h>
 
 
 
@@ -41,6 +43,8 @@ private:
 
     // keeps track of how many cells are in given dimension
     std::vector<size_t> _ncells;
+    // keeps track of reserved capacity
+    std::vector<size_t> _reserved;
 
     // map to find simplices when forming boundary
     spx_map spx_to_idx;
@@ -58,6 +62,7 @@ private:
     // reserve for maxdim dimensional simplices
     void reserve(size_t maxdim) {
         if ( _ncells.size() < maxdim + 1 ) { _ncells.resize(maxdim+1, 0); }
+        if ( _reserved.size() < maxdim + 1 ) { _reserved.resize(maxdim+1, 0); }
         if ( faces.size() < maxdim ) { faces.resize(maxdim); }
         if ( coeff.size() < maxdim ) { coeff.resize(maxdim); }
         return;
@@ -65,8 +70,9 @@ private:
 
     // assume dim > 0
     void reserve(size_t dim, size_t k) {
-        // first reserve for dimension
         reserve(dim);
+        _reserved[dim] = std::max(_reserved[dim], k);
+        if (dim == 0) { return; }
         if ( faces[dim-1].capacity() < k * (dim + 1) ) {
           faces[dim-1].reserve(k * (dim + 1));
           coeff[dim-1].reserve(k * (dim + 1));
@@ -87,7 +93,7 @@ private:
 
     // adds a simplex to the complex without doing any checks
     // assume dim > 0
-    cell_ind add_unsafe(std::vector<size_t> &s) {
+    cell_ind _add_unsafe(std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
 
         // get index of simplex
@@ -135,7 +141,7 @@ private:
             return cell_ind(dim, spx_to_idx[s]);
         }
         // we're clear to add
-        return add_unsafe(s);
+        return _add_unsafe(s);
     }
 
 
@@ -146,6 +152,13 @@ public:
 
     // constructor that initializes to set dimension
     SimplicialComplex(size_t maxdim) { reserve(maxdim); }
+
+    // constructor that reserves space for given number of simplices in each dimension
+    SimplicialComplex(const std::vector<size_t> &dim) {
+        for (size_t d = 0; d < dim.size(); d++) {
+            reserve(d, dim[d]);
+        }
+    }
 
     // maximum dimension of cell
     inline size_t maxdim() const { return _ncells.size() - 1; }
@@ -159,6 +172,10 @@ public:
       }
       return ct;
     }
+
+    // inline cell_ind add_unsafe(
+    //     std::vector<size_t> &s
+    // ) { return add_unsafe(s); }
 
     // add simplex to complex
     inline cell_ind add(
@@ -219,5 +236,10 @@ public:
         );
     }
 
+    friend class MorsePairing<SimplicialComplex>;
+
+    ~SimplicialComplex() {
+        //std::cout << "in simplicial complex destructor" << std::endl;
+    }
 
 };

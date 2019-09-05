@@ -57,6 +57,53 @@ void add_dimension_recursive_flag(
     }
 }
 
+template <typename T>
+void add_dimension_recursive_flag_unsafe(
+    Filtration<T, SimplicialComplex> &F,
+    const std::vector<std::vector<size_t>> &nbrs, // lists of neighbors
+    const size_t d, // dimension
+    const size_t maxd, // max dimension
+    const std::vector<size_t> &iter_idxs,
+    std::vector<size_t> &spx_idxs,
+    const T t
+) {
+    // sorted simplices will end up here
+    std::vector<size_t> spx_idxs2(spx_idxs.size() + 1);
+    if (d == maxd) {
+        // no recursion
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            sort_into(spx_idxs, spx_idxs2);
+
+            // add to F
+            F._add_pair_unsafe(t, spx_idxs2);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    } else { // d < maxd
+        // recursion
+        std::vector<size_t> iter_idxs2; // indices for recursing on
+        iter_idxs2.reserve(iter_idxs.size());
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            sort_into(spx_idxs, spx_idxs2);
+
+            // add to F
+            F._add_pair_unsafe(t, spx_idxs2);
+
+            // recurse
+            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            add_dimension_recursive_flag_unsafe(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    }
+}
+
 
 // Flag complex using list of edges
 // (edges[2*k], edges[2*k+1]) = (i, j) is an edge
@@ -70,13 +117,17 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> FlagFiltration(
     const std::vector<T> &t,
     const size_t n, // number of 0-cells
     const size_t maxdim,
-    const T t0 = T(0)
+    const T t0
+    // SimplicialComplex& X,
+    // Filtration<T, SimplicialComplex>& F
 ) {
 
     // check that dimensions agree
     size_t m = t.size();
     assert (edges.size() == 2 * m);
 
+    // X = SimplicialComplex(maxdim);
+    // F = Filtration<T, SimplicialComplex>(X);
     SimplicialComplex X(maxdim);
     Filtration<T, SimplicialComplex> F(X);
 
@@ -107,7 +158,7 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> FlagFiltration(
         nbrs[j].emplace_back(i);
         std::sort(nbrs[j].begin(), nbrs[j].end());
 
-        add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k]);
+        add_dimension_recursive_flag_unsafe(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k]);
     }
 
     return std::make_tuple(X, F);

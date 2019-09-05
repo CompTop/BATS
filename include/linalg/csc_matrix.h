@@ -1,11 +1,13 @@
 #pragma once
 
 #include <cstddef>
+#include <cassert>
 #include <vector>
 #include "abstract_matrix.h"
 #include <util/sorted.h>
 
 #include <iostream>
+#include <iomanip>
 
 // template over value type and index type
 template <typename TV, typename TI=size_t>

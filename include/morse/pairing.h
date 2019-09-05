@@ -114,13 +114,8 @@ private:
 	}
 
 	// set pair with checks
-	bool _set_pair_safe(const size_t dim, const size_t i, const size_t j) {
-		// check if already paired
-		if (ispaired[dim][i] || ispaired[dim+1][j]) {
-			// was already paired
-			return false;
-		}
-		return _set_pair_unsafe(dim, i, j);
+	inline bool _set_pair_safe(const size_t dim, const size_t i, const size_t j) {
+		return (ispaired[dim][i] || ispaired[dim+1][j]) ? false : _set_pair_unsafe(dim, i, j);
 	}
 
 	// add an edge (i, j) with index ei
@@ -168,25 +163,65 @@ private:
 		return true;
 	}
 
+	// add to underlying complex
+	// assume reserved
+	template <class ...Ts>
+	inline cell_ind _add_unsafe(Ts (&...args)) { return cpx->_add_unsafe(args...); }
+
+	template <class ...Ts>
+	inline cell_ind _add_unsafe_reserve(Ts (&...args)) {
+		cell_ind ret = cpx->_add_unsafe(args...);
+		reserve(ret.dim, ret.ind+1);
+		return ret;
+	}
+
+
+
+	// add to underlying complex and if possible pair with face
+	template <class ...Ts>
+	cell_ind _add_pair_unsafe(Ts (&...args)) {
+		// first add to complex
+		cell_ind ret = _add_unsafe(args...);
+		// now iterate over boundary
+		if (ret.dim > 1) {
+			for (auto k = cpx->faces_begin(ret.dim, ret.ind); k < cpx->faces_end(ret.dim, ret.ind); k++) {
+				if (!ispaired[ret.dim-1][*k]) {
+					// set the pair then exit
+					_set_pair_unsafe(ret.dim - 1, *k, ret.ind);
+					return ret;
+				}
+			}
+		} else if (ret.dim == 1) {
+			auto k = cpx->faces_begin(ret.dim, ret.ind);
+			_set_edge(*k, *(k+1), ret.ind);
+		}
+		return ret;
+	}
+
 
 public:
 
-	MorsePairing() {};
+	MorsePairing() : _maxdim(0) {};
 
-	MorsePairing(CpxT &C) : cpx(&C) {
+	MorsePairing(CpxT &C) : cpx(&C), _maxdim(0) {
 		for (size_t dim = 0; dim < C.maxdim() + 1; dim++){
+			// reserve(dim, C._reserved[dim]);
 			reserve(dim, C.ncells(dim));
 		}
 	};
 
 	// morse pairing for complex up to maxdim cells
-	MorsePairing(size_t maxdim) { reserve(maxdim); }
+	MorsePairing(size_t maxdim) : _maxdim(0) { reserve(maxdim); }
 
 	// morse pairing on complex with given number of cells in each dim
-	MorsePairing(std::vector<size_t> ncells) {
+	MorsePairing(std::vector<size_t> ncells) : _maxdim(0) {
 		for (size_t dim = 0; dim < ncells.size(); dim++) {
 			reserve(dim, ncells[dim]);
 		}
+	}
+
+	~MorsePairing() {
+		//std::cout << "in pairing destructor" << std::endl;
 	}
 
 	inline size_t maxdim() const { return _maxdim; }
@@ -257,5 +292,8 @@ public:
 	}
 
 	inline CSCMatrix<int, size_t> boundary_csc(const size_t dim) const { return cpx->boundary_csc(dim); }
+
+	template <typename T1, typename T2>
+	friend class Filtration;
 
 };

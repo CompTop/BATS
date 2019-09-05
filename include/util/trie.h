@@ -12,14 +12,23 @@ public:
     T val;
     child_container *children = NULL;
 
+    SparseTrie(const SparseTrie &t) {
+        // std::cout << "trie is being copied to " << this << std::endl;
+        val = t.val;
+        if (t.children != NULL) {
+            children = new child_container;
+            for (auto& [k, v] : *(t.children)) {
+                children->emplace(k, new child_type(*v));
+            }
+        }
+    }
+
     SparseTrie(T v) : val(v), children(NULL) {}
-
-
 
     SparseTrie() : children(NULL) {};
 
     ~SparseTrie() {
-//         std::cout << "trie is being deleted at " << this << std::endl;
+        // std::cout << "trie is being deleted at " << this << std::endl;
         if (children != NULL) {
 //             std::cout << "children at " << children << std::endl;
             // delete each child
