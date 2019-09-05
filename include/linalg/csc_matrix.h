@@ -273,6 +273,45 @@ public:
 
     }
 
+    // c = alpha * A + B
+    friend void sum(const TV& alpha, const CSCMatrix &A, const CSCMatrix &B, CSCMatrix &C) {
+
+        assert (A.n == B.n);
+        assert (A.m == B.m);
+        size_t n = B.n;
+        size_t m = A.m;
+
+        C.m = m;
+        C.n = n;
+        C.colptr.resize(n+1);
+        C.colptr[0] = 0;
+        C.rowind.clear();
+        C.val.clear();
+
+        // loop over columns of C
+        // C[:,j] = alpha * A[:,j] + B[:,j]
+        // allocations for temp
+        std::vector<size_t> perm;
+        std::vector<TI> tmp1;
+        std::vector<TV> tmp2;
+        for (size_t j = 0; j < n; j++) {
+            // loop over noneros in jth column of B
+            for (size_t pBj = B.colptr[j]; pBj < B.colptr[j+1]; pBj++) {
+                C.rowind.emplace_back(B.rowind[pBj]);
+                C.val.emplace_back(B.val[pBj]);
+            }
+            for (size_t pAj = A.colptr[j]; pAj < A.colptr[j+1]; pAj++) {
+                C.rowind.emplace_back(A.rowind[pAj]);
+                C.val.emplace_back(alpha * A.val[pAj]);
+            }
+
+            // sort & sum reduce column C[j]
+            sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
+            C.colptr[j+1] = C.rowind.size();
+        }
+
+    }
+
     // upper triangular solve implementation
     // TV can be arbitrary ring, assuming diagonal has units
     // C = A \ B
