@@ -4,7 +4,7 @@
 #include <filtration/filtration.h>
 #include <filtration/star.h>
 #include <iostream>
-#include <homology_reduction.h>
+#include <persistence/homology_reduction.h>
 
 #include <linalg/field.h>
 #define FF ModP<int, 3>
@@ -15,6 +15,7 @@ int main() {
 
   Filtration<SimplicialComplex, float> F;
 
+  std::cout << "adding cells" << std::endl;
   F.add({0}, 0.0);
   F.add({1}, 1.0);
   F.add({2}, 2.0);
@@ -22,8 +23,10 @@ int main() {
   F.add({0,2}, 3.0);
   F.add({1,2}, 4.0);
 
+  std::cout << "done." << std::endl;
   F.sort();
-  F.print();
+  std::cout << "sorted." << std::endl;
+  // F.print();
 
   std::cout << "\n1 boundary:" << std::endl;
   auto B = F.boundary<VecT>(1);
