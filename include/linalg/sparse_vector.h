@@ -1,5 +1,12 @@
 #pragma once
 
+/*
+An implementation of a sparse vector
+maintains indices in sorted order
+*/
+
+
+#include <cstddef>
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -7,7 +14,7 @@
 
 
 // template over type of values
-template <typename TI, typename TV>
+template <typename TV, typename TI=size_t>
 class SparseVector
 {
 private:
@@ -23,9 +30,6 @@ private:
 public:
 
 	SparseVector() {}
-
-	// copy constructor
-	SparseVector(const SparseVector &x) : indval(x.indval) {}
 
 	SparseVector(const std::vector<std::pair<TI, TV>> indval) : indval(indval) {}
 
@@ -112,7 +116,11 @@ public:
 	}
 
 	// return self + ax
-	SparseVector caxpy(const TV &a, const SparseVector &x, size_t xoffset=0) const {
+	SparseVector caxpy(
+		const TV &a,
+		const SparseVector &x,
+		const size_t xoffset=0
+	) const {
 
 		auto xend = x.indval.cend() - xoffset;
 
@@ -195,8 +203,8 @@ public:
 };
 
 // specialized F2 implementation
-template <typename TI, typename IntT>
-class SparseVector<TI, ModP<IntT, 2>> {
+template <typename IntT, typename TI=size_t>
+class SparseVector<ModP<IntT, 2>, TI> {
 private:
 	using TV = ModP<IntT, 2>;
 

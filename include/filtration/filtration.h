@@ -38,14 +38,6 @@ private:
 		val[ret.dim][ret.ind] = t;
 		return ret;
 	}
-	// add to underlying complex
-	template <class ...Ts>
-	inline cell_ind _add_unsafe_reserve(const TF t, Ts (&...args)) {
-		cell_ind ret = P._add_unsafe_reserve(args...);
-		reserve(ret.dim, ret.ind+1);
-		val[ret.dim][ret.ind] = t;
-		return ret;
-	}
 
 
 
@@ -57,7 +49,8 @@ public:
 
     // initialize on complex
     Filtration(CpxT &C) : P(C) {
-        for (size_t dim = 0; dim < P.maxdim(); dim++){
+        for (size_t dim = 0; dim < P.maxdim() + 1; dim++){
+			// std::cout << "reserving " << P.ncells(dim) << std::endl;
 			reserve(dim, P.ncells(dim));
 		}
     };
@@ -69,6 +62,15 @@ public:
 	template <class ...Ts>
 	inline cell_ind add(TF t, Ts (&...args)) {
 		cell_ind ret = P.add(args...);
+		reserve(ret.dim, ret.ind+1);
+		val[ret.dim][ret.ind] = t;
+		return ret;
+	}
+
+	// add to underlying complex
+	template <class ...Ts>
+	inline cell_ind _add_unsafe_reserve(const TF t, Ts (&...args)) {
+		cell_ind ret = P._add_unsafe_reserve(args...);
 		reserve(ret.dim, ret.ind+1);
 		val[ret.dim][ret.ind] = t;
 		return ret;
@@ -95,9 +97,43 @@ public:
 		return ret;
 	}
 
+	template <class ...Ts>
+	std::pair<cell_ind, bool> add_pair_edge(TF t, Ts (&...args)) {
+		// first add to complex
+		cell_ind ret = add(t, args...);
+
+		// now set the pair if possible
+		auto k = P.faces_begin(ret.dim, ret.ind);
+		bool paired = P.set_pair_edge(*k, *(k+1), ret.ind, val[0]);
+
+		return std::make_pair(ret, paired);
+	}
+
+
 	// add to underlying complex and if possible pair with face
 	template <class ...Ts>
 	cell_ind _add_pair_unsafe(TF t, Ts (&...args)) {
+		// first add to complex
+		cell_ind ret = _add_unsafe(t, args...);
+		// now iterate over boundary
+		if (ret.dim > 1) {
+			for (auto k = P.faces_begin(ret.dim, ret.ind); k < P.faces_end(ret.dim, ret.ind); k++) {
+				if (val[ret.dim-1][*k] == t) {
+					// only return if pair set successfully
+					if (P.set_pair(ret.dim-1, *k, ret.ind)) {return ret;}
+				}
+			}
+		} else if (ret.dim == 1) {
+			// TODO: check if boundary is zero e.g. for cell complexes
+			auto k = P.faces_begin(ret.dim, ret.ind);
+			P.set_pair_edge(*k, *(k+1), ret.ind, val[0]);
+		}
+		return ret;
+	}
+
+	// add to underlying complex and if possible pair with face
+	template <class ...Ts>
+	cell_ind _add_pair_unsafe_reserve(TF t, Ts (&...args)) {
 		// first add to complex
 		cell_ind ret = _add_unsafe_reserve(t, args...);
 		// now iterate over boundary
@@ -114,6 +150,10 @@ public:
 			P.set_pair_edge(*k, *(k+1), ret.ind, val[0]);
 		}
 		return ret;
+	}
+
+	inline bool _set_pair_unsafe(const size_t dim, const size_t i, const size_t j) {
+		return P._set_pair_unsafe(dim, i, j);
 	}
 
 	MorsePairing<CpxT>& pairing() {

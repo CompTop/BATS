@@ -205,8 +205,8 @@ public:
 
 	MorsePairing(CpxT &C) : cpx(&C), _maxdim(0) {
 		for (size_t dim = 0; dim < C.maxdim() + 1; dim++){
-			// reserve(dim, C._reserved[dim]);
-			reserve(dim, C.ncells(dim));
+			reserve(dim, C._reserved[dim]);
+			// reserve(dim, C.ncells(dim));
 		}
 	};
 

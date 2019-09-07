@@ -44,7 +44,7 @@ over-writes c
 TODO: template over container type as well
 */
 template <typename T>
-void intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, T maxval, std::vector<T> &c) {
+void intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, const T maxval, std::vector<T> &c) {
     c.clear();
     auto ia = a.cbegin();
     auto ib = b.cbegin();
@@ -64,6 +64,27 @@ void intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, T max
         }
     }
 }
+
+// return true if intersection intersect_sorted_lt would have somethin
+template <typename T>
+bool has_intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, const T maxval) {
+    auto ia = a.cbegin();
+    auto ib = b.cbegin();
+    while (ia < a.cend() && ib < b.cend()) {
+        if (*ia < *ib) {
+            ++ia;
+            if (!(*ia < maxval)) {break;}
+        } else if (*ib < *ia) {
+            ++ib;
+            if (!(*ib < maxval)) {break;}
+        } else {
+            // *ia == *ib
+            return true;
+        }
+    }
+    return false;
+}
+
 
 // copy x into y, then sort y
 template <typename T>
