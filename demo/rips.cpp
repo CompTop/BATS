@@ -12,10 +12,10 @@
 
 int main() {
 
-    size_t d = 3; // dimension of sphere + 1
+    size_t d = 2; // dimension of sphere + 1
     size_t n = 100;
     // size_t n = 4;
-    size_t maxdim = d;
+    size_t maxdim = d+1;
 
     std::cout << "creating pairwise distances" << std::endl;
     auto start = std::chrono::high_resolution_clock::now();
