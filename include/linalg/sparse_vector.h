@@ -203,7 +203,7 @@ public:
 };
 
 // specialized F2 implementation
-template <typename IntT, typename TI=size_t>
+template <typename IntT, typename TI>
 class SparseVector<ModP<IntT, 2>, TI> {
 private:
 	using TV = ModP<IntT, 2>;

@@ -73,15 +73,14 @@ void rips_edges(std::vector<T> &x, std::vector<size_t> &edges, std::vector<T> &t
 }
 
 // returns all pairs on n vertices
-template <typename T>
 std::vector<size_t> all_pairs(const size_t n) {
     size_t m = ((n-1)*n) / 2;
-    std::vector<size_t> edges(m);
-    auto it = edges.begin();
+    std::vector<size_t> edges;
+    edges.reserve(m);
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < i; j++) {
-            *it++ = i;
-            *it++ = j;
+            edges.push_back(i);
+            edges.push_back(j);
         }
     }
     return edges;
@@ -110,7 +109,8 @@ std::vector<T> pairwise_dist(
     auto vit = v.begin();
     auto eit = edges.cbegin();
     while (vit != v.end()) {
-        *vit = euclidean<T>(x.cbegin() + d*(*eit), x.cbegin() + d*(*eit + 1), d);
+        *vit = euclidean<T>(x.cbegin() + d*(*eit), x.cbegin() + d*(*(eit + 1)), d);
+        //std::cout << *vit << std::endl;
         vit++;
         eit+=2;
     }

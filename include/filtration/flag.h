@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <set>
 #include <utility> // make_pair
 #include <tuple>
 #include <complex/simplicial_complex.h>
@@ -10,10 +11,10 @@
 
 // template over filtration type
 // TODO: can do unsafe simplex add
-template <typename T>
+template <typename T, typename NT>
 void add_dimension_recursive_flag(
     Filtration<T, SimplicialComplex> &F,
-    const std::vector<std::vector<size_t>> &nbrs, // lists of neighbors
+    const NT &nbrs, // lists of neighbors
     const size_t d, // dimension
     const size_t maxd, // max dimension
     const std::vector<size_t> &iter_idxs,
@@ -57,11 +58,60 @@ void add_dimension_recursive_flag(
     }
 }
 
+
+
+template <typename T, typename NT>
+void add_dimension_recursive_flag_unsafe(
+    Filtration<T, SimplicialComplex> &F,
+    const NT &nbrs, // lists of neighbors
+    const size_t d, // dimension
+    const size_t maxd, // max dimension
+    const std::vector<size_t> &iter_idxs,
+    std::vector<size_t> &spx_idxs,
+    const T t
+) {
+    // sorted simplices will end up here
+    std::vector<size_t> spx_idxs2(spx_idxs.size() + 1);
+    if (d == maxd) {
+        // no recursion
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            sort_into(spx_idxs, spx_idxs2);
+
+            // add to F
+            F._add_pair_unsafe(t, spx_idxs2);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    } else { // d < maxd
+        // recursion
+        std::vector<size_t> iter_idxs2; // indices for recursing on
+        iter_idxs2.reserve(iter_idxs.size());
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            sort_into(spx_idxs, spx_idxs2);
+
+            // add to F
+            F._add_pair_unsafe(t, spx_idxs2);
+
+            // recurse
+            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            add_dimension_recursive_flag_unsafe(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    }
+}
+
 // this version keeps track of whether we should attempt to pair
-template <typename T>
+template <typename T, typename NT>
 void add_dimension_recursive_flag(
     Filtration<T, SimplicialComplex> &F,
-    const std::vector<std::vector<size_t>> &nbrs, // lists of neighbors
+    const NT &nbrs, // lists of neighbors
     const size_t d, // dimension
     const size_t maxd, // max dimension
     const std::vector<size_t> &iter_idxs,
@@ -120,7 +170,8 @@ void add_dimension_recursive_flag(
 
             // recurse
             intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
-            if (!(iter_idxs2.size() == 0)) {
+            if (!iter_idxs2.empty()) {
+                // there will be some recursion
                 if (!face_paired) {
                     // we're going to pair with face, so further simplces can't pair with us
                     add_dimension_recursive_flag(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t, true, si);
@@ -130,61 +181,15 @@ void add_dimension_recursive_flag(
                 }
             } // else no cofaces to add
 
-            // pop k off spx_idxs
-            spx_idxs.pop_back();
-
             if (!face_paired) {
                 // pair with face first chance
                 F._set_pair_unsafe(fi.dim, fi.ind, si.ind);
                 face_paired = true;
             }
-        }
-    }
-}
-
-template <typename T>
-void add_dimension_recursive_flag_unsafe(
-    Filtration<T, SimplicialComplex> &F,
-    const std::vector<std::vector<size_t>> &nbrs, // lists of neighbors
-    const size_t d, // dimension
-    const size_t maxd, // max dimension
-    const std::vector<size_t> &iter_idxs,
-    std::vector<size_t> &spx_idxs,
-    const T t
-) {
-    // sorted simplices will end up here
-    std::vector<size_t> spx_idxs2(spx_idxs.size() + 1);
-    if (d == maxd) {
-        // no recursion
-        for (auto k : iter_idxs) {
-            // append k to spx_idxs, sort
-            spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
-
-            // add to F
-            F._add_pair_unsafe(t, spx_idxs2);
 
             // pop k off spx_idxs
             spx_idxs.pop_back();
-        }
-    } else { // d < maxd
-        // recursion
-        std::vector<size_t> iter_idxs2; // indices for recursing on
-        iter_idxs2.reserve(iter_idxs.size());
-        for (auto k : iter_idxs) {
-            // append k to spx_idxs, sort
-            spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
 
-            // add to F
-            F._add_pair_unsafe(t, spx_idxs2);
-
-            // recurse
-            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
-            add_dimension_recursive_flag_unsafe(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t);
-
-            // pop k off spx_idxs
-            spx_idxs.pop_back();
         }
     }
 }
@@ -235,15 +240,21 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> FlagFiltration(
         spx_idxs[0] = i;
         spx_idxs[1] = j;
         std::pair<cell_ind, bool> ret = F.add_pair_edge(t[k], spx_idxs);
-
+        // std::cout << ret.second << std::endl;
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
+        if (!iter_idxs.empty()) {
+            add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k], ret.second, ret.first);
+        }
+
+        // TODO: use std::set for neighbors - insertion is log(n)
+        // nbrs[i].emplace(j);
+        // nbrs[j].emplace(i);
+        // TODO: insertion sort
         nbrs[i].emplace_back(j);
         std::sort(nbrs[i].begin(), nbrs[i].end());
         nbrs[j].emplace_back(i);
         std::sort(nbrs[j].begin(), nbrs[j].end());
-
-        add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k], ret.second, ret.first);
     }
 
     return std::make_tuple(X, F);
@@ -309,6 +320,8 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> CompleteFlagFilt
 
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
+        // nbrs[i].emplace(j);
+        // nbrs[j].emplace(i);
         nbrs[i].emplace_back(j);
         std::sort(nbrs[i].begin(), nbrs[i].end());
         nbrs[j].emplace_back(i);

@@ -61,7 +61,7 @@ private:
 			// reserve parent vector
 			if (parent.size() < n) {
 				size_t st = parent.size();
-				parent.reserve(n);
+				parent.resize(n);
 				// set all new 0-cells to have themselves as parent
 				for (size_t i = st; i < n; i++) {
 					parent[i] = i;
@@ -69,19 +69,20 @@ private:
 			}
 		}
 
-		// check up vector
-		if (dim < maxdim()) {
-			if (up[dim].size() < n) {
-				up[dim].reserve(n);
-			}
-		}
-
-		// check down vector
-		if (dim > 0) {
-			if (down[dim-1].size() < n) {
-				down[dim-1].reserve(n);
-			}
-		}
+		// don't reserve up/down - just let them grow dynamically
+		// // check up vector
+		// if (dim < maxdim()) {
+		// 	if (up[dim].size() < n) {
+		// 		up[dim].reserve(n);
+		// 	}
+		// }
+		//
+		// // check down vector
+		// if (dim > 0) {
+		// 	if (down[dim-1].size() < n) {
+		// 		down[dim-1].reserve(n);
+		// 	}
+		// }
 	}
 
 	// set pair (i,j) in dimension dim

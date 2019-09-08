@@ -66,7 +66,7 @@ public:
     }
 
 
-    T get(A* stptr, A* endptr) {
+    T& get(A* stptr, A* endptr) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             current = current->children->at(*stptr++);
@@ -75,8 +75,26 @@ public:
         return current->val;
     }
 
-    inline T operator[](std::vector<T> &k) {
+    inline T& operator[](std::vector<T> &k) {
         return get(k.data(), k.data() + k.size());
+    }
+
+    // get value with default return
+    T get(A* stptr, A* endptr, const T &def_ret) {
+        SparseTrie* current = this;
+        while (stptr < endptr) {
+            if (current->children == NULL || current->children->count(*stptr) == 0) {
+                // return the default value
+                return def_ret;
+            }
+            current = current->children->at(*stptr++);
+            //stptr++;
+        }
+        return current->val;
+    }
+
+    inline T get(std::vector<T> &k, const T &def_ret) {
+        return get(k.data(), k.data() + k.size(), def_ret);
     }
 
     size_t count(A* stptr, A* endptr) {
@@ -94,5 +112,7 @@ public:
     inline size_t count(std::vector<T> &k) {
         return count(k.data(), k.data() + k.size());
     }
+
+
 
 };

@@ -45,6 +45,8 @@ private:
     std::vector<size_t> _ncells;
     // keeps track of reserved capacity
     std::vector<size_t> _reserved;
+	// for iterating over faces
+    std::vector<size_t> __face;
 
     // map to find simplices when forming boundary
     spx_map spx_to_idx;
@@ -53,10 +55,7 @@ private:
     // returns index of simplex
     // TODO: find a way to do this with a single traversal of spx_to_idx
     size_t find_idx(std::vector<size_t> &s) {
-        if (spx_to_idx.count(s)) {
-            return spx_to_idx[s];
-        }
-        return bats::NO_IND;
+        return spx_to_idx.get(s, bats::NO_IND);
     }
 
     // reserve for maxdim dimensional simplices
@@ -105,23 +104,26 @@ private:
         if (dim > 0){
             int c = -1;
             // loop over faces in lexicographical order
-            std::vector<size_t> face;
-            //face.reserve(dim);
             size_t spx_len = dim + 1;
             for (size_t k = 0; k < spx_len; k++) {
                 size_t k2 = dim-k; // index to skip
-                face.clear();
+                __face.clear();
                 for (size_t j = 0; j < k2; j++) {
-                    face.emplace_back(s[j]);
+                    __face.emplace_back(s[j]);
                 }
                 for (size_t j = k2+1; j < spx_len; j++) {
-                    face.emplace_back(s[j]);
+                    __face.emplace_back(s[j]);
                 }
 
-                faces[dim-1].emplace_back(find_idx(face));
+                faces[dim-1].emplace_back(find_idx(__face));
                 coeff[dim-1].emplace_back(c);
                 c = -c;
             }
+            // for (size_t k = 0; k < s.size(); k++) {
+            //     faces[dim-1].emplace_back(s[k]);
+            //     coeff[dim-1].emplace_back(c);
+            //     c = -c;
+            // }
         }
 
         return cell_ind(dim, ind);

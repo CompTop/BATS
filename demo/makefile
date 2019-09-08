@@ -3,7 +3,7 @@ TESTFLAGS = -pg
 CXX = g++
 IFLAGS = -I../include
 
-default: flag.out rips.out
+default: rips.test rips.out
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS)

@@ -12,12 +12,12 @@ sets c = intersection(a, b)
 over-writes c
 TODO: template over container type as well
 */
-template <typename T>
-void intersect_sorted(const std::vector<T> &a, const std::vector<T> &b, std::vector<T> &c) {
+template <typename T, typename C1, typename C2>
+void intersect_sorted(const C1 &a, const C2 &b, std::vector<T> &c) {
     c.clear();
     auto ia = a.cbegin();
     auto ib = b.cbegin();
-    while (ia < a.cend() && ib < b.cend()) {
+    while (ia != a.cend() && ib != b.cend()) {
         if (*ia < *ib) {
             // std::cout << "a small" << std::endl;
             ++ia;
@@ -43,12 +43,12 @@ sets c = intersection(a, b, (-inf, maxval))
 over-writes c
 TODO: template over container type as well
 */
-template <typename T>
-void intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, const T maxval, std::vector<T> &c) {
+template <typename T, typename C1, typename C2>
+void intersect_sorted_lt(const C1 &a, const C2 &b, const T maxval, std::vector<T> &c) {
     c.clear();
     auto ia = a.cbegin();
     auto ib = b.cbegin();
-    while (ia < a.cend() && ib < b.cend()) {
+    while (ia != a.cend() && ib != b.cend()) {
         if (*ia < *ib) {
             ++ia;
             if (!(*ia < maxval)) {break;}
@@ -65,12 +65,13 @@ void intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, const
     }
 }
 
-// return true if intersection intersect_sorted_lt would have somethin
-template <typename T>
-bool has_intersect_sorted_lt(const std::vector<T> &a, const std::vector<T> &b, const T maxval) {
+// return true if intersection intersect_sorted_lt would have something
+// template over container types
+template <typename T, typename C1, typename C2>
+bool has_intersect_sorted_lt(const C1 &a, const C2 &b, const T maxval) {
     auto ia = a.cbegin();
     auto ib = b.cbegin();
-    while (ia < a.cend() && ib < b.cend()) {
+    while (ia != a.cend() && ib != b.cend()) {
         if (*ia < *ib) {
             ++ia;
             if (!(*ia < maxval)) {break;}
