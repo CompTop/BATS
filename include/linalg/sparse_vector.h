@@ -40,13 +40,13 @@ public:
 		}
 	}
 
-	// constructor that takes in integers for val
-	SparseVector(const std::vector<TI> &ind, const std::vector<int> &val) {
-		size_t nz = ind.size();
-		for (size_t i = 0; i < nz; i++) {
-			indval.push_back(std::make_pair(ind[i], TV(val[i])));
-		}
-	}
+	// // constructor that takes in integers for val
+	// SparseVector(const std::vector<TI> &ind, const std::vector<int> &val) {
+	// 	size_t nz = ind.size();
+	// 	for (size_t i = 0; i < nz; i++) {
+	// 		indval.push_back(std::make_pair(ind[i], TV(val[i])));
+	// 	}
+	// }
 
 	// cosntructor that returns indicator in given index
 	SparseVector(const TI i) {
@@ -132,7 +132,7 @@ public:
 			if ((*i1).first == (*i2).first) {
 				TV val = (a * ((*i2).second)) + (*i1).second;
 				// std::cout << "a: " << a << " x: " << ((*i2).second)) << " y: " << (*i1).second << std::endl;
-				if (!val.iszero()) {
+				if (!(val == 0)) {
 					tmp.push_back(std::make_pair((*i1).first, val));
 				}
 				++i1;
@@ -231,7 +231,7 @@ public:
 		size_t nz = inds.size();
 		ind.reserve(nz);
 		for (size_t i = 0; i < nz; i++) {
-			if (val[i] != 0) {
+			if (!(val[i] == 0)) {
 				ind.push_back(inds[i]);
 			}
 		}

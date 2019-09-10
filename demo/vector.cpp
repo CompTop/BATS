@@ -1,33 +1,71 @@
 #include <linalg/field.h>
 #include <linalg/sparse_vector.h>
+#include <linalg/set_vector.h>
 #include <vector>
+#include <chrono>
 
-#define F2 ModP<int, 2>
-#define VecT SparseVector<size_t, F2>
+#define F int
+//ModP<int, 5>
+
+#define NITER 100000
+
+template <typename T1, typename T2>
+void time_axpy(T1 &x, T2 &y, size_t N) {
+    auto start = std::chrono::high_resolution_clock::now();
+    for (size_t i = 0; i < N; i++) {
+        x.axpy( 1, y);
+        x.axpy(-1, y);
+    }
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "microseconds: " << duration.count() << std::endl;
+}
 
 int main() {
 
-  std::vector<size_t> inds({1,3});
-  std::vector<F2> vals({F2(1), F2(1)});
+    std::vector<size_t> ind;
+    std::vector<int> val_int;
+    std::vector<F> val;
 
-  // for (size_t j = 0; j < 2; j++) {
-  //   std::cout << inds[j] << " : " << vals[j] << std::endl;
-  //   auto p = std::make_pair(inds[j], vals[j]);
-  //   std::cout << p.first << " : " << p.second << std::endl;
-  // }
+    // val_int = {-1,1,-1};
+    // val = val_int;
 
-  VecT x(inds, vals);
-  x.print_row();
+    ind = {1,3,5};
+    val = {-1,1,-1};
 
-  VecT y({0, 1}, {F2(1), F2(1)});
-  y.print_row();
+    SetVector x(ind, val);
+    x.print_row();
 
-  y.axpy(F2(1), x);
-  y.print_row();
+    ind = {2, 4};
+    val = {1, 1};
 
-  VecT z(3);
-  z.print_row();
+    SetVector y(ind, val);
+    y.print_row();
 
+    time_axpy(x, y, NITER);
 
-  return 0;
+    x.print_row();
+
+    ind = {1,3,5};
+    val = {-1,1,-1};
+    SparseVector x2(ind, val);
+
+    x2.print_row();
+
+    ind = {2, 4};
+    val = {1, 1};
+
+    SparseVector y2(ind, val);
+    y2.print_row();
+
+    time_axpy(x2, y2, NITER);
+
+    x2.print_row();
+
+    time_axpy(x, y, NITER);
+    time_axpy(x2, y2, NITER);
+    time_axpy(x, y, NITER);
+    time_axpy(x2, y2, NITER);
+
+    return 0;
 }

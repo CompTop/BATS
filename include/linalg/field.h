@@ -81,6 +81,8 @@ private:
 
 public:
 
+
+  ModP() : val(0) {}
   ModP(IntT val) : val((val + P) % P) {}
 
   ModP operator+( const ModP &b) const {
@@ -109,6 +111,10 @@ public:
 
   inline bool operator<( const ModP &b) const {
     return true;
+  }
+
+  ModP operator=(const int &a) {
+    return ModP(a);
   }
 
   ModP inv() const;
@@ -158,6 +164,8 @@ private:
   IntT val;
 
 public:
+
+  ModP() : val(0) {}
   ModP(IntT val) : val(val) {}
 
   ModP operator+( const ModP &b) const {
@@ -192,6 +200,10 @@ public:
 
   inline bool operator==( const int b) const {
     return (val & 0x1) == b;
+  }
+
+  ModP operator=(const int &a) {
+    return ModP(a);
   }
 
   bool iszero() const {
