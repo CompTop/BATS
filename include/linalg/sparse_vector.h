@@ -11,6 +11,7 @@ maintains indices in sorted order
 #include <iostream>
 #include <algorithm>
 #include "field.h"
+#include "abstract_vector.h"
 
 
 // template over type of values
@@ -18,8 +19,10 @@ template <typename TV, typename TI=size_t>
 class SparseVector
 {
 private:
-	// store index-value pairs
-	std::vector<std::pair<TI, TV>> indval;
+
+	using key_type = nzpair<TI, TV>; // std::pair<TI, TV>
+
+	std::vector<key_type> indval;
 
 	// sort in-place
 	void sort() {
@@ -31,45 +34,44 @@ public:
 
 	SparseVector() {}
 
-	SparseVector(const std::vector<std::pair<TI, TV>> indval) : indval(indval) {}
+	SparseVector(const std::vector<key_type> indval) : indval(indval) {}
 
 	SparseVector(const std::vector<TI> &ind, const std::vector<TV> &val) {
 		size_t nz = ind.size();
 		for (size_t i = 0; i < nz; i++) {
-			indval.push_back(std::make_pair(ind[i], val[i]));
+			indval.emplace_back(key_type(ind[i], val[i]));
 		}
 	}
 
-	// // constructor that takes in integers for val
-	// SparseVector(const std::vector<TI> &ind, const std::vector<int> &val) {
-	// 	size_t nz = ind.size();
-	// 	for (size_t i = 0; i < nz; i++) {
-	// 		indval.push_back(std::make_pair(ind[i], TV(val[i])));
-	// 	}
-	// }
+	// constructor that loops over index and value iterators
+	// can be iterators over different type
+	template <typename IT1, typename IT2>
+	SparseVector(IT1 indit, IT2 valit, size_t n) {
+		indval.reserve(n);
+		for (size_t i = 0; i < n; i++) {
+			indval.emplace_back(key_type(TI(*indit++), TV(*valit++)));
+		}
+	}
+
 
 	// cosntructor that returns indicator in given index
 	SparseVector(const TI i) {
-		indval.push_back(std::make_pair(i, TV(1)));
+		indval.push_back(key_type(i, TV(1)));
 	}
-	// get index and set index
 
 	// get const iterator through nzs
-	auto nzbegin() const {
-		return indval.cbegin();
-	}
+	inline auto nzbegin() const { return indval.cbegin(); }
+	inline auto nzend() const { return indval.cend(); }
 
-	// get const iterator end of nzs
-	auto nzend() const {
-		return indval.cend();
-	}
+	// nnz
+	inline size_t nnz() const {return indval.size(); }
 
 	// find nonzero index of last element with index < i
 	auto find_last_nz(TI i) {
 		auto it = std::lower_bound(
 			indval.cbegin(),
 			indval.cend(),
-			std::make_pair(i, TV(0))
+			key_type(i, TV(0))
 		);
 		// if there is no element with index < i, return pointer to end
 		return it == indval.cend() ? it : --it;
@@ -78,125 +80,171 @@ public:
 
 
 	// return last nonzero
-	std::pair<TI, TV> last() const {
+	key_type last() const {
 		return indval.back();
 	}
 
 	TI last_nzind() const {
-		return indval.back().first;
+		return indval.back().ind;
 	}
 
 	// return ith nonzero value
 	TV nzval(size_t i) const {
-		return indval[i].second;
+		return indval[i].val;
 	}
 
 	// return ith nonzero index
 	TI nzind(size_t i) const {
-		return indval[i].first;
+		return indval[i].ind;
 	}
 
-	// return ith nonzero pair
-	std::pair<TI, TV> nzpair(size_t i) const {
-		return indval[i];
-	}
+	// // return ith nonzero pair
+	// const key_type& nzpair(size_t i) const {
+	// 	return indval[i];
+	// }
 
-	// nnz
-	inline size_t nnz() const {
-		return indval.size();
-	}
 
 
 	// permute in-place
 	void permute(const std::vector<size_t>  &perm) {
 		for (size_t i = 0; i < nnz(); i++) {
-			indval[i].first = perm[indval[i].first];
+			indval[i].ind = perm[indval[i].ind];
 		}
 		sort();
 	}
 
-	// return self + ax
-	SparseVector caxpy(
+	// set
+	// y <- ax + y
+	template <class SVT>
+	void axpy(
 		const TV &a,
-		const SparseVector &x,
-		const size_t xoffset=0
-	) const {
+		const SVT &x
+	) {
 
-		auto xend = x.indval.cend() - xoffset;
-
+		// set i2 to find first ind >= firstind
+		auto i2 = x.nzbegin();
 		// where to put new vector
-		std::vector<std::pair<TI, TV>> tmp;
+		if (i2 == x.nzend()) { return; } // nothing to do
+		// something to do...
 		auto i1 = indval.cbegin();
-		auto i2 = x.indval.cbegin();
-		while (i1 < indval.cend() && i2 < xend) {
-			if ((*i1).first == (*i2).first) {
-				TV val = (a * ((*i2).second)) + (*i1).second;
-				// std::cout << "a: " << a << " x: " << ((*i2).second)) << " y: " << (*i1).second << std::endl;
+		std::vector<key_type> tmp;
+		while (i1 != indval.cend() && i2 != x.nzend()) {
+			if ((*i1).ind == (*i2).ind) {
+				TV val = (a * ((*i2).val)) + (*i1).val;
+				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
 				if (!(val == 0)) {
-					tmp.push_back(std::make_pair((*i1).first, val));
+					tmp.push_back(key_type((*i1).ind, val));
 				}
 				++i1;
 				++i2;
-			} else if ((*i1).first < (*i2).first) {
+			} else if ((*i1).ind < (*i2).ind) {
 				tmp.push_back(*i1);
 				++i1;
 			} else {
-				tmp.push_back(std::make_pair((*i2).first, a * (*i2).second));
+				tmp.push_back(key_type((*i2).ind, a * (*i2).val));
 				++i2;
 			}
 		}
 		// run through rest of entries and dump in
 		// at most one of the loops does anything
-		while (i1 < indval.cend()) {
+		while (i1 != indval.cend()) {
 			tmp.push_back(*i1);
 			++i1;
 		}
-		while (i2 < xend) {
-			tmp.push_back(std::make_pair((*i2).first, a * (*i2).second));
+		while (i2 != x.nzend()) {
+			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
 			++i2;
 		}
-
-		return SparseVector(tmp);
-	}
-
-	// set
-	// y <- ax + y
-	void axpy(const TV &a, const SparseVector &x, size_t xoffset=0) {
-
-		// check if there's anything to do
-		auto xend = x.indval.cend() - xoffset;
-
-		// if we won't update, return
-		if (x.indval.cbegin() >= xend) { return; }
-
-		const SparseVector res = caxpy(a, x, xoffset);
-		indval = res.indval;
+		// copy temp vector to indval
+		indval = tmp;
 		return;
 	}
+
+	// return self + ax[firstind:lastind]
+	// template over sparse vector type
+	template <class SVT>
+	void axpy(
+		const TV &a,
+		const SVT &x,
+		const TI &firstind,
+		const TI &lastind
+	) {
+
+
+		// set i2 to find first ind >= firstind
+		auto i2 = std::lower_bound(
+			x.nzbegin(),
+			x.nzend(),
+			key_type(firstind, TV(0))
+		);
+		// where to put new vector
+		if (!(*i2.ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
+		// something to do...
+		auto i1 = indval.cbegin();
+		std::vector<key_type> tmp;
+		while (i1 != indval.cend() && i2 != x.nzend()) {
+			if ((*i1).ind == (*i2).ind) {
+				TV val = (a * ((*i2).val)) + (*i1).val;
+				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
+				if (!(val == 0)) {
+					tmp.push_back(key_type((*i1).ind, val));
+				}
+				++i1;
+				++i2;
+				if (!(*i2.ind < lastind)) { break; }
+			} else if ((*i1).ind < (*i2).ind) {
+				tmp.push_back(*i1);
+				++i1;
+			} else {
+				tmp.push_back(key_type((*i2).ind, a * (*i2).val));
+				++i2;
+				if (!(*i2.ind < lastind)) { break; }
+			}
+		}
+		// run through rest of entries and dump in
+		// at most one of the loops does anything
+		while (i1 != indval.cend()) {
+			tmp.push_back(*i1);
+			++i1;
+		}
+		while (i2 != x.nzend() && !(*i2.ind < lastind)) {
+			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
+			++i2;
+		}
+		// copy temp vector to indval
+		indval = tmp;
+		return;
+	}
+
+
 
 	// zeros out pivot in x
 	void eliminate_pivot(const SparseVector &x) {
 		auto piv = last();
 		auto pivx = x.last();
-		TV alpha = - piv.second / pivx.second;
+		TV alpha = - piv.val / pivx.val;
 		// std::cout << "alpha = " << alpha << std::endl;
 		axpy(alpha, x);
 	}
 	// scal - in place
 
 	// add, subtract, multiply by scalar
-	inline SparseVector operator+(const SparseVector &x) {return caxpy(TV(1), x); }
-	inline SparseVector operator-(const SparseVector &x) {return caxpy(TV(-1), x); }
+	//inline SparseVector operator+(const SparseVector &x) {return caxpy(TV(1), x); }
+	//inline SparseVector operator-(const SparseVector &x) {return caxpy(TV(-1), x); }
 
-	void print() {
-		for (size_t i = 0; i < nnz(); i++) {
-			std::cout << indval[i].first << " : " << indval[i].second << std::endl;
+	void print() const {
+		auto it = indval.cbegin();
+		while (it != indval.cend()) {
+			std::cout << *it << std::endl;
+			++it;
 		}
 	}
 
-	void print_row() {
-		for (size_t i = 0; i < nnz(); i++) {
-			std::cout << "(" << indval[i].first << "," << indval[i].second << ") ";
+	void print_row() const {
+		auto it = indval.cbegin();
+		while (it != indval.cend()) {
+			std::cout << *it << ' ';
+			++it;
 		}
 		std::cout << std::endl;
 	}
@@ -306,6 +354,7 @@ public:
 
 		// where to put new vector
 		std::vector<TI> tmp;
+		tmp.reserve(nnz() + x.nnz());
 		auto i1 = ind.cbegin();
 		auto i2 = x.ind.cbegin();
 		while (i1 < ind.cend() && i2 < xend) {

@@ -27,13 +27,14 @@ int main() {
     std::vector<int> val_int;
     std::vector<F> val;
 
-    // val_int = {-1,1,-1};
+    val_int = {-1,1,-1};
     // val = val_int;
 
     ind = {1,3,5};
     val = {-1,1,-1};
 
-    SetVector x(ind, val);
+    // SetVector x(ind, val);
+    SetVector<F, size_t> x(ind.cbegin(), val_int.cbegin(), ind.size());
     x.print_row();
 
     ind = {2, 4};
@@ -48,7 +49,8 @@ int main() {
 
     ind = {1,3,5};
     val = {-1,1,-1};
-    SparseVector x2(ind, val);
+    // construct using iterator
+    SparseVector<F, size_t> x2(ind.cbegin(), val_int.cbegin(), ind.size());
 
     x2.print_row();
 
@@ -66,6 +68,10 @@ int main() {
     time_axpy(x2, y2, NITER);
     time_axpy(x, y, NITER);
     time_axpy(x2, y2, NITER);
+    time_axpy(x, y2, NITER);
+    time_axpy(x, y2, NITER);
+    time_axpy(x2, y, NITER);
+    time_axpy(x2, y, NITER);
 
     return 0;
 }

@@ -95,6 +95,19 @@ public:
         return TV(0);
     }
 
+    // access to data structures
+    // std::vector<TI> colptr;
+    // std::vector<TI> rowind;
+    // std::vector<TV> val;
+    //
+    // // dimensions
+    // size_t m; // number of rows
+    // size_t n; // number of columns
+    const std::vector<TI>& get_colptr() const { return colptr; }
+    const std::vector<TI>& get_rowind() const { return rowind; }
+    const std::vector<TV>& get_val() const {return val; }
+    const size_t nrow() const { return n; }
+    const size_t ncol() const { return m; }
 
     void print() {
         std::cout << "[" << this << "] : " << m << " x " << n <<\

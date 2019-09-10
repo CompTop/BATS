@@ -30,6 +30,24 @@ public:
 
     ColumnMatrix(size_t m, size_t n, std::vector<TC> col) : m(m), n(n), col(col) {}
 
+    // constructor from CSCMatrix over the integers
+    ColumnMatrix(const CSCMatrix<int, size_t> &A) : m(A.nrow()), n(A.ncol()) {
+        col.reserve(n);
+        auto colptr = A.get_colptr();
+        auto rowind = A.get_rowind();
+        auto val = A.get_rowval();
+        auto rptr = rowind.cbegin();
+        auto vptr = val.cbegin();
+        for (size_t j = 0; j < n; j++) {
+            // use iterator constructor
+            col.emplace_back(TC(
+                rptr + colptr[j],
+                vptr + colptr[j],
+                colptr[j+1] - colptr[j]
+            ));
+        }
+    }
+
     inline size_t nrow() { return m; }
     inline size_t ncol() { return n; }
 
