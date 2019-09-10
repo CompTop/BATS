@@ -6,6 +6,7 @@
 #include <linalg/set_vector.h>
 #include <linalg/col_matrix.h>
 #include <persistence/homology_reduction.h>
+#include <persistence/filtration.h>
 #include <vector>
 #include <random>
 #include <chrono>
@@ -119,6 +120,11 @@ int main() {
     // for (auto& [k, v] : p2c2) {
     //     std::cout << k << ':' << v << ',' << std::endl;
     // }
+
+    std::cout << "Running Block reduction 1" << std::endl;
+    block_reduce(F, 1);
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "microseconds: " << duration.count() << std::endl;
 
     return 0;
 }

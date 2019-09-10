@@ -187,7 +187,7 @@ public:
         // loop in column permutation order
         for ( size_t Mj : cind) {
             // loop over nzs in the jth column of M
-            for (size_t Mp = M.colptr[j]; Mp < M.colptr[j+1]; Mp++) {
+            for (size_t Mp = M.colptr[Mj]; Mp < M.colptr[Mj+1]; Mp++) {
                 for (size_t i = 0; i < N; i++) {
                     if ((*prow[i])[M.rowind[Mp]] != bats::NO_IND) {
                         // this item makes it to the block
@@ -202,6 +202,9 @@ public:
                 (*A[i]).colptr[j] = (*A[i]).rowind.size();
             }
         }
+        for (size_t i = 0; i < N; i++) {
+            (*A[i]).sort();
+        }
     }
 
     // gemm implementation
@@ -213,7 +216,6 @@ public:
         assert (A.n == B.m);
         size_t m = A.m;
         size_t n = B.n;
-        size_t k = A.n;
 
         C.m = m;
         C.n = n;
@@ -340,7 +342,6 @@ public:
         assert (A.n == A.m); // square = invertible
         size_t m = A.m;
         size_t n = B.n;
-        size_t k = A.n;
 
         C.m = m;
         C.n = n;
