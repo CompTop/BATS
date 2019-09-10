@@ -7,12 +7,6 @@
 int main() {
 
   std::vector<std::vector<size_t>> nbrs(4);
-  nbrs[0] = {};
-  nbrs[1] = {0};
-  nbrs[2] = {0,1};
-  nbrs[3] = {0,1,2};
-  SimplicialComplex X = FlagComplex(nbrs, 2);
-  X.print();
 
   std::vector<size_t> edges = {0,1,\
                                0,2,\

@@ -202,7 +202,8 @@ void add_dimension_recursive_flag(
 // n - number of vertices
 // maxdim - maximum dimension of simplices
 template <typename T>
-std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> FlagFiltration(
+Filtration<T, SimplicialComplex>FlagFiltration(
+    SimplicialComplex& X,
     const std::vector<size_t> &edges,
     const std::vector<T> &t,
     const size_t n, // number of 0-cells
@@ -218,7 +219,8 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> FlagFiltration(
 
     // X = SimplicialComplex(maxdim);
     // F = Filtration<T, SimplicialComplex>(X);
-    SimplicialComplex X(maxdim);
+    // reset simplicial complex
+    X = SimplicialComplex(maxdim);
     Filtration<T, SimplicialComplex> F(X);
 
     // sets 0-cells
@@ -257,7 +259,7 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> FlagFiltration(
         std::sort(nbrs[j].begin(), nbrs[j].end());
     }
 
-    return std::make_tuple(X, F);
+    return F;
 }
 
 

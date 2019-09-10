@@ -54,9 +54,8 @@ int main() {
 
     // std::cout << "entering Flag construction" << std::endl;
     start = std::chrono::high_resolution_clock::now();
-    // SimplicialComplex X;
-    // Filtration<float, SimplicialComplex> F;
-    auto [X, F] = FlagFiltration(edges, t, n, maxdim, TF(0));
+    SimplicialComplex X;
+    auto F = FlagFiltration(X, edges, t, n, maxdim, TF(0));
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
@@ -67,6 +66,8 @@ int main() {
         std::cout << "cells in dim " << k << " = " << X.ncells(k) << std::endl;
     }
     std::cout << F.maxdim() << std::endl;
+
+    // auto B = F.pairing().boundary_csc(1);
 
     std::cout << "forming boundary 1" << std::endl;
     start = std::chrono::high_resolution_clock::now();
