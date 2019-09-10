@@ -95,6 +95,14 @@ public:
 	template <typename itT>
 	inline auto replace(itT &it, const TV val) { return replace(it, key_type((*it).ind, val));}
 
+	TV getval(const size_t i) const {
+		auto it = lower_bound(i);
+		if (it == nzend() || (*it).ind != i) {
+			return TV(0);
+		}
+		return (*it).val;
+	}
+
 	// find nonzero index of last element with index < i
 	auto find_last_nz(TI i) {
 		auto it = std::lower_bound(
@@ -109,23 +117,25 @@ public:
 
 
 	// return last nonzero
-	key_type last() const {
+	inline const key_type& lastnz() const {
 		return indval.back();
 	}
 
-	TI last_nzind() const {
-		return indval.back().ind;
-	}
 
-	// return ith nonzero value
-	TV nzval(size_t i) const {
-		return indval[i].val;
-	}
 
-	// return ith nonzero index
-	TI nzind(size_t i) const {
-		return indval[i].ind;
-	}
+	// TI last_nzind() const {
+	// 	return indval.back().ind;
+	// }
+	//
+	// // return ith nonzero value
+	// TV nzval(size_t i) const {
+	// 	return indval[i].val;
+	// }
+	//
+	// // return ith nonzero index
+	// TI nzind(size_t i) const {
+	// 	return indval[i].ind;
+	// }
 
 	// // return ith nonzero pair
 	// const key_type& nzpair(size_t i) const {
@@ -184,8 +194,12 @@ public:
 			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
 			++i2;
 		}
+
 		// copy temp vector to indval
-		indval = tmp;
+		indval.resize(tmp.size());
+		std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
+		//indval = tmp;
+
 		return;
 	}
 
@@ -248,13 +262,13 @@ public:
 
 
 	// zeros out pivot in x
-	void eliminate_pivot(const SparseVector &x) {
-		auto piv = last();
-		auto pivx = x.last();
-		TV alpha = - piv.val / pivx.val;
-		// std::cout << "alpha = " << alpha << std::endl;
-		axpy(alpha, x);
-	}
+	// void eliminate_pivot(const SparseVector &x) {
+	// 	auto piv = last();
+	// 	auto pivx = x.last();
+	// 	TV alpha = - piv.val / pivx.val;
+	// 	// std::cout << "alpha = " << alpha << std::endl;
+	// 	axpy(alpha, x);
+	// }
 	// scal - in place
 
 	// add, subtract, multiply by scalar

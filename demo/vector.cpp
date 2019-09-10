@@ -78,5 +78,24 @@ int main() {
     time_axpy(x2, y, NITER);
     time_axpy(x2, y, NITER);
 
+    ind = {1,3};
+    val = {-1,1};
+    SparseVector<F, size_t> a(ind, val);
+    ind = {0,3};
+    val = {-1,1};
+    SparseVector<F, size_t> b(ind, val);
+    a.print_row();
+    b.print_row();
+    a.axpy(-1, b);
+    a.print_row();
+
+    // F v(2);
+    // std::cout << v << std::endl;
+    // std::cout << F(-1) * v << std::endl;
+    //
+    // nzpair p1(0, F(-1));
+    // nzpair p2(p1);
+    // std::cout <<p1 << p2 << std::endl;
+
     return 0;
 }

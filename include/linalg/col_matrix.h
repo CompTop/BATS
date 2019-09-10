@@ -53,9 +53,13 @@ public:
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
 
-    inline size_t width() {
-        return col.size();
+    auto getval(const size_t i, const size_t j) const {
+        return col[j].getval(i);
     }
+
+    // inline size_t width() {
+    //     return col.size();
+    // }
 
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}
@@ -141,12 +145,24 @@ public:
 
     // schur complement friend
 
+    // void print() {
+    //     std::cout << m << " x " << n << " matrix. transpose: " << std::endl;
+    //     for (size_t i = 0; i < col.size(); i++) {
+    //         std::cout << i << " : ";
+    //         col[i].print_row();
+    //     }
+    // }
     void print() {
-        std::cout << m << " x " << n << " matrix. transpose: " << std::endl;
-        for (size_t i = 0; i < col.size(); i++) {
-            std::cout << i << " : ";
-            col[i].print_row();
+        std::cout << "[" << this << "] : " << m << " x " << n <<\
+        " ColumnMatrix" << std::endl;
+        // loop over rows
+        for (size_t i = 0; i < m; i++) {
+            for (size_t j = 0; j < n; j++) {
+                std::cout << std::setw(3) << getval(i, j) << " ";
+            }
+            std::cout << std::endl;
         }
+        return;
     }
 
     // expose as static member function?

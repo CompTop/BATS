@@ -113,13 +113,9 @@ public:
     return true;
   }
 
-  ModP operator=(const int &a) {
-    return ModP(a);
-  }
-
-  ModP operator=(const ModP &a) {
-    return ModP(a);
-  }
+  // ModP operator=(const int &a) {
+  //   return ModP(a);
+  // }
 
   ModP inv() const;
 

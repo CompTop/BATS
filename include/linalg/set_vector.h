@@ -103,6 +103,10 @@ public:
 	template <typename itT>
 	inline auto replace(itT &it, const TV val) { return replace(it, key_type((*it).ind, val));}
 
+	inline const key_type& lastnz() const {
+		return *(--nzend());
+	}
+
 	// get element with index ind.  If no such element, return zero
 	TV get(const TI ind) const {
 		auto it = indval.find(key_type(ind));
