@@ -11,8 +11,8 @@ struct nzpair {
     TV val;
 
     nzpair() : ind(TI(0)), val(TV(0)) {};
-    nzpair(TI ind) : ind(ind), val(TV(0)) {};
-    nzpair(TI ind, TV val) : ind(ind), val(val) {};
+    nzpair(const TI ind) : ind(ind), val(TV(0)) {};
+    nzpair(const TI ind, const TV val) : ind(ind), val(val) {};
 };
 
 // define comparison

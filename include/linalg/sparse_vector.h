@@ -62,9 +62,38 @@ public:
 	// get const iterator through nzs
 	inline auto nzbegin() const { return indval.cbegin(); }
 	inline auto nzend() const { return indval.cend(); }
+	// get nonconst iterator through nzs
+	inline auto nzbegin() { return indval.begin(); }
+	inline auto nzend(){ return indval.end(); }
 
 	// nnz
 	inline size_t nnz() const {return indval.size(); }
+
+	// returns iterator pointing to first element that is not less than i
+	inline auto lower_bound(const TI &i) {
+		return std::lower_bound(nzbegin(), nzend(), key_type(i, TV(0)));
+	}
+	inline auto lower_bound(const TI &i) const {
+		return std::lower_bound(nzbegin(), nzend(), key_type(i, TV(0)));
+	}
+	// returns iterator pointing to first element that is greater than i
+	inline auto upper_bound(const TI &i) {
+		return std::upper_bound(nzbegin(), nzend(), key_type(i, TV(0)));
+	}
+	inline auto upper_bound(const TI &i) const {
+		return std::upper_bound(nzbegin(), nzend(), key_type(i, TV(0)));
+	}
+
+	// replace the item at the iterator location with k
+	template <typename itT>
+	auto replace(itT &it, const key_type &k) {
+		*it = k;
+		return it;
+	}
+	template <typename itT>
+	inline auto replace(itT &it, const TI ind, const TV val) { return replace(it, key_type(ind, val));}
+	template <typename itT>
+	inline auto replace(itT &it, const TV val) { return replace(it, key_type((*it).ind, val));}
 
 	// find nonzero index of last element with index < i
 	auto find_last_nz(TI i) {
@@ -178,7 +207,7 @@ public:
 			key_type(firstind, TV(0))
 		);
 		// where to put new vector
-		if (!(*i2.ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
+		if (!((*i2).ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
 		// something to do...
 		auto i1 = indval.cbegin();
 		std::vector<key_type> tmp;
@@ -191,14 +220,14 @@ public:
 				}
 				++i1;
 				++i2;
-				if (!(*i2.ind < lastind)) { break; }
+				if (!((*i2).ind < lastind)) { break; }
 			} else if ((*i1).ind < (*i2).ind) {
 				tmp.push_back(*i1);
 				++i1;
 			} else {
 				tmp.push_back(key_type((*i2).ind, a * (*i2).val));
 				++i2;
-				if (!(*i2.ind < lastind)) { break; }
+				if (!((*i2).ind < lastind)) { break; }
 			}
 		}
 		// run through rest of entries and dump in
@@ -207,7 +236,7 @@ public:
 			tmp.push_back(*i1);
 			++i1;
 		}
-		while (i2 != x.nzend() && !(*i2.ind < lastind)) {
+		while (i2 != x.nzend() && !((*i2).ind < lastind)) {
 			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
 			++i2;
 		}

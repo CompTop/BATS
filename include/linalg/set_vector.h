@@ -8,6 +8,7 @@ std::set instead of maintaining sort explicitly
 #include <cstddef>
 #include <cassert>
 #include <set>
+#include <vector>
 #include <iostream>
 #include <algorithm>
 #include "field.h"
@@ -51,9 +52,28 @@ public:
 	// get const iterator through nzs
 	inline auto nzbegin() const { return indval.cbegin(); }
 	inline auto nzend() const { return indval.cend(); }
+	// get non const iterator through nzs
+	inline auto nzbegin() { return indval.cbegin(); }
+	inline auto nzend() { return indval.cend(); }
 
     // nnz
     inline size_t nnz() const { return indval.size(); }
+
+	// returns iterator pointing to first element that is not less than i
+	inline auto lower_bound(const TI &i) {
+		return indval.lower_bound(key_type(i, TV(0)));
+	}
+	inline auto lower_bound(const TI &i) const {
+		return indval.lower_bound(key_type(i, TV(0)));
+	}
+	// returns iterator pointing to first element that greater than i
+	inline auto upper_bound(const TI &i) {
+		return indval.upper_bound(key_type(i, TV(0)));
+	}
+	inline auto upper_bound(const TI &i) const {
+		return indval.upper_bound(key_type(i, TV(0)));
+	}
+
 
 	// set index
 	auto set(const key_type &k) {
@@ -69,10 +89,19 @@ public:
 	}
 	inline auto set(const TI ind, const TV val) {return set(key_type(ind, val));}
 	// set index with hint
+	// replace the item at the iterator location with k
 	template <typename itT>
-	inline auto set_hint(itT &it, const key_type &k) { return indval.emplace_hint(it, k);}
+	auto replace(itT &it, const key_type &k) {
+		// delete this entry
+		it = indval.erase(it);
+		// put in the new key
+		it = indval.emplace_hint(it, k);
+		return it;
+	}
 	template <typename itT>
-	inline auto set_hint(itT &it, const TI ind, const TV val) { return indval.emplace_hint(it, key_type(ind, val));}
+	inline auto replace(itT &it, const TI ind, const TV val) { return replace(it, key_type(ind, val));}
+	template <typename itT>
+	inline auto replace(itT &it, const TV val) { return replace(it, key_type((*it).ind, val));}
 
 	// get element with index ind.  If no such element, return zero
 	TV get(const TI ind) const {
@@ -133,18 +162,11 @@ public:
 	) {
 
 		// set i1 to find first ind >= firstind
-		auto i1 = std::lower_bound(
-			indval.begin(),
-			indval.end(),
-			key_type(firstind, TV(0))
-		);
+		auto i1 = indval.lower_bound(key_type(firstind, TV(0)));
+
 		// set i2 to find first ind >= firstind
-		auto i2 = std::lower_bound(
-			x.nzbegin(),
-			x.nzend(),
-			key_type(firstind, TV(0))
-		);
-		if (!(*i2.ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
+		auto i2 = x.lower_bound(firstind);
+		if (!((*i2).ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
 		while (i1 != indval.end() && i2 != x.nzend()) {
 			if ((*i1).ind == (*i2).ind) {
 				TV val = (a * (*i2).val) + (*i1).val;
@@ -156,7 +178,7 @@ public:
 					++i1;
 				}
 				++i2;
-				if (!(*i2.ind < lastind)) { break; }
+				if (!((*i2).ind < lastind)) { break; }
 			} else if (*i1 < *i2) {
 				// need to catch up i1
 				++i1;
@@ -164,11 +186,11 @@ public:
 				// i2 has lower index
 				i1 = indval.emplace_hint(i1, key_type((*i2).ind, a * (*i2).val) );
 				++i2;
-				if (!(*i2.ind < lastind)) { break; }
+				if (!((*i2).ind < lastind)) { break; }
 			}
 		}
 		// run through rest of entries in i2
-		while (i2 != x.nzend() && !(*i2.ind < lastind)) {
+		while (i2 != x.nzend() && !((*i2).ind < lastind)) {
 			i1 = indval.emplace_hint(i1, nzpair((*i2).ind, a * (*i2).val) );
 			++i2;
 		}

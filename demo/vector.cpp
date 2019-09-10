@@ -4,8 +4,9 @@
 #include <vector>
 #include <chrono>
 
-#define F int
-//ModP<int, 5>
+//#define F int
+#define F ModP<int, 3>
+//#define F Rational<int>
 
 #define NITER 100000
 
@@ -64,12 +65,16 @@ int main() {
 
     x2.print_row();
 
+    std::cout <<"SetVector, SetVector" << std::endl;
     time_axpy(x, y, NITER);
-    time_axpy(x2, y2, NITER);
     time_axpy(x, y, NITER);
+        std::cout <<"SparseVector, SparseVector" << std::endl;
     time_axpy(x2, y2, NITER);
+    time_axpy(x2, y2, NITER);
+        std::cout <<"SetVector, SparseVector" << std::endl;
     time_axpy(x, y2, NITER);
     time_axpy(x, y2, NITER);
+        std::cout <<"SparseVector, SetVector" << std::endl;
     time_axpy(x2, y, NITER);
     time_axpy(x2, y, NITER);
 

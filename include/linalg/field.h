@@ -117,6 +117,10 @@ public:
     return ModP(a);
   }
 
+  ModP operator=(const ModP &a) {
+    return ModP(a);
+  }
+
   ModP inv() const;
 
   ModP operator/( const ModP &b) const {
@@ -139,7 +143,7 @@ public:
 
 // helper function for inversion
 template<typename IntT, unsigned P>
-IntT ff_inv(IntT val) {
+IntT ff_inv(const IntT val) {
   if (val == 0) {throw "Inversion of zero!";}
   IntT b = 1;
   IntT c = val;

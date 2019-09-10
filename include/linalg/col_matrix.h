@@ -3,6 +3,8 @@
 #include <vector>
 #include <cstddef>
 #include "abstract_matrix.h"
+#include "csc_matrix.h"
+#include "abstract_vector.h"
 
 // standard list of list implementation for sparse matrix
 
@@ -35,7 +37,7 @@ public:
         col.reserve(n);
         auto colptr = A.get_colptr();
         auto rowind = A.get_rowind();
-        auto val = A.get_rowval();
+        auto val = A.get_val();
         auto rptr = rowind.cbegin();
         auto vptr = val.cbegin();
         for (size_t j = 0; j < n; j++) {
@@ -48,16 +50,15 @@ public:
         }
     }
 
-    inline size_t nrow() { return m; }
-    inline size_t ncol() { return n; }
+    inline size_t nrow() const { return m; }
+    inline size_t ncol() const { return n; }
 
     inline size_t width() {
         return col.size();
     }
 
-    TC & operator[](size_t index)  {
-        return col[index];
-    }
+    inline TC& operator[](size_t index) { return col[index];}
+    inline const TC& operator[](size_t index) const { return col[index];}
     //
     // TC& constcol const (size_t index) {
     //   return col[index];
@@ -103,8 +104,9 @@ public:
     TC gemv(const TC &x) {
         TC y;  // zero initializer
         // loop over nonzero indices of x
-        for (size_t i = 0; i < x.nnz(); i++) {
-            y.axpy(x.nzval(i), col[x.nzind(i)]); // y <- x[j]*A[j]
+        auto xit = x.nzbegin();
+        while (xit != x.nzend()) {
+            y.axpy((*xit).val, col[(*xit).ind]); // y <- x[j]*A[j]
         }
         return y;
     }
@@ -120,17 +122,17 @@ public:
 
 
     ColumnMatrix operator+(const ColumnMatrix &B) {
-        ColumnMatrix C(m, n);
+        ColumnMatrix C(B); // copy constructor
         for (size_t j = 0; j < n; j++) {
-            C.col[j] = col[j] + B.col[j];
+            C.col[j].axpy(1, col[j]);
         }
         return C;
     }
 
     ColumnMatrix operator-(const ColumnMatrix &B) {
-        ColumnMatrix C(m, n);
+        ColumnMatrix C(B); // copy constructor
         for (size_t j = 0; j < n; j++) {
-            C.col[j] = col[j] - B.col[j];
+            C.col[j].axpy(-1, col[j]);
         }
         return C;
     }
@@ -177,37 +179,84 @@ TC gemv(ColumnMatrix<TC> &A, const TC &x) {
 // for i = n:-1:1
 //    y[i] = y[i] - U[i,j]x[j]
 // this is not generic over TC!
+// template <class TC>
+// TC ut_solve(ColumnMatrix<TC> &U, const TC &x) {
+//     //std::cout << "entering solve" << std::endl;
+//     TC y(x);
+//     auto yi = y.nzend() - 1;
+//     //std::cout << yi->first << " : " << yi->second << std::endl;
+//     while (yi >= y.nzbegin() && yi < y.nzend()) {
+//         size_t i = yi - y.nzbegin();
+//         size_t iind = y.nzind(i);
+//         if (iind == 0) {
+//             break;
+//         }
+//         y.axpy(-y.nzval(i), U[iind], 1); //y.axpy(-yp.second, U[i][:i-1])
+//         // find next nonzero index
+//         yi = y.find_last_nz(iind - 1);
+//     }
+//     return y;
+// }
 template <class TC>
-TC ut_solve(ColumnMatrix<TC> &U, const TC &x) {
-    //std::cout << "entering solve" << std::endl;
-    TC y(x);
-    auto yi = y.nzend() - 1;
-    //std::cout << yi->first << " : " << yi->second << std::endl;
-    while (yi >= y.nzbegin() && yi < y.nzend()) {
-        size_t i = yi - y.nzbegin();
-        size_t iind = y.nzind(i);
-        if (iind == 0) {
-            break;
-        }
-        y.axpy(-y.nzval(i), U[iind], 1); //y.axpy(-yp.second, U[i][:i-1])
-        // find next nonzero index
-        yi = y.find_last_nz(iind - 1);
+TC solve_U(const ColumnMatrix<TC> &U, const TC &y) {
+    TC x(y);
+    if (x.nnz() == 0) { return x; }
+    size_t n = U.ncol();
+    //size_t m = U.nrow();
+    size_t j = n;
+    auto xit = x.upper_bound(j);
+    while (xit != x.nzbegin()) {
+        // exract j
+        --xit;
+        j = (*xit).ind;
+        // x[j] = x[j] / U[j,j]
+        auto Uj_it = U[j].lower_bound(j); // assume entry j exists and is invertible
+        auto a = (*xit).val / (*Uj_it).val;
+        x.replace(xit, a);
+        if (j == 0) { break; } // we're done
+        // x[0:j-1] -= x[j] * U[0:j-1, j]
+        x.axpy(-a, U[j], 0, j-1);
+        // get next nonzero
+        xit = x.upper_bound(j-1);
     }
-    return y;
+    return x;
 }
 
-// solve U \ A
 template <class TC>
-ColumnMatrix<TC> ut_solve(ColumnMatrix<TC> &U, ColumnMatrix<TC> &A) {
-    //std::cout << "entering solve" << std::endl;
-    size_t m = A.nrow();
-    size_t n = A.ncol();
-    std::vector<TC> col;
-    for (size_t j = 0; j < A.width(); j++) {
-
-        auto Uinvj = ut_solve(U, A[j]);
-
-        col.push_back(Uinvj);
+TC solve_L(const ColumnMatrix<TC> &L, const TC &y) {
+    TC x = y;
+    if (x.nnz() == 0) { return x; }
+    //size_t n = L.ncol();
+    size_t m = L.nrow();
+    size_t j = 0;
+    auto xit = x.lower_bound(j);
+    while (xit != x.nzend()) {
+        j = (*xit).ind;
+        // x[j] = x[j] / L[j,j]
+        auto Lj_it = L[j].lower_bound(j); // assume entry j exists and is invertible
+        auto a = (*xit).val / (*Lj_it).val;
+        x.replace(xit, a);
+        //*xit = nzpair((*xit).ind, a);
+        // x[j+1:] -= x[j] * L[j+1:m, j]
+        x.axpy(-a, L[j], j+1, m);
+        // get next nonzero
+        xit = x.lower_bound(j+1);
     }
-    return ColumnMatrix<TC>(col);
+    return x;
 }
+
+// // solve U \ A
+// template <class TC>
+// ColumnMatrix<TC> ut_solve(ColumnMatrix<TC> &U, ColumnMatrix<TC> &A) {
+//     //std::cout << "entering solve" << std::endl;
+//     size_t m = A.nrow();
+//     size_t n = A.ncol();
+//     std::vector<TC> col;
+//     for (size_t j = 0; j < A.width(); j++) {
+//
+//         auto Uinvj = ut_solve(U, A[j]);
+//
+//         col.push_back(Uinvj);
+//     }
+//     return ColumnMatrix<TC>(col);
+// }
