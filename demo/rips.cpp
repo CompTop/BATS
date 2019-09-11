@@ -69,6 +69,11 @@ int main() {
     std::cout << F.maxdim() << std::endl;
 
     // auto B = F.pairing().boundary_csc(1);
+    auto perm0 = F.sortperm(0);
+    // std::cout << "perm0" << std::endl;
+    // for (auto i : perm0) {
+    //     std::cout << i << std::endl;
+    // }
 
     std::cout << "forming boundary 1" << std::endl;
     start = std::chrono::high_resolution_clock::now();
@@ -80,14 +85,34 @@ int main() {
     // B1.print();
 
     std::cout << "Copying to ColumnMatrix" << std::endl;
+    start = std::chrono::high_resolution_clock::now();
     MT M1(B1);
+    stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
     std::cout << M1.nrow() << ',' << M1.ncol() << std::endl;
     // M1.print();
 
+    // std::cout << "perm1" << std::endl;
+    auto perm1 = F.sortperm(1);
+    //
+    // for (auto i : perm1) {
+    //     std::cout << i << std::endl;
+    // }
+    std::cout << "permuting into filtration order" << std::endl;
+    start = std::chrono::high_resolution_clock::now();
+    M1.permute(perm0, perm1);
+    stop = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "microseconds: " << duration.count() << std::endl;
+    std::cout << M1.nrow() << ',' << M1.ncol() << std::endl;
+
+    // TODO: permute matrix
+
     std::cout << "Running Reduction Alg" << std::endl;
+    start = std::chrono::high_resolution_clock::now();
     auto p2c1 = reduce_matrix(M1);
+    stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
     std::cout << p2c1.size() << std::endl;
@@ -106,14 +131,28 @@ int main() {
     // B2.print();
 
     std::cout << "Copying to ColumnMatrix" << std::endl;
+    start = std::chrono::high_resolution_clock::now();
     MT M2(B2);
+    stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
     std::cout << M2.nrow() << ',' << M2.ncol() << std::endl;
     // M2.print();
 
+    // TODO: permute column matrix
+    auto perm2 = F.sortperm(2);
+    std::cout << "permuting into filtration order" << std::endl;
+    start = std::chrono::high_resolution_clock::now();
+    M2.permute(perm1, perm2);
+    stop = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "microseconds: " << duration.count() << std::endl;
+    std::cout << M1.nrow() << ',' << M1.ncol() << std::endl;
+
     std::cout << "Running Reduction Alg" << std::endl;
+        start = std::chrono::high_resolution_clock::now();
     auto p2c2 = reduce_matrix(M2);
+    stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
     std::cout << p2c2.size() << std::endl;
@@ -121,8 +160,8 @@ int main() {
     //     std::cout << k << ':' << v << ',' << std::endl;
     // }
 
-    std::cout << "Running Block reduction 1" << std::endl;
-    block_reduce(F, 1);
+    std::cout << "Running reduction" << std::endl;
+    //standard_reduce(F, 1);
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
 

@@ -12,6 +12,7 @@
 
 #include <morse/pairing.h>
 #include <filtration/filtration.h>
+#include "homology_reduction.h"
 
 #include <vector>
 #include <iostream>
@@ -19,6 +20,30 @@
 // #define FF ModP<int, 3>
 // #define VecT SparseVector<size_t, FF>
 // #define MatT ColumnMatrix<VecT>
+
+template <typename T, class CpxT, typename FT>
+void standard_reduce(const Filtration<T, CpxT> &F, FT) {
+
+    using CT = SparseVector<FT>;
+    using MatT = ColumnMatrix<CT>;
+
+    size_t maxd = F.maxdim(); // maxdim of filtration
+    auto M = F.pairing();
+    // for holding p2cs
+    std::vector<p2c_type> p2c(maxd);
+    std::vector<size_t> permd, permd1;
+    permd1 = F.sortperm(0);
+    for (size_t d = 1; d < maxd+1; d++) {
+        auto B = M.boundary_csc(d);
+        permd = F.sortperm(d);
+        MatT BC(B);
+        // permute rows and columns
+        BC.permute(permd1, permd);
+        p2c[d-1] = reduce_matrix(BC);
+        permd1 = permd;
+    }
+
+}
 
 // compute block matrices in dimension k
 template <typename T, class CpxT>
