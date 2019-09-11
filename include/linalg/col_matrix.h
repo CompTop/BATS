@@ -108,8 +108,7 @@ public:
     TC gemv(const TC &x) {
         TC y;  // zero initializer
         // loop over nonzero indices of x
-        auto xit = x.nzbegin();
-        while (xit != x.nzend()) {
+        for (auto xit = x.nzbegin(); xit != x.nzend(); ++xit) {
             y.axpy((*xit).val, col[(*xit).ind]); // y <- x[j]*A[j]
         }
         return y;
@@ -117,11 +116,15 @@ public:
 
     // gemm C = self * B
     ColumnMatrix operator*(const ColumnMatrix &B) {
-        ColumnMatrix C(m, B.n);
+        std::vector<TC> colC;
+        colC.reserve(n);
+        //ColumnMatrix C(m, B.n);
         for (size_t j = 0; j < B.n; j++) {
-            C.col[j] = gemv(B.col[j]);
+            colC.emplace_back(
+                gemv(B.col[j])
+            );
         }
-        return C;
+        return ColumnMatrix(m, B.n, colC);
     }
 
 
@@ -152,9 +155,13 @@ public:
     //         col[i].print_row();
     //     }
     // }
-    void print() {
+    void print_size() const {
         std::cout << "[" << this << "] : " << m << " x " << n <<\
         " ColumnMatrix" << std::endl;
+    }
+
+    void print() {
+        print_size();
         // loop over rows
         for (size_t i = 0; i < m; i++) {
             for (size_t j = 0; j < n; j++) {
@@ -261,18 +268,19 @@ TC solve_L(const ColumnMatrix<TC> &L, const TC &y) {
     return x;
 }
 
-// // solve U \ A
-// template <class TC>
-// ColumnMatrix<TC> ut_solve(ColumnMatrix<TC> &U, ColumnMatrix<TC> &A) {
-//     //std::cout << "entering solve" << std::endl;
-//     size_t m = A.nrow();
-//     size_t n = A.ncol();
-//     std::vector<TC> col;
-//     for (size_t j = 0; j < A.width(); j++) {
-//
-//         auto Uinvj = ut_solve(U, A[j]);
-//
-//         col.push_back(Uinvj);
-//     }
-//     return ColumnMatrix<TC>(col);
-// }
+// solve U \ A
+template <class TC>
+ColumnMatrix<TC> solve_U(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
+    //std::cout << "entering solve" << std::endl;
+    size_t m = A.nrow();
+    size_t n = A.ncol();
+    std::vector<TC> col;
+    col.reserve(n);
+    for (size_t j = 0; j < n; j++) {
+
+        col.emplace_back(
+            solve_U(U, A[j])
+        );
+    }
+    return ColumnMatrix<TC>(m, n, col);
+}

@@ -25,7 +25,7 @@
 int main() {
 
     size_t d = 2; // dimension of sphere + 1
-    size_t n = 200;
+    size_t n = 150;
     // size_t n = 4;
     size_t maxdim = d;
 
@@ -50,7 +50,7 @@ int main() {
     // std::cout << std::endl;
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
+    std::cout << "  microseconds: " << duration.count() << std::endl;
     std::cout << "n edges =" << t.size() << std::endl;
 
     // std::cout << "entering Flag construction" << std::endl;
@@ -59,7 +59,7 @@ int main() {
     auto F = FlagFiltration(X, edges, t, n, maxdim, TF(0));
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
+    std::cout << "  microseconds: " << duration.count() << std::endl;
 
   // std::cout << "exiting Flag construction" << std::endl;
 
@@ -68,106 +68,25 @@ int main() {
     }
     std::cout << F.maxdim() << std::endl;
 
-    // auto B = F.pairing().boundary_csc(1);
-    auto perm0 = F.sortperm(0);
-    // std::cout << "perm0" << std::endl;
-    // for (auto i : perm0) {
-    //     std::cout << i << std::endl;
-    // }
 
-    std::cout << "forming boundary 1" << std::endl;
+    std::cout << "Block Reduction Alg" << std::endl;
     start = std::chrono::high_resolution_clock::now();
-    auto B1 = X.boundary_csc(1);
+    auto bars1 = block_reduce(F, FT());
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << B1.nrow() << ',' << B1.ncol() << std::endl;
-    // B1.print();
+    std::cout << "  microseconds: " << duration.count() << std::endl;
+    print_barcodes(bars1, TF(0.2));
 
-    std::cout << "Copying to ColumnMatrix" << std::endl;
+    std::cout << "standard reduction alg" << std::endl;
     start = std::chrono::high_resolution_clock::now();
-    MT M1(B1);
+    auto bars2 = standard_reduce(F, FT());
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << M1.nrow() << ',' << M1.ncol() << std::endl;
-    // M1.print();
+    std::cout << "  microseconds: " << duration.count() << std::endl;
 
-    // std::cout << "perm1" << std::endl;
-    auto perm1 = F.sortperm(1);
-    //
-    // for (auto i : perm1) {
-    //     std::cout << i << std::endl;
-    // }
-    std::cout << "permuting into filtration order" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    M1.permute(perm0, perm1);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << M1.nrow() << ',' << M1.ncol() << std::endl;
+    print_barcodes(bars2, TF(0.2));
 
-    // TODO: permute matrix
 
-    std::cout << "Running Reduction Alg" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    auto p2c1 = reduce_matrix(M1);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << p2c1.size() << std::endl;
-    // for (auto& [k, v] : p2c1) {
-    //     std::cout << k << ':' << v << ',' << std::endl;
-    // }
-    // M1.print();
-
-    std::cout << "forming boundary 2" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    auto B2 = X.boundary_csc(2);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << B2.nrow() << ',' << B2.ncol() << std::endl;
-    // B2.print();
-
-    std::cout << "Copying to ColumnMatrix" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    MT M2(B2);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << M2.nrow() << ',' << M2.ncol() << std::endl;
-    // M2.print();
-
-    // TODO: permute column matrix
-    auto perm2 = F.sortperm(2);
-    std::cout << "permuting into filtration order" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    M2.permute(perm1, perm2);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << M2.nrow() << ',' << M2.ncol() << std::endl;
-
-    std::cout << "Running Reduction Alg" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    auto p2c2 = reduce_matrix(M2);
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << p2c2.size() << std::endl;
-    // for (auto& [k, v] : p2c2) {
-    //     std::cout << k << ':' << v << ',' << std::endl;
-    // }
-
-    std::cout << "Running reduction" << std::endl;
-    start = std::chrono::high_resolution_clock::now();
-    auto bars = standard_reduce(F, FT());
-    stop = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-    std::cout << "microseconds: " << duration.count() << std::endl;
-
-    print_barcodes(bars, TF(0.2));
 
     return 0;
 }

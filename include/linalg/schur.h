@@ -1,7 +1,7 @@
 #pragma once
 // schur complement
 #include <iostream>
-
+#include "col_matrix.h"
 
 // schur complement over a matrix type
 // S = D - C A^{-1} B
@@ -25,4 +25,25 @@ T schur(T& A, T& B, T& C, T& D) {
     std::cout << "sum" << std::endl;
     sum(-1, R, D, S); // S <- D - R = D - C * A \ B
     return S;
+}
+
+// column matrix specialization
+template <typename CT>
+ColumnMatrix<CT> schur(
+    ColumnMatrix<CT> &A,
+    ColumnMatrix<CT> &B,
+    ColumnMatrix<CT> &C,
+    ColumnMatrix<CT> &D
+) {
+    using MT = ColumnMatrix<CT>;
+
+    // A.print_size();
+    // B.print_size();
+    // C.print_size();
+    // D.print_size();
+    // std::cout << "solve" << std::endl;
+    MT S = solve_U(A, B); // S <- A \ B
+    MT R = C * S;         // R <- C * S = C * A \ B
+    return D - R;         // D - R = D - C * A \ B
+
 }

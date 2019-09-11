@@ -116,6 +116,14 @@ public:
 		return (*it).val;
 	}
 
+	void permute(const std::vector<size_t> &perm) {
+		std::set<key_type> indval_new;
+		for (auto it = nzbegin(); it != nzend(); ++it) {
+			indval_new.emplace(key_type(perm[(*it).ind], (*it).val));
+		}
+		indval = indval_new;
+	}
+
     // self + ax
 	// template over sparse vector type
 	template <class SVT>
