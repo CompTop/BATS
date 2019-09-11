@@ -156,11 +156,13 @@ public:
 		return P._set_pair_unsafe(dim, i, j);
 	}
 
-	MorsePairing<CpxT>& pairing() {
+	const MorsePairing<CpxT>& pairing() const {
 		return P;
 	}
 
 	inline std::vector<size_t> sortperm(const size_t dim) const { return bats::sortperm(val[dim]); }
+
+	inline const std::vector<TF>& get_val(const size_t dim) const {return val[dim]; }
 
 	// friend void add_dimension_recursive_flag_unsafe(
 	//     Filtration&,

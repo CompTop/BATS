@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <iterator>
+#include <iostream>
 
 template <typename TI>
 auto norm(TI start, const TI end) {
@@ -48,5 +49,27 @@ std::vector<T> gen_sphere(
     }
 
     return x;
+
+}
+
+// print bars with length > minlen
+template <typename T>
+void print_barcodes(
+    std::vector<std::vector<T>> bars,
+    T minlen=T(0)
+) {
+    for (size_t d = 0; d < bars.size(); d++) {
+        std::cout << "dimension " << d << std::endl;
+        auto it = bars[d].cbegin();
+        while (it != bars[d].cend()) {
+            T b = *it++;
+            T d = *it++;
+            T len = d - b;
+            if (len > minlen) {
+                std::cout << "   (" << b << ',' << d << ')' << std::endl;
+            }
+        }
+    }
+    return;
 
 }

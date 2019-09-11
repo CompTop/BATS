@@ -16,21 +16,24 @@
 
 #include <vector>
 #include <iostream>
+#include <limits>
 
 // #define FF ModP<int, 3>
 // #define VecT SparseVector<size_t, FF>
 // #define MatT ColumnMatrix<VecT>
 
 template <typename T, class CpxT, typename FT>
-void standard_reduce(const Filtration<T, CpxT> &F, FT) {
+std::vector<std::vector<T>> standard_reduce(const Filtration<T, CpxT> &F, FT) {
 
     using CT = SparseVector<FT>;
     using MatT = ColumnMatrix<CT>;
 
     size_t maxd = F.maxdim(); // maxdim of filtration
     auto M = F.pairing();
+    MorsePairing M2(M); // TODO: clear pairs becuase of permutation
+    std::vector<std::vector<T>> bars(maxd);
     // for holding p2cs
-    std::vector<p2c_type> p2c(maxd);
+    p2c_type p2c;
     std::vector<size_t> permd, permd1;
     permd1 = F.sortperm(0);
     for (size_t d = 1; d < maxd+1; d++) {
@@ -39,10 +42,31 @@ void standard_reduce(const Filtration<T, CpxT> &F, FT) {
         MatT BC(B);
         // permute rows and columns
         BC.permute(permd1, permd);
-        p2c[d-1] = reduce_matrix(BC);
+        p2c = reduce_matrix(BC);
+
+        for (auto& [k, v] : p2c) {
+            M2.set_pair(d-1, k, v);
+        }
+
+        // fill bars
+        auto up = M2.up_paired(d-1);
+        auto down = M2.down_paired(d);
+        auto unp = M2.unpaired(d-1);
+        auto vald1 = F.get_val(d-1);
+        auto vald = F.get_val(d);
+        bars[d-1].reserve(2*(up.size() + unp.size()));
+        for (size_t k = 0; k < up.size(); k++) {
+            bars[d-1].emplace_back(vald1[up[k]]);
+            bars[d-1].emplace_back(vald[down[k]]);
+        }
+        for (size_t k = 0; k < unp.size(); k++) {
+            bars[d-1].emplace_back(vald1[unp[k]]);
+            bars[d-1].emplace_back(std::numeric_limits<T>::infinity());
+        }
+
         permd1 = permd;
     }
-
+    return bars;
 }
 
 // compute block matrices in dimension k

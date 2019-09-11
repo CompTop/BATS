@@ -242,8 +242,8 @@ public:
 		return _set_edge(i, j, ei, rank);
 	}
 
-	inline std::vector<size_t> up_paired(size_t dim) const {return up[dim]; }
-	inline std::vector<size_t> down_paired(size_t dim) const {return down[dim-1]; }
+	inline const std::vector<size_t>& up_paired(size_t dim) const {return up[dim]; }
+	inline const std::vector<size_t>& down_paired(size_t dim) const {return down[dim-1]; }
 	std::vector<size_t> unpaired(size_t dim) const {
 		std::vector<size_t> ind;
 		for (size_t i = 0; i < ispaired[dim].size(); i++ ){

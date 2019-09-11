@@ -25,7 +25,7 @@
 int main() {
 
     size_t d = 2; // dimension of sphere + 1
-    size_t n = 100;
+    size_t n = 200;
     // size_t n = 4;
     size_t maxdim = d;
 
@@ -147,10 +147,10 @@ int main() {
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
-    std::cout << M1.nrow() << ',' << M1.ncol() << std::endl;
+    std::cout << M2.nrow() << ',' << M2.ncol() << std::endl;
 
     std::cout << "Running Reduction Alg" << std::endl;
-        start = std::chrono::high_resolution_clock::now();
+    start = std::chrono::high_resolution_clock::now();
     auto p2c2 = reduce_matrix(M2);
     stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -161,9 +161,13 @@ int main() {
     // }
 
     std::cout << "Running reduction" << std::endl;
-    //standard_reduce(F, 1);
+    start = std::chrono::high_resolution_clock::now();
+    auto bars = standard_reduce(F, FT());
+    stop = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
     std::cout << "microseconds: " << duration.count() << std::endl;
+
+    print_barcodes(bars, TF(0.2));
 
     return 0;
 }
