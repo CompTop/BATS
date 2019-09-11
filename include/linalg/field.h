@@ -7,6 +7,8 @@ TODO: this could be swapped out for some library
 
 #include <iostream>
 #include <numeric>
+#include <string>
+#include <stdexcept>
 
 
 template<class Derived>
@@ -120,7 +122,7 @@ public:
   ModP inv() const;
 
   ModP operator/( const ModP &b) const {
-    if (b.val == 0) {throw "Division by zero!";}
+    if (b.val == 0) {throw std::invalid_argument("division by 0");}
     ModP binv = b.inv();
     return (val * binv.val);
   }
@@ -140,7 +142,7 @@ public:
 // helper function for inversion
 template<typename IntT, unsigned P>
 IntT ff_inv(const IntT val) {
-  if (val == 0) {throw "Inversion of zero!";}
+  if (val == 0) {throw std::invalid_argument("inversion of 0");}
   IntT b = 1;
   IntT c = val;
   while (c % P != 1) {
