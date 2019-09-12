@@ -221,8 +221,17 @@ public:
 		}
 	}
 
-	~MorsePairing() {
-		//std::cout << "in pairing destructor" << std::endl;
+	// clear all pairings, but keep size and memory allocated
+	void clear() {
+		for (size_t i = 0; i < ispaired.size(); i++) {
+			ispaired[i] = std::vector<bool>(ispaired[i].size(), false);
+		}
+		for (size_t i = 0; i < up.size(); i++) {
+			up[i].clear();
+		}
+		for (size_t i = 0; i < down.size(); i++) {
+			down[i].clear();
+		}
 	}
 
 	inline size_t maxdim() const { return _maxdim; }

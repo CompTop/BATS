@@ -109,16 +109,30 @@ public:
     const size_t nrow() const { return m; }
     const size_t ncol() const { return n; }
 
-    void print() {
+    void print_size() const {
         std::cout << "[" << this << "] : " << m << " x " << n <<\
         " CSCMatrix" << std::endl;
+    }
+
+    void print(
+        size_t rowmin,
+        size_t rowmax,
+        size_t colmin,
+        size_t colmax
+    ) const {
         // loop over rows
-        for (size_t i = 0; i < m; i++) {
-            for (size_t j = 0; j < n; j++) {
+        for (size_t i = rowmin; i < rowmax; i++) {
+            for (size_t j = colmin; j < colmax; j++) {
                 std::cout << std::setw(3) << getval(i, j) << " ";
             }
             std::cout << std::endl;
         }
+        return;
+    }
+
+    void print() const {
+        print_size();
+        print(0, m, 0, n);
         return;
     }
 

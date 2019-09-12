@@ -133,6 +133,21 @@ std::vector<size_t> sortperm(const std::vector<T>& data) {
     fill_sortperm(data, perm);
     return perm;
 }
+
+template <typename T>
+std::vector<size_t> stable_sortperm(const std::vector<T>& data) {
+    std::vector<size_t> perm(data.size());
+    std::iota(perm.begin(), perm.end(), 0);
+    std::stable_sort(
+        perm.begin(),
+        perm.end(),
+        [&](const size_t& a, const size_t& b) {
+            return data[a] < data[b];
+        }
+    );
+    return perm;
+}
+
 }
 
 

@@ -1,15 +1,23 @@
-CXXFLAGS = -Wall -g -std=c++17 -O3
-TESTFLAGS = -pg
+CXXFLAGS = -Wall -std=c++17
+OUTFLAGS = -O3
+PROFFLAGS = -pg -O3
+DBFLAGS = -g -Og
 CXX = g++
 IFLAGS = -I../include
 
-default: rips.test rips.out
+default: rips.out rips.prof rips.db
 
 %.out: %.cpp
-	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS)
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
 
-%.test: %.cpp
-	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(TESTFLAGS)
+%.prof: %.cpp
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(PROFFLAGS)
 
+%.db: %.cpp
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(DBFLAGS)
+
+%: %.out %.prof %.db
+
+.PHONY: clean
 clean:
-	rm *.out *.test
+	rm *.out *.prof *.db

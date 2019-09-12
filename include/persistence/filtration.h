@@ -33,15 +33,20 @@ std::vector<std::vector<T>> standard_reduce(const Filtration<T, CpxT> &F, FT) {
     // Copy the pairing
     // this will have pairs added as reduction occurs
     MorsePairing M2(M);
-    std::vector<std::vector<T>> bars(maxd);
+    M2.clear();
     // for holding p2cs
     p2c_type p2c;
     std::vector<size_t> perm_row, perm_col;
+    //std::vector<size_t> iperm_row, iperm_col;
     perm_row = F.sortperm(0);
+    // perm_col = F.sortperm(maxd);
     //iperm_row = bats::sortperm(perm_row);
     for (size_t d = 1; d < maxd+1; d++) {
+    // for (size_t d = maxd; d > 0; d--) {
+        //std::cout << "processing d = " << d << std::endl;
         auto B = M.boundary_csc(d);
         perm_col = F.sortperm(d);
+        // perm_row = F.sortperm(d-1);
         //iperm_col = bats::sortperm(perm_col);
         MatT BC(B);
         // permute rows and columns
@@ -50,9 +55,25 @@ std::vector<std::vector<T>> standard_reduce(const Filtration<T, CpxT> &F, FT) {
 
         // put pairs into pairing in original order
         for (auto& [k, v] : p2c) {
-            M2.set_pair(d-1, perm_row[k], perm_col[v]);
+            if (!M2.set_pair(d-1, perm_row[k], perm_col[v])) {
+                // this shouldn't happen. If it does, there's a problem :(
+                auto vald1 = F.get_val(d-1);
+                auto vald = F.get_val(d);
+                std::cout << "!!!failed to set pair " << perm_row[k] << ',' << perm_col[v];
+                std::cout << "  in dimension " << d-1 << std::endl;
+                std::cout << "  filtration times " << vald1[perm_row[k]] << ',' << vald[perm_col[v]] << std::endl;
+            }
         }
 
+        // in next dimension, column perm will be row perm.
+        perm_row = perm_col;
+        // perm_col = perm_row;
+        //iperm_row = iperm_col;
+    }
+
+    // finally, we put all the completed pairs into a barcode
+    std::vector<std::vector<T>> bars(maxd);
+    for (size_t d = 1; d < maxd + 1; d++) {
         // fill bars by accessing filtration in original order
         auto up = M2.up_paired(d-1);
         auto down = M2.down_paired(d);
@@ -68,11 +89,8 @@ std::vector<std::vector<T>> standard_reduce(const Filtration<T, CpxT> &F, FT) {
             bars[d-1].emplace_back(vald1[unp[k]]);
             bars[d-1].emplace_back(std::numeric_limits<T>::infinity());
         }
-
-        // in next dimension, column perm will be row perm.
-        perm_row = perm_col;
-        //iperm_row = iperm_col;
     }
+
     return bars;
 }
 
@@ -121,7 +139,9 @@ void complete_pairs(
         {rind1.size(), rind2.size()},
         {&B, &D});
 
+
     CM A1(A), B1(B), C1(C), D1(D);
+
     // get schur complement
     CM S = schur(A1, B1, C1, D1);
     //MatT S = schur(A, B, C, D);
@@ -132,7 +152,12 @@ void complete_pairs(
 
     // put pairs into pairing in original order
     for (auto& [k, v] : p2c) {
-        M.set_pair(d-1, rind2[k], cind2[v]);
+        //M.set_pair(d-1, rind2[k], cind2[v]);
+        if (!M.set_pair(d-1, rind2[k], cind2[v])) {
+            // this shouldn't happen.  If it does, there's a problem :(
+            std::cout << "!!!failed to set pair " << rind2[k] << ',' << cind2[v];
+            std::cout << "  in dimension " << d-1 << std::endl;
+        }
     }
 
     return;
@@ -153,7 +178,8 @@ std::vector<std::vector<T>> block_reduce(Filtration<T, CpxT> &F, FT) {
     //std::vector<std::vector<T>> bars(maxd);
 
     size_t maxd = F.maxdim(); // maxdim of filtration
-    for (size_t d = 1; d < maxd + 1; d++) {
+    // we assume that 0-1 pairs have been found already using union find.
+    for (size_t d = maxd; d > 1; d--) {
         // complete the pairs between dims d and d-1
         complete_pairs(F, M2, d, FT());
     }

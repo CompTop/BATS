@@ -160,7 +160,7 @@ public:
 		return P;
 	}
 
-	inline std::vector<size_t> sortperm(const size_t dim) const { return bats::sortperm(val[dim]); }
+	inline std::vector<size_t> sortperm(const size_t dim) const { return bats::stable_sortperm(val[dim]); }
 
 	inline const std::vector<TF>& get_val(const size_t dim) const {return val[dim]; }
 

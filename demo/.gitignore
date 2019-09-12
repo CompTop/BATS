@@ -2,3 +2,5 @@
 *.o
 *.test
 *.stats*
+*.db
+*.prof

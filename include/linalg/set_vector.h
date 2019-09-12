@@ -40,7 +40,7 @@ public:
 	template <typename IT1, typename IT2>
 	SetVector(IT1 indit, IT2 valit, size_t n) {
 		for (size_t i = 0; i < n; i++) {
-			indval.emplace(key_type(TI(*indit++), TV(*valit++)));
+			indval.emplace_hint(indval.end(), key_type(TI(*indit++), TV(*valit++)));
 		}
 	}
 

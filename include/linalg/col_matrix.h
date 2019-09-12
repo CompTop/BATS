@@ -73,17 +73,18 @@ public:
     // permute columns in-place
     // TODO: evaluate if this is best method.
     void permute_cols(const std::vector<size_t> &colperm) {
-        size_t ncols = col.size();
-        // record swapped columns
-        std::vector<bool> visited(ncols, false);
-        for (size_t j = 0; j < ncols; j++)   {
-            size_t next_j = j;
-            while(!visited[next_j] && !visited[colperm[next_j]]) {
-                std::swap(col[next_j], col[colperm[next_j]]);
-                visited[next_j] = true;
-                next_j = colperm[next_j];
-            }
-        }
+        // size_t ncols = col.size();
+        // // record swapped columns
+        // std::vector<bool> visited(ncols, false);
+        // for (size_t j = 0; j < ncols; j++)   {
+        //     size_t next_j = j;
+        //     while(!visited[next_j] && !visited[colperm[next_j]]) {
+        //         std::swap(col[next_j], col[colperm[next_j]]);
+        //         visited[next_j] = true;
+        //         next_j = colperm[next_j];
+        //     }
+        // }
+        apply_perm(col, colperm);
     }
 
     // permute rows in-place
@@ -234,6 +235,7 @@ TC solve_U(const ColumnMatrix<TC> &U, const TC &y) {
         j = (*xit).ind;
         // x[j] = x[j] / U[j,j]
         auto Uj_it = U[j].lower_bound(j); // assume entry j exists and is invertible
+        if (Uj_it == U[j].nzend()) {throw std::logic_error("diagonal doesn't exist");}
         auto a = (*xit).val / (*Uj_it).val;
         x.replace(xit, a);
         if (j == 0) { break; } // we're done
