@@ -57,7 +57,7 @@ A<Dense<F>> matmul(A<Dense<F>> m1, A<Dense<F>> m2){
 }
 
 /*
-L' E_L = E_L L
+Lret * ELmat = ELmat *Lmat
 */
 template <typename F>
 L<Dense<F>> el_commute(EL<Dense<F>> ELmat, L<Dense<F>> Lmat) {
@@ -98,5 +98,19 @@ L<Dense<F>> el_commute(EL<Dense<F>> ELmat, L<Dense<F>> Lmat) {
     }
 
     return Lret;
+
+}
+
+/*
+solve Aret = Lmat \ Amat
+*/
+template <typename F>
+A<Dense<F>> l_solve(L<Dense<F>> Lmat, A<Dense<F>> Amat) {
+
+    size_t m = Amat.nrow();
+    size_t n = Amat.ncol();
+
+    A<Dense<F>> Aret(m,n);
+    return Aret;
 
 }
