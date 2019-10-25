@@ -19,6 +19,8 @@ public:
     return static_cast<Derived *>(this)->operator+(b);
   }
 
+  // +=, -=, *=, /=
+
   // subtraction
   inline Derived operator-(const Derived &b) {
     return static_cast<Derived *>(this)->operator-(b);
@@ -91,8 +93,18 @@ public:
     return ModP(val + b.val);
   }
 
+  ModP& operator+=( const ModP &b) {
+    val = (val + b.val) % P;
+    return *this;
+  }
+
   ModP operator-( const ModP &b) const  {
     return ModP(val - b.val + P);
+  }
+
+  ModP& operator-=( const ModP &b) {
+    val = (val - b.val + P) % P;
+    return *this;
   }
 
   ModP operator-() const {
@@ -103,12 +115,25 @@ public:
     return ModP(val * b.val);
   }
 
+  ModP& operator*=( const ModP &b) {
+    val = (val * b.val) % P;
+    return *this;
+  }
+
   inline bool operator==( const ModP &b) const {
     return val == b.val;
   }
 
+  inline bool operator!=( const ModP &b) const {
+    return val != b.val;
+  }
+
   inline bool operator==( const int b) const {
     return val == b;
+  }
+
+  inline bool operator!=( const int b) const {
+    return val != b;
   }
 
   inline bool operator<( const ModP &b) const {
@@ -127,13 +152,21 @@ public:
     return (val * binv.val);
   }
 
+  ModP& operator/=( const ModP &b) const {
+    if (b.val == 0) {throw std::invalid_argument("division by 0");}
+    ModP binv = b.inv();
+    val = (val * binv.val) % P;
+    return *this;
+  }
+
   bool iszero() const {
     // std::cout << val << " == 0:" << (val == 0) << std::endl;
     return val == 0;
   }
 
   friend std::ostream& operator<<( std::ostream& os, const ModP &x) {
-    os << x.val << " mod " << P;
+    //os << x.val << " mod " << P;
+    os << x.val;
     return os;
   }
 
