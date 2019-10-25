@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <vector>
 #include <util/common.h>
+#include<iostream>
 
 template<typename F>
 struct Dense{};
@@ -22,9 +23,17 @@ struct A<Dense<F>>{
             }
     }
 
+
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
 
+    inline F operator()(int i, int j) {
+        return mat[i*m+j];
+    }
+    void free(){
+        delete mat;
+    }
+    
     void print(){
         for( size_t i=0; i<m; i++){
             for( size_t j=0; j<n; j++){
