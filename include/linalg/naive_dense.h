@@ -1,4 +1,4 @@
-#include <assert>
+#include <assert.h>
 #include <unordered_map>
 #include <vector>
 #include <util/common.h>
@@ -45,6 +45,25 @@ struct A<Dense<F>>{
     void add_col_to(int i, int j){
         
     }
+};
+
+template<typename F>
+struct T<Dense<F>>:A<Dense<F>>{ 
+      T<Dense<F>>(size_t mm, size_t nn) : A<Dense<F>> (mm,nn) {}
+      T<Dense<F>>(size_t mm, size_t nn, F* mat) : A<Dense<F>> (mm,nn,mat) {}
+};
+
+template<typename F>
+struct L<Dense<F>>:T<Dense<F>> { 
+      L<Dense<F>>(size_t mm, size_t nn) : T<Dense<F>> (mm,nn) {}
+      L<Dense<F>>(size_t mm, size_t nn, F* mat) : T<Dense<F>> (mm,nn,mat) {}
+};
+
+template<typename F>
+struct EL<Dense<F>> :L<Dense<F>>{ 
+      EL<Dense<F>>(size_t mm, size_t nn) : L<Dense<F>> (mm,nn) {}
+      EL<Dense<F>>(size_t mm, size_t nn, F* mat) : L<Dense<F>> (mm,nn,mat) {}
+
 };
 
 template< typename F>
