@@ -12,35 +12,38 @@ struct A<Dense<F>>{
     using DI = Dense<F>;
     F* mat;
     size_t m,n;
-
+    
     A<DI>(size_t mm, size_t nn, F* mat) : m(mm), n(nn), mat(mat) {}
-
+    
     A<DI>(size_t mm, size_t nn) : m(mm), n(nn) {
         mat = new F[m*n];
         for( size_t i=0; i<m; i++)
             for( size_t j=0; j<n; j++){
-                mat[i*m+j]=0;
+                mat[j*m+i]=0;
             }
     }
-
-
+    
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
-
-    inline F operator()(int i, int j) {
-        return mat[i*m+j];
+    
+    void print(){
+        for( size_t i=0; i<m; i++){
+            for( size_t j=0; j<n; j++){
+                std::cout<<(mat[j*m+i])<<" ";
+            }
+            std::cout<<"\n";
+        }
+    }
+    
+    inline F& operator()(int i, int j) {
+        return mat[j*m+i];
     }
     void free(){
         delete mat;
     }
     
-    void print(){
-        for( size_t i=0; i<m; i++){
-            for( size_t j=0; j<n; j++){
-                std::cout<<(mat[i*m+j])<<" ";
-            }
-            std::cout<<"\n";
-        }
+    void add_col_to(int i, int j){
+        
     }
 };
 
