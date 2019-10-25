@@ -1,3 +1,5 @@
+#include<iostream>
+
 template<typename F>
 struct Dense{};
 
