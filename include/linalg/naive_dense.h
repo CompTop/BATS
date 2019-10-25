@@ -73,7 +73,7 @@ A<Dense<F>> matmul(A<Dense<F>> m1, A<Dense<F>> m2){
     for(size_t i=0;i<m1.m;i++)
         for(size_t j=0;j<m2.n;j++)
             for(size_t k=0;k<m1.n;k++){
-                prod.mat[i*prod.m+j] += m1.mat[i*m1.m+k]*m2.mat[k*m2.m+j];
+                prod(i,j) += m1(i,k)*m2(k,j);
             }
     return prod;
 }
