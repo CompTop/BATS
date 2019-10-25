@@ -19,29 +19,51 @@ struct A<Dense<F>>{
         mat = new F[m*n];
         for( size_t i=0; i<m; i++)
             for( size_t j=0; j<n; j++){
-                mat[i*m+j]=0;
+                mat[j*m+i]=0;
             }
     }
-
 
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
 
-    inline F operator()(int i, int j) {
-        return mat[i*m+j];
+    void print(){
+        for( size_t i=0; i<m; i++){
+            for( size_t j=0; j<n; j++){
+                std::cout<<(mat[j*m+i])<<" ";
+            }
+            std::cout<<"\n";
+        }
+    }
+
+    inline F& operator()(int i, int j) {
+        return mat[j*m+i];
     }
     void free(){
         delete mat;
     }
 
-    void print(){
-        for( size_t i=0; i<m; i++){
-            for( size_t j=0; j<n; j++){
-                std::cout<<(mat[i*m+j])<<" ";
-            }
-            std::cout<<"\n";
-        }
+    void add_col_to(int i, int j){
+
     }
+};
+
+template<typename F>
+struct T<Dense<F>>:A<Dense<F>>{
+      T<Dense<F>>(size_t mm, size_t nn) : A<Dense<F>> (mm,nn) {}
+      T<Dense<F>>(size_t mm, size_t nn, F* mat) : A<Dense<F>> (mm,nn,mat) {}
+};
+
+template<typename F>
+struct L<Dense<F>>:T<Dense<F>> {
+      L<Dense<F>>(size_t mm, size_t nn) : T<Dense<F>> (mm,nn) {}
+      L<Dense<F>>(size_t mm, size_t nn, F* mat) : T<Dense<F>> (mm,nn,mat) {}
+};
+
+template<typename F>
+struct EL<Dense<F>> :L<Dense<F>>{
+      EL<Dense<F>>(size_t mm, size_t nn) : L<Dense<F>> (mm,nn) {}
+      EL<Dense<F>>(size_t mm, size_t nn, F* mat) : L<Dense<F>> (mm,nn,mat) {}
+
 };
 
 template< typename F>
@@ -114,4 +136,5 @@ A<Dense<F>> l_solve(L<Dense<F>> Lmat, A<Dense<F>> Amat) {
 
     A<Dense<F>> Aret(m,n);
     return Aret;
+
 }
