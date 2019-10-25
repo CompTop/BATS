@@ -18,6 +18,13 @@ struct A<Dense<F>>{
                 mat[i*m+j]=0;
             }
     }
+
+    inline F operator()(int i, int j) {
+        return mat[i*m+j];
+    }
+    void free(){
+        delete mat;
+    }
     
     void print(){
         for( size_t i=0; i<m; i++){
