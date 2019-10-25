@@ -33,7 +33,7 @@ struct A<Dense<F>>{
     void free(){
         delete mat;
     }
-    
+
     void print(){
         for( size_t i=0; i<m; i++){
             for( size_t j=0; j<n; j++){
@@ -68,7 +68,7 @@ L<Dense<F>> el_commute(EL<Dense<F>> ELmat, L<Dense<F>> Lmat) {
     L<Dense<F>> Lret = L<Dense<F>>(m, m);
 
     // step 1 is to make an index map from ELmat
-    std::vector<int> idx_map(n);
+    std::vector<size_t> idx_map(n);
     size_t i = 0; // pointer to current row
     size_t j = 0; // pointer to column
     // loop over columns of ELmat
