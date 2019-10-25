@@ -207,8 +207,18 @@ public:
     return ModP(val ^ b.val); // xor
   }
 
+  ModP& operator+=( const ModP &b ) {
+    val = val ^ b.val; // xor
+    return *this;
+  }
+
   ModP operator-( const ModP &b) const {
     return ModP(val ^ b.val); // xor
+  }
+
+  ModP& operator-=( const ModP &b ) {
+    val = val ^ b.val; // xor
+    return *this;
   }
 
   inline ModP& operator-() {
@@ -219,9 +229,19 @@ public:
     return ModP(val | b.val); // or
   }
 
+  ModP& operator*=(const ModP &b) {
+    val = val | b.val; // or
+    return *this;
+  }
+
   ModP operator/(const ModP &b) const {
     if ((b.val & 0x1) == 0) {throw "Division by zero!";}
     return ModP(val); // or
+  }
+
+  ModP& operator/=(const ModP &b) {
+    if ((b.val & 0x1) == 0) {throw "Division by zero!";}
+    return *this; // no-op
   }
 
   ModP inv() const {
@@ -229,12 +249,21 @@ public:
     return ModP(0x1);
   }
 
-  bool operator==(const ModP &b) const {
-    return (val & 0x1) == (b & 0x1);
+  inline bool operator==( const ModP &b ) const {
+    return (val & 0x1) == (b.val & 0x1);
   }
+
+  inline bool operator!=( const ModP &b ) const {
+    return (val & 0x1) != (b.val & 0x1);
+  }
+
 
   inline bool operator==( const int b) const {
     return (val & 0x1) == b;
+  }
+
+  inline bool operator!=( const int b) const {
+    return (val & 0x1) != b;
   }
 
   ModP operator=(const int &a) {
@@ -251,7 +280,8 @@ public:
   }
 
   friend std::ostream& operator<<( std::ostream& os, const ModP &x) {
-    os << (x.val & 0x1) << " mod " << 2;
+    // os << (x.val & 0x1) << " mod " << 2;
+    os << (x.val & 0x1);
     return os;
   }
 
@@ -263,19 +293,25 @@ inline int sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
 
+
 template<typename IntT>
 class Rational : public AbstractField<Rational<IntT>> {
 private:
   IntT n; // numerator
   IntT d; // denominator
 
+  // reduction of numerator and denominator
+  void reduce() {
+    IntT gcd = std::gcd(n, d);
+    int s = sgn(d);
+    n = s * (n / gcd);
+    d = s * (d / gcd);
+  }
+
 public:
 
-  Rational(IntT n0, IntT d0) {
-    IntT gcd = std::gcd(n0, d0);
-    int s = sgn(d0);
-    n = s * (n0 / gcd);
-    d = s * (d0 / gcd);
+  Rational(IntT n0, IntT d0) : n(n0), d(d0) {
+    reduce();
   }
 
   Rational(IntT n) : n(n), d(1) {}
@@ -284,8 +320,22 @@ public:
     return Rational(n * b.d + b.n * d, d * b.d);
   }
 
+  Rational& operator+=(const Rational &b) {
+    n = n * b.d + b.n * d;
+    d *= b.d;
+    reduce();
+    return *this;
+  }
+
   Rational operator-( const Rational &b) const  {
     return Rational(n * b.d - b.n * d, d * b.d);
+  }
+
+  Rational& operator-=( const Rational &b) {
+    n = n * b.d - b.n * d;
+    d *= b.d;
+    reduce();
+    return *this;
   }
 
   Rational operator-() const {
@@ -296,12 +346,27 @@ public:
     return Rational(n * b.n, d * b.d);
   }
 
+  Rational& operator*=( const Rational &b) const {
+    n *= b.n;
+    d *= b.d;
+    reduce();
+    return *this;
+  }
+
   inline bool operator==( const Rational &b) const {
-    return (n == b.n) && (d == b.n);
+    return (n == b.n) && (d == b.d);
+  }
+
+  inline bool operator!=( const Rational &b) const {
+    return (n != b.n) || (d != b.n);
   }
 
   inline bool operator==( const int b) const {
     return (n == b) && (d == 1);
+  }
+
+  inline bool operator!=( const int b) const {
+    return (n != b) || (d != 1);
   }
 
   inline bool operator<( const Rational &b) const {
@@ -318,12 +383,20 @@ public:
     return Rational(n * b.d, d * b.n);
   }
 
+  Rational& operator/=( const Rational &b) {
+    if (b.n == 0) {throw "Division by zero!";}
+    n *= b.d;
+    d *= b.n;
+    reduce();
+    return *this;
+  }
+
   bool iszero() const {
     return n == 0;
   }
 
   friend std::ostream& operator<<( std::ostream& os, const Rational &x) {
-    os << x.n << "//" << x.d;
+    os << x.n << "/" << x.d;
     return os;
   }
 
