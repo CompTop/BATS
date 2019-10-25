@@ -1,8 +1,8 @@
-#include <assert>
+#include <assert.h>
 #include <unordered_map>
 #include <vector>
 #include <util/common.h>
-#include<iostream>
+#include <iostream>
 
 template<typename F>
 struct Dense{};
@@ -114,5 +114,4 @@ A<Dense<F>> l_solve(L<Dense<F>> Lmat, A<Dense<F>> Amat) {
 
     A<Dense<F>> Aret(m,n);
     return Aret;
-
 }
