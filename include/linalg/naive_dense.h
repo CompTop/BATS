@@ -25,10 +25,57 @@ struct ColumnView{
         return;
     }
 
+	void operator=(const ColumnView x){
+        T* ptr = start;
+        T* xptr = x.start;
+        while (ptr < end) {
+            *ptr = (*xptr);
+            ++ptr;
+            ++xptr;
+        }
+        return;
+    }
+
     inline size_t size() const { return end - start; }
 
     inline T& operator[](size_t i) {return *(start + i); }
-}
+};
+
+template<typename T>
+struct RowView{
+    T* start;
+    T* end;
+	size_t stride;
+
+    RowView(T* start, T* end, size_t s) : start(start), end(end), stride(s) {};
+
+    // self += a * x
+    void axpy(const T a, const RowView x){
+        T* ptr = start;
+        T* xptr = x.start;
+        while (ptr < end) {
+            *ptr += a * (*xptr);
+            ptr+=stride;
+            xptr+=x.stride;
+        }
+        return;
+    }
+
+	void operator=(const RowView x){
+        T* ptr = start;
+        T* xptr = x.start;
+        while (ptr < end) {
+            *ptr =  (*xptr);
+            ptr+=stride;
+            xptr+=x.stride;
+        }
+        return;
+    }
+
+    //inline size_t size() const { return (end - start)/stride; }
+
+    inline T& operator[](size_t i) {return *(start + stride*i); }
+};
 
 
 template<typename F>
@@ -70,6 +117,11 @@ struct A<Dense<F>>{
     // return a column view of column j
     inline ColumnView<F> operator[](size_t j) {
         return ColumnView<F>(mat + m*j, mat + m*(j+1));
+    }
+
+	// return a row view of row i
+    inline RowView<F> r(size_t i) {
+        return RowView<F>(mat + i, mat + m*n + i, m );
     }
 
     inline F& operator()(int i, int j) {
