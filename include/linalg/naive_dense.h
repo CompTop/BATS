@@ -90,6 +90,12 @@ struct A<Dense<F>>{
     F* mat;
     size_t m,n;
 
+	// null constructor
+	A<DI>(){ m=0;n=0;}
+
+	//"copy" constructor 
+	A<DI>(const A<DI> &m2) {m = m2.m; n = m2.n; mat = m2.mat; } 
+
     A<DI>(size_t mm, size_t nn, F* mat) : m(mm), n(nn), mat(mat) {}
 
     A<DI>(size_t mm, size_t nn) : m(mm), n(nn) {
@@ -134,6 +140,7 @@ struct A<Dense<F>>{
         delete mat;
     }
 
+	//equality check
 	template<typename M>
 	bool operator==(M& other) {
 		if( m!=other.m && n!=other.n)
