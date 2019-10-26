@@ -87,8 +87,9 @@ struct Dense{};
 template<typename F>
 struct A<Dense<F>>{
     using DI = Dense<F>;
-    F* mat;
+
     size_t m,n;
+    F* mat;
 
 	// null constructor
 	A<DI>(){ m=0;n=0;}
@@ -142,14 +143,15 @@ struct A<Dense<F>>{
 
 	//equality check
 	template<typename M>
-	bool operator==(M& other) {
+	bool operator==(M&& other) {
 		if( m!=other.m && n!=other.n)
 			return false;
 
-        for(size_t i=0;i<m;i++)
+        for(size_t i=0;i<m;i++){
     		for(size_t j=0;j<n;j++)
 				if( (*this)(i,j) != other(i,j) )
 					return false;
+		}
 
 		return true;
     }			
@@ -261,7 +263,7 @@ solve Aret = Lmat \ Amat
 template <typename F>
 A<Dense<F>> l_solve(L<Dense<F>> Lmat, A<Dense<F>> Amat) {
 
-    size_t m = Amat.nrow();
+    //size_t m = Amat.nrow();
     size_t n = Amat.ncol();
 
     A<Dense<F>> Aret = Amat.copy();
@@ -359,7 +361,7 @@ auto LEUP_fact(A<Dense<F>>& mat_arg){
     auto mat = mat_arg.copy();
     size_t m = mat.nrow();
     size_t n = mat.ncol();
-    size_t p_row,p_col;
+    size_t p_col;
     size_t pr,pc;
     //return values
     L<Dense<F>> Lmat(m,m);
