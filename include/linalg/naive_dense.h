@@ -274,3 +274,57 @@ A<Dense<F>> l_solve(L<Dense<F>> Lmat, A<Dense<F>> Amat) {
     return Aret;
 
 }
+
+
+// implementations of naive matrix ops
+
+template<typename F>
+void A<Dense<F>>::swap_cols(size_t i, size_t j){
+    for(size_t k=0;k<m;k++){
+        std::swap((*this)(k,i),(*this)(k,j));
+    }
+}
+
+template<typename F>
+void A<Dense<F>>::swap_rows(size_t i, size_t j){
+    for(size_t k=0;k<n;k++){
+        std::swap((*this)(i,k),(*this)(j,k));
+    }
+}
+
+template<typename F>
+void A<Dense<F>>::add_col_to(size_t i, size_t j, F a){
+    for(size_t k=0;k<m;k++){
+       (*this)(k,i) = (*this)(k,i) + a*(*this)(k,j);
+    }
+}
+
+template<typename F>
+void A<Dense<F>>::add_row_to(size_t i, size_t j, F a){
+    for(size_t k=0;k<n;k++){
+       (*this)(i,k) = (*this)(i,k) + a*(*this)(j,k);
+    }
+}
+
+
+// mat creation utils
+
+template<typename M>
+void make_diag_ones(M mat){
+    for(size_t i=0;i<mat.m;i++)
+        mat(i,i)=1;
+}
+template<typename M>
+void fill_zeros(M mat){
+    for(size_t i=0;i<mat.m;i++)
+        for(size_t j=0;j<mat.n;j++)
+            mat(i,j)=0;
+}
+template<typename M>
+void fill_rand(M mat){
+    for(size_t i=0;i<mat.m;i++)
+        for(size_t j=0;j<mat.n;j++)
+            mat(i,j)=rand();
+}
+
+
