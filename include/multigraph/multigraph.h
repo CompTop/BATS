@@ -19,12 +19,7 @@ public:
 
     //inline void add_input(ET in) { inputs.emplace_back(&in); }
     template <typename ET>
-    inline void add_input(ET* in) {
-        std::cout << "adding input" << std::endl;
-        std::cout << inputs.size();
-        inputs.emplace_back((void*) in);
-        std::cout << inputs.size() << std::endl;
-    }
+    inline void add_input(ET* in) { inputs.emplace_back((void*) in); }
     //inline void add_output(ET out) { outputs.emplace_back(&out); }
     template <typename ET>
     inline void add_output(ET* out) { outputs.emplace_back((void*) out); }
