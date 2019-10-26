@@ -328,3 +328,88 @@ void fill_rand(M mat){
 }
 
 
+// Find pivot in lower right block of pr,pc
+template<typename M>
+auto find_pivot(M mat,size_t pr, size_t pc){
+    size_t prow = pr-1; // start 1 less as its immediately incremented
+    size_t pcol = pc;
+
+    // outer loop searches rows
+    do{
+        prow ++; // try new row
+        pcol = pc;
+        //search col, give up if u reach last col
+        while( (mat(prow,pcol)==0) & (pcol < mat.n)){
+            pcol++;
+        }
+    }while((pcol == mat.n) && !(prow == mat.m-1));
+    
+    // if col is outside limit, whole sublock is 0
+    if(pcol == mat.n){
+        prow=mat.m;
+    }
+    return std::make_tuple(prow,pcol);
+}
+
+
+// Find the L EL U P factorization
+template<typename F>
+auto LEUP_fact(A<Dense<F>>& mat_arg){
+    //create copy
+    auto mat = mat_arg.copy();
+    size_t m = mat.nrow();
+    size_t n = mat.ncol();
+    size_t p_row,p_col;
+    size_t pr,pc;
+    //return values
+    L<Dense<F>> Lmat(m,m);
+    EL<Dense<F>> ELmat(m,n);
+    P<Dense<F>> Pmat(n,n);
+    U<Dense<F>> Umat(n,n);
+    
+    std::vector<std::pair<size_t,size_t>> pivots;
+    
+    make_diag_ones(Lmat);
+    make_diag_ones(Pmat);
+    make_diag_ones(Umat);
+
+    for(pr=0,pc=0;pc<n;pc++,pr++){
+        //if pr++ exceeds range
+        if(pr==m)
+            break;
+        // find pivot in lower right region of pr,pc
+        std::tie(pr,p_col)=find_pivot(mat,pr,pc);  
+        // if full zero sublock then done
+        if(pr==m)
+            break;
+        // apply and record permutation
+        if(pc != p_col){
+            mat.swap_cols(pc,p_col);
+            Pmat.swap_rows(pc,p_col); // !inefficient!
+        }
+
+        //zero out column pc below pr - apply schur complement
+        for(size_t i=pr+1;i<m;i++){
+            if( !(mat(i,pc)==0) ){
+                auto coef = mat(i,pc)/mat(pr,pc);
+                mat.add_row_to(i,pr, -coef);
+                //Lmat.add_col_to(pr,i, coef); //inefficient
+                Lmat(i,pr) = coef; // record L
+            }
+        }
+        //record pivot
+        pivots.push_back(std::make_pair(pr,pc));
+        ELmat(pr,pc)=1;
+
+    }
+    //extract U from upper echelon mat
+    for(auto pair:pivots){
+        std::tie(pr,pc) = pair;
+        Umat.r(pc) = mat.r(pr);
+    }
+    
+	mat.free();
+    return std::make_tuple( Lmat, ELmat, Umat, Pmat );
+}
+
+
