@@ -131,6 +131,19 @@ struct A<Dense<F>>{
         delete mat;
     }
 
+	template<typename M>
+	bool operator==(M other) {
+		if( m!=other.m && n!=other.n)
+			return false;
+
+        for(size_t i=0;i<m;i++)
+    		for(size_t j=0;j<n;j++)
+				if( (*this)(i,j) != other(i,j) )
+					return false;
+
+		return true;
+    }			
+
     void add_col_to(size_t i, size_t j, F a);
 
 	void add_row_to(size_t i, size_t j, F a);
