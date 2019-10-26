@@ -23,7 +23,7 @@ MM(U,U,U)
 MM(L,U,A)
 
     
-std::tuple<L<SI> , EL<SI> , U<SI> , P<SI>> lufact(A<SI> a){
+std::tuple<L<SI> , EL<SI> , U<SI> , P<SI>> LEUP_fact(A<SI> a){
     L<SI> l;
     EL<SI> el;
     U<SI> u;
@@ -34,11 +34,9 @@ std::tuple<L<SI> , EL<SI> , U<SI> , P<SI>> lufact(A<SI> a){
 
 
 
-std::tuple< L<SI>,EL<SI>  > commute( L<SI> l1 ,EL<SI> el1, L<SI> l2){
+L<SI> el_commute( EL<SI> el1, L<SI> l1 ){
     L<SI> l;
-    EL<SI> el;
 	(void) l1;
 	(void) el1;
-	(void) l2;
-    return std::make_tuple( l,el); 
+    return l;
 }

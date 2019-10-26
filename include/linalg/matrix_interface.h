@@ -17,8 +17,8 @@ template<typename Impl> struct P : E<Impl> {}; // permutation matrix
 
 MAT matmul(MAT,MAT);
 
-std::tuple<MAT,MAT,MAT,MAT> lufact(MAT);
+std::tuple<MAT,MAT,MAT,MAT> LEUP_Fact(MAT);
 
-std::tuple<MAT,MAT,MAT> commute(MAT,MAT);
+MAT commute_el(MAT,MAT);
 
-MAT solve(MAT,MAT);
+MAT l_solve(MAT,MAT);
