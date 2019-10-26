@@ -55,6 +55,9 @@ int main() {
   e = e * e.inv();
   e.print();
 
+  e += e;
+  e.print();
+
   std::cout << e << std::endl;
 
   return 0;

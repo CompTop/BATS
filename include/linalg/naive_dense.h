@@ -3,6 +3,33 @@
 #include <vector>
 #include <util/common.h>
 #include <iostream>
+#include <algorithm>
+
+// dense vector with entries T
+template<typename T>
+struct ColumnView{
+    T* start;
+    T* end;
+
+    ColumnView(T* start, T* end) : start(start), end(end) {};
+
+    // self += a * x
+    void axpy(const T a, const ColumnView x){
+        T* ptr = start;
+        T* xptr = x.start;
+        while (ptr < end) {
+            *ptr += a * (*xptr);
+            ++ptr;
+            ++xptr;
+        }
+        return;
+    }
+
+    inline size_t size() const { return end - start; }
+
+    inline T& operator[](size_t i) {return *(start + i); }
+}
+
 
 template<typename F>
 struct Dense{};
@@ -17,10 +44,15 @@ struct A<Dense<F>>{
 
     A<DI>(size_t mm, size_t nn) : m(mm), n(nn) {
         mat = new F[m*n];
-        for( size_t i=0; i<m; i++)
-            for( size_t j=0; j<n; j++){
-                mat[j*m+i]=0;
-            }
+        // std::fill
+        std::fill(mat, mat + m*n, F(0));
+    }
+
+    A<DI> copy() {
+        F* newmat = new F[m*n];
+        std::copy(mat, mat + m*n, newmat);
+
+        return A<DI>(m, n, newmat);
     }
 
     inline size_t nrow() const { return m; }
@@ -33,6 +65,11 @@ struct A<Dense<F>>{
             }
             std::cout<<"\n";
         }
+    }
+
+    // return a column view of column j
+    inline ColumnView<F> operator[](size_t j) {
+        return ColumnView<F>(mat + m*j, mat + m*(j+1));
     }
 
     inline F& operator()(int i, int j) {
@@ -126,6 +163,20 @@ L<Dense<F>> el_commute(EL<Dense<F>> ELmat, L<Dense<F>> Lmat) {
 
 }
 
+// solve Lmat x = y in-place
+template <typename F>
+void l_solve(L<Dense<F>> Lmat, ColumnView<F> y) {
+    size_t n = y.size();
+    for (size_t k = 0; k < n; k++) {
+        y[k] /= Lmat(k,k);
+        // apply forward-looking update
+        for (size_t j = k+1; j < n; j++) {
+            y[j] -= Lmat(j, k) * y[k];
+        }
+    }
+    return;
+}
+
 /*
 solve Aret = Lmat \ Amat
 */
@@ -135,7 +186,13 @@ A<Dense<F>> l_solve(L<Dense<F>> Lmat, A<Dense<F>> Amat) {
     size_t m = Amat.nrow();
     size_t n = Amat.ncol();
 
-    A<Dense<F>> Aret(m,n);
+    A<Dense<F>> Aret = Amat.copy();
+
+    // apply lower triangular solve to each column
+    for (size_t j = 0; j < n; j++) {
+        l_solve(Lmat, Aret[j]);
+    }
+
     return Aret;
 
 }
