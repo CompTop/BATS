@@ -4,6 +4,7 @@
 #include <util/common.h>
 #include <iostream>
 #include <algorithm>
+#include "matrix_interface.h"
 
 // dense vector with entries T
 template<typename T>
@@ -28,7 +29,7 @@ struct ColumnView{
     inline size_t size() const { return end - start; }
 
     inline T& operator[](size_t i) {return *(start + i); }
-}
+};
 
 
 template<typename F>
