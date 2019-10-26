@@ -47,26 +47,25 @@ struct A<Dense<F>>{
 	void add_row_to(size_t i, size_t j, F a);
 
     void swap_cols(size_t i, size_t j);
+
+	void swap_rows(size_t i, size_t j);
 };
 
-template<typename F>
-struct T<Dense<F>>:A<Dense<F>>{
-      T<Dense<F>>(size_t mm, size_t nn) : A<Dense<F>> (mm,nn) {}
-      T<Dense<F>>(size_t mm, size_t nn, F* mat) : A<Dense<F>> (mm,nn,mat) {}
-};
+#define INHERIT(T1,T2) \
+template<typename F> \
+struct T1<Dense<F>>:T2<Dense<F>>{ \
+	using Base = T2<Dense<F>>; \
+	using Base::Base ; \
+}; \
 
-template<typename F>
-struct L<Dense<F>>:T<Dense<F>> {
-      L<Dense<F>>(size_t mm, size_t nn) : T<Dense<F>> (mm,nn) {}
-      L<Dense<F>>(size_t mm, size_t nn, F* mat) : T<Dense<F>> (mm,nn,mat) {}
-};
+INHERIT(T,A)
+INHERIT(L,T)
+INHERIT(U,T)
+INHERIT(E,A)
+INHERIT(EL,E)
+INHERIT(EU,E)
+INHERIT(P,E)
 
-template<typename F>
-struct EL<Dense<F>> :L<Dense<F>>{
-      EL<Dense<F>>(size_t mm, size_t nn) : L<Dense<F>> (mm,nn) {}
-      EL<Dense<F>>(size_t mm, size_t nn, F* mat) : L<Dense<F>> (mm,nn,mat) {}
-
-};
 
 template< typename F>
 A<Dense<F>> matmul(A<Dense<F>> m1, A<Dense<F>> m2){
