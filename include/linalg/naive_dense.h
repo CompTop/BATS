@@ -246,7 +246,7 @@ template <typename F>
 void l_solve(L<Dense<F>> Lmat, ColumnView<F> y) {
     size_t n = y.size();
     for (size_t k = 0; k < n; k++) {
-        y[k] /= Lmat(k,k);
+        y[k] = y[k]/Lmat(k,k);
         // apply forward-looking update
         for (size_t j = k+1; j < n; j++) {
             y[j] -= Lmat(j, k) * y[k];
