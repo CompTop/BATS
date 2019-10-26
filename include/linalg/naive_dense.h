@@ -79,9 +79,11 @@ struct A<Dense<F>>{
         delete mat;
     }
 
-    void add_col_to(int i, int j){
+    void add_col_to(size_t i, size_t j, F a);
 
-    }
+	void add_row_to(size_t i, size_t j, F a);
+
+    void swap_cols(size_t i, size_t j);
 };
 
 template<typename F>
