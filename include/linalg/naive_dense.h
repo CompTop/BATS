@@ -132,7 +132,7 @@ struct A<Dense<F>>{
     }
 
 	template<typename M>
-	bool operator==(M other) {
+	bool operator==(M& other) {
 		if( m!=other.m && n!=other.n)
 			return false;
 
@@ -153,6 +153,8 @@ struct A<Dense<F>>{
 	void swap_rows(size_t i, size_t j);
 };
 
+
+// Inherit all the constructors
 #define INHERIT(T1,T2) \
 template<typename F> \
 struct T1<Dense<F>>:T2<Dense<F>>{ \
@@ -169,6 +171,7 @@ INHERIT(EU,E)
 INHERIT(P,E)
 
 
+// naive matmul
 template< typename F>
 A<Dense<F>> matmul(A<Dense<F>> m1, A<Dense<F>> m2){
     assert( m1.n==m2.m );
