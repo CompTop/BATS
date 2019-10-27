@@ -118,11 +118,23 @@ struct A<Dense<F>>{
     void print(){
         for( size_t i=0; i<m; i++){
             for( size_t j=0; j<n; j++){
-                std::cout<<(mat[j*m+i])<<" ";
+                std::cout<<((*this)(i,j))<<" ";
             }
             std::cout<<"\n";
         }
     }
+
+	void print_arr(){
+		std::cout<<"{\n";
+        for( size_t i=0; i<m; i++){
+            for( size_t j=0; j<n; j++){
+                std::cout<<((*this)(j,i))<<",";
+            }
+            std::cout<<"\n";
+        }
+		std::cout<<"};";
+    }
+
 
     // return a column view of column j
     inline ColumnView<F> operator[](size_t j) {
