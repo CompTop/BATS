@@ -152,7 +152,7 @@ public:
     return (val * binv.val);
   }
 
-  ModP& operator/=( const ModP &b) const {
+  ModP& operator/=( const ModP &b) {
     if (b.val == 0) {throw std::invalid_argument("division by 0");}
     ModP binv = b.inv();
     val = (val * binv.val) % P;
@@ -226,11 +226,11 @@ public:
   }
 
   ModP operator*(const ModP &b) const {
-    return ModP(val | b.val); // or
+    return ModP(val & b.val); // or
   }
 
   ModP& operator*=(const ModP &b) {
-    val = val | b.val; // or
+    val = val & b.val; // or
     return *this;
   }
 
@@ -259,7 +259,7 @@ public:
 
 
   inline bool operator==( const int b) const {
-    return (val & 0x1) == b;
+    return (val & 0x1) == (b & 0x1);
   }
 
   inline bool operator!=( const int b) const {
@@ -310,6 +310,8 @@ private:
 
 public:
 
+  Rational() : n(0), d(1) {}
+
   Rational(IntT n0, IntT d0) : n(n0), d(d0) {
     reduce();
   }
@@ -346,7 +348,7 @@ public:
     return Rational(n * b.n, d * b.d);
   }
 
-  Rational& operator*=( const Rational &b) const {
+  Rational& operator*=( const Rational &b) {
     n *= b.n;
     d *= b.d;
     reduce();
