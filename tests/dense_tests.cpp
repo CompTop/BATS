@@ -88,3 +88,32 @@ TEST_CASE("el_commute") {
 	CHECK( (matmul(res,elmat1)== matmul(elmat1,lmat1)) );
 }
 
+TEST_CASE("LEUP Factorization -self consistency") {
+
+	A<Dense<F3>> mat3(4,5);
+	A<Dense<F3>> mat3copy;
+	L<Dense<F3>> Lmat;
+	EL<Dense<F3>> ELmat;
+	P<Dense<F3>> Pmat;
+	U<Dense<F3>> Umat;
+	A<Dense<F3>> leup;
+
+	fill_rand(mat3);
+
+	//reduce rank
+	mat3.r(2)=mat3.r(3);
+	mat3[1]=mat3[3];
+
+	mat3copy = mat3.copy();
+
+	std::tie(Lmat, ELmat, Umat, Pmat) = LEUP_fact(mat3);
+
+	// check no change in mat3
+	CHECK( (mat3==mat3copy) );
+
+	leup = matmul(matmul(Lmat,ELmat),matmul(Umat,Pmat));
+
+	CHECK( (leup==mat3) );
+
+}
+
