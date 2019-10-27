@@ -94,8 +94,8 @@ struct A<Dense<F>>{
 	// null constructor
 	A<DI>(){ m=0;n=0;}
 
-	//"copy" constructor 
-	A<DI>(const A<DI> &m2) {m = m2.m; n = m2.n; mat = m2.mat; } 
+	//"copy" constructor
+	A<DI>(const A<DI> &m2) {m = m2.m; n = m2.n; mat = m2.mat; }
 
     A<DI>(size_t mm, size_t nn, F* mat) : m(mm), n(nn), mat(mat) {}
 
@@ -166,7 +166,7 @@ struct A<Dense<F>>{
 		}
 
 		return true;
-    }			
+    }
 
     void add_col_to(size_t i, size_t j, F a);
 
@@ -260,7 +260,7 @@ template <typename F>
 void l_solve(L<Dense<F>> Lmat, ColumnView<F> y) {
     size_t n = y.size();
     for (size_t k = 0; k < n; k++) {
-        y[k] = y[k]/Lmat(k,k);
+        y[k] /= Lmat(k,k);
         // apply forward-looking update
         for (size_t j = k+1; j < n; j++) {
             y[j] -= Lmat(j, k) * y[k];
@@ -357,7 +357,7 @@ auto find_pivot(M mat,size_t pr, size_t pc){
             pcol++;
         }
     }while((pcol == mat.n) && !(prow == mat.m-1));
-    
+
     // if col is outside limit, whole sublock is 0
     if(pcol == mat.n){
         prow=mat.m;
@@ -380,9 +380,9 @@ auto LEUP_fact(A<Dense<F>>& mat_arg){
     EL<Dense<F>> ELmat(m,n);
     P<Dense<F>> Pmat(n,n);
     U<Dense<F>> Umat(n,n);
-    
+
     std::vector<std::pair<size_t,size_t>> pivots;
-    
+
     make_diag_ones(Lmat);
     make_diag_ones(Pmat);
     make_diag_ones(Umat);
@@ -392,7 +392,7 @@ auto LEUP_fact(A<Dense<F>>& mat_arg){
         if(pr==m)
             break;
         // find pivot in lower right region of pr,pc
-        std::tie(pr,p_col)=find_pivot(mat,pr,pc);  
+        std::tie(pr,p_col)=find_pivot(mat,pr,pc);
         // if full zero sublock then done
         if(pr==m)
             break;
@@ -421,9 +421,7 @@ auto LEUP_fact(A<Dense<F>>& mat_arg){
         std::tie(pr,pc) = pair;
         Umat.r(pc) = mat.r(pr);
     }
-    
+
 	mat.free();
     return std::make_tuple( Lmat, ELmat, Umat, Pmat );
 }
-
-

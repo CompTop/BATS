@@ -360,7 +360,7 @@ public:
   }
 
   inline bool operator!=( const Rational &b) const {
-    return (n != b.n) || (d != b.n);
+    return (n != b.n) || (d != b.d);
   }
 
   inline bool operator==( const int b) const {

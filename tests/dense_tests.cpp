@@ -8,22 +8,21 @@
 
 #define F3 ModP<int, 3>
 
+TEST_CASE_TEMPLATE("Matrix Multiplication", T, int, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Rational<int>) {
 
-TEST_CASE("Matrix Multiplication") {
-
-	int a1v[] = {
+	T a1v[] = {
 	2,3,4,
 	1,2,3,
 	8,5,2,
 	};
-	A<Dense<int>> a1(3,3,a1v);
+	A<Dense<T>> a1(3,3,a1v);
 
-	int a2v[] = {
+	T a2v[] = {
 	39,32,25,
 	28,22,16,
 	37,44,51,
 	};
-	A<Dense<int>> a2(3,3,a2v);
+	A<Dense<T>> a2(3,3,a2v);
 
 	CHECK( (matmul(a1,a1) == a2) );
 }
@@ -71,13 +70,13 @@ TEST_CASE("RowView") {
 }
 
 TEST_CASE("el_commute") {
-	int elmat1v[] = {1,0,0,0, 
+	int elmat1v[] = {1,0,0,0,
 		          0,1,0,0,
 		          0,0,0,1,
 		          0,0,0,0};
 	EL<Dense<int>> elmat1(4,4,elmat1v);
 
-	int lmat1v[] = {2,2,3,4, 
+	int lmat1v[] = {2,2,3,4,
 		          0,3,2,4,
 		          0,0,4,4,
 		          0,0,0,5};
@@ -117,21 +116,20 @@ TEST_CASE("LEUP Factorization -self consistency") {
 
 }
 
-TEST_CASE("l_solve") {
-	A<Dense<F3>> I(4,4);
+TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Rational<int>) {
+	A<Dense<F>> I(4,4);
 	make_diag_ones(I);
-	F3 lmat1v[] = {
+	F lmat1v[] = {
 	1,1,0,0,
 	0,1,2,2,
 	0,0,1,1,
 	0,0,0,1,
 	};
-	L<Dense<F3>> Lmat(4,4,lmat1v);
+	L<Dense<F>> Lmat(4,4,lmat1v);
 
+	auto Linv = l_solve(Lmat,I);
 
-	auto Linv = l_solve(Lmat,I) ;
-
+	CHECK( (matmul(Lmat,Linv) == I) );
 	CHECK( (matmul(Linv,Lmat) == I) );
 
 }
-
