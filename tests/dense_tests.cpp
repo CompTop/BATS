@@ -117,3 +117,21 @@ TEST_CASE("LEUP Factorization -self consistency") {
 
 }
 
+TEST_CASE("l_solve") {
+	A<Dense<F3>> I(4,4);
+	make_diag_ones(I);
+	F3 lmat1v[] = {
+	1,1,0,0,
+	0,1,2,2,
+	0,0,1,1,
+	0,0,0,1,
+	};
+	L<Dense<F3>> Lmat(4,4,lmat1v);
+
+
+	auto Linv = l_solve(Lmat,I) ;
+
+	CHECK( (matmul(Linv,Lmat) == I) );
+
+}
+
