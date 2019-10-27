@@ -144,7 +144,7 @@ struct A<Dense<F>>{
 	//equality check
 	template<typename M>
 	bool operator==(M&& other) {
-		if( m!=other.m && n!=other.n)
+		if( m!=other.m || n!=other.n)
 			return false;
 
         for(size_t i=0;i<m;i++){
