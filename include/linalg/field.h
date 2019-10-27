@@ -129,11 +129,11 @@ public:
   }
 
   inline bool operator==( const int b) const {
-    return val == b;
+    return ((b - val) % P) == 0;
   }
 
   inline bool operator!=( const int b) const {
-    return val != b;
+    return ((val - b + P) % P) != 0;
   }
 
   inline bool operator<( const ModP &b) const {
