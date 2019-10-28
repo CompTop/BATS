@@ -175,6 +175,14 @@ struct A<Dense<F>>{
     void swap_cols(size_t i, size_t j);
 
 	void swap_rows(size_t i, size_t j);
+
+	static A<DI> identity(size_t n) {
+		A<DI> mat = A<DI>(n,n);
+		for (size_t j = 0; j < n; j++) {
+			mat(j,j) = 1;
+		}
+		return mat;
+	}
 };
 
 

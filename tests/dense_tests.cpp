@@ -117,8 +117,9 @@ TEST_CASE("LEUP Factorization -self consistency") {
 }
 
 TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Rational<int>) {
-	A<Dense<F>> I(4,4);
-	make_diag_ones(I);
+	// A<Dense<F>> I(4,4);
+	// make_diag_ones(I);
+	auto I = A<Dense<F>>::identity(4);
 	F lmat1v[] = {
 	1,1,0,0,
 	0,1,2,2,

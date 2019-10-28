@@ -35,6 +35,37 @@ p2c_type reduce_matrix(ColumnMatrix<TVec> &M) {
 	return pivot_to_col;
 }
 
+// perform reduction algorithm on a column matrix in-place
+// apply change of basis to U
+// invariant M * U = R
+template <class TVec>
+p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
+
+	p2c_type pivot_to_col;
+
+	// loop over columns
+	for (size_t j = 0; j < M.ncol(); j++) {
+		while(M[j].nnz() > 0) {
+			// std::cout << j << " : ";
+			// M[j].print_row();
+			// piv is index-value nzpair
+			auto piv = M[j].lastnz();
+			if (pivot_to_col.count(piv.ind) > 0) {
+				// eliminate pivot
+				size_t k = pivot_to_col[piv.ind];
+				auto a = piv.val / M[k].lastnz().val;
+				M[j].axpy(-a, M[k]);
+				U[j].axpy(-a, U[k]); // update change of basis
+			} else {
+				// new pivot
+				pivot_to_col[piv.ind] = j;
+				break;
+			}
+		}
+	}
+	return pivot_to_col;
+}
+
 // // perform reduction algorithm on a column matrix in-place
 // // Maintains invariant M * U^{-1}
 // // i.e if M <- M * A then U^{-1} <- A^{-1} U^{-1} = (U * A)^{-1}
