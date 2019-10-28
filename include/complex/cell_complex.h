@@ -9,7 +9,7 @@
 #include <linalg/csc_matrix.h>
 
 
-class CellComplex : public AbstractComplex
+class CellComplex
 {
 private:
     std::vector<size_t> _ncells;
