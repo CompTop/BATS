@@ -50,6 +50,7 @@ public:
         }
     }
 
+
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
 
