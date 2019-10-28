@@ -339,6 +339,16 @@ public:
 		}
 	}
 
+	// constructor that loops over index and value iterators
+	// can be iterators over different type
+	template <typename IT1, typename IT2>
+	SparseVector(IT1 indit, IT2 valit, size_t n) {
+		ind.reserve(n);
+		for (size_t i = 0; i < n; i++) {
+			ind.emplace_back(TI(*indit++));
+		}
+	}
+
 	// cosntructor that returns indicator in given index
 	SparseVector(const TI i) {
 		ind.push_back(i);

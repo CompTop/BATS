@@ -7,6 +7,8 @@
 #include <iterator>
 #include "abstract_complex.h"
 #include <linalg/csc_matrix.h>
+#include <linalg/sparse_vector.h>
+#include <linalg/col_matrix.h>
 
 
 class CellComplex
@@ -133,10 +135,15 @@ public:
         );
     }
 
+    // get column matrix with sparse integer columns
+    inline ColumnMatrix<SparseVector<int, size_t>> boundary(size_t dim) {
+        return ColumnMatrix<SparseVector<int, size_t>>(boundary_csc(dim));
+    }
+
     // create boundary for dimension k
     // template over matrix type
     // can specialize for F2
-    void boundary(size_t k);
+    //void boundary(size_t k);
 
     // create boundary for dimension k restricted to indices
     // template over matrix type
