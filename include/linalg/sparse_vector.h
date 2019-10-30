@@ -43,6 +43,16 @@ public:
 		}
 	}
 
+	// constructor from other sparse vector
+	template<typename TI2>
+	SparseVector(const SparseVector<int, TI2> &other) {
+		size_t n = other.nnz();
+		indval.reserve(other.nnz());
+		for (auto it = other.nzbegin(); it < other.nzend(); ++it) {
+			indval.emplace_back(key_type((*it).ind, (*it).val));
+		}
+	}
+
 	// constructor that loops over index and value iterators
 	// can be iterators over different type
 	template <typename IT1, typename IT2>

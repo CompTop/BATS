@@ -26,11 +26,20 @@ public:
         col.resize(n, TC());
     }
 
-    ColumnMatrix(std::vector<TC> col) : col(col) {
+    ColumnMatrix(std::vector<TC> &col) : col(col) {
         n = col.size();
     }
 
-    ColumnMatrix(size_t m, size_t n, std::vector<TC> col) : m(m), n(n), col(col) {}
+    ColumnMatrix(size_t m, size_t n, std::vector<TC> &col) : m(m), n(n), col(col) {}
+
+    // constructor from ColumnMatrix with integer type
+    template <typename TC2>
+    ColumnMatrix(const ColumnMatrix<TC2> &other) : m(other.nrow()), n(other.ncol()) {
+        col.resize(n);
+        for (size_t j = 0; j < n; j++) {
+            col[j] = TC(other[j]);
+        }
+    }
 
     // constructor from CSCMatrix over the integers
     ColumnMatrix(const CSCMatrix<int, size_t> &A) : m(A.nrow()), n(A.ncol()) {
@@ -53,6 +62,8 @@ public:
 
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
+    inline std::vector<TC>& cols() { return col; }
+    inline const std::vector<TC>& cols() const { return col; }
 
     auto getval(const size_t i, const size_t j) const {
         return col[j].getval(i);
@@ -223,7 +234,7 @@ TC gemv(ColumnMatrix<TC> &A, const TC &x) {
 //     return y;
 // }
 template <class TC>
-TC solve_U(const ColumnMatrix<TC> &U, const TC &y) {
+TC u_solve(const ColumnMatrix<TC> &U, const TC &y) {
     TC x(y);
     if (x.nnz() == 0) { return x; }
     size_t n = U.ncol();
@@ -249,7 +260,7 @@ TC solve_U(const ColumnMatrix<TC> &U, const TC &y) {
 }
 
 template <class TC>
-TC solve_L(const ColumnMatrix<TC> &L, const TC &y) {
+TC l_solve(const ColumnMatrix<TC> &L, const TC &y) {
     TC x = y;
     if (x.nnz() == 0) { return x; }
     //size_t n = L.ncol();
@@ -273,7 +284,7 @@ TC solve_L(const ColumnMatrix<TC> &L, const TC &y) {
 
 // solve U \ A
 template <class TC>
-ColumnMatrix<TC> solve_U(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
+ColumnMatrix<TC> u_solve(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
     //std::cout << "entering solve" << std::endl;
     size_t m = A.nrow();
     size_t n = A.ncol();
@@ -282,7 +293,7 @@ ColumnMatrix<TC> solve_U(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
     for (size_t j = 0; j < n; j++) {
 
         col.emplace_back(
-            solve_U(U, A[j])
+            u_solve(U, A[j])
         );
     }
     return ColumnMatrix<TC>(m, n, col);
