@@ -241,6 +241,7 @@ TC u_solve(const ColumnMatrix<TC> &U, const TC &y) {
     //size_t m = U.nrow();
     size_t j = n;
     auto xit = x.upper_bound(j);
+
     while (xit != x.nzbegin()) {
         // exract j
         --xit;
@@ -248,11 +249,11 @@ TC u_solve(const ColumnMatrix<TC> &U, const TC &y) {
         // x[j] = x[j] / U[j,j]
         auto Uj_it = U[j].lower_bound(j); // assume entry j exists and is invertible
         if (Uj_it == U[j].nzend()) {throw std::logic_error("diagonal doesn't exist");}
-        auto a = (*xit).val / (*Uj_it).val;
+        auto a = (xit->val) / (Uj_it->val);
         x.replace(xit, a);
         if (j == 0) { break; } // we're done
         // x[0:j-1] -= x[j] * U[0:j-1, j]
-        x.axpy(-a, U[j], 0, j-1);
+        x.axpy(-a, U[j], 0, j);
         // get next nonzero
         xit = x.upper_bound(j-1);
     }
