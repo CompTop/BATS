@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "matrix_interface.h"
 
+// storage type
 template<typename F,typename Acc>
 struct Dense{};
 
@@ -113,9 +114,103 @@ struct MemAcc{
 };
 
 
+
+// define the type changes for trp, Jconj versions
+template<typename T>
+struct Trp_T{};
+
+template<typename T>
+struct JConj_T{};
+
+template<typename T>
+struct TJConj_T{};
+
+#define RULE(K,A,B) \
+template<> \
+struct K<A>{ \
+    using type = B; \
+};
+
+//memory accessor rules
+
+RULE( Trp_T, RowMaj, ColMaj )
+RULE( Trp_T, ColMaj, RowMaj )
+RULE( Trp_T, RevRowMaj, RevColMaj )
+RULE( Trp_T, RevColMaj, RevRowMaj )
+
+RULE( JConj_T, RowMaj, RevRowMaj )
+RULE( JConj_T, ColMaj, RevColMaj )
+RULE( JConj_T, RevRowMaj, RowMaj )
+RULE( JConj_T, RevColMaj, ColMaj )
+
+RULE( TJConj_T, RowMaj, RevColMaj )
+RULE( TJConj_T, ColMaj, RevRowMaj )
+RULE( TJConj_T, RevRowMaj, ColMaj )
+RULE( TJConj_T, RevColMaj, RowMaj )
+
+//matrix shape rules
+
+#define SRULE(K,A,B) \
+template<typename F, typename Acc> \
+struct K<A<Dense<F,Acc>>>{ \
+    using type = B<Dense<F,typename K<Acc>::type>>; \
+};
+
+SRULE( Trp_T, A, A )
+SRULE( Trp_T, P, P )
+SRULE( Trp_T, L, U )
+SRULE( Trp_T, U, L )
+SRULE( Trp_T, EL, EU )
+SRULE( Trp_T, EU, EL )
+SRULE( Trp_T, ELH, EUH )
+SRULE( Trp_T, EUH, ELH )
+
+SRULE( JConj_T, A, A )
+SRULE( JConj_T, P, P )
+SRULE( JConj_T, L, U )
+SRULE( JConj_T, U, L )
+SRULE( JConj_T, EL, EUH )
+SRULE( JConj_T, EU, ELH )
+SRULE( JConj_T, ELH, EU )
+SRULE( JConj_T, EUH, EL )
+
+SRULE( TJConj_T, A, A )
+SRULE( TJConj_T, P, P )
+SRULE( TJConj_T, L, L )
+SRULE( TJConj_T, U, U )
+SRULE( TJConj_T, EL, ELH )
+SRULE( TJConj_T, EU, EUH )
+SRULE( TJConj_T, ELH, EL )
+SRULE( TJConj_T, EUH, EU )
+
+SRULE( Trp_T, T, T )
+SRULE( JConj_T, T, T )
+SRULE( TJConj_T, T, T )
+
+#define IMPLEMENT_TRP(M) \
+auto Trp(){ \
+		typename Trp_T<M>::type rmat(Base::n,Base::m,Base::mat); \
+		return rmat; \
+} \
+
+#define IMPLEMENT_JCONJ(M) \
+auto JConj(){ \
+		typename JConj_T<M>::type rmat(Base::m,Base::n,Base::mat); \
+		return rmat; \
+} \
+
+#define IMPLEMENT_TJCONJ(M) \
+auto TJConj(){ \
+		typename TJConj_T<M>::type rmat(Base::n,Base::m,Base::mat); \
+		return rmat; \
+} \
+
+
 template<typename F,typename Acc>
 struct A<Dense<F,Acc>>{
     using DI = Dense<F,Acc>;
+	// to make things consistent with all the derived classes, Makes the macro work
+	using Base = A<DI>;  
 
     size_t m,n;
     F* mat;
@@ -217,19 +312,25 @@ struct A<Dense<F,Acc>>{
 		return mat;
 	}
 
-	auto T();
-	auto JConj();
-	auto TJconj();
+	
+	IMPLEMENT_TRP(A<DI>)
+	IMPLEMENT_JCONJ(A<DI>)
+	IMPLEMENT_TJCONJ(A<DI>)
 
 };
 
 
-// Inherit all the constructors
+
+// Inherit all the constructors and implement mem acc transforms
 #define INHERIT(T1,T2) \
 template<typename F,typename Acc> \
 struct T1<Dense<F,Acc>>:T2<Dense<F,Acc>>{ \
 	using Base = T2<Dense<F,Acc>>; \
+	using Self = T1<Dense<F,Acc>>; \
 	using Base::Base ; \
+	IMPLEMENT_TRP(Self)\
+	IMPLEMENT_JCONJ(Self)\
+	IMPLEMENT_TJCONJ(Self)\
 }; \
 
 INHERIT(T,A)
@@ -238,6 +339,8 @@ INHERIT(U,T)
 INHERIT(E,A)
 INHERIT(EL,E)
 INHERIT(EU,E)
+INHERIT(ELH,E)
+INHERIT(EUH,E)
 INHERIT(P,E)
 
 
