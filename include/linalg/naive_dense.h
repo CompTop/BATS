@@ -88,7 +88,7 @@ struct MemAcc{
         else if constexpr(std::is_same<Acc,RevColMaj>::value)
             return VectorView<F>( mat + m*(n-j)-1,mat + m*(n-1-j)-1,-1);
         else if constexpr(std::is_same<Acc,RevRowMaj>::value)
-            return VectorView<F>(mat + m*n -j-1, mat -2-j, -n );
+            return VectorView<F>(mat + m*n -j-1, mat -1-j, -n );
     }
     
 	// return a view of row i
@@ -98,7 +98,7 @@ struct MemAcc{
         else if constexpr(std::is_same<Acc,RowMaj>::value)
             return VectorView<F>(mat + n*i, mat + n*(i+1),1);
         else if constexpr(std::is_same<Acc,RevColMaj>::value)
-            return VectorView<F>(mat + m*n -i-1, mat -2-i, -m );
+            return VectorView<F>(mat + m*n -i-1, mat -1-i, -m );
         else if constexpr(std::is_same<Acc,RevRowMaj>::value)
             return VectorView<F>( mat + n*(m-i)-1,mat + n*(m-1-i)-1,-1);
     }
@@ -211,6 +211,7 @@ struct A<Dense<F,Acc>>{
     using DI = Dense<F,Acc>;
 	// to make things consistent with all the derived classes, Makes the macro work
 	using Base = A<DI>;  
+	using FieldType = F;
 
     size_t m,n;
     F* mat;
@@ -254,8 +255,8 @@ struct A<Dense<F,Acc>>{
 
 	void print_arr(){
 		std::cout<<"{\n";
-        for( size_t i=0; i<m; i++){
-            for( size_t j=0; j<n; j++){
+        for( size_t i=0; i<n; i++){
+            for( size_t j=0; j<m; j++){
                 std::cout<<((*this)(j,i))<<",";
             }
             std::cout<<"\n";
@@ -496,13 +497,14 @@ template<typename M>
 auto find_pivot(M mat,size_t pr, size_t pc){
     size_t prow = pr-1; // start 1 less as its immediately incremented
     size_t pcol = pc;
+	using F = typename M::FieldType;
 
     // outer loop searches rows
     do{
         prow ++; // try new row
         pcol = pc;
         //search col, give up if u reach last col
-        while( (mat(prow,pcol)==0) & (pcol < mat.n)){
+        while( (mat(prow,pcol)==F(0)) & (pcol < mat.n)){
             pcol++;
         }
     }while((pcol == mat.n) && !(prow == mat.m-1));

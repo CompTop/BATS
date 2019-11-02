@@ -10,92 +10,221 @@
 
 TEST_CASE_TEMPLATE("Matrix Multiplication", T, int, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Rational<int>) {
 
+	using AD = A<Dense<T,ColMaj>>;
+
 	T a1v[] = {
 	2,3,4,
 	1,2,3,
 	8,5,2,
 	};
-	A<Dense<T>> a1(3,3,a1v);
+	AD a1(3,3,a1v);
 
 	T a2v[] = {
 	39,32,25,
 	28,22,16,
 	37,44,51,
 	};
-	A<Dense<T>> a2(3,3,a2v);
+	AD a2(3,3,a2v);
 
 	CHECK( (matmul(a1,a1) == a2) );
 }
 
 
-TEST_CASE("ColView") {
-	using AD = A<Dense<F3>>;
-	srand(0);
+TEST_CASE_TEMPLATE("VectorView, Transpose and JConjugate" ,
+	Acc, ColMaj, RowMaj, RevColMaj, RevRowMaj 
+) {
+	using F = F3;
+	using ADAcc = A<Dense<F,Acc>>;
+	using AD = A<Dense<F,ColMaj>>;
 
-	AD a1(4,4);
-	AD a2(4,4);
-	fill_rand(a2);
-	a1[2]=a2[3];
+	srand(1);
 
-	F3 resv[] = {
-	0,0,0,0,
-	0,0,0,0,
-	1,0,1,1,
-	0,0,0,0,
+	ADAcc a1(5,3);
+	fill_rand(a1);
+	AD a2(5,5);
+	fill_zeros(a2);
+	AD a3(3,3);
+	fill_zeros(a3);
+
+
+	a2[2] = a1[1];
+	a3[1] = a1.r(4);
+
+
+	//------Compare----------
+	F v1[] = {
+	0,0,0,0,0,
+	0,0,0,0,0,
+	1,2,0,2,1,
+	0,0,0,0,0,
+	0,0,0,0,0,
 	};
-	AD res(4,4,resv);
+	AD cmat1(5,5,v1);
+	CHECK( (a2==cmat1) );
+	//-----------------------
+	//------Compare----------
+	F v2[] = {
+	0,0,0,
+	2,1,2,
+	0,0,0,
+	};
+	AD cmat2(3,3,v2);
+	CHECK( (a3==cmat2) );
+	//-----------------------
 
-	CHECK( (a1==res) );
+
+	auto a1t = a1.Trp();
+	a3[1] = a1t[2];
+	a2[2] = a1t.r(1);
+
+	//------Compare----------
+	F v3[] = {
+	1,1,0,
+	1,2,1,
+	1,0,0,
+	1,2,1,
+	2,1,2,
+	};
+	AD cmat3(3,5,v3);
+	CHECK( (a1t==cmat3) );
+	//-----------------------
+	//------Compare----------
+	F v4[] = {
+	0,0,0,0,0,
+	0,0,0,0,0,
+	1,2,0,2,1,
+	0,0,0,0,0,
+	0,0,0,0,0,
+	};
+	AD cmat4(5,5,v4);
+	CHECK( (a2==cmat4) );
+	//-----------------------
+	//------Compare----------
+	F v5[] = {
+	0,0,0,
+	1,0,0,
+	0,0,0,
+	};
+	AD cmat5(3,3,v5);
+	CHECK( (a3==cmat5) );
+	//-----------------------
+
+	auto a1j = a1.JConj();
+	a2[2] = a1j[2];
+	a3[1] = a1j.r(2);
+
+	//------Compare----------
+	F v6[] = {
+	2,1,0,1,0,
+	1,2,0,2,1,
+	2,1,1,1,1,
+	};
+	AD cmat6(5,3,v6);
+	CHECK( (a1j==cmat6) );
+	//-----------------------
+	//------Compare----------
+	F v7[] = {
+	0,0,0,0,0,
+	0,0,0,0,0,
+	2,1,1,1,1,
+	0,0,0,0,0,
+	0,0,0,0,0,
+	};
+	AD cmat7(5,5,v7);
+	CHECK( (a2==cmat7) );
+	//-----------------------
+	//------Compare----------
+	F v8[] = {
+	0,0,0,
+	0,0,1,
+	0,0,0,
+	};
+	AD cmat8(3,3,v8);
+	CHECK( (a3==cmat8) );
+	//-----------------------
+
+	auto a1tj = a1.TJConj();
+	a3[1] = a1tj[3];
+	a2[2] = a1tj.r(1);
+
+
+	//------Compare----------
+	F v9[] = {
+	2,1,2,
+	1,2,1,
+	0,0,1,
+	1,2,1,
+	0,1,1,
+	};
+	AD cmat9(3,5,v9);
+	CHECK( (a1tj==cmat9) );
+	//-----------------------
+	//------Compare----------
+	F v10[] = {
+	0,0,0,0,0,
+	0,0,0,0,0,
+	1,2,0,2,1,
+	0,0,0,0,0,
+	0,0,0,0,0,
+	};
+	AD cmat10(5,5,v10);
+	CHECK( (a2==cmat10) );
+	//-----------------------
+	//------Compare----------
+	F v11[] = {
+	0,0,0,
+	1,2,1,
+	0,0,0,
+	};
+	AD cmat11(3,3,v11);
+	CHECK( (a3==cmat11) );
+	//-----------------------
+
 }
 
 
-TEST_CASE("RowView") {
-	using AD = A<Dense<F3>>;
-	srand(0);
 
-	AD a1(4,4);
-	AD a2(4,4);
-	fill_rand(a2);
-	a1.r(2)=a2.r(3);
-
-	F3 resv[] = {
-	0,0,2,0,
-	0,0,1,0,
-	0,0,2,0,
-	0,0,1,0,
-	};
-	AD res(4,4,resv);
-
-	CHECK( (a1==res) );
-}
 
 TEST_CASE("el_commute") {
+
+	using DI = Dense<int,ColMaj>;
 	int elmat1v[] = {1,0,0,0,
 		          0,1,0,0,
 		          0,0,0,1,
 		          0,0,0,0};
-	EL<Dense<int>> elmat1(4,4,elmat1v);
+	EL<DI> elmat1(4,4,elmat1v);
 
 	int lmat1v[] = {2,2,3,4,
 		          0,3,2,4,
 		          0,0,4,4,
 		          0,0,0,5};
-	L<Dense<int>> lmat1(4,4,lmat1v);
+	L<DI> lmat1(4,4,lmat1v);
 
 	auto res = el_commute(elmat1,lmat1);
 
 	CHECK( (matmul(res,elmat1)== matmul(elmat1,lmat1)) );
 }
 
-TEST_CASE("LEUP Factorization -self consistency") {
+TEST_CASE_TEMPLATE("LEUP Factorization -self consistency",
+	Acc, ColMaj, RowMaj, RevColMaj, RevRowMaj 
+) {
 
-	A<Dense<F3>> mat3(4,5);
-	A<Dense<F3>> mat3copy;
-	L<Dense<F3>> Lmat;
-	EL<Dense<F3>> ELmat;
-	P<Dense<F3>> Pmat;
-	U<Dense<F3>> Umat;
-	A<Dense<F3>> leup;
+	SUBCASE(""){ srand(0); }
+	SUBCASE(""){ srand(1); }
+	SUBCASE(""){ srand(2); }
+	SUBCASE(""){ srand(3); }
+	SUBCASE(""){ srand(4); }
+	SUBCASE(""){ srand(5); }
+
+	using DI = Dense<F3,Acc>;
+
+	A<DI> mat3(4,5);
+	A<DI> mat3copy;
+	L<DI> Lmat;
+	EL<DI> ELmat;
+	P<DI> Pmat;
+	U<DI> Umat;
+	A<DI> leup;
 
 	fill_rand(mat3);
 
@@ -117,16 +246,17 @@ TEST_CASE("LEUP Factorization -self consistency") {
 }
 
 TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Rational<int>) {
-	// A<Dense<F>> I(4,4);
-	// make_diag_ones(I);
-	auto I = A<Dense<F>>::identity(4);
+
+	using DI = Dense<F,ColMaj>;
+	
+	auto I = A<DI>::identity(4);
 	F lmat1v[] = {
 	1,1,0,0,
 	0,1,2,2,
 	0,0,1,1,
 	0,0,0,1,
 	};
-	L<Dense<F>> Lmat(4,4,lmat1v);
+	L<DI> Lmat(4,4,lmat1v);
 
 	auto Linv = l_solve(Lmat,I);
 
