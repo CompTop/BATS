@@ -375,7 +375,7 @@ L<Dense<F,Acc>> el_commute(EL<Dense<F,Acc>> ELmat, L<Dense<F,Acc>> Lmat) {
     // loop over columns of ELmat
     for (j = 0; j < n && i < m; j++) {
         // increment i until we find a non-zero, or run out of column
-        while (ELmat(i,j) == 0 && i < m) {
+        while (ELmat(i,j) == F(0) && i < m) {
             i++;
         }
         // column is all zero
@@ -553,7 +553,7 @@ auto LEUP_fact(A<Dense<F,Acc>>& mat_arg){
 
         //zero out column pc below pr - apply schur complement
         for(size_t i=pr+1;i<m;i++){
-            if( !(mat(i,pc)==0) ){
+            if( !(mat(i,pc)==F(0)) ){
                 auto coef = mat(i,pc)/mat(pr,pc);
                 mat.add_row_to(i,pr, -coef);
                 //Lmat.add_col_to(pr,i, coef); //inefficient
