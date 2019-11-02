@@ -111,6 +111,7 @@ TEST_CASE("F3 Operations") {
 		REQUIRE(a1.inv() == a1);
 		REQUIRE(a2.inv() == a2);
 		REQUIRE(-a1 == a2);
+		REQUIRE(!(a1 == 0));
 	}
 
 	SUBCASE("Update Operations") {

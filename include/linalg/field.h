@@ -129,7 +129,7 @@ public:
   }
 
   inline bool operator==( const int b) const {
-    return ((b - val) % P) == 0;
+    return ((b - val + P) % P) == 0;
   }
 
   inline bool operator!=( const int b) const {
