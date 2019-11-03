@@ -145,6 +145,10 @@ public:
 		return (*it).val;
 	}
 
+	TV operator[](size_t i) {
+		return getval(i);
+	}
+
 	// find nonzero index of last element with index < i
 	auto find_last_nz(TI i) {
 		auto it = std::lower_bound(

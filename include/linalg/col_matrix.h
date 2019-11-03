@@ -75,6 +75,11 @@ public:
 
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}
+
+    inline auto operator()(size_t i, size_t j) {
+        return col[j][i];
+    }
+
     //
     // TC& constcol const (size_t index) {
     //   return col[index];
