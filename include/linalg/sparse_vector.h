@@ -34,7 +34,7 @@ public:
 
 	SparseVector() {}
 
-	SparseVector(const std::vector<key_type> indval) : indval(indval) {}
+	SparseVector(const std::vector<key_type> &indval) : indval(indval) {}
 
 	SparseVector(const std::vector<TI> &ind, const std::vector<TV> &val) {
 		size_t nz = ind.size();
@@ -67,6 +67,38 @@ public:
 	// cosntructor that returns indicator in given index
 	SparseVector(const TI i) {
 		indval.push_back(key_type(i, TV(1)));
+	}
+
+	// extract indices by iterator
+	template<typename T>
+	SparseVector operator[](const T &indset) const {
+		auto it = indset.cbegin();
+		auto end = indset.cend();
+		std::vector<key_type> indval2;
+		indval2.reserve(indval.size());
+		auto selfit = indval.cbegin();
+		auto selfend = indval.cend();
+		size_t ct = 0;
+		while (it != end && selfit != selfend) {
+			if (*it < selfit->ind) {
+				indval2.emplace_back(key_type(ct, TV(0)));
+				++it;
+			} else if (*it == selfit->ind) {
+				indval2.emplace_back(key_type(ct, selfit->val));
+				++selfit;
+				++it;
+			} else {
+				++selfit;
+			}
+			++ct;
+		}
+		// only enter this loop if index set is longer than nonzeros
+		while (it != end) {
+			indval2.emplace_back(key_type(ct, TV(0)));
+			++it;
+			++ct;
+		}
+		return SparseVector(indval2);
 	}
 
 	// get const iterator through nzs

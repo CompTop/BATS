@@ -1,30 +1,24 @@
+#pragma once
 // Chain map class
 #include <vector>
 #include <cstddef>
+#include <complex/cell_map.h>
 
 
-template <typename R, class TM>
-class ChainMap<R> {
-/**
-Chain map over a ring R
+template <typename TM>
+struct ChainMap {
+    std::vector<TM> map;
 
-stores matrices to encode maps
-**/
-private:
-  size_t maxdim;
-  std::vector<TM> map;
-public:
-
-  ChainMap(size_t maxdim) : maxdim(maxdim) {
-    map.reserve(maxdim + 1);
-  }
-
-  // set map in dimension k
-  void set_map(size_t k, TM &F) {
-    while (map.size() < k+1) {
-      map.push_back(TM());
+    ChainMap(CellularMap &f) {
+        size_t maxd = f.maxdim() + 1;
+        map.resize(maxd);
+        for (size_t k = 0; k < maxd; k++) {
+            map[k] = TM(f[k]);
+        }
     }
-    map[k] = F;
-  }
+
+    inline TM& operator[](size_t k) { return map[k]; }
+    inline const TM& operator[](size_t k) const { return map[k]; }
+
 
 };
