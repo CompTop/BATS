@@ -75,6 +75,11 @@ public:
 
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}
+
+    inline auto operator()(size_t i, size_t j) {
+        return col[j][i];
+    }
+
     //
     // TC& constcol const (size_t index) {
     //   return col[index];
@@ -118,7 +123,7 @@ public:
     // addition, substraction, scalar multiplication
 
     // gemv
-    TC gemv(const TC &x) {
+    TC gemv(const TC &x) const {
         TC y;  // zero initializer
         // loop over nonzero indices of x
         for (auto xit = x.nzbegin(); xit != x.nzend(); ++xit) {
@@ -127,8 +132,10 @@ public:
         return y;
     }
 
+    inline TC operator*(const TC &x) const { return gemv(x); }
+
     // gemm C = self * B
-    ColumnMatrix operator*(const ColumnMatrix &B) {
+    ColumnMatrix operator*(const ColumnMatrix &B) const {
         std::vector<TC> colC;
         colC.reserve(n);
         //ColumnMatrix C(m, B.n);
@@ -173,7 +180,7 @@ public:
         " ColumnMatrix" << std::endl;
     }
 
-    void print() {
+    void print() const {
         print_size();
         // loop over rows
         for (size_t i = 0; i < m; i++) {
@@ -245,7 +252,7 @@ TC u_solve(const ColumnMatrix<TC> &U, const TC &y) {
     while (xit != x.nzbegin()) {
         // exract j
         --xit;
-        j = (*xit).ind;
+        j = xit->ind;
         // x[j] = x[j] / U[j,j]
         auto Uj_it = U[j].lower_bound(j); // assume entry j exists and is invertible
         if (Uj_it == U[j].nzend()) {throw std::logic_error("diagonal doesn't exist");}

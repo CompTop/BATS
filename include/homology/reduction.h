@@ -2,6 +2,7 @@
 
 #include <map>
 #include <unordered_map>
+#include <set>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 
@@ -66,65 +67,46 @@ p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 	return pivot_to_col;
 }
 
-// // perform reduction algorithm on a column matrix in-place
-// // Maintains invariant M * U^{-1}
-// // i.e if M <- M * A then U^{-1} <- A^{-1} U^{-1} = (U * A)^{-1}
-// // thus Updates are M <- M * A, U <- U * A
-// template <class TVec>
-// std::map<size_t, size_t> reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
-//
-// 	p2c_type pivot_to_col;
-//
-//   // loop over columns
-// 	for (size_t j = 0; j < M.width(); j++) {
-// 		while(M[j].nnz() > 0) {
-// 			// std::cout << j << " : ";
-// 			// M[j].print_row();
-// 			// piv is index-value pair
-// 			auto piv = M[j].last();
-// 			if (pivot_to_col.count(piv.first) > 0) {
-// 				size_t k = pivot_to_col[piv.first];
-// 				// get coefficient
-// 				auto pivk = M[k].last();
-// 				auto alpha = - piv.second / pivk.second;
-// 				// std::cout << "alpha = " << alpha << std::endl;
-// 				M[j].axpy(alpha, M[k]);
-// 				U[j].axpy(alpha, U[k]);
-// 			} else {
-// 				pivot_to_col[piv.first] = j;
-// 				break;
-// 			}
-// 		}
-// 	}
-// 	return pivot_to_col;
-// }
+// extract indices for homology-revealing basis
+// Rk - reduced boundary matrix
+// p2ck1 - p2c returned by reduction of B{k+1}
+// dimk - number of cells in dimension k
+template <typename MT>
+std::set<size_t> extract_basis_indices(MT &Rk, p2c_type &p2ck1) {
 
+	std::set<size_t> I;
+	size_t dimk = Rk.ncol();
 
+	for (size_t j = 0; j < dimk; j++) {
+		if (Rk[j].nnz() == 0) {
+			// column is zero
+			if (p2ck1.count(j) == 0) {
+				// column is not a pivot, so add
+				I.emplace(j); // TODO: can use emplace_hint with pointer to back
+			}
+		}
+	}
 
-  /*
-Function to reduce boundary matrix.
-INPUT:
-	B - boundary matrix
-	pivot_to_col - map from pivot to column
-OUTPUT:
-	none - inputs are modified in-place.
-*/
-// void homology_reduction_alg(std::vector<SparseF2Vec<int>> &B, std::map<int, int> &pivot_to_col) {
-// 	// loop over columns of boundary matrix
-// 	for (size_t j = 0; j < B.size(); j++) {
-// 		// if nnz = 0, the reduction is complete
-// 		while (B[j].nnz() > 0) {
-// 			int piv = B[j].last();
-// 			if (pivot_to_col.count(piv) > 0) {
-// 				int k = pivot_to_col[piv];
-// 				// there is a column with that pivot
-// 				B[j].add(B[k]);
-// 			} else {
-// 				// there is no column with that pivot
-// 				pivot_to_col[piv] = j;
-// 				break;
-// 			}
-// 		} // end column reduction
-// 	} // end for loop
-// 	return;
-// }
+	return I;
+}
+
+// extract indices for homology-revealing basis
+// Rk - reduced boundary matrix
+// no p2c for dimension above
+// dimk - number of cells in dimension k
+template <typename MT>
+std::set<size_t> extract_basis_indices(MT &Rk) {
+
+	std::set<size_t> I;
+	size_t dimk = Rk.ncol();
+
+	for (size_t j = 0; j < dimk; j++) {
+		if (Rk[j].nnz() == 0) {
+			// column is zero
+			// column is not a pivot, so add
+			I.emplace(j); // TODO: can use emplace_hint with pointer to back
+		}
+	}
+
+	return I;
+}
