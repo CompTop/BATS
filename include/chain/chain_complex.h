@@ -3,6 +3,7 @@
 class to store a chain complex
 */
 #include <vector>
+#include <util/permutation.h>
 
 // template over matrix type
 template <typename MT>
@@ -12,6 +13,8 @@ struct ChainComplex {
 
 
 	ChainComplex(std::vector<size_t> &dim, std::vector<MT> &boundary) : dim(dim), boundary(boundary) {}
+
+	ChainComplex(ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
 
 	// produce a chain complex from a simplicial or cell complex
 	template <typename CpxT>
@@ -37,6 +40,21 @@ struct ChainComplex {
 			// throw error
 		}
 		return boundary[k];
+	}
+
+	// permute basis in dimension k
+	void permute_basis(size_t k, const std::vector<size_t> &perm) {
+		if (k == 0) {
+			// only worry about boundary[1]
+			boundary[1].permute_rows(perm);
+		} else if (k == maxdim()) {
+			boundary[maxdim()].permute_cols(perm);
+			// only worry about boundary[maxdim()]
+		} else {
+			// need to handle boundary[k] and boundary[k+1]
+			boundary[k].permute_cols(perm);
+			boundary[k+1].permute_rows(inv_perm(perm));
+		}
 	}
 
 };

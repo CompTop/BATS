@@ -89,18 +89,7 @@ public:
 
     // permute columns in-place
     // TODO: evaluate if this is best method.
-    void permute_cols(const std::vector<size_t> &colperm) {
-        // size_t ncols = col.size();
-        // // record swapped columns
-        // std::vector<bool> visited(ncols, false);
-        // for (size_t j = 0; j < ncols; j++)   {
-        //     size_t next_j = j;
-        //     while(!visited[next_j] && !visited[colperm[next_j]]) {
-        //         std::swap(col[next_j], col[colperm[next_j]]);
-        //         visited[next_j] = true;
-        //         next_j = colperm[next_j];
-        //     }
-        // }
+    inline void permute_cols(const std::vector<size_t> &colperm) {
         apply_perm(col, colperm);
     }
 

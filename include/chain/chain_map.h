@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstddef>
 #include <complex/cell_map.h>
+#include <util/permutation.h>
 
 
 template <typename TM>
@@ -19,6 +20,14 @@ struct ChainMap {
 
     inline TM& operator[](size_t k) { return map[k]; }
     inline const TM& operator[](size_t k) const { return map[k]; }
+
+    inline void permute_row_basis(size_t k, const std::vector<size_t> &p) {
+        map[k].permute_rows(inv_perm(p));
+    }
+
+    inline void permute_column_basis(size_t k, const std::vector<size_t> &p) {
+        map[k].permute_cols(p);
+    }
 
 
 };
