@@ -10,8 +10,10 @@ template<typename Impl> struct L : T<Impl> {}; // lower triangular
 template<typename Impl> struct U : T<Impl> {}; // upper triangular
 template<typename Impl> struct E : A<Impl> {}; // arbitrary echelon matrix
 template<typename Impl> struct D : E<Impl>, L<Impl>, U<Impl> {}; // diagonal
-template<typename Impl> struct EL : E<Impl>, L<Impl> {}; // echelon L matrix
-template<typename Impl> struct EU : E<Impl>, U<Impl> {}; // echelon U matrix
+template<typename Impl> struct EL : E<Impl>, L<Impl> {}; // echelon L pivot matrix
+template<typename Impl> struct EU : E<Impl>, U<Impl> {}; // echelon U pivot matrix
+template<typename Impl> struct ELH : E<Impl>, L<Impl> {}; // echelon L hat pivot matrix
+template<typename Impl> struct EUH : E<Impl>, U<Impl> {}; // echelon U hat pivot matrix
 template<typename Impl> struct P : E<Impl> {}; // permutation matrix
 
 
