@@ -37,4 +37,16 @@ public:
 		return cell_map[k];
 	}
 
+	// identity map
+	// template over complex type
+	template <typename CpxT>
+	static CellularMap identity(const CpxT &X) {
+		size_t maxk = X.maxdim();
+		CellularMap M(maxk);
+		for (size_t k = 0; k < maxk + 1; k++) {
+			M[k] = map_type::identity(X.ncells(k));
+		}
+		return M;
+	}
+
 };
