@@ -37,9 +37,15 @@ private:
     // using spx_map = std::map<std::vector<size_t>, size_t>;
     using spx_map = SparseTrie<size_t, size_t>;
 
+    // container that holds simplices
+    // TODO: can combine this with Trie pointer
+    std::vector<std::vector<size_t>> spx;
+
     // container for simplices of a fixed dimension
     std::vector<std::vector<size_t>> faces;
     std::vector<std::vector<int>> coeff;
+
+
 
     // keeps track of how many cells are in given dimension
     std::vector<size_t> _ncells;
@@ -51,17 +57,11 @@ private:
     // map to find simplices when forming boundary
     spx_map spx_to_idx;
 
-
-    // returns index of simplex
-    // TODO: find a way to do this with a single traversal of spx_to_idx
-    size_t find_idx(std::vector<size_t> &s) {
-        return spx_to_idx.get(s, bats::NO_IND);
-    }
-
     // reserve for maxdim dimensional simplices
     void reserve(size_t maxdim) {
         if ( _ncells.size() < maxdim + 1 ) { _ncells.resize(maxdim+1, 0); }
         if ( _reserved.size() < maxdim + 1 ) { _reserved.resize(maxdim+1, 0); }
+        if ( spx.size() < maxdim ) { spx.resize(maxdim + 1); }
         if ( faces.size() < maxdim ) { faces.resize(maxdim); }
         if ( coeff.size() < maxdim ) { coeff.resize(maxdim); }
         return;
@@ -71,24 +71,16 @@ private:
     void reserve(size_t dim, size_t k) {
         reserve(dim);
         _reserved[dim] = std::max(_reserved[dim], k);
+        if ( spx[dim].capacity() < k * (dim + 1) ) {
+            spx[dim].reserve(k * (dim + 1));
+        }
         if (dim == 0) { return; }
         if ( faces[dim-1].capacity() < k * (dim + 1) ) {
-          faces[dim-1].reserve(k * (dim + 1));
-          coeff[dim-1].reserve(k * (dim + 1));
+            faces[dim-1].reserve(k * (dim + 1));
+            coeff[dim-1].reserve(k * (dim + 1));
         }
         return;
     }
-
-    // // add vertex, return index
-    // inline size_t _add_vertex() {
-    //     return _ncells[0]++;
-    // }
-    //
-    // // add k vertices to complex, return total number at end
-    // inline size_t _add_vertices(size_t k) {
-    //     _ncells[0] += k;
-    //     return _ncells[0];
-    // }
 
     // adds a simplex to the complex without doing any checks
     // assume dim > 0
@@ -99,6 +91,9 @@ private:
         size_t ind = _ncells[dim]++;
         // add to map
         spx_to_idx.emplace(s, ind);
+        for (auto v : s) {
+            spx[dim].emplace_back(v);
+        }
 
         // determine faces
         if (dim > 0){
@@ -106,6 +101,7 @@ private:
             // loop over faces in lexicographical order
             size_t spx_len = dim + 1;
             for (size_t k = 0; k < spx_len; k++) {
+
                 size_t k2 = dim-k; // index to skip
                 __face.clear();
                 for (size_t j = 0; j < k2; j++) {
@@ -119,13 +115,7 @@ private:
                 coeff[dim-1].emplace_back(c);
                 c = -c;
             }
-            // for (size_t k = 0; k < s.size(); k++) {
-            //     faces[dim-1].emplace_back(s[k]);
-            //     coeff[dim-1].emplace_back(c);
-            //     c = -c;
-            // }
         }
-
         return cell_ind(dim, ind);
     }
 
@@ -160,6 +150,12 @@ public:
         for (size_t d = 0; d < dim.size(); d++) {
             reserve(d, dim[d]);
         }
+    }
+
+    // returns index of simplex
+    // TODO: find a way to do this with a single traversal of spx_to_idx
+    size_t find_idx(std::vector<size_t> &s) {
+        return spx_to_idx.get(s, bats::NO_IND);
     }
 
     // maximum dimension of cell
@@ -198,6 +194,15 @@ public:
         return faces[dim-1].cbegin() + ((dim + 1) * (i+1));
     }
     inline auto faces_end(const cell_ind &ci) const { return faces_end(ci.dim, ci.ind); }
+
+    // get simplex from index
+    // get simplex i in dimension dim
+    inline auto simplex_begin(const size_t dim, const size_t i) const {
+        return spx[dim].cbegin() + ((dim + 1) * i);
+    }
+    inline auto simplex_end(const size_t dim, const size_t i) const {
+        return spx[dim].cbegin() + ((dim + 1) * (i+1));
+    }
 
     // get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {

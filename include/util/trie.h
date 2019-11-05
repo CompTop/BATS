@@ -2,6 +2,7 @@
 #include <vector>
 
 // there is a boost::trie implementation, but it is based on std::map, not std::unordered_map
+// template over alphabet type A, storage type T
 template <typename A, typename T>
 class SparseTrie {
 private:
@@ -65,8 +66,8 @@ public:
         return insert(k.data(), k.data() + k.size(), v);
     }
 
-
-    T& get(A* stptr, A* endptr) {
+    template <typename ITT>
+    T& get(ITT stptr, ITT endptr) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             current = current->children->at(*stptr++);
@@ -80,7 +81,8 @@ public:
     }
 
     // get value with default return
-    T get(A* stptr, A* endptr, const T &def_ret) {
+    template <typename ITT>
+    T get(ITT stptr, ITT endptr, const T &def_ret) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             if (current->children == NULL || current->children->count(*stptr) == 0) {
@@ -93,8 +95,8 @@ public:
         return current->val;
     }
 
-    inline T get(std::vector<T> &k, const T &def_ret) {
-        return get(k.data(), k.data() + k.size(), def_ret);
+    inline T get(const std::vector<T> &k, const T &def_ret) {
+        return get(k.cbegin(), k.cend(), def_ret);
     }
 
     size_t count(A* stptr, A* endptr) {
