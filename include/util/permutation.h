@@ -176,3 +176,26 @@ std::vector<size_t> rand_perm(const size_t n) {
 inline std::vector<size_t> inv_perm(const std::vector<size_t> &p) {
     return bats::sortperm(p);
 }
+
+/*
+count number of inversions
+i<j, but p[i] > p[j]
+short brute-force for-loop.  For small permutations this should be ok
+*/
+template <typename T>
+size_t perm_inversions(const std::vector<T> &p) {
+    size_t n = p.size();
+    size_t ct = 0;
+    for (size_t i = 0; i < n; i++) {
+        for (size_t j = i+1; j < n; j++) {
+            ct += (p[i] > p[j]);
+        }
+    }
+    return ct;
+}
+
+// return sign of sort permutation of an array p
+template <typename T>
+inline int perm_sign(const std::vector<T> &p) {
+    return (perm_inversions(p) & 0x1) == 1 ? -1 : 1;
+}
