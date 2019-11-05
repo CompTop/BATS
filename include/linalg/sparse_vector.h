@@ -83,14 +83,15 @@ public:
 			if (*it < selfit->ind) {
 				indval2.emplace_back(key_type(ct, TV(0)));
 				++it;
+				++ct;
 			} else if (*it == selfit->ind) {
 				indval2.emplace_back(key_type(ct, selfit->val));
 				++selfit;
 				++it;
+				++ct;
 			} else {
 				++selfit;
 			}
-			++ct;
 		}
 		// only enter this loop if index set is longer than nonzeros
 		while (it != end) {
@@ -296,7 +297,7 @@ public:
 			tmp.push_back(*i1);
 			++i1;
 		}
-		while (i2 != x.nzend() && !((*i2).ind < lastind)) {
+		while (i2 != x.nzend() && ((*i2).ind < lastind)) {
 			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
 			++i2;
 		}

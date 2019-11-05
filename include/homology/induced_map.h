@@ -48,7 +48,7 @@ ColumnMatrix<TVec> induced_map_maxdim(
 	std::vector<TVec> col;
 	// iterate over homology generators in C
 	for (auto it = C.I[k].cbegin(); it != C.I[k].cend(); it++) {
-		auto y = F[k] * C.U[k][*it];
+		auto y = u_solve(D.U[k], F[k] * C.U[k][*it]);
 		// extract indices
 		// every representative is preferred because no boundary k+1
 		col.emplace_back(y[D.I[k]]);
@@ -73,7 +73,7 @@ ColumnMatrix<TVec> induced_map(
 	ColumnMatrix<TVec> bdry = u_solve(D.U[k], D.R[k+1]); // TODO: if k is max dimension
 	// iterate over homology generators in C
 	for (auto it = C.I[k].cbegin(); it != C.I[k].cend(); it++) {
-		auto y = F[k] * C.U[k][*it];
+		auto y = u_solve(D.U[k], F[k] * C.U[k][*it]);
 		find_preferred_representative(y, bdry, D.p2c[k+1]);
 		// extract indices
 		col.emplace_back(y[D.I[k]]);

@@ -183,6 +183,9 @@ public:
     inline cell_ind add(
         std::vector<size_t> &s
     ) { return add_safe(s); }
+    inline cell_ind add(
+        std::vector<size_t> &&s
+    ) { return add_safe(s); }
 
     // inline size_t add_vertex() { return _add_vertex(); }
     // inline size_t add_vertices(size_t k) { return _add_vertices(k); }
