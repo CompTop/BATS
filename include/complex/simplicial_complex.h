@@ -57,6 +57,7 @@ private:
     // map to find simplices when forming boundary
     spx_map spx_to_idx;
 
+
     // reserve for maxdim dimensional simplices
     void reserve(size_t maxdim) {
         if ( _ncells.size() < maxdim + 1 ) { _ncells.resize(maxdim+1, 0); }
@@ -151,6 +152,8 @@ public:
             reserve(d, dim[d]);
         }
     }
+
+    // inline spx_map& trie() { return spx_to_idx; }
 
     // returns index of simplex
     // TODO: find a way to do this with a single traversal of spx_to_idx

@@ -15,6 +15,8 @@ struct ReducedChainComplex {
 	std::vector<std::set<size_t>> I;
 	std::vector<p2c_type> p2c;
 
+	ReducedChainComplex() {}
+
 	// compute reduced chain complex from chain complex
 	ReducedChainComplex(ChainComplex<MT> &C) {
 		size_t dmax = C.maxdim() + 1;
