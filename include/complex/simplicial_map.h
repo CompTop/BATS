@@ -33,6 +33,10 @@ CellularMap SimplicialMap(
 			for (auto it = X.simplex_begin(k, i); it != X.simplex_end(k, i); ++it) {
 				s.emplace_back(f0[*it]);
 			}
+			// for (auto si : s) {
+			// 	std::cout << si << ',';
+			// }
+			// std::cout << std::endl;
 			int sgn = simplex_sign(s);
 			if (sgn != 0) {
 				size_t j = Y.find_idx(s);
@@ -45,7 +49,7 @@ CellularMap SimplicialMap(
 				col.emplace_back(SparseVector<int, size_t>());
 			}
 		}
-		f[k] = ColumnMatrix<SparseVector<int, size_t>>(X.ncells(k), Y.ncells(k), col);
+		f[k] = ColumnMatrix<SparseVector<int, size_t>>(Y.ncells(k), X.ncells(k), col);
 	}
 
 	return f;

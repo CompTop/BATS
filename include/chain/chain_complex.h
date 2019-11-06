@@ -11,6 +11,7 @@ struct ChainComplex {
 	std::vector<size_t> dim;
 	std::vector<MT> boundary;
 
+	ChainComplex() {}
 
 	ChainComplex(std::vector<size_t> &dim, std::vector<MT> &boundary) : dim(dim), boundary(boundary) {}
 

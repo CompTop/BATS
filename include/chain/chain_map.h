@@ -10,6 +10,8 @@ template <typename TM>
 struct ChainMap {
     std::vector<TM> map;
 
+    ChainMap() {}
+
     ChainMap(CellularMap &f) {
         size_t maxd = f.maxdim() + 1;
         map.resize(maxd);
