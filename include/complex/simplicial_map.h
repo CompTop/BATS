@@ -19,7 +19,7 @@ and extend to a map on all simplices
 // send vertex set of X to vertex set of Y using f0
 CellularMap SimplicialMap(
 	const SimplicialComplex &X,
-	SimplicialComplex &Y,
+	const SimplicialComplex &Y,
 	std::vector<size_t> &f0
 ) {
 	std::vector<size_t> s; // simplex

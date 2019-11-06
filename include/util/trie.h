@@ -45,8 +45,8 @@ public:
         }
     }
 
-
-    void insert(A* stptr, const A* endptr, const T &v) {
+    template <typename ITT>
+    void insert(ITT stptr, const ITT endptr, const T &v) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             if (current->children == NULL) { current->children = new child_container; }
@@ -58,16 +58,16 @@ public:
     }
 
 
-    inline void emplace(std::vector<A> &k, T &&v) {
-        return insert(k.data(), k.data() + k.size(), v);
+    inline void emplace(const std::vector<A> &k, T &&v) {
+        return insert(k.cbegin(), k.cend(), v);
     }
 
-    inline void emplace(std::vector<A> &k, T &v) {
-        return insert(k.data(), k.data() + k.size(), v);
+    inline void emplace(const std::vector<A> &k, const T &v) {
+        return insert(k.cbegin(), k.cend(), v);
     }
 
     template <typename ITT>
-    T& get(ITT stptr, ITT endptr) {
+    T& get(ITT stptr, const ITT endptr) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             current = current->children->at(*stptr++);
@@ -76,13 +76,13 @@ public:
         return current->val;
     }
 
-    inline T& operator[](std::vector<T> &k) {
-        return get(k.data(), k.data() + k.size());
+    inline T& operator[](const std::vector<T> &k) {
+        return get(k.cbegin(), k.cend());
     }
 
     // get value with default return
     template <typename ITT>
-    T get(ITT stptr, ITT endptr, const T &def_ret) {
+    T get(ITT stptr, const ITT endptr, const T &def_ret) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             if (current->children == NULL || current->children->count(*stptr) == 0) {
@@ -99,7 +99,26 @@ public:
         return get(k.cbegin(), k.cend(), def_ret);
     }
 
-    size_t count(A* stptr, A* endptr) {
+    // get value with default return
+    // maintains const correctness
+    template <typename ITT>
+    T get(ITT stptr, const ITT endptr, const T &def_ret) const {
+        if (stptr < endptr) {
+            if (children == NULL || children->count(*stptr) == 0) {
+                return def_ret;
+            }
+            return children->at(*stptr)->get(++stptr, endptr, def_ret);
+        }
+        return val;
+    }
+
+    inline T get(const std::vector<T> &k, const T &def_ret) const {
+        return get(k.cbegin(), k.cend(), def_ret);
+    }
+
+
+    template <typename ITT>
+    size_t count(ITT stptr, const ITT endptr) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             if (current->children == NULL || current->children->count(*stptr) == 0) {
@@ -111,8 +130,8 @@ public:
         return 1;
     }
 
-    inline size_t count(std::vector<T> &k) {
-        return count(k.data(), k.data() + k.size());
+    inline size_t count(const std::vector<T> &k) {
+        return count(k.cbegin(), k.cend());
     }
 
 

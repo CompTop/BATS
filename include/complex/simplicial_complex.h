@@ -154,7 +154,11 @@ public:
 
     // returns index of simplex
     // TODO: find a way to do this with a single traversal of spx_to_idx
-    size_t find_idx(std::vector<size_t> &s) {
+    size_t find_idx(const std::vector<size_t> &s) {
+        return spx_to_idx.get(s, bats::NO_IND);
+    }
+
+    size_t find_idx(const std::vector<size_t> &s) const {
         return spx_to_idx.get(s, bats::NO_IND);
     }
 
