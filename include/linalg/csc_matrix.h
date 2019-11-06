@@ -106,8 +106,8 @@ public:
     const std::vector<TI>& get_colptr() const { return colptr; }
     const std::vector<TI>& get_rowind() const { return rowind; }
     const std::vector<TV>& get_val() const {return val; }
-    const size_t nrow() const { return m; }
-    const size_t ncol() const { return n; }
+    size_t nrow() const { return m; }
+    size_t ncol() const { return n; }
 
     void print_size() const {
         std::cout << "[" << this << "] : " << m << " x " << n <<\
