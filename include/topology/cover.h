@@ -9,6 +9,16 @@ utilities for creating covers
 #include <algorithm>
 #include <cmath>
 
+std::set<size_t> set_union(const std::set<size_t> &s1, const std::set<size_t> &s2) {
+    std::set<size_t> s;
+    for (auto x : s1) {
+        s.insert(x);
+    }
+    for (auto x : s2) {
+        s.insert(x);
+    }
+    return s;
+}
 
 // helper function for assigning lower set
 template <typename T>

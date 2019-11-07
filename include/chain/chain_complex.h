@@ -22,7 +22,7 @@ struct ChainComplex {
 	ChainComplex(CpxT& X) {
 		dim.resize(X.maxdim() + 1);
 		boundary.resize(X.maxdim() + 1);
-		for (int k = 0; k < X.maxdim() + 1; k++) {
+		for (size_t k = 0; k < X.maxdim() + 1; k++) {
 			dim[k] = X.ncells(k);
 			if (k == 0) {
 				boundary[k] = MT(1, dim[k]);
