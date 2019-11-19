@@ -24,7 +24,7 @@ std::set<size_t> set_union(const std::set<size_t> &s1, const std::set<size_t> &s
 template <typename T>
 int assign_set_lower(const T v, const T min_val, const double bin_width, const size_t nsets) {
 	double offset = (v - min_val) / bin_width;
-	int bin = (int) floor(offset) * 2;
+	size_t bin = (size_t) floor(offset) * 2;
 	if (!(bin < nsets)) {
 		return -1;
 	}
@@ -35,7 +35,7 @@ int assign_set_lower(const T v, const T min_val, const double bin_width, const s
 template <typename T>
 int assign_set_upper(const T v, const T min_val, const double bin_width, const size_t nsets) {
 	double offset = (v - min_val) / bin_width - 0.5;
-	int bin = 1 + (int) floor(offset) * 2;
+	size_t bin = 1 + (size_t) floor(offset) * 2;
 	if (!(bin > 0) || !(bin < nsets)) {
 		return -1;
 	}
