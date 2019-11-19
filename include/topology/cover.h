@@ -78,3 +78,32 @@ std::vector<std::set<size_t>> uniform_interval_cover(
 	}
 	return cover;
 }
+
+
+// project data x in d dimensions onto coordinate i
+template <typename T>
+std::vector<T> coordinate_projection(const std::vector<T> &x, const size_t d, const size_t i) {
+    std::vector<T> p;
+    p.reserve(x.size() / d);
+    for (auto it = x.cbegin(); it != x.cend(); it += d) {
+        p.emplace_back(*(it + i));
+    }
+    return p;
+}
+
+// get subset of data
+template <typename T>
+std::vector<T> get_subset(
+    const std::vector<T> &x,
+    const size_t d,
+    const std::set<size_t> &ind
+) {
+    std::vector<T> xs;
+    xs.reserve(ind.size() * d);
+    for (auto it = ind.cbegin(); it != ind.cend(); it++) {
+        for (size_t i = 0; i < d; i++) {
+            xs.emplace_back(x[(*it) * d + i]);
+        }
+    }
+    return xs;
+}
