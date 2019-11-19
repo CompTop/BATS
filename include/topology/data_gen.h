@@ -11,6 +11,20 @@ utilities for generating data
 
 #include "metric.h"
 
+template <typename T>
+void add_normal_noise(std::vector<T> &x,
+    const T mu=T(0),
+    const T sigma=T(1)
+) {
+    std::default_random_engine generator;
+    std::normal_distribution<T> distribution(mu,sigma);
+
+    #pragma omp simd
+    for (size_t i = 0; i < x.size(); i++) {
+        x[i] += distribution(generator);
+    }
+}
+
 // form product space X x Y
 template <typename T>
 std::vector<T> product_space(
