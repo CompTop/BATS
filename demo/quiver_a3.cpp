@@ -22,7 +22,7 @@ int main() {
 	assert(check);
 	cout<<"Correct types = "<<check<<"\n";
 
-	using DI = Dense<F>;
+	using DI = Dense<F,ColMaj>;
 
 	A<DI> b1(5,5),b2(5,5);
 	EL<DI> E1,E2;

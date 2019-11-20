@@ -20,7 +20,10 @@ template<typename Impl> struct P : E<Impl> {}; // permutation matrix
 MAT matmul(MAT,MAT);
 
 std::tuple<MAT,MAT,MAT,MAT> LEUP_Fact(MAT);
+std::tuple<MAT,MAT,MAT,MAT> PLEU_Fact(MAT);
+std::tuple<MAT,MAT,MAT,MAT> UELP_Fact(MAT);
+std::tuple<MAT,MAT,MAT,MAT> PUEL_Fact(MAT);
 
-MAT commute_el(MAT,MAT);
+MAT commute(MAT,MAT);
 
-MAT l_solve(MAT,MAT);
+MAT apply_inverse(MAT,MAT);

@@ -10,7 +10,7 @@ class Quiver_A3{
         auto [l1, el1, u1, p1] = LEUP_fact(A1); //structured unbindings
         auto nA2 = matmul(matmul(u1,p1), A2);
         auto [l2, el2, u2, p2] = LEUP_fact(nA2);
-        auto l3p = el_commute(el1,l2);
+        auto l3p = commute(el1,l2);
 		auto l3 =  matmul(l1,l3p);
 		//suppress warning
 		(void) el2;

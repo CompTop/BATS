@@ -362,7 +362,7 @@ A<Dense<F,Acc>> matmul(A<Dense<F,Acc>> m1, A<Dense<F,Acc>> m2){
 Lret * ELmat = ELmat *Lmat
 */
 template <typename F,typename Acc>
-L<Dense<F,Acc>> el_commute(EL<Dense<F,Acc>> ELmat, L<Dense<F,Acc>> Lmat) {
+L<Dense<F,Acc>> commute(EL<Dense<F,Acc>> ELmat, L<Dense<F,Acc>> Lmat) {
     size_t m = ELmat.nrow();
     size_t n = ELmat.ncol();
     assert(n == Lmat.ncol());
@@ -423,7 +423,7 @@ void l_solve(L<Dense<F,Acc>> Lmat, VectorView<F> y) {
 solve Aret = Lmat \ Amat
 */
 template <typename F,typename Acc>
-A<Dense<F,Acc>> l_solve(L<Dense<F,Acc>> Lmat, A<Dense<F,Acc>> Amat) {
+A<Dense<F,Acc>> apply_inverse(L<Dense<F,Acc>> Lmat, A<Dense<F,Acc>> Amat) {
 
     //size_t m = Amat.nrow();
     size_t n = Amat.ncol();
