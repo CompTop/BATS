@@ -20,7 +20,7 @@ and extend to a map on all simplices
 CellularMap SimplicialMap(
 	const SimplicialComplex &X,
 	const SimplicialComplex &Y,
-	std::vector<size_t> &f0
+	const std::vector<size_t> &f0
 ) {
 	std::vector<size_t> s; // simplex
 	size_t maxd = X.maxdim();

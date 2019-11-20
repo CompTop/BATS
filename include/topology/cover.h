@@ -9,7 +9,13 @@ utilities for creating covers
 #include <algorithm>
 #include <cmath>
 
-std::set<size_t> set_union(const std::set<size_t> &s1, const std::set<size_t> &s2) {
+#include <multigraph/diagram.h>
+#include "inclusion.h"
+
+// return union of two sets
+// template over containter types
+template <typename CT1, typename CT2>
+std::set<size_t> set_union(const CT1 &s1, const CT2 &s2) {
     std::set<size_t> s;
     for (auto x : s1) {
         s.insert(x);
@@ -18,6 +24,30 @@ std::set<size_t> set_union(const std::set<size_t> &s1, const std::set<size_t> &s
         s.insert(x);
     }
     return s;
+}
+
+// intersection of two sets
+// template over container type
+template <typename C1, typename C2>
+std::set<size_t> set_intersection(const C1 &a, const C2 &b) {
+	std::set<size_t> s;
+
+	auto is = s.end();
+    auto ia = a.cbegin();
+    auto ib = b.cbegin();
+    while (ia != a.cend() && ib != b.cend()) {
+        if (*ia < *ib) {
+            ++ia;
+        } else if (*ib < *ia) {
+            ++ib;
+        } else {
+            s.emplace_hint(is, *ia);
+			is = s.end();
+            ++ia;
+            ++ib;
+        }
+	}
+	return s;
 }
 
 // helper function for assigning lower set
@@ -78,6 +108,47 @@ std::vector<std::set<size_t>> uniform_interval_cover(
 	}
 	return cover;
 }
+
+Diagram<std::set<size_t>, std::vector<size_t>> linear_cover_union_diagram(
+	std::vector<std::set<size_t>> &cover
+) {
+	Diagram<std::set<size_t>, std::vector<size_t>> SetDgm;
+	for (size_t i = 0; i < cover.size(); i++) {
+	    auto i1 = SetDgm.add_node(cover[i]);
+	    if (i > 0) {
+	        // add backward arrow
+	        SetDgm.add_edge(i1, i1-1, vertex_inclusion_map(SetDgm.node[i1], SetDgm.node[i1-1]));
+	    }
+	    if (i == (cover.size() - 1)) { break; }
+	    auto i2 = SetDgm.add_node(set_union(cover[i], cover[i+1]));
+	    // map from i1 to i2
+	    SetDgm.add_edge(i1, i2, vertex_inclusion_map(SetDgm.node[i1], SetDgm.node[i2]));
+	}
+
+	return SetDgm;
+}
+
+Diagram<std::set<size_t>, std::vector<size_t>> linear_cover_intersection_diagram(
+	std::vector<std::set<size_t>> &cover
+) {
+	Diagram<std::set<size_t>, std::vector<size_t>> SetDgm;
+	for (size_t i = 0; i < cover.size(); i++) {
+	    auto i1 = SetDgm.add_node(cover[i]);
+	    if (i > 0) {
+	        // add arrow from inclusion
+	        SetDgm.add_edge(i1-1, i, vertex_inclusion_map(SetDgm.node[i1-1], SetDgm.node[i1]));
+	    }
+	    if (i == (cover.size() - 1)) { break; }
+	    auto i2 = SetDgm.add_node(set_intersection(cover[i], cover[i+1]));
+	    // map from i2 to i1
+	    SetDgm.add_edge(i2, i1, vertex_inclusion_map(SetDgm.node[i2], SetDgm.node[i1]));
+	}
+
+	return SetDgm;
+}
+
+
+
 
 
 // project data x in d dimensions onto coordinate i

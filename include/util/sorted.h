@@ -21,23 +21,16 @@ void intersect_sorted(const C1 &a, const C2 &b, std::vector<T> &c) {
     auto ib = b.cbegin();
     while (ia != a.cend() && ib != b.cend()) {
         if (*ia < *ib) {
-            // std::cout << "a small" << std::endl;
             ++ia;
         } else if (*ib < *ia) {
-            // std::cout << "b small" << std::endl;
             ++ib;
         } else {
-            // std::cout << "agree" << std::endl;
-            // std::cout << *ia << std::endl;
-            // *ia == *ib
+
             c.emplace_back(*ia);
             ++ia;
             ++ib;
         }
     }
-    // for (auto i : c) {
-    //   std::cout << i << std::endl;
-    // }
 }
 
 /*
