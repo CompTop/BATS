@@ -11,7 +11,6 @@
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 #include <linalg/csc_matrix.h>
-#include <correspondence/correspondence.h>
 #include <util/sorted.h>
 #include <util/trie.h>
 #include <iostream>

@@ -73,17 +73,17 @@ public:
     CSCMatrix(
         size_t m,
         size_t n,
-        std::vector<TI> &colptr,
-        std::vector<TI> &rowind,
-        std::vector<TV> &val
+        const std::vector<TI> &colptr,
+        const std::vector<TI> &rowind,
+        const std::vector<TV> &val
     ) : colptr(colptr), rowind(rowind), val(val), m(m), n(n) {
         sort();
     }
 
     CSCMatrix(
-        std::vector<TI> &colptr,
-        std::vector<TI> &rowind,
-        std::vector<TV> &val
+        const std::vector<TI> &colptr,
+        const std::vector<TI> &rowind,
+        const std::vector<TV> &val
     ) : colptr(colptr), rowind(rowind), val(val), n(colptr.size()-1) {
         sort();
     }
