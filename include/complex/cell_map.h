@@ -37,6 +37,10 @@ public:
 		return cell_map[k];
 	}
 
+	inline const map_type& operator[](size_t k) const {
+		return cell_map[k];
+	}
+
 	// identity map
 	// template over complex type
 	template <typename CpxT>

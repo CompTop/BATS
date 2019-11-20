@@ -18,7 +18,7 @@ struct ReducedChainComplex {
 	ReducedChainComplex() {}
 
 	// compute reduced chain complex from chain complex
-	ReducedChainComplex(ChainComplex<MT> &C) {
+	ReducedChainComplex(const ChainComplex<MT> &C) {
 		size_t dmax = C.maxdim() + 1;
 		U.resize(dmax);
 		R.resize(dmax);

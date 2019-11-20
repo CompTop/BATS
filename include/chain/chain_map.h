@@ -12,7 +12,7 @@ struct ChainMap {
 
     ChainMap() {}
 
-    ChainMap(CellularMap &f) {
+    ChainMap(const CellularMap &f) {
         size_t maxd = f.maxdim() + 1;
         map.resize(maxd);
         for (size_t k = 0; k < maxd; k++) {

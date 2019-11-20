@@ -13,13 +13,11 @@ struct ChainComplex {
 
 	ChainComplex() {}
 
-	ChainComplex(std::vector<size_t> &dim, std::vector<MT> &boundary) : dim(dim), boundary(boundary) {}
-
-	ChainComplex(ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
+	ChainComplex(const std::vector<size_t> &dim, const std::vector<MT> &boundary) : dim(dim), boundary(boundary) {}
 
 	// produce a chain complex from a simplicial or cell complex
 	template <typename CpxT>
-	ChainComplex(CpxT& X) {
+	ChainComplex(const CpxT& X) {
 		dim.resize(X.maxdim() + 1);
 		boundary.resize(X.maxdim() + 1);
 		for (size_t k = 0; k < X.maxdim() + 1; k++) {
@@ -31,6 +29,10 @@ struct ChainComplex {
 			}
 		}
 	}
+
+	ChainComplex(const ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
+
+
 
 	inline size_t maxdim() const { return dim.size() - 1; }
 	//inline size_t dim(size_t k) const { return dim[k]; }
