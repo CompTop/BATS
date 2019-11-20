@@ -37,9 +37,15 @@ private:
     // using spx_map = std::map<std::vector<size_t>, size_t>;
     using spx_map = SparseTrie<size_t, size_t>;
 
+    // container that holds simplices
+    // TODO: can combine this with Trie pointer
+    std::vector<std::vector<size_t>> spx;
+
     // container for simplices of a fixed dimension
     std::vector<std::vector<size_t>> faces;
     std::vector<std::vector<int>> coeff;
+
+
 
     // keeps track of how many cells are in given dimension
     std::vector<size_t> _ncells;
@@ -52,16 +58,11 @@ private:
     spx_map spx_to_idx;
 
 
-    // returns index of simplex
-    // TODO: find a way to do this with a single traversal of spx_to_idx
-    size_t find_idx(std::vector<size_t> &s) {
-        return spx_to_idx.get(s, bats::NO_IND);
-    }
-
     // reserve for maxdim dimensional simplices
     void reserve(size_t maxdim) {
         if ( _ncells.size() < maxdim + 1 ) { _ncells.resize(maxdim+1, 0); }
         if ( _reserved.size() < maxdim + 1 ) { _reserved.resize(maxdim+1, 0); }
+        if ( spx.size() < maxdim ) { spx.resize(maxdim + 1); }
         if ( faces.size() < maxdim ) { faces.resize(maxdim); }
         if ( coeff.size() < maxdim ) { coeff.resize(maxdim); }
         return;
@@ -71,24 +72,16 @@ private:
     void reserve(size_t dim, size_t k) {
         reserve(dim);
         _reserved[dim] = std::max(_reserved[dim], k);
+        if ( spx[dim].capacity() < k * (dim + 1) ) {
+            spx[dim].reserve(k * (dim + 1));
+        }
         if (dim == 0) { return; }
         if ( faces[dim-1].capacity() < k * (dim + 1) ) {
-          faces[dim-1].reserve(k * (dim + 1));
-          coeff[dim-1].reserve(k * (dim + 1));
+            faces[dim-1].reserve(k * (dim + 1));
+            coeff[dim-1].reserve(k * (dim + 1));
         }
         return;
     }
-
-    // // add vertex, return index
-    // inline size_t _add_vertex() {
-    //     return _ncells[0]++;
-    // }
-    //
-    // // add k vertices to complex, return total number at end
-    // inline size_t _add_vertices(size_t k) {
-    //     _ncells[0] += k;
-    //     return _ncells[0];
-    // }
 
     // adds a simplex to the complex without doing any checks
     // assume dim > 0
@@ -99,6 +92,9 @@ private:
         size_t ind = _ncells[dim]++;
         // add to map
         spx_to_idx.emplace(s, ind);
+        for (auto v : s) {
+            spx[dim].emplace_back(v);
+        }
 
         // determine faces
         if (dim > 0){
@@ -106,6 +102,7 @@ private:
             // loop over faces in lexicographical order
             size_t spx_len = dim + 1;
             for (size_t k = 0; k < spx_len; k++) {
+
                 size_t k2 = dim-k; // index to skip
                 __face.clear();
                 for (size_t j = 0; j < k2; j++) {
@@ -119,13 +116,7 @@ private:
                 coeff[dim-1].emplace_back(c);
                 c = -c;
             }
-            // for (size_t k = 0; k < s.size(); k++) {
-            //     faces[dim-1].emplace_back(s[k]);
-            //     coeff[dim-1].emplace_back(c);
-            //     c = -c;
-            // }
         }
-
         return cell_ind(dim, ind);
     }
 
@@ -162,6 +153,18 @@ public:
         }
     }
 
+    // inline spx_map& trie() { return spx_to_idx; }
+
+    // returns index of simplex
+    // TODO: find a way to do this with a single traversal of spx_to_idx
+    size_t find_idx(const std::vector<size_t> &s) {
+        return spx_to_idx.get(s, bats::NO_IND);
+    }
+
+    size_t find_idx(const std::vector<size_t> &s) const {
+        return spx_to_idx.get(s, bats::NO_IND);
+    }
+
     // maximum dimension of cell
     inline size_t maxdim() const { return _ncells.size() - 1; }
     // number of cells in dimension k
@@ -183,6 +186,9 @@ public:
     inline cell_ind add(
         std::vector<size_t> &s
     ) { return add_safe(s); }
+    inline cell_ind add(
+        std::vector<size_t> &&s
+    ) { return add_safe(s); }
 
     // inline size_t add_vertex() { return _add_vertex(); }
     // inline size_t add_vertices(size_t k) { return _add_vertices(k); }
@@ -195,6 +201,15 @@ public:
         return faces[dim-1].cbegin() + ((dim + 1) * (i+1));
     }
     inline auto faces_end(const cell_ind &ci) const { return faces_end(ci.dim, ci.ind); }
+
+    // get simplex from index
+    // get simplex i in dimension dim
+    inline auto simplex_begin(const size_t dim, const size_t i) const {
+        return spx[dim].cbegin() + ((dim + 1) * i);
+    }
+    inline auto simplex_end(const size_t dim, const size_t i) const {
+        return spx[dim].cbegin() + ((dim + 1) * (i+1));
+    }
 
     // get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {
@@ -245,3 +260,114 @@ public:
     }
 
 };
+
+
+// template over filtration type
+// TODO: can do unsafe simplex add
+template <typename NT>
+void add_dimension_recursive_flag(
+    SimplicialComplex &X,
+    const NT &nbrs, // lists of neighbors
+    const size_t d, // dimension
+    const size_t maxd, // max dimension
+    const std::vector<size_t> &iter_idxs,
+    std::vector<size_t> &spx_idxs
+) {
+    // sorted simplices will end up here
+    std::vector<size_t> spx_idxs2(spx_idxs.size() + 1);
+    if (d == maxd) {
+        // no recursion - we're adding maximal dimension cells
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            sort_into(spx_idxs, spx_idxs2);
+
+            // add to X
+            X.add(spx_idxs2);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    } else if (d < maxd) { // d < maxd
+        // recursion
+        std::vector<size_t> iter_idxs2; // indices for recursing on
+        iter_idxs2.reserve(iter_idxs.size());
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            sort_into(spx_idxs, spx_idxs2);
+
+            // add to X
+            X.add(spx_idxs2);
+
+            // recurse
+            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            add_dimension_recursive_flag(X, nbrs, d+1, maxd, iter_idxs2, spx_idxs2);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    }
+    // else do nothing
+}
+
+
+// Flag complex using list of edges
+// (edges[2*k], edges[2*k+1]) = (i, j) is an edge
+// n - number of vertices
+// maxdim - maximum dimension of simplices
+SimplicialComplex FlagComplex(
+    const std::vector<size_t> &edges,
+    const size_t n, // number of 0-cells
+    const size_t maxdim
+) {
+
+    // check that dimensions agree
+    size_t m = edges.size() / 2;
+    if (!(edges.size() == 2 * m)) {
+        throw std::logic_error("edge vector must have length multiple of 2!");
+    }
+
+    // X = SimplicialComplex(maxdim);
+    // F = Filtration<T, SimplicialComplex>(X);
+    // reset simplicial complex
+    SimplicialComplex X(maxdim);
+
+    // sets 0-cells
+    std::vector<size_t> spx_idxs(1);
+    for (size_t k = 0; k < n; k++) {
+        spx_idxs[0] = k;
+        X.add(spx_idxs);
+    }
+
+    std::vector<std::vector<size_t>> nbrs(n);
+
+    spx_idxs.resize(2); // now time to add edges
+    std::vector<size_t> iter_idxs;
+    iter_idxs.reserve(n); // maximum size
+
+    for (size_t k = 0; k < m; k++) {
+        size_t i = edges[2*k];
+        size_t j = edges[2*k + 1];
+        spx_idxs[0] = i;
+        spx_idxs[1] = j;
+        X.add(spx_idxs);
+        // std::cout << ret.second << std::endl;
+        intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
+
+        if (!iter_idxs.empty()) {
+            add_dimension_recursive_flag(X, nbrs, 2, maxdim, iter_idxs, spx_idxs);
+        }
+
+        // TODO: use std::set for neighbors - insertion is log(n)
+        // nbrs[i].emplace(j);
+        // nbrs[j].emplace(i);
+        // TODO: insertion sort
+        nbrs[i].emplace_back(j);
+        std::sort(nbrs[i].begin(), nbrs[i].end());
+        nbrs[j].emplace_back(i);
+        std::sort(nbrs[j].begin(), nbrs[j].end());
+    }
+
+    return X;
+}

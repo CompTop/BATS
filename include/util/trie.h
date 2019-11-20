@@ -1,7 +1,10 @@
+#pragma once
+
 #include <unordered_map>
 #include <vector>
 
 // there is a boost::trie implementation, but it is based on std::map, not std::unordered_map
+// template over alphabet type A, storage type T
 template <typename A, typename T>
 class SparseTrie {
 private:
@@ -10,12 +13,13 @@ public:
     // todo: move this to template type
     typedef std::unordered_map<A, child_type*> child_container;
     T val;
-    child_container *children = NULL;
+    child_container *children = nullptr;
 
+	// Copy constructor - deep copy
     SparseTrie(const SparseTrie &t) {
-        // std::cout << "trie is being copied to " << this << std::endl;
+        //std::cout << "trie is being copied to " << this << std::endl;
         val = t.val;
-        if (t.children != NULL) {
+        if (t.children != nullptr) {
             children = new child_container;
             for (auto& [k, v] : *(t.children)) {
                 children->emplace(k, new child_type(*v));
@@ -23,32 +27,72 @@ public:
         }
     }
 
-    SparseTrie(T v) : val(v), children(NULL) {}
+    // Move constructor
+	// Transfer ownership of children dictionary
+	SparseTrie(SparseTrie&& t)
+		: val(t.val), children(t.children)
+	{
+		t.children = nullptr; //
+	}
 
-    SparseTrie() : children(NULL) {};
+    SparseTrie(T v) : val(v), children(nullptr) {}
+
+    SparseTrie() : val(T(0)), children(nullptr) {};
 
     ~SparseTrie() {
-        // std::cout << "trie is being deleted at " << this << std::endl;
-        if (children != NULL) {
-//             std::cout << "children at " << children << std::endl;
-            // delete each child
+        if (children != nullptr) {
+			// delete each child
             for (auto kvpair : *children) {
-//                 std::cout << "deleting child at " << kvpair.second << std::endl;
-//                 std::cout << "key " << kvpair.first << std::endl;
-//                 std::cout << "value " << kvpair.second->val << std::endl;
                 delete kvpair.second;
-//                 std::cout << "deleted." << std::endl;
             }
-//             std::cout << "deleting map at " << children << std::endl;
             delete children;
         }
     }
 
+	// Copy assignment
+	// performs deep copy
+	SparseTrie& operator=(const SparseTrie& t) {
 
-    void insert(A* stptr, const A* endptr, const T &v) {
+		if (&t == this) {return *this;}
+
+		// release children
+		if (children != nullptr) { delete children; }
+
+		val = t.val;
+        if (t.children != nullptr) {
+            children = new child_container;
+            for (auto& [k, v] : *(t.children)) {
+                children->emplace(k, new child_type(*v));
+            }
+        }
+
+		return *this;
+	}
+
+	// Move assignment
+	// Transfer ownership of children
+	SparseTrie& operator=(SparseTrie&& t)
+	{
+		// Self-assignment detection
+		if (&t == this)
+			return *this;
+
+		// release children
+		if (children != nullptr) { delete children; }
+
+		val = t.val;
+		// Transfer ownership of children
+		children = t.children;
+		t.children = nullptr;
+
+		return *this;
+	}
+
+    template <typename ITT>
+    void insert(ITT stptr, const ITT endptr, const T &v) {
         SparseTrie* current = this;
         while (stptr < endptr) {
-            if (current->children == NULL) { current->children = new child_container; }
+            if (current->children == nullptr) { current->children = new child_container; }
             if (current->children->count(*stptr) == 0) { current->children->emplace(*stptr, new child_type); }
             current = current->children->at(*stptr++);
         }
@@ -57,16 +101,16 @@ public:
     }
 
 
-    inline void emplace(std::vector<A> &k, T &&v) {
-        return insert(k.data(), k.data() + k.size(), v);
+    inline void emplace(const std::vector<A> &k, T &&v) {
+        return insert(k.cbegin(), k.cend(), v);
     }
 
-    inline void emplace(std::vector<A> &k, T &v) {
-        return insert(k.data(), k.data() + k.size(), v);
+    inline void emplace(const std::vector<A> &k, const T &v) {
+        return insert(k.cbegin(), k.cend(), v);
     }
 
-
-    T& get(A* stptr, A* endptr) {
+    template <typename ITT>
+    T& get(ITT stptr, const ITT endptr) {
         SparseTrie* current = this;
         while (stptr < endptr) {
             current = current->children->at(*stptr++);
@@ -75,15 +119,16 @@ public:
         return current->val;
     }
 
-    inline T& operator[](std::vector<T> &k) {
-        return get(k.data(), k.data() + k.size());
+    inline T& operator[](const std::vector<T> &k) {
+        return get(k.cbegin(), k.cend());
     }
 
     // get value with default return
-    T get(A* stptr, A* endptr, const T &def_ret) {
+    template <typename ITT>
+    T get(ITT stptr, const ITT endptr, const T &def_ret) {
         SparseTrie* current = this;
         while (stptr < endptr) {
-            if (current->children == NULL || current->children->count(*stptr) == 0) {
+            if (current->children == nullptr || current->children->count(*stptr) == 0) {
                 // return the default value
                 return def_ret;
             }
@@ -93,14 +138,33 @@ public:
         return current->val;
     }
 
-    inline T get(std::vector<T> &k, const T &def_ret) {
-        return get(k.data(), k.data() + k.size(), def_ret);
+    inline T get(const std::vector<T> &k, const T &def_ret) {
+        return get(k.cbegin(), k.cend(), def_ret);
     }
 
-    size_t count(A* stptr, A* endptr) {
+    // get value with default return
+    // maintains const correctness
+    template <typename ITT>
+    T get(ITT stptr, const ITT endptr, const T &def_ret) const {
+        if (stptr < endptr) {
+            if (children == nullptr || children->count(*stptr) == 0) {
+                return def_ret;
+            }
+            return children->at(*stptr)->get(++stptr, endptr, def_ret);
+        }
+        return val;
+    }
+
+    inline T get(const std::vector<T> &k, const T &def_ret) const {
+        return get(k.cbegin(), k.cend(), def_ret);
+    }
+
+
+    template <typename ITT>
+    size_t count(ITT stptr, const ITT endptr) {
         SparseTrie* current = this;
         while (stptr < endptr) {
-            if (current->children == NULL || current->children->count(*stptr) == 0) {
+            if (current->children == nullptr || current->children->count(*stptr) == 0) {
                 return 0;
             }
             current = current->children->at(*stptr++);
@@ -109,8 +173,8 @@ public:
         return 1;
     }
 
-    inline size_t count(std::vector<T> &k) {
-        return count(k.data(), k.data() + k.size());
+    inline size_t count(const std::vector<T> &k) {
+        return count(k.cbegin(), k.cend());
     }
 
 
