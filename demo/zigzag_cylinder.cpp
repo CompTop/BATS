@@ -33,14 +33,14 @@
 int main() {
 
 	// generate cylinder dataset
-	auto x = gen_cylinder(30, 20);
-	add_normal_noise(x, 0.0, 0.01);
+	auto x = gen_cylinder(40, 30);
+	add_normal_noise(x, 0.0, 0.05);
 
 	/// project onto first coordinate
 	auto p = coordinate_projection(x, 3, 0);
 
 	// create open cover using projection
-	auto cover = uniform_interval_cover(p, 10);
+	auto cover = uniform_interval_cover(p, 20);
 
 	// Diagram of Sets and inclusions
 	auto SetDgm = linear_cover_union_diagram(cover);
