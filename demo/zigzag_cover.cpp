@@ -35,11 +35,20 @@
 int main() {
 
 	// generate cylinder dataset
-	auto x = gen_cylinder(40, 30);
-	add_normal_noise(x, 0.0, 0.05);
+
+	// cylinder example
+	// size_t d = 3;
+	// double rmax = 1.0;
+	// auto x = gen_cylinder(40, 30);
+	// add_normal_noise(x, 0.0, 0.05);
+
+	// random cube example
+	size_t d = 3; // dimension
+	double rmax = 0.15;
+	auto x = sample_cube<double>(d, 1000);
 
 	/// project onto first coordinate
-	auto p = coordinate_projection(x, 3, 0);
+	auto p = coordinate_projection(x, d, 0);
 
 	// create open cover using projection
 	auto cover = uniform_interval_cover(p, 20);
@@ -49,7 +58,7 @@ int main() {
 	// auto SetDgm = linear_cover_intersection_diagram(cover);
 
 	// Diagram of Spaces and maps
-	auto TopDgm = Rips(SetDgm, x, 3, 1.0, 2);
+	auto TopDgm = Rips(SetDgm, x, d, rmax, 2);
 
 	// diagram in Chain
 	auto ChainDgm = Chain<MT>(TopDgm);
