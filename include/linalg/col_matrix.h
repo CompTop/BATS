@@ -17,6 +17,7 @@ private:
     size_t n = 0; // number of columns
     std::vector<TC> col;
 public:
+    using val_type = typename TC::val_type;
 
     // default constructor
     ColumnMatrix() {}
@@ -76,8 +77,20 @@ public:
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}
 
-    inline auto operator()(size_t i, size_t j) {
+    inline auto operator()(size_t i, size_t j) const {
         return col[j][i];
+    }
+
+    // dump matrix into a dense array in column-major format
+    // WARNING: allocates memory, which must be deleted
+    val_type* dump_dense() const {
+        val_type* arr  =  new val_type[m*n];
+        for (size_t j = 0; j < n; j++) {
+            for (size_t i = 0; i < m; i++) {
+                arr[i + j*m] = col[j][i];
+            }
+        }
+        return arr;
     }
 
     //

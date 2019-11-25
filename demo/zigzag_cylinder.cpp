@@ -26,6 +26,8 @@
 #include <multigraph/diagram.h>
 #include <multigraph/functors.h>
 
+#include <quiver/quiver.h>
+
 #define FT ModP<int, 3>
 #define VT SparseVector<FT>
 #define MT ColumnMatrix<VT>
@@ -57,6 +59,14 @@ int main() {
 
 	for (auto M : HkDgm.edata) {
 	    M.print();
+	}
+
+	// dump into Atype rep
+	auto [data, mat, etype] = A_type_rep(HkDgm);
+
+	for (size_t k = 0; k < mat.size(); k++) {
+		std::cout << (etype[k] ? "v" : "^") << std::endl;
+		mat[k].print();
 	}
 
 	return 0;
