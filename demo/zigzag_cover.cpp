@@ -65,9 +65,11 @@ int main() {
 	auto [data, mat, etype] = A_type_rep(HkDgm);
 
 	for (size_t k = 0; k < mat.size(); k++) {
-		std::cout << (etype[k] ? "v" : "^") << std::endl;
+		std::cout << "*" << std::endl;
+		std::cout << (etype[k] ? "v " : "^ ");
 		mat[k].print();
 	}
+	std::cout << "*" << std::endl;
 
 	return 0;
 }
