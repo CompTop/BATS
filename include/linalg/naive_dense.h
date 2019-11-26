@@ -405,13 +405,13 @@ A<Dense<F,Acc2>> apply_matmul_on_right(A<Dense<F,Acc1>> Amat1, A<Dense<F,Acc2>> 
 /*
 Lret * ELmat = ELmat *Lmat
 */
-template <typename F,typename Acc>
-L<Dense<F,Acc>> commute(EL<Dense<F,Acc>> ELmat, L<Dense<F,Acc>> Lmat) {
+template <typename F,typename Acc1,typename Acc2>
+L<Dense<F,Acc2>> commute(EL<Dense<F,Acc1>> ELmat, L<Dense<F,Acc2>> Lmat) {
     size_t m = ELmat.nrow();
     size_t n = ELmat.ncol();
     assert(n == Lmat.ncol());
     assert(Lmat.ncol() == Lmat.nrow());
-    L<Dense<F,Acc>> Lret = L<Dense<F,Acc>>(m, m);
+    L<Dense<F,Acc2>> Lret = L<Dense<F,Acc2>>(m, m);
 
     // step 1 is to make an index map from ELmat
     std::vector<size_t> idx_map(n);
@@ -448,6 +448,31 @@ L<Dense<F,Acc>> commute(EL<Dense<F,Acc>> ELmat, L<Dense<F,Acc>> Lmat) {
 
     return Lret;
 
+}
+
+
+template <typename F,typename Acc1,typename Acc2>
+auto commute(L<Dense<F,Acc2>> Lmat, ELH<Dense<F,Acc1>> ELHmat ) {
+    auto ELm = ELHmat.TJConj();
+    auto Lm = Lmat.TJConj();
+    auto Lp = commute(ELm,Lm);
+    return Lp.TJConj();
+}
+
+template <typename F,typename Acc1,typename Acc2>
+auto commute(EUH<Dense<F,Acc2>> EUHmat, U<Dense<F,Acc1>> Umat ) {
+    auto ELm = EUHmat.JConj();
+    auto Lm = Umat.JConj();
+    auto Lp = commute(ELm,Lm);
+    return Lp.JConj();
+}
+
+template <typename F,typename Acc1,typename Acc2>
+auto commute(U<Dense<F,Acc1>> Umat, EU<Dense<F,Acc2>> EUmat ) {
+    auto ELm = EUmat.Trp();
+    auto Lm = Umat.Trp();
+    auto Lp = commute(ELm,Lm);
+    return Lp.Trp();
 }
 
 // solve Lmat x = y in-place
