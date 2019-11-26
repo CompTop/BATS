@@ -1,56 +1,48 @@
+#pragma once
 /*
-A data type to hold a the companion matrix of a quiver
+Utility to dump a multigraph of vector spaces into something we can operate on
 */
 #include <vector>
 
+#include <multigraph/diagram.h>
+#include <linalg/naive_dense.h>
+#include <linalg/col_matrix.h>
 
 
-// template over implementation
-template <typename I>
-class Quiver {
-private:
-    // storage is essentially a (directed) edge list
-    // with list of matrices for each edge
+// return tuple of
+//   1. vect of matrix data
+//   2. vect of matrix wrappers
+//   3. vect of etype (bool) = 0 = <-, 1 = ->
+// template over node type and column type
+template <typename NT, typename CT>
+auto A_type_rep(Diagram<NT, ColumnMatrix<CT>> &D) {
+    using FT = typename CT::val_type;
+    using AD = A<Dense<FT,ColMaj>>;
 
-    std::vector<size_t> edgelist; // edges in quiver
-    std::vector<size_t> dim; // dimension of each vector space
-    std::vector<I> A; // matrices on edges
-public:
+    size_t m = D.nedge();
+    // TODO: check m == n-1
 
-    // default empty constructor
-    Quiver() {};
+    std::vector<FT*> data(m);
+    std::vector<AD> mat(m);
+    std::vector<bool> etype(m);
 
-    void add_edge(size_t i, size_t j, I& Aij) {
-        // see if we need to extend number of nodes in quiver
-
-        // first see if dim[i] and dim[j] have been set
-        // if so, check that dimesnions of Aij agree
-
-        // if checks pass, we can add edge
+    // assume nodes and edges are sorted for a traversal
+    // TODO: check this
+    size_t i = 0;
+    for (size_t k = 0; k < m; k++) {
+        size_t mk = D.edata[k].nrow();
+        size_t nk = D.edata[k].ncol();
+        data[k] = D.edata[k].dump_dense();
+        mat[k] = AD(mk, nk, data[k]);
+        if (i == D.elist[k].src) {
+            etype[k] = true;
+        } else if (i == D.elist[k].targ) {
+            etype[k] = false;
+        } else {
+            // throw error
+        }
+        i++;
     }
 
-}
-
-template <typename I>
-class QuiverMorphism {
-private:
-    std::vector<size_t> dim_src; // dimension of vector spaces in source
-    std::vector<size_t> dim_targ; // dimension of vector spaces in target
-    std::vector<I> M; // block matrices for diagonal
-
-public:
-    // empty constructor
-    QuiverMorphism() {};
-
-    // quiver morphism
-    QuiverMorphism(
-        std::vector<size_t> dim1,
-        std::vector<size_t> dim2) : dim_src(dim1), dim_targ(dim)
-    {}; // TODO: initialize with empty maps
-
-    // TODO: static member to initialize identity morphism
-
-    // operator[] returns morphism
-
-
+    return std::make_tuple(data, mat, etype);
 }

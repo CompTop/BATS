@@ -36,7 +36,7 @@ struct VectorView{
         }
         return;
     }
-    
+
     void operator=(const VectorView<T> x){
         T* ptr = start;
         T* xptr = x.start;
@@ -59,17 +59,17 @@ template<typename F, typename Acc>
 struct MemAcc{
     size_t m,n;
     F* mat;
-    
+
     MemAcc(size_t mm, size_t nn, F* mat) : m(mm), n(nn), mat(mat) {}
 	// null constructor
 	MemAcc(){ m=0;n=0;}
 
 	void init(size_t mm, size_t nn, F* mmat){
-		m=mm; 
+		m=mm;
 		n=nn;
 		mat=mmat;
 	}
-    
+
     inline F& operator()(int i, int j) {
         if constexpr(std::is_same<Acc,ColMaj>::value)
             return mat[j*m+i];
@@ -80,7 +80,7 @@ struct MemAcc{
         else if constexpr(std::is_same<Acc,RevRowMaj>::value)
             return mat[(m-i-1)*n+(n-j-1)];
     }
-    
+
     // return a column view of column j
     inline VectorView<F> operator[](size_t j) {
         if constexpr(std::is_same<Acc,ColMaj>::value)
@@ -92,7 +92,7 @@ struct MemAcc{
         else if constexpr(std::is_same<Acc,RevRowMaj>::value)
             return VectorView<F>(mat + m*n -j-1, mat -1-j, -n );
     }
-    
+
 	// return a view of row i
     inline VectorView<F> r(size_t i) {
         if constexpr(std::is_same<Acc,ColMaj>::value)
@@ -104,7 +104,7 @@ struct MemAcc{
         else if constexpr(std::is_same<Acc,RevRowMaj>::value)
             return VectorView<F>( mat + n*(m-i)-1,mat + n*(m-1-i)-1,-1);
     }
-    
+
     void print(){
         for( size_t i=0; i<m; i++){
             for( size_t j=0; j<n; j++){
@@ -212,7 +212,7 @@ template<typename F,typename Acc>
 struct A<Dense<F,Acc>>{
     using DI = Dense<F,Acc>;
 	// to make things consistent with all the derived classes, Makes the macro work
-	using Base = A<DI>;  
+	using Base = A<DI>;
 	using FieldType = F;
 
     size_t m,n;
@@ -315,7 +315,7 @@ struct A<Dense<F,Acc>>{
 		return mat;
 	}
 
-	
+
 	IMPLEMENT_TRP(A<DI>)
 	IMPLEMENT_JCONJ(A<DI>)
 	IMPLEMENT_TJCONJ(A<DI>)
@@ -394,6 +394,7 @@ L<Dense<F,Acc>> commute(EL<Dense<F,Acc>> ELmat, L<Dense<F,Acc>> Lmat) {
     for (j = 0; j < m; j++) {
         Lret(j,j) = F(1); // default unit-diagonal
     }
+	
     // perform actual commutation
     for (j = 0; j < n; j++) {
         if (idx_map[j] == bats::NO_IND) { break; }

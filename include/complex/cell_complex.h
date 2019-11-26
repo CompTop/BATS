@@ -125,7 +125,7 @@ public:
     inline size_t add_vertices(size_t k) { return _add_vertices(k); }
 
     // get CSC integer matrix boundary in dimension dim
-    inline CSCMatrix<int, size_t> boundary_csc(size_t dim) {
+    inline CSCMatrix<int, size_t> boundary_csc(size_t dim) const {
         return CSCMatrix<int, size_t>(
             ncells(dim-1),
             ncells(dim),

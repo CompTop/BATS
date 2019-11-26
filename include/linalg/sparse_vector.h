@@ -20,6 +20,8 @@ class SparseVector
 {
 private:
 
+
+
 	using key_type = nzpair<TI, TV>; // std::pair<TI, TV>
 
 	std::vector<key_type> indval;
@@ -31,6 +33,7 @@ private:
 	}
 
 public:
+	using val_type = TV;
 
 	SparseVector() {}
 
@@ -145,7 +148,7 @@ public:
 		return (*it).val;
 	}
 
-	TV operator[](size_t i) {
+	TV operator[](size_t i) const {
 		return getval(i);
 	}
 

@@ -21,7 +21,6 @@ ColumnMatrix<TVec> induced_map(
 ) {
 
 	std::vector<TVec> col;
-	ColumnMatrix<TVec> bdry = u_solve(D.U[k], D.R[k+1]); // TODO: if k is max dimension
 	// iterate over homology generators in C
 	for (auto it = C.I[k].cbegin(); it != C.I[k].cend(); it++) {
 		// put image in homology revealing basis in D
