@@ -43,19 +43,32 @@ MM(U,U,U)
 MM(L,U,A)
 
 
-#define APPLY_INVERSE(A,B,C) \
-C<SI> apply_inverse(A<SI> a, B<SI> b){\
+#define APPLY_INVERSE_ON_LEFT(A,B,C) \
+C<SI> apply_inverse_on_left(A<SI> a, B<SI> b){\
     C<SI> c;\
 	(void) a;\
 	(void) b;\
     return c;\
 };
 
-APPLY_INVERSE(L,L,L)
-APPLY_INVERSE(U,U,U)
-APPLY_INVERSE(L,A,A)
-APPLY_INVERSE(U,A,A)
+APPLY_INVERSE_ON_LEFT(L,L,L)
+APPLY_INVERSE_ON_LEFT(U,U,U)
+APPLY_INVERSE_ON_LEFT(L,A,A)
+APPLY_INVERSE_ON_LEFT(U,A,A)
 
+
+#define APPLY_INVERSE_ON_RIGHT(A,B,C) \
+C<SI> apply_inverse_on_right(A<SI> a, B<SI> b){\
+    C<SI> c;\
+	(void) a;\
+	(void) b;\
+    return c;\
+};
+
+APPLY_INVERSE_ON_RIGHT(L,L,L)
+APPLY_INVERSE_ON_RIGHT(U,U,U)
+APPLY_INVERSE_ON_RIGHT(A,L,A)
+APPLY_INVERSE_ON_RIGHT(A,U,A)
 
 #define IMPL_FACT(TYPE,F1,F2,F3,F4,f1,f2,f3,f4) \
 std::tuple<F1<SI> , F2<SI> , F3<SI> , F4<SI>> TYPE##_fact(A<SI> a){ \

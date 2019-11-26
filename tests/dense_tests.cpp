@@ -200,7 +200,7 @@ TEST_CASE("el_commute") {
 		          0,0,0,5};
 	L<DI> lmat1(4,4,lmat1v);
 
-	auto res = el_commute(elmat1,lmat1);
+	auto res = commute(elmat1,lmat1);
 
 	CHECK( (matmul(res,elmat1)== matmul(elmat1,lmat1)) );
 }
@@ -258,7 +258,7 @@ TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Ration
 	};
 	L<DI> Lmat(4,4,lmat1v);
 
-	auto Linv = l_solve(Lmat,I);
+	auto Linv = apply_inverse_on_left(Lmat,I);
 
 	CHECK( (matmul(Lmat,Linv) == I) );
 	CHECK( (matmul(Linv,Lmat) == I) );

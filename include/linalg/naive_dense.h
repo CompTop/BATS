@@ -21,7 +21,7 @@ template<typename T>
 struct VectorView{
     T* start;
     T* end;
-	size_t stride;
+	int stride;
 
     VectorView(T* start, T* end, size_t s) : start(start), end(end), stride(s) {};
 
@@ -48,7 +48,9 @@ struct VectorView{
         return;
     }
 
-    inline size_t size() const { return (end - start)/stride; }
+    inline size_t size() const { 
+		return (end - start)/stride ; 
+	}
 
     inline T& operator[](size_t i) {return *(start + stride*i); }
 };
@@ -346,10 +348,10 @@ INHERIT(P,E)
 
 
 // naive matmul
-template< typename F,typename Acc>
-A<Dense<F,Acc>> matmul(A<Dense<F,Acc>> m1, A<Dense<F,Acc>> m2){
+template< typename F,typename Acc1, typename Acc2>
+auto matmul(A<Dense<F,Acc1>> m1, A<Dense<F,Acc2>> m2){
     assert( m1.n==m2.m );
-    A<Dense<F,Acc>> prod(m1.m,m2.n);
+    A<Dense<F,Acc1>> prod(m1.m,m2.n);
     for(size_t i=0;i<m1.m;i++)
         for(size_t j=0;j<m2.n;j++)
             for(size_t k=0;k<m1.n;k++){
@@ -422,13 +424,13 @@ void l_solve(L<Dense<F,Acc>> Lmat, VectorView<F> y) {
 /*
 solve Aret = Lmat \ Amat
 */
-template <typename F,typename Acc>
-A<Dense<F,Acc>> apply_inverse(L<Dense<F,Acc>> Lmat, A<Dense<F,Acc>> Amat) {
+template <typename F,typename Acc1,typename Acc2>
+A<Dense<F,Acc2>> apply_inverse_on_left(L<Dense<F,Acc1>> Lmat, A<Dense<F,Acc2>> Amat) {
 
     //size_t m = Amat.nrow();
     size_t n = Amat.ncol();
 
-    A<Dense<F,Acc>> Aret = Amat.copy();
+    A<Dense<F,Acc2>> Aret = Amat.copy();
 
     // apply lower triangular solve to each column
     for (size_t j = 0; j < n; j++) {
@@ -576,3 +578,66 @@ auto LEUP_fact(A<Dense<F,Acc>>& mat_arg){
 	mat.free();
     return std::make_tuple( Lmat, ELmat, Umat, Pmat );
 }
+
+
+template<typename F,typename Acc>
+auto PLEU_fact(A<Dense<F,Acc>>& mat_arg){
+    auto  mat_trp = mat_arg.Trp();
+    auto [Lmat, ELmat, Umat, Pmat] = LEUP_fact(mat_trp);
+    auto Pret = Pmat.Trp();
+    auto Lret = Umat.Trp();
+    auto EUret = ELmat.Trp();
+    auto Uret = Lmat.Trp();
+    return std::make_tuple( Pret,Lret ,EUret,Uret );
+}
+
+template<typename F,typename Acc>
+auto UELP_fact(A<Dense<F,Acc>>& mat_arg){
+    auto  mat_jconj = mat_arg.JConj();
+    auto [Lmat, ELmat, Umat, Pmat] = LEUP_fact(mat_jconj);
+    auto Uret = Lmat.JConj();
+    auto EUHret = ELmat.JConj();
+    auto Lret = Umat.JConj();
+    auto Pret = Pmat.JConj();
+    return std::make_tuple( Uret,EUHret ,Lret,Pret );
+}
+
+template<typename F,typename Acc>
+auto PUEL_fact(A<Dense<F,Acc>>& mat_arg){
+    auto  mat_tjconj = mat_arg.TJConj();
+    auto [Lmat, ELmat, Umat, Pmat] = LEUP_fact(mat_tjconj);
+    auto Pret = Pmat.TJConj();
+    auto Uret = Umat.TJConj();
+    auto ELHret = ELmat.TJConj();
+    auto Lret = Lmat.TJConj();
+    return std::make_tuple( Pret,Uret ,ELHret,Lret );
+}
+
+
+template <typename F,typename Acc1,typename Acc2>
+auto apply_inverse_on_left(U<Dense<F,Acc1>> Umat, A<Dense<F,Acc2>> Amat) {
+    auto Amat_jconj = Amat.JConj();
+    auto Lm = Umat.JConj();
+    auto ret = apply_inverse_on_left(Lm,Amat_jconj);
+    auto ret2 = ret.JConj();
+    return ret2;
+}
+
+template <typename F,typename Acc1,typename Acc2>
+auto apply_inverse_on_right(A<Dense<F,Acc2>> Amat,U<Dense<F,Acc1>> Umat) {
+    auto Amat_trp = Amat.Trp();
+    auto Lm = Umat.Trp();
+    auto ret = apply_inverse_on_left(Lm,Amat_trp);
+    auto ret2 = ret.Trp();
+    return ret2;
+}
+
+template <typename F,typename Acc1,typename Acc2>
+auto apply_inverse_on_right(A<Dense<F,Acc2>> Amat,L<Dense<F,Acc1>> Lmat) {
+    auto Amat_tjconj = Amat.TJConj();
+    auto Lm = Lmat.TJConj();
+    auto ret = apply_inverse_on_left(Lm,Amat_tjconj);
+    auto ret2 = ret.TJConj();
+    return ret2;
+}
+
