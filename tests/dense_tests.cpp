@@ -257,8 +257,8 @@ TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Ration
 	0,0,0,1,
 	};
 	L<DI> Lmat(4,4,lmat1v);
-
-	auto Linv = apply_inverse_on_left(Lmat,I);
+	auto tempI = I.copy();
+	auto Linv = apply_inverse_on_left(Lmat,tempI);
 
 	CHECK( (matmul(Lmat,Linv) == I) );
 	CHECK( (matmul(Linv,Lmat) == I) );

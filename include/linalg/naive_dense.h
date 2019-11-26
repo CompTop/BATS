@@ -360,6 +360,48 @@ auto matmul(A<Dense<F,Acc1>> m1, A<Dense<F,Acc2>> m2){
     return prod;
 }
 
+
+template< typename F,typename Acc1>
+void matmul(A<Dense<F,Acc1>> m1, VectorView<F> y){
+    F temp[m1.m]; 
+    A<Dense<F,Acc1>> prod(m1.m,1,temp);
+    for(size_t i=0;i<m1.m;i++)
+            for(size_t k=0;k<m1.n;k++){
+                prod(i,0) += m1(i,k)*y[k];
+            }
+    y=prod[0];
+}
+
+template< typename F,typename Acc1>
+void matmul(VectorView<F> y, A<Dense<F,Acc1>> m1 ){
+    F temp[m1.n]; 
+    A<Dense<F,Acc1>> prod(1,m1.n,temp);
+    for(size_t j=0;j<m1.n;j++)
+            for(size_t k=0;k<m1.n;k++){
+                prod(0,j) += y[k]*m1(k,j);
+            }
+    y=prod.r(0);
+}
+
+template <typename F,typename Acc1,typename Acc2>
+A<Dense<F,Acc2>> apply_matmul_on_left(A<Dense<F,Acc1>> Amat1, A<Dense<F,Acc2>> Amat2) {
+    size_t n = Amat2.ncol();
+    for (size_t j = 0; j < n; j++) {
+        matmul(Amat1, Amat2[j]);
+    }
+    return Amat2;
+}
+
+template <typename F,typename Acc1,typename Acc2>
+A<Dense<F,Acc2>> apply_matmul_on_right(A<Dense<F,Acc1>> Amat1, A<Dense<F,Acc2>> Amat2) {
+    size_t m = Amat1.nrow();
+    for (size_t i = 0; i < m; i++) {
+        matmul(Amat1.r(i), Amat2);
+    }
+    return Amat2;
+}
+
+
 /*
 Lret * ELmat = ELmat *Lmat
 */
@@ -431,14 +473,14 @@ A<Dense<F,Acc2>> apply_inverse_on_left(L<Dense<F,Acc1>> Lmat, A<Dense<F,Acc2>> A
     //size_t m = Amat.nrow();
     size_t n = Amat.ncol();
 
-    A<Dense<F,Acc2>> Aret = Amat.copy();
+    //A<Dense<F,Acc2>> Aret = Amat.copy();
 
     // apply lower triangular solve to each column
     for (size_t j = 0; j < n; j++) {
-        l_solve(Lmat, Aret[j]);
+        l_solve(Lmat, Amat[j]);
     }
 
-    return Aret;
+    return Amat;
 
 }
 
