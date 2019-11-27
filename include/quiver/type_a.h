@@ -263,6 +263,7 @@ struct Type_A{
 
 	/*
 	*   print barcodes
+	*		- Each line has eaxactly one bar
 	*/
 	void print_barcodes(){
 		std::vector<string> lines;
@@ -323,5 +324,109 @@ struct Type_A{
 		}
 		for(size_t i=0;i<lines.size();i++)
 		cout<<lines[i]<<"\n";
+	}
+
+	/*
+	*   print barcodes in compressed format,
+	*		- Each line can have multiple bars
+	*/
+	void print_barcodes_compressed(){
+		std::vector<string> lines;
+		std::vector<size_t> active,active2;
+		A<DI> Em ;
+		std::vector<int> lastup;
+
+		for(size_t i=0;i<dims[0];i++){
+			lines.emplace_back("*");
+			active.emplace_back(i);
+			lastup.emplace_back(0);
+		}
+		for(size_t kk=0;kk<ELmats.size();kk++){
+			if(arrow_dir[kk]==0){
+				Em=ELmats[kk];
+				active2.clear();
+				active2.resize(Em.ncol());
+				for(size_t j=0; j<Em.ncol(); j++){
+				    size_t i;
+				    for(i=0; i<Em.nrow(); i++){
+				        if(Em(i,j)==F(1)){
+				            lines[active[i]]+="<--*";
+				            lastup[active[i]]+=1;
+				            active2[j]=active[i];
+				            break;
+				        }
+				    }
+				    if(i==Em.nrow()){
+				        size_t l=0;
+				        for(;l<lines.size();l++){
+				            size_t jj=0;
+				            bool bad=0;
+				            for(;jj<active2.size() ;jj++)
+				                if(active2[jj]==l ) bad=1;
+				            if(!bad) break;
+				        }
+				        active2[j]=l;
+				        
+				        if(l==lines.size()){
+				            lines.emplace_back(" ");
+				            lastup.emplace_back(0);
+				        }
+				        
+				        string plu = "";
+				        for(size_t ll=lastup[l];ll<kk;ll++)
+				            plu+="    ";
+				        plu+="   *";
+				        
+				        lines[l] += plu;
+				        lastup[l] = kk+1;
+				        
+				    }
+				}
+				std::swap(active,active2);
+			}else{
+				Em=ELHmats[kk];
+				active2.clear();
+				active2.resize(Em.nrow());
+				for(int i=Em.nrow()-1; i>=0; i--){
+				    int j;
+				    for(j=Em.ncol()-1; j>=0; j--){
+				        if(Em(i,j)==F(1)){
+				            lines[active[j]]+="-->*";
+				            lastup[active[j]]+=1;
+				            active2[i]=active[j];
+				            break;
+				        }
+				    }
+				    if(j==-1){
+				        size_t l=0;
+				        for(;l<lines.size();l++){
+				            size_t ii=0;
+				            bool bad=0;
+				            for(;ii<active2.size() ;ii++)
+				                if(active2[ii]==l ) bad=1;
+				            if(!bad) break;
+				        }
+				        active2[i]=l;
+				        
+				        if(l==lines.size()){
+				            lines.emplace_back(" ");
+				            lastup.emplace_back(0);
+				        }
+				        
+				        string plu = "";
+				        for(size_t ll=lastup[l];ll<kk;ll++)
+				            plu+="    ";
+				        plu+="   *";
+				        
+				        lines[l] += plu;
+				        lastup[l] = kk+1;
+				    }
+				}
+				std::swap(active,active2);
+			}
+		}
+		for(size_t i=0;i<lines.size();i++)
+			cout<<lines[i]<<"\n";
+
 	}
 };

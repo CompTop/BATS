@@ -75,7 +75,11 @@ int main() {
 	}
 
 	//print barcodes
+	std::cout<<"Barcodes:\n\n";
 	taq.print_barcodes();
+
+	std::cout<<"Compressed Barcodes:\n\n";
+	taq.print_barcodes_compressed();
 
 	bool cons =  taq.is_consistent();
 
