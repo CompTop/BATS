@@ -34,6 +34,9 @@ struct Type_A{
     std::vector<AD> basis;
     std::vector<AD> inv_basis;
     
+	bool fwd_sweep_complete = 0;
+	bool bwd_sweep_complete = 0;
+
     /* constructor 
     *   ms - Vector of matrices
     *   as - Vector of bools indication arrow directions
@@ -141,6 +144,7 @@ struct Type_A{
                 Pmats.emplace_back(Pmat);
             }
         }
+		fwd_sweep_complete = 1;
     }
     
     /*
@@ -159,6 +163,9 @@ struct Type_A{
     *  Performs the Backward sweep of the quiver algorithm
     */
     void backward_sweep(){
+		if( !fwd_sweep_complete ){
+			throw std::runtime_error("Forward sweep not completed");
+		}
         L<DI> Lt; // The L that gets passed
         for(size_t i=n-1; i<n; i--){ // i<n instead of i>=0 for unsignedint
             if(arrow_dir[i]==0){
@@ -203,6 +210,51 @@ struct Type_A{
 
             }
         }
-        
+        bwd_sweep_complete = 1;
     }
+
+	// copy for consistency check
+	std::vector<AD> mats_copy;
+	bool is_copy_saved = 0;
+	/*
+	* Create copy for consistency check
+	*/
+	void create_copy_of_mats(){
+		AD a;
+		for(size_t i=0;i<n;i++){
+			a = mats[i].copy();
+			mats_copy.emplace_back(a);
+		}
+		is_copy_saved = 1;
+	}
+
+
+	/*
+	* Check consistency of factorization
+	*/
+	bool is_consistent(){
+		if( !is_copy_saved )
+			throw std::runtime_error("Copy of mats not saved");
+		if( ! bwd_sweep_complete || !fwd_sweep_complete )
+			throw std::runtime_error("Factorization not complete");
+		std::vector<AD> mats_recon2;
+		for(size_t i=0;i<n;i++){
+			if(arrow_dir[i]==0){
+				auto mtemp = matmul(matmul(
+						basis[i],ELmats[i]),inv_basis[i+1]
+					);
+				mats_recon2.emplace_back(mtemp);
+			}else{
+				auto mtemp = matmul(matmul(
+						basis[i+1],ELHmats[i]),inv_basis[i]
+					);
+				mats_recon2.emplace_back(mtemp);
+			}
+		}
+		bool consistent = 1;
+		for(size_t i=0;i<n;i++){
+			consistent &=  (mats_copy[i]==mats_recon2[i]);
+		}
+		return consistent;
+	}
 };
