@@ -8,6 +8,10 @@
 #include <algorithm>
 #include "matrix_interface.h"
 
+//required for fill_rand<Rational<int>>()
+#include <linalg/field.h>
+
+
 // storage type
 template<typename F,typename Acc>
 struct Dense{};
@@ -574,8 +578,12 @@ template<typename F,typename M>
 void fill_rand(M mat){
     for(size_t i=0;i<mat.m;i++)
         for(size_t j=0;j<mat.n;j++)
-            mat(i,j)=F(rand());
+			if constexpr(std::is_same<F,Rational<int>>::value)
+            	mat(i,j)=F(rand()%10);
+			else
+				mat(i,j)=F(rand());
 }
+
 
 
 // Find pivot in lower right block of pr,pc
