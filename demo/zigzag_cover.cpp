@@ -55,5 +55,18 @@ int main() {
 	}
 	std::cout << "*" << std::endl;
 
+	(void) data; // to remove warnings
+
+	// create quiver, factorize and check consistency
+	auto taq = Type_A<FT>(mat,etype);
+	taq.create_copy_of_mats();
+
+	taq.forward_sweep();
+	taq.backward_sweep();
+
+	bool cons =  taq.is_consistent();
+
+	std::cout<<"Quiver factorization is"<<( cons?"":" NOT" )<<" consistent !\n";
+
 	return 0;
 }
