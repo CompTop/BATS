@@ -64,9 +64,19 @@ int main() {
 	taq.forward_sweep();
 	taq.backward_sweep();
 
+	// print E mats
+	for(size_t i=0;i<taq.n;i++){   
+		std::cout<<"Arrow Dir :"<<taq.arrow_dir[i]<<"\n";
+		if(taq.arrow_dir[i]==0){
+		    taq.ELmats[i].print();
+		}else{
+		    taq.ELHmats[i].print();
+		}
+	}
+
 	bool cons =  taq.is_consistent();
 
-	std::cout<<"Quiver factorization is"<<( cons?"":" NOT" )<<" consistent !\n";
+	std::cout<<"Quiver factorization is"<<( cons?"":" NOT" )<<" consistent !\n\n";
 
 	return 0;
 }
