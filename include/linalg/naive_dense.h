@@ -64,7 +64,7 @@ struct MemAcc{
 
     MemAcc(size_t mm, size_t nn, F* mat) : m(mm), n(nn), mat(mat) {}
 	// null constructor
-	MemAcc(){ m=0;n=0;}
+	MemAcc(){ m=0;n=0;mat=NULL;}
 
 	void init(size_t mm, size_t nn, F* mmat){
 		m=mm;
@@ -218,7 +218,7 @@ struct A<Dense<F,Acc>>{
 	using FieldType = F;
 
     size_t m,n;
-    F* mat;
+    F* mat = NULL;
 	MemAcc<F,Acc> macc;
 
 	// null constructor
@@ -312,7 +312,7 @@ struct A<Dense<F,Acc>>{
 	static A<DI> identity(size_t n) {
 		A<DI> mat = A<DI>(n,n);
 		for (size_t j = 0; j < n; j++) {
-			mat(j,j) = 1;
+			mat(j,j) = F(1);
 		}
 		return mat;
 	}
@@ -550,6 +550,13 @@ void make_diag_ones(M mat){
     for(size_t i=0;i<mat.m;i++)
         mat(i,i)=1;
 }
+
+template<typename F,typename M>
+void make_diag_ones(M mat){
+    for(size_t i=0;i<mat.m;i++)
+        mat(i,i)=F(1);
+}
+
 template<typename M>
 void fill_zeros(M mat){
     for(size_t i=0;i<mat.m;i++)
@@ -561,6 +568,13 @@ void fill_rand(M mat){
     for(size_t i=0;i<mat.m;i++)
         for(size_t j=0;j<mat.n;j++)
             mat(i,j)=rand();
+}
+
+template<typename F,typename M>
+void fill_rand(M mat){
+    for(size_t i=0;i<mat.m;i++)
+        for(size_t j=0;j<mat.n;j++)
+            mat(i,j)=F(rand());
 }
 
 
@@ -606,9 +620,9 @@ auto LEUP_fact(A<Dense<F,Acc>>& mat_arg){
 
     std::vector<std::pair<size_t,size_t>> pivots;
 
-    make_diag_ones(Lmat);
-    make_diag_ones(Pmat);
-    make_diag_ones(Umat);
+    make_diag_ones<F>(Lmat);
+    make_diag_ones<F>(Pmat);
+    make_diag_ones<F>(Umat);
 
     for(pr=0,pc=0;pc<n;pc++,pr++){
         //if pr++ exceeds range
@@ -636,7 +650,7 @@ auto LEUP_fact(A<Dense<F,Acc>>& mat_arg){
         }
         //record pivot
         pivots.push_back(std::make_pair(pr,pc));
-        ELmat(pr,pc)=1;
+        ELmat(pr,pc)=F(1);
 
     }
     //extract U from upper echelon mat

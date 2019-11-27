@@ -3,6 +3,7 @@
 #include <linalg/naive_dense.h>
 #include <linalg/field.h>
 
+using std::cout;
 
 // type A quiver
 template< typename F>
@@ -79,11 +80,11 @@ struct Type_A{
         P<DI> Pmat;
         U<DI> Umat;
         ELH<DI> ELHmat;
-        
         for(size_t i=0;i<n;i++){
             if(arrow_dir[i]==0){
                 // LEUP Factorization
                 std::tie(Lmat, ELmat, Umat, Pmat) = LEUP_fact(mats[i]);
+
                 auto Pinv = Pmat.Trp(); // inverse of transpose
                 if(i<n-1){
                     if(arrow_dir[i+1]==0){
@@ -148,7 +149,7 @@ struct Type_A{
     */
     auto L_inverse(L<DI> La){
         auto Linv = L<DI>(La.m,La.n);
-        make_diag_ones(Linv);
+        make_diag_ones<F>(Linv);
         apply_inverse_on_left(La,Linv);
         return Linv;
     }
