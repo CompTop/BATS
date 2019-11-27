@@ -74,6 +74,9 @@ int main() {
 		}
 	}
 
+	//print barcodes
+	taq.print_barcodes();
+
 	bool cons =  taq.is_consistent();
 
 	std::cout<<"Quiver factorization is"<<( cons?"":" NOT" )<<" consistent !\n\n";

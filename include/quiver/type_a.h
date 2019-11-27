@@ -2,8 +2,10 @@
 
 #include <linalg/naive_dense.h>
 #include <linalg/field.h>
+#include <string>
 
 using std::cout;
+using std::string;
 
 // type A quiver
 template< typename F>
@@ -256,5 +258,70 @@ struct Type_A{
 			consistent &=  (mats_copy[i]==mats_recon2[i]);
 		}
 		return consistent;
+	}
+
+
+	/*
+	*   print barcodes
+	*/
+	void print_barcodes(){
+		std::vector<string> lines;
+		std::vector<int> active,active2;
+		A<DI> Em;
+		for(size_t i=0;i<dims[0];i++){
+		    lines.emplace_back("*");
+		    active.emplace_back(i);
+		}
+		for(size_t kk=0;kk<ELmats.size();kk++){
+		    if(arrow_dir[kk]==0){
+		        Em=ELmats[kk];
+		        active2.clear();
+		        active2.resize(Em.ncol());
+		        for(size_t j=0; j<Em.ncol(); j++){
+		            size_t i;
+		            for(i=0; i<Em.nrow(); i++){
+		                if(Em(i,j)==F(1)){
+		                    lines[active[i]]+="<--*";
+		                    active2[j]=active[i];
+		                    break;
+		                }
+		            }
+		            if(i==Em.nrow()){
+		                string plu ="";
+		                for(size_t l=0;l<kk+1;l++)
+		                    plu+="    ";
+		                plu+="*";
+		                active2[j]=lines.size();
+		                lines.emplace_back(plu);
+		            }
+		        }
+		        std::swap(active,active2);
+		    }else{
+		        Em=ELHmats[kk];
+		        active2.clear();
+		        active2.resize(Em.nrow());
+		        for(int i=Em.nrow()-1; i>=0; i--){
+		            int j;
+		            for(j=Em.ncol()-1; j>=0; j--){
+		                if(Em(i,j)==F(1)){
+		                    lines[active[j]]+="-->*";
+		                    active2[i]=active[j];
+		                    break;
+		                }
+		            }
+		            if(j==-1){
+		                string plu ="";
+		                for(size_t l=0;l<kk+1;l++)
+		                    plu+="    ";
+		                plu+="*";
+		                active2[i]=lines.size();
+		                lines.emplace_back(plu);
+		            }
+		        }
+		        std::swap(active,active2);
+		    }
+		}
+		for(size_t i=0;i<lines.size();i++)
+		cout<<lines[i]<<"\n";
 	}
 };
