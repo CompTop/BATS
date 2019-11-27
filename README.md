@@ -80,7 +80,27 @@ The matrices used in the chain complex and reduction are determined by the templ
 So homology will be computed with coefficients in `F3`.
 
 
+# Fields
 
+BATS linear algebra routines are templated over the choice of field, so you can choose between provided field types, or implement your own.
+
+## Field mod a prime
+
+BATS contains a type for mod-p arithmetic: `ModP<IntT, P>`.  `IntT` is the type of the underlying data, and `P` should be a prime number (we check with a `static_assert` that it is indeed prime at compile time). For example,
+```cpp
+ModP<int, 3>
+```
+will perform arithmetic with the integers mod 3.
+
+## Rationals
+
+BATS supports rational arithmetic with an provided `Rational<IntT>` template.
+
+When computing with the in-built rational type, it is possible that the factorizations used in the quiver will create larger and larger numerators and denominators, eventually leading to overflow.  To avoid this, we recommend `Rational<int64_t>` types (instead of 32 bit-types).  You may also consider using big-int type packages which will hold arbitrarily large integers.
+
+If you want to use the in-built rational type, you can pass in a compiler flag `-DWARN_RATIONAL_OVERFLOW` which will check whether `Rational<int64_t>` and `Rational<int32_t>` types are in danger of overflow (other integer types will not perform checks).
+
+We should note that on "real" problems, induced maps on homology don't seem to run into these overflow issues.  These issues have been observed when testing the quiver algorithms on random matrices.  If you find an example in the wild, we're interested to know!
 
 
 # Contributing
