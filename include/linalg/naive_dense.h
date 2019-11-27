@@ -360,7 +360,7 @@ auto matmul(A<Dense<F,Acc1>> m1, A<Dense<F,Acc2>> m2){
     return prod;
 }
 
-
+//inplace
 template< typename F,typename Acc1>
 void matmul(A<Dense<F,Acc1>> m1, VectorView<F> y){
     F temp[m1.m]; 
