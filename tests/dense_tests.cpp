@@ -271,19 +271,41 @@ TEST_CASE_TEMPLATE("Quiver Alg - self consistency", F, ModP<int,2>, ModP<int,3>,
 
 	using DI = Dense<F,ColMaj>;
 	using AD = A<DI>;
+	
+	SUBCASE(""){ srand(0); }
+	SUBCASE(""){ srand(1); }
+	SUBCASE(""){ srand(2); }
+	SUBCASE(""){ srand(3); }
+	SUBCASE(""){ srand(4); }
+	SUBCASE(""){ srand(5); }
 
 
 	size_t n=10;
+	size_t maxdim = 10;
+
+	// two large length quivers
+	SUBCASE(""){ n=50;  }
+	SUBCASE(""){ n=100; }
+
+	// two small length ,large dimensional quivers
+	SUBCASE(""){ maxdim=50;  }
+	SUBCASE(""){ maxdim=100; }
+
+	// two large length ,large dimensional quivers
+	SUBCASE(""){ n=50; maxdim=50;  }
+	SUBCASE(""){ n=100; maxdim=100; }
+
+
 	std::vector<AD> mats;
 	std::vector<bool> arrow_dir;
 	std::vector<size_t> dims;
 	
 	// generate random type-A quiver with random dimensions
 	AD a1;
-	size_t dim1 = 1+rand()%10;
+	size_t dim1 = 1+rand()%maxdim;
 	dims.emplace_back(dim1);
 	for(size_t i=0;i<n;i++){
-		size_t dim_ip1 = 1+rand()%10;
+		size_t dim_ip1 = 1+rand()%maxdim;
 		dims.emplace_back(dim_ip1);
 		
 		arrow_dir.emplace_back(rand()%2);
