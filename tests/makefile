@@ -5,7 +5,7 @@ DBFLAGS = -g -Og
 CXX = g++
 IFLAGS = -I../include
 
-default: rips.out rips.prof rips.db
+default: field.out dense_tests.out
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)

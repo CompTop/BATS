@@ -575,13 +575,11 @@ void fill_rand(M mat){
 }
 
 template<typename F,typename M>
-void fill_rand(M mat){
+void fill_rand(M mat, int vmax=10){
+	// fill put random numbers in matrix
     for(size_t i=0;i<mat.m;i++)
         for(size_t j=0;j<mat.n;j++)
-			if constexpr(std::is_same<F,Rational<int>>::value)
-            	mat(i,j)=F(rand()%10);
-			else
-				mat(i,j)=F(rand());
+			mat(i,j)=F(rand()%vmax);
 }
 
 

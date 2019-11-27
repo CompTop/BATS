@@ -235,17 +235,17 @@ public:
   }
 
   ModP operator/(const ModP &b) const {
-    if ((b.val & 0x1) == 0) {throw "Division by zero!";}
+    if ((b.val & 0x1) == 0) {throw std::runtime_error("Division by zero!");}
     return ModP(val); // or
   }
 
   ModP& operator/=(const ModP &b) {
-    if ((b.val & 0x1) == 0) {throw "Division by zero!";}
+    if ((b.val & 0x1) == 0) {throw std::runtime_error("Division by zero!");}
     return *this; // no-op
   }
 
   ModP inv() const {
-    if ((val & 0x1) == 0) {throw "Inversion of zero!";}
+    if ((val & 0x1) == 0) {throw std::runtime_error("Inversion of zero!");}
     return ModP(0x1);
   }
 
@@ -306,6 +306,21 @@ private:
     int s = sgn(d);
     n = s * (n / gcd);
     d = s * (d / gcd);
+    #ifdef WARN_RATIONAL_OVERFLOW
+    if constexpr(std::is_same<IntT,int32_t>::value) {
+      const int32_t mask = 0x7F00; // ignore sign bit
+      auto n2 = n < 0 ? -n : n;  // make numerator positive
+      if ( ((n2 |d) & mask) > 0) {
+        std::cout<< "Rational overflow possibility! " << std::endl;
+      }
+    } else if constexpr(std::is_same<IntT, int64_t>::value) {
+      const int64_t mask = 0x7FFF0000; // ignore sign bit
+      auto n2 = n < 0 ? -n : n;
+      if ( ((n2|d) & mask) != 0) {
+        std::cout<< "Rational overflow possibility! " << std::endl;
+      }
+    }
+    #endif
   }
 
 public:
@@ -376,17 +391,17 @@ public:
   }
 
   Rational inv() const {
-    if (n == 0) {throw "Inversion of zero!";}
+    if (n == 0) {throw std::runtime_error("Inversion of zero!");}
     return Rational(d, n);
   }
 
   Rational operator/( const Rational &b) const {
-    if (b.n == 0) {throw "Division by zero!";}
+    if (b.n == 0) {throw std::runtime_error("Division by zero!");}
     return Rational(n * b.d, d * b.n);
   }
 
   Rational& operator/=( const Rational &b) {
-    if (b.n == 0) {throw "Division by zero!";}
+    if (b.n == 0) {throw std::runtime_error("Division by zero!");}
     n *= b.d;
     d *= b.n;
     reduce();

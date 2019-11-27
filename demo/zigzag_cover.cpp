@@ -3,7 +3,8 @@
 
 #include <bats.h>
 
-#define FT ModP<int, 3>
+#define FT ModP<int, 2>
+// #define FT Rational<int>
 #define VT SparseVector<FT>
 #define MT ColumnMatrix<VT>
 
@@ -65,7 +66,7 @@ int main() {
 	taq.backward_sweep();
 
 	// print E mats
-	for(size_t i=0;i<taq.n;i++){   
+	for(size_t i=0;i<taq.n;i++){
 		std::cout<<"Arrow Dir :"<<taq.arrow_dir[i]<<"\n";
 		if(taq.arrow_dir[i]==0){
 		    taq.ELmats[i].print();
