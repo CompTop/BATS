@@ -3,6 +3,8 @@
 Functors from one type of diagram to another
 */
 #include "diagram.h"
+#include <topology/cover.h>
+#include <topology/rips.h>
 #include <complex/simplicial_complex.h>
 #include <complex/simplicial_map.h>
 #include <chain/chain_complex.h>

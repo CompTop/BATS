@@ -1,3 +1,5 @@
+#pragma once
+
 #include <assert.h>
 #include <unordered_map>
 #include <vector>
@@ -48,8 +50,8 @@ struct VectorView{
         return;
     }
 
-    inline size_t size() const { 
-		return (end - start)/stride ; 
+    inline size_t size() const {
+		return (end - start)/stride ;
 	}
 
     inline T& operator[](size_t i) {return *(start + stride*i); }
@@ -363,7 +365,7 @@ auto matmul(A<Dense<F,Acc1>> m1, A<Dense<F,Acc2>> m2){
 
 template< typename F,typename Acc1>
 void matmul(A<Dense<F,Acc1>> m1, VectorView<F> y){
-    F temp[m1.m]; 
+    F temp[m1.m];
     A<Dense<F,Acc1>> prod(m1.m,1,temp);
     for(size_t i=0;i<m1.m;i++)
             for(size_t k=0;k<m1.n;k++){
@@ -374,7 +376,7 @@ void matmul(A<Dense<F,Acc1>> m1, VectorView<F> y){
 
 template< typename F,typename Acc1>
 void matmul(VectorView<F> y, A<Dense<F,Acc1>> m1 ){
-    F temp[m1.n]; 
+    F temp[m1.n];
     A<Dense<F,Acc1>> prod(1,m1.n,temp);
     for(size_t j=0;j<m1.n;j++)
             for(size_t k=0;k<m1.n;k++){
@@ -436,7 +438,7 @@ L<Dense<F,Acc2>> commute(EL<Dense<F,Acc1>> ELmat, L<Dense<F,Acc2>> Lmat) {
     for (j = 0; j < m; j++) {
         Lret(j,j) = F(1); // default unit-diagonal
     }
-	
+
     // perform actual commutation
     for (j = 0; j < n; j++) {
         if (idx_map[j] == bats::NO_IND) { break; }
@@ -708,4 +710,3 @@ auto apply_inverse_on_right(A<Dense<F,Acc2>> Amat,L<Dense<F,Acc1>> Lmat) {
     auto ret2 = ret.TJConj();
     return ret2;
 }
-

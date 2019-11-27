@@ -1,32 +1,7 @@
 #include <vector>
 #include <set>
 
-#include <linalg/field.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
-
-#include <complex/cell_complex.h>
-#include <complex/simplicial_complex.h>
-#include <homology/reduction.h>
-#include <complex/cell_map.h>
-#include <complex/simplicial_map.h>
-
-#include <chain/chain_complex.h>
-#include <homology/basis.h>
-
-#include <chain/chain_map.h>
-#include <homology/induced_map.h>
-
-#include <topology/metric.h>
-#include <topology/cover.h>
-#include <topology/data_gen.h>
-#include <topology/rips.h>
-#include <topology/inclusion.h>
-
-#include <multigraph/diagram.h>
-#include <multigraph/functors.h>
-
-#include <quiver/quiver.h>
+#include <bats.h>
 
 #define FT ModP<int, 3>
 #define VT SparseVector<FT>
