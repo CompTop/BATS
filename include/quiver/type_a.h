@@ -160,7 +160,7 @@ struct Type_A{
     */
     void backward_sweep(){
         L<DI> Lt; // The L that gets passed
-        for(int i=n-1;i>=0;i--){
+        for(size_t i=n-1; i<n; i--){ // i<n instead of i>=0 for unsignedint
             if(arrow_dir[i]==0){
                 if (i==n-1){ // check if first step, then no incoming L
                     Lt = Lmats[i];
