@@ -5,6 +5,7 @@
 
 #include <linalg/naive_dense.h>
 #include <linalg/field.h>
+#include <quiver/type_a.h>
 
 #define F3 ModP<int, 3>
 
@@ -263,4 +264,95 @@ TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Ration
 	CHECK( (matmul(Lmat,Linv) == I) );
 	CHECK( (matmul(Linv,Lmat) == I) );
 
+}
+
+
+TEST_CASE_TEMPLATE("Quiver Alg - self consistency", F, ModP<int,2>, ModP<int,3>, ModP<int, 5>) {
+
+	using DI = Dense<F,ColMaj>;
+	using AD = A<DI>;
+
+
+	size_t n=10;
+	std::vector<AD> mats;
+	std::vector<bool> arrow_dir;
+	std::vector<size_t> dims;
+	
+	// generate random type-A quiver with random dimensions
+	AD a1;
+	size_t dim1 = 1+rand()%10;
+	dims.emplace_back(dim1);
+	for(size_t i=0;i<n;i++){
+		size_t dim_ip1 = 1+rand()%10;
+		dims.emplace_back(dim_ip1);
+		
+		arrow_dir.emplace_back(rand()%2);
+		
+		if(arrow_dir[i]==0)
+		    a1 = AD(dims[i],dims[i+1]);
+		else
+		    a1 = AD(dims[i+1],dims[i]);
+		fill_rand<F>(a1);
+		mats.emplace_back(a1);
+//a1.print();
+	}
+
+	// create copy to compare later
+	std::vector<AD> mats_copy;
+	AD a3;
+	for(size_t i=0;i<n;i++){
+		a3 = mats[i].copy();
+		mats_copy.emplace_back(a3);
+	}
+
+	// create object
+	auto taq = Type_A<F>(mats,arrow_dir);
+	// forward sweep
+	taq.forward_sweep();
+
+	// check consistency of forward sweep
+	std::vector<AD> mats_recon;
+	for(size_t i=0;i<taq.n;i++){
+		if(taq.arrow_dir[i]==0){
+		    auto mtemp = matmul(matmul(
+							taq.basis[i],
+							matmul(taq.Lmats[i],taq.ELmats[i])),
+							taq.inv_basis[i+1]
+						 );
+		    mats_recon.emplace_back(mtemp);
+		}else{
+		    auto mtemp = matmul(matmul(
+							taq.basis[i+1],
+							matmul(taq.ELHmats[i],taq.Lmats[i])),
+							taq.inv_basis[i]
+						 );
+		    mats_recon.emplace_back(mtemp);
+		}
+	}
+	for(size_t i=0;i<n;i++){
+		CHECK( (mats_copy[i]==mats_recon[i]) );
+	}
+
+	//Backward sweep
+	taq.backward_sweep();
+
+	// check quiver factorization consistency
+	std::vector<AD> mats_recon2;
+	for(size_t i=0;i<taq.n;i++){
+		if(taq.arrow_dir[i]==0){
+		    auto mtemp = matmul(matmul(
+						taq.basis[i],taq.ELmats[i]),taq.inv_basis[i+1]
+					);
+		    mats_recon2.emplace_back(mtemp);
+		}else{
+		    auto mtemp = matmul(matmul(
+						taq.basis[i+1],taq.ELHmats[i]),taq.inv_basis[i]
+					);
+		    mats_recon2.emplace_back(mtemp);
+		}
+	}
+
+	for(size_t i=0;i<n;i++){
+    	CHECK( (mats_copy[i]==mats_recon2[i]) );
+	}
 }
