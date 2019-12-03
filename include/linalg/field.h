@@ -289,7 +289,7 @@ public:
 
 // sign function
 template <typename T>
-inline int sgn(T val) {
+inline T sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
 
@@ -303,7 +303,7 @@ private:
   // reduction of numerator and denominator
   void reduce() {
     IntT gcd = std::gcd(n, d);
-    int s = sgn(d);
+    IntT s = sgn(d);
     n = s * (n / gcd);
     d = s * (d / gcd);
     #ifdef WARN_RATIONAL_OVERFLOW
@@ -311,13 +311,13 @@ private:
       const int32_t mask = 0x7F00; // ignore sign bit
       auto n2 = n < 0 ? -n : n;  // make numerator positive
       if ( ((n2 |d) & mask) > 0) {
-        std::cout<< "Rational overflow possibility! " << std::endl;
+        std::cerr<< "Rational overflow possibility! " << std::endl;
       }
     } else if constexpr(std::is_same<IntT, int64_t>::value) {
       const int64_t mask = 0x7FFF0000; // ignore sign bit
       auto n2 = n < 0 ? -n : n;
       if ( ((n2|d) & mask) != 0) {
-        std::cout<< "Rational overflow possibility! " << std::endl;
+        std::cerr<< "Rational overflow possibility! " << std::endl;
       }
     }
     #endif
