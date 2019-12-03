@@ -102,6 +102,14 @@ If you want to use the in-built rational type, you can pass in a compiler flag `
 
 We should note that on "real" problems, induced maps on homology don't seem to run into these overflow issues.  These issues have been observed when testing the quiver algorithms on random matrices.  If you find an example in the wild, we're interested to know!
 
+# Parallelism
+
+This package supports OpenMP by default.  If you want to specify the number of threads (instead of using your environment default), try setting the environment variable `OMP_NUM_THREADS`, e.g.
+```
+time OMP_NUM_THREADS=2 ./zigzag_cylinder.out
+```
+
+
 
 # Contributing
 Code should use C++17 standard
