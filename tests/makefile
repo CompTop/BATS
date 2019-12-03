@@ -5,7 +5,7 @@ DBFLAGS = -g -Og
 CXX = g++
 IFLAGS = -I../include
 
-default: field.out dense_tests.out
+default: field.out dense_tests.out col_matrix.out sparse_vector.out util.out
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
@@ -17,6 +17,13 @@ default: field.out dense_tests.out
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(DBFLAGS)
 
 %: %.out %.prof %.db
+
+test: field.out dense_tests.out col_matrix.out sparse_vector.out util.out
+	./field.out
+	./dense_tests.out
+	./col_matrix.out
+	./sparse_vector.out
+	./util.out
 
 .PHONY: clean
 clean:

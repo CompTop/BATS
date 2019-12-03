@@ -8,4 +8,12 @@ To run tests, build as follows,
 make -j
 ./dense_tests.out
 ./field.out
+./util.out
+./sparse_vector.out
+./col_matrix.out
+```
+
+or you can build and run tests using
+```bash
+make test -j
 ```
