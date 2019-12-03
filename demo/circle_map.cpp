@@ -1,18 +1,5 @@
 #include <iostream>
-#include <linalg/field.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
-
-#include <complex/cell_complex.h>
-#include <complex/simplicial_complex.h>
-#include <homology/reduction.h>
-#include <complex/cell_map.h>
-
-#include <chain/chain_complex.h>
-#include <homology/basis.h>
-
-#include <chain/chain_map.h>
-#include <homology/induced_map.h>
+#include <bats.h>
 
 #define FT ModP<int, 3>
 #define VT SparseVector<FT, size_t>
