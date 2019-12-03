@@ -20,4 +20,4 @@ default: field.out dense_tests.out
 
 .PHONY: clean
 clean:
-	rm *.out *.prof *.db
+	rm *.out
