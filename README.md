@@ -44,10 +44,10 @@ We'll now look a bit more closely at how thing work
 We first build a diagram of spaces.  This could potentially be done in many ways (depending on the application).  In `zigzag_cover.cpp`, we use a cover of the cube, and consider inclusion maps from sets to unions with the adjacent sets
 ```cpp
 // this just creates data
-auto x = sample_cube<double>(d, 1000);
+auto X = sample_cube<double>(d, 1000);
 
 /// project onto first coordinate
-auto p = coordinate_projection(x, d, 0);
+auto p = coordinate_projection(X, 0);
 
 // create open cover using projection
 auto cover = uniform_interval_cover(p, 20);
@@ -56,7 +56,7 @@ auto cover = uniform_interval_cover(p, 20);
 auto SetDgm = linear_cover_union_diagram(cover);
 
 // Diagram of Spaces and maps
-auto TopDgm = Rips(SetDgm, x, d, rmax, 2);
+auto TopDgm = Rips(SetDgm, X, Euclidean(), rmax, 2);
 ```
 The diagram of spaces is now held in `TopDgm`.
 

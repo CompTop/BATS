@@ -25,17 +25,46 @@ struct RevColMaj{};
 // represents either a row view or column view
 template<typename T>
 struct VectorView{
-    T* start;
-    T* end;
+    T* first;
+    T* last;
 	int stride;
 
-    VectorView(T* start, T* end, size_t s) : start(start), end(end), stride(s) {};
+    VectorView(T* start, T* end, size_t s) : first(start), last(end), stride(s) {};
+
+	class Iterator {
+	private:
+		T* ptr;
+		int stride;
+	public:
+		Iterator(const T* p, const int s) noexcept : ptr(p), stride(s) { }
+
+		// Prefix ++ overload
+        Iterator& operator++() {
+            ptr+=stride;
+            return *this;
+        }
+
+		// Postfix ++ overload
+		Iterator operator++(int) {
+			Iterator iterator = *this;
+			++*this;
+			return iterator;
+		}
+
+		inline bool operator!=(const Iterator& other) { return ptr != other.ptr;}
+
+		inline T operator*() { return *ptr;}
+
+	};
+
+	Iterator begin() { return Iterator(first, stride); }
+	Iterator end() { return Iterator(last, stride); }
 
     // self += a * x
     void axpy(const T a, const VectorView<T> x){
-        T* ptr = start;
-        T* xptr = x.start;
-        while (ptr != end) {
+        T* ptr = first;
+        T* xptr = x.first;
+        while (ptr != last) {
             *ptr += a * (*xptr);
             ptr+=stride;
             xptr+=x.stride;
@@ -44,9 +73,9 @@ struct VectorView{
     }
 
     void operator=(const VectorView<T> x){
-        T* ptr = start;
-        T* xptr = x.start;
-        while (ptr != end) {
+        T* ptr = first;
+        T* xptr = x.first;
+        while (ptr != last) {
             *ptr = (*xptr);
             ptr+=stride;
             xptr+=x.stride;
@@ -55,11 +84,37 @@ struct VectorView{
     }
 
     inline size_t size() const {
-		return (end - start)/stride ;
+		return (last - first)/stride ;
 	}
 
-    inline T& operator[](size_t i) {return *(start + stride*i); }
+    inline T& operator[](size_t i) {return *(first + stride*i); }
+	inline const T& operator[](size_t i) const {return *(first + stride*i); }
+	inline T& operator()(size_t i) {return *(first + stride*i); }
+	inline const T& operator()(size_t i) const {return *(first + stride*i); }
+
+	T norm() const {
+		T n = T(0);
+		T* ptr = first;
+		while (ptr != last) {
+			n += *ptr;
+			ptr += stride;
+		}
+		return n;
+	}
+
+	// basic arithmetic
+	VectorView& operator/=(const T c) {
+		T* ptr = first;
+		while (ptr != last) {
+			*ptr /= c;
+			ptr += stride;
+		}
+		return this;
+	}
 };
+
+template<typename T>
+inline T norm(const VectorView<T> &v) { return v.norm(); }
 
 template<typename F, typename Acc>
 struct MemAcc{
@@ -76,7 +131,11 @@ struct MemAcc{
 		mat=mmat;
 	}
 
-    inline F& operator()(int i, int j) {
+	// single element access
+	inline F& operator()(const size_t k) { return mat[k]; }
+	inline const F& operator()(const size_t k) const { return mat[k]; }
+
+    inline F& operator()(const int i, const int j) {
         if constexpr(std::is_same<Acc,ColMaj>::value)
             return mat[j*m+i];
         else if constexpr(std::is_same<Acc,RowMaj>::value)
@@ -87,8 +146,19 @@ struct MemAcc{
             return mat[(m-i-1)*n+(n-j-1)];
     }
 
+	inline const F& operator()(const int i, const int j) const {
+		if constexpr(std::is_same<Acc,ColMaj>::value)
+			return mat[j*m+i];
+		else if constexpr(std::is_same<Acc,RowMaj>::value)
+			return mat[i*n+j];
+		else if constexpr(std::is_same<Acc,RevColMaj>::value)
+			return mat[(n-j-1)*m+(m-i-1)];
+		else if constexpr(std::is_same<Acc,RevRowMaj>::value)
+			return mat[(m-i-1)*n+(n-j-1)];
+	}
+
     // return a column view of column j
-    inline VectorView<F> operator[](size_t j) {
+    inline VectorView<F> operator[](const size_t j) {
         if constexpr(std::is_same<Acc,ColMaj>::value)
             return VectorView<F>(mat + m*j, mat + m*(j+1),1);
         else if constexpr(std::is_same<Acc,RowMaj>::value)
@@ -99,8 +169,20 @@ struct MemAcc{
             return VectorView<F>(mat + m*n -j-1, mat -1-j, -n );
     }
 
+	// return a column view of column j
+	inline const VectorView<F> operator[](const size_t j) const {
+		if constexpr(std::is_same<Acc,ColMaj>::value)
+			return VectorView<F>(mat + m*j, mat + m*(j+1),1);
+		else if constexpr(std::is_same<Acc,RowMaj>::value)
+			return VectorView<F>(mat + j, mat + m*n + j, n );
+		else if constexpr(std::is_same<Acc,RevColMaj>::value)
+			return VectorView<F>( mat + m*(n-j)-1,mat + m*(n-1-j)-1,-1);
+		else if constexpr(std::is_same<Acc,RevRowMaj>::value)
+			return VectorView<F>(mat + m*n -j-1, mat -1-j, -n );
+	}
+
 	// return a view of row i
-    inline VectorView<F> r(size_t i) {
+    inline VectorView<F> r(const size_t i) {
         if constexpr(std::is_same<Acc,ColMaj>::value)
             return VectorView<F>(mat + i, mat + m*n + i, m );
         else if constexpr(std::is_same<Acc,RowMaj>::value)
@@ -251,6 +333,7 @@ struct A<Dense<F,Acc>>{
 
     inline size_t nrow() const { return m; }
     inline size_t ncol() const { return n; }
+	inline size_t size() const { return m * n; }
 
     void print(){
         for( size_t i=0; i<m; i++){
@@ -277,15 +360,20 @@ struct A<Dense<F,Acc>>{
     inline VectorView<F> operator[](size_t j) {
         return macc[j];
     }
+	inline const VectorView<F> operator[](size_t j) const {
+		return macc[j];
+	}
 
 	// return a row view of row i
     inline VectorView<F> r(size_t i) {
         return macc.r(i);
     }
 
-    inline F& operator()(int i, int j) {
-        return macc(i,j);
-    }
+	inline F& operator()(const size_t k) { return macc(k); }
+	inline const F& operator()(const size_t k) const { return macc(k); }
+    inline F& operator()(int i, int j) { return macc(i,j); }
+	inline const F& operator()(int i, int j) const { return macc(i,j); }
+
     void free(){
         delete mat;
     }

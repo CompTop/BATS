@@ -3,6 +3,7 @@
 Functors from one type of diagram to another
 */
 #include "diagram.h"
+#include <topology/data.h>
 #include <topology/cover.h>
 #include <topology/rips.h>
 #include <complex/simplicial_complex.h>
@@ -13,11 +14,11 @@ Functors from one type of diagram to another
 #include <homology/induced_map.h>
 
 // Create diagram of Rips complexes from subsets
-template <typename T>
+template <typename T, typename M>
 Diagram<SimplicialComplex, CellularMap> Rips(
 	const Diagram<std::set<size_t>, std::vector<size_t>> &D,
-	const std::vector<T> &x,
-	const size_t xdim, // dimension of point cloud
+	const Matrix<T> &X,
+	const M &dist, // distance
 	const T rmax, // maximum radius
 	const size_t dmax // maximum simplex dimension
 ) {
@@ -30,8 +31,8 @@ Diagram<SimplicialComplex, CellularMap> Rips(
 	// apply functor to nodes
 	#pragma omp parallel for
 	for (size_t i = 0; i < n; i++) {
-	    auto xi = get_subset(x, xdim, D.node[i]);
-	    TD.set_node(i, RipsComplex(xi, xdim, rmax, dmax));
+	    auto XI = get_subset(X, D.node[i]);
+	    TD.set_node(i, RipsComplex(XI, dist, rmax, dmax));
 	}
 
 	// apply functor to edges

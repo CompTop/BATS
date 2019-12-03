@@ -9,50 +9,73 @@ utilities for generating data
 #include <iterator>
 #include <iostream>
 
-#include "metric.h"
+#include "data.h"
 
+
+
+// add normal_noise
+// operates in-place on X
 template <typename T>
-void add_normal_noise(std::vector<T> &x,
+Matrix<T>& add_normal_noise(Matrix<T> &X,
     const T mu=T(0),
     const T sigma=T(1)
 ) {
     std::default_random_engine generator;
-    std::normal_distribution<T> distribution(mu,sigma);
+    std::normal_distribution distribution(mu,sigma);
 
     #pragma omp simd
-    for (size_t i = 0; i < x.size(); i++) {
-        x[i] += distribution(generator);
+    for (size_t i = 0; i < X.size(); i++) {
+        X(i) += distribution(generator);
     }
+    return X;
 }
+
+template <typename T>
+Matrix<T>& add_uniform_noise(Matrix<T> &X,
+    const T lb = T(0),
+    const T ub = T(1)
+) {
+    std::default_random_engine generator;
+    std::uniform_real_distribution distribution(lb, ub);
+
+    #pragma omp simd
+    for (size_t i = 0; i < X.size(); i++) {
+        X(i) += distribution(generator);
+    }
+    return X;
+}
+
 
 // form product space X x Y
 template <typename T>
-std::vector<T> product_space(
-    const std::vector<T> &x,
-    size_t dx,
-    const std::vector<T> &y,
-    size_t dy
+Matrix<T> product_space(
+    const Matrix<T> &X,
+    const Matrix<T> &Y
 ) {
-    size_t nx = x.size()/dx;
-    size_t ny = y.size()/dy;
+    size_t dx = X.nrow();
+    size_t nx = X.ncol();
+    size_t dy = Y.nrow();
+    size_t ny = Y.ncol();
+
     size_t nz = nx * ny;
     size_t dz = dx + dy;
     //std::cout << 'x' << nx << 'y' << ny << 'z' <<  nz << 'd' << dz << std::endl;
-    std::vector<T> z;
-    z.reserve(nz * dz);
-    for (size_t i = 0; i < nx*dx; i+=dx) {
-        for (size_t j = 0; j < ny*dy; j+=dy) {
+    Matrix<T> Z(dz, nz);
+    //z.reserve(nz * dz);
+    size_t k = 0;
+    for (size_t i = 0; i < nx; i++) {
+        for (size_t j = 0; j < ny; j++) {
             // put x[i] in first coordinate block
-            for (size_t ii = i; ii < i + dx; ii++) {
-                z.emplace_back(x[ii]);
+            for (size_t di = 0; di < dx; di++) {
+                Z(k++) = X(di, i);
             }
             // put y[j] in second coordinate block
-            for (size_t jj = j; jj < j + dy; jj++) {
-                z.emplace_back(y[jj]);
+            for (size_t dj = 0; dj < dy; dj++) {
+                Z(k++) = Y(dj, j);
             }
         }
     }
-    return z;
+    return Z;
 }
 
 
@@ -60,85 +83,64 @@ std::vector<T> product_space(
     generate (d-1)-dimensional sphere with n samples
 */
 template <typename T>
-std::vector<T> sample_sphere(
+Matrix<T> sample_sphere(
     const size_t d,
     const size_t n
 ) {
-    std::default_random_engine generator;
-    std::normal_distribution<T> distribution(0.0,1.0);
 
     // fill with gaussian random numbers
-    std::vector<T> x(d*n);
-    auto it = x.begin();
-    while (it < x.end()) {
-        *it = distribution(generator);
-        ++it;
-    }
+    Matrix<T> X(d, n);
+    add_normal_noise(X);
 
     // normalize
-    for (size_t i = 0; i < n; i++) {
-        auto vst = x.begin() + (i*d);
-        auto vend = x.begin() + (i*d + d);
-        T vnorm = norm(vst, vend);
-        while (vst < vend) {
-            *vst /= vnorm;
-            ++vst;
-        }
+    for (size_t j = 0; j < n; j++) {
+        T vnorm = norm(X[j]);
+        X[j] /= vnorm;
     }
 
-    return x;
+    return X;
 
 }
 
 // sample n points uniformly at random from d dimensional cube
 template <typename T>
-std::vector<T> sample_cube(
+Matrix<T> sample_cube(
     const size_t d,
     const size_t n
 ) {
-    std::default_random_engine generator;
-    std::uniform_real_distribution<T> distribution(0.0,1.0);
-
-    // fill with gaussian random numbers
-    std::vector<T> x(d*n);
-    auto it = x.begin();
-    while (it < x.end()) {
-        *it = distribution(generator);
-        ++it;
-    }
-
-    return x;
-
+    Matrix<T> X(d, n);
+    add_uniform_noise(X);
+    return X;
 }
 
 // n equispaced points between min and max
 template <typename T>
-std::vector<T> interval(
+Matrix<T> interval(
     const T min,
     const T max,
     const size_t n
 ) {
-    std::vector<T> x(n);
+    Matrix<T> x(1,n);
     T stride = (max - min) / (n-1);
-    x[0] = min;
+    x(0) = min;
     for (size_t i = 1; i < n; i++) {
-        x[i] = x[i-1] + stride;
+        x(i) = x(i-1) + stride;
     }
     return x;
 }
 
 // circle embedded in 2d on n points
 template <typename T>
-std::vector<T> circle(
+Matrix<T> circle(
     const T rad,
     const size_t n
 ) {
-    std::vector<T> x(2*n);
+    Matrix<T> x(2, n);
     T dtheta = 2 * M_PI / n;
     T theta = T(0);
     for (size_t i = 0; i < n; i++) {
-        x[2*i] = rad * std::cos(theta);
-        x[2*i + 1] = rad * std::sin(theta);
+        x(0, i) = rad * std::cos(theta);
+        x(1, i) = rad * std::sin(theta);
         theta += dtheta;
     }
     return x;
@@ -148,12 +150,12 @@ std::vector<T> circle(
     generate 3-d cylinder that is I x S^1
     total number of points is n_len x n_cir
 */
-std::vector<double> gen_cylinder(
+Matrix<double> gen_cylinder(
     const size_t n_len,
     const size_t n_cir
 ) {
     auto I = interval(0.0, 1.0, n_len);
     auto S = circle(1.0, n_cir);
 
-    return product_space(I, 1, S, 2);
+    return product_space(I, S);
 }

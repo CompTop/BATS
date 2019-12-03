@@ -1,26 +1,51 @@
 #pragma once
+/*
+various metrics for use with geometric constructions
+TODO: add pairwise function
+*/
 
 #include <cstddef>
 #include <cmath>
 #include <vector>
+#include "data.h"
 
-template <typename TI>
-auto norm(TI start, const TI end) {
-    using T = typename std::iterator_traits<TI>::value_type;
-    T res = 0;
-    while (start != end) {
-        res += (*start) * (*start);
-        ++start;
-    }
-    return std::sqrt(res);
-}
+struct AbstractMetric {};
 
-// euclidean distance in d dimensions
-template <typename T, typename TI>
-T euclidean(TI a, TI b, size_t d){
-    T res = 0;
-    for (size_t i = 0; i < d; i++) {
-        res += std::pow((*a++ - *b++), 2);
+// metrics are implemented as structs
+struct Euclidean : AbstractMetric {
+
+    template <typename T>
+    T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+        T n = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            T diff = x(i) - y(i);
+            n += diff * diff;
+        }
+        return std::sqrt(n);
     }
-    return std::sqrt(res);
-}
+};
+
+struct L1Dist : AbstractMetric {
+
+    template <typename T>
+    T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+        T n = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            n += std::abs(x(i) - y(i));
+        }
+        return n;
+    }
+};
+
+struct LInfDist : AbstractMetric {
+
+    template <typename T>
+    T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+        T n = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            T diff = std::abs(x(i) - y(i));
+            n = (n > diff) ? n : diff;
+        }
+        return n;
+    }
+};

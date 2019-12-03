@@ -28,7 +28,7 @@ int main() {
 
     auto x = sample_cube<double>(d, n);
 
-    auto X = RipsComplex(x, d, 0.2, maxdim);
+    auto X = RipsComplex(x, LInfDist(), 0.2, maxdim);
 
     auto CX = ChainComplex<MT>(X);
 

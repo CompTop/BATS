@@ -10,6 +10,7 @@ utilities for creating covers
 #include <cmath>
 
 #include <multigraph/diagram.h>
+#include "data.h"
 #include "inclusion.h"
 
 // return union of two sets
@@ -153,28 +154,29 @@ Diagram<std::set<size_t>, std::vector<size_t>> linear_cover_intersection_diagram
 
 // project data x in d dimensions onto coordinate i
 template <typename T>
-std::vector<T> coordinate_projection(const std::vector<T> &x, const size_t d, const size_t i) {
+std::vector<T> coordinate_projection(const Matrix<T> &X, const size_t i) {
     std::vector<T> p;
-    p.reserve(x.size() / d);
-    for (auto it = x.cbegin(); it != x.cend(); it += d) {
-        p.emplace_back(*(it + i));
+    p.reserve(X.ncol());
+    for (size_t j = 0; j < X.ncol(); j++) {
+		p.emplace_back(X(i, j));
     }
     return p;
 }
 
 // get subset of data
 template <typename T>
-std::vector<T> get_subset(
-    const std::vector<T> &x,
-    const size_t d,
+Matrix<T> get_subset(
+    const Matrix<T> &X,
     const std::set<size_t> &ind
 ) {
-    std::vector<T> xs;
-    xs.reserve(ind.size() * d);
+	size_t d = X.nrow();
+    Matrix<T> XS(d, ind.size());
+	size_t j = 0;
     for (auto it = ind.cbegin(); it != ind.cend(); it++) {
         for (size_t i = 0; i < d; i++) {
-            xs.emplace_back(x[(*it) * d + i]);
+            XS(i, j) = X(i, *it);
         }
+		j++;
     }
-    return xs;
+    return XS;
 }
