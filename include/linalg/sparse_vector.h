@@ -71,6 +71,17 @@ public:
 		indval.push_back(key_type(i, TV(1)));
 	}
 
+	template<typename T>
+	bool operator==(const T &other) const {
+		auto it1 = nzbegin();
+		auto it2 = other.nzbegin();
+		while (it1 != nzend() && it2 != other.nzend()) {
+			if (*it1++ != *it2++) {return false;}
+		}
+		if (it1 != nzend() || it2 != other.nzend()) { return false;}
+		return true;
+	}
+
 	// extract indices by iterator
 	template<typename T>
 	SparseVector operator[](const T &indset) const {

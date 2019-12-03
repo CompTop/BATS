@@ -14,6 +14,9 @@ struct nzpair {
     nzpair(const TI ind) : ind(ind), val(TV(0)) {};
     nzpair(const TI ind, const TV val) : ind(ind), val(val) {};
     nzpair(const nzpair& p) : ind(p.ind), val(p.val) {};
+
+    inline bool operator==(const nzpair &other) const { return (ind == other.ind) && (val == other.val); }
+    inline bool operator!=(const nzpair &other) const { return (ind != other.ind) || (val != other.val); }
 };
 
 // define comparison
