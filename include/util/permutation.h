@@ -44,6 +44,24 @@ std::vector<size_t> sortperm(const std::vector<T>& data) {
     return perm;
 }
 
+// fill a vector that will return a sort permutation on data
+template <typename TI>
+std::vector<size_t> sortperm(
+    const TI& begin,
+    const TI& end
+) {
+    std::vector<size_t> perm(end - begin);
+    std::iota(perm.begin(), perm.end(), 0);
+    std::sort(
+        perm.begin(),
+        perm.end(),
+        [&](const size_t& a, const size_t& b) {
+            return *(begin+a) < *(begin+b);
+        }
+    );
+    return perm;
+}
+
 template <typename T>
 std::vector<size_t> stable_sortperm(const std::vector<T>& data) {
     std::vector<size_t> perm(data.size());
@@ -55,6 +73,27 @@ std::vector<size_t> stable_sortperm(const std::vector<T>& data) {
             return data[a] < data[b];
         }
     );
+    return perm;
+}
+
+// fill a vector that will return indices of first k elements of range
+template <typename TI>
+std::vector<size_t> firstk(
+    const TI& begin,
+    const TI& end,
+    const size_t k
+) {
+    std::vector<size_t> perm(end - begin);
+    std::iota(perm.begin(), perm.end(), 0);
+    std::partial_sort(
+        perm.begin(),
+        perm.begin() + k,
+        perm.end(),
+        [&](const size_t& a, const size_t& b) {
+            return *(begin+a) < *(begin+b);
+        }
+    );
+    perm.resize(k); // resize to first k elements
     return perm;
 }
 

@@ -18,16 +18,30 @@ struct AbstractMetric {
         return static_cast<const D*>(this)->dist(x, y);
     }
 
+    // distance between two points
     template <typename T>
     inline T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
         return static_cast<const D*>(this)->dist(x, y);
     };
 
+    // all distances from point x
     template <typename T>
     std::vector<T> operator()(const VectorView<T> &x, const DataSet<T> &X) const {
         std::vector<T> dists(X.size());
         for (int i = 0; i < X.size(); i++) {
             dists[i] = static_cast<const D*>(this)->dist(x, X[i]);
+        }
+        return dists;
+    }
+
+    // all pair distances
+    template <typename T>
+    Matrix<T> operator()(const DataSet<T> &X, const DataSet<T> &Y) const {
+        Matrix<T> dists(X.size(), Y.size());
+        for (size_t i = 0; i < X.size(); i++) {
+            for (size_t j = 0; j < Y.size(); j++) {
+                dists(i,j) = static_cast<const D*>(this)->dist(X[i], Y[j]);
+            }
         }
         return dists;
     }
@@ -73,5 +87,3 @@ struct LInfDist : AbstractMetric<LInfDist> {
         return n;
     }
 };
-
-// compute all distances from a point

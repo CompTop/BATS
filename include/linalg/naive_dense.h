@@ -36,7 +36,7 @@ struct VectorView{
 		T* ptr;
 		int stride;
 	public:
-		Iterator(const T* p, const int s) noexcept : ptr(p), stride(s) { }
+		Iterator(T* p, const int s) noexcept : ptr(p), stride(s) { }
 
 		// Prefix ++ overload
         Iterator& operator++() {
@@ -51,7 +51,14 @@ struct VectorView{
 			return iterator;
 		}
 
+		inline Iterator operator+(const size_t offset) const {
+			return Iterator(ptr + stride*offset, stride);
+		}
+
 		inline bool operator!=(const Iterator& other) { return ptr != other.ptr;}
+		inline size_t operator-(const Iterator& other) const {
+			return (ptr - other.ptr)/stride;
+		}
 
 		inline T operator*() { return *ptr;}
 
