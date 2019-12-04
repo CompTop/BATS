@@ -72,7 +72,7 @@ struct VectorView{
         return;
     }
 
-    void operator=(const VectorView<T> x){
+    VectorView& operator=(const VectorView<T> x){
         T* ptr = first;
         T* xptr = x.first;
         while (ptr != last) {
@@ -80,7 +80,7 @@ struct VectorView{
             ptr+=stride;
             xptr+=x.stride;
         }
-        return;
+        return *this;
     }
 
     inline size_t size() const {

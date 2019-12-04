@@ -9,13 +9,36 @@ TODO: add pairwise function
 #include <vector>
 #include "data.h"
 
-struct AbstractMetric {};
-
-// metrics are implemented as structs
-struct Euclidean : AbstractMetric {
+// CRTP over derived class D
+template <class D>
+struct AbstractMetric {
 
     template <typename T>
-    T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+    inline T dist(const VectorView<T> &x, const VectorView<T> &y) const {
+        static_cast<const D*>(this)->dist(x, y);
+    }
+
+    template <typename T>
+    inline T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+        static_cast<const D*>(this)->dist(x, y);
+    };
+
+    template <typename T>
+    std::vector<T> operator()(const VectorView<T> &x, const DataSet<T> &X) const {
+        std::vector<T> dists(X.size());
+        for (int i = 0; i < X.size(); i++) {
+            dists[i] = static_cast<const D*>(this)->dist(x, X[i]);
+        }
+        return dists;
+    }
+};
+
+
+// metrics are implemented as structs
+struct Euclidean : AbstractMetric<Euclidean> {
+
+    template <typename T>
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
         T n = T(0);
         for (size_t i = 0; i < x.size(); i++) {
             T diff = x(i) - y(i);
@@ -23,12 +46,13 @@ struct Euclidean : AbstractMetric {
         }
         return std::sqrt(n);
     }
+
 };
 
-struct L1Dist : AbstractMetric {
+struct L1Dist : AbstractMetric<L1Dist> {
 
     template <typename T>
-    T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
         T n = T(0);
         for (size_t i = 0; i < x.size(); i++) {
             n += std::abs(x(i) - y(i));
@@ -37,10 +61,10 @@ struct L1Dist : AbstractMetric {
     }
 };
 
-struct LInfDist : AbstractMetric {
+struct LInfDist : AbstractMetric<LInfDist> {
 
     template <typename T>
-    T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
         T n = T(0);
         for (size_t i = 0; i < x.size(); i++) {
             T diff = std::abs(x(i) - y(i));
@@ -49,3 +73,5 @@ struct LInfDist : AbstractMetric {
         return n;
     }
 };
+
+// compute all distances from a point
