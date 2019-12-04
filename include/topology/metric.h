@@ -15,12 +15,12 @@ struct AbstractMetric {
 
     template <typename T>
     inline T dist(const VectorView<T> &x, const VectorView<T> &y) const {
-        static_cast<const D*>(this)->dist(x, y);
+        return static_cast<const D*>(this)->dist(x, y);
     }
 
     template <typename T>
     inline T operator() (const VectorView<T> &x, const VectorView<T> &y) const {
-        static_cast<const D*>(this)->dist(x, y);
+        return static_cast<const D*>(this)->dist(x, y);
     };
 
     template <typename T>
