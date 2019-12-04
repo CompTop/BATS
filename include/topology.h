@@ -5,6 +5,7 @@
 #include "topology/data_gen.h"
 #include "topology/inclusion.h"
 #include "topology/metric.h"
+#include "topology/neighborhood.h"
 #include "topology/rips.h"
 #include "topology/landmark.h"
 #include "topology/witness.h"
