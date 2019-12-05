@@ -1,17 +1,8 @@
-
-#include <topology/data_gen.h>
-#include <topology/rips.h>
-
-#include <linalg/field.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
-
-#include <chain/chain_complex.h>
-#include <homology/basis.h>
-
 #include <iostream>
 #include <vector>
 #include <chrono>
+
+#include <bats.h>
 
 
 #define FT ModP<int, 3>
@@ -37,9 +28,6 @@ int main() {
     for (size_t k = 0; k < RX.maxdim()+1; k++) {
         std::cout << "betti " << k << " = " << RX.hdim(k) << std::endl;
     }
-
-
-
 
     return 0;
 }

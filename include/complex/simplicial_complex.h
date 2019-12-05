@@ -5,20 +5,18 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <iostream>
+#include <map>
 
-#include <util/common.h>
 #include "abstract_complex.h"
+#include <util/common.h>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 #include <linalg/csc_matrix.h>
 #include <util/sorted.h>
 #include <util/trie.h>
-#include <iostream>
-#include <map>
 #include <filtration/filtration.h>
 #include <morse/pairing.h>
-
-
 
 #include <util/simplex.h> // for hash function
 
@@ -87,14 +85,8 @@ private:
     cell_ind _add_unsafe(std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
 
-        // get index of simplex
-        size_t ind = _ncells[dim]++;
-        // add to map
-        spx_to_idx.emplace(s, ind);
-        for (auto v : s) {
-            spx[dim].emplace_back(v);
-        }
-
+        // first we'll add faces
+        size_t old_size = faces[dim-1].size();
         // determine faces
         if (dim > 0){
             int c = -1;
@@ -111,11 +103,29 @@ private:
                     __face.emplace_back(s[j]);
                 }
 
-                faces[dim-1].emplace_back(find_idx(__face));
+                size_t ind = find_idx(__face);
+                // return NO_IND if faces haven't been added
+                if (ind == bats::NO_IND) {
+                    // remove boundary placed so far
+                    faces[dim-1].resize(old_size);
+                    coeff[dim-1].resize(old_size);
+                    return cell_ind(dim, bats::NO_IND);
+                }
+                faces[dim-1].emplace_back(ind);
                 coeff[dim-1].emplace_back(c);
                 c = -c;
             }
         }
+
+        // if we succeeded (faces were present), we add the simplex
+        // get index of simplex
+        size_t ind = _ncells[dim]++;
+        // add to map
+        spx_to_idx.emplace(s, ind);
+        for (auto v : s) {
+            spx[dim].emplace_back(v);
+        }
+
         return cell_ind(dim, ind);
     }
 
@@ -175,6 +185,14 @@ public:
         ct += ncells(k);
       }
       return ct;
+    }
+
+    void print_summary() {
+        std::cout << "SimplicialComplex, maxdim = " << maxdim() << std::endl;
+        for (size_t k = 0; k < maxdim() + 1; k++) {
+            std::cout << "\tdim " << k << " : " << ncells(k) << " cells" << std::endl;
+        }
+        std::cout << ncells() << " total" << std::endl;
     }
 
     // inline cell_ind add_unsafe(

@@ -43,42 +43,43 @@ std::vector<size_t> neighborhood(
 }
 
 /*
-get neighborhoods of points in L in DataSet X within radius r in metric dist
+get neighborhoods of points in X in DataSet Y within radius r in metric dist
 */
 template <typename T, typename M>
 std::vector<std::vector<size_t>> neighborhoods(
-	const DataSet<T> &L,
 	const DataSet<T> &X,
+	const DataSet<T> &Y,
 	const M &dist,
 	const T r
 ) {
 
-	std::vector<std::vector<size_t>> nbrs;
-	nbrs.reserve(L.size());
+	std::vector<std::vector<size_t>> nbrs(X.size());
 
-	for (size_t i = 0; i < L.size(); i++) {
-		nbrs.emplace_back(neighborhood(L[i], X, dist, r));
+	#pragma omp parallel for
+	for (size_t i = 0; i < X.size(); i++) {
+		nbrs.emplace_back(neighborhood(X[i], Y, dist, r));
 	}
 
 	return nbrs;
 }
 
 /*
-get k nearest neighborhoods of points in L in DataSet X
+get k nearest neighborhoods of points in X in DataSet Y
 */
 template <typename T, typename M>
 std::vector<std::vector<size_t>> neighborhoods(
-	const DataSet<T> &L,
 	const DataSet<T> &X,
+	const DataSet<T> &Y,
 	const M &dist,
 	const size_t k
 ) {
 
-	std::vector<std::vector<size_t>> nbrs;
-	nbrs.reserve(L.size());
+	std::vector<std::vector<size_t>> nbrs(X.size());
 
-	for (size_t i = 0; i < L.size(); i++) {
-		nbrs.emplace_back(neighborhood(L[i], X, dist, k));
+	#pragma omp parallel for
+	for (size_t i = 0; i < X.size(); i++) {
+		// k nearest neighbors of X[i] in L
+		nbrs[i] = neighborhood(X[i], Y, dist, k);
 	}
 
 	return nbrs;

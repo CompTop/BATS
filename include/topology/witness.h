@@ -6,6 +6,7 @@ Witness complex
 #include "data.h"
 #include "neighborhood.h"
 #include <util/sorted.h>
+#include <complex/simplicial_complex.h>
 
 
 template <typename T, typename M>
@@ -23,6 +24,9 @@ std::vector<size_t> witness_edges(
     auto D = dist(L, X);
 
     // for each column of D, see which edge X[j] witnesses
+    auto nbrs = neighborhoods(L, X, dist, 2);
+
+    // TODO: finish
 
     return edges;
 }
@@ -60,3 +64,42 @@ std::vector<size_t> witness_edges(
 }
 
 // for strong witness complex, build list of witnesses for simplices
+// template over data type, metric
+template <typename T, typename M>
+SimplicialComplex WitnessComplex(
+    const DataSet<T> &X,
+    const DataSet<T> &L,
+    const M &dist,
+    const size_t dmax
+) {
+
+
+    size_t k = dmax + 1; // number of neighbors to find
+    // find the k closest neighbors in
+    auto nbrs = neighborhoods(X, L, dist, k);
+
+    // initialize complex
+    SimplicialComplex W(dmax);
+
+    // add one vertex to L for every landmark
+    for (size_t i = 0; i < L.size(); i++) {
+        W.add({i});
+    }
+
+    // container for holding simplex
+    std::vector<size_t> spx;
+    // now we loop over each point in x, and try adding the simplex it witnesses
+    for (size_t dim = 1; dim < k; dim++) {
+        spx.resize(dim+1);
+        // add simplex that X[i] witnesses in dimension dim
+        for (size_t i = 0; i < X.size(); i++) {
+            for (size_t j = 0; j < dim+1; j++) {
+                spx[j] = nbrs[i][j];
+            }
+            // the add is safe - only succeeds if boundary is present
+            W.add(spx);
+        }
+    }
+
+    return W;
+}

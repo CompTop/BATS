@@ -83,7 +83,7 @@ Matrix<T> product_space(
     generate (d-1)-dimensional sphere with n samples
 */
 template <typename T>
-Matrix<T> sample_sphere(
+DataSet<T> sample_sphere(
     const size_t d,
     const size_t n
 ) {
@@ -98,7 +98,7 @@ Matrix<T> sample_sphere(
         X[j] /= vnorm;
     }
 
-    return X;
+    return DataSet(X);
 
 }
 

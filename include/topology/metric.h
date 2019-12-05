@@ -28,7 +28,7 @@ struct AbstractMetric {
     template <typename T>
     std::vector<T> operator()(const VectorView<T> &x, const DataSet<T> &X) const {
         std::vector<T> dists(X.size());
-        for (int i = 0; i < X.size(); i++) {
+        for (size_t i = 0; i < X.size(); i++) {
             dists[i] = static_cast<const D*>(this)->dist(x, X[i]);
         }
         return dists;
