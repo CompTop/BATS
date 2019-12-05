@@ -38,5 +38,8 @@ struct DataSet {
 	inline VectorView<T> operator[](const size_t i) { return data[i]; }
 	inline const VectorView<T> operator[](const size_t i) const { return data[i]; }
 
+	T& operator()(const size_t i, const size_t j) { return data(i,j); }
+	const T& operator()(const size_t i, const size_t j) const { return data(i,j); }
+
 
 };

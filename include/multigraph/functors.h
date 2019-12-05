@@ -17,7 +17,7 @@ Functors from one type of diagram to another
 template <typename T, typename M>
 Diagram<SimplicialComplex, CellularMap> Rips(
 	const Diagram<std::set<size_t>, std::vector<size_t>> &D,
-	const Matrix<T> &X,
+	const DataSet<T> &X,
 	const M &dist, // distance
 	const T rmax, // maximum radius
 	const size_t dmax // maximum simplex dimension

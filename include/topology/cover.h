@@ -154,10 +154,10 @@ Diagram<std::set<size_t>, std::vector<size_t>> linear_cover_intersection_diagram
 
 // project data x in d dimensions onto coordinate i
 template <typename T>
-std::vector<T> coordinate_projection(const Matrix<T> &X, const size_t i) {
+std::vector<T> coordinate_projection(const DataSet<T> &X, const size_t i) {
     std::vector<T> p;
-    p.reserve(X.ncol());
-    for (size_t j = 0; j < X.ncol(); j++) {
+    p.reserve(X.size());
+    for (size_t j = 0; j < X.size(); j++) {
 		p.emplace_back(X(i, j));
     }
     return p;
@@ -165,11 +165,11 @@ std::vector<T> coordinate_projection(const Matrix<T> &X, const size_t i) {
 
 // get subset of data
 template <typename T>
-Matrix<T> get_subset(
-    const Matrix<T> &X,
+DataSet<T> get_subset(
+    const DataSet<T> &X,
     const std::set<size_t> &ind
 ) {
-	size_t d = X.nrow();
+	size_t d = X.dim();
     Matrix<T> XS(d, ind.size());
 	size_t j = 0;
     for (auto it = ind.cbegin(); it != ind.cend(); it++) {
@@ -178,5 +178,5 @@ Matrix<T> get_subset(
         }
 		j++;
     }
-    return XS;
+    return DataSet(XS);
 }

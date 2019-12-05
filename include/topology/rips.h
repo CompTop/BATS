@@ -39,12 +39,12 @@ dmax - maximum simplex dimension
 // template over data type>
 template <typename T, typename M>
 SimplicialComplex RipsComplex(
-    const Matrix<T> &X,
+    const DataSet<T> &X,
     const M &dist,
     T rmax,
     size_t dmax
 ) {
-    size_t n = X.ncol(); // number of points
-    auto redges = rips_edges(X, dist, rmax);
+    size_t n = X.size(); // number of points
+    auto redges = rips_edges(X.data, dist, rmax);
     return FlagComplex(redges, n, dmax);
 }

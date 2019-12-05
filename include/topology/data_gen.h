@@ -31,6 +31,16 @@ Matrix<T>& add_normal_noise(Matrix<T> &X,
 }
 
 template <typename T>
+inline DataSet<T>& add_normal_noise(
+    DataSet<T> &X,
+    const T mu=T(0),
+    const T sigma=T(1)
+) {
+    return add_normal_noise(X.data, mu, sigma);
+}
+
+
+template <typename T>
 Matrix<T>& add_uniform_noise(Matrix<T> &X,
     const T lb = T(0),
     const T ub = T(1)
@@ -45,17 +55,26 @@ Matrix<T>& add_uniform_noise(Matrix<T> &X,
     return X;
 }
 
+template <typename T>
+inline DataSet<T>& add_uniform_noise(
+    DataSet<T> &X,
+    const T lb = T(0),
+    const T ub = T(1)
+) {
+    return add_uniform_noise(X.data, lb, ub);
+}
+
 
 // form product space X x Y
 template <typename T>
-Matrix<T> product_space(
-    const Matrix<T> &X,
-    const Matrix<T> &Y
+DataSet<T> product_space(
+    const DataSet<T> &X,
+    const DataSet<T> &Y
 ) {
-    size_t dx = X.nrow();
-    size_t nx = X.ncol();
-    size_t dy = Y.nrow();
-    size_t ny = Y.ncol();
+    size_t dx = X.dim();
+    size_t nx = X.size();
+    size_t dy = Y.dim();
+    size_t ny = Y.size();
 
     size_t nz = nx * ny;
     size_t dz = dx + dy;
@@ -75,7 +94,7 @@ Matrix<T> product_space(
             }
         }
     }
-    return Z;
+    return DataSet(Z);
 }
 
 
@@ -104,18 +123,18 @@ DataSet<T> sample_sphere(
 
 // sample n points uniformly at random from d dimensional cube
 template <typename T>
-Matrix<T> sample_cube(
+DataSet<T> sample_cube(
     const size_t d,
     const size_t n
 ) {
     Matrix<T> X(d, n);
     add_uniform_noise(X);
-    return X;
+    return DataSet(X);
 }
 
 // n equispaced points between min and max
 template <typename T>
-Matrix<T> interval(
+DataSet<T> interval(
     const T min,
     const T max,
     const size_t n
@@ -126,12 +145,12 @@ Matrix<T> interval(
     for (size_t i = 1; i < n; i++) {
         x(i) = x(i-1) + stride;
     }
-    return x;
+    return DataSet(x);
 }
 
 // circle embedded in 2d on n points
 template <typename T>
-Matrix<T> circle(
+DataSet<T> circle(
     const T rad,
     const size_t n
 ) {
@@ -143,14 +162,14 @@ Matrix<T> circle(
         x(1, i) = rad * std::sin(theta);
         theta += dtheta;
     }
-    return x;
+    return DataSet(x);
 }
 
 /*
     generate 3-d cylinder that is I x S^1
     total number of points is n_len x n_cir
 */
-Matrix<double> gen_cylinder(
+DataSet<double> gen_cylinder(
     const size_t n_len,
     const size_t n_cir
 ) {
