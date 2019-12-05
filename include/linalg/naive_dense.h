@@ -100,13 +100,14 @@ struct VectorView{
 	inline const T& operator()(size_t i) const {return *(first + stride*i); }
 
 	T norm() const {
+		// 2-norm of vector
 		T n = T(0);
 		T* ptr = first;
 		while (ptr != last) {
-			n += *ptr;
+			n += (*ptr)*(*ptr);
 			ptr += stride;
 		}
-		return n;
+		return std::sqrt(n);
 	}
 
 	// basic arithmetic
@@ -116,7 +117,7 @@ struct VectorView{
 			*ptr /= c;
 			ptr += stride;
 		}
-		return this;
+		return *this;
 	}
 };
 
