@@ -205,6 +205,18 @@ SimplicialComplex WitnessComplex(
     return RipsComplex(pdist, rmax, dmax);
 }
 
+template <typename T, typename M>
+inline auto witness_neighborhoods(
+    const DataSet<T> &X,
+    const DataSet<T> &L,
+    const M &dist,
+    const size_t nu,
+    const T rmax
+) {
+    auto pdist = witness_edge_param(X, L, dist, nu);
+    // get cover
+    return neighborhoods(pdist, rmax);
+}
 
 
 // strict witness complex with parameter rmax
@@ -218,8 +230,7 @@ SimplicialComplex StrictWitnessComplex(
     const T rmax,
     const size_t dmax
 ) {
-    auto pdist = witness_edge_param(X, L, dist, nu);
     // get cover
-    auto cover = neighborhoods(pdist, rmax);
+    auto cover = witness_neighborhoods(X, L, dist, nu, rmax);
     return Nerve(cover, dmax);
 }

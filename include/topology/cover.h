@@ -8,6 +8,7 @@ utilities for creating covers
 #include <set>
 #include <algorithm>
 #include <cmath>
+#include <tuple>
 
 #include <multigraph/diagram.h>
 #include "data.h"
@@ -179,4 +180,38 @@ DataSet<T> get_subset(
 		j++;
     }
     return DataSet(XS);
+}
+
+
+/*
+produce bivariate cover of cover1, cover2
+i.e. restriction to diagonal in cover1 x cover2
+also return maps to cover1 and cover2 (extends to SimplicialMap on Nerves)
+*/
+auto bivariate_cover(
+	const std::vector<std::set<size_t>> &cover1,
+	const std::vector<std::set<size_t>> &cover2
+) {
+	std::vector<std::set<size_t>> cover12;
+	std::vector<size_t> f1;
+	std::vector<size_t> f2;
+
+	for (size_t i = 0; i < cover1.size(); i++) {
+		for (size_t j = 0; j < cover2.size(); j++) {
+			std::set<size_t> intersection;
+			intersect_sorted(
+				cover1[i],
+				cover2[j],
+				intersection
+			);
+			if (intersection.size() > 0) {
+				// cover1[i] and cover2[j] have nonempy intersection
+				cover12.emplace_back(intersection);
+				f1.emplace_back(i);
+				f2.emplace_back(j);
+			}
+		}
+	}
+
+	return std::make_tuple(cover12, f1, f2);
 }
