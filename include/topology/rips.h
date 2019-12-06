@@ -28,6 +28,24 @@ std::vector<size_t> rips_edges(const Matrix<T> &X, const M &dist, const T rmax) 
     return edges;
 }
 
+// work on pairwise distance matrix
+template <typename T>
+std::vector<size_t> rips_edges(const Matrix<T> &pdist, const T rmax) {
+    size_t n = pdist.ncol();
+    std::vector<size_t> edges;
+    size_t nedges = (n * (n-1)) / 2;
+    edges.reserve(2*nedges);
+    for (size_t j = 0; j < n; j++) {
+        for (size_t i = 0; i < j; i++) {
+            if (pdist(i,j) < rmax) {
+                edges.push_back(i);
+                edges.push_back(j);
+            }
+        }
+    }
+    return edges;
+}
+
 /*
 Generate Rips complex from data
 x - point cloud
@@ -46,5 +64,16 @@ SimplicialComplex RipsComplex(
 ) {
     size_t n = X.size(); // number of points
     auto redges = rips_edges(X.data, dist, rmax);
+    return FlagComplex(redges, n, dmax);
+}
+
+template <typename T>
+SimplicialComplex RipsComplex(
+    const Matrix<T> &pdist,
+    T rmax,
+    size_t dmax
+) {
+    size_t n = pdist.ncol(); // number of points
+    auto redges = rips_edges(pdist, rmax);
     return FlagComplex(redges, n, dmax);
 }

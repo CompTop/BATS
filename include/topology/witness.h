@@ -7,6 +7,7 @@ Witness complex
 #include <limits>
 #include "data.h"
 #include "neighborhood.h"
+#include "rips.h"
 #include <util/sorted.h>
 #include <complex/simplicial_complex.h>
 
@@ -187,4 +188,18 @@ SimplicialComplex WitnessComplex(
     }
 
     return W;
+}
+
+// lazy witness complex with parameter rmax
+template <typename T, typename M>
+SimplicialComplex WitnessComplex(
+    const DataSet<T> &X,
+    const DataSet<T> &L,
+    const M &dist,
+    const size_t nu,
+    const T rmax,
+    const size_t dmax
+) {
+    auto pdist = witness_edge_param(X, L, dist, nu);
+    return RipsComplex(pdist, rmax, dmax);
 }
