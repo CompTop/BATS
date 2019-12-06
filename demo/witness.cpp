@@ -13,7 +13,7 @@ int main() {
 
     size_t d = 3; // dimension of Euclidean Space
     // sphere will be sampled on S^{d-1}
-    size_t n = 10000; // number of samples
+    size_t n = 1000; // number of samples
     size_t m = 20; // number of landmarks
 
     // maximum simplex dimension

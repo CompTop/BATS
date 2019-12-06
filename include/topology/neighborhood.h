@@ -84,3 +84,28 @@ std::vector<std::vector<size_t>> neighborhoods(
 
 	return nbrs;
 }
+
+
+/*
+put columns of pdist in neighborhoods of rows of pdist
+each column is a point in X
+each row is a point in L
+assign each column to neighborhood of L if the distance to L is <= eps
+*/
+template <typename T>
+std::vector<std::set<size_t>> neighborhoods(
+    const Matrix<T> &pdist,
+    const T eps = T(0)
+) {
+
+	std::vector<std::set<size_t>> nbrs(pdist.nrow());
+
+	for (size_t j = 0; j < pdist.ncol(); j++) {
+		for (size_t i = 0; i < pdist.nrow(); i++) {
+			if (pdist(i,j) <= eps) {
+				nbrs[i].emplace_hint(nbrs[i].end(), j);
+			}
+		}
+	}
+	return nbrs;
+}

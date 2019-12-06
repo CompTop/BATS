@@ -8,4 +8,5 @@
 #include "topology/neighborhood.h"
 #include "topology/rips.h"
 #include "topology/landmark.h"
+#include "topology/nerve.h"
 #include "topology/witness.h"

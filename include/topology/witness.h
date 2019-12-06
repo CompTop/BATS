@@ -8,6 +8,7 @@ Witness complex
 #include "data.h"
 #include "neighborhood.h"
 #include "rips.h"
+#include "nerve.h"
 #include <util/sorted.h>
 #include <complex/simplicial_complex.h>
 
@@ -202,4 +203,23 @@ SimplicialComplex WitnessComplex(
 ) {
     auto pdist = witness_edge_param(X, L, dist, nu);
     return RipsComplex(pdist, rmax, dmax);
+}
+
+
+
+// strict witness complex with parameter rmax
+// gets
+template <typename T, typename M>
+SimplicialComplex StrictWitnessComplex(
+    const DataSet<T> &X,
+    const DataSet<T> &L,
+    const M &dist,
+    const size_t nu,
+    const T rmax,
+    const size_t dmax
+) {
+    auto pdist = witness_edge_param(X, L, dist, nu);
+    // get cover
+    auto cover = neighborhoods(pdist, rmax);
+    return Nerve(cover, dmax);
 }
