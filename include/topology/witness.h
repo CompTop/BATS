@@ -3,12 +3,96 @@
 Witness complex
 */
 #include <vector>
+#include <algorithm>
+#include <limits>
 #include "data.h"
 #include "neighborhood.h"
 #include <util/sorted.h>
 #include <complex/simplicial_complex.h>
 
+// find next smallest entry of columns of pdist[j]
+template <typename T>
+std::vector<T>& increment_m(
+    const Matrix<T> &pdist,
+    std::vector<T> &m
+) {
+    size_t N = m.size();
+    size_t n = pdist.nrow();
+    for (size_t j = 0; j < N; j++) {
+        T mj = std::numeric_limits<T>::max();
+        for (size_t i = 0; i < n; i++) {
+            T dij = pdist(i,j);
+            mj = (dij > mj) ? mj : (dij > m[j] ? dij : mj);
+        }
+        // update m[j] to be next smallest element
+        m[j] = mj;
+    }
+    return m;
+}
 
+// get nu-th smallest entry in each column
+template <typename T>
+std::vector<T> get_m(
+    const Matrix<T> &pdist,
+    size_t nu
+) {
+    size_t N = pdist.ncol();
+    std::vector<T> m(N, T(0));
+
+    while (nu > 0) {
+        // update m with next largest entry
+        increment_m(pdist, m);
+        nu--;
+    }
+
+    return m;
+}
+
+// get witness edge parameters
+// for witness filtration
+template <typename T, typename M>
+Matrix<T> witness_edge_param(
+    const DataSet<T> &X,
+    const DataSet<T> &L,
+    const M &dist,
+    const size_t nu
+) {
+    size_t n = L.size();
+    size_t N = X.size();
+
+    // pairwise distances
+    auto pdist = dist(L, X);
+
+    // get m
+    auto m = get_m(pdist, nu);
+
+    // loop over pdist, subtract m[j] from each column, take max with 0
+    for (size_t j = 0; j < X.size(); j++) {
+        for (size_t i = 0; i < L.size(); i++) {
+            pdist(i,j) -= m[j];
+            pdist(i,j) = (pdist(i,j) > T(0)) ? pdist(i,j) : T(0);
+        }
+    }
+
+    // set witness parameters using minmax
+    Matrix<T> R(L.size(), L.size());
+    for (size_t j = 0; j < L.size(); j++) {
+        for (size_t i = 0; i < j; i++) {
+            R(i,j) = R(j,i); // symmetry
+        }
+        for (size_t i = j+1; i < L.size(); i++) {
+            T Rij = std::numeric_limits<T>::max();
+            for (size_t k = 0; k < X.size(); k++) {
+                Rij = std::min(Rij, std::max(pdist(i,k), pdist(j,k)));
+            }
+            R(i,j) = Rij;
+        }
+    }
+    return R;
+}
+
+
+// witness edges
 template <typename T, typename M>
 std::vector<size_t> witness_edges(
     const DataSet<T> &X,
@@ -30,6 +114,7 @@ std::vector<size_t> witness_edges(
 
     return edges;
 }
+
 
 // for weak witness complex, find witnessed edge set for parameterized complex
 // template over data type and metric
