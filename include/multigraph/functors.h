@@ -6,12 +6,44 @@ Functors from one type of diagram to another
 #include <topology/data.h>
 #include <topology/cover.h>
 #include <topology/rips.h>
+#include <topology/nerve.h>
 #include <complex/simplicial_complex.h>
 #include <complex/simplicial_map.h>
 #include <chain/chain_complex.h>
 #include <chain/chain_map.h>
 #include <homology/basis.h>
 #include <homology/induced_map.h>
+
+Diagram<SimplicialComplex, CellularMap> Nerve(
+	const Diagram<bats::Cover, std::vector<size_t>> &D,
+	const size_t dmax // maximum simplex dimension
+) {
+	size_t n = D.nnode();
+	size_t m = D.nedge();
+	// Diagram of simplicial complexes and maps
+	Diagram<SimplicialComplex, CellularMap> TD(n, m);
+
+	// apply functor to nodes
+	#pragma omp parallel for
+	for (size_t i = 0; i < n; i++) {
+		TD.set_node(i, Nerve(D.node[i], dmax));
+	}
+
+	// apply functor to edges
+	#pragma omp parallel for
+	for (size_t i = 0; i < m; i++) {
+		auto s = D.elist[i].src;
+		auto t = D.elist[i].targ;
+		TD.set_edge(i, s, t,
+						SimplicialMap(TD.node[s] , TD.node[t], D.edata[i])
+					   );
+	}
+
+	return TD;
+
+
+}
+
 
 // Create diagram of Rips complexes from subsets
 template <typename T, typename M>

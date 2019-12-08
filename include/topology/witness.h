@@ -59,8 +59,6 @@ Matrix<T> witness_edge_param(
     const M &dist,
     const size_t nu
 ) {
-    size_t n = L.size();
-    size_t N = X.size();
 
     // pairwise distances
     auto pdist = dist(L, X);

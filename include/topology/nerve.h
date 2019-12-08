@@ -7,11 +7,12 @@ Nerve of a cover
 #include <set>
 #include <util/sorted.h>
 #include <complex/simplicial_complex.h>
+#include "cover.h"
 
 void add_dimension_recursive_nerve(
 	SimplicialComplex &N,
 	std::vector<size_t> spx,
-	const std::vector<std::set<size_t>> cover,
+	const bats::Cover &cover,
 	std::vector<size_t> intersection,
 	const size_t dmax
 ) {
@@ -44,7 +45,7 @@ void add_dimension_recursive_nerve(
 Build nerve of cover up to dmax skeleton
 */
 SimplicialComplex Nerve(
-	const std::vector<std::set<size_t>> &cover,
+	const bats::Cover &cover,
 	const size_t dmax
 ) {
 

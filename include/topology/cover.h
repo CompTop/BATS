@@ -14,6 +14,10 @@ utilities for creating covers
 #include "data.h"
 #include "inclusion.h"
 
+namespace bats {
+	using Cover = std::vector<std::set<size_t>>;
+}
+
 // return union of two sets
 // template over containter types
 template <typename CT1, typename CT2>
@@ -84,7 +88,7 @@ OUTPUT:
 	each subsequent set shares half the width
 */
 template <typename T>
-std::vector<std::set<size_t>> uniform_interval_cover(
+bats::Cover uniform_interval_cover(
 	const std::vector<T> &x,
 	const size_t nsets
 ) {
