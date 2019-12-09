@@ -16,7 +16,8 @@ utilities for generating data
 // add normal_noise
 // operates in-place on X
 template <typename T>
-Matrix<T>& add_normal_noise(Matrix<T> &X,
+Matrix<T>& add_normal_noise(
+    Matrix<T> &X,
     const T mu=T(0),
     const T sigma=T(1)
 ) {
@@ -36,7 +37,8 @@ inline DataSet<T>& add_normal_noise(
     const T mu=T(0),
     const T sigma=T(1)
 ) {
-    return add_normal_noise(X.data, mu, sigma);
+    add_normal_noise(X.data, mu, sigma);
+    return X;
 }
 
 

@@ -7,6 +7,7 @@ utilities for permutations
 #include <cstddef>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 
 // fill a vector that will return a sort permutation on data
 template <typename T>
@@ -96,6 +97,45 @@ std::vector<size_t> firstk(
     perm.resize(k); // resize to first k elements
     return perm;
 }
+
+// get top k indices
+// does not sort
+template <typename T>
+std::vector<size_t> top_k(
+    const std::vector<T> &data,
+    const size_t k
+) {
+
+    std::vector<size_t> perm(data.size());
+    std::iota(perm.begin(), perm.end(), 0);
+
+    auto begin = data.begin();
+
+    std::nth_element(
+        perm.begin(),
+        perm.begin() + k,
+        perm.end(),
+        [&](const size_t& a, const size_t& b) {
+            return *(begin+a) < *(begin+b);
+        }
+    );
+
+    perm.resize(k); // resize to first k elements
+    return perm;
+}
+
+// get top p indices
+// does not sort
+template <typename T>
+std::vector<size_t> top_p(
+    const std::vector<T> &data,
+    const double p
+) {
+    size_t k = (size_t) std::round(data.size() * p);
+
+    return top_k(data, k);
+}
+
 
 }
 

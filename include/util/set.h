@@ -56,3 +56,17 @@ std::set<size_t> random_subset(
 
 	return inds;
 }
+
+// convert vector to set
+template <typename T>
+std::set<T> to_set(
+	const std::vector<T> &v
+) {
+	std::set<T> s;
+	
+	for (auto x : v) {
+		s.insert(x);
+	}
+
+	return s;
+}

@@ -10,3 +10,4 @@
 #include "topology/landmark.h"
 #include "topology/nerve.h"
 #include "topology/witness.h"
+#include "topology/density.h"
