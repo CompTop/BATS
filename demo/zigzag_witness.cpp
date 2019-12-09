@@ -68,16 +68,14 @@ Diagram<bats::Cover, std::vector<size_t>> bivariate_cover_diagram(
 }
 
 
-
-
 int main() {
 
-	size_t nlms = 3;
-	size_t nl = 20;
+	size_t nlms = 8;
+	size_t nl = 30;
 
 	// sample circle
 	size_t d = 2; // 2d points
-	size_t n = 1000; // 1000 points
+	size_t n = 2000; // 1000 points
 	auto dist = Euclidean(); // Euclidean distance
 
 	// generate data

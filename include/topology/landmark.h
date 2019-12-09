@@ -9,6 +9,7 @@ utility for landmarking pointclouds
 
 #include "data.h"
 #include "metric.h"
+#include <util/set.h>
 
 // random landmarking with k landmarks
 // assume k < n
@@ -19,14 +20,7 @@ DataSet<T> random_landmarks(
  ) {
 	size_t n = D.size();
 
-	std::default_random_engine generator;
-  	std::uniform_int_distribution<int> distribution(0,n-1);
-
-	std::set<int> inds;
-
-	while (inds.size() < k) {
-		inds.insert( distribution(generator) );
-	}
+	auto inds = random_subset(n, k);
 
 	return D[inds];
  }

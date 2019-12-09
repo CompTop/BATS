@@ -2,6 +2,7 @@
 #include <set>
 
 #include <bats.h>
+#include <util/set.h>
 
 #define FT ModP<int, 2>
 // #define FT Rational<int>
@@ -10,31 +11,29 @@
 
 int main() {
 
-	// generate cylinder dataset
+	size_t nsets = 8;
+	size_t ns = 100; // number of points in each subset
 
-	// cylinder example
-	// size_t d = 3;
-	// double rmax = 1.0;
-	// auto x = gen_cylinder(40, 30);
-	// add_normal_noise(x, 0.0, 0.05);
+	// sample circle
+	size_t d = 2; // 2d points
+	size_t n = 1000; // 100 points
+	auto dist = Euclidean(); // Euclidean distance
+	double rmax = 0.5;
 
-	// random cube example
-	size_t d = 3; // dimension
-	double rmax = 0.15;
-	auto X = sample_cube<double>(d, 1000);
+	// generate data
+	auto X = sample_sphere<double>(d, n);
 
-	/// project onto first coordinate
-	auto p = coordinate_projection(X, 0);
-
-	// create open cover using projection
-	auto cover = uniform_interval_cover(p, 20);
+	// landmark sets
+	std::vector<std::set<size_t>> subset;
+	for (size_t i =0; i < nsets; i++) {
+		subset.emplace_back(random_subset(n, ns));
+	}
 
 	// Diagram of Sets and inclusions
-	auto SetDgm = linear_subset_union_diagram(cover);
-	// auto SetDgm = linear_cover_intersection_diagram(cover);
+	auto SetDgm = linear_subset_union_diagram(subset);
 
 	// Diagram of Spaces and maps
-	auto TopDgm = Rips(SetDgm, X, Euclidean(), rmax, 2);
+	auto TopDgm = Rips(SetDgm, X, dist, rmax, d);
 
 	// diagram in Chain
 	auto ChainDgm = Chain<MT>(TopDgm);
