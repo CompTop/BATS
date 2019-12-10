@@ -2,6 +2,9 @@
 
 #include <vector>
 #include <cstddef>
+#include <iostream>
+#include <string>
+#include <fstream>
 #include "abstract_matrix.h"
 #include "csc_matrix.h"
 #include "abstract_vector.h"
@@ -59,6 +62,36 @@ public:
             ));
         }
     }
+
+	void read(std::istream &io) {
+		std::string line, token;
+		getline(io, line); // get first line
+		// get dimensions from first line
+		std::istringstream iss(line);
+		getline(iss, token, ',');
+		m = std::stoi(token);
+		getline(iss, token);
+		n = std::stoi(token);
+		col.resize(n);
+		for (size_t j = 0; j < n; j++) {
+			getline(io, line);
+			col[j] = TC(line);
+		}
+	}
+
+    ColumnMatrix(std::istream& io) {
+		read(io);
+    }
+
+	ColumnMatrix(std::string &fname) {
+		std::ifstream file (fname, std::ios::in);
+        if (file.is_open()) {
+			read(file);
+            file.close();
+        } else {
+            std::cerr << "unable to read ColumnMatrix from " << fname << std::endl;
+        }
+	}
 
 
     inline size_t nrow() const { return m; }
@@ -203,6 +236,25 @@ public:
         return ColumnMatrix(n, n, col);
     }
     // dense matrix
+
+    // template <typename IO>
+    void write(std::ostream &io) const {
+        io << nrow() << ',' << ncol() << '\n';
+        for (size_t j = 0; j < ncol(); j++) {
+            // write column as row
+            col[j].write(io);
+        }
+    }
+
+    void save(std::string &fname) const {
+        std::ofstream file (fname, std::ios::out);
+        if (file.is_open()) {
+            write(file);
+            file.close();
+        } else {
+            std::cerr << "unable to write ColumnMatrix to " << fname << std::endl;
+        }
+    }
 };
 
 

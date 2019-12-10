@@ -126,6 +126,7 @@ The format is a comma separated value file with a simplex on each line.  E.g. th
 1,
 0,1,
 ```
+by default, `.scpx` is used as the file extension
 
 ## Sparse Matrices
 
@@ -142,6 +143,7 @@ would be stored as
 0:1
 ```
 
+By default, `.smtx` is used as the file extension.
 
 
 # Contributing

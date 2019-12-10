@@ -10,6 +10,8 @@ maintains indices in sorted order
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <string>
+#include <sstream>
 #include "field.h"
 #include "abstract_vector.h"
 
@@ -19,8 +21,6 @@ template <typename TV, typename TI=size_t>
 class SparseVector
 {
 private:
-
-
 
 	using key_type = nzpair<TI, TV>; // std::pair<TI, TV>
 
@@ -69,6 +69,18 @@ public:
 	// cosntructor that returns indicator in given index
 	SparseVector(const TI i) {
 		indval.push_back(key_type(i, TV(1)));
+	}
+
+	// construct from line string
+	SparseVector(std::string &line) {
+		std::string token;
+		std::istringstream iss(line);
+		while (getline(iss, token, ',')) {
+			// std::cout << token << ',' << std::endl;
+			if (token.size() > 0) {
+				indval.emplace_back(key_type(token));
+			}
+		}
 	}
 
 	SparseVector& operator=(const SparseVector &other) {
@@ -355,6 +367,16 @@ public:
 			++it;
 		}
 		std::cout << std::endl;
+	}
+
+	template <typename IO>
+	void write(IO &io) const {
+		auto it = indval.cbegin();
+		while (it != indval.cend()) {
+			io << (*it).ind << ':' << (*it).val << ',';
+			++it;
+		}
+		io << '\n';
 	}
 };
 
