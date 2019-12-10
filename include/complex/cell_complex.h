@@ -102,7 +102,7 @@ public:
     // maximum dimension of cell
     inline size_t maxdim() const { return _ncells.size() - 1; }
     // number of cells in dimension k
-    inline size_t ncells(size_t k) const { return _ncells[k]; }
+    inline size_t ncells(size_t k) const { return k <= maxdim() ? _ncells[k] : 0; }
     // total number of cells
     size_t ncells() const {
       size_t ct = 0;

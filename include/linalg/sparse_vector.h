@@ -71,6 +71,11 @@ public:
 		indval.push_back(key_type(i, TV(1)));
 	}
 
+	SparseVector& operator=(const SparseVector &other) {
+		indval = other.indval;
+		return *this;
+	}
+
 	template<typename T>
 	bool operator==(const T &other) const {
 		auto it1 = nzbegin();
