@@ -28,6 +28,7 @@ int main() {
 
     auto W = WitnessComplex(X, L, dist, maxdim);
     W.print_summary();
+    W.save("witness.scpx");
     //W.boundary_csc(1).print();
 
     auto CX = ChainComplex<MT>(W);

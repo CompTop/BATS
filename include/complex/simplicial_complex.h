@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <iterator>
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <map>
 
 #include "abstract_complex.h"
@@ -59,7 +61,7 @@ private:
     void reserve(size_t maxdim) {
         if ( _ncells.size() < maxdim + 1 ) { _ncells.resize(maxdim+1, 0); }
         if ( _reserved.size() < maxdim + 1 ) { _reserved.resize(maxdim+1, 0); }
-        if ( spx.size() < maxdim ) { spx.resize(maxdim + 1); }
+        if ( spx.size() < maxdim + 1 ) { spx.resize(maxdim + 1); }
         if ( faces.size() < maxdim ) { faces.resize(maxdim); }
         if ( coeff.size() < maxdim ) { coeff.resize(maxdim); }
         return;
@@ -85,10 +87,11 @@ private:
     cell_ind _add_unsafe(std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
 
-        // first we'll add faces
-        size_t old_size = faces[dim-1].size();
         // determine faces
         if (dim > 0){
+            // first we'll add faces
+            size_t old_size = faces[dim-1].size();
+
             int c = -1;
             // loop over faces in lexicographical order
             size_t spx_len = dim + 1;
@@ -161,6 +164,27 @@ public:
             reserve(d, dim[d]);
         }
     }
+
+    SimplicialComplex(const std::string &&fname) {
+        reserve(0);
+        std::ifstream file (fname, std::ios::in);
+        if (file.is_open()) {
+            std::string line;
+            std::vector<size_t> spx;
+            while (getline(file, line)) {
+                read_simplex(line, spx);
+                this->add_safe(spx);
+            }
+            file.close();
+        } else {
+            std::cerr << "unable to read simplicial complex from " << fname << std::endl;
+        }
+    }
+
+    // // read from file
+    // SimplicialComplex(const std::string fname) {
+    //
+    // }
 
     // inline spx_map& trie() { return spx_to_idx; }
 
@@ -274,6 +298,20 @@ public:
 
     ~SimplicialComplex() {
         //std::cout << "in simplicial complex destructor" << std::endl;
+    }
+
+    void save(std::string &&fname) const {
+        std::ofstream file (fname, std::ios::out);
+        if (file.is_open()) {
+            for (size_t dim = 0; dim < maxdim() + 1; dim++) {
+                for (size_t i =0; i < ncells(dim); i++) {
+                    write_simplex(file, simplex_begin(dim, i), simplex_end(dim, i));
+                }
+            }
+            file.close();
+        } else {
+            std::cerr << "unable to write simplicial complex to " << fname << std::endl;
+        }
     }
 
 };

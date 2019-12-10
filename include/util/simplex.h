@@ -2,6 +2,7 @@
 // utilities for simplices
 #include <functional> // for hash
 #include <vector>
+#include <sstream>
 
 #include "permutation.h"
 
@@ -79,4 +80,35 @@ int simplex_sign(std::vector<T> &s) {
     auto p = bats::sortperm(s);
     apply_perm(s, p);
     return is_degenerate(s) ? 0 : perm_sign(p);
+}
+
+template <typename IO, typename T>
+void write_simplex(IO &io, std::vector<T> &s) {
+    for (auto x : s) {
+        io << x << ", ";
+    }
+    io << '\n';
+}
+
+template <typename IO, typename TI>
+void write_simplex(IO &io, TI&& begin, TI&& end) {
+    auto it = begin;
+    while (it != end) {
+        io << *it++ << ",";
+    }
+    io << '\n';
+}
+
+template < typename T>
+void read_simplex(std::string &line, std::vector<T> &s) {
+    s.clear();
+    // read csv line to string
+    std::string token;
+    std::istringstream iss(line);
+    while (getline(iss, token, ',')) {
+        // std::cout << token << ',' << std::endl;
+        if (token.size() > 0) {
+            s.emplace_back(std::stoi(token));
+        }
+    }
 }

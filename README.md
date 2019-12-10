@@ -109,6 +109,39 @@ This package supports OpenMP by default.  If you want to specify the number of t
 time OMP_NUM_THREADS=2 ./zigzag_cylinder.out
 ```
 
+# IO
+
+We support reading/writing various objects in the following formats
+
+## SimplicialComplexes
+
+You can write a simplicial complex to a text file using
+```cpp
+X.write(fname); // std::string fname
+```
+
+The format is a comma separated value file with a simplex on each line.  E.g. the simplicial complex with simplices `{0}, {1}, {0,1}` will be written to a file
+```
+0,
+1,
+0,1,
+```
+
+## Sparse Matrices
+
+Sparse matrices can be stored in index-value format `i:v`, where each column of the matrix gets its own row.  The size of the matrix is encoded on the first line as `m, n`. For example, the matrix
+```
+0  1
+1  0
+-1  0
+```
+would be stored as
+```
+3,2
+1:1,2:-1,
+0:1
+```
+
 
 
 # Contributing
