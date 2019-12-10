@@ -366,6 +366,8 @@ struct A<Dense<F,Acc>>{
 
     // return a column view of column j
     inline VectorView<F> operator[](size_t j) {
+		if(j+1>n)
+			std::cout<<"OUTOFBOUNDS2\n";
         return macc[j];
     }
 	inline const VectorView<F> operator[](size_t j) const {
@@ -374,16 +376,23 @@ struct A<Dense<F,Acc>>{
 
 	// return a row view of row i
     inline VectorView<F> r(size_t i) {
+		if(i+1>m)
+			std::cout<<"OUTOFBOUNDS3\n";
         return macc.r(i);
     }
 
 	inline F& operator()(const size_t k) { return macc(k); }
 	inline const F& operator()(const size_t k) const { return macc(k); }
-    inline F& operator()(int i, int j) { return macc(i,j); }
+    inline F& operator()(int i, int j) { 
+		if(i+1>m || j+1>n)
+			std::cout<<"OUTOFBOUNDS1\n";
+		return macc(i,j); 
+	}
 	inline const F& operator()(int i, int j) const { return macc(i,j); }
 
     void free(){
-        delete mat;
+		if (m !=0 && n!=0)
+        	delete mat;
     }
 
 	//equality check
@@ -522,7 +531,7 @@ L<Dense<F,Acc2>> commute(EL<Dense<F,Acc1>> ELmat, L<Dense<F,Acc2>> Lmat) {
     // loop over columns of ELmat
     for (j = 0; j < n && i < m; j++) {
         // increment i until we find a non-zero, or run out of column
-        while (ELmat(i,j) == F(0) && i < m) {
+        while ( i < m && ELmat(i,j) == F(0) ) {
             i++;
         }
         // column is all zero
@@ -692,7 +701,7 @@ auto find_pivot(M mat,size_t pr, size_t pc){
         prow ++; // try new row
         pcol = pc;
         //search col, give up if u reach last col
-        while( (mat(prow,pcol)==F(0)) & (pcol < mat.n)){
+        while( (pcol < mat.n) && (mat(prow,pcol)==F(0)) ){
             pcol++;
         }
     }while((pcol == mat.n) && !(prow == mat.m-1));

@@ -15,13 +15,13 @@ int main() {
 	// cylinder example
 	// size_t d = 3;
 	// double rmax = 1.0;
-	// auto x = gen_cylinder(40, 30);
-	// add_normal_noise(x, 0.0, 0.05);
+	auto X = gen_cylinder(40, 30);
+	add_normal_noise(X, 0.0, 0.05);
 
 	// random cube example
 	size_t d = 3; // dimension
 	double rmax = 0.15;
-	auto X = sample_cube<double>(d, 1000);
+	//auto X = sample_cube<double>(d, 1000);
 
 	/// project onto first coordinate
 	auto p = coordinate_projection(X, 0);
@@ -57,7 +57,7 @@ int main() {
 	std::cout << "*" << std::endl;
 
 	(void) data; // to remove warnings
-
+	std::cout<<"Quiver fact\n";
 	// create quiver, factorize and check consistency
 	auto taq = Type_A<FT>(mat,etype);
 	taq.create_copy_of_mats();

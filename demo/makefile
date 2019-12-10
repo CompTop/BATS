@@ -1,7 +1,7 @@
 CXXFLAGS = -Wall -std=c++17 -Wextra
 OUTFLAGS = -O3 -fopenmp
 PROFFLAGS = -pg -O3
-DBFLAGS = -g -Og
+DBFLAGS = -g -O0 
 CXX = g++
 IFLAGS = -I../include
 

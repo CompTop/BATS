@@ -194,6 +194,8 @@ struct Type_A{
                     Lt = Lmats[i];
                 }else{ // commute the other way
                     auto Lt2 = commute(Lt,ELHmats[i]); //allocates new mem 
+					cout<<"Free LT - 1 "<<i<<(Lt.mat==NULL)<<"\n";
+					Lt.print();
                     Lt.free();
                     Lt = Lt2;
                     apply_matmul_on_right(Lt,Lmats[i]);
@@ -206,6 +208,8 @@ struct Type_A{
                 // If next arrow direction is opposite inverse the passing L
                 if( i>0 && arrow_dir[i-1]!= 1 ){
                     auto Lt3 = L_inverse(Lt); //allocates new mem 
+					cout<<"Free LT - 2 "<<i<<"\n";
+					Lt.print();
                     Lt.free();
                     Lt = Lt3;
                 }

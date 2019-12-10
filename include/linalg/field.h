@@ -85,7 +85,6 @@ private:
 
 public:
 
-
   ModP() : val(0) {}
   ModP(IntT val) : val((val + P) % P) {}
 
