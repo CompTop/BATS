@@ -1,5 +1,6 @@
 #include <vector>
 #include <set>
+#include <string>
 
 #include <bats.h>
 #include <util/set.h>
@@ -34,6 +35,9 @@ int main() {
 
 	// Diagram of Spaces and maps
 	auto TopDgm = Rips(SetDgm, X, dist, rmax, d);
+
+	std::string dname = "rss.dgm";
+	TopDgm.save(dname);
 
 	// diagram in Chain
 	auto ChainDgm = Chain<MT>(TopDgm);

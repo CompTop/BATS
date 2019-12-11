@@ -6,6 +6,7 @@ essentially a chain map
 */
 
 #include <vector>
+#include <string>
 #include <linalg/sparse_vector.h>
 #include <linalg/col_matrix.h>
 
@@ -30,6 +31,19 @@ public:
 		cell_map.resize(dim+1);
 	}
 
+	CellularMap(std::string &fname) {
+		std::ifstream file (fname, std::ios::in);
+        if (file.is_open()) {
+			// keep putting cell_maps on back
+			while (!file.eof()) {
+				cell_map.emplace_back(map_type(file));
+			}
+            file.close();
+        } else {
+            std::cerr << "unable to read CellularMap from " << fname << std::endl;
+        }
+	}
+
 	inline size_t maxdim() const { return cell_map.size() - 1; }
 
 	map_type& operator[](size_t k) {
@@ -51,6 +65,19 @@ public:
 			M[k] = map_type::identity(X.ncells(k));
 		}
 		return M;
+	}
+
+	void save(std::string &fname) {
+		// save each cellmap in the same file
+		std::ofstream file (fname, std::ios::out);
+        if (file.is_open()) {
+			for (auto& M : cell_map) {
+				M.write(file);
+			}
+            file.close();
+        } else {
+            std::cerr << "unable to write CellularMap to " << fname << std::endl;
+        }
 	}
 
 };

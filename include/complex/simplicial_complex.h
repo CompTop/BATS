@@ -300,7 +300,7 @@ public:
         //std::cout << "in simplicial complex destructor" << std::endl;
     }
 
-    void save(std::string &&fname) const {
+    void save(std::string &fname) const {
         std::ofstream file (fname, std::ios::out);
         if (file.is_open()) {
             for (size_t dim = 0; dim < maxdim() + 1; dim++) {

@@ -2,6 +2,8 @@
 
 #include <cstddef>
 #include <vector>
+#include <string>
+#include <sys/stat.h>
 
 // diagram class - owns data
 template <typename NT, typename ET>
@@ -73,5 +75,21 @@ public:
     void set_edge(size_t i, size_t s, size_t t, ET &&data) {
         edata[i] = data;
         elist[i] = Edge(s, t);
+    }
+
+    void save(std::string &dname) {
+        mkdir(dname.c_str(), 0777);
+        // TODO: write metadata on number of nodes, edges, and edge source/target
+
+        #pragma omp parallel for
+        for (size_t i = 0; i < nnode(); i++) {
+            std::string fname = dname + "/node" + std::to_string(i);
+            node[i].save(fname);
+        }
+        #pragma omp parallel for
+        for (size_t i = 0; i < nedge(); i++) {
+            std::string fname = dname + "/edge" + std::to_string(i);
+            edata[i].save(fname);
+        }
     }
 };
