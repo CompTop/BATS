@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <fstream>
 #include <sys/stat.h>
 
 // diagram class - owns data
@@ -77,9 +78,26 @@ public:
         elist[i] = Edge(s, t);
     }
 
-    void save(std::string &dname) {
+    void save_metadata(std::string &fname) const {
+        std::ofstream file (fname, std::ios::out);
+        if (file.is_open()) {
+            file << node.size() << '\n'; // number of nodes
+            file << elist.size() << '\n'; // number of edges
+            for (auto e : elist) {
+                // write edge directions
+                file << e.src << ',' << e.targ << '\n';
+            }
+            file.close();
+        } else {
+            std::cerr << "unable to write metadata at " << fname << std::endl;
+        }
+    }
+
+    void save(std::string &dname) const {
         mkdir(dname.c_str(), 0777);
         // TODO: write metadata on number of nodes, edges, and edge source/target
+        std::string mdname = dname + "/metadata";
+        save_metadata(mdname);
 
         #pragma omp parallel for
         for (size_t i = 0; i < nnode(); i++) {

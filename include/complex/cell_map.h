@@ -67,7 +67,7 @@ public:
 		return M;
 	}
 
-	void save(std::string &fname) {
+	void save(std::string &fname) const {
 		// save each cellmap in the same file
 		std::ofstream file (fname, std::ios::out);
         if (file.is_open()) {

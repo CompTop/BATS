@@ -20,4 +20,5 @@ default: rips.out rips.prof rips.db
 
 .PHONY: clean
 clean:
-	rm *.out *.prof *.db
+	rm -f *.out *.prof *.db
+	rm -rf *.dgm
