@@ -170,6 +170,7 @@ public:
         std::ifstream file (fname, std::ios::in);
         if (file.is_open()) {
             std::string line;
+            getline(file, line); // TODO: should be "SimplicialComplex"
             std::vector<size_t> spx;
             while (getline(file, line)) {
                 read_simplex(line, spx);
@@ -303,6 +304,7 @@ public:
     void save(std::string &fname) const {
         std::ofstream file (fname, std::ios::out);
         if (file.is_open()) {
+            file << "SimplicialComplex\n";
             for (size_t dim = 0; dim < maxdim() + 1; dim++) {
                 for (size_t i =0; i < ncells(dim); i++) {
                     write_simplex(file, simplex_begin(dim, i), simplex_end(dim, i));

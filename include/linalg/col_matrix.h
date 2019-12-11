@@ -65,6 +65,7 @@ public:
 
 	void read(std::istream &io) {
 		std::string line, token;
+		getline(io, line); // TODO: should be "Sparse Matrix"
 		getline(io, line); // get first line
 		// get dimensions from first line
 		std::istringstream iss(line);
@@ -239,6 +240,7 @@ public:
 
     // template <typename IO>
     void write(std::ostream &io) const {
+		io << "Sparse Matrix\n";
         io << nrow() << ',' << ncol() << '\n';
         for (size_t j = 0; j < ncol(); j++) {
             // write column as row

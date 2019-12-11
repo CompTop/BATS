@@ -34,6 +34,8 @@ public:
 	CellularMap(std::string &fname) {
 		std::ifstream file (fname, std::ios::in);
         if (file.is_open()) {
+			std::string line;
+			getline(file, line); // TODO: should be CellularMap
 			// keep putting cell_maps on back
 			while (!file.eof()) {
 				cell_map.emplace_back(map_type(file));
@@ -71,6 +73,7 @@ public:
 		// save each cellmap in the same file
 		std::ofstream file (fname, std::ios::out);
         if (file.is_open()) {
+			file << "CellularMap\n";
 			for (auto& M : cell_map) {
 				M.write(file);
 			}
