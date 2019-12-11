@@ -113,11 +113,17 @@ time OMP_NUM_THREADS=2 ./zigzag_cylinder.out
 
 We support reading/writing various objects in the following formats
 
+Our convention is to save object `X` using a `save` method.
+```cpp
+std::string fname = "...";
+X.save(fname);
+```
+
 ## SimplicialComplexes
 
 You can write a simplicial complex to a text file using
 ```cpp
-X.write(fname); // std::string fname
+X.save(fname); // std::string fname
 ```
 
 The format is a comma separated value file with a simplex on each line.  E.g. the simplicial complex with simplices `{0}, {1}, {0,1}` will be written to a file
