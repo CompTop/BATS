@@ -145,6 +145,31 @@ would be stored as
 
 By default, `.smtx` is used as the file extension.
 
+## CellularMap
+A CellularMap is saved as several sparse matrices in a single file.
+
+If the 0-map is n columns, then after n rows of the file, an entry for the 1-map will begin.
+
+## Diagrams
+If the nodes and edges of a diagram have a `save` method on the objects, then the diagram can be saved.
+
+Diagrams are saved in a `*.dgm` folder.  Every node will be saved as `*.dgm/node<i>`, where `<i>` is replaced by the node index in the diagram.  Every edge will be saved as `*.dgm/edge<j>` where `<j>` is the edge index in the diagram.  Metadata for the diagram can be found in `*.dgm/metadata`, which is a text file where the first line is the number of nodes, the second line is the number of edges, and then a line for each edge with contains the source and target of each edge as a comma-separated pair.
+
+For example, a diagram of two simplicial complexes and cellular maps saved in `test.dgm` will have the following directory structure
+```
+test.dgm/
+	metadata
+	node0
+	node1
+	edge1
+```
+where `node0` and `node1` each contain a saved `SimplicialComplex`, and `edge1` is the saved `CellularMap`.  If the edge is from node 0 to node 1, then the metadata file will contain
+```
+2
+1
+0,1
+```
+
 
 # Contributing
 Code should use C++17 standard
