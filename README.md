@@ -119,6 +119,8 @@ std::string fname = "...";
 X.save(fname);
 ```
 
+all file names will begin with the type of the object.
+
 ## SimplicialComplexes
 
 You can write a simplicial complex to a text file using
@@ -128,6 +130,7 @@ X.save(fname); // std::string fname
 
 The format is a comma separated value file with a simplex on each line.  E.g. the simplicial complex with simplices `{0}, {1}, {0,1}` will be written to a file
 ```
+SimplicialComplex
 0,
 1,
 0,1,
@@ -144,6 +147,7 @@ Sparse matrices can be stored in index-value format `i:v`, where each column of 
 ```
 would be stored as
 ```
+Sparse Matrix
 3,2
 1:1,2:-1,
 0:1
