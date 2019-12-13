@@ -62,6 +62,7 @@ template<typename T>
 struct DataSet {
 	Matrix<T> data;
 
+	DataSet() {}
 	DataSet(const Matrix<T> &d ) : data(d) {}
 
 	inline size_t size() const { return data.ncol(); }
