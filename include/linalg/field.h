@@ -65,6 +65,12 @@ public:
     std::cout << *this << std::endl;
   }
 
+  std::string str() {
+    std::ostringstream oss;
+    oss << *this;
+    return oss.str();
+  }
+
 
 };
 
