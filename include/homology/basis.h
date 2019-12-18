@@ -10,6 +10,8 @@ compute homology-revealing bases for a chain complex
 template <typename MT>
 struct ReducedChainComplex {
 
+	using chain_type = typename MT::col_type;
+
 	std::vector<MT> U; // basis matrices
 	std::vector<MT> R; // reduced matrix
 	std::vector<std::set<size_t>> I;
@@ -41,6 +43,19 @@ struct ReducedChainComplex {
 	// size of homology vector space in dimension k
 	inline size_t hdim(size_t k) const { return I[k].size(); }
 	inline size_t maxdim() const { return R.size() - 1; }
+
+	// get preferred representative i in dimension k
+	chain_type get_preferred_representative(
+		size_t i,
+		const size_t k
+	) const {
+		auto Iptr = I[k].begin();
+		while (i > 0) {
+			Iptr++;
+			i--;
+		}
+		return U[k][*Iptr];
+	}
 
 	// modify y in-place to be preferred representative for homology class in dimension k
 	void find_preferred_representative(
