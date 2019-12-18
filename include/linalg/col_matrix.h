@@ -21,6 +21,7 @@ private:
     std::vector<TC> col;
 public:
     using val_type = typename TC::val_type;
+	using col_type = TC;
 
     // default constructor
     ColumnMatrix() {}
