@@ -43,9 +43,8 @@ struct ReducedChainComplex {
 	inline size_t maxdim() const { return R.size() - 1; }
 
 	// modify y in-place to be preferred representative for homology class in dimension k
-	template <class TVec>
 	void find_preferred_representative(
-		TVec &y,
+		typename MT::col_type &y,
 		const size_t k
 	) const {
 		if (k == maxdim()) {
