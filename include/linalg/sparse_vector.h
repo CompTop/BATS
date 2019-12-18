@@ -39,10 +39,12 @@ public:
 
 	SparseVector(const std::vector<key_type> &indval) : indval(indval) {}
 
-	SparseVector(const std::vector<TI> &ind, const std::vector<TV> &val) {
+	template <typename TV2>
+	SparseVector(const std::vector<TI> &ind, const std::vector<TV2> &val) {
 		size_t nz = ind.size();
+		indval.reserve(nz);
 		for (size_t i = 0; i < nz; i++) {
-			indval.emplace_back(key_type(ind[i], val[i]));
+			indval.emplace_back(key_type(ind[i], TV(val[i])));
 		}
 	}
 
