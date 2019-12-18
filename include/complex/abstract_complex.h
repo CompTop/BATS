@@ -5,6 +5,8 @@
 
 // #include <vector>
 #include <cstddef>
+#include <string>
+#include <iostream>
 
 // indicates dimension and index of a cell
 struct cell_ind {
@@ -14,6 +16,12 @@ public:
 
     cell_ind() {}
     cell_ind(size_t dim, size_t ind) : dim(dim), ind(ind) {}
+
+    std::string str() {
+        std::ostringstream oss;
+        oss << '(' << dim << ',' << ind << ')';
+        return oss.str();
+    }
 };
 
 // //#include "csc_matrix.h"
