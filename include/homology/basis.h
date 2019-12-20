@@ -12,6 +12,7 @@ struct ReducedChainComplex {
 
 	using chain_type = typename MT::col_type;
 
+	std::vector<size_t> dim;
 	std::vector<MT> U; // basis matrices
 	std::vector<MT> R; // reduced matrix
 	std::vector<std::set<size_t>> I;
@@ -22,6 +23,7 @@ struct ReducedChainComplex {
 	// compute reduced chain complex from chain complex
 	ReducedChainComplex(const ChainComplex<MT> &C) {
 		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
 		U.resize(dmax);
 		R.resize(dmax);
 		I.resize(dmax);
