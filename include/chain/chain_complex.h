@@ -32,8 +32,6 @@ struct ChainComplex {
 
 	ChainComplex(const ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
 
-
-
 	inline size_t maxdim() const { return dim.size() - 1; }
 	//inline size_t dim(size_t k) const { return dim[k]; }
 	//inline MT& boundary(size_t k) { return boundary[k]; }

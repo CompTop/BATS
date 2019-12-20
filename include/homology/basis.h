@@ -40,6 +40,7 @@ struct ReducedChainComplex {
 		I[dmax-1] = extract_basis_indices(R[dmax-1]);
 	}
 
+
 	// size of homology vector space in dimension k
 	inline size_t hdim(size_t k) const { return I[k].size(); }
 	inline size_t maxdim() const { return R.size() - 1; }

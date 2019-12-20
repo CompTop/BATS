@@ -7,6 +7,7 @@ Single header file to include all functionality
 #include "filtration.h"
 #include "chain.h"
 #include "homology.h"
+#include "persistence.h"
 #include "multigraph.h"
 #include "quiver.h"
 #include "topology.h"

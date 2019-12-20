@@ -1,0 +1,26 @@
+#pragma once
+
+// store dimension, birth, death, and critical indices of pair
+template <typename T>
+struct PersistencePair {
+	size_t dim;
+	size_t birth_ind;
+	size_t death_ind;
+	T birth;
+	T death;
+
+	PersistencePair() {}
+	PersistencePair(
+		const size_t dim,
+		const size_t birth_ind,
+		const size_t death_ind,
+		const T birth,
+		const T death
+	) : dim(dim), birth_ind(birth_ind), death_ind(death_ind), birth(birth), death(death) {}
+
+	inline size_t get_dim() const {return dim;}
+	inline size_t get_birth_ind() const {return birth_ind;}
+	inline size_t get_death_ind() const {return death_ind;}
+	inline T get_birth() const {return birth;}
+	inline T get_death() const {return death;}
+};
