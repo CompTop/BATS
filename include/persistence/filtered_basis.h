@@ -51,6 +51,11 @@ struct ReducedFilteredChainComplex {
 		return pairs;
 	}
 
+	// return representative for a pair
+	inline auto representative(const PersistencePair<T>& p) {
+		return RC.U[p.dim][p.birth_ind];
+	}
+
 	// barcode w/out critical inds
 	std::vector<T> barcode(const size_t k);
 
