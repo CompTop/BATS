@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include "matrix_interface.h"
+#include <string>
 
 //required for fill_rand<Rational<int>>()
 #include <linalg/field.h>
@@ -209,6 +210,17 @@ struct MemAcc{
             std::cout<<"\n";
         }
     }
+
+	std::string str(){
+		std::ostringstream oss;
+		for( size_t i=0; i<m; i++){
+            for( size_t j=0; j<n; j++){
+                oss<<((*this)(i,j))<<" ";
+            }
+            oss<<"\n";
+        }
+	    return oss.str();
+	}
 };
 
 
@@ -363,6 +375,16 @@ struct A<Dense<F,Acc>>{
 		std::cout<<"};";
     }
 
+	std::string str(){
+		std::ostringstream oss;
+		for( size_t i=0; i<m; i++){
+            for( size_t j=0; j<n; j++){
+                oss<<((*this)(i,j))<<" ";
+            }
+            oss<<"\n";
+        }
+	    return oss.str();
+	}
 
     // return a column view of column j
     inline VectorView<F> operator[](size_t j) {
