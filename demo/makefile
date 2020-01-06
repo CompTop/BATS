@@ -5,7 +5,7 @@ DBFLAGS = -g -Og
 CXX = g++
 IFLAGS = -I../include
 
-default: rips.out rips.prof rips.db
+default: rips.out serpinski.out zigzag_codensity.out zigzag_cover.out zigzag_rips_samples.out zigzag_witness.out
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
