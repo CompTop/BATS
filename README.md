@@ -5,7 +5,9 @@ This repository contains header files for
 * Computing algebraic invariants of topological spaces, and diagrams of topological spaces.
 
 The contents of this repository were originally developed to implement the computational framework in the paper
-[Persistent and Zigzag Homology: A Matrix Factorization Viewpoint](https://arxiv.org/abs/1911.10693) by Gunnar Carlsson, Anjan Dwaraknath, and Bradley J. Nelson.  Portions of the code base is still under development - please contact the authors if you would like to have certain functionality to support an application!
+[Persistent and Zigzag Homology: A Matrix Factorization Viewpoint](https://arxiv.org/abs/1911.10693) by Gunnar Carlsson, Anjan Dwaraknath, and Bradley J. Nelson.  Portions of the code base is still under development - please contact the authors (or submit an issue) if you would like to have certain functionality to support an application!
+
+Python bindings for a subset of BATS can be found in a separate repository: [BATS.py](https://github.com/bnels/BATS.py).  
 
 ## Features
 
