@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <iostream>
+
 // store dimension, birth, death, and critical indices of pair
 template <typename T>
 struct PersistencePair {
@@ -23,4 +26,10 @@ struct PersistencePair {
 	inline size_t get_death_ind() const {return death_ind;}
 	inline T get_birth() const {return birth;}
 	inline T get_death() const {return death;}
+
+	std::string str() {
+        std::ostringstream oss;
+        oss << dim << " : (" << birth << ',' << death << ") <" << birth_ind << ',' << (death_ind == bats::NO_IND ? (int) -1 : (int) death_ind) << '>';
+        return oss.str();
+    }
 };

@@ -182,6 +182,36 @@ where `node0` and `node1` each contain a saved `SimplicialComplex`, and `edge1` 
 0,1
 ```
 
+# Filtrations
+
+BATS provides a filtration wrapper for complexes, chain complexes, and reduced chain complexes.
+
+
+```cpp
+std::vector<size_t> spx;
+Filtration<double, SimplicialComplex> F;
+spx = {0}; F.add(0.0, spx);
+spx = {1}; F.add(0.0, spx);
+spx = {2}; F.add(0.0, spx);
+spx = {0,1}; F.add(1.0, spx);
+spx = {0,2}; F.add(1.0, spx);
+spx = {1,2}; F.add(1.0, spx);
+```
+
+Extracting homology
+```cpp
+auto FC = FilteredChainComplex<double, MT>(F);
+
+auto RFC = ReducedFilteredChainComplex(FC);
+
+// persistence pairs for H1
+auto ps = RFC.persistence_pairs(1);
+
+for (auto p : ps) {
+	std::cout << p.str() << std::endl;
+}
+```
+
 
 # Contributing
 Code should use C++17 standard
