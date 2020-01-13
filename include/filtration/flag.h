@@ -31,7 +31,7 @@ void add_dimension_recursive_flag(
             sort_into(spx_idxs, spx_idxs2);
 
             // add to F
-            F._add_pair_unsafe_reserve(t, spx_idxs2);
+            F.add(t, spx_idxs2);
 
             // pop k off spx_idxs
             spx_idxs.pop_back();
@@ -46,7 +46,7 @@ void add_dimension_recursive_flag(
             sort_into(spx_idxs, spx_idxs2);
 
             // add to F
-            F._add_pair_unsafe_reserve(t, spx_idxs2);
+            F.add(t, spx_idxs2);
 
             // recurse
             intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
@@ -80,7 +80,7 @@ void add_dimension_recursive_flag_unsafe(
             sort_into(spx_idxs, spx_idxs2);
 
             // add to F
-            F._add_pair_unsafe(t, spx_idxs2);
+            F.add(t, spx_idxs2);
 
             // pop k off spx_idxs
             spx_idxs.pop_back();
@@ -95,7 +95,7 @@ void add_dimension_recursive_flag_unsafe(
             sort_into(spx_idxs, spx_idxs2);
 
             // add to F
-            F._add_pair_unsafe(t, spx_idxs2);
+            F.add(t, spx_idxs2);
 
             // recurse
             intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
@@ -202,15 +202,12 @@ void add_dimension_recursive_flag(
 // n - number of vertices
 // maxdim - maximum dimension of simplices
 template <typename T>
-Filtration<T, SimplicialComplex>FlagFiltration(
-    SimplicialComplex& X,
+Filtration<T, SimplicialComplex> FlagFiltration(
     const std::vector<size_t> &edges,
     const std::vector<T> &t,
     const size_t n, // number of 0-cells
     const size_t maxdim,
     const T t0
-    // SimplicialComplex& X,
-    // Filtration<T, SimplicialComplex>& F
 ) {
 
     // check that dimensions agree
@@ -220,8 +217,7 @@ Filtration<T, SimplicialComplex>FlagFiltration(
     // X = SimplicialComplex(maxdim);
     // F = Filtration<T, SimplicialComplex>(X);
     // reset simplicial complex
-    X = SimplicialComplex(maxdim);
-    Filtration<T, SimplicialComplex> F(X);
+    Filtration<T, SimplicialComplex> F;
 
     // sets 0-cells
     std::vector<size_t> spx_idxs(1);
@@ -241,12 +237,12 @@ Filtration<T, SimplicialComplex>FlagFiltration(
         size_t j = edges[2*k + 1];
         spx_idxs[0] = i;
         spx_idxs[1] = j;
-        std::pair<cell_ind, bool> ret = F.add_pair_edge(t[k], spx_idxs);
+        auto ret = F.add(t[k], spx_idxs);
         // std::cout << ret.second << std::endl;
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
         if (!iter_idxs.empty()) {
-            add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k], ret.second, ret.first);
+            add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k]);
         }
 
         // TODO: use std::set for neighbors - insertion is log(n)
@@ -318,7 +314,7 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> CompleteFlagFilt
         size_t j = edges[2*k + 1];
         spx_idxs[0] = i;
         spx_idxs[1] = j;
-        F.add_pair(t[k], spx_idxs);
+        F.add(t[k], spx_idxs);
 
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
