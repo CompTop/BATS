@@ -14,6 +14,8 @@ utilities for creating covers
 #include <multigraph/diagram.h>
 #include "data.h"
 #include "inclusion.h"
+#include "landmark.h"
+#include "neighborhood.h"
 
 namespace bats {
 	using Cover = std::vector<std::set<size_t>>;
@@ -110,6 +112,28 @@ DataSet<T> get_subset(
 		j++;
     }
     return DataSet(XS);
+}
+
+/*
+Assign points in data sets to k nearest landmarks
+*/
+// template over data type, distance
+template <typename T, typename M>
+bats::Cover landmark_cover(
+	const DataSet<T> &X,
+	const DataSet<T> &L,
+	const M &dist,
+	size_t k
+) {
+	auto ns = neighborhoods(X, L, dist, k);
+	// ns[i] contains k closest points in L to X[i]
+	bats::Cover cover(L.size());
+	for (size_t i = 0; i < ns.size(); i++) {
+		for (auto j : ns[i]) {
+			cover[j].emplace(i);
+		}
+	}
+	return cover;
 }
 
 

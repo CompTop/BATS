@@ -11,3 +11,4 @@
 #include "topology/nerve.h"
 #include "topology/witness.h"
 #include "topology/density.h"
+#include "topology/rips_cover.h"

@@ -46,6 +46,9 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
             }
         }
     }
+    // sort edges
+    std::sort(edges.begin(), edges.end());
+    edges.shrink_to_fit();
     return edges;
 }
 

@@ -19,10 +19,11 @@ struct filtered_edge {
     filtered_edge() {}
     filtered_edge(const size_t &s, const size_t &t, const T &r) : s(s), t(t), r(r) {}
 
-    bool operator<(const filtered_edge& other) {
-        return ((s < other.s) ? true :
-                (s == other.s && t < other.t) ? true :
-                (s == other.s && t == other.t && r < other.r) ? true :
+    // sort by r, then s, then t
+    bool operator<(const filtered_edge& other) const {
+        return ((r < other.r) ? true :
+                (r == other.r && s < other.s) ? true :
+                (r == other.r && s == other.s && t < other.t) ? true :
                 false
         );
     }
