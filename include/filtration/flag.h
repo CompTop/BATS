@@ -9,6 +9,25 @@
 #include <iostream>
 // flag filtrations
 
+// struct for filtered edges
+template <typename T>
+struct filtered_edge {
+    size_t s; // source
+    size_t t; // target
+    T r;      // parameter
+
+    filtered_edge() {}
+    filtered_edge(const size_t &s, const size_t &t, const T &r) : s(s), t(t), r(r) {}
+
+    bool operator<(const filtered_edge& other) {
+        return ((s < other.s) ? true :
+                (s == other.s && t < other.t) ? true :
+                (s == other.s && t == other.t && r < other.r) ? true :
+                false
+        );
+    }
+};
+
 // template over filtration type
 // TODO: can do unsafe simplex add
 template <typename T, typename NT>
@@ -203,16 +222,14 @@ void add_dimension_recursive_flag(
 // maxdim - maximum dimension of simplices
 template <typename T>
 Filtration<T, SimplicialComplex> FlagFiltration(
-    const std::vector<size_t> &edges,
-    const std::vector<T> &t,
+    const std::vector<filtered_edge<T>> &edges,
     const size_t n, // number of 0-cells
     const size_t maxdim,
     const T t0
 ) {
 
     // check that dimensions agree
-    size_t m = t.size();
-    assert (edges.size() == 2 * m);
+    size_t m = edges.size();
 
     // X = SimplicialComplex(maxdim);
     // F = Filtration<T, SimplicialComplex>(X);
@@ -233,16 +250,17 @@ Filtration<T, SimplicialComplex> FlagFiltration(
     iter_idxs.reserve(n); // maximum size
 
     for (size_t k = 0; k < m; k++) {
-        size_t i = edges[2*k];
-        size_t j = edges[2*k + 1];
+        size_t i = edges[k].s;
+        size_t j = edges[k].t;
+        T t = edges[k].r;
         spx_idxs[0] = i;
         spx_idxs[1] = j;
-        auto ret = F.add(t[k], spx_idxs);
+        auto ret = F.add(t, spx_idxs);
         // std::cout << ret.second << std::endl;
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
         if (!iter_idxs.empty()) {
-            add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t[k]);
+            add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t);
         }
 
         // TODO: use std::set for neighbors - insertion is log(n)

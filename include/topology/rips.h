@@ -32,25 +32,21 @@ std::vector<size_t> rips_edges(const Matrix<T> &X, const M &dist, const T rmax) 
 
 // template over data type and metric
 template <typename T, typename M>
-std::tuple<std::vector<size_t>, std::vector<T>> rips_filtration_edges(
+std::vector<filtered_edge<T>> rips_filtration_edges(
     const Matrix<T> &X, const M &dist, const T rmax) {
     size_t n = X.ncol();
-    std::vector<size_t> edges;
-    std::vector<T> t;
+    std::vector<filtered_edge<T>> edges;
     size_t nedges = (n * (n-1)) / 2;
-    edges.reserve(2*nedges);
-    t.reserve(nedges);
+    edges.reserve(nedges);
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < i; j++) {
             T dij = dist(X[i], X[j]);
             if (dij < rmax) {
-                edges.push_back(j);
-                edges.push_back(i);
-                t.push_back(dij);
+                edges.emplace_back(filtered_edge(i, j, dij));
             }
         }
     }
-    return std::make_tuple(edges, t);
+    return edges;
 }
 
 // work on pairwise distance matrix
@@ -112,6 +108,6 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     size_t dmax
 ) {
     size_t n = X.size(); // number of points
-    auto [redges, et] = rips_filtration_edges(X.data, dist, rmax);
-    return FlagFiltration(redges, et, n, dmax, T(0));
+    auto edges = rips_filtration_edges(X.data, dist, rmax);
+    return FlagFiltration(edges, n, dmax, T(0));
 }
