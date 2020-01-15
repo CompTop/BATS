@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <utility> // make_pair
+#include <algorithm> // sort
 #include <tuple>
 #include <complex/simplicial_complex.h>
 #include <filtration/filtration.h>
@@ -223,7 +224,7 @@ void add_dimension_recursive_flag(
 // maxdim - maximum dimension of simplices
 template <typename T>
 Filtration<T, SimplicialComplex> FlagFiltration(
-    const std::vector<filtered_edge<T>> &edges,
+    std::vector<filtered_edge<T>> &edges,
     const size_t n, // number of 0-cells
     const size_t maxdim,
     const T t0
