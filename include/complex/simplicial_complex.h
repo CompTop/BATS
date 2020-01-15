@@ -260,7 +260,7 @@ public:
 			s.emplace_back(i);
 			if (s.size() == dim + 1) {
 				simplices.emplace_back(s);
-				s.clear()
+				s.clear();
 			}
 		}
 		return simplices;

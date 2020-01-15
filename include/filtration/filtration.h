@@ -46,8 +46,6 @@ public:
 	inline size_t maxdim() const { return val.size() - 1; }
 	inline size_t ncells(const size_t dim) const { return val[dim].size(); }
 
-	inline std::vector<TF> get_values(const size_t dim) const { return val[dim]; }
-
 	// add to underlying complex
 	template <class ...Ts>
 	inline cell_ind add(TF t, Ts (&...args)) {
