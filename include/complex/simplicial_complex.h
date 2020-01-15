@@ -253,6 +253,19 @@ public:
         return spx[dim].cbegin() + ((dim + 1) * (i+1));
     }
 
+	std::vector<std::vector<size_t>> get_simplices(const size_t dim) const {
+		std::vector<std::vector<size_t>> simplices;
+		std::vector<size_t> s;
+		for (auto i : spx[dim]) {
+			s.emplace_back(i);
+			if (s.size() == dim + 1) {
+				simplices.emplace_back(s);
+				s.clear()
+			}
+		}
+		return simplices;
+	}
+
     // get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {
         size_t m = ncells(dim-1);
