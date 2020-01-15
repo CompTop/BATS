@@ -229,6 +229,8 @@ Filtration<T, SimplicialComplex> FlagFiltration(
     const T t0
 ) {
 
+    std::sort(edges.begin(), edges.end());
+
     // check that dimensions agree
     size_t m = edges.size();
 
