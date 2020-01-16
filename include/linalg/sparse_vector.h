@@ -143,6 +143,15 @@ public:
 	// nnz
 	inline size_t nnz() const {return indval.size(); }
 
+	std::vector<size_t> nzinds() const {
+		std::vector<size_t> ind;
+		ind.reserve(nnz());
+		for (auto it = nzbegin(); it != nzend(); it++) {
+			ind.emplace_back((*it).ind);
+		}
+		return ind;
+	}
+
 	// returns iterator pointing to first element that is not less than i
 	inline auto lower_bound(const TI &i) {
 		return std::lower_bound(nzbegin(), nzend(), key_type(i, TV(0)));
