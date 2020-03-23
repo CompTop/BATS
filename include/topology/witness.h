@@ -232,3 +232,42 @@ SimplicialComplex StrictWitnessComplex(
     auto cover = witness_neighborhoods(X, L, dist, nu, rmax);
     return Nerve(cover, dmax);
 }
+
+
+template <typename T>
+std::vector<filtered_edge<T>> flag_filtration_edges(
+    const Matrix<T> &pdist,
+    const T rmax) {
+    size_t n = pdist.ncol();
+    std::vector<filtered_edge<T>> edges;
+    size_t nedges = (n * (n-1)) / 2;
+    edges.reserve(nedges);
+    for (size_t i = 0; i < n; i++) {
+        for (size_t j = 0; j < i; j++) {
+            T dij = pdist(i,j);
+            if (dij < rmax) {
+                edges.emplace_back(filtered_edge(i, j, dij));
+            }
+        }
+    }
+    // sort edges
+    std::sort(edges.begin(), edges.end());
+    edges.shrink_to_fit();
+    return edges;
+}
+
+
+// template over data type>
+template <typename T, typename M>
+Filtration<T, SimplicialComplex> WitnessFiltration(
+    const DataSet<T> &L,
+    const DataSet<T> &X,
+    const M &dist,
+    T rmax,
+    size_t dmax
+) {
+    size_t n = L.size(); // number of points in landmark set
+    auto R = witness_edge_param(X, L, dist, 0); // nu=0
+    auto edges = flag_filtration_edges(R, rmax);
+    return FlagFiltration(edges, n, dmax, T(0));
+}
