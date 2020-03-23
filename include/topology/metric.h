@@ -49,6 +49,8 @@ struct AbstractMetric {
 
 
 // metrics are implemented as structs
+
+// standard Euclidean distance
 struct Euclidean : AbstractMetric<Euclidean> {
 
     template <typename T>
@@ -63,6 +65,7 @@ struct Euclidean : AbstractMetric<Euclidean> {
 
 };
 
+// L1 metric
 struct L1Dist : AbstractMetric<L1Dist> {
 
     template <typename T>
@@ -75,6 +78,7 @@ struct L1Dist : AbstractMetric<L1Dist> {
     }
 };
 
+// L-infinity metric
 struct LInfDist : AbstractMetric<LInfDist> {
 
     template <typename T>
@@ -86,4 +90,43 @@ struct LInfDist : AbstractMetric<LInfDist> {
         }
         return n;
     }
+};
+
+
+// Angular metric
+struct AngleDist : AbstractMetric<AngleDist> {
+
+    template <typename T>
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
+        T nx = T(0);
+        T ny = T(0);
+        T ip = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            nx += (x(i) * x(i));
+            ip += (x(i) * y(i));
+            ny += (y(i) * y(i));
+        }
+        T cxy = ip / (std::sqrt(nx) * std::sqrt(ny)); // cosine of angle
+        return std::acos(cxy);
+    }
+};
+
+// metric on RP based on angular distance between representatives
+struct RPAngleDist : AbstractMetric<RPAngleDist> {
+
+    template <typename T>
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
+        T nx = T(0);
+        T ny = T(0);
+        T ip = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            nx += x(i) * x(i);
+            ip += x(i) * y(i);
+            ny += y(i) * y(i);
+        }
+        ip = std::abs(ip); // positive inner produce minimizes distance between RP representatives
+        T cxy = ip / (std::sqrt(nx) * std::sqrt(ny)); // cosine of angle
+        return std::acos(cxy);
+    }
+
 };

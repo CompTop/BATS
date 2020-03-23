@@ -60,7 +60,7 @@ Matrix<T>& add_uniform_noise(Matrix<T> &X,
 template <typename T>
 inline DataSet<T>& add_uniform_noise(
     DataSet<T> &X,
-    const T lb = T(0),
+    const T lb = T(-1),
     const T ub = T(1)
 ) {
     return add_uniform_noise(X.data, lb, ub);

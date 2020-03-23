@@ -15,16 +15,17 @@ int main (int argc, char* argv[]) {
     size_t maxdim = parse_argv(argc, argv, "-maxdim", 3);
     double rmax = parse_argv(argc, argv, "-rmax", 0.2);
 
-	auto X = sample_cube<double>(d, n);
+	//auto X = sample_cube<double>(d, n);
+	auto X = sample_sphere<double>(d, n);
 
-	auto dist = Euclidean();
+	auto dist = RPAngleDist(); //AngleDist();
 
 	// generate a cover
-	auto L = greedy_landmarks(X, 10, dist);
-	auto cover = landmark_cover(X, L, dist, 3);
+	// auto L = greedy_landmarks(X, 10, dist);
+	// auto cover = landmark_cover(X, L, dist, 3);
 
-	// auto F = RipsFiltration(X, dist, rmax, maxdim);
-	auto F = RipsFiltration(X, cover, dist, rmax, maxdim);
+	auto F = RipsFiltration(X, dist, rmax, maxdim);
+	//auto F = RipsFiltration(X, cover, dist, rmax, maxdim);
 
 	//auto F = FlagFiltration(edges, ts, 3, 2, 0.);
 
@@ -36,7 +37,8 @@ int main (int argc, char* argv[]) {
 	auto ps = RFC.persistence_pairs(1);
 
 	for (auto p : ps) {
-	    std::cout << p.str() << " " << p.death - p.birth << std::endl;
+		if (p.death > p.birth)
+			std::cout << p.str() << " " << p.death - p.birth << std::endl;
 	}
 
 	return 0;
