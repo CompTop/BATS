@@ -259,7 +259,7 @@ Filtration<T, SimplicialComplex> FlagFiltration(
         T t = edges[k].r;
         spx_idxs[0] = i;
         spx_idxs[1] = j;
-        auto ret = F.add(t, spx_idxs);
+        F.add(t, spx_idxs); // auto ret = 
         // std::cout << ret.second << std::endl;
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 

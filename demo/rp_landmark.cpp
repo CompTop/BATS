@@ -8,11 +8,11 @@
 
 int main (int argc, char* argv[]) {
 
-	size_t d = 3; // dimension of Euclidean Space
+	size_t d = 3; // dimension of Euclidean Space = RP^{d-1}
 	size_t n = 200;
 
 	// maximum simplex dimension
-    size_t maxdim = parse_argv(argc, argv, "-maxdim", 3);
+    size_t maxdim = parse_argv(argc, argv, "-maxdim", 3); // should be at least d
     double rmax = parse_argv(argc, argv, "-rmax", 0.2);
 
 	//auto X = sample_cube<double>(d, n);

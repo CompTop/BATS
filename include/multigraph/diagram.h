@@ -15,7 +15,7 @@ public:
         size_t targ;
 
         Edge() {}
-        Edge(const Edge& other) : src(other.src), targ(other.targ) {}
+        //Edge(const Edge& other) : src(other.src), targ(other.targ) {}
         Edge(size_t s, size_t t) : src(s), targ(t) {}
     };
 
