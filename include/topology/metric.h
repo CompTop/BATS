@@ -3,6 +3,7 @@
 various metrics for use with geometric constructions
 TODO: add pairwise function
 */
+#pragma once
 
 #include <cstddef>
 #include <cmath>
@@ -107,7 +108,7 @@ struct AngleDist : AbstractMetric<AngleDist> {
             ny += (y(i) * y(i));
         }
         T cxy = ip / (std::sqrt(nx) * std::sqrt(ny)); // cosine of angle
-        return std::acos(cxy);
+        return std::acos(cxy > 1.0 ? 1.0 : cxy);
     }
 };
 
