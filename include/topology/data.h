@@ -67,6 +67,7 @@ struct DataSet {
 
 	inline size_t size() const { return data.ncol(); }
 	inline size_t dim() const { return data.nrow(); }
+	inline Matrix<T>& get_data() { return data; }
 
 
 	// subset of dataset
