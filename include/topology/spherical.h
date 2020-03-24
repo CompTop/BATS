@@ -62,7 +62,7 @@ void force_repel_rp(
 				#pragma omp simd
 				for (size_t k = 0; k < d; k++) {
 					dv(k,j) += f(k);
-					dv(k,i) += f(k);
+					dv(k,i) -= f(k);
 				}
             } else {
 				#pragma omp simd
