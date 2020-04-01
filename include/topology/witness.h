@@ -54,14 +54,9 @@ std::vector<T> get_m(
 // for witness filtration
 template <typename T, typename M>
 Matrix<T> witness_edge_param(
-    const DataSet<T> &X,
-    const DataSet<T> &L,
-    const M &dist,
+    const Matrix<T> &pdist,
     const size_t nu
 ) {
-
-    // pairwise distances
-    auto pdist = dist(L, X);
 
     // get m
     auto m = get_m(pdist, nu);
@@ -89,6 +84,21 @@ Matrix<T> witness_edge_param(
         }
     }
     return R;
+}
+
+// get witness edge parameters
+// for witness filtration
+template <typename T, typename M>
+Matrix<T> witness_edge_param(
+    const DataSet<T> &X,
+    const DataSet<T> &L,
+    const M &dist,
+    const size_t nu
+) {
+
+    // pairwise distances
+    auto pdist = dist(L, X);
+    return witness_edge_param(pdist, nu);
 }
 
 
