@@ -52,32 +52,23 @@ std::vector<T> get_m(
 
 // get witness edge parameters
 // for witness filtration
-template <typename T, typename M>
-Matrix<T> witness_edge_param(
-    const Matrix<T> &pdist,
-    const size_t nu
+template <typename T>
+Matrix<T> dowker_edge_param(
+    Matrix<T> &pdist
 ) {
 
-    // get m
-    auto m = get_m(pdist, nu);
-
-    // loop over pdist, subtract m[j] from each column, take max with 0
-    for (size_t j = 0; j < X.size(); j++) {
-        for (size_t i = 0; i < L.size(); i++) {
-            pdist(i,j) -= m[j];
-            pdist(i,j) = (pdist(i,j) > T(0)) ? pdist(i,j) : T(0);
-        }
-    }
+    auto nL = pdist.nrow();
+    auto nX = pdist.ncol();
 
     // set witness parameters using minmax
-    Matrix<T> R(L.size(), L.size());
-    for (size_t j = 0; j < L.size(); j++) {
+    Matrix<T> R(nL, nL);
+    for (size_t j = 0; j < nL; j++) {
         for (size_t i = 0; i < j; i++) {
             R(i,j) = R(j,i); // symmetry
         }
-        for (size_t i = j+1; i < L.size(); i++) {
+        for (size_t i = j+1; i < nL; i++) {
             T Rij = std::numeric_limits<T>::max();
-            for (size_t k = 0; k < X.size(); k++) {
+            for (size_t k = 0; k < nX; k++) {
                 Rij = std::min(Rij, std::max(pdist(i,k), pdist(j,k)));
             }
             R(i,j) = Rij;
@@ -98,7 +89,20 @@ Matrix<T> witness_edge_param(
 
     // pairwise distances
     auto pdist = dist(L, X);
-    return witness_edge_param(pdist, nu);
+
+    // get m
+    auto m = get_m(pdist, nu);
+    auto nX = pdist.ncol();
+
+    // loop over pdist, subtract m[j] from each column, take max with 0
+    for (size_t j = 0; j < nX; j++) {
+        for (size_t i = 0; i < nX; i++) {
+            pdist(i,j) -= m[j];
+            pdist(i,j) = (pdist(i,j) > T(0)) ? pdist(i,j) : T(0);
+        }
+    }
+
+    return dowker_edge_param(pdist);
 }
 
 
@@ -278,6 +282,20 @@ Filtration<T, SimplicialComplex> WitnessFiltration(
 ) {
     size_t n = L.size(); // number of points in landmark set
     auto R = witness_edge_param(X, L, dist, 0); // nu=0
+    auto edges = flag_filtration_edges(R, rmax);
+    return FlagFiltration(edges, n, dmax, T(0));
+}
+
+// template over data type>
+// pdist is nL x nX size
+template <typename T>
+Filtration<T, SimplicialComplex> DowkerFiltration(
+    const Matrix<T> &pdist,
+    T rmax,
+    size_t dmax
+) {
+    size_t n = pdist.nrow(); // number of points in landmark set
+    auto R = dowker_edge_param(pdist); // nu=0
     auto edges = flag_filtration_edges(R, rmax);
     return FlagFiltration(edges, n, dmax, T(0));
 }

@@ -9,7 +9,7 @@
 #include "topology/rips.h"
 #include "topology/landmark.h"
 #include "topology/nerve.h"
-#include "topology/witness.h"
+#include "topology/dowker.h"
 #include "topology/density.h"
 #include "topology/rips_cover.h"
 #include "topology/spherical.h"
