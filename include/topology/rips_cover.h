@@ -19,7 +19,6 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
     const bats::Cover &cover,
     const M &dist,
     const T rmax) {
-    size_t n = X.ncol();
     std::set<filtered_edge<T>> eset;
     std::vector<filtered_edge<T>> edges;
 
