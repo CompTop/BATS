@@ -54,7 +54,7 @@ std::vector<T> get_m(
 // for witness filtration
 template <typename T>
 Matrix<T> dowker_edge_param(
-    Matrix<T> &pdist
+    const Matrix<T> &pdist
 ) {
 
     auto nL = pdist.nrow();
