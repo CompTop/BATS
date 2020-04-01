@@ -11,7 +11,7 @@
 // data matrix - d x n
 // where d is dimension, n is number of points
 template<typename T>
-using Matrix = A<Dense<T,ColMaj>>;
+using Matrix = A<Dense<T,RowMaj>>;
 
 // read point cloud from csv file.
 // header=True indicates first line is a header
