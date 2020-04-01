@@ -94,6 +94,42 @@ struct LInfDist : AbstractMetric<LInfDist> {
 };
 
 
+// Cosine metric 1 - cos(x,y) = 1 - x^T y / ||x||*||y||
+struct CosineDist : AbstractMetric<CosineDist> {
+
+    template <typename T>
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
+        T nx = T(0);
+        T ny = T(0);
+        T ip = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            nx += (x(i) * x(i));
+            ip += (x(i) * y(i));
+            ny += (y(i) * y(i));
+        }
+        T cxy = ip / (std::sqrt(nx) * std::sqrt(ny)); // cosine of angle
+        return T(1) - cxy;
+    }
+};
+
+// Cosine metric 1 - cos(x,y) = 1 - x^T y / ||x||*||y||
+struct RPCosineDist : AbstractMetric<CosineDist> {
+
+    template <typename T>
+    T dist (const VectorView<T> &x, const VectorView<T> &y) const {
+        T nx = T(0);
+        T ny = T(0);
+        T ip = T(0);
+        for (size_t i = 0; i < x.size(); i++) {
+            nx += (x(i) * x(i));
+            ip += (x(i) * y(i));
+            ny += (y(i) * y(i));
+        }
+        T cxy = ip / (std::sqrt(nx) * std::sqrt(ny)); // cosine of angle
+        return T(1) - std::abs(cxy);
+    }
+};
+
 // Angular metric
 struct AngleDist : AbstractMetric<AngleDist> {
 
@@ -108,7 +144,7 @@ struct AngleDist : AbstractMetric<AngleDist> {
             ny += (y(i) * y(i));
         }
         T cxy = ip / (std::sqrt(nx) * std::sqrt(ny)); // cosine of angle
-        return std::acos(cxy > 1.0 ? 1.0 : cxy);
+        return std::acos(cxy > T(1) ? T(1) : cxy);
     }
 };
 
