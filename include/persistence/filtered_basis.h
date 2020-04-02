@@ -63,3 +63,18 @@ struct ReducedFilteredChainComplex {
 	std::vector<size_t> critical_cells(const size_t k);
 
 };
+
+// defualt return
+template <typename FT, typename T, typename CpxT>
+inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F));
+}
+
+
+
+
+// default return
+//template <typename T, typename FT>

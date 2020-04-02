@@ -29,9 +29,10 @@ int main (int argc, char* argv[]) {
 
 	//auto F = FlagFiltration(edges, ts, 3, 2, 0.);
 
-	auto FC = FilteredChainComplex<double, MT>(F);
+	//auto FC = __FilteredChainComplex(F, FT());
 
-	auto RFC = ReducedFilteredChainComplex(FC);
+	//auto RFC = ReducedFilteredChainComplex(FC);
+	auto RFC = __ReducedFilteredChainComplex(F, FT());
 
 	// persistence pairs for H1
 	auto ps = RFC.persistence_pairs(1);

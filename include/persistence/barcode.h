@@ -33,3 +33,15 @@ struct PersistencePair {
         return oss.str();
     }
 };
+
+// // template over filtration type, field type, complex type
+// template <typename T, typename FT, typename CpxT>
+// auto PersistencePairs(const Filtration<FT, CpxT> &F, FT, const size_t dim) {
+// 	using VT = SparseVector<FT, size_t>;
+// 	using MT = ColumnMatrix<VT>;
+//
+// 	auto FC = FilteredChainComplex<T, MT>(F);
+// 	auto RFC = ReducedFilteredChainComplex(FC);
+//
+// 	return RFC.persistence_pairs(dim);
+// }

@@ -20,3 +20,12 @@ struct FilteredChainComplex {
 	inline const std::vector<std::vector<FT>>& vals() const { return val; }
 
 };
+
+// defualt return
+template <typename FT, typename T, typename CpxT>
+inline auto __FilteredChainComplex(const Filtration<FT, CpxT> &F, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return FilteredChainComplex<FT, MT>(F);
+}
