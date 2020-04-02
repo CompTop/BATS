@@ -15,7 +15,7 @@ generate Rips Cover complex
 // template over data type and metric
 template <typename T, typename M>
 std::vector<filtered_edge<T>> rips_filtration_edges(
-    const Matrix<T> &X,
+    const DataSet<T> &X,
     const bats::Cover &cover,
     const M &dist,
     const T rmax) {
@@ -57,6 +57,6 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     size_t dmax
 ) {
     size_t n = X.size(); // number of points
-    auto edges = rips_filtration_edges(X.data, cover, dist, rmax);
+    auto edges = rips_filtration_edges(X, cover, dist, rmax);
     return FlagFiltration(edges, n, dmax, T(0));
 }

@@ -9,7 +9,7 @@ utilities for S^n and RP^n
 
 // normalizes columns of data to have norm 1
 template <typename T>
-void normalize_columns(DataSet<T>& data) {
+void normalize_entries(DataSet<T>& data) {
 	for (size_t j = 0; j < data.size(); j++) {
 		T vnorm = norm(data[j]);
 		data[j] /= vnorm;
@@ -31,9 +31,9 @@ void force_repel_rp(
 	size_t n = v.size();
 
 	// preallocate array for force vectors
-	Matrix<T> dv(d,n);
+	Matrix<T> dv(n,d);
 	fill_zeros(dv);
-	Matrix<T> f(d, 1);
+	Matrix<T> f(1, d);
 	fill_zeros(f);
 
 	// step 1: compute force
@@ -42,7 +42,7 @@ void force_repel_rp(
 			T normf = T(0);
 			bool same_hemisphere = true;
 			for (size_t k = 0; k < d; k++) {
-				f(k) = v(k,j) - v(k, i);
+				f(k) = v(j,k) - v(i,k);
 				normf += f(k)*f(k);
 			}
 			// check to see if representative was from far side of sphere
@@ -50,7 +50,7 @@ void force_repel_rp(
 				normf = T(0);
 				same_hemisphere = false;
 				for (size_t k = 0; k < d; k++) {
-					f(k) = v(k,j) + v(k, i);
+					f(k) = v(j,k) + v(i,k);
 					normf += f(k)*f(k);
 				}
 			}
@@ -61,14 +61,14 @@ void force_repel_rp(
 			if (same_hemisphere) {
 				#pragma omp simd
 				for (size_t k = 0; k < d; k++) {
-					dv(k,j) += f(k);
-					dv(k,i) -= f(k);
+					dv(j,k) += f(k);
+					dv(i,k) -= f(k);
 				}
             } else {
 				#pragma omp simd
 				for (size_t k =0; k < d; k++) {
-					dv(k,j) += f(k);
-					dv(k,i) += f(k);
+					dv(j,k) += f(k);
+					dv(i,k) += f(k);
 				}
 			}
 		}
@@ -82,14 +82,14 @@ void force_repel_rp(
 		T ip = T(0);
 		#pragma omp simd
 		for (size_t k = 0; k < d; k++) {
-			ip += v(k,j) * dv(k,j);
+			ip += v(j,k) * dv(j,k);
 		}
 
 		T dvn = T(0); // dv norm
 		#pragma omp simd
 		for (size_t k = 0; k < d; k++) {
-			dv(k,j) -= ip*v(k,j); // project off normal component
-			dvn += dv(k,j) * dv(k,j);
+			dv(j,k) -= ip*v(j,k); // project off normal component
+			dvn += dv(j,k) * dv(j,k);
 		}
 
 		// enforce maximum step size
@@ -98,14 +98,14 @@ void force_repel_rp(
 			// project dv to be size step_max
 			#pragma omp simd
 			for (size_t k = 0; k < d; k++) {
-				dv(k,j) *= cproj; // project
+				dv(j,k) *= cproj; // project
 			}
 		}
 
 		// update position
 		#pragma omp simd
 		for (size_t k = 0; k < d; k++) {
-			v(k,j) += dv(k,j);
+			v(j,k) += dv(j,k);
 		}
 
 		// project onto ball

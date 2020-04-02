@@ -13,8 +13,8 @@ generate Rips complex
 // construct edges for rips complex
 // template over data type and metric
 template <typename T, typename M>
-std::vector<size_t> rips_edges(const Matrix<T> &X, const M &dist, const T rmax) {
-    size_t n = X.ncol();
+std::vector<size_t> rips_edges(const DataSet<T> &X, const M &dist, const T rmax) {
+    size_t n = X.size();
     std::vector<size_t> edges;
     size_t nedges = (n * (n-1)) / 2;
     edges.reserve(2*nedges);
@@ -33,8 +33,8 @@ std::vector<size_t> rips_edges(const Matrix<T> &X, const M &dist, const T rmax) 
 // template over data type and metric
 template <typename T, typename M>
 std::vector<filtered_edge<T>> rips_filtration_edges(
-    const Matrix<T> &X, const M &dist, const T rmax) {
-    size_t n = X.ncol();
+    const DataSet<T> &X, const M &dist, const T rmax) {
+    size_t n = X.size();
     std::vector<filtered_edge<T>> edges;
     size_t nedges = (n * (n-1)) / 2;
     edges.reserve(nedges);
@@ -87,7 +87,7 @@ SimplicialComplex RipsComplex(
     size_t dmax
 ) {
     size_t n = X.size(); // number of points
-    auto redges = rips_edges(X.data, dist, rmax);
+    auto redges = rips_edges(X, dist, rmax);
     return FlagComplex(redges, n, dmax);
 }
 
@@ -111,6 +111,6 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     size_t dmax
 ) {
     size_t n = X.size(); // number of points
-    auto edges = rips_filtration_edges(X.data, dist, rmax);
+    auto edges = rips_filtration_edges(X, dist, rmax);
     return FlagFiltration(edges, n, dmax, T(0));
 }

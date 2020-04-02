@@ -12,6 +12,7 @@
 // where d is dimension, n is number of points
 template<typename T>
 using Matrix = A<Dense<T,RowMaj>>;
+// we use RowMajor to be compatible with Python
 
 // read point cloud from csv file.
 // header=True indicates first line is a header
@@ -65,8 +66,8 @@ struct DataSet {
 	DataSet() {}
 	DataSet(const Matrix<T> &d ) : data(d) {}
 
-	inline size_t size() const { return data.ncol(); }
-	inline size_t dim() const { return data.nrow(); }
+	inline size_t size() const { return data.nrow(); }
+	inline size_t dim() const { return data.ncol(); }
 	inline Matrix<T>& get_data() { return data; }
 
 
@@ -75,22 +76,22 @@ struct DataSet {
 	template <typename TI>
 	DataSet operator[](const TI &inds) const {
 		size_t n = inds.size();
-		Matrix<T> data2(dim(), n);
+		Matrix<T> data2(n, dim());
 		size_t j = 0;
 		for (auto it = inds.cbegin(); it != inds.cend(); ++it) {
-			data2[j] = data[*it];
+			data2.r(j) = data.r(*it);
 			j++;
 		}
 		return DataSet(data2);
 	}
 
-	inline VectorView<T> operator[](const int i) { return data[i]; }
-	inline const VectorView<T> operator[](const int i) const { return data[i]; }
-	inline VectorView<T> operator[](const size_t i) { return data[i]; }
-	inline const VectorView<T> operator[](const size_t i) const { return data[i]; }
+	// obtain rows of data
+	inline VectorView<T> operator[](const int i) { return data.r(i); }
+	inline const VectorView<T> operator[](const int i) const { return data.r(i); }
+	inline VectorView<T> operator[](const size_t i) { return data.r(i); }
+	inline const VectorView<T> operator[](const size_t i) const { return data.r(i); }
 
 	T& operator()(const size_t i, const size_t j) { return data(i,j); }
 	const T& operator()(const size_t i, const size_t j) const { return data(i,j); }
-
 
 };

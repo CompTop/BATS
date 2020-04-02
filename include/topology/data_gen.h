@@ -88,11 +88,11 @@ DataSet<T> product_space(
         for (size_t j = 0; j < ny; j++) {
             // put x[i] in first coordinate block
             for (size_t di = 0; di < dx; di++) {
-                Z(k++) = X(di, i);
+                Z(k++) = X(i, di);
             }
             // put y[j] in second coordinate block
             for (size_t dj = 0; dj < dy; dj++) {
-                Z(k++) = Y(dj, j);
+                Z(k++) = Y(j, dj);
             }
         }
     }
@@ -110,13 +110,13 @@ DataSet<T> sample_sphere(
 ) {
 
     // fill with gaussian random numbers
-    Matrix<T> X(d, n);
+    Matrix<T> X(n, d);
     add_normal_noise(X);
 
     // normalize
     for (size_t j = 0; j < n; j++) {
-        T vnorm = norm(X[j]);
-        X[j] /= vnorm;
+        T vnorm = norm(X.r(j));
+        X.r(j) /= vnorm;
     }
 
     return DataSet(X);
@@ -129,7 +129,7 @@ DataSet<T> sample_cube(
     const size_t d,
     const size_t n
 ) {
-    Matrix<T> X(d, n);
+    Matrix<T> X(n, d);
     add_uniform_noise(X);
     return DataSet(X);
 }
@@ -141,7 +141,7 @@ DataSet<T> interval(
     const T max,
     const size_t n
 ) {
-    Matrix<T> x(1,n);
+    Matrix<T> x(n,1);
     T stride = (max - min) / (n-1);
     x(0) = min;
     for (size_t i = 1; i < n; i++) {
@@ -156,12 +156,12 @@ DataSet<T> circle(
     const T rad,
     const size_t n
 ) {
-    Matrix<T> x(2, n);
+    Matrix<T> x(n, 2);
     T dtheta = 2 * M_PI / n;
     T theta = T(0);
     for (size_t i = 0; i < n; i++) {
-        x(0, i) = rad * std::cos(theta);
-        x(1, i) = rad * std::sin(theta);
+        x(i, 0) = rad * std::cos(theta);
+        x(i, 1) = rad * std::sin(theta);
         theta += dtheta;
     }
     return DataSet(x);

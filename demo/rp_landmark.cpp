@@ -17,6 +17,7 @@ int main (int argc, char* argv[]) {
 
 	//auto X = sample_cube<double>(d, n);
 	auto X = sample_sphere<double>(d, n);
+
 	force_repel_rp(X, 0.05);
 	for (size_t i = 0; i < 10; i++) {
 		force_repel_rp(X, 0.05);

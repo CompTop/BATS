@@ -202,6 +202,18 @@ struct MemAcc{
             return VectorView<F>( mat + n*(m-i)-1,mat + n*(m-1-i)-1,-1);
     }
 
+	// return a view of row i
+	inline const VectorView<F> r(const size_t i) const {
+		if constexpr(std::is_same<Acc,ColMaj>::value)
+			return VectorView<F>(mat + i, mat + m*n + i, m );
+		else if constexpr(std::is_same<Acc,RowMaj>::value)
+			return VectorView<F>(mat + n*i, mat + n*(i+1),1);
+		else if constexpr(std::is_same<Acc,RevColMaj>::value)
+			return VectorView<F>(mat + m*n -i-1, mat -1-i, -m );
+		else if constexpr(std::is_same<Acc,RevRowMaj>::value)
+			return VectorView<F>( mat + n*(m-i)-1,mat + n*(m-1-i)-1,-1);
+	}
+
     void print(){
         for( size_t i=0; i<m; i++){
             for( size_t j=0; j<n; j++){
@@ -398,6 +410,9 @@ struct A<Dense<F,Acc>>{
     inline VectorView<F> r(size_t i) {
         return macc.r(i);
     }
+	inline const VectorView<F> r(size_t i) const {
+        return macc.r(i);
+    }
 
 	inline F& operator()(const size_t k) { return macc(k); }
 	inline const F& operator()(const size_t k) const { return macc(k); }
@@ -405,7 +420,7 @@ struct A<Dense<F,Acc>>{
 	inline const F& operator()(int i, int j) const { return macc(i,j); }
 
     void free(){
-        delete mat;
+        delete [] mat;
     }
 
 	//equality check
