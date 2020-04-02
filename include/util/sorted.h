@@ -87,16 +87,16 @@ void intersect_sorted_lt(const C1 &a, const C2 &b, const T maxval, std::vector<T
     while (ia != a.cend() && ib != b.cend()) {
         if (*ia < *ib) {
             ++ia;
-            if (!(*ia < maxval)) {break;}
+            if (ia == a.cend() || !(*ia < maxval)) {break;}
         } else if (*ib < *ia) {
             ++ib;
-            if (!(*ib < maxval)) {break;}
+            if (ib == b.cend() || !(*ib < maxval)) {break;}
         } else {
             // *ia == *ib
             c.emplace_back(*ia);
             ++ia;
             ++ib;
-          if (!(*ia < maxval) || !(*ib < maxval)) {break;}
+          if (ia == a.cend() || ib == b.cend() || !(*ia < maxval) || !(*ib < maxval)) {break;}
         }
     }
 }
@@ -110,10 +110,10 @@ bool has_intersect_sorted_lt(const C1 &a, const C2 &b, const T maxval) {
     while (ia != a.cend() && ib != b.cend()) {
         if (*ia < *ib) {
             ++ia;
-            if (!(*ia < maxval)) {break;}
+            if (ia == a.cend() || !(*ia < maxval)) {break;}
         } else if (*ib < *ia) {
             ++ib;
-            if (!(*ib < maxval)) {break;}
+            if (ib == b.cend() || !(*ib < maxval)) {break;}
         } else {
             // *ia == *ib
             return true;
