@@ -56,19 +56,20 @@ void force_repel_rp(
 			}
 
 			normf = std::pow(normf, T(1.5)); // for inverse square law
-			f[0] /= normf; // normalize
 			// add to total forces on i, j
 			if (same_hemisphere) {
 				#pragma omp simd
 				for (size_t k = 0; k < d; k++) {
-					dv(j,k) += f(k);
-					dv(i,k) -= f(k);
+					T ck = f(k) / normf;
+					dv(j,k) += ck;
+					dv(i,k) -= ck;
 				}
             } else {
 				#pragma omp simd
 				for (size_t k =0; k < d; k++) {
-					dv(j,k) += f(k);
-					dv(i,k) += f(k);
+					T ck = f(k) / normf;
+					dv(j,k) += ck;
+					dv(i,k) += ck;
 				}
 			}
 		}
