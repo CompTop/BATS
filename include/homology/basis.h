@@ -95,3 +95,13 @@ struct ReducedChainComplex {
 		}
 	}
 };
+
+
+// defualt return
+template <typename T, typename CpxT>
+inline auto __ReducedChainComplex(const CpxT &F, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return ReducedChainComplex(ChainComplex<MT>(F));
+}

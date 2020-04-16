@@ -26,6 +26,8 @@ struct PersistencePair {
 	inline size_t get_death_ind() const {return death_ind;}
 	inline T get_birth() const {return birth;}
 	inline T get_death() const {return death;}
+	inline T length() const {return death - birth;}
+	inline T mid() const {return (death + birth) / T(2);}
 
 	std::string str() {
         std::ostringstream oss;
