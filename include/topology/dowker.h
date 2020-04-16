@@ -50,6 +50,21 @@ std::vector<T> get_m(
     return m;
 }
 
+// get dowker edge parameter for landmarks i and j
+// assume that pdist is |L| x |X|
+template <typename T>
+T dowker_edge_param(
+    const Matrix<T> &pdist,
+    const size_t i,
+    const size_t j
+) {
+    T Rij = std::numeric_limits<T>::max();
+    for (size_t k = 0; k < pdist.ncol(); k++) {
+        Rij = std::min(Rij, std::max(pdist(i,k), pdist(j,k)));
+    }
+    return Rij;
+}
+
 // get witness edge parameters
 // for witness filtration
 template <typename T>
@@ -58,7 +73,6 @@ Matrix<T> dowker_edge_param(
 ) {
 
     auto nL = pdist.nrow();
-    auto nX = pdist.ncol();
 
     // set witness parameters using minmax
     Matrix<T> R(nL, nL);
@@ -67,11 +81,7 @@ Matrix<T> dowker_edge_param(
             R(i,j) = R(j,i); // symmetry
         }
         for (size_t i = j+1; i < nL; i++) {
-            T Rij = std::numeric_limits<T>::max();
-            for (size_t k = 0; k < nX; k++) {
-                Rij = std::min(Rij, std::max(pdist(i,k), pdist(j,k)));
-            }
-            R(i,j) = Rij;
+            R(i,j) = dowker_edge_param(pdist, i, j);
         }
     }
     return R;
@@ -298,4 +308,17 @@ Filtration<T, SimplicialComplex> DowkerFiltration(
     auto R = dowker_edge_param(pdist); // nu=0
     auto edges = flag_filtration_edges(R, rmax);
     return FlagFiltration(edges, n, dmax, T(0));
+}
+
+
+template <typename T, typename M>
+Filtration<T, SimplicialComplex> DowkerFiltration(
+    const DataSet<T> &L,
+    const DataSet<T> &X,
+    const M &dist,
+    T rmax,
+    size_t dmax
+) {
+    Matrix<T> pdist = dist(L, X);
+    return DowkerFiltration(pdist, rmax, dmax);
 }

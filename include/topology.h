@@ -13,3 +13,4 @@
 #include "topology/density.h"
 #include "topology/rips_cover.h"
 #include "topology/spherical.h"
+#include "topology/dowker_cover.h"
