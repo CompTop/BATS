@@ -49,12 +49,12 @@ auto A_type_rep(Diagram<NT, ColumnMatrix<CT>> &D) {
 }
 
 
-template <typename NT, typename CT>
+template <typename MT>
 std::vector<PersistencePair<size_t>> barcode(
-    Diagram<NT, ColumnMatrix<CT>> &D,
+    Diagram<ReducedChainComplex<MT>, MT> &D,
 	size_t hdim
 ) {
-    using FT = typename CT::val_type;
+    using FT = typename MT::val_type;
 
     auto [data, mat, etype] = A_type_rep(D);
 
