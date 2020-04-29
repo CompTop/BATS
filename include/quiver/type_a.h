@@ -2,6 +2,7 @@
 
 #include <linalg/naive_dense.h>
 #include <linalg/field.h>
+#include <persistence/barcode.h>
 #include <string>
 
 using std::cout;
@@ -13,16 +14,16 @@ struct Type_A{
     // matrix types
     using DI = Dense<F,ColMaj>;
     using AD = A<DI>;
-    
+
     //input data
     std::vector<AD> mats;
     std::vector<bool> arrow_dir;
-    
+
     // number of edges
     size_t n;
     // dimension of each vector space
     std::vector<size_t> dims;
-    
+
     // reducedm pivot matrices
     std::vector<EL<DI>> ELmats;
     std::vector<ELH<DI>> ELHmats;
@@ -35,11 +36,11 @@ struct Type_A{
     // basis and inverse basis matrices
     std::vector<AD> basis;
     std::vector<AD> inv_basis;
-    
+
 	bool fwd_sweep_complete = 0;
 	bool bwd_sweep_complete = 0;
 
-    /* constructor 
+    /* constructor
     *   ms - Vector of matrices
     *   as - Vector of bools indication arrow directions
     */
@@ -47,7 +48,7 @@ struct Type_A{
         n = ms.size();
         dims.resize(n+1);
         get_dims();
-        
+
         // initialize basis matrices
         AD b1,b2;
         for(size_t i=0;i<n+1;i++){
@@ -57,8 +58,8 @@ struct Type_A{
             inv_basis.emplace_back(b2);
         }
     }
-    
-    
+
+
     /*
     *  Extract dimesnions for vector spaces from matrices
     */
@@ -74,7 +75,7 @@ struct Type_A{
         else
             dims[n] = mats[n-1].nrow();
     }
-    
+
     /*
     *  Performs the Forward sweep of the quiver algorithm
     */
@@ -148,7 +149,7 @@ struct Type_A{
         }
 		fwd_sweep_complete = 1;
     }
-    
+
     /*
     *  Computes inverse of a lower triangular matrix.
     *  Allocates new memory.
@@ -159,8 +160,8 @@ struct Type_A{
         apply_inverse_on_left(La,Linv);
         return Linv;
     }
-    
-    
+
+
     /*
     *  Performs the Backward sweep of the quiver algorithm
     */
@@ -174,17 +175,17 @@ struct Type_A{
                 if (i==n-1){ // check if first step, then no incoming L
                     Lt = Lmats[i];
                 }else{ // if not, commute incoming with  E and multiply with existing L
-                    auto Lt2 = commute(ELmats[i],Lt); //allocates new mem 
+                    auto Lt2 = commute(ELmats[i],Lt); //allocates new mem
                     Lt.free();
                     Lt = Lt2;
                     apply_matmul_on_left(Lmats[i],Lt);
                 }
                 // apply the passing L to basis mats
                 apply_inverse_on_left(Lt,inv_basis[i]);
-                apply_matmul_on_right(basis[i],Lt);  
+                apply_matmul_on_right(basis[i],Lt);
                 // If next arrow direction is opposite inverse the passing L
                 if( i>0 && arrow_dir[i-1]!= 0 ){
-                    auto Lt3 = L_inverse(Lt); //allocates new mem 
+                    auto Lt3 = L_inverse(Lt); //allocates new mem
                     Lt.free();
                     Lt = Lt3;
                 }
@@ -193,7 +194,7 @@ struct Type_A{
                 if (i==n-1){
                     Lt = Lmats[i];
                 }else{ // commute the other way
-                    auto Lt2 = commute(Lt,ELHmats[i]); //allocates new mem 
+                    auto Lt2 = commute(Lt,ELHmats[i]); //allocates new mem
                     Lt.free();
                     Lt = Lt2;
                     apply_matmul_on_right(Lt,Lmats[i]);
@@ -201,11 +202,11 @@ struct Type_A{
 
                 // apply the passing L to basis mats
                 apply_matmul_on_left(Lt,inv_basis[i]);
-                apply_inverse_on_right(basis[i],Lt);  
+                apply_inverse_on_right(basis[i],Lt);
 
                 // If next arrow direction is opposite inverse the passing L
                 if( i>0 && arrow_dir[i-1]!= 1 ){
-                    auto Lt3 = L_inverse(Lt); //allocates new mem 
+                    auto Lt3 = L_inverse(Lt); //allocates new mem
                     Lt.free();
                     Lt = Lt3;
                 }
@@ -258,6 +259,71 @@ struct Type_A{
 			consistent &=  (mats_copy[i]==mats_recon2[i]);
 		}
 		return consistent;
+	}
+
+	// put barcode into vector of Persistence Pairs
+	std::vector<PersistencePair<size_t>> barcode_pairs(size_t hdim=0) {
+
+		std::vector<PersistencePair<size_t>> pairs;
+		std::vector<int> active, active2;
+
+		A<DI> Em;
+		for(size_t i=0;i<dims[0];i++){
+		    pairs.emplace_back(PersistencePair(hdim, size_t(0), size_t(0), size_t(0), size_t(0)));
+		    active.emplace_back(i);
+		}
+		for(size_t kk=0; kk<ELmats.size(); kk++){
+		    if(arrow_dir[kk]==0){
+		        Em=ELmats[kk];
+		        active2.clear();
+		        active2.resize(Em.ncol());
+		        for(size_t j=0; j<Em.ncol(); j++){
+		            size_t i;
+		            for(i=0; i<Em.nrow(); i++){
+						// look for bar to continue
+		                if(Em(i,j)==F(1)){
+		                    pairs[active[i]].death_ind = kk + 1;
+							pairs[active[i]].death = kk + 1;
+
+		                    active2[j]=active[i];
+		                    break;
+		                }
+		            }
+
+		            if(i==Em.nrow()){
+						// we are starting a new bar
+		                active2[j]=pairs.size();
+		                pairs.emplace_back(PersistencePair(hdim, kk, kk, kk, kk));
+		            }
+		        }
+		        std::swap(active,active2);
+		    }else{
+		        Em=ELHmats[kk];
+		        active2.clear();
+		        active2.resize(Em.nrow());
+		        for(int i=Em.nrow()-1; i>=0; i--){
+		            int j;
+		            for(j=Em.ncol()-1; j>=0; j--){
+		                if(Em(i,j)==F(1)){
+							// look for bar to continue
+							pairs[active[i]].death_ind = kk + 1;
+							pairs[active[i]].death = kk + 1;
+
+		                    active2[i]=active[j];
+		                    break;
+		                }
+		            }
+		            if(j==-1){
+						// we are starting a new bar
+		                active2[i]=pairs.size();
+		                pairs.emplace_back(PersistencePair(hdim, kk, kk, kk, kk));
+		            }
+		        }
+		        std::swap(active,active2);
+		    }
+		}
+
+		return pairs;
 	}
 
 
@@ -366,20 +432,20 @@ struct Type_A{
 				            if(!bad) break;
 				        }
 				        active2[j]=l;
-				        
+
 				        if(l==lines.size()){
 				            lines.emplace_back(" ");
 				            lastup.emplace_back(0);
 				        }
-				        
+
 				        string plu = "";
 				        for(size_t ll=lastup[l];ll<kk;ll++)
 				            plu+="    ";
 				        plu+="   *";
-				        
+
 				        lines[l] += plu;
 				        lastup[l] = kk+1;
-				        
+
 				    }
 				}
 				std::swap(active,active2);
@@ -407,17 +473,17 @@ struct Type_A{
 				            if(!bad) break;
 				        }
 				        active2[i]=l;
-				        
+
 				        if(l==lines.size()){
 				            lines.emplace_back(" ");
 				            lastup.emplace_back(0);
 				        }
-				        
+
 				        string plu = "";
 				        for(size_t ll=lastup[l];ll<kk;ll++)
 				            plu+="    ";
 				        plu+="   *";
-				        
+
 				        lines[l] += plu;
 				        lastup[l] = kk+1;
 				    }

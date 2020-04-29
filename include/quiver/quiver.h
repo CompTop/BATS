@@ -7,6 +7,7 @@ Utility to dump a multigraph of vector spaces into something we can operate on
 #include <multigraph/diagram.h>
 #include <linalg/naive_dense.h>
 #include <linalg/col_matrix.h>
+#include "type_a.h"
 
 
 // return tuple of
@@ -45,4 +46,24 @@ auto A_type_rep(Diagram<NT, ColumnMatrix<CT>> &D) {
     }
 
     return std::make_tuple(data, mat, etype);
+}
+
+
+template <typename NT, typename CT>
+std::vector<PersistencePair<size_t>> barcode(
+    Diagram<NT, ColumnMatrix<CT>> &D,
+	size_t hdim
+) {
+    using FT = typename CT::val_type;
+
+    auto [data, mat, etype] = A_type_rep(D);
+
+    auto taq = Type_A<FT>(mat,etype);
+
+    taq.create_copy_of_mats();
+
+	taq.forward_sweep();
+	taq.backward_sweep();
+
+    return taq.barcode_pairs(hdim);
 }

@@ -137,6 +137,12 @@ int main() {
 	std::cout<<"Compressed Barcodes:\n\n";
 	taq.print_barcodes_compressed();
 
+	auto pairs = taq.barcode_pairs(0);
+	std::cout << "pairs:" << std::endl;
+	for (auto p : pairs) {
+		std::cout << p << std::endl;
+	}
+
 	bool cons =  taq.is_consistent();
 
 	std::cout<<"Quiver factorization is"<<( cons?"":" NOT" )<<" consistent !\n\n";
