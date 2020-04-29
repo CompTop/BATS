@@ -61,3 +61,47 @@ DataSet<T> greedy_landmarks(
 
 	return D[inds];
 }
+
+// hausdorff landmarking
+// D is dataset
+// k is number of landmarks
+// dist is Metric struct
+// i0 is seed point for landmark set
+// template over data type T and metric M
+template <typename T, typename M>
+DataSet<T> hausdorff_landmarks(
+	const DataSet<T> &D,
+	const T r,
+	const M &dist,
+	const size_t i0=0
+) {
+
+	std::set<size_t> inds;
+	inds.insert(i0);
+
+	std::vector<T> d = dist(D[i0], D);
+	auto it = std::max_element(d.cbegin(), d.cend());
+	T dDL = *it;
+
+	while (dDL > r) {
+		// get furthest point from landmark set
+		// assume we've already found max_element with it
+		size_t i = it - d.cbegin();
+
+		// insert point
+		inds.insert(i);
+
+		// get all distances from point i
+		std::vector<T> di = dist(D[i], D);
+		// update distances from set
+		for (size_t k = 0; k < d.size(); k++) {
+			d[k] = (d[k] < di[k]) ? d[k] : di[k];
+		}
+
+		// update distance to rest of data
+		it = std::max_element(d.cbegin(), d.cend());
+		dDL = *it;
+	}
+
+	return D[inds];
+}

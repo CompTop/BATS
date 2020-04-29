@@ -136,6 +136,33 @@ bats::Cover landmark_cover(
 	return cover;
 }
 
+// get cover that assigns to closest landmark
+// also any other landmark that is within eps distance of closest landmark
+// template over data type, distance
+template <typename T, typename M>
+bats::Cover landmark_eps_cover(
+	const DataSet<T> &X,
+	const DataSet<T> &L,
+	const M &dist,
+	T eps
+) {
+	// initialize cover
+	bats::Cover cover(L.size());
+	// loop over points in X
+	for (size_t i = 0; i < X.size(); i++) {
+		auto di = dist(X[i], L); // distance from X[i] to points in L
+		auto it = std::min_element(di.cbegin(), di.cend());
+		for (size_t j = 0; j < L.size(); j++) {
+			if (di[j] < *it + eps) {
+				// add i to any landmark set that is within eps of closest landmark
+				// this should include closest point
+				cover[j].emplace(i);
+			}
+		}
+	}
+	return cover;
+}
+
 
 /*
 produce bivariate cover of cover1, cover2
