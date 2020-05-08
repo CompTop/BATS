@@ -103,13 +103,13 @@ DataSet<T> get_subset(
     const std::set<size_t> &ind
 ) {
 	size_t d = X.dim();
-    Matrix<T> XS(d, ind.size());
-	size_t j = 0;
+    Matrix<T> XS(ind.size(), d);
+	size_t i = 0;
     for (auto it = ind.cbegin(); it != ind.cend(); it++) {
-        for (size_t i = 0; i < d; i++) {
-            XS(i, j) = X(i, *it);
+        for (size_t j = 0; j < d; j++) {
+            XS(i, j) = X(*it, j);
         }
-		j++;
+		i++;
     }
     return DataSet(XS);
 }

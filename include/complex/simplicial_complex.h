@@ -263,6 +263,7 @@ public:
 		return s;
 	}
 
+	// return simplices in dimension dim
 	std::vector<std::vector<size_t>> get_simplices(const size_t dim) const {
 		std::vector<std::vector<size_t>> simplices;
 		std::vector<size_t> s;
@@ -275,6 +276,24 @@ public:
 		}
 		return simplices;
 	}
+
+	// return all simplices
+	std::vector<std::vector<size_t>> get_simplices() const {
+		std::vector<std::vector<size_t>> simplices;
+		std::vector<size_t> s;
+		for (size_t dim = 0; dim < maxdim() + 1; dim++){
+			for (auto i : spx[dim]) {
+				s.emplace_back(i);
+				if (s.size() == dim + 1) {
+					simplices.emplace_back(s);
+					s.clear();
+				}
+			}
+		}
+		return simplices;
+	}
+
+
 
     // get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {

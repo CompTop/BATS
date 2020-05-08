@@ -107,6 +107,15 @@ Diagram<ChainComplex<TM>, ChainMap<TM>> Chain(const DT &D) {
 	return CD;
 }
 
+// easy chain functor
+template <typename DT, typename T>
+inline auto __Chain(const DT &D, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return Chain<MT, DT>(D);
+}
+
 
 // Homology functor for dimension k
 // template over matrix type
