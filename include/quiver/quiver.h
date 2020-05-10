@@ -8,6 +8,7 @@ Utility to dump a multigraph of vector spaces into something we can operate on
 #include <linalg/naive_dense.h>
 #include <linalg/col_matrix.h>
 #include "type_a.h"
+#include <stdexcept>
 
 
 // return tuple of
@@ -64,6 +65,10 @@ std::vector<PersistencePair<size_t>> barcode(
 
 	taq.forward_sweep();
 	taq.backward_sweep();
+
+	if (!taq.is_consistent()) {
+		throw std::runtime_error("quiver fact is not consistent!");
+	}
 
     return taq.barcode_pairs(hdim);
 }

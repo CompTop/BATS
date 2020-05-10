@@ -249,6 +249,12 @@ public:
         }
     }
 
+	std::string str() {
+	  std::ostringstream oss;
+	  write(oss);
+	  return oss.str();
+	}
+
     void save(std::string &fname) const {
         std::ofstream file (fname, std::ios::out);
         if (file.is_open()) {

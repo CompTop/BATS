@@ -95,6 +95,8 @@ public:
   ModP() : val(0) {}
   ModP(IntT val) : val((val + P) % P) {}
 
+  inline IntT to_int() const { return val; }
+
   ModP operator+( const ModP &b) const {
     return ModP(val + b.val);
   }
@@ -208,6 +210,8 @@ public:
 
   ModP() : val(0) {}
   ModP(IntT val) : val(val) {}
+
+  inline IntT to_int() const { return val & 0x1; }
 
   ModP operator+( const ModP &b) const {
     return ModP(val ^ b.val); // xor
@@ -338,6 +342,8 @@ public:
   }
 
   Rational(IntT n) : n(n), d(1) {}
+
+  inline IntT to_int() const { return n / d; }
 
   Rational operator+( const Rational &b) const {
     return Rational(n * b.d + b.n * d, d * b.d);

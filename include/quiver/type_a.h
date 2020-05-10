@@ -272,6 +272,7 @@ struct Type_A{
 		    pairs.emplace_back(PersistencePair(hdim, size_t(0), size_t(0), size_t(0), size_t(0)));
 		    active.emplace_back(i);
 		}
+		// loop over edges
 		for(size_t kk=0; kk<ELmats.size(); kk++){
 		    if(arrow_dir[kk]==0){
 		        Em=ELmats[kk];
@@ -281,7 +282,7 @@ struct Type_A{
 		            size_t i;
 		            for(i=0; i<Em.nrow(); i++){
 						// look for bar to continue
-		                if(Em(i,j)==F(1)){
+		                if(Em(i,j)!=F(0)){
 		                    pairs[active[i]].death_ind = kk + 1;
 							pairs[active[i]].death = kk + 1;
 
@@ -293,7 +294,7 @@ struct Type_A{
 		            if(i==Em.nrow()){
 						// we are starting a new bar
 		                active2[j]=pairs.size();
-		                pairs.emplace_back(PersistencePair(hdim, kk, kk, kk, kk));
+		                pairs.emplace_back(PersistencePair(hdim, kk+1, kk+1, kk+1, kk+1));
 		            }
 		        }
 		        std::swap(active,active2);
@@ -304,7 +305,7 @@ struct Type_A{
 		        for(int i=Em.nrow()-1; i>=0; i--){
 		            int j;
 		            for(j=Em.ncol()-1; j>=0; j--){
-		                if(Em(i,j)==F(1)){
+		                if(Em(i,j)!=F(0)){
 							// look for bar to continue
 							pairs[active[i]].death_ind = kk + 1;
 							pairs[active[i]].death = kk + 1;
@@ -316,7 +317,7 @@ struct Type_A{
 		            if(j==-1){
 						// we are starting a new bar
 		                active2[i]=pairs.size();
-		                pairs.emplace_back(PersistencePair(hdim, kk, kk, kk, kk));
+		                pairs.emplace_back(PersistencePair(hdim, kk+1, kk+1, kk+1, kk+1));
 		            }
 		        }
 		        std::swap(active,active2);
