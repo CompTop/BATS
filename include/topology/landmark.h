@@ -6,6 +6,8 @@ utility for landmarking pointclouds
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <tuple>
+#include <iterator>
 
 #include "data.h"
 #include "metric.h"
@@ -46,7 +48,7 @@ DataSet<T> greedy_landmarks(
 	while (inds.size() < k) {
 		// get furthest point from landmark set
 		auto it = std::max_element(d.cbegin(), d.cend());
-		size_t i = it - d.cbegin();
+		size_t i = std::distance(d.cbegin(), it);
 
 		// insert point
 		inds.insert(i);
@@ -86,7 +88,7 @@ DataSet<T> hausdorff_landmarks(
 	while (dDL > r) {
 		// get furthest point from landmark set
 		// assume we've already found max_element with it
-		size_t i = it - d.cbegin();
+		size_t i = std::distance(d.cbegin(), it);
 
 		// insert point
 		inds.insert(i);
@@ -104,4 +106,87 @@ DataSet<T> hausdorff_landmarks(
 	}
 
 	return D[inds];
+}
+
+
+// greedy landmarking
+// D is dataset
+// k is number of landmarks
+// dist is Metric struct
+// i0 is seed point for landmark set
+// template over data type T and metric M
+// return indices of landmarks in order, hausdorff distance to rest of set
+template <typename T, typename M>
+std::tuple<std::vector<size_t>, std::vector<T>> greedy_landmarks_hausdorff(
+	const DataSet<T> &D,
+	const M &dist,
+	const size_t i0=0
+) {
+	std::vector<size_t> inds; // index order
+	std::vector<T>      hds; // Hausdorff distance to full data set of indices up that point
+	inds.emplace_back(i0);
+
+	std::vector<T> d = dist(D[i0], D);
+
+	while (inds.size() < D.size()) {
+		// get furthest point from landmark set
+		auto it = std::max_element(d.cbegin(), d.cend());
+		hds.emplace_back(*it); // Hausdorff distance of set up to that point.
+		size_t i = std::distance(d.cbegin(), it);
+
+		// insert new point
+		inds.emplace_back(i);
+
+		// get all distances
+		std::vector<T> di = dist(D[i], D);
+		// update distances from set
+		for (size_t k = 0; k < d.size(); k++) {
+			d[k] = (d[k] < di[k]) ? d[k] : di[k];
+		}
+	}
+
+	hds.emplace_back(T(0));
+
+	return std::make_tuple(inds, hds);
+}
+
+
+// find approximate center index by doing k steps of max-min landmarking
+// then finding point that minimizes maximum distance to all landmarks
+// if k = 0, use , k=D.dim()+1 for triangulation.
+// i0 is first landmark point (default 0)
+template <typename T, typename M>
+size_t approx_center(
+	const DataSet<T> &D,
+	const M &dist,
+	size_t k=0,
+	size_t i0=0
+) {
+	// if k = 0, set k = D.dim + 1;
+	k = (k== 0) ? D.dim() + 1 : k;
+
+	std::vector<T> maxd = dist(D[i0], D); // minimum maximum distance to any landmark
+	std::vector<T> mind = dist(D[i0], D); // maximum minimum distance to any landmark
+
+	for (size_t j = 0; j < k; j++) {
+
+		// find next landmark
+		auto it = std::max_element(maxd.cbegin(), maxd.cend());
+		size_t i = std::distance(maxd.cbegin(), it);
+
+		// distances to landmark i
+		std::vector<T> di = dist(D[i], D);
+
+		// update max and min distances
+		for (size_t jj = 0; jj < di.size(); jj++) {
+			maxd[jj] = (maxd[jj] < di[jj]) ? maxd[jj] : di[jj];
+			mind[jj] = (mind[jj] > di[jj]) ? mind[jj] : di[jj];
+		}
+
+	}
+
+	return std::distance(
+		mind.cbegin(),
+		std::min_element(mind.cbegin(), mind.cend())
+	);
 }
