@@ -47,16 +47,12 @@ std::vector<size_t> get_dM_ZZ_inds(
 }
 
 
-// rho - rips multiplier - should be >10 [OS15 thm 4.6]
-// returns diagram of Rips complexes, rips parameter for each complex.
 template <typename T, typename M>
-std::tuple<Diagram<SimplicialComplex, CellularMap>, std::vector<T>> DiscreteMorozovZigzag(
+std::tuple<Diagram<std::set<size_t>, std::vector<size_t>>, std::vector<T>> DiscreteMorozovZigzagSets(
 	const DataSet<T> &D,
 	const M &dist,
-	T rho,
-	size_t dmax
+	T rho
 ) {
-
 	size_t i0 = approx_center(D, dist);
 
 	auto [ inds, hds ] = greedy_landmarks_hausdorff(D, dist, i0);
@@ -117,6 +113,22 @@ std::tuple<Diagram<SimplicialComplex, CellularMap>, std::vector<T>> DiscreteMoro
 		src = 2*i + 2; // update source
 		SetDgm.set_edge(j, src, targ, vertex_inclusion_map(SetDgm.node[src], SetDgm.node[targ]));
 	}
+
+	return make_tuple(SetDgm, rmax);
+}
+
+
+// rho - rips multiplier - should be >10 [OS15 thm 4.6]
+// returns diagram of Rips complexes, rips parameter for each complex.
+template <typename T, typename M>
+std::tuple<Diagram<SimplicialComplex, CellularMap>, std::vector<T>> DiscreteMorozovZigzag(
+	const DataSet<T> &D,
+	const M &dist,
+	T rho,
+	size_t dmax
+) {
+
+	auto [SetDgm, rmax] = DiscreteMorozovZigzagSets(D, dist, rho);
 
 	// std::cout << "applying Rips" << std::endl;
 	// now apply Rips functor
