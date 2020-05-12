@@ -15,3 +15,4 @@
 #include "topology/spherical.h"
 #include "topology/dowker_cover.h"
 #include "topology/zigzag_zoo.h"
+#include "topology/extras.h"
