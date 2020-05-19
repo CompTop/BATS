@@ -155,11 +155,11 @@ int main() {
     // diagram in Homology
     auto HkDgm = Hom(ChainDgm, 1);
 
+    // auto ps0 = barcode(HkDgm, 1);
+
     for (auto M : HkDgm.edata) {
         M.print();
     }
-
-    auto ps0 = barcode(HkDgm);
 
     // dump into Atype rep
     auto [data, mat, etype] = A_type_rep(HkDgm);
@@ -201,7 +201,11 @@ int main() {
 
     std::cout<<"Quiver factorization is"<<( cons?"":" NOT" )<<" consistent !\n\n";
 
-    auto ps = taq.barcode_pairs()
+    auto ps = taq.barcode_pairs(1);
+
+    for (auto p : ps) {
+        std::cout << p.str() << std::endl;
+    }
 
     return 0;
 }
