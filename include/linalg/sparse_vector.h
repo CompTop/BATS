@@ -190,6 +190,13 @@ public:
 		return getval(i);
 	}
 
+	inline auto emplace_back(const key_type &k) {
+		return indval.emplace_back(k);
+	}
+	inline auto emplace_back(TI ind, TV val) {
+		return emplace_back(key_type(ind, val));
+	}
+
 	// find nonzero index of last element with index < i
 	auto find_last_nz(TI i) {
 		auto it = std::lower_bound(
@@ -206,6 +213,10 @@ public:
 	// return last nonzero
 	inline const key_type& lastnz() const {
 		return indval.back();
+	}
+
+	inline const key_type& firstnz() const {
+		return indval[0];
 	}
 
 
@@ -235,6 +246,15 @@ public:
 	void permute(const std::vector<size_t>  &perm) {
 		for (size_t i = 0; i < nnz(); i++) {
 			indval[i].ind = perm[indval[i].ind];
+		}
+		sort();
+	}
+
+	// apply J-matrix transformation
+	// index i -> (m-1) - i
+	void J(const size_t m) {
+		for (size_t i = 0; i < nnz(); i++) {
+			indval[i].ind = (m - 1) - indval[i].ind;
 		}
 		sort();
 	}
@@ -308,27 +328,26 @@ public:
 			key_type(firstind, TV(0))
 		);
 		// where to put new vector
-		if (!((*i2).ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
+		if (!(i2->ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
 		// something to do...
 		auto i1 = indval.cbegin();
 		std::vector<key_type> tmp;
 		while (i1 != indval.cend() && i2 != x.nzend()) {
-			if ((*i1).ind == (*i2).ind) {
-				TV val = (a * ((*i2).val)) + (*i1).val;
-				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
+			if (i1->ind == i2->ind) {
+				TV val = (a * (i2->val)) + i1->val;
 				if (!(val == 0)) {
-					tmp.push_back(key_type((*i1).ind, val));
+					tmp.push_back(key_type(i1->ind, val));
 				}
 				++i1;
 				++i2;
-				if (!((*i2).ind < lastind)) { break; }
-			} else if ((*i1).ind < (*i2).ind) {
+				if (!(i2->ind < lastind)) { break; }
+			} else if (i1->ind < i2->ind) {
 				tmp.push_back(*i1);
 				++i1;
 			} else {
-				tmp.push_back(key_type((*i2).ind, a * (*i2).val));
+				tmp.push_back(key_type(i2->ind, a * (i2->val)));
 				++i2;
-				if (!((*i2).ind < lastind)) { break; }
+				if (!(i2->ind < lastind)) { break; }
 			}
 		}
 		// run through rest of entries and dump in
@@ -337,12 +356,65 @@ public:
 			tmp.push_back(*i1);
 			++i1;
 		}
-		while (i2 != x.nzend() && ((*i2).ind < lastind)) {
-			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
+		while (i2 != x.nzend() && (i2->ind < lastind)) {
+			tmp.push_back(key_type(i2->ind, a * (i2->val)));
 			++i2;
 		}
 		// copy temp vector to indval
 		indval = tmp;
+		return;
+	}
+
+	// return self + coeff*x[inds]
+	// template over sparse vector type
+	template <class SVT>
+	void axpy(
+		const SVT &x,
+		const std::vector<TV> &coeff,
+		const std::vector<TI> &inds
+	) {
+
+
+		// set i2 to find first ind >= firstind
+		auto i2 = x.nzbegin();
+		// where to put new vector
+		if (i2 == x.nzend()) { return; } // nothing to do
+		// something to do...
+		auto i1 = indval.cbegin();
+		std::vector<key_type> tmp;
+		while (i1 != indval.cend() && i2 != x.nzend() && i2->ind < inds.size()) {
+			if (i1->ind == inds[i2->ind]) {
+				TV val = (coeff[i2->ind] * (i2->val)) + i1->val;
+				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
+				if (!(val == 0)) {
+					tmp.push_back(key_type(i1->ind, val));
+				}
+				++i1;
+				++i2;
+			} else if ((*i1).ind < inds[i2->ind]) {
+				tmp.push_back(*i1);
+				++i1;
+			} else {
+				tmp.push_back(key_type(inds[i2->ind], coeff[i2->ind] * (i2->val)));
+				++i2;
+			}
+		}
+		// run through rest of entries and dump in
+		// at most one of the loops does anything
+		while (i1 != indval.cend()) {
+			tmp.push_back(*i1);
+			++i1;
+		}
+		while (i2 != x.nzend() && i2->ind < inds.size()) {
+			tmp.push_back(key_type(inds[i2->ind], coeff[i2->ind] * (i2->val)));
+			++i2;
+		}
+
+		// copy temp vector to indval
+		indval.resize(tmp.size());
+		std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
+		//indval = tmp;
+
 		return;
 	}
 

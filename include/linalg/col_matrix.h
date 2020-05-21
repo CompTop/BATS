@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstddef>
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <fstream>
 #include "abstract_matrix.h"
@@ -201,6 +202,75 @@ public:
         return C;
     }
 
+	ColumnMatrix transpose() const {
+		std::vector<TC> tcol(m);
+		// loop over columns
+		for (size_t j = 0; j < n; j++) {
+			for (auto it = col[j].nzbegin(); it != col[j].nzend(); it++) {
+				tcol[it->ind].emplace_back(j, it->val);
+			}
+		}
+		return ColumnMatrix(n, m, tcol);
+	}
+
+	inline ColumnMatrix T() const { return transpose(); }
+
+	// apply J matrix from the right
+	ColumnMatrix& J_right_inplace() {
+		for (size_t j =0; j < n/2; j++) {
+			std::swap(col[j], col[n-1-j]);
+		}
+		return *this;
+	}
+
+	inline ColumnMatrix J_right() const {
+		ColumnMatrix other(*this);
+		other.J_right_inplace();
+		return other;
+	}
+
+	// apply J matrix from the left
+	ColumnMatrix& J_left_inplace() {
+		for (size_t j=0; j < n; j++) {
+			col[j].J(m);
+		}
+		return *this;
+	}
+
+	inline ColumnMatrix J_left() const {
+		ColumnMatrix other(*this);
+		other.J_left_inplace();
+		return other;
+	}
+
+	ColumnMatrix& J_conjugation_inplace() {
+		J_left_inplace();
+		J_right_inplace();
+		return *this;
+	}
+
+	inline ColumnMatrix J_conjugation() const {
+		ColumnMatrix other(*this);
+		other.J_conjugation_inplace();
+		return other;
+	}
+
+	// swap columns j1 and j2
+	inline void swap_cols(size_t j1, size_t j2) {
+		std::swap(col[j1], col[j2]);
+	}
+
+	// schur complement of i,j entry
+	inline void schur_complement(size_t i, size_t j) {
+		auto a11 = col[j][i];
+		for (size_t j1 = j+1; j1 < n; j1++) {
+			auto c = col[j1][i];
+			if (c != 0) {
+				col[j1].axpy(-c / a11, col[j], i+1, m);
+			}
+		}
+	}
+
     // triangular solve
 
     // schur complement friend
@@ -369,3 +439,5 @@ ColumnMatrix<TC> u_solve(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
     }
     return ColumnMatrix<TC>(m, n, col);
 }
+
+// factorization struct
