@@ -441,6 +441,16 @@ public:
 		return;
 	}
 
+	// scale each entry i by coeff[i]
+	// assume coeff[i] is non-zero
+	void scale_inplace(const std::vector<TV> &coeff) {
+		auto it = nzbegin();
+		while (it != nzend()) {
+			it->val = (it->val * coeff[it->ind]);
+			++it;
+		}
+	}
+
 
 
 	// zeros out pivot in x

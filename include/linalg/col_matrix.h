@@ -271,6 +271,14 @@ public:
 		}
 	}
 
+	// apply diagonal matrix with coeff vector along diagonal on the left
+	ColumnMatrix& row_scale(const std::vector<val_type> &coeff) {
+		for (size_t j = 0; j < n; j++) {
+			col[j].scale_inplace(coeff);
+		}
+		return *this;
+	}
+
     // triangular solve
 
     // schur complement friend
