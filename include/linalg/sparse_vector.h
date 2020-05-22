@@ -140,6 +140,8 @@ public:
 	inline auto nzbegin() { return indval.begin(); }
 	inline auto nzend(){ return indval.end(); }
 
+	inline void clear() {indval.clear();}
+
 	// nnz
 	inline size_t nnz() const {return indval.size(); }
 
@@ -376,27 +378,43 @@ public:
 
 
 		// set i2 to find first ind >= firstind
-		auto i2 = x.nzbegin();
+		auto i2 = x.nzbegin(); // iterate over x
 		// where to put new vector
 		if (i2 == x.nzend()) { return; } // nothing to do
 		// something to do...
-		auto i1 = indval.cbegin();
+		auto i1 = indval.cbegin(); // iterate over self
+		size_t ii = 0; // index for inds
+
 		std::vector<key_type> tmp;
-		while (i1 != indval.cend() && i2 != x.nzend() && i2->ind < inds.size()) {
-			if (i1->ind == inds[i2->ind]) {
-				TV val = (coeff[i2->ind] * (i2->val)) + i1->val;
+		while (i1 != indval.cend() && i2 != x.nzend() && ii < inds.size()) {
+			if (ii < i1->ind  && inds[ii] < i2->ind) {
+				// need to increment ii until something happens
+				++ii;
+			} else if (i1->ind == ii && inds[ii] < i2->ind) {
+				// no match from nonzero in x, but match from nonzero in self
+				tmp.push_back(*i1);
+				++i1;
+				++ii;
+			} else if (ii < i1->ind && inds[ii] == i2->ind) {
+				// no match from nonzero in self, but match from x
+				TV val = (coeff[ii] * (i2->val));
+				if (!(val == 0)) {
+					tmp.push_back(key_type(ii, val));
+				}
+				++ii;
+				++i2;
+			} else if (i1->ind == ii && i2->ind == inds[ii]) {
+				// match from both x and self
+				TV val = (coeff[ii] * (i2->val)) + i1->val;
 				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
 				if (!(val == 0)) {
 					tmp.push_back(key_type(i1->ind, val));
 				}
 				++i1;
 				++i2;
-			} else if ((*i1).ind < inds[i2->ind]) {
-				tmp.push_back(*i1);
-				++i1;
+				++ii;
 			} else {
-				tmp.push_back(key_type(inds[i2->ind], coeff[i2->ind] * (i2->val)));
-				++i2;
+				throw std::runtime_error("Unexpected condition in sparse axpy!");
 			}
 		}
 		// run through rest of entries and dump in
@@ -405,9 +423,14 @@ public:
 			tmp.push_back(*i1);
 			++i1;
 		}
-		while (i2 != x.nzend() && i2->ind < inds.size()) {
-			tmp.push_back(key_type(inds[i2->ind], coeff[i2->ind] * (i2->val)));
-			++i2;
+		while (i2 != x.nzend() && ii < inds.size()) {
+			if (inds[ii] < i2->ind) {
+				++ii;
+			} else {
+				tmp.push_back(key_type(ii, coeff[ii] * (i2->val)));
+				++i2;
+				++ii;
+			}
 		}
 
 		// copy temp vector to indval
