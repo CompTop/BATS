@@ -179,7 +179,7 @@ std::vector<PersistencePair<size_t>> bars_to_pairs(
 }
 
 template <typename NT, typename TM>
-std::vector<PersistencePair<size_t>> barcode(const Diagram<NT, TM> &dgm, size_t hdim) {
+std::vector<PersistencePair<size_t>> barcode_sparse(const Diagram<NT, TM> &dgm, size_t hdim) {
     auto mats = barcode_form_leftward(dgm);
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
