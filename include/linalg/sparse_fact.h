@@ -9,6 +9,7 @@ as well as shape commutation relations
 
 #include "col_matrix.h"
 #include <vector>
+#include <map>
 
 
 // factorization struct
