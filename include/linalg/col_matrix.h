@@ -448,4 +448,11 @@ ColumnMatrix<TC> u_solve(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
     return ColumnMatrix<TC>(m, n, col);
 }
 
-// factorization struct
+// form inverse U^{-1}
+template <class TC>
+ColumnMatrix<TC> u_inv(const ColumnMatrix<TC> &U) {
+    //std::cout << "entering solve" << std::endl;
+    size_t m = U.nrow();
+    size_t n = U.ncol();
+	return u_solve(U, ColumnMatrix<TC>::identity(m));
+}

@@ -6,3 +6,4 @@
 #include "linalg/matrix_interface.h"
 #include "linalg/naive_dense.h"
 #include "linalg/sparse_vector.h"
+#include "linalg/sparse_fact.h"
