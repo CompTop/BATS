@@ -54,11 +54,31 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
 
 // work on pairwise distance matrix
 template <typename T>
+std::vector<filtered_edge<T>> rips_filtration_edges(
+    const Matrix<T> &pdist,
+    const T rmax)
+{
+    size_t n = pdist.ncol();
+    std::vector<filtered_edge<T>> edges;
+    size_t nedges = (n * (n-1)) / 2;
+    edges.reserve(nedges);
+    for (size_t j = 0; j < n; j++) {
+        for (size_t i = 0; i < j; i++) {
+            if (pdist(i,j) < rmax) {
+                edges.emplace_back(filtered_edge(i, j, pdist(i,j)));
+            }
+        }
+    }
+    return edges;
+}
+
+// work on pairwise distance matrix
+template <typename T>
 std::vector<size_t> rips_edges(const Matrix<T> &pdist, const T rmax) {
     size_t n = pdist.ncol();
     std::vector<size_t> edges;
     size_t nedges = (n * (n-1)) / 2;
-    edges.reserve(2*nedges);
+    edges.reserve(nedges);
     for (size_t j = 0; j < n; j++) {
         for (size_t i = 0; i < j; i++) {
             if (pdist(i,j) < rmax) {
@@ -113,4 +133,15 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     size_t n = X.size(); // number of points
     auto edges = rips_filtration_edges(X, dist, rmax);
     return FlagFiltration(edges, n, dmax, T(0));
+}
+
+template <typename T>
+Filtration<T, SimplicialComplex> RipsFiltration(
+    const Matrix<T> &pdist,
+    T rmax,
+    size_t dmax
+) {
+    size_t n = pdist.ncol(); // number of points
+    auto redges = rips_filtration_edges(pdist, rmax);
+    return FlagFiltration(redges, n, dmax, T(0));
 }
