@@ -14,5 +14,14 @@ int main() {
 
 	X.print_summary();
 
+	auto B1 = X.boundary_csc(1);
+	B1.print();
+
+	auto B2 = X.boundary_csc(2);
+	B2.print();
+
+	auto B3 = X.boundary_csc(3);
+	B3.print();
+
 	return 0;
 }

@@ -391,16 +391,16 @@ public:
         size_t val = 0;
         while (vbeg != vend) {
             *vbeg++ = val;
-            val += (dim + 1);
+            val += (2*dim);
         }
 
         // create rowind
         std::vector<size_t> rowind;
-        rowind.reserve((dim+1)*n);
+        rowind.reserve((2*dim)*n);
 
         // create val
         std::vector<int> ival;
-        ival.reserve((dim+1)*n);
+        ival.reserve((2*dim)*n);
 
         std::copy(
             faces[dim-1].cbegin(),
