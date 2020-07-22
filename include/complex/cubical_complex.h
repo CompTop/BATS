@@ -331,10 +331,10 @@ public:
 
     // get simplex from index
     // get simplex i in dimension dim
-    inline auto simplex_begin(const size_t dim, const size_t i) const {
+    inline auto cell_begin(const size_t dim, const size_t i) const {
         return spx[dim].cbegin() + (2*__maxdim * i);
     }
-    inline auto simplex_end(const size_t dim, const size_t i) const {
+    inline auto cell_end(const size_t dim, const size_t i) const {
         return spx[dim].cbegin() + ((2*__maxdim) * (i+1));
     }
 
@@ -342,7 +342,7 @@ public:
 	std::vector<size_t> get_cube(size_t dim, size_t i) const {
 		std::vector<size_t> s;
 		s.reserve(dim+1);
-		for (auto it = simplex_begin(dim, i); it != simplex_end(dim, i); it++) {
+		for (auto it = cell_begin(dim, i); it != cell_end(dim, i); it++) {
 			s.emplace_back(*it);
 		}
 		return s;
@@ -420,23 +420,6 @@ public:
             rowind,
             ival
         );
-    }
-
-    friend class MorsePairing<SimplicialComplex>;
-
-    void save(std::string &fname) const {
-        std::ofstream file (fname, std::ios::out);
-        if (file.is_open()) {
-            file << "SimplicialComplex\n";
-            for (size_t dim = 0; dim < maxdim() + 1; dim++) {
-                for (size_t i =0; i < ncells(dim); i++) {
-                    write_simplex(file, simplex_begin(dim, i), simplex_end(dim, i));
-                }
-            }
-            file.close();
-        } else {
-            std::cerr << "unable to write simplicial complex to " << fname << std::endl;
-        }
     }
 
 };

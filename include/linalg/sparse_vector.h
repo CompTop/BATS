@@ -84,10 +84,10 @@ public:
 		}
 	}
 
-	SparseVector& operator=(const SparseVector &other) {
-		indval = other.indval;
-		return *this;
-	}
+	// SparseVector& operator=(const SparseVector &other) {
+	// 	indval = other.indval;
+	// 	return *this;
+	// }
 
 	template<typename T>
 	bool operator==(const T &other) const {

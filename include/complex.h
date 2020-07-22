@@ -5,3 +5,4 @@
 #include "complex/simplicial_complex.h"
 #include "complex/simplicial_map.h"
 #include "complex/cubical_complex.h"
+#include "complex/cubical_map.h"

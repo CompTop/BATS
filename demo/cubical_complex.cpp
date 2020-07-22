@@ -27,5 +27,11 @@ int main() {
 
 	(B2 * B3).print();
 
+	CubicalComplex Y(3); // 2 is max dimension
+	Y.add_toplex({1,2,0,1,5,5});
+
+	auto M = CubicalMap(Y, X);
+	M[0].print();
+
 	return 0;
 }
