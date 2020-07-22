@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 // indicates dimension and index of a cell
 struct cell_ind {

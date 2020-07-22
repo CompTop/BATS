@@ -4,3 +4,4 @@
 #include "complex/cell_map.h"
 #include "complex/simplicial_complex.h"
 #include "complex/simplicial_map.h"
+#include "complex/cubical_complex.h"
