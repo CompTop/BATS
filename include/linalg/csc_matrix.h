@@ -262,6 +262,12 @@ public:
 
     }
 
+    CSCMatrix operator*(const CSCMatrix &other) const {
+        CSCMatrix C;
+        gemm(*this, other, C);
+        return C;
+    }
+
     // gemm implementation
     // TV can be arbitrary ring
     // C = A + B
