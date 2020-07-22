@@ -349,7 +349,7 @@ public:
 	}
 
 	// return simplices in dimension dim
-	std::vector<std::vector<size_t>> get_cubess(const size_t dim) const {
+	std::vector<std::vector<size_t>> get_cubes(const size_t dim) const {
 		std::vector<std::vector<size_t>> simplices;
 		std::vector<size_t> s;
 		for (auto i : spx[dim]) {
