@@ -9,7 +9,7 @@ int main() {
 
 	CubicalComplex X(3); // 2 is max dimension
 	std::cout << "\ndeclared complex" << std::endl;
-	X.add_toplex({1,2,0,1,5,6});
+	X.add_recursive({1,2,0,1,5,6});
 	std::cout << "\nadded toplex" << std::endl;
 
 	X.print_summary();
@@ -27,8 +27,15 @@ int main() {
 
 	(B2 * B3).print();
 
+	auto cubes = X.get_cubes();
+	std::cout << cubes.size() << std::endl;
+	for (auto c: cubes) {
+		std::cout << c.size() << ", ";
+	}
+	std::cout << '\n';
+
 	CubicalComplex Y(3); // 2 is max dimension
-	Y.add_toplex({1,2,0,1,5,5});
+	Y.add_recursive({1,2,0,1,5,5});
 
 	auto M = CubicalMap(Y, X);
 	M[0].print();

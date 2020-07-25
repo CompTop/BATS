@@ -185,7 +185,7 @@ private:
 
 	// adds a cube to the complex without doing any checks
     // assume dim > 0
-    cell_ind _add_unsafe_toplex(const std::vector<size_t> &s) {
+    cell_ind _add_unsafe_recursive(const std::vector<size_t> &s) {
         size_t dim = cube_dim(s);
 		std::vector<size_t> cface(s.size()); // current face
 
@@ -204,7 +204,7 @@ private:
 				cface[k] = s[k+1]; // face # 1
 				size_t ind = find_idx(cface);
 				if (ind == bats::NO_IND) {
-                    auto ret = _add_unsafe_toplex(cface);
+                    auto ret = _add_unsafe_recursive(cface);
 					ind = ret.ind;
                 }
 				faces[dim-1].emplace_back(ind);
@@ -213,7 +213,7 @@ private:
 				cface[k] = s[k]; cface[k+1] = s[k]; // face # 2
 				ind = find_idx(cface);
 				if (ind == bats::NO_IND) {
-                    auto ret = _add_unsafe_toplex(cface);
+                    auto ret = _add_unsafe_recursive(cface);
 					ind = ret.ind;
                 }
 				faces[dim-1].emplace_back(ind);
@@ -237,7 +237,7 @@ private:
     }
 
 	// add simplex to complex with appropriate checks
-    cell_ind add_safe_toplex(const std::vector<size_t> &s) {
+    cell_ind add_safe_recursive(const std::vector<size_t> &s) {
 		if (!is_valid_cube(s)) {throw std::runtime_error("Not a valid cube for dimension of complex!");}
 
         // check if cube is already in complex
@@ -246,7 +246,7 @@ private:
             return cell_ind(cube_dim(s), spx_to_idx[s]);
         }
         // we're clear to add
-        return _add_unsafe_toplex(s);
+        return _add_unsafe_recursive(s);
     }
 
 public:
@@ -310,12 +310,12 @@ public:
         std::vector<size_t> &&s
     ) { return add_safe(s); }
 
-	inline cell_ind add_toplex(
+	inline cell_ind add_recursive(
 		const std::vector<size_t> &s
-	) { return add_safe_toplex(s); }
-	inline cell_ind add_toplex(
+	) { return add_safe_recursive(s); }
+	inline cell_ind add_recursive(
 		const std::vector<size_t> &&s
-	) { return add_safe_toplex(s); }
+	) { return add_safe_recursive(s); }
 
     // inline size_t add_vertex() { return _add_vertex(); }
     // inline size_t add_vertices(size_t k) { return _add_vertices(k); }
@@ -341,41 +341,43 @@ public:
 	// return simplex i in dimension dim
 	std::vector<size_t> get_cube(size_t dim, size_t i) const {
 		std::vector<size_t> s;
-		s.reserve(dim+1);
+		s.reserve(2*__maxdim);
 		for (auto it = cell_begin(dim, i); it != cell_end(dim, i); it++) {
 			s.emplace_back(*it);
 		}
 		return s;
 	}
 
-	// return simplices in dimension dim
+	// return cubes in dimension dim
 	std::vector<std::vector<size_t>> get_cubes(const size_t dim) const {
-		std::vector<std::vector<size_t>> simplices;
-		std::vector<size_t> s;
+		std::vector<std::vector<size_t>> cubes;
+		std::vector<size_t> c; // cube
+		c.reserve(2*__maxdim);
 		for (auto i : spx[dim]) {
-			s.emplace_back(i);
-			if (s.size() == dim + 1) {
-				simplices.emplace_back(s);
-				s.clear();
+			cubes.emplace_back(i);
+			if (c.size() == 2*__maxdim) {
+				cubes.emplace_back(c);
+				c.clear();
 			}
 		}
-		return simplices;
+		return cubes;
 	}
 
 	// return all simplices
 	std::vector<std::vector<size_t>> get_cubes() const {
-		std::vector<std::vector<size_t>> simplices;
-		std::vector<size_t> s;
+		std::vector<std::vector<size_t>> cubes;
+		std::vector<size_t> c; //cube
+		c.reserve(2*__maxdim);
 		for (size_t dim = 0; dim < maxdim() + 1; dim++){
 			for (auto i : spx[dim]) {
-				s.emplace_back(i);
-				if (s.size() == dim + 1) {
-					simplices.emplace_back(s);
-					s.clear();
+				c.emplace_back(i);
+				if (c.size() == 2*__maxdim) {
+					cubes.emplace_back(c);
+					c.clear();
 				}
 			}
 		}
-		return simplices;
+		return cubes;
 	}
 
 
