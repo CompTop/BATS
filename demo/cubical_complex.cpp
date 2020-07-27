@@ -34,7 +34,7 @@ int main() {
 	}
 	std::cout << '\n';
 
-	CubicalComplex Y(3); // 2 is max dimension
+	CubicalComplex Y = X.skeleton(2); // 2 is max dimension
 	Y.add_recursive({1,2,0,1,5,5});
 
 	auto M = CubicalMap(Y, X);

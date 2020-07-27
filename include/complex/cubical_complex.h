@@ -354,13 +354,24 @@ public:
 		std::vector<size_t> c; // cube
 		c.reserve(2*__maxdim);
 		for (auto i : spx[dim]) {
-			cubes.emplace_back(i);
+			c.emplace_back(i);
 			if (c.size() == 2*__maxdim) {
 				cubes.emplace_back(c);
 				c.clear();
 			}
 		}
 		return cubes;
+	}
+
+	CubicalComplex skeleton(const size_t k) const {
+		if (k > __maxdim) {throw std::runtime_error("skeleton dimension must be <= maxdim");}
+		CubicalComplex X(__maxdim); // new complex
+		for (size_t d = 0; d <= __maxdim; d++) {
+			for (auto c : get_cubes(d)) {
+				X._add_unsafe(c);
+			}
+		}
+		return X;
 	}
 
 	// return all simplices
