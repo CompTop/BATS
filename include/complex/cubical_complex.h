@@ -366,7 +366,7 @@ public:
 	CubicalComplex skeleton(const size_t k) const {
 		if (k > __maxdim) {throw std::runtime_error("skeleton dimension must be <= maxdim");}
 		CubicalComplex X(__maxdim); // new complex
-		for (size_t d = 0; d <= __maxdim; d++) {
+		for (size_t d = 0; d <= k; d++) {
 			for (auto c : get_cubes(d)) {
 				X._add_unsafe(c);
 			}
