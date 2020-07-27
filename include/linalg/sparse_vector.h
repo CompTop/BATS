@@ -330,7 +330,7 @@ public:
 			key_type(firstind, TV(0))
 		);
 		// where to put new vector
-		if (!(i2->ind < lastind) || i2 == x.nzend()) { return; } // nothing to do
+		if (i2 == x.nzend() || !(i2->ind < lastind)) { return; } // nothing to do
 		// something to do...
 		auto i1 = indval.cbegin();
 		std::vector<key_type> tmp;

@@ -32,7 +32,7 @@ int main() {
 
 	std::cout << "\nCreating cubical complex" << std::endl;
 
-	auto X = full_cube(3);
+	auto X = full_cube(2);
 
 	X.print_summary();
 
@@ -44,10 +44,16 @@ int main() {
 
 	// diagram in Homology
 	std::cout << "Homology functor" << std::endl;
-	auto HkDgm = Hom(ChainDgm, 1);
-	std::cout << HkDgm.nnode() << "," << HkDgm.nedge() << std::endl;
+	for (size_t d = 0; d < 3; d++) {
+		std::cout << "dimension " << d << std::endl;
+		auto HkDgm = Hom(ChainDgm, d);
 
-	auto ps = barcode_sparse(HkDgm, 1);
+		auto ps = barcode_sparse(HkDgm, d);
+		for (auto p : ps) {
+			std::cout << p.str() << std::endl;
+		}
+	}
+
 
 
 
