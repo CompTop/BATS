@@ -142,8 +142,8 @@ std::vector<bar> barcode_from_barcode_form(
             // easier to work on transpose
             auto matT = mat[k].T();
             for (size_t j = 0; j < matT.ncol(); j++) {
-                auto piv = mat[k][j].nzbegin();
-                if (piv == mat[k][j].nzend()) {
+                auto piv = matT[j].nzbegin();
+                if (piv == matT[j].nzend()) {
                     // no extension to complete. start new bar
                     // i.e. row was not in range of matrix
                     piv_to_ind2[j] = bars.size();
