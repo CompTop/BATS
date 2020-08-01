@@ -453,6 +453,6 @@ template <class TC>
 ColumnMatrix<TC> u_inv(const ColumnMatrix<TC> &U) {
     //std::cout << "entering solve" << std::endl;
     size_t m = U.nrow();
-    size_t n = U.ncol();
+    // size_t n = U.ncol();
 	return u_solve(U, ColumnMatrix<TC>::identity(m));
 }

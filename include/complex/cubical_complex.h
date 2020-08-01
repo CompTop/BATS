@@ -435,4 +435,28 @@ public:
         );
     }
 
+	// read from list of cubes
+	void load_cubes(std::string &fname) {
+		std::fstream fin;
+		fin.open(fname, std::ios::in);
+
+		std::vector<size_t> cube;
+
+		std::string line;
+
+		while(std::getline(fin, line)) {
+			std::stringstream lstream(line);
+			size_t i;
+			std::string ind;
+			cube.clear();
+			while(std::getline(lstream, ind, ',')) {
+				i = std::stoi(ind);
+				cube.emplace_back(i);
+			}
+			add(cube);
+		}
+		return;
+	}
+
+
 };
