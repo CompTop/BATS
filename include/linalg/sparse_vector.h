@@ -112,7 +112,8 @@ public:
 		size_t ct = 0;
 		while (it != end && selfit != selfend) {
 			if (*it < selfit->ind) {
-				indval2.emplace_back(key_type(ct, TV(0)));
+				// zero entry
+				// indval2.emplace_back(key_type(ct, TV(0)));
 				++it;
 				++ct;
 			} else if (*it == selfit->ind) {
@@ -125,11 +126,12 @@ public:
 			}
 		}
 		// only enter this loop if index set is longer than nonzeros
-		while (it != end) {
-			indval2.emplace_back(key_type(ct, TV(0)));
-			++it;
-			++ct;
-		}
+		// do not want to put zero values in
+		// while (it != end) {
+		// 	indval2.emplace_back(key_type(ct, TV(0)));
+		// 	++it;
+		// 	++ct;
+		// }
 		return SparseVector(indval2);
 	}
 
@@ -141,6 +143,16 @@ public:
 	inline auto nzend(){ return indval.end(); }
 
 	inline void clear() {indval.clear();}
+
+	void clear_zeros() {
+		std::vector<key_type> indval2;
+		for (auto iv : indval) {
+			if (iv.val != TV(0)) {
+				indval2.emplace_back(iv);
+			}
+		}
+		indval = indval2;
+	}
 
 	// nnz
 	inline size_t nnz() const {return indval.size(); }
@@ -269,6 +281,8 @@ public:
 		const SVT &x
 	) {
 
+		if (a == TV(0)) {return;}
+
 		// set i2 to find first ind >= firstind
 		auto i2 = x.nzbegin();
 		// where to put new vector
@@ -277,37 +291,39 @@ public:
 		auto i1 = indval.cbegin();
 		std::vector<key_type> tmp;
 		while (i1 != indval.cend() && i2 != x.nzend()) {
-			if ((*i1).ind == (*i2).ind) {
+			if ( i1->ind == i2->ind) {
 				TV val = (a * ((*i2).val)) + (*i1).val;
 				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
-				if (!(val == 0)) {
-					tmp.push_back(key_type((*i1).ind, val));
+				if (val != TV(0)) {
+					tmp.push_back(key_type(i1->ind, val));
 				}
 				++i1;
 				++i2;
-			} else if ((*i1).ind < (*i2).ind) {
+			} else if ((i1->ind) < (i2->ind)) {
 				tmp.push_back(*i1);
 				++i1;
 			} else {
-				tmp.push_back(key_type((*i2).ind, a * (*i2).val));
+				tmp.push_back(key_type(i2->ind, a * (i2->val)));
 				++i2;
 			}
 		}
 		// run through rest of entries and dump in
 		// at most one of the loops does anything
 		while (i1 != indval.cend()) {
-			tmp.push_back(*i1);
+			tmp.emplace_back(*i1);
 			++i1;
 		}
 		while (i2 != x.nzend()) {
-			tmp.push_back(key_type((*i2).ind, a * (*i2).val));
+			tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
 			++i2;
 		}
 
 		// copy temp vector to indval
-		indval.resize(tmp.size());
-		std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
-		//indval = tmp;
+		// indval.resize(tmp.size());
+		// std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
+		indval = tmp;
+
+		clear_zeros();
 
 		return;
 	}
@@ -322,6 +338,7 @@ public:
 		const TI &lastind
 	) {
 
+		if (a == TV(0)) {return;}
 
 		// set i2 to find first ind >= firstind
 		auto i2 = std::lower_bound(
@@ -337,7 +354,7 @@ public:
 		while (i1 != indval.cend() && i2 != x.nzend()) {
 			if (i1->ind == i2->ind) {
 				TV val = (a * (i2->val)) + i1->val;
-				if (!(val == 0)) {
+				if (val != TV(0)) {
 					tmp.push_back(key_type(i1->ind, val));
 				}
 				++i1;
@@ -376,7 +393,6 @@ public:
 		const std::vector<TI> &inds
 	) {
 
-
 		// set i2 to find first ind >= firstind
 		auto i2 = x.nzbegin(); // iterate over x
 		// where to put new vector
@@ -398,7 +414,7 @@ public:
 			} else if (ii < i1->ind && inds[ii] == i2->ind) {
 				// no match from nonzero in self, but match from x
 				TV val = (coeff[ii] * (i2->val));
-				if (!(val == 0)) {
+				if (val != TV(0)) {
 					tmp.push_back(key_type(ii, val));
 				}
 				++ii;
@@ -407,7 +423,7 @@ public:
 				// match from both x and self
 				TV val = (coeff[ii] * (i2->val)) + i1->val;
 				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
-				if (!(val == 0)) {
+				if (val != TV(0)) {
 					tmp.push_back(key_type(i1->ind, val));
 				}
 				++i1;
@@ -434,9 +450,7 @@ public:
 		}
 
 		// copy temp vector to indval
-		indval.resize(tmp.size());
-		std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
-		//indval = tmp;
+		indval = tmp;
 
 		return;
 	}

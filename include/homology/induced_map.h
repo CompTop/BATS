@@ -20,6 +20,12 @@ ColumnMatrix<TVec> induced_map(
 	size_t k
 ) {
 
+	// Check dimensions
+	// F: C -> D
+	if (F[k].ncol() != C.U[k].nrow() || F[k].nrow() != D.U[k].ncol()) {
+		throw std::runtime_error("ChainMap dimensions do not agree with basis dimensions!");
+	}
+
 	std::vector<TVec> col;
 	// iterate over homology generators in C
 	for (auto it = C.I[k].cbegin(); it != C.I[k].cend(); it++) {
