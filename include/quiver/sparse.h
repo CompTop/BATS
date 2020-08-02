@@ -173,7 +173,7 @@ std::vector<PersistencePair<size_t>> bars_to_pairs(
     size_t n = bars.size();
     std::vector<PersistencePair<size_t>> pairs(n);
     for (size_t i = 0; i < n; i++) {
-        pairs[i] = PersistencePair(hdim, bars[i].start, bars[i].end, bars[i].start_ind, bars[i].end_ind);
+        pairs[i] = PersistencePair(hdim, bars[i].start_ind, bars[i].end_ind, bars[i].start, bars[i].end);
     }
     return pairs;
 }
