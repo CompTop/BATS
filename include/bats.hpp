@@ -11,3 +11,4 @@ Single header file to include all functionality
 #include "multigraph.h"
 #include "quiver.h"
 #include "topology.h"
+#include "future.h"
