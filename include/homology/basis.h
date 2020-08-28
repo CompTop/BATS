@@ -44,12 +44,12 @@ struct ReducedChainComplex {
 
 	// put vector/matrix in homology-revealing basis in dimension k
 	template <typename TV>
-	inline TV to_hom_basis(const TV &v, size_t k) {
+	inline TV to_hom_basis(const TV &v, size_t k) const {
 		return u_solve(U[k], v);
 	}
 
 	template <typename TV>
-	inline TV from_hom_basis(const TV &v, size_t k) {
+	inline TV from_hom_basis(const TV &v, size_t k) const {
 		return U[k] * v;
 	}
 
