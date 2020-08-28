@@ -42,6 +42,16 @@ struct ReducedChainComplex {
 		I[dmax-1] = extract_basis_indices(R[dmax-1]);
 	}
 
+	// put vector/matrix in homology-revealing basis in dimension k
+	template <typename TV>
+	inline TV to_hom_basis(const TV &v, size_t k) {
+		return u_solve(U[k], v);
+	}
+
+	template <typename TV>
+	inline TV from_hom_basis(const TV &v, size_t k) {
+		return U[k] * v;
+	}
 
 	// size of homology vector space in dimension k
 	inline size_t hdim(size_t k) const { return I[k].size(); }

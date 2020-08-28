@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include <bats.h>
+#include <bats.hpp>
 
 int main() {
 

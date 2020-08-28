@@ -12,6 +12,16 @@
 
 // standard list of list implementation for sparse matrix
 
+// forward declarations
+template <class TC>
+class ColumnMatrix;
+
+template <class TC>
+TC l_solve(const ColumnMatrix<TC> &L, const TC &y);
+
+template <class TC>
+TC u_solve(const ColumnMatrix<TC> &U, const TC &y);
+
 // template over column type
 template <class TC>
 class ColumnMatrix : public AbstractMatrix
