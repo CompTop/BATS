@@ -127,6 +127,16 @@ public:
         return col[j][i];
     }
 
+	std::vector<std::vector<val_type>> to_row_array() const {
+		std::vector<std::vector<val_type>> A(m);
+		for (size_t i = 0; i < m; i++) {
+			for (size_t j = 0; j < n; j++) {
+				A[i].emplace_back(getval(i,j));
+			}
+		}
+		return A;
+	}
+
     // dump matrix into a dense array in column-major format
     // WARNING: allocates memory, which must be deleted
     val_type* dump_dense() const {
