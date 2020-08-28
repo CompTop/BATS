@@ -71,6 +71,7 @@ struct ReducedChainComplex {
 	}
 
 	// modify y in-place to be preferred representative for homology class in dimension k
+	// assumes y is in homology-revealing basis
 	void find_preferred_representative(
 		typename MT::col_type &y,
 		const size_t k
@@ -103,6 +104,15 @@ struct ReducedChainComplex {
 			// else j is a preferred representative
 			// so we do nothing
 		}
+	}
+
+	// find the preferred representative for a k-chain
+	chain_type chain_preferred_representative(
+		const chain_type &c, size_t k
+	) const {
+		auto x = to_hom_basis(c, k);
+		find_preferred_representative(x, k);
+		return from_hom_basis(x, k);
 	}
 };
 
