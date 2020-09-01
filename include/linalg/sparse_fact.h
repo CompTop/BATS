@@ -426,12 +426,12 @@ void LQU_inplace(SparseLQU<TC> &F) {
     // TODO
 
     // first, do a CU factorization in-place on A and U.
-    CU_inplace(F.A, F.U);
+    CU_inplace(F.Q, F.U);
 
     // now do a CU factorization on A^T to get L factor.
-    F.A = F.A.T();
-    CU_inplace(F.A, F.L);
-    F.A = F.A.T(); // A is now a pivot matrix
+    F.Q = F.Q.T();
+    CU_inplace(F.Q, F.L);
+    F.Q = F.Q.T(); // A is now a pivot matrix
     F.L = F.L.T(); // take transpose to get L factor.
 }
 
