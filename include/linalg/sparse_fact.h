@@ -358,3 +358,98 @@ template <typename TC>
 inline ColumnMatrix<TC> L_EL_commute(const ColumnMatrix<TC> &L, const ColumnMatrix<TC> &EL) {
     return EL_L_commute(EL.T().J_conjugation_inplace(), L.T().J_conjugation_inplace()).T().J_conjugation_inplace();
 }
+
+
+// factorization struct
+template <class TC>
+struct SparseLQU {
+    // struct to hold factorization LEUP, PUEL, etc.
+    ColumnMatrix<TC> L;
+    ColumnMatrix<TC> Q;
+    ColumnMatrix<TC> U;
+
+    inline ColumnMatrix<TC> LQU_prod() const {
+        return L * Q * U;
+    }
+
+};
+
+template <class TC>
+void CU_inplace(ColumnMatrix<TC> &C, ColumnMatrix<TC> &U) {
+    // produce factorization CU
+    // where U is upper triangular.
+    // everything to right of a high pivot is eliminated
+    // columns of C are scaled so pivots are 1
+
+    size_t m = C.nrow();
+    size_t n = C.ncol();
+
+    std::vector<ssize_t> p2c(m, -1); // initialize pivots to -1
+
+    // loop over columns
+    for (size_t j = 0; j < n; j++) {
+        bool found_pivot = false;
+        size_t i0 = 0;
+        // loop over entries in column C[j]
+        auto piv = C[j].lower_bound(i0);
+        while (piv != C[j].nzend()) {
+            if (p2c[piv->ind] != -1) { // if pivot index is pivot in previous column - eliminate
+                i0 = piv->ind;
+                auto v = piv->val;
+                // eliminate entry in C[j]
+                C[j].axpy(-v, C[p2c[i0]]); // pivot has been scaled to 1
+                // update U[j]
+                U[j].axpy(v, U[p2c[i0]]); // inverse operation to columns of U
+
+                piv = C[j].lower_bound(i0); // go to next nonzero
+            } else if (!found_pivot) { // we have found pivot for this column
+                found_pivot = true; // found the pivot
+                // record pivot
+                p2c[piv->ind] = j;
+                auto v = piv->val;
+                // scale column so pivot is 1
+                C[j].scale_inplace(v.inv());
+                // scale U with inverse operation
+                U[j].scale_inplace(v);
+                ++piv; // go to next nonzero
+            } else {
+                ++piv; // go to next nonzero
+            }
+
+        }
+
+    }
+}
+
+template <class TC>
+void LQU_inplace(SparseLQU<TC> &F) {
+    // TODO
+
+    // first, do a CU factorization in-place on A and U.
+    CU_inplace(F.A, F.U);
+
+    // now do a CU factorization on A^T to get L factor.
+    F.A = F.A.T();
+    CU_inplace(F.A, F.L);
+    F.A = F.A.T(); // A is now a pivot matrix
+    F.L = F.L.T(); // take transpose to get L factor.
+}
+
+template <class TC>
+SparseFact<TC> LQU(const ColumnMatrix<TC> &A) {
+    // LEUP factorization of matrix A
+
+    using MatT = ColumnMatrix<TC>;
+
+    size_t m = A.nrow();
+    size_t n = A.ncol();
+
+    SparseLQU<TC> F;
+    F.L = MatT::identity(m);
+    F.Q = A;
+    F.U = MatT::identity(n);
+
+    LQU_inplace(F);
+
+    return F;
+}
