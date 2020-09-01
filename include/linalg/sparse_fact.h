@@ -353,11 +353,26 @@ ColumnMatrix<TC> EL_L_commute(const ColumnMatrix<TC> &E, const ColumnMatrix<TC> 
     return Ltilde.row_scale(coeff); // scale rows
 }
 
-// produce matrix Ltilde so L * EL = EL * Ltilde
+// produce matrix Ltilde so L * ELhat = ELhat * Ltilde
 template <typename TC>
 inline ColumnMatrix<TC> L_EL_commute(const ColumnMatrix<TC> &L, const ColumnMatrix<TC> &EL) {
     return EL_L_commute(EL.T().J_conjugation_inplace(), L.T().J_conjugation_inplace()).T().J_conjugation_inplace();
 }
+
+
+// produce matrix Utilde so U * EU = EU * Utilde
+template <typename TC>
+inline ColumnMatrix<TC> U_EU_commute(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &EU) {
+    return EL_L_commute(EU.T(), U.T()).T();
+}
+
+
+// produce matrix Utilde so EUhat * U = Utilde * EUhat
+template <typename TC>
+inline ColumnMatrix<TC> EU_U_commute(const ColumnMatrix<TC> &EU, const ColumnMatrix<TC> &U) {
+    return EL_L_commute(EU.J_conjugation(), U.J_conjugation()).J_conjugation();
+}
+
 
 
 // factorization struct
@@ -436,7 +451,7 @@ void LQU_inplace(SparseLQU<TC> &F) {
 }
 
 template <class TC>
-SparseFact<TC> LQU(const ColumnMatrix<TC> &A) {
+SparseLQU<TC> LQU(const ColumnMatrix<TC> &A) {
     // LEUP factorization of matrix A
 
     using MatT = ColumnMatrix<TC>;
