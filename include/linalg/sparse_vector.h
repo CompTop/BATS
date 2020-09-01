@@ -168,7 +168,7 @@ public:
 	}
 
 	std::vector<TV> nzvals() const {
-		std::vector<size_t> val;
+		std::vector<TV> val;
 		val.reserve(nnz());
 		for (auto it = nzbegin(); it != nzend(); it++) {
 			val.emplace_back(it->val);
@@ -179,7 +179,7 @@ public:
 	std::tuple<std::vector<size_t>, std::vector<TV>> nzs() const {
 
 		std::vector<size_t> ind; ind.reserve(nnz());
-		std::vector<size_t> val; val.reserve(nnz());
+		std::vector<TV> val; val.reserve(nnz());
 		for (auto it = nzbegin(); it != nzend(); it++) {
 			ind.emplace_back(it->ind);
 			val.emplace_back(it->val);
