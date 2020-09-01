@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include <bats.h>
+#include <bats.hpp>
 
 auto full_cube(const size_t N) {
 	CubicalComplex X(3);
@@ -48,7 +48,7 @@ int main() {
 		std::cout << "dimension " << d << std::endl;
 		auto HkDgm = Hom(ChainDgm, d);
 
-		auto ps = barcode_sparse(HkDgm, d);
+		auto ps = barcode_sparse_rightward(HkDgm, d);
 		for (auto p : ps) {
 			std::cout << p.str() << std::endl;
 		}

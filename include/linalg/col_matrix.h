@@ -468,6 +468,23 @@ ColumnMatrix<TC> u_solve(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &A) {
     return ColumnMatrix<TC>(m, n, col);
 }
 
+// solve L \ A
+template <class TC>
+ColumnMatrix<TC> l_solve(const ColumnMatrix<TC> &L, const ColumnMatrix<TC> &A) {
+    //std::cout << "entering solve" << std::endl;
+    size_t m = A.nrow();
+    size_t n = A.ncol();
+    std::vector<TC> col;
+    col.reserve(n);
+    for (size_t j = 0; j < n; j++) {
+
+        col.emplace_back(
+            l_solve(L, A[j])
+        );
+    }
+    return ColumnMatrix<TC>(m, n, col);
+}
+
 // form inverse U^{-1}
 template <class TC>
 ColumnMatrix<TC> u_inv(const ColumnMatrix<TC> &U) {
@@ -475,4 +492,13 @@ ColumnMatrix<TC> u_inv(const ColumnMatrix<TC> &U) {
     size_t m = U.nrow();
     // size_t n = U.ncol();
 	return u_solve(U, ColumnMatrix<TC>::identity(m));
+}
+
+// form inverse L^{-1}
+template <class TC>
+ColumnMatrix<TC> l_inv(const ColumnMatrix<TC> &L) {
+    //std::cout << "entering solve" << std::endl;
+    size_t m = L.nrow();
+    // size_t n = U.ncol();
+	return l_solve(L, ColumnMatrix<TC>::identity(m));
 }
