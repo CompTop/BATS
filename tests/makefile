@@ -2,7 +2,7 @@ CXXFLAGS = -Wall -std=c++17 -Wextra
 OUTFLAGS = -O3
 PROFFLAGS = -pg -O3
 DBFLAGS = -g -Og
-CXX = g++
+CXX ?= g++
 IFLAGS = -I../include
 
 default: field.out dense_tests.out col_matrix.out sparse_vector.out util.out
