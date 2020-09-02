@@ -13,20 +13,19 @@ inline bool is_left_arrow(const Edge &e) {
     return e.targ < e.src;
 }
 
-template <typename NT, typename TM>
-auto barcode_form_leftward(const Diagram<NT, TM> &dgm) {
-
-    size_t m = dgm.nedge();
-
-    using TC = typename TM::col_type;
-    std::vector<SparseFact<TC>> facts(m);
-
-    // copy matrices on edges
-    std::vector<TM> mats = dgm.edata;
-
-    // forward sweep
+// sweep 1 from right to left
+// start at index j0
+// end at index j1
+template <typename NT, typename TC, typename TM>
+void type_A_leftright_sweep1(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+) {
     // left to right
-    for (size_t j = 0; j < m; j++) {
+    for (ssize_t j = j0; j <= j1; j++) {
         if (is_left_arrow(dgm.elist[j])) {
             // Left arrow = LEUP
 
@@ -65,7 +64,21 @@ auto barcode_form_leftward(const Diagram<NT, TM> &dgm) {
 
         }
     }
-    // we don't do leftward sweep if we only want barcode form
+}
+
+template <typename NT, typename TM>
+auto barcode_form_leftright(const Diagram<NT, TM> &dgm) {
+
+    size_t m = dgm.nedge();
+
+    using TC = typename TM::col_type;
+    std::vector<SparseFact<TC>> facts(m);
+
+    // copy matrices on edges
+    std::vector<TM> mats = dgm.edata;
+
+    type_A_leftright_sweep1(dgm, facts, mats, 0, m-1);
+    // we don't do second sweep if we only want barcode form
 
     // dump E matrices to return
     for (size_t j = 0; j < m; j++) {
@@ -76,25 +89,24 @@ auto barcode_form_leftward(const Diagram<NT, TM> &dgm) {
     return mats;
 }
 
-template <typename NT, typename TM>
-auto barcode_form_rightward(const Diagram<NT, TM> &dgm) {
-
-    size_t m = dgm.nedge();
-
-    using TC = typename TM::col_type;
-    std::vector<SparseFact<TC>> facts(m);
-
-    // copy matrices on edges
-    std::vector<TM> mats = dgm.edata;
-
-    // forward sweep
-    // left to right
-    for (ssize_t j = m-1; j >= 0 ; j--) {
+// sweep 1 from right to left
+// start at index j0
+// end at index j1
+template <typename NT, typename TC, typename TM>
+void type_A_rightleft_sweep1(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+) {
+    // right to left
+    for (ssize_t j = j0; j >= j1 ; j--) {
         if (is_left_arrow(dgm.elist[j])) {
             // Left arrow = PLEU
 
             // first apply change of basis from left
-            if (j < m-1) {
+            if (j < j0) {
                 if (is_left_arrow(dgm.elist[j+1])) {
                     // A = A * P * L
                     mats[j] = mats[j] * facts[j+1].P * facts[j+1].L;
@@ -113,7 +125,7 @@ auto barcode_form_rightward(const Diagram<NT, TM> &dgm) {
             // Right arrow = UELP
 
             // first apply change of basis from left
-            if (j < m-1) {
+            if (j < j0) {
                 if (is_left_arrow(dgm.elist[j+1])) {
                         // A = L^{-1} * P^{-1} * A
                         mats[j] = l_inv(facts[j+1].L) * facts[j+1].P.T() * mats[j];
@@ -128,13 +140,26 @@ auto barcode_form_rightward(const Diagram<NT, TM> &dgm) {
 
         }
     }
-    // we don't do leftward sweep if we only want barcode form
+}
+
+template <typename NT, typename TM>
+auto barcode_form_rightleft(const Diagram<NT, TM> &dgm) {
+
+    size_t m = dgm.nedge();
+
+    using TC = typename TM::col_type;
+    std::vector<SparseFact<TC>> facts(m);
+
+    // copy matrices on edges
+    std::vector<TM> mats = dgm.edata;
+
+    type_A_rightleft_sweep1(dgm, facts, mats, m-1, 0);
+    // we don't do second sweep if we only want barcode form
 
     // dump E matrices to return
     for (size_t j = 0; j < m; j++) {
         mats[j] = facts[j].E;
     }
-
 
     return mats;
 }
@@ -246,14 +271,14 @@ std::vector<PersistencePair<size_t>> bars_to_pairs(
 
 template <typename NT, typename TM>
 std::vector<PersistencePair<size_t>> barcode_sparse(const Diagram<NT, TM> &dgm, size_t hdim) {
-    auto mats = barcode_form_leftward(dgm);
+    auto mats = barcode_form_leftright(dgm);
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
 }
 
 template <typename NT, typename TM>
-std::vector<PersistencePair<size_t>> barcode_sparse_rightward(const Diagram<NT, TM> &dgm, size_t hdim) {
-    auto mats = barcode_form_rightward(dgm);
+std::vector<PersistencePair<size_t>> barcode_sparse_rightleft(const Diagram<NT, TM> &dgm, size_t hdim) {
+    auto mats = barcode_form_rightleft(dgm);
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
 }

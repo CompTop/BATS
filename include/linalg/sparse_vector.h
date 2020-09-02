@@ -13,6 +13,8 @@ maintains indices in sorted order
 #include <string>
 #include <sstream>
 #include <utility>
+#include <random>
+#include <chrono>
 #include "field.h"
 #include "abstract_vector.h"
 
@@ -100,6 +102,11 @@ public:
 		if (it1 != nzend() || it2 != other.nzend()) { return false;}
 		return true;
 	}
+	template<typename T>
+	inline bool operator!=(const T &other) const {
+		return !(*this == other);
+	}
+
 
 	// extract indices by iterator
 	template<typename T>
@@ -475,21 +482,6 @@ public:
 	}
 
 
-
-	// zeros out pivot in x
-	// void eliminate_pivot(const SparseVector &x) {
-	// 	auto piv = last();
-	// 	auto pivx = x.last();
-	// 	TV alpha = - piv.val / pivx.val;
-	// 	// std::cout << "alpha = " << alpha << std::endl;
-	// 	axpy(alpha, x);
-	// }
-	// scal - in place
-
-	// add, subtract, multiply by scalar
-	//inline SparseVector operator+(const SparseVector &x) {return caxpy(TV(1), x); }
-	//inline SparseVector operator-(const SparseVector &x) {return caxpy(TV(-1), x); }
-
 	void print() const {
 		auto it = indval.cbegin();
 		while (it != indval.cend()) {
@@ -521,5 +513,25 @@ public:
 	  std::ostringstream oss;
 	  write(oss);
 	  return oss.str();
+	}
+
+	// generate random vectors
+	static SparseVector random(size_t n, double p, int maxval, std::default_random_engine generator) {
+		std::uniform_int_distribution<int> val_distribution(1,maxval);
+		std::uniform_real_distribution<double> nz_distribution(0.0,1.0);
+
+		std::vector<key_type> indval;
+		for (size_t i = 0; i < n; i++) {
+			if (nz_distribution(generator) < p) {
+				indval.emplace_back(key_type(i, val_distribution(generator)));
+			}
+		}
+		return SparseVector(indval);
+	}
+	static SparseVector random(size_t n, double p, int maxval) {
+		// obtain a seed from the system clock:
+		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		std::default_random_engine generator(seed);
+		return random(n, p, maxval, generator);
 	}
 };

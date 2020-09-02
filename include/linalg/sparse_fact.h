@@ -37,6 +37,10 @@ struct SparseFact {
         return P * U * E * L;
     }
 
+    inline ColumnMatrix<TC> LQU_prod() const {
+        return L * E * U;
+    }
+
 
 };
 
@@ -375,20 +379,6 @@ inline ColumnMatrix<TC> EU_U_commute(const ColumnMatrix<TC> &EU, const ColumnMat
 
 
 
-// factorization struct
-template <class TC>
-struct SparseLQU {
-    // struct to hold factorization LEUP, PUEL, etc.
-    ColumnMatrix<TC> L;
-    ColumnMatrix<TC> Q;
-    ColumnMatrix<TC> U;
-
-    inline ColumnMatrix<TC> LQU_prod() const {
-        return L * Q * U;
-    }
-
-};
-
 template <class TC>
 void CU_inplace(ColumnMatrix<TC> &C, ColumnMatrix<TC> &U) {
     // produce factorization CU
@@ -437,31 +427,33 @@ void CU_inplace(ColumnMatrix<TC> &C, ColumnMatrix<TC> &U) {
 }
 
 template <class TC>
-void LQU_inplace(SparseLQU<TC> &F) {
+void LQU_inplace(SparseFact<TC> &F) {
     // TODO
 
     // first, do a CU factorization in-place on A and U.
-    CU_inplace(F.Q, F.U);
+    CU_inplace(F.E, F.U);
 
     // now do a CU factorization on A^T to get L factor.
-    F.Q = F.Q.T();
-    CU_inplace(F.Q, F.L);
-    F.Q = F.Q.T(); // A is now a pivot matrix
+    F.E = F.E.T();
+    CU_inplace(F.E, F.L);
+    F.E = F.E.T(); // A is now a pivot matrix
     F.L = F.L.T(); // take transpose to get L factor.
 }
 
 template <class TC>
-SparseLQU<TC> LQU(const ColumnMatrix<TC> &A) {
-    // LEUP factorization of matrix A
+SparseFact<TC> LQU(const ColumnMatrix<TC> &A) {
+    // LQU factorization of matrix A
+    // E is used for Q matrix
+    // P is unused
 
     using MatT = ColumnMatrix<TC>;
 
     size_t m = A.nrow();
     size_t n = A.ncol();
 
-    SparseLQU<TC> F;
+    SparseFact<TC> F;
     F.L = MatT::identity(m);
-    F.Q = A;
+    F.E = A;
     F.U = MatT::identity(n);
 
     LQU_inplace(F);

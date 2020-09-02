@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <random>
+#include <chrono>
 #include "abstract_matrix.h"
 #include "csc_matrix.h"
 #include "abstract_vector.h"
@@ -126,6 +128,16 @@ public:
     inline auto operator()(size_t i, size_t j) const {
         return col[j][i];
     }
+
+	bool operator==(const ColumnMatrix &other) const {
+		if (m != other.m || n != other.n) {return false;}
+		for (size_t j = 0; j < n; j++) {
+			if (col[j] != other.col[j]) {return false;}
+		}
+		return true;
+	}
+
+
 
 	std::vector<std::vector<val_type>> to_row_array() const {
 		std::vector<std::vector<val_type>> A(m);
@@ -299,17 +311,75 @@ public:
 		return *this;
 	}
 
-    // triangular solve
+	// tests to see if matrix has structure
+	bool is_upper() const {
+		for (size_t j = 0; j < n; j++) {
+			auto iv = col[j].nzend();
+			if (iv != col[j].nzbegin()) {
+				iv--;
+				if (iv->ind < j) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	bool is_lower() const {
+		for (size_t j = 0; j < n; j++) {
+			auto iv = col[j].nzbegin();
+			if (iv != col[j].nzend()) {
+				if (iv->ind > j) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	bool is_pivot_matrix() const {
+		for (size_t j = 0; j < n; j++) {
+			if (col[j].nnz() > 1) {
+				return false;
+			}
+		}
+		// check that rows also have at most 1 nonzero
+		ColumnMatrix row = transpose();
+		for (size_t i = 0; i < m; i++) {
+			if (row[i].nnz() > 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+	bool is_EL() const {
+		size_t j = 0;
+		ssize_t i = -1;
+		while (j < n) {
+			auto st = col[j].nzbegin();
+			auto end = col[j].nzend();
+			// check if no pivots
+			if (std::distance(st, end) == 0) { j++; break; }
 
-    // schur complement friend
+			// check that pivot is strictly increasing
+			if (std::distance(st, end) > 1 || ssize_t(st->ind) <= i) { return false; }
 
-    // void print() {
-    //     std::cout << m << " x " << n << " matrix. transpose: " << std::endl;
-    //     for (size_t i = 0; i < col.size(); i++) {
-    //         std::cout << i << " : ";
-    //         col[i].print_row();
-    //     }
-    // }
+			i = st->ind;
+			j++;
+		}
+		// enter this loop after we encounter a column with no zeros
+		while (j < n) {
+			if (col[j].nnz() == 0) {
+				j++;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+	inline bool is_EU() const { return transpose().is_EL(); }
+	inline bool is_ELhat() const { return J_conjugation().is_EU(); }
+	inline bool is_EUhat() const {return J_conjugation().is_EL(); }
+
+
     void print_size() const {
         std::cout << "[" << this << "] : " << m << " x " << n <<\
         " ColumnMatrix" << std::endl;
@@ -326,16 +396,6 @@ public:
         }
         return;
     }
-
-    // expose as static member function?
-    static ColumnMatrix identity(size_t n) {
-        std::vector<TC> col(n);
-        for (size_t j = 0; j < n; j++) {
-            col[j] = TC(j);
-        }
-        return ColumnMatrix(n, n, col);
-    }
-    // dense matrix
 
     // template <typename IO>
     void write(std::ostream &io) const {
@@ -362,6 +422,30 @@ public:
             std::cerr << "unable to write ColumnMatrix to " << fname << std::endl;
         }
     }
+
+	// static methods
+	static ColumnMatrix identity(size_t n) {
+		std::vector<TC> col(n);
+		for (size_t j = 0; j < n; j++) {
+			col[j] = TC(j);
+		}
+		return ColumnMatrix(n, n, col);
+	}
+
+	static ColumnMatrix random(size_t m, size_t n, double p, int maxval, std::default_random_engine generator) {
+		std::vector<TC> col(n);
+		for (size_t j = 0; j < n; j++) {
+			col[j] = TC::random(m, p, maxval, generator);
+		}
+		return ColumnMatrix(m, n, col);
+	}
+	static ColumnMatrix random(size_t m, size_t n, double p, int maxval) {
+		// obtain a seed from the system clock:
+		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		std::default_random_engine generator(seed);
+		return random(m, n, p, maxval, generator);
+	}
+
 };
 
 
