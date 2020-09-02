@@ -43,16 +43,30 @@ TEST_CASE_TEMPLATE("Shapes", F, F2, F3, F5, Q) {
 	using VT = SparseVector<F, size_t>;
 	using MatT = ColumnMatrix<VT>;
 
-	// TODO: generate some random matrices, set seeds
-	MatT I = MatT::identity(5);
+	SUBCASE("Identity") {
+		MatT I = MatT::identity(5);
 
-	CHECK(I.is_upper());
-	CHECK(I.is_lower());
-	CHECK(I.is_pivot_matrix());
-	CHECK(I.is_EL());
-	CHECK(I.is_ELhat());
-	CHECK(I.is_EU());
-	CHECK(I.is_EUhat());
+		CHECK(I.is_upper());
+		CHECK(I.is_lower());
+		CHECK(I.is_pivot_matrix());
+		CHECK(I.is_EL());
+		CHECK(I.is_ELhat());
+		CHECK(I.is_EU());
+		CHECK(I.is_EUhat());
+	}
+
+	SUBCASE("Upper") {
+		std::vector<VT> col{VT({0}, {1}), VT({0,1}, {1,1})};
+		MatT U(2,2,col);
+		CHECK(U.is_upper());
+		CHECK(!(U.is_lower()));
+	}
+	SUBCASE("Lower") {
+		std::vector<VT> col{VT({0,1}, {1,1}), VT({1}, {1})};
+		MatT L(2,2,col);
+		CHECK(L.is_lower());
+		CHECK(!(L.is_upper()));
+	}
 }
 
 #define CHECK_LEUP(F, A) \
@@ -271,55 +285,64 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 
 }
 
-#define CHECK_EL_L(m, n, generator) \
+#define CHECK_EL_L(m, n, p, p2, generator) \
 SUBCASE("EL - L") {\
-	auto A = MatT::random(m, n, 0.2, 1, generator); \
-	auto B = MatT::random(n, n, 0.2, 1, generator); \
+	auto A = MatT::random(m, n, p, 1, generator); \
+	auto B = MatT::random(n, n, p2, 1, generator); \
 	auto F = LEUP(A); \
+	CHECK_LEUP(F, A) \
 	auto EL = F.E; \
 	auto FB = LQU(B); \
+	CHECK_LQU(FB, B) \
 	auto L = FB.L;  \
 	auto Ltil = EL_L_commute(EL, L); \
 	CHECK(Ltil.is_lower()); \
 	CHECK(Ltil * EL == EL * L); \
 }
 
-#define CHECK_L_EL(m, n, generator) \
+#define CHECK_L_EL(m, n, p, p2, generator) \
 SUBCASE("L - ELhat") {\
-	auto A = MatT::random(m, n, 0.2, 1, generator); \
-	auto B = MatT::random(m, m, 0.2, 1, generator); \
+	auto A = MatT::random(m, n, p, 1, generator); \
+	auto B = MatT::random(m, m, p2, 1, generator); \
 	auto F = PUEL(A); \
+	CHECK_PUEL(F, A) \
 	auto EL = F.E; \
 	auto FB = LQU(B); \
+	CHECK_LQU(FB, B) \
 	auto L = FB.L;  \
 	auto Ltil = L_EL_commute(L, EL); \
 	CHECK(Ltil.is_lower()); \
 	CHECK(EL * Ltil == L * EL); \
 }
 
-#define CHECK_U_EU(m, n, generator) \
+#define CHECK_U_EU(m, n, p, p2, generator) \
 SUBCASE("U - EU") {\
-	auto A = MatT::random(m, n, 0.2, 1, generator); \
-	auto B = MatT::random(m, m, 0.2, 1, generator); \
+	auto A = MatT::random(m, n, p, 1, generator); \
+	auto B = MatT::random(m, m, p2, 1, generator); \
 	auto F = PLEU(A); \
+	CHECK_PLEU(F, A) \
 	auto EU = F.E; \
 	auto FB = LQU(B); \
+	CHECK_LQU(FB, B) \
 	auto U = FB.U;  \
 	auto Util = U_EU_commute(U, EU); \
 	CHECK(Util.is_upper()); \
 	CHECK(U * EU == EU * Util); \
 }
 
-#define CHECK_EU_U(m, n, generator) \
+#define CHECK_EU_U(m, n, p, p2, generator) \
 SUBCASE("EUhat - U") {\
-	auto A = MatT::random(m, n, 0.2, 1, generator); \
-	auto B = MatT::random(n, n, 0.2, 1, generator); \
+	auto A = MatT::random(m, n, p, 1, generator); \
+	auto B = MatT::random(n, n, p2, 1, generator); \
 	auto F = UELP(A); \
+	CHECK_UELP(F, A) \
 	auto EU = F.E; \
 	auto FB = LQU(B); \
+	CHECK_LQU(FB, B) \
 	auto U = FB.U;  \
 	auto Util = EU_U_commute(EU, U); \
 	CHECK(Util.is_upper()); \
+	CHECK(Util.is_lower()); \
 	CHECK(EU * U == Util * EU); \
 }
 
@@ -331,20 +354,25 @@ TEST_CASE_TEMPLATE("Commutation Relations", T, F2, F3, F5, Q) {
 	SUBCASE("Square") {
 		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
-			CHECK_EL_L(10, 10, generator)
-			CHECK_L_EL(10, 10, generator)
-			CHECK_U_EU(10, 10, generator)
-			CHECK_EU_U(10, 10, generator)
+			size_t m = 20;
+
+			CHECK_EL_L(m, m, 0.04, 0.1, generator)
+			CHECK_L_EL(m, m, 0.04, 0.1, generator)
+			CHECK_U_EU(m, m, 0.04, 0.1, generator)
+			CHECK_EU_U(m, m, 0.04, 0.1, generator)
 		}
 	}
 
 	SUBCASE("Short") {
 		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
-			CHECK_EL_L(10, 20, generator)
-			CHECK_L_EL(10, 20, generator)
-			CHECK_U_EU(10, 20, generator)
-			CHECK_EU_U(10, 20, generator)
+			size_t m = 20;
+			size_t n = 30;
+
+			CHECK_EL_L(m, n, 0.03, 0.1, generator)
+			CHECK_L_EL(m, n, 0.03, 0.1, generator)
+			CHECK_U_EU(m, n, 0.03, 0.1, generator)
+			CHECK_EU_U(m, n, 0.03, 0.1, generator)
 
 		}
 	}
@@ -352,10 +380,13 @@ TEST_CASE_TEMPLATE("Commutation Relations", T, F2, F3, F5, Q) {
 	SUBCASE("Tall") {
 		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
-			CHECK_EL_L(20, 10, generator)
-			CHECK_L_EL(20, 10, generator)
-			CHECK_U_EU(20, 10, generator)
-			CHECK_EU_U(20, 10, generator)
+			size_t m = 30;
+			size_t n = 20;
+
+			CHECK_EL_L(m, n, 0.03, 0.1, generator)
+			CHECK_L_EL(m, n, 0.03, 0.1, generator)
+			CHECK_U_EU(m, n, 0.03, 0.1, generator)
+			CHECK_EU_U(m, n, 0.03, 0.1, generator)
 		}
 	}
 

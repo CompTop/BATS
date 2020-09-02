@@ -317,7 +317,7 @@ public:
 			auto iv = col[j].nzend();
 			if (iv != col[j].nzbegin()) {
 				iv--;
-				if (iv->ind < j) {
+				if (iv->ind > j) {
 					return false;
 				}
 			}
@@ -328,7 +328,7 @@ public:
 		for (size_t j = 0; j < n; j++) {
 			auto iv = col[j].nzbegin();
 			if (iv != col[j].nzend()) {
-				if (iv->ind > j) {
+				if (iv->ind < j) {
 					return false;
 				}
 			}
