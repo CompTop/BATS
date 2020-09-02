@@ -11,6 +11,8 @@
 #define Q Rational<int>
 #define F5 ModP<int, 5>
 
+#define N_SEEDS 4
+
 TEST_CASE_TEMPLATE("Col Matrix Solve", F, F2, F3, F5, Q, int) {
 
 	using VT = SparseVector<F, size_t>;
@@ -65,7 +67,7 @@ TEST_CASE_TEMPLATE("LEUP Factorization", T, F2, F3, F5, Q) {
 	using MatT = ColumnMatrix<VT>;
 
 	SUBCASE("Square") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 10, 0.2, 1, generator);
 
@@ -75,7 +77,7 @@ TEST_CASE_TEMPLATE("LEUP Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Short") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 20, 0.2, 1, generator);
 
@@ -85,7 +87,7 @@ TEST_CASE_TEMPLATE("LEUP Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Tall") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(20, 10, 0.2, 1, generator);
 
@@ -108,7 +110,7 @@ TEST_CASE_TEMPLATE("PUEL Factorization", T, F2, F3, F5, Q) {
 	using MatT = ColumnMatrix<VT>;
 
 	SUBCASE("Square") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 10, 0.2, 1, generator);
 
@@ -118,7 +120,7 @@ TEST_CASE_TEMPLATE("PUEL Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Short") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 20, 0.2, 1, generator);
 
@@ -128,7 +130,7 @@ TEST_CASE_TEMPLATE("PUEL Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Tall") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(20, 10, 0.2, 1, generator);
 
@@ -152,7 +154,7 @@ TEST_CASE_TEMPLATE("PLEU Factorization", T, F2, F3, F5, Q) {
 	using MatT = ColumnMatrix<VT>;
 
 	SUBCASE("Square") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 10, 0.2, 1, generator);
 
@@ -162,7 +164,7 @@ TEST_CASE_TEMPLATE("PLEU Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Short") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 20, 0.2, 1, generator);
 
@@ -172,7 +174,7 @@ TEST_CASE_TEMPLATE("PLEU Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Tall") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(20, 10, 0.2, 1, generator);
 
@@ -195,7 +197,7 @@ TEST_CASE_TEMPLATE("UELP Factorization", T, F2, F3, F5, Q) {
 	using MatT = ColumnMatrix<VT>;
 
 	SUBCASE("Square") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 10, 0.2, 1, generator);
 
@@ -205,7 +207,7 @@ TEST_CASE_TEMPLATE("UELP Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Short") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 20, 0.2, 1, generator);
 
@@ -215,7 +217,7 @@ TEST_CASE_TEMPLATE("UELP Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Tall") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(20, 10, 0.2, 1, generator);
 
@@ -238,7 +240,7 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 	using MatT = ColumnMatrix<VT>;
 
 	SUBCASE("Square") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 10, 0.2, 1, generator);
 
@@ -248,7 +250,7 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Short") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 20, 0.2, 1, generator);
 
@@ -258,12 +260,102 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Tall") {
-		for ( unsigned seed = 0; seed < 3; seed++) {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(20, 10, 0.2, 1, generator);
 
 			auto F = LQU(A);
 			CHECK_LQU(F, A)
+		}
+	}
+
+}
+
+#define CHECK_EL_L(m, n, generator) \
+SUBCASE("EL - L") {\
+	auto A = MatT::random(m, n, 0.2, 1, generator); \
+	auto B = MatT::random(n, n, 0.2, 1, generator); \
+	auto F = LEUP(A); \
+	auto EL = F.E; \
+	auto FB = LQU(B); \
+	auto L = FB.L;  \
+	auto Ltil = EL_L_commute(EL, L); \
+	CHECK(Ltil.is_lower()); \
+	CHECK(Ltil * EL == EL * L); \
+}
+
+#define CHECK_L_EL(m, n, generator) \
+SUBCASE("L - ELhat") {\
+	auto A = MatT::random(m, n, 0.2, 1, generator); \
+	auto B = MatT::random(m, m, 0.2, 1, generator); \
+	auto F = PUEL(A); \
+	auto EL = F.E; \
+	auto FB = LQU(B); \
+	auto L = FB.L;  \
+	auto Ltil = L_EL_commute(L, EL); \
+	CHECK(Ltil.is_lower()); \
+	CHECK(EL * Ltil == L * EL); \
+}
+
+#define CHECK_U_EU(m, n, generator) \
+SUBCASE("U - EU") {\
+	auto A = MatT::random(m, n, 0.2, 1, generator); \
+	auto B = MatT::random(m, m, 0.2, 1, generator); \
+	auto F = PLEU(A); \
+	auto EU = F.E; \
+	auto FB = LQU(B); \
+	auto U = FB.U;  \
+	auto Util = U_EU_commute(U, EU); \
+	CHECK(Util.is_upper()); \
+	CHECK(U * EU == EU * Util); \
+}
+
+#define CHECK_EU_U(m, n, generator) \
+SUBCASE("EUhat - U") {\
+	auto A = MatT::random(m, n, 0.2, 1, generator); \
+	auto B = MatT::random(n, n, 0.2, 1, generator); \
+	auto F = UELP(A); \
+	auto EU = F.E; \
+	auto FB = LQU(B); \
+	auto U = FB.U;  \
+	auto Util = EU_U_commute(EU, U); \
+	CHECK(Util.is_upper()); \
+	CHECK(EU * U == Util * EU); \
+}
+
+
+TEST_CASE_TEMPLATE("Commutation Relations", T, F2, F3, F5, Q) {
+	using VT = SparseVector<T, size_t>;
+	using MatT = ColumnMatrix<VT>;
+
+	SUBCASE("Square") {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
+			std::default_random_engine generator(seed);
+			CHECK_EL_L(10, 10, generator)
+			CHECK_L_EL(10, 10, generator)
+			CHECK_U_EU(10, 10, generator)
+			CHECK_EU_U(10, 10, generator)
+		}
+	}
+
+	SUBCASE("Short") {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
+			std::default_random_engine generator(seed);
+			CHECK_EL_L(10, 20, generator)
+			CHECK_L_EL(10, 20, generator)
+			CHECK_U_EU(10, 20, generator)
+			CHECK_EU_U(10, 20, generator)
+
+		}
+	}
+
+	SUBCASE("Tall") {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
+			std::default_random_engine generator(seed);
+			CHECK_EL_L(20, 10, generator)
+			CHECK_L_EL(20, 10, generator)
+			CHECK_U_EU(20, 10, generator)
+			CHECK_EU_U(20, 10, generator)
 		}
 	}
 
