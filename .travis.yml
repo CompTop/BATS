@@ -15,5 +15,6 @@ matrix:
 before_install:
     - eval "${MATRIX_EVAL}"
 script:
+- g++ --version
 - cd tests
 - make test
