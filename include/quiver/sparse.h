@@ -13,7 +13,75 @@ inline bool is_left_arrow(const Edge &e) {
     return e.targ < e.src;
 }
 
-// sweep 1 from right to left
+// pass facts[i].U, P to mats[i+1]
+template <typename NT, typename TC, typename TM>
+void pass_UP_right(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t i
+) {
+    if (is_left_arrow(dgm.elist[i+1])) {
+        if (is_left_arrow(dgm.elist[i])) {
+            // A = U * P * A
+            mats[i+1] = facts[i].U * facts[i].P * mats[i+1];
+        } else {
+            // A = U^{-1} * P^{-1} * A
+            mats[i+1] = u_inv(facts[i].U) * facts[i].P.T() * mats[i+1];
+        }
+    } else {
+        if (is_left_arrow(dgm.elist[i])) {
+             // A = A * P^{-1} * U^{-1}
+             mats[i+1] = mats[i+1] * facts[i].P.T() * u_inv(facts[i].U);
+        } else {
+             // A = A * P * U
+             mats[i+1] = mats[i+1] * facts[i].P * facts[i].U;
+        }
+    }
+    // TODO: clear facts[i].U and facts[i].P
+}
+
+// commute facts.L[i] through facts.E[i]
+template <typename NT, typename TC, typename TM>
+void commute_L_left(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    ssize_t i
+) {
+    if (is_left_arrow(dgm.elist[i])) {
+        // EL - L commutation
+        facts[i].L = EL_L_commute(facts[i].E, facts[i].L);
+    } else {
+        // L - ELhat commutation
+        facts[i].L = L_EL_commute(facts[i].L, facts[i].E);
+    }
+}
+
+// pass facts[i].L, to facts[i-1].L, with EL commute
+template <typename NT, typename TC, typename TM>
+void pass_L_left(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    ssize_t i
+) {
+    if (is_left_arrow(dgm.elist[i-1])) {
+        if (is_left_arrow(dgm.elist[i])) {
+            // L E_L L
+            facts[i-1].L = facts[i-1].L * EL_L_commute(facts[i-1].E, facts[i].L);
+        } else {
+            // L E_L L^{-1}
+            facts[i-1].L = facts[i-1].L * EL_L_commute(facts[i-1].E, l_inv(facts[i].L));
+        }
+    } else {
+        if (is_left_arrow(dgm.elist[i])) {
+            facts[i-1].L = L_EL_commute(l_inv(facts[i].L), facts[i-1].E) * facts[i-1].L;
+        } else {
+            facts[i-1].L = L_EL_commute(facts[i].L, facts[i-1].E) * facts[i-1].L;
+        }
+    }
+}
+
+// sweep 1 from left to right
 // start at index j0
 // end at index j1
 template <typename NT, typename TC, typename TM>
@@ -24,45 +92,31 @@ void type_A_leftright_sweep1(
     ssize_t j0,
     ssize_t j1
 ) {
-    // left to right
-    for (ssize_t j = j0; j <= j1; j++) {
-        if (is_left_arrow(dgm.elist[j])) {
-            // Left arrow = LEUP
+    // do first arrow
+    facts[j0] = is_left_arrow(dgm.elist[j0]) ? LEUP(mats[j0]) : PUEL(mats[j0]);
 
-            // first apply change of basis from left
-            if (j > 0) {
-                if (is_left_arrow(dgm.elist[j-1])) {
-                    // A = U * P * A
-                    mats[j] = facts[j-1].U * facts[j-1].P * mats[j];
-                } else {
-                    // A = U^{-1} * P^{-1} * A
-                    mats[j] = u_inv(facts[j-1].U) * facts[j-1].P.T() * mats[j];
+    // left to right - apply change of basis, then do factorization
+    for (ssize_t j = j0 + 1; j <= j1; j++) {
+        // first apply change of basis from left
+        pass_UP_right(dgm, facts, mats, j-1);
+        // now perform factorization
+        facts[j] = is_left_arrow(dgm.elist[j]) ? LEUP(mats[j]) : PUEL(mats[j]);
+    }
+}
 
-                }
-
-            }
-
-             // Left arrow = LEUP
-             facts[j] = LEUP(mats[j]);
-
-
-        } else {
-            // Right arrow = PLEU
-
-            // first apply change of basis from left
-            if (j > 0) {
-                if (is_left_arrow(dgm.elist[j-1])) {
-                         // A = A * P^{-1} * U^{-1}
-                         mats[j] = mats[j] * facts[j-1].P.T() * u_inv(facts[j-1].U);
-                    } else {
-                         // A = A * P * U
-                         mats[j] = mats[j] * facts[j-1].P * facts[j-1].U;
-                    }
-            }
-
-            facts[j] = PUEL(mats[j]);
-
-        }
+// sweep 2 - commute L matrices back through quiver
+// start at index j1
+// end at index j0+1
+template <typename NT, typename TC, typename TM>
+void type_A_leftright_sweep2(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    ssize_t j0,
+    ssize_t j1
+) {
+    // right to left
+    for (ssize_t j = j1; j > j0; j--) {
+        pass_L_left(dgm, facts, j);
     }
 }
 
@@ -79,7 +133,7 @@ auto barcode_form_leftright(const Diagram<NT, TM> &dgm) {
 
     type_A_leftright_sweep1(dgm, facts, mats, 0, m-1);
     // we don't do second sweep if we only want barcode form
-
+    // type_A_leftright_sweep2(dgm, facts, 0, m-1);
     // dump E matrices to return
     for (size_t j = 0; j < m; j++) {
         mats[j] = facts[j].E;
@@ -89,9 +143,87 @@ auto barcode_form_leftright(const Diagram<NT, TM> &dgm) {
     return mats;
 }
 
+// pass facts[i].U, P to mats[i+1]
+template <typename NT, typename TC, typename TM>
+void pass_PL_left(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t i
+) {
+    if (is_left_arrow(dgm.elist[i-1])) {
+        if (is_left_arrow(dgm.elist[i])) {
+            // A = A * P * L
+            mats[i-1] = mats[i-1] * facts[i].P * facts[i].L;
+        } else {
+            // A = A * P^{-1} * L^{-1}
+            mats[i-1] = mats[i-1] * facts[i].P.T() * l_inv(facts[i].L);
+        }
+    } else {
+        if (is_left_arrow(dgm.elist[i])) {
+            // A = L^{-1} * P^{-1} * A
+            mats[i-1] = l_inv(facts[i].L) * facts[i].P.T() * mats[i-1];
+        } else {
+            // A = L * P * A
+            mats[i-1] = facts[i].L * facts[i].P * mats[i-1];
+        }
+    }
+}
+
+// commute facts.L[i] through facts.E[i]
+template <typename NT, typename TC, typename TM>
+void commute_U_right(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    ssize_t i
+) {
+    if (is_left_arrow(dgm.elist[i])) {
+        // EU - U commutation // came from PLEU
+        facts[i].U = EU_U_commute(facts[i].E, facts[i].U);
+    } else {
+        // L - ELhat commutation // came from UELP
+        facts[i].U = U_EU_commute(facts[i].U, facts[i].E);
+    }
+}
+
+// pass facts[i].U, to facts[i+1].U, with EL commute
+template <typename NT, typename TC, typename TM>
+void pass_U_right(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    ssize_t i
+) {
+    if (is_left_arrow(dgm.elist[i])) {
+        if (is_left_arrow(dgm.elist[i+1])) {
+            facts[i+1].U = U_EU_commute(facts[i].U, facts[i+1].E) * facts[i+1].U;
+        } else {
+            facts[i+1].U = facts[i+1].U * EU_U_commute(facts[i+1].E, u_inv(facts[i].U));
+        }
+    } else {
+        if (is_left_arrow(dgm.elist[i+1])) {
+            facts[i+1].U = U_EU_commute(u_inv(facts[i].U), facts[i+1].E) * facts[i+1].U;
+        } else {
+            facts[i+1].U = facts[i+1].U * EU_U_commute(facts[i+1].E, facts[i].U);
+        }
+    }
+}
+
 // sweep 1 from right to left
 // start at index j0
 // end at index j1
+template <typename NT, typename TC, typename TM>
+void type_A_rightleft_sweep2(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    ssize_t j0,
+    ssize_t j1
+) {
+    // left to right
+    for (ssize_t j = j0; j < j1 ; j++) {
+        pass_U_right(dgm, facts, j);
+    }
+}
+
 template <typename NT, typename TC, typename TM>
 void type_A_rightleft_sweep1(
     const Diagram<NT, TM> &dgm,
@@ -100,45 +232,14 @@ void type_A_rightleft_sweep1(
     ssize_t j0,
     ssize_t j1
 ) {
+    // first factorization
+    facts[j1] = is_left_arrow(dgm.elist[j1]) ? PLEU(mats[j1]) : UELP(mats[j1]);
     // right to left
-    for (ssize_t j = j0; j >= j1 ; j--) {
-        if (is_left_arrow(dgm.elist[j])) {
-            // Left arrow = PLEU
-
-            // first apply change of basis from left
-            if (j < j0) {
-                if (is_left_arrow(dgm.elist[j+1])) {
-                    // A = A * P * L
-                    mats[j] = mats[j] * facts[j+1].P * facts[j+1].L;
-                } else {
-                    // A = A * P^{-1} * L^{-1}
-                    mats[j] = mats[j] * facts[j+1].P.T() * l_inv(facts[j+1].L);
-                }
-
-            }
-
-             // Left arrow = PLEU
-             facts[j] = PLEU(mats[j]);
-
-
-        } else {
-            // Right arrow = UELP
-
-            // first apply change of basis from left
-            if (j < j0) {
-                if (is_left_arrow(dgm.elist[j+1])) {
-                        // A = L^{-1} * P^{-1} * A
-                        mats[j] = l_inv(facts[j+1].L) * facts[j+1].P.T() * mats[j];
-                    } else {
-                        // A = L * P * A
-                        mats[j] = facts[j+1].L * facts[j+1].P * mats[j];
-                    }
-            }
-
-            // Right arrow = UELP
-            facts[j] = UELP(mats[j]);
-
-        }
+    for (ssize_t j = j1-1; j >= j0; j--) {
+        // change basis from the right
+        pass_PL_left(dgm, facts, mats, j+1);
+        // compute factorization
+        facts[j] = is_left_arrow(dgm.elist[j]) ? PLEU(mats[j]) : UELP(mats[j]);
     }
 }
 
@@ -153,7 +254,118 @@ auto barcode_form_rightleft(const Diagram<NT, TM> &dgm) {
     // copy matrices on edges
     std::vector<TM> mats = dgm.edata;
 
-    type_A_rightleft_sweep1(dgm, facts, mats, m-1, 0);
+    type_A_rightleft_sweep1(dgm, facts, mats, 0, m-1);
+    // we don't do second sweep if we only want barcode form
+    type_A_rightleft_sweep2(dgm, facts, 0, m-1);
+    // dump E matrices to return
+    for (size_t j = 0; j < m; j++) {
+        mats[j] = facts[j].E;
+    }
+
+    return mats;
+}
+
+/*
+Divide and conquer declarations
+*/
+template <typename NT, typename TC, typename TM>
+void type_A_dq_EL(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+);
+
+template <typename NT, typename TC, typename TM>
+void type_A_dq_EU(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+);
+
+template <typename NT, typename TC, typename TM>
+void type_A_dq_common(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+) {
+    // phase 1 - divide into two sub-quivers
+    size_t j2 = j0 + j1 / 2; //edge at j2 will be LQU factorization
+    size_t j0b = j2 - 1;
+    size_t j1a = j2 + 1;
+
+
+    // left side will be EL-type, right-side will be EU-type
+    type_A_dq_EL(dgm, facts, mats, j0, j0b);
+    type_A_dq_EU(dgm, facts, mats, j1a, j1);
+
+    // now do the LQU factorization in the middle
+    // first pass the UP and PL terms from left and right
+
+
+    // take LQU factorization
+
+    // commute L and U factors out
+
+}
+
+
+template <typename NT, typename TC, typename TM>
+void type_A_dq_EU(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+) {
+    // TODO
+}
+
+template <typename NT, typename TC, typename TM>
+void type_A_dq_EL(
+    const Diagram<NT, TM> &dgm,
+    std::vector<SparseFact<TC>> &facts,
+    std::vector<TM> &mats,
+    ssize_t j0,
+    ssize_t j1
+) {
+    // first check if j1 - j0 is small enough - then no recursion
+    if (j1 - j0 < 4) {
+        // TODO
+        // sweep from left to right LEUP
+        // sweep from right to left L-EL commutations
+
+    }
+    // else, we will recurse on two sub-quivers
+    type_A_dq_common(dgm, facts, mats, j0, j1);
+
+    // now update the right-hand side to be EL-type
+    // start with Q term, then propagate rightward
+
+
+    // at the end, we have:
+    // a hanging L on the left
+    // a hanging UP on the right
+
+}
+
+template <typename NT, typename TM>
+auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
+
+    size_t m = dgm.nedge();
+
+    using TC = typename TM::col_type;
+    std::vector<SparseFact<TC>> facts(m);
+
+    // copy matrices on edges
+    std::vector<TM> mats = dgm.edata;
+
+    type_A_dq_common(dgm, facts, mats, m-1, 0);
     // we don't do second sweep if we only want barcode form
 
     // dump E matrices to return
@@ -163,6 +375,7 @@ auto barcode_form_rightleft(const Diagram<NT, TM> &dgm) {
 
     return mats;
 }
+
 
 
 
