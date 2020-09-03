@@ -48,7 +48,7 @@ int main() {
 		std::cout << "dimension " << d << std::endl;
 		auto HkDgm = Hom(ChainDgm, d);
 
-		auto ps = barcode_sparse_rightleft(HkDgm, d);
+		auto ps = barcode_sparse_divide_conquer(HkDgm, d);
 		for (auto p : ps) {
 			std::cout << p.str() << std::endl;
 		}

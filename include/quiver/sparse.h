@@ -39,22 +39,34 @@ void pass_UP_right(
         }
     }
     // TODO: clear facts[i].U and facts[i].P
+    facts[i].U = TM::identity(facts[i].U.nrow());
+    facts[i].P = TM::identity(facts[i].P.nrow());
 }
 
-// commute facts.L[i] through facts.E[i]
 template <typename NT, typename TC, typename TM>
-void commute_L_left(
+void pass_P_right(
     const Diagram<NT, TM> &dgm,
     std::vector<SparseFact<TC>> &facts,
     ssize_t i
 ) {
-    if (is_left_arrow(dgm.elist[i])) {
-        // EL - L commutation
-        facts[i].L = EL_L_commute(facts[i].E, facts[i].L);
+    if (is_left_arrow(dgm.elist[i+1])) {
+        if (is_left_arrow(dgm.elist[i])) {
+            facts[i+1].E = facts[i].P * facts[i+1].E;
+        } else {
+            // A = U^{-1} * P^{-1} * A
+            facts[i+1].E = facts[i].P.T() * facts[i+1].E;
+        }
     } else {
-        // L - ELhat commutation
-        facts[i].L = L_EL_commute(facts[i].L, facts[i].E);
+        if (is_left_arrow(dgm.elist[i])) {
+             // A = A * P^{-1} * U^{-1}
+             facts[i+1].E = facts[i+1].E * facts[i].P.T();
+        } else {
+             // A = A * P * U
+             facts[i+1].E = facts[i+1].E * facts[i].P;
+        }
     }
+    // clear facts[i].P
+    facts[i].P = TM::identity(facts[i].P.nrow());
 }
 
 // pass facts[i].L, to facts[i-1].L, with EL commute
@@ -79,6 +91,8 @@ void pass_L_left(
             facts[i-1].L = L_EL_commute(facts[i].L, facts[i-1].E) * facts[i-1].L;
         }
     }
+    // clear facts[i].L
+    facts[i].L = TM::identity(facts[i].L.nrow());
 }
 
 // sweep 1 from left to right
@@ -143,7 +157,7 @@ auto barcode_form_leftright(const Diagram<NT, TM> &dgm) {
     return mats;
 }
 
-// pass facts[i].U, P to mats[i+1]
+// pass facts[i].L, P to mats[i-1]
 template <typename NT, typename TC, typename TM>
 void pass_PL_left(
     const Diagram<NT, TM> &dgm,
@@ -168,22 +182,35 @@ void pass_PL_left(
             mats[i-1] = facts[i].L * facts[i].P * mats[i-1];
         }
     }
+    facts[i].L = TM::identity(facts[i].L.nrow());
+    facts[i].P = TM::identity(facts[i].P.nrow());
 }
 
-// commute facts.L[i] through facts.E[i]
+// pass facts[i].L, P to mats[i-1]
 template <typename NT, typename TC, typename TM>
-void commute_U_right(
+void pass_P_left(
     const Diagram<NT, TM> &dgm,
     std::vector<SparseFact<TC>> &facts,
     ssize_t i
 ) {
-    if (is_left_arrow(dgm.elist[i])) {
-        // EU - U commutation // came from PLEU
-        facts[i].U = EU_U_commute(facts[i].E, facts[i].U);
+    if (is_left_arrow(dgm.elist[i-1])) {
+        if (is_left_arrow(dgm.elist[i])) {
+            // A = A * P * L
+            facts[i-1].E = facts[i-1].E * facts[i].P;
+        } else {
+            // A = A * P^{-1} * L^{-1}
+            facts[i-1].E = facts[i-1].E * facts[i].P.T();
+        }
     } else {
-        // L - ELhat commutation // came from UELP
-        facts[i].U = U_EU_commute(facts[i].U, facts[i].E);
+        if (is_left_arrow(dgm.elist[i])) {
+            // A = L^{-1} * P^{-1} * A
+            facts[i-1].E = facts[i].P.T() * facts[i-1].E;
+        } else {
+            // A = L * P * A
+            facts[i-1].E = facts[i].P * facts[i-1].E;
+        }
     }
+    facts[i].P = TM::identity(facts[i].P.nrow());
 }
 
 // pass facts[i].U, to facts[i+1].U, with EL commute
@@ -206,6 +233,7 @@ void pass_U_right(
             facts[i+1].U = facts[i+1].U * EU_U_commute(facts[i+1].E, facts[i].U);
         }
     }
+    facts[i].U = TM::identity(facts[i].U.nrow());
 }
 
 // sweep 1 from right to left
@@ -287,7 +315,7 @@ void type_A_dq_EU(
 );
 
 template <typename NT, typename TC, typename TM>
-void type_A_dq_common(
+ssize_t type_A_dq_common(
     const Diagram<NT, TM> &dgm,
     std::vector<SparseFact<TC>> &facts,
     std::vector<TM> &mats,
@@ -295,22 +323,38 @@ void type_A_dq_common(
     ssize_t j1
 ) {
     // phase 1 - divide into two sub-quivers
-    size_t j2 = j0 + j1 / 2; //edge at j2 will be LQU factorization
+    size_t j2 = (j0 + j1) / 2; //edge at j2 will be LQU factorization
     size_t j0b = j2 - 1;
     size_t j1a = j2 + 1;
 
 
     // left side will be EL-type, right-side will be EU-type
+    // TODO: openMP thread for each
     type_A_dq_EL(dgm, facts, mats, j0, j0b);
     type_A_dq_EU(dgm, facts, mats, j1a, j1);
+    // TODO: openMP thread wait
 
     // now do the LQU factorization in the middle
     // first pass the UP and PL terms from left and right
-
+    pass_PL_left(dgm, facts, mats, j1a);
+    pass_UP_right(dgm, facts, mats, j0b);
 
     // take LQU factorization
+    facts[j2] = LQU(mats[j2]);
+    // pass L and U factors out
+    pass_U_right(dgm, facts, j2);
+    pass_L_left(dgm, facts, j2);
 
     // commute L and U factors out
+    // TODO: OpenMP thread for each
+    // TODO: could specialize for identity
+    type_A_leftright_sweep2(dgm, facts, j0, j0b);
+    type_A_rightleft_sweep2(dgm, facts, j1a, j1);
+
+    // quiver now has pivot matrices everywhere
+    // there is a dangling L on the left and a dangling U on the right.
+
+    return j2; // return break location
 
 }
 
@@ -323,7 +367,31 @@ void type_A_dq_EU(
     ssize_t j0,
     ssize_t j1
 ) {
-    // TODO
+    // first check if j1 - j0 is small enough - then no recursion
+    if (j1 - j0 < 4) {
+        type_A_rightleft_sweep1(dgm, facts, mats, j0, j1);
+        type_A_rightleft_sweep2(dgm, facts, j0, j1);
+        return;
+    }
+    // else, we will recurse on two sub-quivers
+    ssize_t j2 = type_A_dq_common(dgm, facts, mats, j0, j1);
+
+    // now update the left-hand side to be EU-type
+    // start with Q term (at j2), then propagate leftward
+    for (ssize_t j = j2; j > j0; j--) {
+        facts[j] = is_left_arrow(dgm.elist[j]) ? PLEU(facts[j].E) : UELP(facts[j].E);
+        // pass P term to left (L term is identity)
+        pass_P_left(dgm, facts, j);
+    }
+    // handle last node - has dangling L term.
+    facts[j0] = is_left_arrow(dgm.elist[j0]) ? PLEU(facts[j1].L * facts[j1].E) : UELP(facts[j1].E * facts[j1].L);
+    // now commute U term all the way back
+    type_A_rightleft_sweep2(dgm, facts, j0, j1);
+
+    // at the end, we have:
+    // a hanging PL on the left
+    // a hanging U on the right
+    return;
 }
 
 template <typename NT, typename TC, typename TM>
@@ -336,21 +404,29 @@ void type_A_dq_EL(
 ) {
     // first check if j1 - j0 is small enough - then no recursion
     if (j1 - j0 < 4) {
-        // TODO
-        // sweep from left to right LEUP
-        // sweep from right to left L-EL commutations
-
+        type_A_leftright_sweep1(dgm, facts, mats, j0, j1);
+        type_A_leftright_sweep2(dgm, facts, j0, j1);
+        return;
     }
     // else, we will recurse on two sub-quivers
-    type_A_dq_common(dgm, facts, mats, j0, j1);
+    ssize_t j2 = type_A_dq_common(dgm, facts, mats, j0, j1);
 
     // now update the right-hand side to be EL-type
-    // start with Q term, then propagate rightward
-
+    // start with Q term (at j2), then propagate rightward
+    for (ssize_t j = j2; j < j1; j++) {
+        facts[j] = is_left_arrow(dgm.elist[j]) ? LEUP(facts[j].E) : PUEL(facts[j].E);
+        // pass P term to right (U term is identity)
+        pass_P_right(dgm, facts, j);
+    }
+    // handle last node - has dangling U term.
+    facts[j1] = is_left_arrow(dgm.elist[j1]) ? LEUP(facts[j1].E * facts[j1].U) : PUEL(facts[j1].U * facts[j1].E);
+    // now commute L term all the way back
+    type_A_leftright_sweep2(dgm, facts, j0, j1);
 
     // at the end, we have:
     // a hanging L on the left
     // a hanging UP on the right
+    return;
 
 }
 
@@ -359,13 +435,16 @@ auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
 
     size_t m = dgm.nedge();
 
+    // check if we should just do sequential algorithm
+    if (m < 5) { return barcode_form_leftright(dgm);}
+
     using TC = typename TM::col_type;
     std::vector<SparseFact<TC>> facts(m);
 
     // copy matrices on edges
     std::vector<TM> mats = dgm.edata;
 
-    type_A_dq_common(dgm, facts, mats, m-1, 0);
+    type_A_dq_common(dgm, facts, mats, 0, m-1);
     // we don't do second sweep if we only want barcode form
 
     // dump E matrices to return
@@ -492,6 +571,13 @@ std::vector<PersistencePair<size_t>> barcode_sparse(const Diagram<NT, TM> &dgm, 
 template <typename NT, typename TM>
 std::vector<PersistencePair<size_t>> barcode_sparse_rightleft(const Diagram<NT, TM> &dgm, size_t hdim) {
     auto mats = barcode_form_rightleft(dgm);
+    auto bars = barcode_from_barcode_form(mats, dgm);
+    return bars_to_pairs(bars, hdim);
+}
+
+template <typename NT, typename TM>
+std::vector<PersistencePair<size_t>> barcode_sparse_divide_conquer(const Diagram<NT, TM> &dgm, size_t hdim) {
+    auto mats = barcode_form_divide_conquer(dgm);
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
 }
