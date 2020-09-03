@@ -329,10 +329,13 @@ ssize_t type_A_dq_common(
 
 
     // left side will be EL-type, right-side will be EU-type
-    // TODO: openMP thread for each
-    type_A_dq_EL(dgm, facts, mats, j0, j0b);
-    type_A_dq_EU(dgm, facts, mats, j1a, j1);
-    // TODO: openMP thread wait
+    // #pragma omp task default(none) firstprivate(dgm, facts, mats, j0, j0b)
+    {(void) type_A_dq_EL(dgm, facts, mats, j0, j0b);}
+
+    // #pragma omp task default(none) firstprivate(dgm, facts, mats, j1a, j1)
+    {(void) type_A_dq_EU(dgm, facts, mats, j1a, j1);}
+
+    // #pragma omp taskwait
 
     // now do the LQU factorization in the middle
     // first pass the UP and PL terms from left and right
@@ -346,10 +349,13 @@ ssize_t type_A_dq_common(
     pass_L_left(dgm, facts, j2);
 
     // commute L and U factors out
-    // TODO: OpenMP thread for each
     // TODO: could specialize for identity
-    type_A_leftright_sweep2(dgm, facts, j0, j0b);
-    type_A_rightleft_sweep2(dgm, facts, j1a, j1);
+    //#pragma omp task default(none) firstprivate(dgm, facts, j0, j0b)
+    {type_A_leftright_sweep2(dgm, facts, j0, j0b);}
+    // #pragma omp task default(none) firstprivate(dgm, facts, j1a, j1)
+    {type_A_rightleft_sweep2(dgm, facts, j1a, j1);}
+
+    // #pragma omp taskwait
 
     // quiver now has pivot matrices everywhere
     // there is a dangling L on the left and a dangling U on the right.
@@ -444,7 +450,15 @@ auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
     // copy matrices on edges
     std::vector<TM> mats = dgm.edata;
 
-    type_A_dq_common(dgm, facts, mats, 0, m-1);
+    // begin parallel region
+    // #pragma omp parallel default(none) shared(dgm, facts, mats, m)
+    {
+        // #pragma omp single nowait
+        {
+            type_A_dq_common(dgm, facts, mats, 0, m-1);
+        }
+    }
+
     // we don't do second sweep if we only want barcode form
 
     // dump E matrices to return
