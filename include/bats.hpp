@@ -2,6 +2,12 @@
 /*
 Single header file to include all functionality
 */
+#ifdef BATS_OPCOUNT
+namespace bats {
+    unsigned global_ops;
+}
+#endif
+
 #include "linalg.h"
 #include "complex.h"
 #include "filtration.h"

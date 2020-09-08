@@ -2,6 +2,7 @@ CXXFLAGS = -Wall -std=c++17 -Wextra
 OUTFLAGS = -O3 -fopenmp
 PROFFLAGS = -pg -O3
 DBFLAGS = -g -Og
+OPFLAGS = -O3 -DBATS_OPCOUNT
 CXX = g++
 IFLAGS = -I../include
 
@@ -9,6 +10,9 @@ default: rips.out serpinski.out zigzag_codensity.out zigzag_cover.out zigzag_rip
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
+
+%.op: %.cpp
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OPFLAGS)
 
 %.prof: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(PROFFLAGS)

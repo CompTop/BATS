@@ -351,9 +351,9 @@ ssize_t type_A_dq_common(
     // commute L and U factors out
     // TODO: could specialize for identity
     //#pragma omp task default(none) firstprivate(dgm, facts, j0, j0b)
-    {type_A_leftright_sweep2(dgm, facts, j0, j0b);}
+    {(void) type_A_leftright_sweep2(dgm, facts, j0, j0b);}
     // #pragma omp task default(none) firstprivate(dgm, facts, j1a, j1)
-    {type_A_rightleft_sweep2(dgm, facts, j1a, j1);}
+    {(void) type_A_rightleft_sweep2(dgm, facts, j1a, j1);}
 
     // #pragma omp taskwait
 
@@ -451,11 +451,11 @@ auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
     std::vector<TM> mats = dgm.edata;
 
     // begin parallel region
-    // #pragma omp parallel default(none) shared(dgm, facts, mats, m)
+    #pragma omp parallel default(none) shared(dgm, facts, mats, m)
     {
-        // #pragma omp single nowait
+        #pragma omp single nowait
         {
-            type_A_dq_common(dgm, facts, mats, 0, m-1);
+            (void) type_A_dq_common(dgm, facts, mats, 0, m-1);
         }
     }
 
