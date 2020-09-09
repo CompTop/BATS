@@ -2,7 +2,7 @@
 #include <vector>
 #include <chrono>
 
-#include <bats.h>
+#include <bats.hpp>
 #include <util/io.h>
 #include <string>
 
@@ -14,7 +14,7 @@
 int main(int argc, char* argv[]) {
 
     size_t d = 2; // dimension of Euclidean Space
-    size_t n = 100;
+    size_t n = 350;
 
     // maximum simplex dimension
     size_t maxdim = parse_argv(argc, argv, "-maxdim", 3);
@@ -32,10 +32,76 @@ int main(int argc, char* argv[]) {
 
     auto CX = ChainComplex<MT>(X);
 
-    auto RX = ReducedChainComplex(CX);
 
-    for (size_t k = 0; k < RX.maxdim()+1; k++) {
-        std::cout << "betti " << k << " = " << RX.hdim(k) << std::endl;
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::standard_reduction_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "standard reduction: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::standard_reduction_flag(),
+            bats::compression_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "reduction with compression: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::standard_reduction_flag(),
+            bats::clearing_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "reduction with clearing: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::extra_reduction_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "extra reduction: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::extra_reduction_flag(),
+            bats::compression_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "extra reduction with compression: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::extra_reduction_flag(),
+            bats::clearing_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "extra reduction with clearing: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
     }
 
     return 0;

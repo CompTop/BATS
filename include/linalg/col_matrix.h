@@ -189,6 +189,15 @@ public:
         permute_rows(rowperm);
     }
 
+	// clear rows i for which c[i] is true
+	// use vector of bools for quick lookup - vector of inds would require search
+	void clear_rows(const std::vector<bool> &c) {
+		// TODO: check that length of vector agrees with number of rows
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].clear_inds(c);
+		}
+	}
+
 
     // addition, substraction, scalar multiplication
 

@@ -162,6 +162,19 @@ public:
 		indval = indval2;
 	}
 
+	// clear indices marked true in c
+	// i.e. remove entry i if c[i] is true
+	void clear_inds(const std::vector<bool> &c) {
+		std::vector<key_type> indval2;
+		for (auto iv : indval) {
+			// put indval pair in if it is not marked for clearing
+			if (!c[iv.ind]) {
+				indval2.emplace_back(iv);
+			}
+		}
+		indval = indval2;
+	}
+
 	// nnz
 	inline size_t nnz() const {return indval.size(); }
 
@@ -330,7 +343,7 @@ public:
 		// std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
 		indval = tmp;
 
-		clear_zeros();
+		//clear_zeros();
 
 		return;
 	}
