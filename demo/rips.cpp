@@ -32,7 +32,8 @@ int main(int argc, char* argv[]) {
 
     auto CX = ChainComplex<MT>(X);
 
-
+    for (size_t k =0; k < 2; k++) {
+        std::cout << "\ntesting flags, no basis" << std::endl;
     {
         auto start = std::chrono::steady_clock::now();
         auto RX = ReducedChainComplex(
@@ -102,6 +103,62 @@ int main(int argc, char* argv[]) {
         std::cout << "extra reduction with clearing: "
             << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
             << "ms" << std::endl;
+    }
+    }
+
+    for (size_t k =0; k < 2; k++) {
+        std::cout << "\ntesting flags, with basis" << std::endl;
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::standard_reduction_flag(),
+            bats::compute_basis_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "standard reduction: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::standard_reduction_flag(),
+            bats::compression_flag(),
+            bats::compute_basis_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "standard reduction with compression: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::extra_reduction_flag(),
+            bats::compute_basis_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "extra reduction: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+    {
+        auto start = std::chrono::steady_clock::now();
+        auto RX = ReducedChainComplex(
+            CX,
+            bats::extra_reduction_flag(),
+            bats::compression_flag(),
+            bats::compute_basis_flag()
+        );
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "extra reduction with compression: "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+    }
+
     }
 
     return 0;

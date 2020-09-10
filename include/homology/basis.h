@@ -7,6 +7,11 @@ compute homology-revealing bases for a chain complex
 #include <chain/chain_complex.h>
 #include "reduction.h"
 
+namespace bats {
+	// flag to indicate that basis should be computed
+	struct compute_basis_flag {};
+}
+
 template <typename MT>
 class ReducedChainComplex {
 public:
@@ -75,8 +80,36 @@ public:
 		set_indices();
 	}
 
+	// compute reduced boundary matrices and basis with flags
 	template <typename algflag>
-	ReducedChainComplex(const ChainComplex<MT> &C, algflag, bats::clearing_flag) {
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::compute_basis_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		U.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// TODO: can parallelize this
+		for (size_t k = 0; k < dmax; k++) {
+			R[k] = C.boundary[k];
+			U[k] = MT::identity(C.dim[k]);
+			p2c[k] = reduce_matrix(R[k], U[k], algflag());
+		}
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::clearing_flag
+	) {
 		size_t dmax = C.maxdim() + 1;
 		dim = C.dim;
 		R.resize(dmax);
@@ -97,7 +130,11 @@ public:
 	}
 
 	template <typename algflag>
-	ReducedChainComplex(const ChainComplex<MT> &C, algflag, bats::compression_flag) {
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::compression_flag
+	) {
 		size_t dmax = C.maxdim() + 1;
 		dim = C.dim;
 		R.resize(dmax);
@@ -111,6 +148,36 @@ public:
 		for (ssize_t k = 1; k < dmax; k++) {
 			R[k] = C.boundary[k];
 			p2c[k] = reduce_matrix_compression(R[k], comp_inds, algflag());
+			comp_inds = get_compression_inds(R[k]);
+		}
+
+		set_indices();
+	}
+
+	// compute reduced boundary matrices and basis with flags
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::compression_flag,
+		bats::compute_basis_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		U.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// do bottom dimension normally
+		R[0] = C.boundary[0];
+		U[0] = MT::identity(C.dim[0]);
+		p2c[0] = reduce_matrix(R[0], U[0], algflag());
+		std::vector<bool> comp_inds = get_compression_inds(R[0]);
+		for (ssize_t k = 1; k < dmax; k++) {
+			R[k] = C.boundary[k];
+			U[k] = MT::identity(C.dim[k]);
+			p2c[k] = reduce_matrix_compression(R[k], U[k], comp_inds, algflag());
 			comp_inds = get_compression_inds(R[k]);
 		}
 

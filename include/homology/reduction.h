@@ -107,7 +107,7 @@ inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, bats::extra_reduction_flag)
 // apply change of basis to U
 // invariant M * U = R
 template <class TVec>
-p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
+p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 	p2c_type pivot_to_col;
 
@@ -133,7 +133,60 @@ p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 	}
 	return pivot_to_col;
 }
-// TODO: implement extra reduction here
+
+template <class TVec>
+p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
+
+	p2c_type pivot_to_col;
+
+	// loop over columns
+	for (size_t j = 0; j < M.ncol(); j++) {
+		bool found_pivot = false;
+		size_t end_offset = 1;
+		auto piv = M[j].nzend() - end_offset; // nonzero location
+		while(piv - M[j].nzbegin() > 0) {
+			// while the nonzero we are looking at is in the vector
+			// piv is index-value nzpair
+			// auto piv = M[j].lastnz();
+			if (pivot_to_col.count(piv->ind) > 0) {
+				// eliminate pivot
+				size_t k = pivot_to_col[piv->ind];
+				auto a = piv->val / M[k].lastnz().val;
+				M[j].axpy(-a, M[k]);
+				U[j].axpy(-a, U[k]); // update change of basis
+				piv = M[j].nzend() - end_offset; // next nonzero location
+			} else if (!found_pivot) {
+				// new pivot
+				pivot_to_col[piv->ind] = j;
+				found_pivot = true;
+				end_offset++;
+				piv--;
+			} else {
+				// we skip zeroing out this entry
+				// need to increment offset
+				end_offset++;
+				piv--;
+			}
+		}
+	}
+	return pivot_to_col;
+}
+
+// default behavior
+template <class TVec>
+inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
+	return reduce_matrix_standard(M, U);
+}
+// behavior with standard flag
+template <class TVec>
+inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U, bats::standard_reduction_flag) {
+	return reduce_matrix_standard(M, U);
+}
+// behavior with extra flag
+template <class TVec>
+inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U, bats::extra_reduction_flag) {
+	return reduce_matrix_extra(M, U);
+}
 
 // get clearing indices from pivots
 std::vector<size_t> get_clearing_inds(const p2c_type &p2c) {
@@ -203,17 +256,18 @@ p2c_type reduce_matrix_compression(
 }
 
 
-template <class TVec>
+template <class TVec, typename flag>
 p2c_type reduce_matrix_compression(
 	ColumnMatrix<TVec> &M,
 	ColumnMatrix<TVec> &U,
-	const std::vector<bool> &comp_inds
+	const std::vector<bool> &comp_inds,
+	flag
 ) {
 	// first zero-out rows designated by comp_inds
 	M.clear_rows(comp_inds);
 
 	// we can still record basis.
-	return reduce_matrix(M, U);
+	return reduce_matrix(M, U, flag());
 }
 // TODO: add flags
 
