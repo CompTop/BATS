@@ -28,6 +28,13 @@ public:
 	inline size_t hdim(size_t k) const { return I[k].size(); }
 	inline size_t maxdim() const { return R.size() - 1; }
 
+	MT& operator[](size_t k) {
+		if (k >= dim.size()) {
+			// throw error
+		}
+		return R[k];
+	}
+
 private:
 	// set homology indices after reduction is completed
 	void set_indices() {
