@@ -32,6 +32,10 @@ int main(int argc, char* argv[]) {
 
     auto CX = ChainComplex<MT>(X);
 
+    {
+        auto RX = __ReducedChainComplex(X, FT(), bats::extra_reduction_flag());
+    }
+
     for (size_t k =0; k < 2; k++) {
         std::cout << "\ntesting flags, no basis" << std::endl;
     {
