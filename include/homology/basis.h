@@ -145,6 +145,9 @@ public:
 		R[0] = C.boundary[0];
 		p2c[0] = reduce_matrix(R[0], algflag());
 		std::vector<bool> comp_inds = get_compression_inds(R[0]);
+		for (auto i : comp_inds) {
+			std::cout << i << std::endl;
+		}
 		for (ssize_t k = 1; k < dmax; k++) {
 			R[k] = C.boundary[k];
 			p2c[k] = reduce_matrix_compression(R[k], comp_inds, algflag());
