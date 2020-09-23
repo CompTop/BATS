@@ -344,6 +344,24 @@ public:
 		}
 		return true;
 	}
+	bool is_reduced() const {
+		// check whether columns have unique lower index (if it exists)
+		std::map<size_t, size_t> p2c;
+		for (size_t j = 0; j < n; j++) {
+			auto st = col[j].nzbegin();
+			auto end = col[j].nzend();
+			if (st != end) {
+				end--;
+				if (p2c.count(end->ind) > 0) {
+					// pivot already exists - return false
+					return false;
+				} else {
+					p2c[end->ind] = j;
+				}
+			}
+		}
+		return true;
+	}
 	bool is_pivot_matrix() const {
 		for (size_t j = 0; j < n; j++) {
 			if (col[j].nnz() > 1) {
