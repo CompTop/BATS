@@ -59,3 +59,12 @@ struct ChainComplex {
 	}
 
 };
+
+// defualt return
+template <typename T, typename CpxT>
+inline auto __ChainComplex(const CpxT &X, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return ChainComplex<MT>(X);
+}
