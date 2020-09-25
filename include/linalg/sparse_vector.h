@@ -529,7 +529,7 @@ public:
 	}
 
 	// generate random vectors
-	static SparseVector random(size_t n, double p, int maxval, std::default_random_engine generator) {
+	static SparseVector random(size_t n, double p, int maxval, std::default_random_engine &generator) {
 		std::uniform_int_distribution<int> val_distribution(1,maxval);
 		std::uniform_real_distribution<double> nz_distribution(0.0,1.0);
 

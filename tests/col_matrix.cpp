@@ -278,6 +278,48 @@ TEST_CASE_TEMPLATE("UELP Factorization", T, F2, F3, F5, Q) {
 
 }
 
+#define CHECK_CU(A, U) \
+ColumnMatrix C(A); \
+CU_inplace(C, U); \
+CHECK(U.is_upper()); \
+CHECK(A == C * u_inv(U));
+
+TEST_CASE_TEMPLATE("CU Factorization", T, F2, F3, F5, Q) {
+	using VT = SparseVector<T, size_t>;
+	using MatT = ColumnMatrix<VT>;
+
+	SUBCASE("Square") {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
+			std::default_random_engine generator(seed);
+			auto A = MatT::random(10, 10, 0.2, 1, generator);
+			auto U = MatT::identity(10);
+
+			CHECK_CU(A, U)
+		}
+	}
+
+	SUBCASE("Short") {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
+			std::default_random_engine generator(seed);
+			auto A = MatT::random(10, 20, 0.2, 1, generator);
+			auto U = MatT::identity(20);
+
+			CHECK_CU(A, U)
+		}
+	}
+
+	SUBCASE("Tall") {
+		for ( unsigned seed = 0; seed < N_SEEDS; seed++) {
+			std::default_random_engine generator(seed);
+			auto A = MatT::random(20, 10, 0.2, 1, generator);
+			auto U = MatT::identity(10);
+
+			CHECK_CU(A, U)
+		}
+	}
+
+}
+
 #define CHECK_LQU(F, A) \
 CHECK(F.LQU_prod() == A); \
 CHECK(F.L.is_lower()); \
@@ -378,7 +420,6 @@ SUBCASE("EUhat - U") {\
 	auto U = FB.U;  \
 	auto Util = EU_U_commute(EU, U); \
 	CHECK(Util.is_upper()); \
-	CHECK(Util.is_lower()); \
 	CHECK(EU * U == Util * EU); \
 }
 

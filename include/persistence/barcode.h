@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 // store dimension, birth, death, and critical indices of pair
 template <typename T>
@@ -21,6 +22,10 @@ struct PersistencePair {
 		const T death
 	) : dim(dim), birth_ind(birth_ind), death_ind(death_ind), birth(birth), death(death) {}
 
+	// useful for checking equality of barcodes
+	inline bool operator==(const PersistencePair &other) const { return birth == other.birth && death == other.death && dim == other.dim; }
+	inline bool operator!=(const PersistencePair &other) const { return birth != other.birth || death != other.death || dim != other.dim; }
+
 	inline size_t get_dim() const {return dim;}
 	inline size_t get_birth_ind() const {return birth_ind;}
 	inline size_t get_death_ind() const {return death_ind;}
@@ -36,14 +41,32 @@ struct PersistencePair {
     }
 };
 
-// // template over filtration type, field type, complex type
-// template <typename T, typename FT, typename CpxT>
-// auto PersistencePairs(const Filtration<FT, CpxT> &F, FT, const size_t dim) {
-// 	using VT = SparseVector<FT, size_t>;
-// 	using MT = ColumnMatrix<VT>;
-//
-// 	auto FC = FilteredChainComplex<T, MT>(F);
-// 	auto RFC = ReducedFilteredChainComplex(FC);
-//
-// 	return RFC.persistence_pairs(dim);
-// }
+template <typename T>
+bool barcode_equality(
+	const std::vector<PersistencePair<T>> &ps1,
+	const std::vector<PersistencePair<T>> &ps2
+) {
+	// check for same number of pairs
+	if (ps1.size() != ps2.size()) {
+		return false;
+	}
+
+	size_t n = ps1.size();
+	// vector for checking if a pair in ps2 has been matched
+	std::vector<bool> matched(n, false);
+	for (size_t i = 0; i < n; i++) {
+		bool found_match = false;
+		for (size_t j = 0; j < n; j++) {
+			if (ps1[i] == ps2[j] && !matched[j]){
+				found_match = true;
+				matched[j] = true;
+				break;
+			}
+		}
+		if (!found_match) {
+			return false; // no match for ps1[i]
+		}
+	}
+	return true; // we found a match for every pair.
+
+}

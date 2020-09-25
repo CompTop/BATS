@@ -321,6 +321,14 @@ public:
 		return *this;
 	}
 
+	// apply inverse of diagonal matrix with coeff vector along diagonal on the left
+	ColumnMatrix& col_inv_scale(const std::vector<val_type> &coeff) {
+		for (size_t j = 0; j < n; j++) {
+			col[j].scale_inplace(coeff[j].inv());
+		}
+		return *this;
+	}
+
 	// tests to see if matrix has structure
 	bool is_upper() const {
 		for (size_t j = 0; j < n; j++) {
@@ -460,7 +468,7 @@ public:
 		return ColumnMatrix(n, n, col);
 	}
 
-	static ColumnMatrix random(size_t m, size_t n, double p, int maxval, std::default_random_engine generator) {
+	static ColumnMatrix random(size_t m, size_t n, double p, int maxval, std::default_random_engine &generator) {
 		std::vector<TC> col(n);
 		for (size_t j = 0; j < n; j++) {
 			col[j] = TC::random(m, p, maxval, generator);
