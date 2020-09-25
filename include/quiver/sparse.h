@@ -8,6 +8,8 @@
 #include <linalg/sparse_fact.h>
 #include <persistence/barcode.h>
 
+#include <omp.h> // openMP header
+
 template <typename Edge>
 inline bool is_left_arrow(const Edge &e) {
     return e.targ < e.src;
@@ -329,13 +331,11 @@ ssize_t type_A_dq_common(
 
 
     // left side will be EL-type, right-side will be EU-type
-    // #pragma omp task default(none) firstprivate(dgm, facts, mats, j0, j0b)
-    {(void) type_A_dq_EL(dgm, facts, mats, j0, j0b);}
-
-    // #pragma omp task default(none) firstprivate(dgm, facts, mats, j1a, j1)
-    {(void) type_A_dq_EU(dgm, facts, mats, j1a, j1);}
-
-    // #pragma omp taskwait
+    #pragma omp task shared(dgm, facts, mats) firstprivate(j0, j0b)
+    (void) type_A_dq_EL(dgm, facts, mats, j0, j0b);
+    #pragma omp task shared(dgm, facts, mats) firstprivate(j1a, j1)
+    (void) type_A_dq_EU(dgm, facts, mats, j1a, j1);
+    #pragma omp taskwait
 
     // now do the LQU factorization in the middle
     // first pass the UP and PL terms from left and right
@@ -350,12 +350,11 @@ ssize_t type_A_dq_common(
 
     // commute L and U factors out
     // TODO: could specialize for identity
-    //#pragma omp task default(none) firstprivate(dgm, facts, j0, j0b)
-    {(void) type_A_leftright_sweep2(dgm, facts, j0, j0b);}
-    // #pragma omp task default(none) firstprivate(dgm, facts, j1a, j1)
-    {(void) type_A_rightleft_sweep2(dgm, facts, j1a, j1);}
-
-    // #pragma omp taskwait
+    #pragma omp task shared(dgm, facts) firstprivate(j0, j0b)
+    (void) type_A_leftright_sweep2(dgm, facts, j0, j0b);
+    #pragma omp task shared(dgm, facts) firstprivate(j1a, j1)
+    (void) type_A_rightleft_sweep2(dgm, facts, j1a, j1);
+    #pragma omp taskwait
 
     // quiver now has pivot matrices everywhere
     // there is a dangling L on the left and a dangling U on the right.

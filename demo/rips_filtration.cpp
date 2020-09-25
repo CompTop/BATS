@@ -13,12 +13,21 @@ int main (int argc, char* argv[]) {
 
 	// maximum simplex dimension
     size_t maxdim = parse_argv(argc, argv, "-maxdim", 3);
-    double rmax = parse_argv(argc, argv, "-rmax", 0.2);
+    double rmax = parse_argv(argc, argv, "-rmax", 0.4);
 
 	//auto X = sample_cube<double>(d, n);
 	auto X = sample_sphere<double>(d, n);
 
-	auto dist = RPAngleDist(); //AngleDist();
+	// auto dist = RPAngleDist(); //AngleDist();
+	auto dist = Euclidean();
+
+	{
+		X.data.print();
+		auto R = RipsComplex(X, dist, rmax, 3);
+		auto C = __ChainComplex(R, FT());
+		auto RC = ReducedChainComplex(C);
+		std::cout << "non-filtered homology: " << RC.hdim(1) << std::endl;
+	}
 
 	// generate a cover
 	// auto L = greedy_landmarks(X, 10, dist);
@@ -35,9 +44,9 @@ int main (int argc, char* argv[]) {
 	auto FC = __FilteredChainComplex(F, FT());
 
 	auto RFC = ReducedFilteredChainComplex(
-		FC,
-		bats::extra_reduction_flag(),
-		bats::compression_flag()
+		FC
+		// bats::extra_reduction_flag(),
+		// bats::compression_flag()
 	);
 	// auto RFC = __ReducedFilteredChainComplex(F, FT());
 

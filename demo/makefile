@@ -8,6 +8,8 @@ IFLAGS = -I../include
 
 default: rips.out serpinski.out zigzag_codensity.out zigzag_cover.out zigzag_rips_samples.out zigzag_witness.out rips_filtration.out witness_filtration.out
 
+zigzag: zigzag_rips_samples.out
+
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
 
