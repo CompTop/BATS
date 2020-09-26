@@ -326,6 +326,12 @@ CHECK(F.L.is_lower()); \
 CHECK(F.U.is_upper()); \
 CHECK(F.E.is_pivot_matrix()); \
 
+#define CHECK_UQL(F, A) \
+CHECK(F.UQL_prod() == A); \
+CHECK(F.L.is_lower()); \
+CHECK(F.U.is_upper()); \
+CHECK(F.E.is_pivot_matrix()); \
+
 
 TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 	using VT = SparseVector<T, size_t>;
@@ -336,8 +342,15 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 10, 0.2, 1, generator);
 
-			auto F = LQU(A);
-			CHECK_LQU(F, A)
+			SUBCASE("LQU") {
+				auto F = LQU(A);
+				CHECK_LQU(F, A)
+			}
+			SUBCASE("UQL") {
+				auto F = UQL(A);
+				CHECK_UQL(F, A)
+			}
+
 		}
 	}
 
@@ -346,8 +359,14 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(10, 20, 0.2, 1, generator);
 
-			auto F = LQU(A);
-			CHECK_LQU(F, A)
+			SUBCASE("LQU") {
+				auto F = LQU(A);
+				CHECK_LQU(F, A)
+			}
+			SUBCASE("UQL") {
+				auto F = UQL(A);
+				CHECK_UQL(F, A)
+			}
 		}
 	}
 
@@ -356,8 +375,14 @@ TEST_CASE_TEMPLATE("LQU Factorization", T, F2, F3, F5, Q) {
 			std::default_random_engine generator(seed);
 			auto A = MatT::random(20, 10, 0.2, 1, generator);
 
-			auto F = LQU(A);
-			CHECK_LQU(F, A)
+			SUBCASE("LQU") {
+				auto F = LQU(A);
+				CHECK_LQU(F, A)
+			}
+			SUBCASE("UQL") {
+				auto F = UQL(A);
+				CHECK_UQL(F, A)
+			}
 		}
 	}
 

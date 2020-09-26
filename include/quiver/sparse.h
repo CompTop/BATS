@@ -326,6 +326,7 @@ ssize_t type_A_dq_common(
 ) {
     // phase 1 - divide into two sub-quivers
     size_t j2 = (j0 + j1) / 2; //edge at j2 will be LQU factorization
+    // std::cout << "partitioning at " << j2 <<  std::endl;
     size_t j0b = j2 - 1;
     size_t j1a = j2 + 1;
 
@@ -343,7 +344,8 @@ ssize_t type_A_dq_common(
     pass_UP_right(dgm, facts, mats, j0b);
 
     // take LQU factorization
-    facts[j2] = LQU(mats[j2]);
+    facts[j2] = is_left_arrow(dgm.elist[j2]) ? LQU(mats[j2]) : UQL(mats[j2]);
+
     // pass L and U factors out
     pass_U_right(dgm, facts, j2);
     pass_L_left(dgm, facts, j2);
@@ -373,7 +375,9 @@ void type_A_dq_EU(
     ssize_t j1
 ) {
     // first check if j1 - j0 is small enough - then no recursion
-    if (j1 - j0 < 4) {
+    // alternatively, if we shouldn't be spawining new levels of recursion
+    // if (j1 - j0 < 4) {
+    if (j1 - j0 < 4 ) {
         type_A_rightleft_sweep1(dgm, facts, mats, j0, j1);
         type_A_rightleft_sweep2(dgm, facts, j0, j1);
         return;
@@ -387,9 +391,10 @@ void type_A_dq_EU(
         facts[j] = is_left_arrow(dgm.elist[j]) ? PLEU(facts[j].E) : UELP(facts[j].E);
         // pass P term to left (L term is identity)
         pass_P_left(dgm, facts, j);
+        // pass_PL_left(dgm, facts, j);
     }
     // handle last node - has dangling L term.
-    facts[j0] = is_left_arrow(dgm.elist[j0]) ? PLEU(facts[j1].L * facts[j1].E) : UELP(facts[j1].E * facts[j1].L);
+    facts[j0] = is_left_arrow(dgm.elist[j0]) ? PLEU(facts[j0].L * facts[j0].E) : UELP(facts[j0].E * facts[j0].L);
     // now commute U term all the way back
     type_A_rightleft_sweep2(dgm, facts, j0, j1);
 
@@ -422,6 +427,7 @@ void type_A_dq_EL(
         facts[j] = is_left_arrow(dgm.elist[j]) ? LEUP(facts[j].E) : PUEL(facts[j].E);
         // pass P term to right (U term is identity)
         pass_P_right(dgm, facts, j);
+        // pass_UP_right(dgm, facts, j);
     }
     // handle last node - has dangling U term.
     facts[j1] = is_left_arrow(dgm.elist[j1]) ? LEUP(facts[j1].E * facts[j1].U) : PUEL(facts[j1].U * facts[j1].E);
@@ -584,6 +590,13 @@ std::vector<PersistencePair<size_t>> barcode_sparse(const Diagram<NT, TM> &dgm, 
 template <typename NT, typename TM>
 std::vector<PersistencePair<size_t>> barcode_sparse_rightleft(const Diagram<NT, TM> &dgm, size_t hdim) {
     auto mats = barcode_form_rightleft(dgm);
+    auto bars = barcode_from_barcode_form(mats, dgm);
+    return bars_to_pairs(bars, hdim);
+}
+
+template <typename NT, typename TM>
+std::vector<PersistencePair<size_t>> barcode_sparse_leftright(const Diagram<NT, TM> &dgm, size_t hdim) {
+    auto mats = barcode_form_leftright(dgm);
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
 }

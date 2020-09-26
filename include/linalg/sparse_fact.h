@@ -41,6 +41,10 @@ struct SparseFact {
         return L * E * U;
     }
 
+    inline ColumnMatrix<TC> UQL_prod() const {
+        return U * E * L;
+    }
+
 
 };
 
@@ -446,6 +450,19 @@ SparseFact<TC> LQU(const ColumnMatrix<TC> &A) {
     F.U = MatT::identity(n);
 
     LQU_inplace(F);
+
+    return F;
+}
+
+template <class TC>
+SparseFact<TC> UQL(const ColumnMatrix<TC> &A) {
+    auto Aj = A.J_conjugation();
+
+    auto F = LQU(Aj);
+    std::swap(F.L, F.U);
+    F.E.J_conjugation_inplace();
+    F.L.J_conjugation_inplace();
+    F.U.J_conjugation_inplace();
 
     return F;
 }
