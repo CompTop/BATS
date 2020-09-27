@@ -6,6 +6,7 @@ utilities for generating data
 #include <cmath>
 #include <vector>
 #include <random>
+#include <chrono>
 #include <iterator>
 #include <iostream>
 
@@ -21,7 +22,8 @@ Matrix<T>& add_normal_noise(
     const T mu=T(0),
     const T sigma=T(1)
 ) {
-    std::default_random_engine generator;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generator(seed);
     std::normal_distribution distribution(mu,sigma);
 
     #pragma omp simd
@@ -47,7 +49,8 @@ Matrix<T>& add_uniform_noise(Matrix<T> &X,
     const T lb = T(0),
     const T ub = T(1)
 ) {
-    std::default_random_engine generator;
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generator(seed);
     std::uniform_real_distribution distribution(lb, ub);
 
     #pragma omp simd
