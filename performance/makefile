@@ -1,24 +1,24 @@
-CPPFLAGS = -Wall -std=c++17 -Wextra
+CXXFLAGS = -Wall -std=c++17 -Wextra
 OUTFLAGS = -O3 -fopenmp
 PROFFLAGS = -pg -O3
 DBFLAGS = -g -Og
 OPFLAGS = -O3 -DBATS_OPCOUNT
-CPP ?= g++
+CXX ?= g++
 IFLAGS = -I../include
 
 default: divide_conquer.out
 
 %.out: %.cpp
-	$(CPP) -o $@ $< $(IFLAGS) $(CPPFLAGS) $(OUTFLAGS)
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
 
 %.op: %.cpp
-	$(CPP) -o $@ $< $(IFLAGS) $(CPPFLAGS) $(OPFLAGS)
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OPFLAGS)
 
 %.prof: %.cpp
-	$(CPP) -o $@ $< $(IFLAGS) $(CPPFLAGS) $(PROFFLAGS)
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(PROFFLAGS)
 
 %.db: %.cpp
-	$(CPP) -o $@ $< $(IFLAGS) $(CPPFLAGS) $(DBFLAGS)
+	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(DBFLAGS)
 
 %: %.out %.prof %.db
 
