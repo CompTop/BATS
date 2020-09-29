@@ -81,7 +81,7 @@ int main() {
 
 	for (size_t dim: {10, 100, 200})
 	{
-		size_t n = 64;
+		size_t n = 256;
 		std::cout << "\nn= " << n << " dim = " << dim << std::endl;
 		auto Q = random_quiver(n, dim, MT2(), 0.5);
 
@@ -124,7 +124,7 @@ int main() {
 
 	for (size_t dim: {10, 100, 200})
 	{
-		size_t n = 64;
+		size_t n = 256;
 		std::cout << "\nn= " << n << " dim = " << dim << std::endl;
 		auto Q = random_quiver(n, dim, MT3(), 0.5);
 
