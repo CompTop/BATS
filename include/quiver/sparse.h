@@ -446,8 +446,13 @@ auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
 
     size_t m = dgm.nedge();
 
+    // compute number of levels of recursion to use
+    int nthreads = (int) omp_get_num_threads();
+    int nlevels = 0;
+    while (nthreads >>= 1) nlevels++;
+
     // check if we should just do sequential algorithm
-    if (m < 5) { return barcode_form_leftright(dgm);}
+    if (m < 5 || nlevels <= 1) { return barcode_form_leftright(dgm);}
 
     using TC = typename TM::col_type;
     std::vector<SparseFact<TC>> facts(m);
@@ -456,7 +461,7 @@ auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
     std::vector<TM> mats = dgm.edata;
 
     // begin parallel region
-    #pragma omp parallel default(none) shared(dgm, facts, mats, m)
+    #pragma omp parallel default(none) shared(dgm, facts, mats, m, nlevels)
     {
         #pragma omp single nowait
         {

@@ -1,5 +1,5 @@
 CXXFLAGS = -Wall -std=c++17 -Wextra
-OUTFLAGS = -O3
+OUTFLAGS = -O3 -fopenmp
 PROFFLAGS = -pg -O3
 DBFLAGS = -g -Og
 CXX ?= g++
