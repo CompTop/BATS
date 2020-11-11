@@ -64,6 +64,21 @@ struct ReducedFilteredChainComplex {
 	// critical cells for barcode in dimension k
 	std::vector<size_t> critical_cells(const size_t k);
 
+	// update filtration
+	void update_filtration(const std::vector<std::vector<T>> newval) {
+		// step 1: determine permutation order for newval
+
+		// step 2: determine update to old permutation
+
+		// step 3: apply permutation updates to ReducedChainComplex RC
+
+		// step 4: update reduction in RC
+
+	}
+
+	// get subcomplex
+	ReducedFilteredChainComplex get_subcomplex() const;
+
 };
 
 // defualt return
@@ -74,9 +89,3 @@ inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args
 
 	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F), args...);
 }
-
-
-
-
-// default return
-//template <typename T, typename FT>

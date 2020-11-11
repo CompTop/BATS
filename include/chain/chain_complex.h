@@ -58,6 +58,13 @@ struct ChainComplex {
 		}
 	}
 
+	// permute basis in all dimensions
+	void permute_basis(const std::vector<std::vector<size_t>> &perm) {
+		for (size_t k = 0; k < perm.size(); k++) {
+			permute_basis(k, perm[k]);
+		}
+	}
+
 };
 
 // defualt return
