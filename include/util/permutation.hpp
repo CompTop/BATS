@@ -9,6 +9,9 @@ utilities for permutations
 #include <algorithm>
 #include <cmath>
 
+namespace bats {
+namespace util {
+
 // fill a vector that will return a sort permutation on data
 template <typename T>
 void fill_sortperm(
@@ -37,7 +40,7 @@ inline void fill_sortperm(
     return fill_sortperm(data.cbegin(), data.cend(), perm);
 }
 
-namespace bats{
+
 template <typename T>
 std::vector<size_t> sortperm(const std::vector<T>& data) {
     std::vector<size_t> perm(data.size());
@@ -136,8 +139,6 @@ std::vector<size_t> top_p(
     return top_k(data, k);
 }
 
-
-}
 
 
 // reorders data by permutation
@@ -278,3 +279,6 @@ template <typename T>
 inline int perm_sign(const std::vector<T> &p) {
     return (perm_inversions(p) & 0x1) == 1 ? -1 : 1;
 }
+
+} // namespace util
+} // namespace bats
