@@ -7,8 +7,14 @@ compute homology-revealing bases for a chain complex
 #include <chain/chain_complex.h>
 #include "reduction.h"
 
+namespace bats {
+	// flag to indicate that basis should be computed
+	struct compute_basis_flag {};
+}
+
 template <typename MT>
-struct ReducedChainComplex {
+class ReducedChainComplex {
+public:
 
 	using chain_type = typename MT::col_type;
 
@@ -17,6 +23,29 @@ struct ReducedChainComplex {
 	std::vector<MT> R; // reduced matrix
 	std::vector<std::set<size_t>> I;
 	std::vector<p2c_type> p2c;
+
+	// size of homology vector space in dimension k
+	inline size_t hdim(size_t k) const { return I[k].size(); }
+	inline size_t maxdim() const { return R.size() - 1; }
+
+	MT& operator[](size_t k) {
+		if (k >= dim.size()) {
+			// throw error
+		}
+		return R[k];
+	}
+
+private:
+	// set homology indices after reduction is completed
+	void set_indices() {
+		// TODO: can parallelize this
+		for (size_t k = 0; k < maxdim(); k++) {
+			I[k] = extract_basis_indices(R[k], p2c[k+1]);
+		}
+		I[maxdim()] = extract_basis_indices(R[maxdim()]);
+	}
+
+public:
 
 	ReducedChainComplex() {}
 
@@ -35,11 +64,134 @@ struct ReducedChainComplex {
 			R[k] = C.boundary[k];
 			p2c[k] = reduce_matrix(R[k], U[k]);
 		}
+
+		set_indices();
+
+	}
+
+	// compute reduced boundary matrices only with flags
+	template <typename algflag>
+	ReducedChainComplex(const ChainComplex<MT> &C, algflag) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
 		// TODO: can parallelize this
-		for (size_t k = 0; k < dmax-1; k++) {
-			I[k] = extract_basis_indices(R[k], p2c[k+1]);
+		for (size_t k = 0; k < dmax; k++) {
+			R[k] = C.boundary[k];
+			p2c[k] = reduce_matrix(R[k], algflag());
 		}
-		I[dmax-1] = extract_basis_indices(R[dmax-1]);
+
+		set_indices();
+	}
+
+	// compute reduced boundary matrices and basis with flags
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::compute_basis_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		U.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// TODO: can parallelize this
+		for (size_t k = 0; k < dmax; k++) {
+			R[k] = C.boundary[k];
+			U[k] = MT::identity(C.dim[k]);
+			p2c[k] = reduce_matrix(R[k], U[k], algflag());
+		}
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::clearing_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// do top dimension normally
+		R[dmax-1] = C.boundary[dmax-1];
+		p2c[dmax-1] = reduce_matrix(R[dmax-1], algflag());
+		std::vector<size_t> clear_inds = get_clearing_inds(p2c[dmax-1]);
+		for (ssize_t k = dmax-2; k >= 0; k--) {
+			R[k] = C.boundary[k];
+			p2c[k] = reduce_matrix_clearing(R[k], clear_inds, algflag());
+			clear_inds = get_clearing_inds(p2c[k]);
+		}
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::compression_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// do top dimension normally
+		R[0] = C.boundary[0];
+		p2c[0] = reduce_matrix(R[0], algflag());
+		std::vector<bool> comp_inds = get_compression_inds(R[0]);
+		// for (auto i : comp_inds) {
+		// 	std::cout << i << std::endl;
+		// }
+		for (ssize_t k = 1; k < dmax; k++) {
+			R[k] = C.boundary[k];
+			p2c[k] = reduce_matrix_compression(R[k], comp_inds, algflag());
+			comp_inds = get_compression_inds(R[k]);
+		}
+
+		set_indices();
+	}
+
+	// compute reduced boundary matrices and basis with flags
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
+		bats::compression_flag,
+		bats::compute_basis_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		dim = C.dim;
+		R.resize(dmax);
+		U.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// do bottom dimension normally
+		R[0] = C.boundary[0];
+		U[0] = MT::identity(C.dim[0]);
+		p2c[0] = reduce_matrix(R[0], U[0], algflag());
+		std::vector<bool> comp_inds = get_compression_inds(R[0]);
+		for (ssize_t k = 1; k < dmax; k++) {
+			R[k] = C.boundary[k];
+			U[k] = MT::identity(C.dim[k]);
+			p2c[k] = reduce_matrix_compression(R[k], U[k], comp_inds, algflag());
+			comp_inds = get_compression_inds(R[k]);
+		}
+
+		set_indices();
 	}
 
 	// put vector/matrix in homology-revealing basis in dimension k
@@ -53,9 +205,7 @@ struct ReducedChainComplex {
 		return U[k] * v;
 	}
 
-	// size of homology vector space in dimension k
-	inline size_t hdim(size_t k) const { return I[k].size(); }
-	inline size_t maxdim() const { return R.size() - 1; }
+
 
 	// get preferred representative i in dimension k
 	chain_type get_preferred_representative(
@@ -118,10 +268,10 @@ struct ReducedChainComplex {
 
 
 // defualt return
-template <typename T, typename CpxT>
-inline auto __ReducedChainComplex(const CpxT &F, T) {
+template <typename T, typename CpxT, typename... Args>
+inline auto __ReducedChainComplex(const CpxT &F, T, Args... args) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
-	return ReducedChainComplex(ChainComplex<MT>(F));
+	return ReducedChainComplex(ChainComplex<MT>(F), args...);
 }

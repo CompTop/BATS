@@ -12,6 +12,9 @@ maintains indices in sorted order
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include <utility>
+#include <random>
+#include <chrono>
 #include "field.h"
 #include "abstract_vector.h"
 
@@ -99,6 +102,11 @@ public:
 		if (it1 != nzend() || it2 != other.nzend()) { return false;}
 		return true;
 	}
+	template<typename T>
+	inline bool operator!=(const T &other) const {
+		return !(*this == other);
+	}
+
 
 	// extract indices by iterator
 	template<typename T>
@@ -154,6 +162,19 @@ public:
 		indval = indval2;
 	}
 
+	// clear indices marked true in c
+	// i.e. remove entry i if c[i] is true
+	void clear_inds(const std::vector<bool> &c) {
+		std::vector<key_type> indval2;
+		for (auto iv : indval) {
+			// put indval pair in if it is not marked for clearing
+			if (!c[iv.ind]) {
+				indval2.emplace_back(iv);
+			}
+		}
+		indval = indval2;
+	}
+
 	// nnz
 	inline size_t nnz() const {return indval.size(); }
 
@@ -161,9 +182,30 @@ public:
 		std::vector<size_t> ind;
 		ind.reserve(nnz());
 		for (auto it = nzbegin(); it != nzend(); it++) {
-			ind.emplace_back((*it).ind);
+			ind.emplace_back(it->ind);
 		}
 		return ind;
+	}
+
+	std::vector<TV> nzvals() const {
+		std::vector<TV> val;
+		val.reserve(nnz());
+		for (auto it = nzbegin(); it != nzend(); it++) {
+			val.emplace_back(it->val);
+		}
+		return val;
+	}
+
+	std::tuple<std::vector<size_t>, std::vector<TV>> nzs() const {
+
+		std::vector<size_t> ind; ind.reserve(nnz());
+		std::vector<TV> val; val.reserve(nnz());
+		for (auto it = nzbegin(); it != nzend(); it++) {
+			ind.emplace_back(it->ind);
+			val.emplace_back(it->val);
+		}
+
+		return std::make_tuple(ind, val);
 	}
 
 	// returns iterator pointing to first element that is not less than i
@@ -234,28 +276,6 @@ public:
 	}
 
 
-
-	// TI last_nzind() const {
-	// 	return indval.back().ind;
-	// }
-	//
-	// // return ith nonzero value
-	// TV nzval(size_t i) const {
-	// 	return indval[i].val;
-	// }
-	//
-	// // return ith nonzero index
-	// TI nzind(size_t i) const {
-	// 	return indval[i].ind;
-	// }
-
-	// // return ith nonzero pair
-	// const key_type& nzpair(size_t i) const {
-	// 	return indval[i];
-	// }
-
-
-
 	// permute in-place
 	void permute(const std::vector<size_t>  &perm) {
 		for (size_t i = 0; i < nnz(); i++) {
@@ -323,7 +343,7 @@ public:
 		// std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
 		indval = tmp;
 
-		clear_zeros();
+		//clear_zeros();
 
 		return;
 	}
@@ -465,21 +485,15 @@ public:
 		}
 	}
 
+	// scale vector by c
+	void scale_inplace(const TV c) {
+		auto it = nzbegin();
+		while (it != nzend()) {
+			it->val = it->val * c;
+			++it;
+		}
+	}
 
-
-	// zeros out pivot in x
-	// void eliminate_pivot(const SparseVector &x) {
-	// 	auto piv = last();
-	// 	auto pivx = x.last();
-	// 	TV alpha = - piv.val / pivx.val;
-	// 	// std::cout << "alpha = " << alpha << std::endl;
-	// 	axpy(alpha, x);
-	// }
-	// scal - in place
-
-	// add, subtract, multiply by scalar
-	//inline SparseVector operator+(const SparseVector &x) {return caxpy(TV(1), x); }
-	//inline SparseVector operator-(const SparseVector &x) {return caxpy(TV(-1), x); }
 
 	void print() const {
 		auto it = indval.cbegin();
@@ -507,209 +521,30 @@ public:
 		}
 		io << '\n';
 	}
+
+	std::string str() {
+	  std::ostringstream oss;
+	  write(oss);
+	  return oss.str();
+	}
+
+	// generate random vectors
+	static SparseVector random(size_t n, double p, int maxval, std::default_random_engine &generator) {
+		std::uniform_int_distribution<int> val_distribution(1,maxval);
+		std::uniform_real_distribution<double> nz_distribution(0.0,1.0);
+
+		std::vector<key_type> indval;
+		for (size_t i = 0; i < n; i++) {
+			if (nz_distribution(generator) < p) {
+				indval.emplace_back(key_type(i, val_distribution(generator)));
+			}
+		}
+		return SparseVector(indval);
+	}
+	static SparseVector random(size_t n, double p, int maxval) {
+		// obtain a seed from the system clock:
+		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		std::default_random_engine generator(seed);
+		return random(n, p, maxval, generator);
+	}
 };
-
-// // specialized F2 implementation
-// template <typename IntT, typename TI>
-// class SparseVector<ModP<IntT, 2>, TI> {
-// private:
-// 	using TV = ModP<IntT, 2>;
-//
-// 	// store nonzero indices
-// 	std::vector<TI> ind;
-//
-// 	// sort in-place
-// 	void sort() {
-// 		// sort in-place
-// 		std::sort(ind.begin(), ind.end());
-// 	}
-//
-// public:
-//
-// 	SparseVector() {}
-//
-// 	// copy constructor
-// 	SparseVector(const SparseVector &x) : ind(x.ind) {}
-//
-// 	// construct from index vector
-// 	SparseVector(const std::vector<TI> ind): ind(ind) {}
-//
-// 	SparseVector(const std::vector<TI> &inds, const std::vector<TV> &val) {
-// 		size_t nz = inds.size();
-// 		ind.reserve(nz);
-// 		for (size_t i = 0; i < nz; i++) {
-// 			if (!(val[i] == 0)) {
-// 				ind.push_back(inds[i]);
-// 			}
-// 		}
-// 	}
-//
-// 	// constructor that takes in integers for val
-// 	SparseVector(const std::vector<TI> &inds, const std::vector<int> &val) {
-// 		size_t nz = inds.size();
-// 		ind.reserve(nz);
-// 		for (size_t i = 0; i < nz; i++) {
-// 			if ((val[i] & 0x1) == 1) {
-// 				ind.push_back(inds[i]);
-// 			}
-// 		}
-// 	}
-//
-// 	// constructor that loops over index and value iterators
-// 	// can be iterators over different type
-// 	template <typename IT1, typename IT2>
-// 	SparseVector(IT1 indit, IT2 valit, size_t n) {
-// 		ind.reserve(n);
-// 		for (size_t i = 0; i < n; i++) {
-// 			ind.emplace_back(TI(*indit++));
-// 		}
-// 	}
-//
-// 	// cosntructor that returns indicator in given index
-// 	SparseVector(const TI i) {
-// 		ind.push_back(i);
-// 	}
-//
-// 	// nnz
-// 	inline size_t nnz() const {
-// 		return ind.size();
-// 	}
-//
-// 	// get const iterator through nzs
-// 	auto nzbegin() const {
-// 		return ind.cbegin();
-// 	}
-//
-// 	// get const iterator end of nzs
-// 	auto nzend() const {
-// 		return ind.cend();
-// 	}
-//
-// 	// return ith nonzero value
-// 	constexpr TV nzval(size_t i) const {
-// 		return TV(1);
-// 	}
-//
-// 	// return ith nonzero index
-// 	TI nzind(size_t i) const {
-// 		return ind[i];
-// 	}
-//
-// 	// find nonzero index of last element with index < i
-// 	auto find_last_nz(TI i) {
-// 		auto it = std::lower_bound(
-// 			ind.cbegin(),
-// 			ind.cend(),
-// 			i
-// 		);
-// 		// if there is no element with index < i, return pointer to end
-// 		return it == ind.cend() ? it : --it;
-// 		//return it--;
-// 	}
-//
-//
-// 	// permute in-place
-// 	void permute(const std::vector<size_t>  &perm) {
-// 		for (size_t i = 0; i < nnz(); i++) {
-// 			ind[i] = perm[ind[i]];
-// 		}
-// 		sort();
-// 	}
-//
-// 	// return result of self + ax
-// 	SparseVector caxpy(const SparseVector &x, size_t xoffset=0) const {
-// 		// first check if there is anything to do.
-// 		auto xend = x.ind.cend() - xoffset;
-//
-// 		// where to put new vector
-// 		std::vector<TI> tmp;
-// 		tmp.reserve(nnz() + x.nnz());
-// 		auto i1 = ind.cbegin();
-// 		auto i2 = x.ind.cbegin();
-// 		while (i1 < ind.cend() && i2 < xend) {
-// 			if ((*i1) == (*i2)) {
-// 				++i1;
-// 				++i2;
-// 			} else if ((*i1) < (*i2)) {
-// 				tmp.push_back(*i1);
-// 				++i1;
-// 			} else {
-// 				tmp.push_back(*i2);
-// 				++i2;
-// 			}
-// 		}
-// 		// run through rest of entries and dump in
-// 		// at most one of the loops does anything
-// 		while (i1 < ind.cend()) {
-// 			tmp.push_back(*i1);
-// 			++i1;
-// 		}
-// 		while (i2 < xend) {
-// 			tmp.push_back(*i2);
-// 			++i2;
-// 		}
-// 		return SparseVector(tmp);
-// 	}
-//
-// 	// set
-// 	// y <- ax + y
-// 	void axpy(const SparseVector &x, size_t xoffset=0) {
-//
-// 		// check if there's anything to do
-// 		auto xend = x.ind.cend() - xoffset;
-// 		// if we won't update, return
-// 		if (x.ind.cbegin() >= xend) { return; }
-// 		// if all nzs are in x, dump
-// 		if (nnz() == 0) {
-// 			std::copy(x.ind.cbegin(), xend, std::back_inserter(ind));
-// 			//ind = x.ind;
-// 			return;
-// 		}
-//
-// 		const SparseVector res = caxpy(x, xoffset);
-// 		ind = res.ind;
-// 		return;
-// 	}
-// 	void axpy(const TV &a, const SparseVector &x, size_t xoffset=0) {
-// 		if (a == 0) { return; }
-// 		axpy(x, xoffset);
-// 		return;
-// 	}
-//
-// 	// zeros out pivot in x
-// 	void eliminate_pivot(const SparseVector &x) {
-// 		axpy(x);
-// 	}
-//
-// 	// add, subtract, multiply by scalar
-// 	inline SparseVector operator+(const SparseVector &x) {return caxpy(x); }
-// 	inline SparseVector operator-(const SparseVector &x) {return caxpy(x); }
-//
-//
-// 	void print() {
-// 		for (size_t i = 0; i < nnz(); i++) {
-// 			std::cout << ind[i] << std::endl;
-// 		}
-// 	}
-//
-// 	void print_row() {
-// 		for (size_t i = 0; i < nnz(); i++) {
-// 			std::cout << ind[i] << " ";
-// 		}
-// 		std::cout << std::endl;
-// 	}
-//
-// };
-
-// // TODO: sparse F2 vector implementation
-// template <typename TI>
-// class SparseF2Vector
-// {
-// private:
-// 	// non-zero indices
-// 	std::vector<TI> ind;
-// public:
-//
-//
-// 	// get index and set index
-// };

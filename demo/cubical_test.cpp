@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
 
-#include <bats.h>
+// count operations
+#include <bats.hpp>
+
+
 
 auto full_cube(const size_t N) {
 	CubicalComplex X(3);
@@ -30,6 +33,11 @@ auto skeleton_filtration_diagram(const CubicalComplex &X) {
 
 int main() {
 
+	#ifdef BATS_OPCOUNT
+	bats::reset_global_ops();
+	std::cout << "op count: " << bats::get_global_ops() << std::endl;
+	#endif
+
 	std::cout << "\nCreating cubical complex" << std::endl;
 
 	auto X = full_cube(2);
@@ -40,7 +48,7 @@ int main() {
 
 	// diagram in Chain
 	std::cout << "Chain functor" << std::endl;
-	auto ChainDgm = __Chain(D, ModP<int, 2>());
+	auto ChainDgm = __Chain(D, ModP<int, 3>());
 
 	// diagram in Homology
 	std::cout << "Homology functor" << std::endl;
@@ -48,12 +56,15 @@ int main() {
 		std::cout << "dimension " << d << std::endl;
 		auto HkDgm = Hom(ChainDgm, d);
 
-		auto ps = barcode_sparse(HkDgm, d);
+		auto ps = barcode_sparse_divide_conquer(HkDgm, d);
 		for (auto p : ps) {
 			std::cout << p.str() << std::endl;
 		}
 	}
 
+	#ifdef BATS_OPCOUNT
+	std::cout << "op count: " << bats::get_global_ops() << std::endl;
+	#endif
 
 
 

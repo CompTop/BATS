@@ -1,3 +1,15 @@
 *.ipynb
 .ipynb_checkpoints
-
+demo/scratch.*
+*.out
+*.o
+*.test
+*.stats*
+*.db
+*.prof
+*.scpx
+*.dgm
+*.csv
+*.op
+vgcore.*
+debug*

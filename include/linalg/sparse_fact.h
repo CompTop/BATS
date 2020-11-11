@@ -37,6 +37,14 @@ struct SparseFact {
         return P * U * E * L;
     }
 
+    inline ColumnMatrix<TC> LQU_prod() const {
+        return L * E * U;
+    }
+
+    inline ColumnMatrix<TC> UQL_prod() const {
+        return U * E * L;
+    }
+
 
 };
 
@@ -277,43 +285,24 @@ inline size_t pivot_ind(const ColumnMatrix<TC> &E, size_t j) {
     return (it == E[j].nzend()) ? bats::NO_IND : it->ind;
 }
 
-// normalize EL matrix to have unit entries
+// normalize E matrix to have unit entries
 // return scaling of rows to recover original matrix
 template <typename TC>
 auto extract_row_scale(ColumnMatrix<TC> &E) {
-    // assume EL structure in E
+    // assume pivot structure
     using val_type = typename TC::val_type;
 
     size_t m = E.nrow();
     size_t n = E.ncol();
 
-    std::vector<val_type> coeff(m);
-    size_t i = 0;
-    size_t j = 0;
-    while (i < m && j < n) {
+    std::vector<val_type> coeff(m, val_type(1));
+    for (size_t j = 0; j < n; j++) {
         auto it = E[j].nzbegin();
-        if (it == E[j].nzend()) {
-            // we've reached the end of the non-zero columns
-            while (i < m) {
-                coeff[i++] = val_type(1);
-            }
-            break;
+        if (it != E[j].nzend()) {
+            coeff[it->ind] = it->val;
+            it->val = val_type(1);
         }
-        while (i < it->ind) {
-            // fill in coefficients for rows with no pivots
-            coeff[i++] = val_type(1);
-        }
-        // set coefficient
-        coeff[i++] = it->val;
-        // set pivot to 1 in E matrix
-        it->val = val_type(1);
-        j++;
     }
-    while (i < m) {
-        // we only enter this loop if E has full column rank, and is tall/skinny
-        coeff[i++] = val_type(1);
-    }
-
 
     return coeff;
 }
@@ -327,7 +316,7 @@ ColumnMatrix<TC> EL_L_commute(const ColumnMatrix<TC> &E, const ColumnMatrix<TC> 
     MatT EL(E); // create copy
     auto coeff = extract_row_scale(EL); // extract row scale
     // for unit EL, we have EL * L = Ltil * EL
-    // with diagonal row scaling, use D EL L = D Ltil EL
+    // with diagonal row scaling, use D EL L = D Ltil D^{-1} D EL
 
 
     size_t m = EL.nrow();
@@ -350,11 +339,130 @@ ColumnMatrix<TC> EL_L_commute(const ColumnMatrix<TC> &E, const ColumnMatrix<TC> 
         }
     }
 
-    return Ltilde.row_scale(coeff); // scale rows
+    Ltilde.row_scale(coeff); // scale rows
+    Ltilde.col_inv_scale(coeff); // scale columns by inverse
+
+    // auto Ltilde = E * L * EL.T();
+    return Ltilde;
 }
 
-// produce matrix Ltilde so L * EL = EL * Ltilde
+// produce matrix Ltilde so L * ELhat = ELhat * Ltilde
 template <typename TC>
 inline ColumnMatrix<TC> L_EL_commute(const ColumnMatrix<TC> &L, const ColumnMatrix<TC> &EL) {
     return EL_L_commute(EL.T().J_conjugation_inplace(), L.T().J_conjugation_inplace()).T().J_conjugation_inplace();
+}
+
+
+// produce matrix Utilde so U * EU = EU * Utilde
+template <typename TC>
+inline ColumnMatrix<TC> U_EU_commute(const ColumnMatrix<TC> &U, const ColumnMatrix<TC> &EU) {
+    return EL_L_commute(EU.T(), U.T()).T();
+}
+
+
+// produce matrix Utilde so EUhat * U = Utilde * EUhat
+template <typename TC>
+inline ColumnMatrix<TC> EU_U_commute(const ColumnMatrix<TC> &EU, const ColumnMatrix<TC> &U) {
+    return EL_L_commute(EU.J_conjugation(), U.J_conjugation()).J_conjugation();
+}
+
+
+
+template <class TC>
+void CU_inplace(ColumnMatrix<TC> &C, ColumnMatrix<TC> &U) {
+    // produce factorization CU^{-1}
+    // where U is upper triangular.
+    // everything to right of a high pivot is eliminated
+    // columns of C are scaled so pivots are 1
+
+    size_t m = C.nrow();
+    size_t n = C.ncol();
+
+    std::vector<ssize_t> p2c(m, -1); // initialize pivots to -1
+
+    // loop over columns
+    for (size_t j = 0; j < n; j++) {
+        bool found_pivot = false;
+        size_t i0 = 0;
+        // loop over entries in column C[j]
+        auto piv = C[j].lower_bound(i0);
+        while (piv != C[j].nzend()) {
+            i0 = piv->ind;
+            auto v = piv->val;
+            if (p2c[i0] != -1) { // if pivot index is pivot in previous column - eliminate
+
+                // eliminate entry in C[j]
+                C[j].axpy(-v, C[p2c[i0]]); // pivot has been scaled to 1
+                // update U[j]
+                U[j].axpy(-v, U[p2c[i0]]); // inverse operation to columns of U
+
+                piv = C[j].lower_bound(i0); // go to next nonzero
+            } else if (!found_pivot) { // we have found pivot for this column
+                found_pivot = true; // found the pivot
+                // record pivot
+                p2c[i0] = j;
+                // scale column so pivot is 1
+                C[j].scale_inplace(v.inv());
+                // scale U with inverse operation
+                U[j].scale_inplace(v.inv());
+                ++piv; // go to next nonzero
+            } else {
+                ++piv; // go to next nonzero
+            }
+
+        }
+        // U = u_inv(U);
+
+    }
+}
+
+template <class TC>
+void LQU_inplace(SparseFact<TC> &F) {
+    // TODO
+
+    // first, do a CU factorization in-place on A and U.
+    CU_inplace(F.E, F.U);
+    F.U = u_inv(F.U);
+
+
+    // now do a CU factorization on A^T to get L factor.
+    F.E = F.E.T();
+    CU_inplace(F.E, F.L);
+    F.L = u_inv(F.L);
+    F.E = F.E.T(); // A is now a pivot matrix
+    F.L = F.L.T(); // take transpose to get L factor.
+}
+
+template <class TC>
+SparseFact<TC> LQU(const ColumnMatrix<TC> &A) {
+    // LQU factorization of matrix A
+    // E is used for Q matrix
+    // P is unused
+
+    using MatT = ColumnMatrix<TC>;
+
+    size_t m = A.nrow();
+    size_t n = A.ncol();
+
+    SparseFact<TC> F;
+    F.L = MatT::identity(m);
+    F.E = A;
+    F.U = MatT::identity(n);
+
+    LQU_inplace(F);
+
+    return F;
+}
+
+template <class TC>
+SparseFact<TC> UQL(const ColumnMatrix<TC> &A) {
+    auto Aj = A.J_conjugation();
+
+    auto F = LQU(Aj);
+    std::swap(F.L, F.U);
+    F.E.J_conjugation_inplace();
+    F.L.J_conjugation_inplace();
+    F.U.J_conjugation_inplace();
+
+    return F;
 }

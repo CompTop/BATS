@@ -16,9 +16,11 @@ struct ReducedFilteredChainComplex {
 
 	ReducedFilteredChainComplex() {}
 
-	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C) :
+	// variadic template for passing arguments
+	template <typename... Args>
+	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args... args) :
 		val(C.vals()),
-		RC(C.complex()) {}
+		RC(C.complex(), args...) {}
 
 	inline size_t maxdim() const { return RC.maxdim(); }
 	inline size_t dim(const size_t k) const {return RC.dim[k];}
@@ -65,12 +67,12 @@ struct ReducedFilteredChainComplex {
 };
 
 // defualt return
-template <typename FT, typename T, typename CpxT>
-inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T) {
+template <typename FT, typename T, typename CpxT, typename... Args>
+inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args... args) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
-	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F));
+	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F), args...);
 }
 
 

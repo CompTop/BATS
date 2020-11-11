@@ -1,5 +1,7 @@
 # BATS: Basic Applied Topology Subprograms
 
+[![Build Status](https://travis-ci.com/bnels/BATS.svg?branch=master)](https://travis-ci.com/bnels/BATS)
+
 This repository contains header files for
 * Representing topological spaces on a computer
 * Computing algebraic invariants of topological spaces, and diagrams of topological spaces.

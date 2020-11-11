@@ -3,12 +3,10 @@ OUTFLAGS = -O3 -fopenmp
 PROFFLAGS = -pg -O3
 DBFLAGS = -g -Og
 OPFLAGS = -O3 -DBATS_OPCOUNT
-CXX = g++
+CXX ?= g++
 IFLAGS = -I../include
 
-default: rips.out serpinski.out zigzag_codensity.out zigzag_cover.out zigzag_rips_samples.out zigzag_witness.out rips_filtration.out witness_filtration.out
-
-zigzag: zigzag_rips_samples.out
+default: divide_conquer.out zigzag_circle.out zigzag_cube.out
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)
