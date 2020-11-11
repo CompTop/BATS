@@ -3,8 +3,8 @@
 points for neighborhoods
 */
 #include <vector>
-#include <util/permutation.h>
-#include "data.h"
+#include <util/permutation.hpp>
+#include "data.hpp"
 
 /*
 get neighbors of point x in DataSet X within radius r in metric dist

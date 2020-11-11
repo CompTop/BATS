@@ -1,7 +1,7 @@
 #pragma once
 
-#include "chain_complex.h"
-#include <filtration/filtration.h>
+#include "chain_complex.hpp"
+#include <filtration/filtration.hpp>
 
 // template over filtration and matrix type
 template <typename FT, typename MT>

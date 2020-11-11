@@ -1,5 +1,5 @@
 #pragma once
 
-#include "homology/basis.h"
-#include "homology/induced_map.h"
-#include "homology/reduction.h"
+#include "homology/basis.hpp"
+#include "homology/induced_map.hpp"
+#include "homology/reduction.hpp"

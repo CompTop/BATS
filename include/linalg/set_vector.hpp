@@ -11,8 +11,8 @@ std::set instead of maintaining sort explicitly
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "field.h"
-#include "abstract_vector.h"
+#include "field.hpp"
+#include "abstract_vector.hpp"
 
 // template over index type and type of value
 template <typename TV, typename TI=size_t>

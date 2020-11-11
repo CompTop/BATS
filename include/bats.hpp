@@ -8,13 +8,13 @@ namespace bats {
 }
 #endif
 
-#include "linalg.h"
-#include "complex.h"
-#include "filtration.h"
-#include "chain.h"
-#include "homology.h"
-#include "persistence.h"
-#include "multigraph.h"
-#include "quiver.h"
-#include "topology.h"
-#include "future.hpp"
+#include "linalg.hpp"
+#include "complex.hpp"
+#include "filtration.hpp"
+#include "chain.hpp"
+#include "homology.hpp"
+#include "persistence.hpp"
+#include "multigraph.hpp"
+#include "quiver.hpp"
+#include "topology.hpp"
+#include "future.hpppp"

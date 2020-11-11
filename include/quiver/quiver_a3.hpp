@@ -1,4 +1,4 @@
-#include "../linalg/matrix_interface.h"
+#include "../linalg/matrix_interface.hpp"
 #include <tuple>
 
 template <typename I>

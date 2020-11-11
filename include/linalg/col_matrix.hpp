@@ -9,9 +9,9 @@
 #include <fstream>
 #include <random>
 #include <chrono>
-#include "abstract_matrix.h"
-#include "csc_matrix.h"
-#include "abstract_vector.h"
+#include "abstract_matrix.hpp"
+#include "csc_matrix.hpp"
+#include "abstract_vector.hpp"
 
 // standard list of list implementation for sparse matrix
 

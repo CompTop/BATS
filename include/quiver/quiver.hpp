@@ -4,10 +4,10 @@ Utility to dump a multigraph of vector spaces into something we can operate on
 */
 #include <vector>
 
-#include <multigraph/diagram.h>
-#include <linalg/naive_dense.h>
-#include <linalg/col_matrix.h>
-#include "type_a.h"
+#include <multigraph/diagram.hpp>
+#include <linalg/naive_dense.hpp>
+#include <linalg/col_matrix.hpp>
+#include "type_a.hpp"
 #include <stdexcept>
 
 

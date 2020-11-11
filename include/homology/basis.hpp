@@ -4,8 +4,8 @@ compute homology-revealing bases for a chain complex
 */
 #include <vector>
 #include <set>
-#include <chain/chain_complex.h>
-#include "reduction.h"
+#include <chain/chain_complex.hpp>
+#include "reduction.hpp"
 
 namespace bats {
 	// flag to indicate that basis should be computed

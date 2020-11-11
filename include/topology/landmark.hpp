@@ -9,9 +9,9 @@ utility for landmarking pointclouds
 #include <tuple>
 #include <iterator>
 
-#include "data.h"
-#include "metric.h"
-#include <util/set.h>
+#include "data.hpp"
+#include "metric.hpp"
+#include <util/set.hpp>
 
 // random landmarking with k landmarks
 // assume k < n

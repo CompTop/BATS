@@ -2,7 +2,7 @@
 
 #include <cmath>
 #include <iostream>
-#include <util/sorted.h>
+#include <util/sorted.hpp>
 
 // Struct for holding edge with a value
 template <typename TF, typename TI>

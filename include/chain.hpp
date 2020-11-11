@@ -1,5 +1,5 @@
 #pragma once
 
-#include "chain/chain_complex.h"
-#include "chain/chain_map.h"
-#include "chain/filtered_chain_complex.h"
+#include "chain/chain_complex.hpp"
+#include "chain/chain_map.hpp"
+#include "chain/filtered_chain_complex.hpp"

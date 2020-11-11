@@ -1,5 +1,5 @@
 #pragma once
 
-#include "quiver/quiver.h"
-#include "quiver/type_a.h"
-#include "quiver/sparse.h"
+#include "quiver/quiver.hpp"
+#include "quiver/type_a.hpp"
+#include "quiver/sparse.hpp"

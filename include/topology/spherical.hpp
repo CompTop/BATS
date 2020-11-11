@@ -3,8 +3,8 @@
 utilities for S^n and RP^n
 */
 
-#include "data.h"
-#include "data_gen.h"
+#include "data.hpp"
+#include "data_gen.hpp"
 #include <cmath>
 
 // normalizes columns of data to have norm 1

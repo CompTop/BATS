@@ -3,8 +3,8 @@
 #include <cstddef>
 #include <cassert>
 #include <vector>
-#include "abstract_matrix.h"
-#include <util/sorted.h>
+#include "abstract_matrix.hpp"
+#include <util/sorted.hpp>
 
 #include <iostream>
 #include <iomanip>

@@ -13,12 +13,12 @@ and extend to a map on all simplices
 #include <iostream>
 #include <vector>
 #include <stdexcept>
-#include <util/simplex.h>
-#include "cell_map.h"
-#include "simplicial_complex.h"
+#include <util/simplex.hpp>
+#include "cell_map.hpp"
+#include "simplicial_complex.hpp"
 
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
 
 // construct simplicial map from X to Y
 // Assumes that X \subseteq Y

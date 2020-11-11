@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <util/set.h>
+#include <util/set.hpp>
 
 // vertex inclusion map of set s into set t
 // template over container type

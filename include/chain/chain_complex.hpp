@@ -3,7 +3,7 @@
 class to store a chain complex
 */
 #include <vector>
-#include <util/permutation.h>
+#include <util/permutation.hpp>
 
 // template over matrix type
 template <typename MT>

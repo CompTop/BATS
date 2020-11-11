@@ -1,4 +1,4 @@
 #pragma once
 
-#include "persistence/barcode.h"
-#include "persistence/filtered_basis.h"
+#include "persistence/barcode.hpp"
+#include "persistence/filtered_basis.hpp"

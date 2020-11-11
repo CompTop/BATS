@@ -5,9 +5,9 @@ Nerve of a cover
 
 #include <vector>
 #include <set>
-#include <util/sorted.h>
-#include <complex/simplicial_complex.h>
-#include "cover.h"
+#include <util/sorted.hpp>
+#include <complex/simplicial_complex.hpp>
+#include "cover.hpp"
 
 void add_dimension_recursive_nerve(
 	SimplicialComplex &N,

@@ -10,12 +10,12 @@ utilities for creating covers
 #include <cmath>
 #include <tuple>
 
-#include <util/set.h>
-#include <multigraph/diagram.h>
-#include "data.h"
-#include "inclusion.h"
-#include "landmark.h"
-#include "neighborhood.h"
+#include <util/set.hpp>
+#include <multigraph/diagram.hpp>
+#include "data.hpp"
+#include "inclusion.hpp"
+#include "landmark.hpp"
+#include "neighborhood.hpp"
 
 namespace bats {
 	using Cover = std::vector<std::set<size_t>>;

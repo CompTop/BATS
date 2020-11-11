@@ -4,11 +4,11 @@ helpers for constructions in "Zigzag Zoology: Rips Zigzags for Homology Inferenc
 by Oudot and Sheehy (2015) [OS15]
 */
 
-#include "data.h"
-#include "inclusion.h" 				// linear_subset_union_diagram
-#include "landmark.h"				// greedy_landmarks_hausdorff
-#include <multigraph/diagram.h>
-#include <multigraph/functors.h> 	// Rips functor
+#include "data.hpp"
+#include "inclusion.hpp" 				// linear_subset_union_diagram
+#include "landmark.hpp"				// greedy_landmarks_hausdorff
+#include <multigraph/diagram.hpp>
+#include <multigraph/functors.hpp> 	// Rips functor
 #include <tuple>
 #include <vector>
 #include <iostream>

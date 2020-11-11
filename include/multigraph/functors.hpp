@@ -2,17 +2,17 @@
 /*
 Functors from one type of diagram to another
 */
-#include "diagram.h"
-#include <topology/data.h>
-#include <topology/cover.h>
-#include <topology/rips.h>
-#include <topology/nerve.h>
-#include <complex/simplicial_complex.h>
-#include <complex/simplicial_map.h>
-#include <chain/chain_complex.h>
-#include <chain/chain_map.h>
-#include <homology/basis.h>
-#include <homology/induced_map.h>
+#include "diagram.hpp"
+#include <topology/data.hpp>
+#include <topology/cover.hpp>
+#include <topology/rips.hpp>
+#include <topology/nerve.hpp>
+#include <complex/simplicial_complex.hpp>
+#include <complex/simplicial_map.hpp>
+#include <chain/chain_complex.hpp>
+#include <chain/chain_map.hpp>
+#include <homology/basis.hpp>
+#include <homology/induced_map.hpp>
 
 #include <stdexcept>
 

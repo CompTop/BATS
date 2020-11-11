@@ -1,8 +1,8 @@
 #pragma once
 
-#include <linalg/naive_dense.h>
-#include <linalg/field.h>
-#include <persistence/barcode.h>
+#include <linalg/naive_dense.hpp>
+#include <linalg/field.hpp>
+#include <persistence/barcode.hpp>
 #include <string>
 
 using std::cout;

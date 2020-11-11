@@ -3,10 +3,10 @@
 #include <vector>
 #include <map>
 
-#include <multigraph/diagram.h>
-#include <linalg/col_matrix.h>
-#include <linalg/sparse_fact.h>
-#include <persistence/barcode.h>
+#include <multigraph/diagram.hpp>
+#include <linalg/col_matrix.hpp>
+#include <linalg/sparse_fact.hpp>
+#include <persistence/barcode.hpp>
 
 #include <omp.h> // openMP header
 

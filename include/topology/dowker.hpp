@@ -5,12 +5,12 @@ Witness complex
 #include <vector>
 #include <algorithm>
 #include <limits>
-#include "data.h"
-#include "neighborhood.h"
-#include "rips.h"
-#include "nerve.h"
-#include <util/sorted.h>
-#include <complex/simplicial_complex.h>
+#include "data.hpp"
+#include "neighborhood.hpp"
+#include "rips.hpp"
+#include "nerve.hpp"
+#include <util/sorted.hpp>
+#include <complex/simplicial_complex.hpp>
 
 // find next smallest entry of columns of pdist[j]
 template <typename T>

@@ -15,8 +15,8 @@ maintains indices in sorted order
 #include <utility>
 #include <random>
 #include <chrono>
-#include "field.h"
-#include "abstract_vector.h"
+#include "field.hpp"
+#include "abstract_vector.hpp"
 
 
 // template over type of values

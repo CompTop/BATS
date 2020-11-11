@@ -7,8 +7,8 @@ Some operations on sorted containers
 #include <set>
 #include <iostream>
 #include <algorithm>
-#include "common.h"
-#include "permutation.h"
+#include "common.hpp"
+#include "permutation.hpp"
 
 /*
 sets c = intersection(a, b)

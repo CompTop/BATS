@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <linalg/naive_dense.h>
+#include <linalg/naive_dense.hpp>
 
 // data matrix - d x n
 // where d is dimension, n is number of points

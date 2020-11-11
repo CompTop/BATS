@@ -4,9 +4,9 @@
 #include <utility> // make_pair
 #include <algorithm> // sort
 #include <tuple>
-#include <complex/simplicial_complex.h>
-#include <filtration/filtration.h>
-#include <util/sorted.h>
+#include <complex/simplicial_complex.hpp>
+#include <filtration/filtration.hpp>
+#include <util/sorted.hpp>
 #include <iostream>
 // flag filtrations
 
@@ -259,7 +259,7 @@ Filtration<T, SimplicialComplex> FlagFiltration(
         T t = edges[k].r;
         spx_idxs[0] = i;
         spx_idxs[1] = j;
-        F.add(t, spx_idxs); // auto ret = 
+        F.add(t, spx_idxs); // auto ret =
         // std::cout << ret.second << std::endl;
         intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 

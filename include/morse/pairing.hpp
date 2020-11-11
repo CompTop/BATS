@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <complex/abstract_complex.h>
-#include <linalg/csc_matrix.h>
+#include <complex/abstract_complex.hpp>
+#include <linalg/csc_matrix.hpp>
 
 // class that wraps pre-pairing of complex
 // template over complex type

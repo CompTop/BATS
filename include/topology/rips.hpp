@@ -5,10 +5,10 @@ generate Rips complex
 
 #include <vector>
 #include <tuple>
-#include "data.h"
-#include "metric.h"
-#include <complex/simplicial_complex.h>
-#include <filtration/flag.h>
+#include "data.hpp"
+#include "metric.hpp"
+#include <complex/simplicial_complex.hpp>
+#include <filtration/flag.hpp>
 
 // construct edges for rips complex
 // template over data type and metric

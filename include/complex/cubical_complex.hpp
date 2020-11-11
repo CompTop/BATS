@@ -18,17 +18,17 @@
 #include <map>
 #include <stdexcept>
 
-#include "abstract_complex.h"
-#include <util/common.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
-#include <linalg/csc_matrix.h>
-#include <util/sorted.h>
-#include <util/trie.h>
-#include <filtration/filtration.h>
-#include <morse/pairing.h>
+#include "abstract_complex.hpp"
+#include <util/common.hpp>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
+#include <linalg/csc_matrix.hpp>
+#include <util/sorted.hpp>
+#include <util/trie.hpp>
+#include <filtration/filtration.hpp>
+#include <morse/pairing.hpp>
 
-#include <util/simplex.h> // for hash function
+#include <util/simplex.hpp> // for hash function
 
 /*
 	cubical complex of dimension d

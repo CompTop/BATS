@@ -3,9 +3,9 @@
 utilities to compute density on point clouds
 */
 
-#include "data.h"
-#include "metric.h"
-#include "neighborhood.h"
+#include "data.hpp"
+#include "metric.hpp"
+#include "neighborhood.hpp"
 
 
 // get distance to kth nearest neighbor

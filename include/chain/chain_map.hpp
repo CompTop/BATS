@@ -2,8 +2,8 @@
 // Chain map class
 #include <vector>
 #include <cstddef>
-#include <complex/cell_map.h>
-#include <util/permutation.h>
+#include <complex/cell_map.hpp>
+#include <util/permutation.hpp>
 
 
 template <typename TM>

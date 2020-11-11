@@ -5,10 +5,10 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
-#include "abstract_complex.h"
-#include <linalg/csc_matrix.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
+#include "abstract_complex.hpp"
+#include <linalg/csc_matrix.hpp>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
 
 
 class CellComplex

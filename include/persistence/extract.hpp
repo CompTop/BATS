@@ -3,9 +3,9 @@
 
 #include <map>
 #include <vector>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
-#include <util/barcode.h>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
+#include <util/barcode.hpp>
 
 /*
 returns vector of pairs

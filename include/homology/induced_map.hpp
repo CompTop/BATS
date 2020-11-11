@@ -3,12 +3,12 @@
 compute induced maps on homology
 */
 #include <iostream>
-#include "reduction.h"
-#include "basis.h"
-#include <chain/chain_map.h>
+#include "reduction.hpp"
+#include "basis.hpp"
+#include <chain/chain_map.hpp>
 
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
 
 
 // get induced map on homology for dimension k

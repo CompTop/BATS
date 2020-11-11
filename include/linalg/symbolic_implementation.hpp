@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "matrix_interface.h"
+#include "matrix_interface.hpp"
 #include <tuple>
 #include <assert.h>
 #include <iostream>

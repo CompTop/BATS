@@ -1,7 +1,7 @@
 #pragma once
 // schur complement
 #include <iostream>
-#include "col_matrix.h"
+#include "col_matrix.hpp"
 
 // schur complement over a matrix type
 // S = D - C A^{-1} B

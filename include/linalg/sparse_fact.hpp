@@ -7,7 +7,7 @@ LEUP, PUEL, UELP, PLEU
 as well as shape commutation relations
 */
 
-#include "col_matrix.h"
+#include "col_matrix.hpp"
 #include <vector>
 #include <map>
 

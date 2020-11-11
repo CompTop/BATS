@@ -1,18 +1,18 @@
 #pragma once
 // compute homology over a filtration
 
-#include <util/sorted.h>
+#include <util/sorted.hpp>
 
 
-#include <linalg/field.h>
-#include <linalg/csc_matrix.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
-#include <linalg/schur.h>
+#include <linalg/field.hpp>
+#include <linalg/csc_matrix.hpp>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
+#include <linalg/schur.hpp>
 
-#include <morse/pairing.h>
-#include <filtration/filtration.h>
-#include "homology_reduction.h"
+#include <morse/pairing.hpp>
+#include <filtration/filtration.hpp>
+#include "homology_reduction.hpp"
 
 #include <vector>
 #include <iostream>

@@ -3,8 +3,8 @@
 #include <map>
 #include <unordered_map>
 #include <set>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
 
 #define p2c_type std::unordered_map<size_t, size_t>
 

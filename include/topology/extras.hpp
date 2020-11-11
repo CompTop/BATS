@@ -6,8 +6,8 @@ Some constructions for demonstrations
 #include <vector>
 #include <set>
 
-#include <complex/cell_complex.h>
-#include <complex/cell_map.h>
+#include <complex/cell_complex.hpp>
+#include <complex/cell_map.hpp>
 
 struct triangle {
     size_t a, b, c, ab, bc, ca;
@@ -25,7 +25,7 @@ Diagram<CellComplex, CellularMap> serpinski_diagram(
 
     using Vint = SparseVector<int>;
     using MTint = ColumnMatrix<Vint>;
-    
+
     Diagram<CellComplex, CellularMap> X(k, k-1);
     // create first iteration - just a triangle
     CellComplex S0;

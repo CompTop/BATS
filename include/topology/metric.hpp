@@ -8,7 +8,7 @@ TODO: add pairwise function
 #include <cstddef>
 #include <cmath>
 #include <vector>
-#include "data.h"
+#include "data.hpp"
 
 // CRTP over derived class D
 template <class D>

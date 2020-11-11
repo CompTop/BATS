@@ -1,16 +1,16 @@
 #pragma once
 
-#include <assert.h>
+#include <assert.hpp>
 #include <unordered_map>
 #include <vector>
-#include <util/common.h>
+#include <util/common.hpp>
 #include <iostream>
 #include <algorithm>
-#include "matrix_interface.h"
+#include "matrix_interface.hpp"
 #include <string>
 
 //required for fill_rand<Rational<int>>()
-#include <linalg/field.h>
+#include <linalg/field.hpp>
 
 
 // storage type

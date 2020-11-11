@@ -1,4 +1,4 @@
 #pragma once
 
-#include "filtration/filtration.h"
-#include "filtration/flag.h"
+#include "filtration/filtration.hpp"
+#include "filtration/flag.hpp"

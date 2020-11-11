@@ -7,8 +7,8 @@ essentially a chain map
 
 #include <vector>
 #include <string>
-#include <linalg/sparse_vector.h>
-#include <linalg/col_matrix.h>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/col_matrix.hpp>
 
 class CellularMap
 {

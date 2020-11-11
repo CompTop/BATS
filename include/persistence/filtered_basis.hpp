@@ -2,10 +2,10 @@
 
 #include <vector>
 #include <limits>
-#include <chain/filtered_chain_complex.h>
-#include <homology/basis.h>
-#include <util/common.h>
-#include "barcode.h"
+#include <chain/filtered_chain_complex.hpp>
+#include <homology/basis.hpp>
+#include <util/common.hpp>
+#include "barcode.hpp"
 
 
 template <typename T, typename MT>
