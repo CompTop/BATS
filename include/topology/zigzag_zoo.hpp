@@ -13,6 +13,8 @@ by Oudot and Sheehy (2015) [OS15]
 #include <vector>
 #include <iostream>
 
+namespace bats {
+
 /*
 determine set of indices to use for dM-ZZ construction
 hds - hausdorff distance of each point to point set.
@@ -139,3 +141,5 @@ std::tuple<Diagram<SimplicialComplex, CellularMap>, std::vector<T>> DiscreteMoro
 }
 
 // TODO: add magic function that computes barcode for you
+
+} // namespace bats

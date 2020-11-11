@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <vector>
 
+namespace bats {
+
 // there is a boost::trie implementation, but it is based on std::map, not std::unordered_map
 // template over alphabet type A, storage type T
 template <typename A, typename T>
@@ -177,6 +179,6 @@ public:
         return count(k.cbegin(), k.cend());
     }
 
-
-
 };
+
+} // namespace bats

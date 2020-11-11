@@ -4,6 +4,8 @@
 #include <iostream>
 #include <util/sorted.hpp>
 
+namespace bats {
+
 // Struct for holding edge with a value
 template <typename TF, typename TI>
 struct tedge {
@@ -117,9 +119,4 @@ std::vector<T> pairwise_dist(
     return v;
 }
 
-
-
-// template <typename TF, typename TI>
-// std::vector<tedge<TF, TI>> adj_edges_vec(std::vector<TF> D, TF thresh) {
-//
-// }
+} // namespace bats

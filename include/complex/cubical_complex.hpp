@@ -30,6 +30,9 @@
 
 #include <util/simplex.hpp> // for hash function
 
+namespace bats {
+
+
 /*
 	cubical complex of dimension d
 	cubes are vectors of length 2*d, storing degeneracies
@@ -460,3 +463,5 @@ public:
 
 
 };
+
+} // namespace bats

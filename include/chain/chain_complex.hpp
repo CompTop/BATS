@@ -54,7 +54,7 @@ struct ChainComplex {
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
 			boundary[k].permute_cols(perm);
-			boundary[k+1].permute_rows(inv_perm(perm));
+			boundary[k+1].permute_rows(bats::util::inv_perm(perm));
 		}
 	}
 

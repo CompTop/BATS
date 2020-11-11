@@ -7,6 +7,7 @@ utilities to compute density on point clouds
 #include "metric.hpp"
 #include "neighborhood.hpp"
 
+namespace bats {
 
 // get distance to kth nearest neighbor
 template <typename T, typename M>
@@ -33,3 +34,5 @@ std::vector<T> kdist(
 
 	return dk;
 }
+
+} // namespace bats

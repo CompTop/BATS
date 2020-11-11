@@ -22,6 +22,7 @@
 
 #include <util/simplex.hpp> // for hash function
 
+namespace bats {
 
 /*
 simplicial complex implementation
@@ -173,7 +174,7 @@ public:
             getline(file, line); // TODO: should be "SimplicialComplex"
             std::vector<size_t> spx;
             while (getline(file, line)) {
-                read_simplex(line, spx);
+                bats::util::read_simplex(line, spx);
                 this->add_safe(spx);
             }
             file.close();
@@ -349,7 +350,7 @@ public:
             file << "SimplicialComplex\n";
             for (size_t dim = 0; dim < maxdim() + 1; dim++) {
                 for (size_t i =0; i < ncells(dim); i++) {
-                    write_simplex(file, simplex_begin(dim, i), simplex_end(dim, i));
+                    bats::util::write_simplex(file, simplex_begin(dim, i), simplex_end(dim, i));
                 }
             }
             file.close();
@@ -379,7 +380,7 @@ void add_dimension_recursive_flag(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to X
             X.add(spx_idxs2);
@@ -394,13 +395,13 @@ void add_dimension_recursive_flag(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to X
             X.add(spx_idxs2);
 
             // recurse
-            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            bats::util::intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
             add_dimension_recursive_flag(X, nbrs, d+1, maxd, iter_idxs2, spx_idxs2);
 
             // pop k off spx_idxs
@@ -452,7 +453,7 @@ SimplicialComplex FlagComplex(
         spx_idxs[1] = j;
         X.add(spx_idxs);
         // std::cout << ret.second << std::endl;
-        intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
+        bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
         if (!iter_idxs.empty()) {
             add_dimension_recursive_flag(X, nbrs, 2, maxdim, iter_idxs, spx_idxs);
@@ -470,3 +471,5 @@ SimplicialComplex FlagComplex(
 
     return X;
 }
+
+} // namespace bats

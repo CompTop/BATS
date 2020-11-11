@@ -7,6 +7,8 @@ utilities for S^n and RP^n
 #include "data_gen.hpp"
 #include <cmath>
 
+namespace bats {
+
 // normalizes columns of data to have norm 1
 template <typename T>
 void normalize_entries(DataSet<T>& data) {
@@ -120,3 +122,5 @@ void force_repel_rp(
 
 	return;
 }
+
+} // namespace bats

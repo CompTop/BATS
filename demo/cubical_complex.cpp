@@ -7,7 +7,7 @@ int main() {
 
 	std::cout << "\nCreating cubical complex" << std::endl;
 
-	CubicalComplex X(3); // 2 is max dimension
+	bats::CubicalComplex X(3); // 2 is max dimension
 	std::cout << "\ndeclared complex" << std::endl;
 	X.add_recursive({1,2,0,1,5,6});
 	std::cout << "\nadded toplex" << std::endl;
@@ -34,11 +34,11 @@ int main() {
 	}
 	std::cout << '\n';
 
-	CubicalComplex Y = X.skeleton(0); // 2 is max dimension
+	auto Y = X.skeleton(0); // 2 is max dimension
 	std::cout << "Y cells " << Y.ncells() << std::endl;
 	Y.add_recursive({1,2,0,1,5,5});
 
-	auto M = CubicalMap(Y, X);
+	auto M = bats::CubicalMap(Y, X);
 	M[0].print();
 
 	return 0;

@@ -10,6 +10,8 @@ essentially a chain map
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
 
+namespace bats {
+
 class CellularMap
 {
 private:
@@ -84,3 +86,5 @@ public:
 	}
 
 };
+
+} // namespace bats

@@ -12,6 +12,8 @@ generate Rips Cover complex
 #include <complex/simplicial_complex.hpp>
 #include <filtration/flag.hpp>
 
+namespace bats {
+
 // template over data type and metric
 template <typename T, typename M>
 std::vector<filtered_edge<T>> rips_filtration_edges(
@@ -60,3 +62,5 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     auto edges = rips_filtration_edges(X, cover, dist, rmax);
     return FlagFiltration(edges, n, dmax, T(0));
 }
+
+} // namespace bats

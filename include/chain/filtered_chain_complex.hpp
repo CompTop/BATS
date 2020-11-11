@@ -3,6 +3,8 @@
 #include "chain_complex.hpp"
 #include <filtration/filtration.hpp>
 
+namespace bats {
+
 // template over filtration and matrix type
 template <typename FT, typename MT>
 struct FilteredChainComplex {
@@ -28,7 +30,7 @@ struct FilteredChainComplex {
 	inline const std::vector<std::vector<FT>>& vals() const { return val; }
 
 	// update filtration
-	void update_filtration(const std::vector<std::vector<T>> newval) {
+	void update_filtration(const std::vector<std::vector<FT>> newval) {
 		// step 1: determine permutation order for newval
 
 		// step 2: determine update to old permutation
@@ -47,3 +49,5 @@ inline auto __FilteredChainComplex(const Filtration<FT, CpxT> &F, T) {
 
 	return FilteredChainComplex<FT, MT>(F);
 }
+
+} // namespace bats

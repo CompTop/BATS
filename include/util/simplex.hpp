@@ -6,7 +6,8 @@
 
 #include "permutation.hpp"
 
-
+namespace bats {
+namespace util {
 
 // implement has function for vectors
 
@@ -77,7 +78,7 @@ bool is_degenerate(const std::vector<T> &s) {
 // // returns 0 if simplex is degenerate
 template <typename T>
 int simplex_sign(std::vector<T> &s) {
-    auto p = bats::sortperm(s);
+    auto p = sortperm(s);
     apply_perm(s, p);
     return is_degenerate(s) ? 0 : perm_sign(p);
 }
@@ -112,3 +113,6 @@ void read_simplex(std::string &line, std::vector<T> &s) {
         }
     }
 }
+
+} // namespace util
+} // namespace bats

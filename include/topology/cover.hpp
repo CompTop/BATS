@@ -18,8 +18,9 @@ utilities for creating covers
 #include "neighborhood.hpp"
 
 namespace bats {
-	using Cover = std::vector<std::set<size_t>>;
-}
+
+using Cover = std::vector<std::set<size_t>>;
+
 
 
 
@@ -180,7 +181,7 @@ auto bivariate_cover(
 	for (size_t i = 0; i < cover1.size(); i++) {
 		for (size_t j = 0; j < cover2.size(); j++) {
 			std::set<size_t> intersection;
-			intersect_sorted(
+			bats::util::intersect_sorted(
 				cover1[i],
 				cover2[j],
 				intersection
@@ -196,3 +197,5 @@ auto bivariate_cover(
 
 	return std::make_tuple(cover12, f1, f2);
 }
+
+} // namespace bats

@@ -8,9 +8,9 @@ compute homology-revealing bases for a chain complex
 #include "reduction.hpp"
 
 namespace bats {
-	// flag to indicate that basis should be computed
-	struct compute_basis_flag {};
-}
+// flag to indicate that basis should be computed
+struct compute_basis_flag {};
+
 
 template <typename MT>
 class ReducedChainComplex {
@@ -275,3 +275,5 @@ inline auto __ReducedChainComplex(const CpxT &F, T, Args... args) {
 
 	return ReducedChainComplex(ChainComplex<MT>(F), args...);
 }
+
+} // namespace bats

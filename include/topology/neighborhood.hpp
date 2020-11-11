@@ -6,6 +6,8 @@ points for neighborhoods
 #include <util/permutation.hpp>
 #include "data.hpp"
 
+namespace bats {
+
 /*
 get neighbors of point x in DataSet X within radius r in metric dist
 */
@@ -39,7 +41,7 @@ std::vector<size_t> neighborhood(
 	const size_t k
 ) {
 	auto dxX = dist(x, X);
-	return bats::firstk(dxX.cbegin(), dxX.cend(), k);
+	return bats::util::firstk(dxX.cbegin(), dxX.cend(), k);
 }
 
 /*
@@ -109,3 +111,5 @@ std::vector<std::set<size_t>> neighborhoods(
 	}
 	return nbrs;
 }
+
+} // namespace bats

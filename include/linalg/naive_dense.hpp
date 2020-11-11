@@ -1,6 +1,6 @@
 #pragma once
 
-#include <assert.hpp>
+#include <assert.h>
 #include <unordered_map>
 #include <vector>
 #include <util/common.hpp>

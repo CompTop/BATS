@@ -10,6 +10,7 @@ Utility to dump a multigraph of vector spaces into something we can operate on
 #include "type_a.hpp"
 #include <stdexcept>
 
+namespace bats {
 
 // return tuple of
 //   1. vect of matrix data
@@ -72,3 +73,5 @@ std::vector<PersistencePair<size_t>> barcode(
 
     return taq.barcode_pairs(hdim);
 }
+
+} // namespace bats

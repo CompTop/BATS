@@ -5,6 +5,7 @@
 #include <complex/cell_map.hpp>
 #include <util/permutation.hpp>
 
+namespace bats {
 
 template <typename TM>
 struct ChainMap {
@@ -24,7 +25,7 @@ struct ChainMap {
     inline const TM& operator[](size_t k) const { return map[k]; }
 
     inline void permute_row_basis(size_t k, const std::vector<size_t> &p) {
-        map[k].permute_rows(inv_perm(p));
+        map[k].permute_rows(bats::util::inv_perm(p));
     }
 
     inline void permute_column_basis(size_t k, const std::vector<size_t> &p) {
@@ -33,3 +34,5 @@ struct ChainMap {
 
 
 };
+
+} // namespace bats

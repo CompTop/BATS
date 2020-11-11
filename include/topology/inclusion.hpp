@@ -3,6 +3,9 @@
 #include <vector>
 #include <util/set.hpp>
 
+namespace bats {
+
+
 // vertex inclusion map of set s into set t
 // template over container type
 template <typename T1, typename T2>
@@ -32,7 +35,7 @@ Diagram<std::set<size_t>, std::vector<size_t>> linear_subset_union_diagram(
 	        SetDgm.add_edge(i1, i1-1, vertex_inclusion_map(SetDgm.node[i1], SetDgm.node[i1-1]));
 	    }
 	    if (i == (subsets.size() - 1)) { break; }
-	    auto i2 = SetDgm.add_node(set_union(subsets[i], subsets[i+1]));
+	    auto i2 = SetDgm.add_node(bats::util::set_union(subsets[i], subsets[i+1]));
 	    // map from i1 to i2
 	    SetDgm.add_edge(i1, i2, vertex_inclusion_map(SetDgm.node[i1], SetDgm.node[i2]));
 	}
@@ -51,10 +54,12 @@ Diagram<std::set<size_t>, std::vector<size_t>> linear_cover_intersection_diagram
 	        SetDgm.add_edge(i1-1, i, vertex_inclusion_map(SetDgm.node[i1-1], SetDgm.node[i1]));
 	    }
 	    if (i == (cover.size() - 1)) { break; }
-	    auto i2 = SetDgm.add_node(set_intersection(cover[i], cover[i+1]));
+	    auto i2 = SetDgm.add_node(bats::util::set_intersection(cover[i], cover[i+1]));
 	    // map from i2 to i1
 	    SetDgm.add_edge(i2, i1, vertex_inclusion_map(SetDgm.node[i2], SetDgm.node[i1]));
 	}
 
 	return SetDgm;
 }
+
+} // namespace bats

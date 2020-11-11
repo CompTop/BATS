@@ -10,15 +10,16 @@
 
 
 namespace bats {
-	// flags for selecting optimizations
-	struct no_optimization_flag {};
-	struct clearing_flag {};
-	struct compression_flag {};
 
-	// flags for selecting algorithms
-	struct standard_reduction_flag {};
-	struct extra_reduction_flag {};
-}
+// flags for selecting optimizations
+struct no_optimization_flag {};
+struct clearing_flag {};
+struct compression_flag {};
+
+// flags for selecting algorithms
+struct standard_reduction_flag {};
+struct extra_reduction_flag {};
+
 
 // perform reduction algorithm on a column matrix in-place
 template <class TVec>
@@ -316,3 +317,5 @@ std::set<size_t> extract_basis_indices(MT &Rk) {
 
 	return I;
 }
+
+} // namespace bats

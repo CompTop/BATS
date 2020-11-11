@@ -8,6 +8,10 @@
 using std::cout;
 using std::string;
 
+
+namespace bats {
+
+
 // type A quiver
 template< typename F>
 struct Type_A{
@@ -497,3 +501,5 @@ struct Type_A{
 
 	}
 };
+
+} // namespace bats

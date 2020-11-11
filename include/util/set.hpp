@@ -2,6 +2,9 @@
 #include <set>
 #include <random>
 
+namespace bats {
+namespace util {
+
 // return union of two sets
 // template over containter types
 template <typename CT1, typename CT2>
@@ -63,10 +66,13 @@ std::set<T> to_set(
 	const std::vector<T> &v
 ) {
 	std::set<T> s;
-	
+
 	for (auto x : v) {
 		s.insert(x);
 	}
 
 	return s;
 }
+
+} // namespace util
+} // namespace bats

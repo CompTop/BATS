@@ -8,6 +8,10 @@ Utilities for I/O
 #include <fstream>
 #include <sstream>
 
+namespace bats {
+namespace util {
+namespace io {
+
 template<typename T>
 T parse_argv(
 	const int argc,
@@ -51,3 +55,8 @@ std::string parse_argv(
 	}
 	return default_return;
 }
+
+
+} // namespace io
+} // namespace util
+} // namespace bats

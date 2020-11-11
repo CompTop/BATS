@@ -10,6 +10,9 @@ Some operations on sorted containers
 #include "common.hpp"
 #include "permutation.hpp"
 
+namespace bats {
+namespace util {
+
 /*
 sets c = intersection(a, b)
 over-writes c
@@ -203,3 +206,6 @@ size_t find_sorted_lt(const TI &begin, const TI &end, const T &v) {
     return bats::NO_IND;
     //return it--;
 }
+
+} // namespace util
+} // namespace bats

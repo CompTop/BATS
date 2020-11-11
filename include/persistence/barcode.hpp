@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+namespace bats {
+
 // store dimension, birth, death, and critical indices of pair
 template <typename T>
 struct PersistencePair {
@@ -70,3 +72,5 @@ bool barcode_equality(
 	return true; // we found a match for every pair.
 
 }
+
+} // namespace bats

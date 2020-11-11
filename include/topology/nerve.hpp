@@ -9,6 +9,8 @@ Nerve of a cover
 #include <complex/simplicial_complex.hpp>
 #include "cover.hpp"
 
+namespace bats {
+
 void add_dimension_recursive_nerve(
 	SimplicialComplex &N,
 	std::vector<size_t> spx,
@@ -25,11 +27,11 @@ void add_dimension_recursive_nerve(
 	std::vector<size_t> spxk;
 
 	for (size_t k = 0; k < kmax; k++) {
-		intersect_sorted(cover[k], intersection, intersectionk);
+		bats::util::intersect_sorted(cover[k], intersection, intersectionk);
 		if (intersectionk.size() > 0) {
 			// add simplex
 			spx.emplace_back(k);
-			sort_into(spx, spxk);
+			bats::util::sort_into(spx, spxk);
 			// add to nerve
 			N.add(spxk);
 			if (dmax > dim+1) {
@@ -61,7 +63,7 @@ SimplicialComplex Nerve(
 
 		for (size_t j = 0; j < i; j++) {
 			// check to add edge between i and j
-			intersect_sorted(cover[i], cover[j], intersection);
+			bats::util::intersect_sorted(cover[i], cover[j], intersection);
 			if (intersection.size() > 0) {
 				// add edge
 				spx = {j, i};
@@ -75,3 +77,5 @@ SimplicialComplex Nerve(
 	}
 	return N;
 }
+
+} // namespace bats

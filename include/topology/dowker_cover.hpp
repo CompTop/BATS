@@ -16,6 +16,8 @@ flag filtration version
 #include <filtration/flag.hpp>
 
 
+namespace bats {
+
 // template over data type and metric
 // cover is over the landmark set
 template <typename T>
@@ -75,3 +77,5 @@ Filtration<T, SimplicialComplex> DowkerFiltration(
     Matrix<T> pdist = dist(L, X);
     return DowkerFiltration(pdist, cover, rmax, dmax);
 }
+
+} // namespace bats

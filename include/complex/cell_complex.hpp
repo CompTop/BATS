@@ -10,6 +10,7 @@
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
 
+namespace bats {
 
 class CellComplex
 {
@@ -155,3 +156,5 @@ public:
     );
 
 };
+
+} // namespace bats

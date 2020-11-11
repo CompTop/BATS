@@ -30,19 +30,19 @@ private:
         std::vector<TV> &tmp2
     ) {
         // get sortperm on row indices
-        fill_sortperm(
+        bats::util::fill_sortperm(
             rowind.cbegin() + colptr[j],
             rowind.cbegin() + colptr[j+1],
             perm
         );
         // apply permutation to row indices
-        apply_perm(
+        bats::util::apply_perm(
             rowind.data() + colptr[j],
             tmp1,
             perm
         );
         // apply permutation to row values
-        apply_perm(
+        bats::util::apply_perm(
             val.data() + colptr[j],
             tmp2,
             perm
@@ -256,7 +256,7 @@ public:
                 }
             }
             // sort & sum reduce column C[j]
-            sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
+            bats::util::sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
             C.colptr[j+1] = C.rowind.size();
         }
 
@@ -304,7 +304,7 @@ public:
             }
 
             // sort & sum reduce column C[j]
-            sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
+            bats::util::sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
             C.colptr[j+1] = C.rowind.size();
         }
 
@@ -343,7 +343,7 @@ public:
             }
 
             // sort & sum reduce column C[j]
-            sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
+            bats::util::sort_sum_reduce(C.rowind, C.val, C.colptr[j], perm, tmp1, tmp2);
             C.colptr[j+1] = C.rowind.size();
         }
 

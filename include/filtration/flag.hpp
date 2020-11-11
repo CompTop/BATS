@@ -10,6 +10,8 @@
 #include <iostream>
 // flag filtrations
 
+namespace bats {
+
 // struct for filtered edges
 template <typename T>
 struct filtered_edge {
@@ -49,7 +51,7 @@ void add_dimension_recursive_flag(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to F
             F.add(t, spx_idxs2);
@@ -64,13 +66,13 @@ void add_dimension_recursive_flag(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to F
             F.add(t, spx_idxs2);
 
             // recurse
-            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            bats::util::intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
             add_dimension_recursive_flag(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t);
 
             // pop k off spx_idxs
@@ -98,7 +100,7 @@ void add_dimension_recursive_flag_unsafe(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to F
             F.add(t, spx_idxs2);
@@ -113,13 +115,13 @@ void add_dimension_recursive_flag_unsafe(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to F
             F.add(t, spx_idxs2);
 
             // recurse
-            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            bats::util::intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
             add_dimension_recursive_flag_unsafe(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t);
 
             // pop k off spx_idxs
@@ -149,7 +151,7 @@ void add_dimension_recursive_flag(
             if (!face_paired) {
                 // append k to spx_idxs, sort
                 spx_idxs.push_back(k);
-                sort_into(spx_idxs, spx_idxs2);
+                bats::util::sort_into(spx_idxs, spx_idxs2);
 
                 // add to F
                 cell_ind si = F._add_unsafe_reserve(t, spx_idxs2);
@@ -161,11 +163,11 @@ void add_dimension_recursive_flag(
                 face_paired = true;
             } else {
                 // face is already paired
-                if (!has_intersect_sorted_lt(iter_idxs, nbrs[k], k)) {
+                if (!bats::util::has_intersect_sorted_lt(iter_idxs, nbrs[k], k)) {
                     // homology may be killed by simplex
                     // simplex should be added
                     spx_idxs.push_back(k);
-                    sort_into(spx_idxs, spx_idxs2);
+                    bats::util::sort_into(spx_idxs, spx_idxs2);
 
                     F._add_unsafe_reserve(t, spx_idxs2);
 
@@ -184,13 +186,13 @@ void add_dimension_recursive_flag(
         for (auto k : iter_idxs) {
             // append k to spx_idxs, sort
             spx_idxs.push_back(k);
-            sort_into(spx_idxs, spx_idxs2);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
 
             // add to F
             cell_ind si = F._add_unsafe_reserve(t, spx_idxs2);
 
             // recurse
-            intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            bats::util::intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
             if (!iter_idxs2.empty()) {
                 // there will be some recursion
                 if (!face_paired) {
@@ -261,7 +263,7 @@ Filtration<T, SimplicialComplex> FlagFiltration(
         spx_idxs[1] = j;
         F.add(t, spx_idxs); // auto ret =
         // std::cout << ret.second << std::endl;
-        intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
+        bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
         if (!iter_idxs.empty()) {
             add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t);
@@ -338,7 +340,7 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> CompleteFlagFilt
         spx_idxs[1] = j;
         F.add(t[k], spx_idxs);
 
-        intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
+        bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
         // nbrs[i].emplace(j);
         // nbrs[j].emplace(i);
@@ -352,3 +354,5 @@ std::tuple<SimplicialComplex, Filtration<T, SimplicialComplex>> CompleteFlagFilt
 
     return std::make_tuple(X, F);
 }
+
+} // namespace bats

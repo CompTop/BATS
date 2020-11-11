@@ -10,6 +10,8 @@
 
 #include <omp.h> // openMP header
 
+namespace bats {
+
 template <typename Edge>
 inline bool is_left_arrow(const Edge &e) {
     return e.targ < e.src;
@@ -612,3 +614,5 @@ std::vector<PersistencePair<size_t>> barcode_sparse_divide_conquer(const Diagram
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
 }
+
+} // namespace bats

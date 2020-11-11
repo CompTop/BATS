@@ -7,6 +7,7 @@
 #include <util/common.hpp>
 #include "barcode.hpp"
 
+namespace bats {
 
 template <typename T, typename MT>
 struct ReducedFilteredChainComplex {
@@ -89,3 +90,5 @@ inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args
 
 	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F), args...);
 }
+
+} // namespace bats

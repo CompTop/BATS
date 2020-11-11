@@ -249,12 +249,12 @@ std::vector<size_t> rand_perm(const size_t n) {
         *it = distribution(generator);
     }
 
-    return bats::sortperm(x);
+    return sortperm(x);
 }
 
 // compute inverse permutation
 inline std::vector<size_t> inv_perm(const std::vector<size_t> &p) {
-    return bats::sortperm(p);
+    return sortperm(p);
 }
 
 /*

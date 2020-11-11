@@ -15,6 +15,8 @@ and extend to a map on all simplices
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
 
+namespace bats {
+
 // construct simplicial map from X to Y
 // send vertex set of X to vertex set of Y using f0
 CellularMap SimplicialMap(
@@ -37,7 +39,7 @@ CellularMap SimplicialMap(
 			// 	std::cout << si << ',';
 			// }
 			// std::cout << std::endl;
-			int sgn = simplex_sign(s);
+			int sgn = bats::util::simplex_sign(s);
 			if (sgn != 0) {
 				size_t j = Y.find_idx(s);
 				if (j == bats::NO_IND) {
@@ -85,3 +87,5 @@ CellularMap SimplicialMap(
 
 	return f;
 }
+
+} // namespace bats

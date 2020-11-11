@@ -8,6 +8,8 @@
 
 #include <linalg/naive_dense.hpp>
 
+namespace bats {
+
 // data matrix - d x n
 // where d is dimension, n is number of points
 template<typename T>
@@ -95,3 +97,5 @@ struct DataSet {
 	const T& operator()(const size_t i, const size_t j) const { return data(i,j); }
 
 };
+
+} // namespace bats

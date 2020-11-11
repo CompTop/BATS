@@ -9,6 +9,8 @@ Some constructions for demonstrations
 #include <complex/cell_complex.hpp>
 #include <complex/cell_map.hpp>
 
+namespace bats {
+
 struct triangle {
     size_t a, b, c, ab, bc, ca;
 
@@ -139,3 +141,5 @@ Diagram<CellComplex, CellularMap> serpinski_diagram(
 
     return X;
 }
+
+} // namespace bats

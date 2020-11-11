@@ -16,6 +16,8 @@ Functors from one type of diagram to another
 
 #include <stdexcept>
 
+namespace bats {
+
 Diagram<SimplicialComplex, CellularMap> Nerve(
 	const Diagram<bats::Cover, std::vector<size_t>> &D,
 	const size_t dmax // maximum simplex dimension
@@ -191,3 +193,5 @@ Diagram<ReducedChainComplex<TM>, TM> Hom(
 	return HD;
 
 }
+
+} // namespace bats

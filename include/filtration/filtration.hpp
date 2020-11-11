@@ -2,6 +2,7 @@
 
 #include <vector>
 
+namespace bats {
 
 // template over
 //  TC - complex type
@@ -56,3 +57,5 @@ public:
 	}
 
 };
+
+} // namespace bats

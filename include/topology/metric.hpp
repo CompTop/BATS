@@ -10,6 +10,8 @@ TODO: add pairwise function
 #include <vector>
 #include "data.hpp"
 
+namespace bats {
+
 // CRTP over derived class D
 template <class D>
 struct AbstractMetric {
@@ -167,3 +169,5 @@ struct RPAngleDist : AbstractMetric<RPAngleDist> {
     }
 
 };
+
+} // namespace bats

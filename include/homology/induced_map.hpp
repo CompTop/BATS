@@ -10,6 +10,8 @@ compute induced maps on homology
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
 
+namespace bats {
+
 
 // get induced map on homology for dimension k
 template <class TVec>
@@ -38,3 +40,5 @@ ColumnMatrix<TVec> induced_map(
 	}
 	return ColumnMatrix<TVec>(D.I[k].size(), C.I[k].size(), col);
 }
+
+} // namespace bats

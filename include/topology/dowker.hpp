@@ -12,6 +12,8 @@ Witness complex
 #include <util/sorted.hpp>
 #include <complex/simplicial_complex.hpp>
 
+namespace bats {
+
 // find next smallest entry of columns of pdist[j]
 template <typename T>
 std::vector<T>& increment_m(
@@ -322,3 +324,5 @@ Filtration<T, SimplicialComplex> DowkerFiltration(
     Matrix<T> pdist = dist(L, X);
     return DowkerFiltration(pdist, rmax, dmax);
 }
+
+} // namespace bats

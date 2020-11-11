@@ -2,6 +2,8 @@
 #include <limits>
 #include <iostream>
 
+namespace bats {
+  
 // template over filtration type
 template <typename T>
 class BarcodePair {
@@ -17,3 +19,5 @@ public:
     std::cout << "( " << birth << " , " << death << " )" << std::endl;
   }
 };
+
+} // namespace bats

@@ -10,6 +10,8 @@ generate Rips complex
 #include <complex/simplicial_complex.hpp>
 #include <filtration/flag.hpp>
 
+namespace bats {
+
 // construct edges for rips complex
 // template over data type and metric
 template <typename T, typename M>
@@ -145,3 +147,5 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     auto redges = rips_filtration_edges(pdist, rmax);
     return FlagFiltration(redges, n, dmax, T(0));
 }
+
+} // namespace bats

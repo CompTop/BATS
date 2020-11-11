@@ -6,6 +6,8 @@
 #include <fstream>
 #include <sys/stat.h>
 
+namespace bats {
+
 // diagram class - owns data
 template <typename NT, typename ET>
 class Diagram {
@@ -116,3 +118,5 @@ public:
         }
     }
 };
+
+} // namespace bats

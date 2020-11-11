@@ -13,6 +13,8 @@ utilities for generating data
 #include "data.hpp"
 
 
+namespace bats {
+
 
 // add normal_noise
 // operates in-place on X
@@ -183,3 +185,5 @@ DataSet<double> gen_cylinder(
 
     return product_space(I, S);
 }
+
+} // namespace bats

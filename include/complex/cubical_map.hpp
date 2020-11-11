@@ -20,6 +20,8 @@ and extend to a map on all simplices
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
 
+namespace bats {
+
 // construct simplicial map from X to Y
 // Assumes that X \subseteq Y
 CellularMap CubicalMap(
@@ -53,3 +55,5 @@ CellularMap CubicalMap(
 
 	return f;
 }
+
+} // namespace bats

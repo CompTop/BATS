@@ -13,6 +13,8 @@ utility for landmarking pointclouds
 #include "metric.hpp"
 #include <util/set.hpp>
 
+namespace bats {
+
 // random landmarking with k landmarks
 // assume k < n
 template <typename T>
@@ -22,7 +24,7 @@ DataSet<T> random_landmarks(
  ) {
 	size_t n = D.size();
 
-	auto inds = random_subset(n, k);
+	auto inds = bats::util::random_subset(n, k);
 
 	return D[inds];
  }
@@ -234,3 +236,5 @@ size_t approx_center(
 		std::min_element(mind.cbegin(), mind.cend())
 	);
 }
+
+} // namespace bats
