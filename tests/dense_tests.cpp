@@ -3,9 +3,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-#include <linalg/naive_dense.h>
-#include <linalg/field.h>
-#include <quiver/type_a.h>
+#include <linalg/naive_dense.hpp>
+#include <linalg/field.hpp>
+#include <quiver/type_a.hpp>
 
 #define F3 ModP<int, 3>
 
@@ -32,7 +32,7 @@ TEST_CASE_TEMPLATE("Matrix Multiplication", T, int, ModP<int, 2>, ModP<int,3>, M
 
 
 TEST_CASE_TEMPLATE("VectorView, Transpose and JConjugate" ,
-	Acc, ColMaj, RowMaj, RevColMaj, RevRowMaj 
+	Acc, ColMaj, RowMaj, RevColMaj, RevRowMaj
 ) {
 	using F = F3;
 	using ADAcc = A<Dense<F,Acc>>;
@@ -207,7 +207,7 @@ TEST_CASE("el_commute") {
 }
 
 TEST_CASE_TEMPLATE("LEUP Factorization -self consistency",
-	Acc, ColMaj, RowMaj, RevColMaj, RevRowMaj 
+	Acc, ColMaj, RowMaj, RevColMaj, RevRowMaj
 ) {
 
 	SUBCASE(""){ srand(0); }
@@ -249,7 +249,7 @@ TEST_CASE_TEMPLATE("LEUP Factorization -self consistency",
 TEST_CASE_TEMPLATE("l_solve", F, ModP<int, 2>, ModP<int,3>, ModP<int, 5>, Rational<int>) {
 
 	using DI = Dense<F,ColMaj>;
-	
+
 	auto I = A<DI>::identity(4);
 	F lmat1v[] = {
 	1,1,0,0,
@@ -271,7 +271,7 @@ TEST_CASE_TEMPLATE("Quiver Alg - self consistency", F, ModP<int,2>, ModP<int,3>,
 
 	using DI = Dense<F,ColMaj>;
 	using AD = A<DI>;
-	
+
 	SUBCASE(""){ srand(0); }
 	SUBCASE(""){ srand(1); }
 	SUBCASE(""){ srand(2); }
@@ -299,7 +299,7 @@ TEST_CASE_TEMPLATE("Quiver Alg - self consistency", F, ModP<int,2>, ModP<int,3>,
 	std::vector<AD> mats;
 	std::vector<bool> arrow_dir;
 	std::vector<size_t> dims;
-	
+
 	// generate random type-A quiver with random dimensions
 	AD a1;
 	size_t dim1 = 1+rand()%maxdim;
@@ -307,9 +307,9 @@ TEST_CASE_TEMPLATE("Quiver Alg - self consistency", F, ModP<int,2>, ModP<int,3>,
 	for(size_t i=0;i<n;i++){
 		size_t dim_ip1 = 1+rand()%maxdim;
 		dims.emplace_back(dim_ip1);
-		
+
 		arrow_dir.emplace_back(rand()%2);
-		
+
 		if(arrow_dir[i]==0)
 		    a1 = AD(dims[i],dims[i+1]);
 		else
@@ -328,7 +328,7 @@ TEST_CASE_TEMPLATE("Quiver Alg - self consistency", F, ModP<int,2>, ModP<int,3>,
 	}
 
 	// create object
-	auto taq = Type_A<F>(mats,arrow_dir);
+	auto taq = bats::Type_A<F>(mats,arrow_dir);
 	// forward sweep
 	taq.forward_sweep();
 

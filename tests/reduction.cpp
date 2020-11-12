@@ -21,7 +21,7 @@ TEST_CASE_TEMPLATE("Identity Reduction", F, F2, F3, F5, Q) {
 	MatT B = MatT::identity(5);
 	MatT U = MatT::identity(5);
 
-	reduce_matrix(B, U);
+	bats::reduce_matrix(B, U);
 	CHECK(B == MatT::identity(5));
 	CHECK(U == MatT::identity(5));
 }
@@ -36,7 +36,7 @@ TEST_CASE_TEMPLATE("Ones Reduction", F, F2, F3, F5, Q) {
 	CHECK(R == B);
 	MatT U = MatT::identity(2);
 
-	auto p2c = reduce_matrix(R, U);
+	auto p2c = bats::reduce_matrix(R, U);
 	// basic sanity checks
 	CHECK(U.is_upper());
 	CHECK(R.is_reduced());
@@ -62,7 +62,7 @@ TEST_CASE_TEMPLATE("Random Seeds", T, F2, F3, F5, Q) {
 			MatT R(A);
 			auto U = MatT::identity(A.ncol());
 
-			reduce_matrix(R, U);
+			bats::reduce_matrix(R, U);
 
 			// sanity checks
 			CHECK(U.is_upper());
@@ -79,7 +79,7 @@ TEST_CASE_TEMPLATE("Random Seeds", T, F2, F3, F5, Q) {
 			MatT R(A);
 			auto U = MatT::identity(A.ncol());
 
-			reduce_matrix(R, U);
+			bats::reduce_matrix(R, U);
 
 			// sanity checks
 			CHECK(U.is_upper());
@@ -96,7 +96,7 @@ TEST_CASE_TEMPLATE("Random Seeds", T, F2, F3, F5, Q) {
 			MatT R(A);
 			auto U = MatT::identity(A.ncol());
 
-			reduce_matrix(R, U);
+			bats::reduce_matrix(R, U);
 
 			// sanity checks
 			CHECK(U.is_upper());

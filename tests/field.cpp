@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-#include <linalg/field.h>
+#include <linalg/field.hpp>
 
 #define F2 ModP<int, 2>
 #define F3 ModP<int, 3>

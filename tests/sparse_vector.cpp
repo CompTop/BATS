@@ -3,9 +3,9 @@
 #include <vector>
 #include <set>
 
-#include <linalg/field.h>
-#include <linalg/sparse_vector.h>
-#include <linalg/set_vector.h>
+#include <linalg/field.hpp>
+#include <linalg/sparse_vector.hpp>
+#include <linalg/set_vector.hpp>
 
 #define F2 ModP<int, 2>
 #define F3 ModP<int, 3>
@@ -26,7 +26,7 @@ TEST_CASE_TEMPLATE("Sparse Vector Ops", F, F2, F3, F5, Q, int) {
 
 		REQUIRE(x == y);
 	}
-	
+
 	SUBCASE("axpy") {
 		std::vector<size_t> ind;
 		std::vector<F> val;
