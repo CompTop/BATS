@@ -5,6 +5,9 @@ class to store a chain complex
 #include <vector>
 #include <util/permutation.hpp>
 
+namespace bats {
+
+
 // template over matrix type
 template <typename MT>
 struct ChainComplex {
@@ -75,3 +78,5 @@ inline auto __ChainComplex(const CpxT &X, T) {
 
 	return ChainComplex<MT>(X);
 }
+
+} // namespace bats

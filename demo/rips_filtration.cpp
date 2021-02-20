@@ -1,5 +1,5 @@
 #include <bats.hpp>
-#include <util/io.h>
+#include <util/io.hpp>
 #include <string>
 
 #define FT ModP<int, 2>
@@ -12,20 +12,20 @@ int main (int argc, char* argv[]) {
 	size_t n = 100;
 
 	// maximum simplex dimension
-    size_t maxdim = parse_argv(argc, argv, "-maxdim", 3);
-    double rmax = parse_argv(argc, argv, "-rmax", 0.4);
+    size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
+    double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 0.4);
 
 	//auto X = sample_cube<double>(d, n);
-	auto X = sample_sphere<double>(d, n);
+	auto X = bats::sample_sphere<double>(d, n);
 
 	// auto dist = RPAngleDist(); //AngleDist();
-	auto dist = Euclidean();
+	auto dist = bats::Euclidean();
 
 	{
 		X.data.print();
-		auto R = RipsComplex(X, dist, rmax, 3);
-		auto C = __ChainComplex(R, FT());
-		auto RC = ReducedChainComplex(C);
+		auto R = bats::RipsComplex(X, dist, rmax, 3);
+		auto C = bats::__ChainComplex(R, FT());
+		auto RC = bats::ReducedChainComplex(C);
 		std::cout << "non-filtered homology: " << RC.hdim(1) << std::endl;
 	}
 
@@ -33,7 +33,7 @@ int main (int argc, char* argv[]) {
 	// auto L = greedy_landmarks(X, 10, dist);
 	// auto cover = landmark_cover(X, L, dist, 3);
 
-	auto F = RipsFiltration(X, dist, rmax, maxdim);
+	auto F = bats::RipsFiltration(X, dist, rmax, maxdim);
 	for (size_t i = 0; i <= F.maxdim(); i++) {
 		std::cout << F.ncells(i) << " in dim " << i << std::endl;
 	}
@@ -41,9 +41,9 @@ int main (int argc, char* argv[]) {
 
 	//auto F = FlagFiltration(edges, ts, 3, 2, 0.);
 
-	auto FC = __FilteredChainComplex(F, FT());
+	auto FC = bats::__FilteredChainComplex(F, FT());
 
-	auto RFC = ReducedFilteredChainComplex(
+	auto RFC = bats::ReducedFilteredChainComplex(
 		FC
 		// bats::extra_reduction_flag(),
 		// bats::compression_flag()

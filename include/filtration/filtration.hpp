@@ -4,6 +4,39 @@
 
 namespace bats {
 
+/*
+Helper functions for sort permutations
+*/
+// get sort permutation for filtration in dimension dim
+template <typename T>
+inline std::vector<size_t> filtration_sortperm(
+	const std::vector<T> &v
+) {
+	return bats::util::stable_sortperm(v);
+}
+
+template <typename T>
+std::vector<std::vector<size_t>> filtration_sortperm(
+	const std::vector<std::vector<T>> &v
+) {
+	std::vector<std::vector<size_t>> perms;
+	for (size_t dim = 0; dim < v.size(); dim++) {
+		perms.emplace_back(filtration_sortperm(v[dim]));
+	}
+	return perms;
+}
+
+std::vector<std::vector<size_t>> filtration_iperm(
+	const std::vector<std::vector<size_t>> &perms
+) {
+	std::vector<std::vector<size_t>> iperms;
+	for (auto p : perms) {
+		iperms.emplace_back(bats::util::inv_perm(p));
+	}
+	return iperms;
+}
+
+
 // template over
 //  TC - complex type
 //  TF - filtration type
@@ -54,6 +87,16 @@ public:
 		reserve(ret.dim, ret.ind+1);
 		val[ret.dim][ret.ind] = t;
 		return ret;
+	}
+
+	// get sort permutation for filtration in dimension dim
+	inline std::vector<size_t> sortperm(size_t dim) const {
+		return filtration_sortperm(val[dim]);
+	}
+
+	// get sort permutation for filtration in all dimensions
+	inline std::vector<std::vector<size_t>> sortperm() const {
+		return filtration_sortperm(val);
 	}
 
 };

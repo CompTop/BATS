@@ -18,7 +18,7 @@ default: field.out dense_tests.out col_matrix.out sparse_vector.out util.out red
 
 %: %.out %.prof %.db
 
-test: field.out dense_tests.out col_matrix.out sparse_vector.out util.out reduction.out quiver.out
+test: field.out dense_tests.out col_matrix.out sparse_vector.out util.out reduction.out quiver.out filtration.out
 	./field.out
 	./dense_tests.out
 	./col_matrix.out
@@ -26,6 +26,7 @@ test: field.out dense_tests.out col_matrix.out sparse_vector.out util.out reduct
 	./util.out
 	./reduction.out
 	./quiver.out
+	./filtration.out
 
 .PHONY: clean
 clean:
