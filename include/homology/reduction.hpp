@@ -279,7 +279,7 @@ p2c_type reduce_matrix_compression(
 // p2ck1 - p2c returned by reduction of B{k+1}
 // dimk - number of cells in dimension k
 template <typename MT>
-std::set<size_t> extract_basis_indices(MT &Rk, p2c_type &p2ck1) {
+std::set<size_t> extract_basis_indices(MT &&Rk, const p2c_type &p2ck1) {
 
 	std::set<size_t> I;
 	size_t dimk = Rk.ncol();
@@ -302,7 +302,7 @@ std::set<size_t> extract_basis_indices(MT &Rk, p2c_type &p2ck1) {
 // no p2c for dimension above
 // dimk - number of cells in dimension k
 template <typename MT>
-std::set<size_t> extract_basis_indices(MT &Rk) {
+std::set<size_t> extract_basis_indices(const MT &Rk) {
 
 	std::set<size_t> I;
 	size_t dimk = Rk.ncol();
