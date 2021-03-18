@@ -175,6 +175,17 @@ public:
         apply_perm(col, colperm);
     }
 
+	// vj <- a * vj + c * vk
+	// vk <- b * vj + d * vk
+	void mix_cols(const size_t j, const size_t k, const val_type& a, const val_type& b, const val_type& c, const val_type& d) {
+		TC cj(col[j]);
+		TC ck(col[k]);
+		col[j].scale_inplace(a);
+		col[j].axpy(c, ck);
+		col[k].scale_inplace(d);
+		col[k].axpy(b, cj);
+	}
+
     // permute rows in-place
     void permute_rows(const std::vector<size_t> &rowperm) {
         // TODO: this is trivially parallelizable
@@ -198,6 +209,27 @@ public:
 			col[j].clear_inds(c);
 		}
 	}
+
+	// swap rows i, i2
+	void swap_rows(const size_t i, const size_t i2) {
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].swap_rows(i,i2);
+		}
+	}
+
+	void mix_rows(const size_t i, const size_t i2, const val_type& a, const val_type& b, const val_type& c, const val_type& d) {
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].mix_rows(i, i2, a, b, c, d);
+		}
+	}
+
+	void add_rows(const size_t i, const val_type& c, const size_t i2) {
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].add_rows(i, c, i2);
+		}
+	}
+
+
 
 
     // addition, substraction, scalar multiplication

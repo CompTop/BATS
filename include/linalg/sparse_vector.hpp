@@ -293,6 +293,101 @@ public:
 		sort();
 	}
 
+	/*
+	Row operations
+	*/
+	// swap entries i and j in-place
+	void swap_rows(const size_t i, const size_t j) {
+		auto pi = lower_bound(i);
+		auto pj = lower_bound(j);
+		// check whether there is actually an entry at location i
+		if (pi != nzend() && pi->ind == i) {
+			// check whether there is actually an entry at location j
+			if (pj != nzend() && pj->ind == j) {
+				std::swap(pi->val, pj->val);
+			} else {
+				pi->ind = j;
+				sort();
+			}
+		} else if (pj != nzend() && pj->ind == j) {
+			pj->ind = i;
+			sort();
+		}
+	}
+	// scale vector by c
+	void scale_inplace(const TI i, const TV& c) {
+		auto pi = lower_bound(i);
+		if (pi != nzend() && pi->ind ==i) {
+			if (c == 0) {
+				indval.erase(pi);
+				return;
+			}
+			pi->val = c * pi->val;
+		}
+		return;
+	}
+
+	// mix row entries
+	// apply matrix
+	// [a b]
+	// [c d]
+	// to rows i, j
+	// v[i] <- a*v[i] + b*v[j]
+	// v[j] <- c*v[i] + d*v[j]
+	// check that zeros are removed
+	void mix_rows(const size_t i, const size_t j, const TV& a, const TV& b, const TV& c, const TV& d) {
+		auto pi = lower_bound(i);
+		auto pj = lower_bound(j);
+		// check whether there is actually an entry at location i
+		if (pi != nzend() && pi->ind == i) {
+			auto vi = pi->val;
+			// check whether there is actually an entry at location j
+			if (pj != nzend() && pj->ind == j) {
+				auto vj = pj->val;
+				pi->val = (a * vi) + (b * vj);
+				pj->val = (c * vi) + (d * vj);
+				if (pj->val ==  0) {
+					indval.erase(pj);
+					pi = lower_bound(i);
+				}
+			} else {
+				pi->val = a * vi;
+				if (c*vi != 0) indval.insert(pj, nzpair(j, c*vi));
+			}
+
+			if (pi->val == 0) {
+				indval.erase(pi);
+			}
+		} else if (pj != nzend() && pj->ind == j) {
+			auto vj = pj->val;
+
+			if (d*vj != 0) {
+				pj->val = d * vj;
+			} else {
+				indval.erase(pj);
+			}
+			if (b*vj != 0) indval.insert(pi, nzpair(i, b*vj));
+
+		}
+	}
+
+	// // v[i] <- v[i] + c * v[j]
+	// void add_rows(const size_t i, const TV& c, const size_t j) {
+	// 	if (c == 0) return;
+	// 	auto pi = lower_bound(i);
+	// 	if (pi != nzend() && pi->ind == i) {
+	// 		// something to do
+	// 		auto pj = lower_bound(j);
+	// 		if (pj != nzend() && pj->ind ==j) {
+	// 			pj->val = pj->val + c * (pi->val);
+	// 			if (pj->val == 0) indval.erase(pj); // delete entry if value is 0
+	// 		} else {
+	// 			// need to insert
+	// 			indval.insert(pj, c*(pi->val));
+	// 		}
+	// 	}
+	// }
+
 	// set
 	// y <- ax + y
 	template <class SVT>
