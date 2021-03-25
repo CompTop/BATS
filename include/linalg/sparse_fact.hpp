@@ -466,3 +466,14 @@ SparseFact<TC> UQL(const ColumnMatrix<TC> &A) {
 
     return F;
 }
+
+// invert A using LQU factorization
+// assume Q is full rank
+// A = LQU -> A^{-1} = U^{-1} Q^T L^{-1}
+template <class TC>
+ColumnMatrix<TC> inv(const ColumnMatrix<TC> &A) {
+
+    auto F = LQU(A);
+    return u_inv(F.U) * F.E.T() * l_inv(F.L);
+
+}

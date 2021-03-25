@@ -172,7 +172,7 @@ public:
     // permute columns in-place
     // TODO: evaluate if this is best method.
     inline void permute_cols(const std::vector<size_t> &colperm) {
-        apply_perm(col, colperm);
+        bats::util::apply_perm(col, colperm);
     }
 
 	// vj <- a * vj + c * vk

@@ -589,6 +589,12 @@ public:
 		}
 	}
 
+	SparseVector scale(const TV c) const {
+		SparseVector vc(*this);
+		vc.scale_inplace(c);
+		return vc;
+	}
+
 
 	void print() const {
 		auto it = indval.cbegin();

@@ -69,6 +69,7 @@ public:
 
     // dimension of polynomial
     inline size_t dim() const { return c.size() - 1; }
+	inline size_t degree() const { return dim(); }
     // size - useful for iteration
     inline size_t size() const { return c.size(); }
 
@@ -76,6 +77,32 @@ public:
     inline T leading_coeff() const {
         return c.back();
     }
+
+	// apply polynomial
+	T operator()(const T& v) const {
+		if (is_zero()) {return T(0);}
+		T sum = c[0];
+		T vk = T(1);
+		for (size_t k = 1; k < size(); k++) {
+			vk = vk * v; // v^k
+			sum += c[k] * vk;
+		}
+		return sum;
+	}
+
+	// apply polynomial of matrix to vector
+	// p(A) * v
+	template <typename TC>
+	TC operator()(const ColumnMatrix<TC>& A, const TC& v) const {
+		if (is_zero()){ return TC(); }
+		TC sum; sum.axpy(c[0], v); // c[0]*v
+		TC Akv(v); // A^k * v
+		for (size_t k = 1; k < size(); k++) {
+			Akv = A * Akv; // A^k * v
+			sum.axpy(c[k], Akv);
+		}
+		return sum;
+	}
 
     // negation
     UnivariatePolynomial operator-() const {
