@@ -201,6 +201,23 @@ public:
         permute_rows(rowperm);
     }
 
+	ColumnMatrix submatrix(
+		const std::vector<size_t> &rind,
+        const std::vector<size_t> &cind
+    ) const {
+		std::vector<TC> newcol;
+		newcol.reserve(cind.size());
+
+		auto prow = bats::util::partial_perm(rind, nrow());
+
+		size_t j = 0;
+        // loop in column permutation order
+        for ( size_t j : cind) {
+			newcol.append(col[j].subvector(prow));
+        }
+		return ColumnMatrix(rind.size(), cind.size(), newcol);
+	}
+
 	// clear rows i for which c[i] is true
 	// use vector of bools for quick lookup - vector of inds would require search
 	void clear_rows(const std::vector<bool> &c) {

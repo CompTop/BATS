@@ -33,6 +33,26 @@ struct ChainComplex {
 		}
 	}
 
+	// produce a relative chain complex C(X, A)
+	template <typename CpxT>
+	ChainComplex(const CpxT& X, const CpxT& A) {
+		dim.resize(X.maxdim() + 1);
+		boundary.resize(X.maxdim() + 1);
+		auto inds = X.get_indices(A);
+		std::vector<std::vector<size_t>> cinds;
+		for (size_t k = 0; k < X.maxdim() + 1; k++) {
+			std::sort(inds[k].begin(), inds[k].end());
+			cinds.emplace_back(bats::util::sorted_complement(inds[k], X.ncells(k)));
+			if (k == 0) {
+				boundary[k] = MT(1, X.ncells(k) - A.ncells(k));
+			} else {
+				CSCMatrix<int, size_t> B = X.boundary_csc(k);
+				boundary[k] = MT(B.submatrix(cinds[k-1], cinds[k]));
+			}
+			dim[k] = boundary[k].ncol();
+		}
+	}
+
 	// ChainComplex(const ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
 
 	inline size_t maxdim() const { return dim.size() - 1; }
@@ -77,6 +97,13 @@ inline auto __ChainComplex(const CpxT &X, T) {
 	using MT = ColumnMatrix<VT>;
 
 	return ChainComplex<MT>(X);
+}
+template <typename T, typename CpxT>
+inline auto __ChainComplex(const CpxT &X, const CpxT &A, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return ChainComplex<MT>(X, A);
 }
 
 } // namespace bats

@@ -26,6 +26,7 @@ public:
 
 	// size of homology vector space in dimension k
 	inline size_t hdim(size_t k) const { return I[k].size(); }
+	inline size_t betti(size_t k) const { return I[k].size(); }
 	inline size_t maxdim() const { return R.size() - 1; }
 
 	MT& operator[](size_t k) {

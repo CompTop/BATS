@@ -136,6 +136,39 @@ public:
         return;
     }
 
+    // return submatrix indexed by rows and columns
+    CSCMatrix submatrix(
+        const std::vector<size_t> &rind,
+        const std::vector<size_t> &cind
+    ) const {
+        CSCMatrix A;
+        A.m = rind.size();
+        A.n = cind.size();
+        A.colptr.resize(A.n + 1);
+        A.colptr[0] = 0;
+        A.rowind.clear();
+        A.val.clear();
+
+        auto prow = bats::util::partial_perm(rind, nrow());
+
+        size_t j = 0;
+        // loop in column permutation order
+        for ( size_t Mj : cind) {
+            // loop over nzs in the jth column of M
+            for (size_t Mp = colptr[Mj]; Mp < colptr[Mj+1]; Mp++) {
+                if (prow[rowind[Mp]] != bats::NO_IND) {
+                    // this item makes it to the block
+                    A.rowind.emplace_back(prow[rowind[Mp]]);
+                    A.val.emplace_back(val[Mp]);
+                }
+            }
+            j++;
+            A.colptr[j] = A.rowind.size();
+        }
+        return A;
+
+    }
+
     // obtain block A from M from columns cind and
     // row permutation prow
     friend void block_select(

@@ -284,6 +284,21 @@ public:
 		sort();
 	}
 
+	// return subvector based on indices pind
+	SparseVector subvector(
+		const std::vector<size_t> &pind
+	) const {
+		std::vector<key_type> newindval;
+		for (auto it = nzbegin(); it != nzend(); it++) {
+			if (pind[it->ind] != bats::NO_IND) {
+				newindval.emplace_back(key_type(pind[it->ind], it->val));
+			}
+		}
+		// sort in-place
+		std::sort(newindval.begin(), newindval.end());
+		return SparseVector(newindval);
+	}
+
 	// apply J-matrix transformation
 	// index i -> (m-1) - i
 	void J(const size_t m) {

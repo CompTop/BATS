@@ -21,6 +21,35 @@ struct ChainMap {
         }
     }
 
+    // relative chain map
+    // A \subseteq X
+    // B \subseteq Y
+    // f: X \to Y
+    // ASSUMES: f(A) \subseteq B
+    template <typename CpxT>
+    ChainMap(
+        const CellularMap& f,
+        const CpxT& X,
+        const CpxT& A,
+        const CpxT& Y,
+        const CpxT& B
+    ) {
+        size_t maxd = f.maxdim() + 1;
+        map.resize(maxd);
+        auto Xinds = X.get_indices(A);
+        auto Yinds = Y.get_indices(B);
+        for (size_t k = 0; k < maxd; k++) {
+            auto Yinds = Y.get_indices(B, k);
+            std::sort(Yinds.begin(), Yinds.end());
+            auto Xinds = X.get_indices(A, k);
+            std::sort(Xinds.begin(), Xinds.end());
+            map[k] = TM(f[k].submatrix(
+                bats::util::sorted_complement(Yinds, Y.ncells(k)),
+                bats::util::sorted_complement(Xinds, X.ncells(k))
+            ));
+        }
+    }
+
     inline TM& operator[](size_t k) { return map[k]; }
     inline const TM& operator[](size_t k) const { return map[k]; }
 

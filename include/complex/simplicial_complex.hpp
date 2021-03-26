@@ -46,7 +46,6 @@ private:
     std::vector<std::vector<int>> coeff;
 
 
-
     // keeps track of how many cells are in given dimension
     std::vector<size_t> _ncells;
     // keeps track of reserved capacity
@@ -294,6 +293,24 @@ public:
 		return simplices;
 	}
 
+	// get indices in subcomplex A in dimension dim
+	std::vector<size_t> get_indices(const SimplicialComplex& A, size_t dim) const {
+		if (dim > A.maxdim()) { return std::vector<size_t>(); }
+		std::vector<size_t> inds(A.ncells(dim));
+		for (size_t i = 0; i < A.ncells(dim); i++) {
+			auto s = A.get_simplex(dim, i);
+			inds[i] = find_idx(s);
+		}
+		return inds;
+	}
+
+	std::vector<std::vector<size_t>> get_indices(const SimplicialComplex& A) const {
+		std::vector<std::vector<size_t>> inds;
+		for (size_t dim = 0; dim < maxdim() + 1; dim++) {
+			inds.emplace_back(get_indices(A, dim));
+		}
+		return inds;
+	}
 
 
     // get CSC integer matrix boundary in dimension dim
@@ -337,6 +354,7 @@ public:
             ival
         );
     }
+
 
     friend class MorsePairing<SimplicialComplex>;
 

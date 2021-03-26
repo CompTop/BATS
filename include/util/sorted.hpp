@@ -207,5 +207,30 @@ size_t find_sorted_lt(const TI &begin, const TI &end, const T &v) {
     //return it--;
 }
 
+// return complement of sorted vector in range [0,n)
+// assume vector ind is sorted
+template <typename T>
+std::vector<T> sorted_complement(const std::vector<T> &ind, size_t n) {
+    std::vector<T> cind;
+    cind.reserve(n - ind.size());
+    size_t i = 0;
+    auto ip = ind.begin();
+    while (ip != ind.end()) {
+        if (*ip == i) {
+            // we do not append i to the complement
+            i++;
+            ip++;
+        } else {
+            // we append i to the complement
+            cind.emplace_back(i++);
+        }
+    }
+    while (i < n) {
+        // fill in the rest
+        cind.emplace_back(i++);
+    }
+    return cind;
+}
+
 } // namespace util
 } // namespace bats
