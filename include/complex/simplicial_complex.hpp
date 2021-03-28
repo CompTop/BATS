@@ -9,6 +9,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <tuple>
 
 #include "abstract_complex.hpp"
 #include <util/common.hpp>
@@ -84,7 +85,7 @@ private:
 
     // adds a simplex to the complex without doing any checks
     // assume dim > 0
-    cell_ind _add_unsafe(std::vector<size_t> &s) {
+	cell_ind _add_unsafe(std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
 
         // determine faces
@@ -132,6 +133,7 @@ private:
         return cell_ind(dim, ind);
     }
 
+
     // add simplex to complex with appropriate checks
     cell_ind add_safe(std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
@@ -147,6 +149,72 @@ private:
         }
         // we're clear to add
         return _add_unsafe(s);
+    }
+
+	// adds a simplex to the complex without doing any checks
+    // recurse on faces
+	cell_ind _add_recursive(std::vector<size_t> &s) {
+        size_t dim = s.size() - 1;
+
+        // determine faces
+        if (dim > 0){
+            // first we'll add faces
+
+			std::vector<size_t> face; // newly allocated face
+
+            int c = -1;
+            // loop over faces in lexicographical order
+            size_t spx_len = dim + 1;
+            for (size_t k = 0; k < spx_len; k++) {
+
+                size_t k2 = dim-k; // index to skip
+                face.clear();
+                for (size_t j = 0; j < k2; j++) {
+                    face.emplace_back(s[j]);
+                }
+                for (size_t j = k2+1; j < spx_len; j++) {
+                    face.emplace_back(s[j]);
+                }
+
+                size_t ind = find_idx(face);
+                // add face recursively
+                if (ind == bats::NO_IND) {
+					cell_ind fci = _add_recursive(face);
+					ind = fci.ind;
+                }
+                faces[dim-1].emplace_back(ind);
+                coeff[dim-1].emplace_back(c);
+                c = -c;
+            }
+        }
+
+        // if we succeeded (faces were present), we add the simplex
+        // get index of simplex
+        size_t ind = _ncells[dim]++;
+        // add to map
+        spx_to_idx.emplace(s, ind);
+        for (auto v : s) {
+            spx[dim].emplace_back(v);
+        }
+
+        return cell_ind(dim, ind);
+    }
+
+	// add simplex to complex with appropriate checks
+    cell_ind add_safe_recursive(std::vector<size_t> &s) {
+        size_t dim = s.size() - 1;
+        // check that we have reserved memory for dimension
+        reserve(dim);
+
+        // ensure simplex is sorted
+        std::sort(s.begin(), s.end());
+        // check if simplex is already in complex
+        if (spx_to_idx.count(s) > 0) {
+            // simplex is already in complex
+            return cell_ind(dim, spx_to_idx[s]);
+        }
+        // we're clear to add
+        return _add_recursive(s);
     }
 
 
@@ -232,6 +300,12 @@ public:
         std::vector<size_t> &&s
     ) { return add_safe(s); }
 
+	inline cell_ind add_recursive(
+		std::vector<size_t> &s
+	) { return add_safe_recursive(s); }
+	inline cell_ind add_recursive(
+		std::vector<size_t> &&s
+	) { return add_safe_recursive(s); }
     // inline size_t add_vertex() { return _add_vertex(); }
     // inline size_t add_vertices(size_t k) { return _add_vertices(k); }
 
@@ -488,6 +562,86 @@ SimplicialComplex FlagComplex(
     }
 
     return X;
+}
+
+// helper functions for TriangulatedProduct
+// prod_ind turns product of 0-simplices to 0-simplex
+// ind_prod performs inverse operation
+inline size_t  prod_ind(size_t i, size_t j, size_t n) {
+	return i + n*j;
+}
+// std::tuple<size_t, size_t> ind_prod(size_t k, size_t n) {
+// 	return std::tie(k % n, k / n);
+// }
+
+// loop over all possible simplices
+template <typename itT>
+void product_paths(
+	SimplicialComplex &XY,
+	const itT xit,
+	const itT xend,
+	const itT yit,
+	const itT yend,
+	std::vector<size_t> &s,
+	const size_t n
+) {
+	// put on vertex
+	s.emplace_back(prod_ind(*xit, *yit, n));
+	if (xit == xend && yit == yend) {
+		XY.add_recursive(s);
+		s.pop_back();
+		return;
+	}
+	if (xit != xend) {
+		// increment in x direction
+		product_paths(XY, xit+1, xend, yit, yend, s, n);
+	}
+	if (yit != yend) {
+		// increment in y direction
+		product_paths(XY, xit, xend, yit+1, yend, s, n);
+	}
+	// pop off vertex
+	s.pop_back();
+	return;
+}
+
+// Triangulated product of X and Y up to simplex dimension k
+// use translator
+SimplicialComplex TriangulatedProduct(
+	const SimplicialComplex& X,
+	const SimplicialComplex& Y,
+	const size_t maxdim
+) {
+
+	SimplicialComplex XY;
+	const size_t n = X.ncells(0); // number of 0-cells in X
+
+	std::vector<size_t> s; // placeholder simplex
+	// loop over simplex dimension of product
+	for (size_t dim = 0; dim <=maxdim; dim++) {
+		// dimension of simplices we'll take a product of
+		for (size_t dX = 0; dX <= dim; dX++) {
+			size_t dY = dim - dX;
+			if (dX > X.maxdim() || dY > Y.maxdim()) {continue;}
+
+			// loop over simplices of dimension dX
+			for (size_t iX = 0; iX < X.ncells(dX); iX++) {
+				// loop over simplices of dimension dY
+				for (size_t iY = 0; iY < Y.ncells(dY); iY++) {
+					product_paths(
+						XY,
+						X.simplex_begin(dX, iX),
+						(X.simplex_end(dX, iX) - 1),
+						Y.simplex_begin(dY, iY),
+						(Y.simplex_end(dY, iY) - 1),
+						s,
+						n
+					);
+				}
+			}
+		}
+	}
+	return XY;
 }
 
 } // namespace bats
