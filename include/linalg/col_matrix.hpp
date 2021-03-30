@@ -213,7 +213,7 @@ public:
 		size_t j = 0;
         // loop in column permutation order
         for ( size_t j : cind) {
-			newcol.append(col[j].subvector(prow));
+			newcol.emplace_back(col[j].subvector(prow));
         }
 		return ColumnMatrix(rind.size(), cind.size(), newcol);
 	}
