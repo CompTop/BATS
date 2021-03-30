@@ -153,7 +153,8 @@ private:
 
 	// adds a simplex to the complex without doing any checks
     // recurse on faces
-	cell_ind _add_recursive(std::vector<size_t> &s) {
+	// put any added cells in ci
+	cell_ind _add_recursive(std::vector<size_t> &s, std::vector<cell_ind> &ci) {
         size_t dim = s.size() - 1;
 
         // determine faces
@@ -179,7 +180,7 @@ private:
                 size_t ind = find_idx(face);
                 // add face recursively
                 if (ind == bats::NO_IND) {
-					cell_ind fci = _add_recursive(face);
+					cell_ind fci = _add_recursive(face, ci);
 					ind = fci.ind;
                 }
                 faces[dim-1].emplace_back(ind);
@@ -196,12 +197,13 @@ private:
         for (auto v : s) {
             spx[dim].emplace_back(v);
         }
+		ci.emplace_back(cell_ind(dim, ind));
 
         return cell_ind(dim, ind);
     }
 
 	// add simplex to complex with appropriate checks
-    cell_ind add_safe_recursive(std::vector<size_t> &s) {
+    std::vector<cell_ind> add_safe_recursive(std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
         // check that we have reserved memory for dimension
         reserve(dim);
@@ -211,10 +213,12 @@ private:
         // check if simplex is already in complex
         if (spx_to_idx.count(s) > 0) {
             // simplex is already in complex
-            return cell_ind(dim, spx_to_idx[s]);
+            return std::vector{cell_ind(dim, spx_to_idx[s])};
         }
         // we're clear to add
-        return _add_recursive(s);
+		std::vector<cell_ind> ci;
+		_add_recursive(s, ci);
+        return ci;
     }
 
 
@@ -300,10 +304,10 @@ public:
         std::vector<size_t> &&s
     ) { return add_safe(s); }
 
-	inline cell_ind add_recursive(
+	inline std::vector<cell_ind> add_recursive(
 		std::vector<size_t> &s
 	) { return add_safe_recursive(s); }
-	inline cell_ind add_recursive(
+	inline std::vector<cell_ind> add_recursive(
 		std::vector<size_t> &&s
 	) { return add_safe_recursive(s); }
     // inline size_t add_vertex() { return _add_vertex(); }

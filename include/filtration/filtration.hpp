@@ -73,6 +73,15 @@ public:
 		}
     };
 
+	// initialize complex with arguments
+	template <class ...Ts>
+	Filtration(Ts (&...args)) : X(args...) {
+		for (size_t dim = 0; dim < X.maxdim() + 1; dim++){
+			// std::cout << "reserving " << P.ncells(dim) << std::endl;
+			reserve(dim, X.ncells(dim));
+		}
+	}
+
 	inline const CpxT& complex() const { return X; }
 	inline const std::vector<std::vector<TF>>& vals() const { return val;}
 	inline const std::vector<TF>& vals(const size_t k) const { return val[k]; }
@@ -86,6 +95,19 @@ public:
 		cell_ind ret = X.add(args...);
 		reserve(ret.dim, ret.ind+1);
 		val[ret.dim][ret.ind] = t;
+		return ret;
+	}
+
+	// add to complex
+	// recursively add faces as needed
+	// anything added takes filtration value t
+	template <class ...Ts>
+	inline std::vector<cell_ind> add_recursive(TF t, Ts (&...args)) {
+		std::vector<cell_ind> ret = X.add_recursive(args...);
+		for (auto &r : ret) {
+			reserve(r.dim, r.ind+1);
+			val[r.dim][r.ind] = t;
+		}
 		return ret;
 	}
 

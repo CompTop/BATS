@@ -97,7 +97,7 @@ private:
     }
 
 	// check that s is a cube that can be added to complex
-	bool is_valid_cube(const std::vector<size_t> &s) {
+	bool is_valid_cube(const std::vector<size_t> &s) const {
 		if (s.size() != 2*__maxdim) { return false; }
 		// check that each interval is either degenerate or unit length
 		for (size_t i = 0; i < 2*__maxdim; i+=2) {
@@ -107,7 +107,7 @@ private:
 	}
 
 	// get dimension of cube by removing degeneracies
-	size_t cube_dim(const std::vector<size_t> &s) {
+	size_t cube_dim(const std::vector<size_t> &s) const {
 		size_t dim = 0;
 		for (size_t i = 0; i < 2*__maxdim; i+=2) {
 			dim += s[i+1] - s[i]; // assume valid cube
@@ -188,7 +188,11 @@ private:
 
 	// adds a cube to the complex without doing any checks
     // assume dim > 0
-    cell_ind _add_unsafe_recursive(const std::vector<size_t> &s) {
+	// add added cells to ci
+    cell_ind _add_unsafe_recursive(
+		const std::vector<size_t> &s,
+		std::vector<cell_ind> &ci
+	) {
         size_t dim = cube_dim(s);
 		std::vector<size_t> cface(s.size()); // current face
 
@@ -207,7 +211,7 @@ private:
 				cface[k] = s[k+1]; // face # 1
 				size_t ind = find_idx(cface);
 				if (ind == bats::NO_IND) {
-                    auto ret = _add_unsafe_recursive(cface);
+                    auto ret = _add_unsafe_recursive(cface, ci);
 					ind = ret.ind;
                 }
 				faces[dim-1].emplace_back(ind);
@@ -216,7 +220,7 @@ private:
 				cface[k] = s[k]; cface[k+1] = s[k]; // face # 2
 				ind = find_idx(cface);
 				if (ind == bats::NO_IND) {
-                    auto ret = _add_unsafe_recursive(cface);
+                    auto ret = _add_unsafe_recursive(cface, ci);
 					ind = ret.ind;
                 }
 				faces[dim-1].emplace_back(ind);
@@ -236,20 +240,23 @@ private:
             spx[dim].emplace_back(v);
         }
 
+		ci.emplace_back(cell_ind(dim, ind));
         return cell_ind(dim, ind);
     }
 
 	// add simplex to complex with appropriate checks
-    cell_ind add_safe_recursive(const std::vector<size_t> &s) {
+    std::vector<cell_ind> add_safe_recursive(const std::vector<size_t> &s) {
 		if (!is_valid_cube(s)) {throw std::runtime_error("Not a valid cube for dimension of complex!");}
 
         // check if cube is already in complex
         if (spx_to_idx.count(s) > 0) {
             // simplex is already in complex
-            return cell_ind(cube_dim(s), spx_to_idx[s]);
+            return std::vector{cell_ind(cube_dim(s), spx_to_idx[s])};
         }
         // we're clear to add
-        return _add_unsafe_recursive(s);
+		std::vector<cell_ind> ci;
+		_add_unsafe_recursive(s, ci);
+        return ci;
     }
 
 public:
@@ -313,10 +320,10 @@ public:
         std::vector<size_t> &&s
     ) { return add_safe(s); }
 
-	inline cell_ind add_recursive(
+	inline std::vector<cell_ind> add_recursive(
 		const std::vector<size_t> &s
 	) { return add_safe_recursive(s); }
-	inline cell_ind add_recursive(
+	inline std::vector<cell_ind> add_recursive(
 		const std::vector<size_t> &&s
 	) { return add_safe_recursive(s); }
 
