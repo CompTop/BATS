@@ -88,6 +88,20 @@ struct ChainComplex {
 		}
 	}
 
+	// tensor product of chain complexes A\otimes B
+	// construct tensor product up to dimension dmax
+	friend ChainComplex tensor_product(const ChainComplex &A, const ChainComplex &B, size_t dmax) {
+		ChainComplex C;
+		for (size_t n = 0; n <= dmax; n++) {
+			for (size_t Adim = 0; Adim <= n; Adim++) {
+				size_t Bdim = n - Adim;
+				if (Adim > A.maxdim() || Bdim > B.maxdim()) {continue;}
+				// add to tensor product
+			}
+		}
+		return C;
+	}
+
 };
 
 // defualt return

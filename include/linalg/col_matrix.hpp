@@ -531,6 +531,50 @@ public:
 		return random(m, n, p, maxval, generator);
 	}
 
+	// tensor product A \otimes B
+	// friend ColumnMatrix tensor_product(const ColumnMatrix& A, const ColumnMatrix& B) {
+	// 	size_t Am = A.nrow();
+	// 	size_t An = A.ncol();
+	// 	size_t Bm = B.nrow();
+	// 	size_t Bn = B.ncol();
+	// 	std::vector<TC> newcol;
+	// 	std::vector<nzpair> nzs;
+	// 	for (size_t i = 0; i < An; i++) {
+	// 		for (size_t j = 0; j < Bn; j++) {
+	// 			nzs.clear();
+	// 			auto Ait = A[i].nzbegin();
+	// 			while (Ait != A[i].nzend()) {
+	// 				auto Bit = B[j].nzbegin();
+	// 				while (Bit != B[j].nzend()) {
+	// 					size_t ind = Bm*(Ait->ind) + Bit->ind;
+	// 					size_t val = (Ait->val) * Bit->val;
+	// 					nzs.emplace_back(nzpair(ind, val));
+	// 					Bit++;
+	// 				}
+	// 				Ait++;
+	// 			}
+	// 			newcol.emplace_back(TC(nzs));
+	// 		}
+	// 	}
+	// 	return ColumnMatrix(Am * Bm, An * Bn, newcol);
+	// }
+
+	// direct sum A \oplus B
+	friend ColumnMatrix direct_sum(const ColumnMatrix& A, const ColumnMatrix& B) {
+		size_t Am = A.nrow();
+		size_t An = A.ncol();
+		size_t Bm = B.nrow();
+		size_t Bn = B.ncol();
+		std::vector<TC> newcol;
+		for (size_t j = 0; j < An; j++) {
+			newcol.emplace_back(A[j]);
+		}
+		for (size_t j = 0; j < Bn; j++) {
+			newcol.emplace_back(B[j].shift_inds(Am));
+		}
+		return ColumnMatrix(Am + Bm, An + Bn, newcol);
+	}
+
 };
 
 

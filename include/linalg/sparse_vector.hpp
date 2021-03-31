@@ -87,6 +87,15 @@ public:
 		}
 	}
 
+	// return new SparseVector where all indices have been shifted
+	SparseVector shift_inds(TI shift) const {
+		SparseVector v(*this);
+		for (auto& x : v.indval) {
+			x.ind += shift;
+		}
+		return v;
+	}
+
 	// SparseVector& operator=(const SparseVector &other) {
 	// 	indval = other.indval;
 	// 	return *this;
