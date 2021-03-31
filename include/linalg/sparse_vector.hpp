@@ -71,8 +71,8 @@ public:
 
 
 	// cosntructor that returns indicator in given index
-	SparseVector(const TI i) {
-		indval.push_back(key_type(i, TV(1)));
+	SparseVector(const TI i, const TV v=TV(1)) {
+		indval.push_back(key_type(i, v));
 	}
 
 	// construct from line string
@@ -95,6 +95,8 @@ public:
 		}
 		return v;
 	}
+
+
 
 	// SparseVector& operator=(const SparseVector &other) {
 	// 	indval = other.indval;
@@ -467,6 +469,12 @@ public:
 		return;
 	}
 
+	SparseVector operator+(const SparseVector& other) const {
+		SparseVector a(*this);
+		a.axpy(TV(1), other);
+		return a;
+	}
+
 	// return self + ax[firstind:lastind]
 	// template over sparse vector type
 	template <class SVT>
@@ -672,4 +680,24 @@ public:
 		std::default_random_engine generator(seed);
 		return random(n, p, maxval, generator);
 	}
+
+	// tensor product a \otimes b
+	// m is length of vector b (other)
+	// uses Kronecker product ordering
+	SparseVector kron(const SparseVector& other, size_t m) const {
+		std::vector<key_type> nzs;
+		auto Ait = nzbegin();
+		while (Ait != nzend()) {
+			auto Bit = other.nzbegin();
+			while (Bit != other.nzend()) {
+				size_t ind = m*(Ait->ind) + Bit->ind;
+				TV val = (Ait->val) * Bit->val;
+				nzs.emplace_back(nzpair(ind, val));
+				Bit++;
+			}
+			Ait++;
+		}
+		return SparseVector(nzs);
+	}
+	inline SparseVector tensor(const SparseVector& other, size_t m) const {return tensor(other, m);}
 };

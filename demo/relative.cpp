@@ -62,6 +62,21 @@ int main(int argc, char* argv[]) {
         std::cout << "betti_" << d << ": " << RC.betti(d) << std::endl;
     }
 
+    bats::SimplicialComplex Y, Z;
+    Y.add_recursive({0,1,2});
+    Y.print_summary();
+    Z.add_recursive({0,1,2});
+    Z.print_summary();
+
+    auto YZ = TriangulatedProduct(Y, Z, 4);
+    YZ.print_summary();
+
+    auto CYZ = __ChainComplex(YZ, FT());
+    auto RCYZ = bats::ReducedChainComplex(CYZ);
+    for (size_t d = 0; d <= RCYZ.maxdim(); d++) {
+        std::cout << "betti_" << d << ": " << RCYZ.betti(d) << std::endl;
+    }
+
 
     return 0;
 }

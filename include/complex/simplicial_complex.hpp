@@ -609,6 +609,39 @@ void product_paths(
 	return;
 }
 
+// loop over all possible simplices
+template <typename itT>
+void product_paths(
+	SimplicialComplex &XY,
+	const itT xit,
+	const itT xend,
+	const itT yit,
+	const itT yend,
+	std::vector<size_t> &s,
+	const size_t n,
+	std::vector<cell_ind> &ci // holds all top-level simplices added
+) {
+	// put on vertex
+	s.emplace_back(prod_ind(*xit, *yit, n));
+	if (xit == xend && yit == yend) {
+		ci.emplace_back((XY.add_recursive(s)).back());
+		s.pop_back();
+		return;
+	}
+	if (xit != xend) {
+		// increment in x direction
+		product_paths(XY, xit+1, xend, yit, yend, s, n, ci);
+	}
+	if (yit != yend) {
+		// increment in y direction
+		product_paths(XY, xit, xend, yit+1, yend, s, n, ci);
+	}
+	// pop off vertex
+	s.pop_back();
+	return;
+}
+
+
 // Triangulated product of X and Y up to simplex dimension k
 // use translator
 SimplicialComplex TriangulatedProduct(

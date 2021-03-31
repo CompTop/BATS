@@ -13,6 +13,9 @@ struct ChainMap {
 
     ChainMap() {}
 
+    // chain map on d dimensions
+    ChainMap(size_t d) : map(d+1) {}
+
     ChainMap(const CellularMap &f) {
         size_t maxd = f.maxdim() + 1;
         map.resize(maxd);
@@ -49,6 +52,8 @@ struct ChainMap {
             ));
         }
     }
+
+    inline size_t maxdim() const { return map.size() - 1; }
 
     inline TM& operator[](size_t k) { return map[k]; }
     inline const TM& operator[](size_t k) const { return map[k]; }

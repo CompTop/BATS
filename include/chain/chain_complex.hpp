@@ -11,22 +11,25 @@ namespace bats {
 // template over matrix type
 template <typename MT>
 struct ChainComplex {
-	std::vector<size_t> dim;
+	//std::vector<size_t> dim;
 	std::vector<MT> boundary;
 
 	ChainComplex() {}
 
-	ChainComplex(const std::vector<size_t> &dim, const std::vector<MT> &boundary) : dim(dim), boundary(boundary) {}
+	// chain complex on maxd
+	ChainComplex(size_t maxd) : boundary(maxd+1) {}
+
+	ChainComplex(const std::vector<MT> &boundary) : boundary(boundary) {}
 
 	// produce a chain complex from a simplicial or cell complex
 	template <typename CpxT>
 	ChainComplex(const CpxT& X) {
-		dim.resize(X.maxdim() + 1);
+		//dim.resize(X.maxdim() + 1);
 		boundary.resize(X.maxdim() + 1);
 		for (size_t k = 0; k < X.maxdim() + 1; k++) {
-			dim[k] = X.ncells(k);
+			//dim[k] = X.ncells(k);
 			if (k == 0) {
-				boundary[k] = MT(1, dim[k]);
+				boundary[k] = MT(1, X.ncells(k));
 			} else {
 				boundary[k] = MT(X.boundary_csc(k));
 			}
@@ -36,7 +39,7 @@ struct ChainComplex {
 	// produce a relative chain complex C(X, A)
 	template <typename CpxT>
 	ChainComplex(const CpxT& X, const CpxT& A) {
-		dim.resize(X.maxdim() + 1);
+		//dim.resize(X.maxdim() + 1);
 		boundary.resize(X.maxdim() + 1);
 		auto inds = X.get_indices(A);
 		std::vector<std::vector<size_t>> cinds;
@@ -49,18 +52,18 @@ struct ChainComplex {
 				CSCMatrix<int, size_t> B = X.boundary_csc(k);
 				boundary[k] = MT(B.submatrix(cinds[k-1], cinds[k]));
 			}
-			dim[k] = boundary[k].ncol();
+			//dim[k] = boundary[k].ncol();
 		}
 	}
 
 	// ChainComplex(const ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
 
-	inline size_t maxdim() const { return dim.size() - 1; }
-	//inline size_t dim(size_t k) const { return dim[k]; }
+	inline size_t maxdim() const { return boundary.size() - 1; }
+	inline size_t dim(size_t k) const { return boundary[k].ncol(); }
 	//inline MT& boundary(size_t k) { return boundary[k]; }
 
 	MT& operator[](size_t k) {
-		if (k >= dim.size()) {
+		if (k >= boundary.size()) {
 			// throw error
 		}
 		return boundary[k];
@@ -97,6 +100,7 @@ struct ChainComplex {
 				size_t Bdim = n - Adim;
 				if (Adim > A.maxdim() || Bdim > B.maxdim()) {continue;}
 				// add to tensor product
+				// determine shift from dimensions
 			}
 		}
 		return C;

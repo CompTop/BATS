@@ -18,7 +18,7 @@ public:
 
 	using chain_type = typename MT::col_type;
 
-	std::vector<size_t> dim;
+	//std::vector<size_t> dim;
 	std::vector<MT> U; // basis matrices
 	std::vector<MT> R; // reduced matrix
 	std::vector<std::set<size_t>> I;
@@ -30,7 +30,7 @@ public:
 	inline size_t maxdim() const { return R.size() - 1; }
 
 	MT& operator[](size_t k) {
-		if (k >= dim.size()) {
+		if (k >= R.size()) {
 			// throw error
 		}
 		return R[k];
@@ -53,7 +53,7 @@ public:
 	// compute reduced chain complex from chain complex
 	ReducedChainComplex(const ChainComplex<MT> &C) {
 		size_t dmax = C.maxdim() + 1;
-		dim = C.dim;
+		//dim = C.dim;
 		U.resize(dmax);
 		R.resize(dmax);
 		I.resize(dmax);
@@ -61,7 +61,7 @@ public:
 
 		// TODO: can parallelize this
 		for (size_t k = 0; k < dmax; k++) {
-			U[k] = MT::identity(C.dim[k]);
+			U[k] = MT::identity(C.dim(k));
 			R[k] = C.boundary[k];
 			p2c[k] = reduce_matrix(R[k], U[k]);
 		}
@@ -74,7 +74,7 @@ public:
 	template <typename algflag>
 	ReducedChainComplex(const ChainComplex<MT> &C, algflag) {
 		size_t dmax = C.maxdim() + 1;
-		dim = C.dim;
+		//dim = C.dim;
 		R.resize(dmax);
 		p2c.resize(dmax);
 		I.resize(dmax);
@@ -96,7 +96,7 @@ public:
 		bats::compute_basis_flag
 	) {
 		size_t dmax = C.maxdim() + 1;
-		dim = C.dim;
+		//dim = C.dim;
 		R.resize(dmax);
 		U.resize(dmax);
 		p2c.resize(dmax);
@@ -105,7 +105,7 @@ public:
 		// TODO: can parallelize this
 		for (size_t k = 0; k < dmax; k++) {
 			R[k] = C.boundary[k];
-			U[k] = MT::identity(C.dim[k]);
+			U[k] = MT::identity(C.dim(k));
 			p2c[k] = reduce_matrix(R[k], U[k], algflag());
 		}
 
@@ -119,7 +119,7 @@ public:
 		bats::clearing_flag
 	) {
 		size_t dmax = C.maxdim() + 1;
-		dim = C.dim;
+		// dim = C.dim;
 		R.resize(dmax);
 		p2c.resize(dmax);
 		I.resize(dmax);
@@ -144,7 +144,7 @@ public:
 		bats::compression_flag
 	) {
 		size_t dmax = C.maxdim() + 1;
-		dim = C.dim;
+		// dim = C.dim;
 		R.resize(dmax);
 		p2c.resize(dmax);
 		I.resize(dmax);
@@ -174,7 +174,7 @@ public:
 		bats::compute_basis_flag
 	) {
 		size_t dmax = C.maxdim() + 1;
-		dim = C.dim;
+		//dim = C.dim;
 		R.resize(dmax);
 		U.resize(dmax);
 		p2c.resize(dmax);
@@ -182,12 +182,12 @@ public:
 
 		// do bottom dimension normally
 		R[0] = C.boundary[0];
-		U[0] = MT::identity(C.dim[0]);
+		U[0] = MT::identity(C.dim(0));
 		p2c[0] = reduce_matrix(R[0], U[0], algflag());
 		std::vector<bool> comp_inds = get_compression_inds(R[0]);
 		for (ssize_t k = 1; k < dmax; k++) {
 			R[k] = C.boundary[k];
-			U[k] = MT::identity(C.dim[k]);
+			U[k] = MT::identity(C.dim(k));
 			p2c[k] = reduce_matrix_compression(R[k], U[k], comp_inds, algflag());
 			comp_inds = get_compression_inds(R[k]);
 		}

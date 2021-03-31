@@ -15,4 +15,5 @@
 #include "topology/spherical.hpp"
 #include "topology/dowker_cover.hpp"
 #include "topology/zigzag_zoo.hpp"
+#include "topology/eilenberg_zilber.hpp"
 #include "topology/extras.hpp"

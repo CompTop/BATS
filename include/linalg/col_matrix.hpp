@@ -114,6 +114,7 @@ public:
     inline size_t ncol() const { return n; }
     inline std::vector<TC>& cols() { return col; }
     inline const std::vector<TC>& cols() const { return col; }
+	inline void set_nrow(size_t mnew) { m = mnew; }
 
     auto getval(const size_t i, const size_t j) const {
         return col[j].getval(i);
@@ -122,6 +123,12 @@ public:
     // inline size_t width() {
     //     return col.size();
     // }
+
+	// append a column to the end
+	template <class ...Ts>
+	void append_column(Ts (&...args)) { col.emplace_back(TC(args...)); n++; }
+	template <class ...Ts>
+	void append_column(Ts (&&...args)) { col.emplace_back(TC(args...)); n++; }
 
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}
@@ -532,32 +539,20 @@ public:
 	}
 
 	// tensor product A \otimes B
-	// friend ColumnMatrix tensor_product(const ColumnMatrix& A, const ColumnMatrix& B) {
-	// 	size_t Am = A.nrow();
-	// 	size_t An = A.ncol();
-	// 	size_t Bm = B.nrow();
-	// 	size_t Bn = B.ncol();
-	// 	std::vector<TC> newcol;
-	// 	std::vector<nzpair> nzs;
-	// 	for (size_t i = 0; i < An; i++) {
-	// 		for (size_t j = 0; j < Bn; j++) {
-	// 			nzs.clear();
-	// 			auto Ait = A[i].nzbegin();
-	// 			while (Ait != A[i].nzend()) {
-	// 				auto Bit = B[j].nzbegin();
-	// 				while (Bit != B[j].nzend()) {
-	// 					size_t ind = Bm*(Ait->ind) + Bit->ind;
-	// 					size_t val = (Ait->val) * Bit->val;
-	// 					nzs.emplace_back(nzpair(ind, val));
-	// 					Bit++;
-	// 				}
-	// 				Ait++;
-	// 			}
-	// 			newcol.emplace_back(TC(nzs));
-	// 		}
-	// 	}
-	// 	return ColumnMatrix(Am * Bm, An * Bn, newcol);
-	// }
+	// use Kronecker product ordering
+	friend ColumnMatrix tensor_product(const ColumnMatrix& A, const ColumnMatrix& B) {
+		size_t Am = A.nrow();
+		size_t An = A.ncol();
+		size_t Bm = B.nrow();
+		size_t Bn = B.ncol();
+		std::vector<TC> newcol;
+		for (size_t i = 0; i < An; i++) {
+			for (size_t j = 0; j < Bn; j++) {
+				newcol.emplace_back(A[j].tensor(B[j]));
+			}
+		}
+		return ColumnMatrix(Am * Bm, An * Bn, newcol);
+	}
 
 	// direct sum A \oplus B
 	friend ColumnMatrix direct_sum(const ColumnMatrix& A, const ColumnMatrix& B) {
