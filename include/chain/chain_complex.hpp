@@ -56,13 +56,58 @@ struct ChainComplex {
 		}
 	}
 
-	// ChainComplex(const ChainComplex &C) : dim(C.dim), boundary(C.boundary) {}
-
 	inline size_t maxdim() const { return boundary.size() - 1; }
 	inline size_t dim(size_t k) const { return boundary[k].ncol(); }
-	//inline MT& boundary(size_t k) { return boundary[k]; }
+
+	// check that ChainComplex is a valid complex
+	// checks that composition of boundary maps is 0
+	bool is_valid_complex() const {
+		for (size_t k = 0; k < maxdim(); k++) {
+			if ( !((boundary[k]*boundary[k+1]).is_zero()) ) {return false;}
+		}
+		return true;
+	}
+
+	// construct subcomplex defind by inds[k] in dimension k
+	// assume this is a valid subcomplex
+	ChainComplex subcomplex(std::vector<std::vector<size_t>>& inds) const {
+		std::vector<MT> newboundary(boundary.size());
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			std::sort(inds[k].begin(), inds[k].end());
+			if (k == 0) {
+				newboundary[k] = MT(1, inds[k].size());
+			} else {
+				newboundary[k] = dim[k].submatrix(inds[k-1], inds[k]);
+			}
+		}
+		return ChainComplex(newboundary);
+	}
+
+	// construct relative complex
+	// by quotienting out inds in each dimension
+	// assume inds defines a subcomplex
+	ChainComplex relative_complex(std::vector<std::vector<size_t>>& inds) const {
+		std::vector<MT> newboundary(boundary.size());
+		std::vector<std::vector<size_t>> cinds;
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			std::sort(inds[k].begin(), inds[k].end());
+			cinds.emplace_back(bats::util::sorted_complement(inds[k], dim(k)));
+			if (k == 0) {
+				newboundary[k] = MT(1, dim(k) - inds[k].size());
+			} else {
+				newboundary[k] = boundary[k].submatrix(cinds[k-1], cinds[k]);
+			}
+		}
+		return ChainComplex(newboundary);
+	}
 
 	MT& operator[](size_t k) {
+		if (k >= boundary.size()) {
+			// throw error
+		}
+		return boundary[k];
+	}
+	const MT& operator[](size_t k) const {
 		if (k >= boundary.size()) {
 			// throw error
 		}
@@ -94,17 +139,45 @@ struct ChainComplex {
 	// tensor product of chain complexes A\otimes B
 	// construct tensor product up to dimension dmax
 	friend ChainComplex tensor_product(const ChainComplex &A, const ChainComplex &B, size_t dmax) {
-		ChainComplex C;
+		ChainComplex C(dmax);
+		using VT = typename MT::col_type;
+		using T = typename VT::val_type;
+
+		size_t ind_shift[dmax+1][dmax+1]; // keep track of index shifts in direct sum
 		for (size_t n = 0; n <= dmax; n++) {
+			if (n== 0) {
+				// just do this explicitly
+				ind_shift[0][0] = 0;
+				C[0] = MT(1, A.dim(0) * B.dim(0));
+				continue;
+			}
+			C[n] = MT(C[n-1].ncol(), 0);
+
+			size_t shift = 0; // keep track of index shift
 			for (size_t Adim = 0; Adim <= n; Adim++) {
 				size_t Bdim = n - Adim;
+				ind_shift[Adim][Bdim] = shift;
 				if (Adim > A.maxdim() || Bdim > B.maxdim()) {continue;}
+				shift += A.dim(Adim) * B.dim(Bdim); // how much we'll shift for next pair of dimensions
 				// add to tensor product
 				// determine shift from dimensions
+				for (size_t iA = 0; iA < A.dim(Adim); iA++) {
+					// loop over simplices of dimension dY
+					for (size_t iB = 0; iB < B.dim(Bdim); iB++) {
+						auto dxy = (A[Adim][iA].kron(VT(iB), B.dim(Bdim))).shift_inds(ind_shift[Adim-1][Bdim])\
+						 + VT(iA, T(Adim & 0x1 ? -1 : 1)).kron(B[Bdim][iB], B[Bdim].nrow()).shift_inds(ind_shift[Adim][Bdim-1]);
+						C[n].append_column(dxy);
+					}
+				}
 			}
 		}
 		return C;
 	}
+
+	inline friend ChainComplex tensor_product(
+		const ChainComplex &A,
+		const ChainComplex& B
+	) {return tensor_product(A, B, A.maxdim() + B.maxdim()); }
 
 };
 

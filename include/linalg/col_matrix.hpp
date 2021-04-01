@@ -385,6 +385,25 @@ public:
 		return *this;
 	}
 
+	// number of nonzeros
+	size_t nnz() const {
+		size_t ct = 0;
+		for (size_t j = 0; j < n; j++) {
+			ct += col[j].nnz();
+		}
+		return ct;
+	}
+
+	// tests to see if matrix is zero
+	bool is_zero() const {
+		for (size_t j = 0; j < n; j++) {
+			if( col[j].nnz() > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	// tests to see if matrix has structure
 	bool is_upper() const {
 		for (size_t j = 0; j < n; j++) {

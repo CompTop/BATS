@@ -341,6 +341,7 @@ public:
 		return s;
 	}
 
+
 	// return simplices in dimension dim
 	std::vector<std::vector<size_t>> get_simplices(const size_t dim) const {
 		std::vector<std::vector<size_t>> simplices;
@@ -369,6 +370,20 @@ public:
 			}
 		}
 		return simplices;
+	}
+
+	// take union of simplicial complex with Y
+	void union_add(const SimplicialComplex& Y) {
+		std::vector<size_t> s;
+		for (size_t dim = 0; dim < Y.maxdim() + 1; dim++){
+			for (auto i : Y.spx[dim]) {
+				s.emplace_back(i);
+				if (s.size() == dim + 1) {
+					add_safe(s);
+					s.clear();
+				}
+			}
+		}
 	}
 
 	// get indices in subcomplex A in dimension dim
@@ -644,14 +659,15 @@ void product_paths(
 
 // Triangulated product of X and Y up to simplex dimension k
 // use translator
+// n is number of possible vertices on X
 SimplicialComplex TriangulatedProduct(
 	const SimplicialComplex& X,
 	const SimplicialComplex& Y,
-	const size_t maxdim
+	const size_t maxdim,
+	const size_t n
 ) {
 
 	SimplicialComplex XY;
-	const size_t n = X.ncells(0); // number of 0-cells in X
 
 	std::vector<size_t> s; // placeholder simplex
 	// loop over simplex dimension of product
@@ -680,5 +696,16 @@ SimplicialComplex TriangulatedProduct(
 	}
 	return XY;
 }
+
+inline SimplicialComplex TriangulatedProduct(
+	const SimplicialComplex& X,
+	const SimplicialComplex& Y,
+	const size_t maxdim
+) { return TriangulatedProduct(X, Y, maxdim, X.ncells(0)); }
+
+inline SimplicialComplex TriangulatedProduct(
+	const SimplicialComplex& X,
+	const SimplicialComplex& Y
+) { return TriangulatedProduct(X, Y, X.maxdim() + Y.maxdim(), X.ncells(0)); }
 
 } // namespace bats

@@ -13,6 +13,8 @@ struct ChainMap {
 
     ChainMap() {}
 
+    ChainMap(const std::vector<TM>& map) : map(map) {}
+
     // chain map on d dimensions
     ChainMap(size_t d) : map(d+1) {}
 
@@ -51,6 +53,23 @@ struct ChainMap {
                 bats::util::sorted_complement(Xinds, X.ncells(k))
             ));
         }
+    }
+
+    // relative chain map
+    ChainMap relative_map(
+        std::vector<std::vector<size_t>>& inds1,
+        std::vector<std::vector<size_t>>& inds2
+    ) const {
+        std::vector<TM> newmap(map.size());
+        for (size_t k = 0; k < map.size(); k++) {
+            std::sort(inds1[k].begin(), inds1[k].end());
+            std::sort(inds2[k].begin(), inds2[k].end());
+            newmap[k] = map[k].submatrix(
+                bats::util::sorted_complement(inds1[k], map[k].nrow()),
+                bats::util::sorted_complement(inds2[k], map[k].ncol())
+            );
+        }
+        return ChainMap(newmap);
     }
 
     inline size_t maxdim() const { return map.size() - 1; }

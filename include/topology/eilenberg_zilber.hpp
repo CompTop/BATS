@@ -109,4 +109,99 @@ auto EilenbergZilber(
     return std::tuple(CXCY, F, XY);
 }
 
+// obtain kronecker product indices
+template <typename CpxT>
+std::vector<std::vector<size_t>> kron_index(
+	const CpxT& X,
+	std::vector<std::vector<size_t>>& Ainds,
+	const CpxT& Y,
+	std::vector<std::vector<size_t>>& Binds,
+	size_t maxdim
+) {
+	std::vector<std::vector<size_t>> ABinds(maxdim+1);
+
+	// loop over simplex dimension of product
+	for (size_t dim = 0; dim <=maxdim; dim++) {
+		if (dim == 0) {
+			// just do this explicitly
+			ABinds[0].reserve(Ainds.size() * Binds.size());
+			for (auto& iA : Ainds[0]) {
+				for (size_t iB = 0; iB < Y.ncells(0); iB++) {
+					ABinds[0].emplace_back(iA * Y.ncells(0) + iB);
+				}
+			}
+			for (auto iA : bats::util::sorted_complement(Ainds[0], X.ncells(0))) {
+				for (auto iB : Binds[0]) {
+					ABinds[0].emplace_back(iA * Y.ncells(0) + iB);
+				}
+			}
+			std::sort(ABinds[0].begin(), ABinds[0].end());
+			continue;
+		}
+
+		// dimension of simplices we'll take a product of
+		size_t shift = 0; // keep track of index shift
+		for (size_t dX = 0; dX <= dim; dX++) {
+			size_t dY = dim - dX;
+			if (dX > X.maxdim() || dY > Y.maxdim()) {continue;}
+
+			// A x Y
+			for (auto& iA : Ainds[dX]) {
+				for (size_t iB = 0; iB < Y.ncells(dY); iB++) {
+					ABinds[dim].emplace_back(iA * Y.ncells(dY) + iB + shift);
+				}
+			}
+
+			// X\A x B (don't do cells already inserted)
+			for (auto iA : bats::util::sorted_complement(Ainds[dX], X.ncells(dX))) {
+				for (auto iB : Binds[dY]) {
+					ABinds[dim].emplace_back(iA * Y.ncells(dY) + iB + shift);
+				}
+			}
+			shift += X.ncells(dX) * Y.ncells(dY); // how much we'll shift for next pair of dimensions
+		}
+		std::sort(ABinds[dim].begin(), ABinds[dim].end());
+	}
+	return ABinds;
+}
+
+/*
+Relative Eilenberg-Zilberg map
+C_*(X, A) \otimes C_*(Y, B) \to C_*(X \times Y, X \times B \cup A \times Y)
+returns:
+	C_*(X, A) \otimes C_*(Y, B)
+	F_* (Relative Eilenberg-Zilber map)
+	C_*(X \times Y, X \times B \cup A \times Y)
+*/
+template <typename T>
+auto EilenbergZilber(
+    const SimplicialComplex& X,     // first simplicial complex
+	const SimplicialComplex& A,
+    const SimplicialComplex& Y,     // second simplicial complex
+	const SimplicialComplex& B,
+    const size_t maxdim,       		// maximum constructed dimension
+	T								// field type
+) {
+
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	auto [CXCY, F, XY] = EilenbergZilber(X, Y, maxdim, T());
+
+	auto Ainds = X.get_indices(A);
+	auto Binds = Y.get_indices(B);
+	auto ABinds = kron_index(X, Ainds, Y, Binds, maxdim);
+	auto RCXCY = CXCY.relative_complex(ABinds);
+
+	SimplicialComplex R = TriangulatedProduct(X, B, maxdim, X.ncells(0));
+	R.union_add(TriangulatedProduct(A, Y, maxdim, X.ncells(0)));
+
+	auto Rinds = XY.get_indices(R);
+	ChainComplex<MT> RCXY(XY, R); // relative chain complex
+
+	auto RF = F.relative_map(Rinds, ABinds);
+
+    return std::tuple(RCXCY, RF, RCXY);
+}
+
 } // namespace bats
