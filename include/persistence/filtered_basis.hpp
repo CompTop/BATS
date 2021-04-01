@@ -24,7 +24,7 @@ struct ReducedFilteredChainComplex {
 		RC(C.complex(), args...) {}
 
 	inline size_t maxdim() const { return RC.maxdim(); }
-	inline size_t dim(const size_t k) const {return RC.dim[k];}
+	inline size_t dim(const size_t k) const {return RC.dim(k);}
 
 	// persistence pairs in dimension k
 	std::vector<PersistencePair<T>> persistence_pairs(const size_t k) {

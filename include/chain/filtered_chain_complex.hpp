@@ -21,12 +21,16 @@ struct FilteredChainComplex {
 
 		// step 2: put ChainComplex C in permutation order
 		C.permute_basis(perms);
+		// permute vals as well
+		for (size_t i = 0; i < val.size(); i++) {
+			std::sort(val[i].begin(), val[i].end());
+		}
 
 		// step 3: store inverse perumutation to map back to original order
 		iperm = filtration_iperm(perms);
 	}
 
-	inline size_t dim(const size_t k) { return C.dim[k]; }
+	inline size_t dim(const size_t k) { return C.dim(k); }
 
 	inline const ChainComplex<MT>& complex() const {return C;}
 	inline const std::vector<std::vector<FT>>& vals() const { return val; }
