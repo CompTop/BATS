@@ -378,7 +378,10 @@ public:
 				}
 			} else {
 				pi->val = a * vi;
-				if (c*vi != 0) indval.insert(pj, nzpair(j, c*vi));
+				if (c*vi != 0) {
+					indval.insert(pj, nzpair(j, c*vi));
+					pi = lower_bound(i);
+				}
 			}
 
 			if (pi->val == 0) {
@@ -422,7 +425,7 @@ public:
 		const SVT &x
 	) {
 
-		if (a == TV(0)) {return;}
+		if (a == TV(0)) {clear_zeros(); return;}
 
 		// set i2 to find first ind >= firstind
 		auto i2 = x.nzbegin();
