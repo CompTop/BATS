@@ -16,4 +16,5 @@
 #include "topology/dowker_cover.hpp"
 #include "topology/zigzag_zoo.hpp"
 #include "topology/eilenberg_zilber.hpp"
+#include "topology/mayer_vietoris.hpp"
 #include "topology/extras.hpp"

@@ -85,7 +85,7 @@ private:
 
     // adds a simplex to the complex without doing any checks
     // assume dim > 0
-	cell_ind _add_unsafe(std::vector<size_t> &s) {
+	cell_ind _add_unsafe(const std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
 
         // determine faces
@@ -284,14 +284,6 @@ public:
       return ct;
     }
 
-    void print_summary() {
-        std::cout << "SimplicialComplex, maxdim = " << maxdim() << std::endl;
-        for (size_t k = 0; k < maxdim() + 1; k++) {
-            std::cout << "\tdim " << k << " : " << ncells(k) << " cells" << std::endl;
-        }
-        std::cout << ncells() << " total" << std::endl;
-    }
-
     // inline cell_ind add_unsafe(
     //     std::vector<size_t> &s
     // ) { return add_unsafe(s); }
@@ -386,6 +378,26 @@ public:
 		}
 	}
 
+	friend SimplicialComplex simplicial_union(
+		const SimplicialComplex& X,
+		const SimplicialComplex& Y
+	) {
+		SimplicialComplex XY;
+		for (size_t k = 0; k <= X.maxdim(); k++) {
+			for (size_t nk = 0; nk < X.ncells(k); nk++) {
+				auto s = X.get_simplex(k, nk);
+				XY.add_safe(s);
+			}
+		}
+		for (size_t k = 0; k <= Y.maxdim(); k++) {
+			for (size_t nk = 0; nk < Y.ncells(k); nk++) {
+				auto s = Y.get_simplex(k, nk);
+				XY.add_safe(s);
+			}
+		}
+		return XY;
+	}
+
 	// get indices in subcomplex A in dimension dim
 	std::vector<size_t> get_indices(const SimplicialComplex& A, size_t dim) const {
 		if (dim > A.maxdim()) { return std::vector<size_t>(); }
@@ -403,6 +415,23 @@ public:
 			inds.emplace_back(get_indices(A, dim));
 		}
 		return inds;
+	}
+
+	// return intersection of simplicial complexes X and Y
+	friend SimplicialComplex intersection(
+		const SimplicialComplex& X,
+		const SimplicialComplex& Y
+	) {
+		SimplicialComplex XY(X.maxdim());
+		for (size_t k = 0; k <= X.maxdim(); k++) {
+			for (size_t nk = 0; nk < X.ncells(k); nk++) {
+				auto s = X.get_simplex(k, nk);
+				if (Y.find_idx(s) != bats::NO_IND) {
+					XY._add_unsafe(s);
+				}
+			}
+		}
+		return XY;
 	}
 
 
@@ -469,6 +498,24 @@ public:
             std::cerr << "unable to write simplicial complex to " << fname << std::endl;
         }
     }
+
+	void print_summary() const {
+		std::cout << "SimplicialComplex, maxdim = " << maxdim() << std::endl;
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			std::cout << "\tdim " << k << " : " << ncells(k) << " cells" << std::endl;
+		}
+		std::cout << ncells() << " total" << std::endl;
+	}
+
+	void print_cells() const {
+		std::cout << "SimplicialComplex, maxdim = " << maxdim() << std::endl;
+		for (auto& sx : get_simplices()) {
+			for (auto& s : sx) {
+				std::cout << s << ",";
+			}
+			std::cout << std::endl;
+		}
+	}
 
 };
 
