@@ -225,6 +225,37 @@ public:
 		return ColumnMatrix(rind.size(), cind.size(), newcol);
 	}
 
+	// get block A[i0:i1, j0:j1]
+	// i1,j1 are not inclusive
+	ColumnMatrix block(
+		const size_t i0,
+		const size_t i1,
+		const size_t j0,
+		const size_t j1
+	) const {
+		std::vector<TC> newcol;
+		newcol.reserve(j1 - j0);
+
+		for (size_t j = j0; j < j1; j++) {
+			newcol.emplace_back(col[j].block(i0, i1));
+		}
+
+		return ColumnMatrix(i1 - i0, j1 - j0, newcol);
+	}
+
+	void set_block(
+		const size_t i0,
+		const size_t i1,
+		const size_t j0,
+		const size_t j1,
+		const ColumnMatrix& B
+	) {
+
+		for (size_t j = j0, k=0; j < j1; j++, k++) {
+			col[j].set_block(i0, i1, B[k]);
+		}
+	}
+
 	// clear rows i for which c[i] is true
 	// use vector of bools for quick lookup - vector of inds would require search
 	void clear_rows(const std::vector<bool> &c) {

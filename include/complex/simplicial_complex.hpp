@@ -434,6 +434,19 @@ public:
 		return XY;
 	}
 
+	// return inds, vals in boundary
+	auto boundary(const size_t dim, const size_t k) const {
+		size_t indbegin = (dim+1) * k;
+		size_t indend = indbegin + dim + 1;
+		std::vector<size_t> ind;
+		std::vector<int> val;
+		for (size_t i = indbegin; i < indend; i++) {
+			ind.emplace_back(faces[dim-1][i]);
+			val.emplace_back(coeff[dim-1][i]);
+		}
+		return std::tuple(ind, val);
+	}
+
 
     // get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {

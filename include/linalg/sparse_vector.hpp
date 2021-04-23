@@ -310,6 +310,45 @@ public:
 		return SparseVector(newindval);
 	}
 
+	// block v[i0:i1]
+	// i1 is not inclusive
+	// new indices start at 0.
+	SparseVector block(
+		const size_t i0,
+		const size_t i1
+	) const {
+		std::vector<key_type> newindval;
+		auto it = lower_bound(i0);
+		while( it != nzend() ) {
+			if (it->ind < i1) {
+				newindval.emplace_back(key_type(it->ind - i0, it->val));
+			} else {
+				break;
+			}
+			it++;
+		}
+		return SparseVector(newindval);
+	}
+
+	// set v[i0:i1] = b
+	void set_block(
+		const size_t i0,
+		const size_t i1,
+		const SparseVector& b
+	) {
+
+		// first delete all entries in the range
+		indval.erase(lower_bound(i0), upper_bound(i1));
+
+		// now insert the elements in b
+		auto it = lower_bound(i0);
+		auto bit = b.nzbegin();
+		while (bit != b.nzend()) {
+			it = indval.emplace(it, key_type(bit->ind + i0, bit->val));
+			bit++; it++;
+		}
+	}
+
 	// apply J-matrix transformation
 	// index i -> (m-1) - i
 	void J(const size_t m) {

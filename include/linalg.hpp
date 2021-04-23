@@ -10,3 +10,4 @@
 #include "linalg/polynomial.hpp"
 #include "linalg/pid.hpp"
 #include "linalg/rcf.hpp"
+//#include "linalg/schur.hpp"
