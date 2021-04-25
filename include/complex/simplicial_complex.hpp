@@ -53,6 +53,9 @@ private:
     std::vector<size_t> _reserved;
 	// for iterating over faces
     std::vector<size_t> __face;
+	std::vector<size_t> __perm; // for sortperms
+	std::vector<int> __tmpc; // temporary coeff
+
 
     // map to find simplices when forming boundary
     spx_map spx_to_idx;
@@ -88,6 +91,9 @@ private:
 	cell_ind _add_unsafe(const std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
 
+		// get index of simplex
+        size_t ind = _ncells[dim]++;
+
         // determine faces
         if (dim > 0){
             // first we'll add faces
@@ -113,17 +119,34 @@ private:
                     // remove boundary placed so far
                     faces[dim-1].resize(old_size);
                     coeff[dim-1].resize(old_size);
+					_ncells[dim]--; // we don't add the cell
                     return cell_ind(dim, bats::NO_IND);
                 }
                 faces[dim-1].emplace_back(ind);
                 coeff[dim-1].emplace_back(c);
                 c = -c;
             }
+			// if we made it to this point, the simplex will be added
+			// we should sort the faces and coeff
+			bats::util::fill_sortperm(
+				faces[dim-1].begin() + ((dim + 1) * ind),
+				faces[dim-1].begin() + ((dim + 1) * (ind+1)),
+				__perm
+			);
+			bats::util::apply_perm(
+				faces[dim-1].begin() + ((dim + 1) * ind),
+				__face,
+				__perm
+			);
+			bats::util::apply_perm(
+				coeff[dim-1].begin() + ((dim + 1) * ind),
+				__tmpc,
+				__perm
+			);
         }
 
         // if we succeeded (faces were present), we add the simplex
-        // get index of simplex
-        size_t ind = _ncells[dim]++;
+
         // add to map
         spx_to_idx.emplace(s, ind);
         for (auto v : s) {
@@ -157,6 +180,9 @@ private:
 	cell_ind _add_recursive(std::vector<size_t> &s, std::vector<cell_ind> &ci) {
         size_t dim = s.size() - 1;
 
+		// get index of simplex
+        size_t ind = _ncells[dim]++;
+
         // determine faces
         if (dim > 0){
             // first we'll add faces
@@ -187,11 +213,27 @@ private:
                 coeff[dim-1].emplace_back(c);
                 c = -c;
             }
+			// if we made it to this point, the simplex will be added
+			// we should sort the faces and coeff
+			bats::util::fill_sortperm(
+				faces[dim-1].begin() + ((dim + 1) * ind),
+				faces[dim-1].begin() + ((dim + 1) * (ind+1)),
+				__perm
+			);
+			bats::util::apply_perm(
+				faces[dim-1].begin() + ((dim + 1) * ind),
+				__face,
+				__perm
+			);
+			bats::util::apply_perm(
+				coeff[dim-1].begin() + ((dim + 1) * ind),
+				__tmpc,
+				__perm
+			);
         }
 
         // if we succeeded (faces were present), we add the simplex
-        // get index of simplex
-        size_t ind = _ncells[dim]++;
+
         // add to map
         spx_to_idx.emplace(s, ind);
         for (auto v : s) {

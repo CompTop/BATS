@@ -142,10 +142,10 @@ std::vector<size_t> top_p(
 
 
 // reorders data by permutation
-template <typename T>
+template <typename T, typename T2>
 void apply_perm(
-    T* begin,
-    std::vector<T> &tmp,
+    T begin,
+    std::vector<T2> &tmp,
     const std::vector<size_t> &perm
 ) {
     // use allocated array to do permutation
