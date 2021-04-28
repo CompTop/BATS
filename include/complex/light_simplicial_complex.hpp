@@ -227,6 +227,9 @@ public:
 		index_to_key[dim].emplace_back(k);
     }
 
+	// TODO: make this safe
+	inline void add(const std::vector<index_type>& s) {return add_unsafe(s);}
+
 	// get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {
         size_t m = ncells(dim-1);
