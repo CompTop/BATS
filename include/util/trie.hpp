@@ -1,7 +1,9 @@
 #pragma once
 
-#include <unordered_map>
+// #include <unordered_map>
 #include <vector>
+#include "tsl/hopscotch_map.h"
+// #include "tsl/robin_map.h"
 
 namespace bats {
 
@@ -13,7 +15,8 @@ private:
 public:
     typedef SparseTrie<A, T> child_type;
     // todo: move this to template type
-    typedef std::unordered_map<A, child_type*> child_container;
+    // typedef std::unordered_map<A, child_type*> child_container;
+	typedef tsl::hopscotch_map<A, child_type*> child_container;
     T val;
     child_container *children = nullptr;
 

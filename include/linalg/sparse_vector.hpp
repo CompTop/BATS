@@ -35,12 +35,23 @@ private:
 		std::sort(indval.begin(), indval.end());
 	}
 
+	void check_sorted() const {
+		if (indval.size() < 2) { return; }
+		for (auto it = indval.begin(); it != --(indval.end()); ) {
+			if (!(it->ind < (++it)->ind)) { throw std::runtime_error("SparseVector not sorted!"); }
+		}
+	}
+
 public:
 	using val_type = TV;
 
 	SparseVector() {}
 
-	SparseVector(const std::vector<key_type> &indval) : indval(indval) {}
+	SparseVector(const std::vector<key_type> &indval) : indval(indval) {
+		#ifdef BATS_DEBUG
+		check_sorted();
+		#endif
+	}
 
 	SparseVector(const std::vector<TI> &ind, const std::vector<TV> &val) {
 		size_t nz = ind.size();
@@ -48,6 +59,9 @@ public:
 		for (size_t i = 0; i < nz; i++) {
 			indval.emplace_back(key_type(ind[i], val[i]));
 		}
+		#ifdef BATS_DEBUG
+		check_sorted();
+		#endif
 	}
 
 	// constructor from other sparse vector
@@ -57,6 +71,9 @@ public:
 		for (auto it = other.nzbegin(); it < other.nzend(); ++it) {
 			indval.emplace_back(key_type((*it).ind, (*it).val));
 		}
+		#ifdef BATS_DEBUG
+		check_sorted();
+		#endif
 	}
 
 	// constructor that loops over index and value iterators
@@ -67,6 +84,9 @@ public:
 		for (size_t i = 0; i < n; i++) {
 			indval.emplace_back(key_type(TI(*indit++), TV(*valit++)));
 		}
+		#ifdef BATS_DEBUG
+		check_sorted();
+		#endif
 	}
 
 
@@ -505,6 +525,10 @@ public:
 		// indval.resize(tmp.size());
 		// std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
 		indval = tmp;
+
+		#ifdef BATS_DEBUG
+		check_sorted();
+		#endif
 
 		//clear_zeros();
 

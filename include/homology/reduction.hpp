@@ -5,8 +5,10 @@
 #include <set>
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
+#include "tsl/hopscotch_map.h"
 
-#define p2c_type std::unordered_map<size_t, size_t>
+// #define p2c_type std::unordered_map<size_t, size_t>
+#define p2c_type tsl::hopscotch_map<size_t, size_t>
 
 
 namespace bats {
