@@ -307,6 +307,24 @@ public:
 		return add_recursive(dim, k);
 	}
 
+	// return inds, vals in boundary of simplex i in dimension dim
+	auto boundary(const size_t dim, const size_t i) const {
+		auto k = index_to_key[dim][i];
+		std::vector<size_t> ind;
+		std::vector<int> val;
+		auto bdry = simplex_boundary_iterator(k, dim, this);
+		while (bdry) {
+			auto [f, c] = bdry.next();
+			ind.emplace_back(key_to_index[dim-1].at(f));
+			val.emplace_back(c);
+		}
+		// ensure indices are in sorted order
+		auto p = bats::util::sortperm(ind);
+		bats::util::apply_perm(ind, p);
+		bats::util::apply_perm(val, p);
+		return std::tuple(ind, val);
+	}
+
 
 	// get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {
