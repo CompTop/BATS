@@ -22,6 +22,7 @@ e.g. for simplex (x_0, ... x_k), we use sum x_i n^i
 #include <unordered_map>
 #include <vector>
 #include <linalg/csc_matrix.hpp>
+#include "abstract_complex.hpp"
 
 namespace bats {
 
@@ -208,26 +209,104 @@ public:
 		return find_idx(dim, key);
 	}
 
+	// add simplex key k to dimension dim
+	cell_ind add_unsafe(
+		const size_t dim,
+		const index_type k
+	) {
+		const size_t ind = index_to_key[dim].size();
+
+		// add to lookup
+		key_to_index[dim].emplace(k, ind);
+
+        // add to list of simplicies
+		index_to_key[dim].emplace_back(k);
+
+		return cell_ind(dim, ind);
+	}
+
+	// add simplex key k to dimension dim
+	// check if key has already been added
+	cell_ind add(
+		const size_t dim,
+		const index_type k
+	) {
+		// query if key has already been added
+		size_t ind = index_to_key[dim].size();
+		auto [it, newkey] = key_to_index[dim].try_emplace(k, ind);
+		if (newkey) {
+			// new key was inserted
+			index_to_key[dim].emplace_back(k);
+		} else {
+			// key was already inserted - we'll look up the index
+			ind = it->second;
+		}
+		return cell_ind(dim, ind);
+	}
+
     // add simplex
     // assumptions:
     // s is sorted
     // boundary is already added
     // s has not already been added
-    void add_unsafe(
+    cell_ind add_unsafe(
         const std::vector<index_type>& s
     ) {
-        auto k = simplex_key(s);
-		size_t dim = s.size() - 1;
-
-		// add to lookup
-		key_to_index[dim].emplace(k, index_to_key[dim].size());
-
-        // add to list of simplicies
-		index_to_key[dim].emplace_back(k);
+		auto k = simplex_key(s);
+		const size_t dim = s.size() - 1;
+		return add_unsafe(dim, k);
     }
 
-	// TODO: make this safe
-	inline void add(const std::vector<index_type>& s) {return add_unsafe(s);}
+
+
+	// safe add
+	// assumes s is sorted
+	inline auto add(const std::vector<index_type>& s) {
+		auto k = simplex_key(s);
+		const size_t dim = s.size() - 1;
+		return add(dim, k);
+	}
+
+	// add key recursively
+	std::vector<cell_ind> add_recursive(
+		size_t dim,
+		const index_type k
+	) {
+		std::vector<cell_ind> newcells;
+		// first see if the key is already added
+		size_t ind = index_to_key[dim].size();
+		auto [it, newkey] = key_to_index[dim].try_emplace(k, ind);
+		if (newkey) {
+			// new key was inserted
+			index_to_key[dim].emplace_back(k);
+			// iterate over faces if dim > 0
+			if (dim > 0) {
+				auto bdry = simplex_boundary_iterator(k, dim, this);
+				// check that every face has been added recursively
+				while (bdry) {
+					auto [f, c] = bdry.next();
+					auto fc = add_recursive(dim-1, f);
+					newcells.insert(newcells.end(), fc.begin(), fc.end());
+				}
+			}
+		} else {
+			// key was already inserted - we'll look up the index
+			ind = it->second;
+		}
+
+		// add cell index
+		newcells.emplace_back(cell_ind(dim, ind));
+
+		return newcells;
+	}
+
+
+	std::vector<cell_ind> add_recursive(const std::vector<index_type>& s) {
+		auto k = simplex_key(s);
+		const size_t dim = s.size() - 1;
+		return add_recursive(dim, k);
+	}
+
 
 	// get CSC integer matrix boundary in dimension dim
     CSCMatrix<int, size_t> boundary_csc(const size_t dim) const {
