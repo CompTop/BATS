@@ -3,7 +3,7 @@
 #include <chrono>
 
 #include <bats.hpp>
-#include <util/io.h>
+#include <util/io.hpp>
 #include <string>
 
 
@@ -11,15 +11,22 @@
 #define VT SparseVector<FT>
 #define MT ColumnMatrix<VT>
 
+
+
+using namespace bats;
+
+// using CpxT = SimplicialComplex;
+using CpxT = LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+
 int main(int argc, char* argv[]) {
 
     size_t d = 2; // dimension of Euclidean Space
     size_t n = 350;
 
     // maximum simplex dimension
-    size_t maxdim = parse_argv(argc, argv, "-maxdim", 3);
-    double rmax = parse_argv(argc, argv, "-rmax", 0.2);
-    std::string fname = parse_argv(argc, argv, "-file", std::string(""));
+    size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
+    double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 0.2);
+    std::string fname = bats::util::io::parse_argv(argc, argv, "-file", std::string(""));
 
     DataSet<double> x;
     if (fname.empty()) {
@@ -28,7 +35,13 @@ int main(int argc, char* argv[]) {
         x = DataSet(read_point_cloud(fname));
     }
 
-    auto X = RipsComplex(x, LInfDist(), rmax, maxdim);
+    auto start1 = std::chrono::steady_clock::now();
+    auto X = RipsComplex<CpxT>(x, LInfDist(), rmax, maxdim);
+    auto end1 = std::chrono::steady_clock::now();
+    std::cout << "Time to construct Rips Complex: "
+        << std::chrono::duration_cast<std::chrono::milliseconds>(end1 - start1).count()
+        << "ms" << std::endl;
+    X.print_summary();
 
     auto CX = ChainComplex<MT>(X);
 
