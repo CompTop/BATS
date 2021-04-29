@@ -185,6 +185,14 @@ public:
 		return key_to_simplex(dim, index_to_key[dim][i]);
 	}
 
+	std::vector<std::vector<index_type>> get_simplices(const size_t dim) const {
+		std::vector<std::vector<index_type>> simplices(ncells(dim));
+		for (size_t i = 0; i < ncells(dim); i++) {
+			simplices[i] = get_simplex(dim, i);
+		}
+		return simplices;
+	}
+
 	// find index of simplex s
 	// returns bats::NO_IND if s can not be found
 	inline size_t find_idx(const size_t dim, const index_type key) const {

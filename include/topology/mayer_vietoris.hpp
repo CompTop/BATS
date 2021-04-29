@@ -12,11 +12,11 @@ return Mayer-Vietoris boundary C_{k+1}(X) \to C_k(Y)
 a \mapsto boundary(a) |Y
 b \mapsto 0
 */
+template <typename CpxT> // SimplicialComplex
 auto mayer_vietoris_boundary(
-    const SimplicialComplex& A,
-    const SimplicialComplex& B,
-    const SimplicialComplex& X,
-    const SimplicialComplex& Y,
+    const CpxT& A,
+    const CpxT& X,
+    const CpxT& Y,
     size_t k
 ) {
     using TC = SparseVector<int>;
