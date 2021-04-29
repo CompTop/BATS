@@ -26,6 +26,8 @@ template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 
 	p2c_type pivot_to_col;
+	// create a temporary vector for use in axpys
+	typename TVec::tmp_type tmp;
 
 	// loop over columns
 	for (size_t j = 0; j < M.ncol(); j++) {
@@ -38,7 +40,7 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv.ind];
 				auto a = piv.val / M[k].lastnz().val;
-				M[j].axpy(-a, M[k]);
+				M[j].axpy(-a, M[k], tmp);
 			} else {
 				// new pivot
 				pivot_to_col[piv.ind] = j;
@@ -55,6 +57,8 @@ template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M) {
 
 	p2c_type pivot_to_col;
+	// create a temporary vector for use in axpys
+	typename TVec::tmp_type tmp;
 
 	// loop over columns
 	for (size_t j = 0; j < M.ncol(); j++) {
@@ -69,7 +73,7 @@ p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv->ind];
 				auto a = piv->val / M[k].lastnz().val;
-				M[j].axpy(-a, M[k]);
+				M[j].axpy(-a, M[k], tmp);
 				piv = M[j].nzend() - end_offset; // next nonzero location
 			} else if (!found_pivot) {
 				// new pivot
@@ -111,6 +115,8 @@ template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 	p2c_type pivot_to_col;
+	// create a temporary vector for use in axpys
+	typename TVec::tmp_type tmp;
 
 	// loop over columns
 	for (size_t j = 0; j < M.ncol(); j++) {
@@ -123,8 +129,8 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv.ind];
 				auto a = piv.val / M[k].lastnz().val;
-				M[j].axpy(-a, M[k]);
-				U[j].axpy(-a, U[k]); // update change of basis
+				M[j].axpy(-a, M[k], tmp);
+				U[j].axpy(-a, U[k], tmp); // update change of basis
 			} else {
 				// new pivot
 				pivot_to_col[piv.ind] = j;
@@ -139,6 +145,8 @@ template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 	p2c_type pivot_to_col;
+	// create a temporary vector for use in axpys
+	typename TVec::tmp_type tmp;
 
 	// loop over columns
 	for (size_t j = 0; j < M.ncol(); j++) {
@@ -153,8 +161,8 @@ p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv->ind];
 				auto a = piv->val / M[k].lastnz().val;
-				M[j].axpy(-a, M[k]);
-				U[j].axpy(-a, U[k]); // update change of basis
+				M[j].axpy(-a, M[k], tmp);
+				U[j].axpy(-a, U[k], tmp); // update change of basis
 				piv = M[j].nzend() - end_offset; // next nonzero location
 			} else if (!found_pivot) {
 				// new pivot

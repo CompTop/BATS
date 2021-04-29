@@ -37,6 +37,7 @@ private:
 
 public:
 	using val_type = TV;
+	using tmp_type = std::vector<key_type>;
 
 	SparseVector() {}
 
@@ -458,6 +459,65 @@ public:
 
 	// set
 	// y <- ax + y
+	// uses pre-allocated temporary vector
+	template <class SVT>
+	void axpy(
+		const TV &a,
+		const SVT &x,
+		std::vector<key_type>& tmp
+	) {
+
+		if (a == TV(0)) {clear_zeros(); return;}
+
+		// set i2 to find first ind >= firstind
+		auto i2 = x.nzbegin();
+		// where to put new vector
+		if (i2 == x.nzend()) { return; } // nothing to do
+		// something to do...
+		auto i1 = indval.cbegin();
+		tmp.clear();
+		while (i1 != indval.cend() && i2 != x.nzend()) {
+			if ( i1->ind == i2->ind) {
+				TV val = (a * ((*i2).val)) + (*i1).val;
+				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
+				if (val != TV(0)) {
+					tmp.push_back(key_type(i1->ind, val));
+				}
+				++i1;
+				++i2;
+			} else if ((i1->ind) < (i2->ind)) {
+				tmp.push_back(*i1);
+				++i1;
+			} else {
+				tmp.push_back(key_type(i2->ind, a * (i2->val)));
+				++i2;
+			}
+		}
+		// run through rest of entries and dump in
+		// at most one of the loops does anything
+		while (i1 != indval.cend()) {
+			tmp.emplace_back(*i1);
+			++i1;
+		}
+		while (i2 != x.nzend()) {
+			tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
+			++i2;
+		}
+
+		// copy temp vector to indval
+		// indval.resize(tmp.size());
+		// std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
+		std::swap(indval, tmp);
+		// indval = tmp;
+
+		//clear_zeros();
+
+		return;
+	}
+
+
+	// set
+	// y <- ax + y
 	template <class SVT>
 	void axpy(
 		const TV &a,
@@ -504,7 +564,8 @@ public:
 		// copy temp vector to indval
 		// indval.resize(tmp.size());
 		// std::copy(tmp.cbegin(), tmp.cend(), indval.begin());
-		indval = tmp;
+		std::swap(indval, tmp);
+		// indval = tmp;
 
 		//clear_zeros();
 
