@@ -8,7 +8,9 @@ generate Rips complex
 #include "data.hpp"
 #include "metric.hpp"
 #include <complex/simplicial_complex.hpp>
+#include "flag.hpp"
 #include <filtration/flag.hpp>
+
 
 namespace bats {
 
@@ -101,8 +103,8 @@ dmax - maximum simplex dimension
 */
 
 // template over data type>
-template <typename T, typename M>
-SimplicialComplex RipsComplex(
+template <typename CpxT, typename T, typename M>
+CpxT RipsComplex(
     const DataSet<T> &X,
     const M &dist,
     T rmax,
@@ -110,18 +112,18 @@ SimplicialComplex RipsComplex(
 ) {
     size_t n = X.size(); // number of points
     auto redges = rips_edges(X, dist, rmax);
-    return FlagComplex(redges, n, dmax);
+    return FlagComplex<CpxT>(redges, n, dmax);
 }
 
-template <typename T>
-SimplicialComplex RipsComplex(
+template <typename CpxT, typename T>
+CpxT RipsComplex(
     const Matrix<T> &pdist,
     T rmax,
     size_t dmax
 ) {
     size_t n = pdist.ncol(); // number of points
     auto redges = rips_edges(pdist, rmax);
-    return FlagComplex(redges, n, dmax);
+    return FlagComplex<CpxT>(redges, n, dmax);
 }
 
 // template over data type>

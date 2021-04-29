@@ -35,6 +35,25 @@ Matrix<T>& add_normal_noise(
     return X;
 }
 
+// add normal_noise
+// operates in-place on X
+template <typename T>
+Matrix<T>& add_normal_noise(
+    Matrix<T> &X,
+    unsigned seed,
+    const T mu=T(0),
+    const T sigma=T(1)
+) {
+    std::default_random_engine generator(seed);
+    std::normal_distribution distribution(mu,sigma);
+
+    #pragma omp simd
+    for (size_t i = 0; i < X.size(); i++) {
+        X(i) += distribution(generator);
+    }
+    return X;
+}
+
 template <typename T>
 inline DataSet<T>& add_normal_noise(
     DataSet<T> &X,
@@ -48,10 +67,10 @@ inline DataSet<T>& add_normal_noise(
 
 template <typename T>
 Matrix<T>& add_uniform_noise(Matrix<T> &X,
+    unsigned seed,
     const T lb = T(0),
     const T ub = T(1)
 ) {
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator(seed);
     std::uniform_real_distribution distribution(lb, ub);
 
@@ -60,6 +79,15 @@ Matrix<T>& add_uniform_noise(Matrix<T> &X,
         X(i) += distribution(generator);
     }
     return X;
+}
+
+template <typename T>
+inline Matrix<T>& add_uniform_noise(Matrix<T> &X,
+    const T lb = T(0),
+    const T ub = T(1)
+) {
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    return add_uniform_noise(X, seed, lb, ub);
 }
 
 template <typename T>
@@ -136,6 +164,18 @@ DataSet<T> sample_cube(
 ) {
     Matrix<T> X(n, d);
     add_uniform_noise(X);
+    return DataSet(X);
+}
+
+// sample n points uniformly at random from d dimensional cube
+template <typename T>
+DataSet<T> sample_cube(
+    const size_t d,
+    const size_t n,
+    unsigned seed
+) {
+    Matrix<T> X(n, d);
+    add_uniform_noise(X, seed);
     return DataSet(X);
 }
 

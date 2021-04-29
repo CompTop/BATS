@@ -6,6 +6,7 @@
 #include "topology/inclusion.hpp"
 #include "topology/metric.hpp"
 #include "topology/neighborhood.hpp"
+#include "topology/flag.hpp"
 #include "topology/rips.hpp"
 #include "topology/landmark.hpp"
 #include "topology/nerve.hpp"
