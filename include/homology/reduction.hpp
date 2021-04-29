@@ -47,7 +47,7 @@ template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 
 	// p2c_type pivot_to_col;
-	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
+	p2c_type pivot_to_col(M.nrow(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -80,7 +80,7 @@ template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M) {
 
 	// p2c_type pivot_to_col;
-	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
+	p2c_type pivot_to_col(M.nrow(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -140,7 +140,7 @@ template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 	// p2c_type pivot_to_col;
-	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
+	p2c_type pivot_to_col(M.nrow(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -172,7 +172,7 @@ template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 	// p2c_type pivot_to_col;
-	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
+	p2c_type pivot_to_col(M.nrow(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
