@@ -25,7 +25,7 @@ struct extra_reduction_flag {};
 template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 
-	p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol());
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -56,7 +56,7 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M) {
 
-	p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol());
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -114,7 +114,7 @@ inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, bats::extra_reduction_flag)
 template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
-	p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol());
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -144,7 +144,7 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
-	p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol());
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 

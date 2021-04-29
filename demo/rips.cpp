@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 
     DataSet<double> x;
     if (fname.empty()) {
-        x = sample_cube<double>(d, n);
+        x = sample_cube<double>(d, n, 0); // seed with 0
     } else {
         x = DataSet(read_point_cloud(fname));
     }
