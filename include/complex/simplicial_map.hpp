@@ -19,9 +19,10 @@ namespace bats {
 
 // construct simplicial map from X to Y
 // send vertex set of X to vertex set of Y using f0
+template <typename CpxT> // template over type of complex
 CellularMap SimplicialMap(
-	const SimplicialComplex &X,
-	const SimplicialComplex &Y,
+	const CpxT &X,
+	const CpxT &Y,
 	const std::vector<size_t> &f0
 ) {
 	std::vector<size_t> s; // simplex
@@ -32,8 +33,8 @@ CellularMap SimplicialMap(
 		for (size_t i = 0; i < X.ncells(k); i++) {
 			// fill s with image of simplex i in dimension k
 			s.clear();
-			for (auto it = X.simplex_begin(k, i); it != X.simplex_end(k, i); ++it) {
-				s.emplace_back(f0[*it]);
+			for (auto x : X.get_simplex(k, i)) {
+				s.emplace_back(f0[x]);
 			}
 			// for (auto si : s) {
 			// 	std::cout << si << ',';
@@ -60,9 +61,10 @@ CellularMap SimplicialMap(
 
 // construct simplicial map from X to Y
 // no initial data is specified - assume inclusion map
+template <typename CpxT> // template over type of complex
 CellularMap SimplicialMap(
-	const SimplicialComplex &X,
-	const SimplicialComplex &Y
+	const CpxT &X,
+	const CpxT &Y
 ) {
 	std::vector<size_t> s; // simplex
 	size_t maxd = X.maxdim();
@@ -71,10 +73,7 @@ CellularMap SimplicialMap(
 		std::vector<SparseVector<int, size_t>> col;
 		for (size_t i = 0; i < X.ncells(k); i++) {
 			// fill s with image of simplex i in dimension k
-			s.clear();
-			for (auto it = X.simplex_begin(k, i); it != X.simplex_end(k, i); ++it) {
-				s.emplace_back(*it);
-			}
+			s = X.get_simplex(k, i);
 
 			size_t j = Y.find_idx(s);
 			if (j == bats::NO_IND) {
