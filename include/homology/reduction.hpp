@@ -5,10 +5,29 @@
 #include <set>
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
-#include "tsl/hopscotch_map.h"
+// #include "tsl/hopscotch_map.h"
+// #include "tsl/robin_map.h"
+// #include "tsl/sparse_map.h"
+
+// template <typename T>
+// struct vector_to_dict {
+// 	std::vector<T> vals;
+//
+// 	template <typename ...Args>
+// 	vector_to_dict(Args (&...args)) : vals(args...) {}
+//
+// 	vector_to_dict(size_t n) : vals(n, bats::NO_IND) {}
+//
+// 	inline T& operator=(size_t i) {return vals[i];}
+// 	inline const T& operator=(size_t i) const {return vals[i];}
+// 	inline size_t count(size_t i) const {return vals[i] != bats::NO_IND;}
+// };
 
 // #define p2c_type std::unordered_map<size_t, size_t>
-#define p2c_type tsl::hopscotch_map<size_t, size_t>
+// #define p2c_type tsl::hopscotch_map<size_t, size_t>
+// #define p2c_type tsl::robin_map<size_t, size_t>
+// #define p2c_type tsl::sparse_map<size_t, size_t>
+#define p2c_type std::vector<size_t>
 
 
 namespace bats {
@@ -27,7 +46,8 @@ struct extra_reduction_flag {};
 template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 
-	p2c_type pivot_to_col(M.ncol());
+	// p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -38,7 +58,8 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 			// M[j].print_row();
 			// piv is index-value nzpair
 			auto piv = M[j].lastnz();
-			if (pivot_to_col.count(piv.ind) > 0) {
+			// if (pivot_to_col.count(piv.ind) > 0) {
+			if (pivot_to_col[piv.ind] != bats::NO_IND) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv.ind];
 				auto a = piv.val / M[k].lastnz().val;
@@ -58,7 +79,8 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M) {
 template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M) {
 
-	p2c_type pivot_to_col(M.ncol());
+	// p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -71,7 +93,8 @@ p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M) {
 			// while the nonzero we are looking at is in the vector
 			// piv is index-value nzpair
 			// auto piv = M[j].lastnz();
-			if (pivot_to_col.count(piv->ind) > 0) {
+			// if (pivot_to_col.count(piv->ind) > 0) {
+			if (pivot_to_col[piv->ind] != bats::NO_IND) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv->ind];
 				auto a = piv->val / M[k].lastnz().val;
@@ -116,7 +139,8 @@ inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, bats::extra_reduction_flag)
 template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
-	p2c_type pivot_to_col(M.ncol());
+	// p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -127,7 +151,8 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 			// M[j].print_row();
 			// piv is index-value nzpair
 			auto piv = M[j].lastnz();
-			if (pivot_to_col.count(piv.ind) > 0) {
+			// if (pivot_to_col.count(piv.ind) > 0) {
+			if (pivot_to_col[piv.ind] != bats::NO_IND) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv.ind];
 				auto a = piv.val / M[k].lastnz().val;
@@ -146,7 +171,8 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
-	p2c_type pivot_to_col(M.ncol());
+	// p2c_type pivot_to_col;
+	p2c_type pivot_to_col(M.ncol(), bats::NO_IND);
 	// create a temporary vector for use in axpys
 	typename TVec::tmp_type tmp;
 
@@ -159,7 +185,8 @@ p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 			// while the nonzero we are looking at is in the vector
 			// piv is index-value nzpair
 			// auto piv = M[j].lastnz();
-			if (pivot_to_col.count(piv->ind) > 0) {
+			// if (pivot_to_col.count(piv->ind) > 0) {
+			if (pivot_to_col[piv->ind] != bats::NO_IND) {
 				// eliminate pivot
 				size_t k = pivot_to_col[piv->ind];
 				auto a = piv->val / M[k].lastnz().val;
@@ -203,12 +230,15 @@ inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U, bats
 std::vector<size_t> get_clearing_inds(const p2c_type &p2c) {
 	std::vector<size_t> inds;
 	inds.reserve(p2c.size());
+	size_t i = 0;
 	auto it = p2c.begin();
 	while (it != p2c.end()) {
 		// put keys into indices - these are the clearing indices for
 		// one dimension down.
-		inds.emplace_back(it->first);
+		// inds.emplace_back(it->first);
+		if (*it != bats::NO_IND) { inds.emplace_back(i); }
 		it++;
+		i++;
 	}
 	std::sort(inds.begin(), inds.end());
 	return inds;
@@ -289,17 +319,19 @@ p2c_type reduce_matrix_compression(
 // p2ck1 - p2c returned by reduction of B{k+1}
 // dimk - number of cells in dimension k
 template <typename MT>
-std::set<size_t> extract_basis_indices(MT &&Rk, const p2c_type &p2ck1) {
+std::vector<size_t> extract_basis_indices(MT &&Rk, const p2c_type &p2ck1) {
 
-	std::set<size_t> I;
+	std::vector<size_t> I;
 	size_t dimk = Rk.ncol();
+	I.reserve(dimk);
 
 	for (size_t j = 0; j < dimk; j++) {
 		if (Rk[j].nnz() == 0) {
 			// column is zero
-			if (p2ck1.count(j) == 0) {
+			// if (p2ck1.count(j) == 0) {
+			if (p2ck1[j] == bats::NO_IND) {
 				// column is not a pivot, so add
-				I.emplace(j); // TODO: can use emplace_hint with pointer to back
+				I.emplace_back(j); // TODO: can use emplace_hint with pointer to back
 			}
 		}
 	}
@@ -312,16 +344,17 @@ std::set<size_t> extract_basis_indices(MT &&Rk, const p2c_type &p2ck1) {
 // no p2c for dimension above
 // dimk - number of cells in dimension k
 template <typename MT>
-std::set<size_t> extract_basis_indices(const MT &Rk) {
+std::vector<size_t> extract_basis_indices(const MT &Rk) {
 
-	std::set<size_t> I;
+	std::vector<size_t> I;
 	size_t dimk = Rk.ncol();
+	I.reserve(dimk);
 
 	for (size_t j = 0; j < dimk; j++) {
 		if (Rk[j].nnz() == 0) {
 			// column is zero
 			// column is not a pivot, so add
-			I.emplace(j); // TODO: can use emplace_hint with pointer to back
+			I.emplace_back(j); // TODO: can use emplace_hint with pointer to back
 		}
 	}
 

@@ -21,7 +21,7 @@ public:
 	//std::vector<size_t> dim;
 	std::vector<MT> U; // basis matrices
 	std::vector<MT> R; // reduced matrix
-	std::vector<std::set<size_t>> I;
+	std::vector<std::vector<size_t>> I;
 	std::vector<p2c_type> p2c;
 
 	// size of homology vector space in dimension k
@@ -241,7 +241,8 @@ public:
 			--yit;
 			j = yit->ind;
 			// find if j is a pivot of bdry
-			if (p2c[k+1].count(j) > 0) {
+			// if (p2c[k+1].count(j) > 0) {
+			if (p2c[k+1][j] != bats::NO_IND) {
 				auto i = p2c[k+1].at(j);
 
 				// form column i of boundary in homology revealing basis

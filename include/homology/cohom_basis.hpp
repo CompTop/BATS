@@ -237,7 +237,8 @@ public:
 			--yit;
 			j = yit->ind;
 			// find if j is a pivot of bdry
-			if (p2c[k+1].count(j) > 0) {
+			// if (p2c[k+1].count(j) > 0) {
+			if (p2c[k+1][j] != bats::NO_IND) {
 				auto i = p2c[k+1].at(j);
 
 				// form column i of boundary in homology revealing basis

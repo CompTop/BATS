@@ -501,23 +501,23 @@ public:
 				TV val = (a * ((*i2).val)) + (*i1).val;
 				// std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
 				if (val != TV(0)) {
-					tmp.push_back(key_type(i1->ind, val));
+					tmp.emplace_back(key_type(i1->ind, val));
 				}
 				++i1;
 				++i2;
 			} else if ((i1->ind) < (i2->ind)) {
-				tmp.push_back(*i1);
-				++i1;
+				tmp.emplace_back(*i1++);
+				// ++i1;
 			} else {
-				tmp.push_back(key_type(i2->ind, a * (i2->val)));
+				tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
 				++i2;
 			}
 		}
 		// run through rest of entries and dump in
 		// at most one of the loops does anything
 		while (i1 != indval.cend()) {
-			tmp.emplace_back(*i1);
-			++i1;
+			tmp.emplace_back(*i1++);
+			// ++i1;
 		}
 		while (i2 != x.nzend()) {
 			tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
