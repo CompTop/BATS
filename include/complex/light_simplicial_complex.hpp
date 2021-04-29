@@ -166,11 +166,11 @@ public:
         return key;
     }
 
-	// TODO
+	// get simplex corresponding to a particular key
 	std::vector<index_type> key_to_simplex(
 		const size_t dim,
 		index_type key
-	) {
+	) const {
 		std::vector<index_type> s(dim+1);
 		for (size_t d = dim; d > 0; d--) {
 			s[d] = max_vertex(key, d);
@@ -178,6 +178,26 @@ public:
 		}
 		s[0] = key;
 		return s;
+	}
+
+	// get simplex at index i
+	inline std::vector<index_type> get_simplex(const size_t dim, const size_t i) const {
+		return key_to_simplex(dim, index_to_key[dim][i]);
+	}
+
+	// find index of simplex s
+	// returns bats::NO_IND if s can not be found
+	inline size_t find_idx(const size_t dim, const index_type key) const {
+		auto loc = key_to_index[dim].find(key);
+		return (loc == key_to_index[dim].end()) ? bats::NO_IND : loc->second;
+	}
+
+	// find index of simplex s
+	// returns bats::NO_IND if s can not be found
+	size_t find_idx(const std::vector<index_type> &s) const {
+		auto key = simplex_key(s);
+		size_t dim = s.size() - 1;
+		return find_idx(dim, key);
 	}
 
     // add simplex
@@ -192,7 +212,7 @@ public:
 		size_t dim = s.size() - 1;
 
 		// add to lookup
-		key_to_index[dim][k] = index_to_key[dim].size();
+		key_to_index[dim].emplace(k, index_to_key[dim].size());
 
         // add to list of simplicies
 		index_to_key[dim].emplace_back(k);
