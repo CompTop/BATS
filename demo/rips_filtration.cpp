@@ -6,6 +6,8 @@
 #define VT SparseVector<FT>
 #define MT ColumnMatrix<VT>
 
+using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+
 int main (int argc, char* argv[]) {
 
 	size_t d = 2; // dimension of Euclidean Space
@@ -23,7 +25,7 @@ int main (int argc, char* argv[]) {
 
 	{
 		X.data.print();
-		auto R = bats::RipsComplex(X, dist, rmax, 3);
+		auto R = bats::RipsComplex<CpxT>(X, dist, rmax, 3);
 		auto C = bats::__ChainComplex(R, FT());
 		auto RC = bats::ReducedChainComplex(C);
 		std::cout << "non-filtered homology: " << RC.hdim(1) << std::endl;
@@ -33,7 +35,7 @@ int main (int argc, char* argv[]) {
 	// auto L = greedy_landmarks(X, 10, dist);
 	// auto cover = landmark_cover(X, L, dist, 3);
 
-	auto F = bats::RipsFiltration(X, dist, rmax, maxdim);
+	auto F = bats::RipsFiltration<CpxT>(X, dist, rmax, maxdim);
 	for (size_t i = 0; i <= F.maxdim(); i++) {
 		std::cout << F.ncells(i) << " in dim " << i << std::endl;
 	}

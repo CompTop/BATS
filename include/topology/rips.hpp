@@ -127,8 +127,8 @@ CpxT RipsComplex(
 }
 
 // template over data type>
-template <typename T, typename M>
-Filtration<T, SimplicialComplex> RipsFiltration(
+template <typename CpxT, typename T, typename M>
+Filtration<T, CpxT> RipsFiltration(
     const DataSet<T> &X,
     const M &dist,
     T rmax,
@@ -136,18 +136,18 @@ Filtration<T, SimplicialComplex> RipsFiltration(
 ) {
     size_t n = X.size(); // number of points
     auto edges = rips_filtration_edges(X, dist, rmax);
-    return FlagFiltration(edges, n, dmax, T(0));
+    return FlagFiltration<CpxT>(edges, n, dmax, T(0));
 }
 
-template <typename T>
-Filtration<T, SimplicialComplex> RipsFiltration(
+template <typename CpxT, typename T>
+Filtration<T, CpxT> RipsFiltration(
     const Matrix<T> &pdist,
     T rmax,
     size_t dmax
 ) {
     size_t n = pdist.ncol(); // number of points
     auto redges = rips_filtration_edges(pdist, rmax);
-    return FlagFiltration(redges, n, dmax, T(0));
+    return FlagFiltration<CpxT>(redges, n, dmax, T(0));
 }
 
 } // namespace bats

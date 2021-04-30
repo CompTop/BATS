@@ -34,9 +34,9 @@ struct filtered_edge {
 
 // template over filtration type
 // TODO: can do unsafe simplex add
-template <typename T, typename NT>
+template <typename CpxT, typename T, typename NT>
 void add_dimension_recursive_flag(
-    Filtration<T, SimplicialComplex> &F,
+    Filtration<T, CpxT> &F,
     const NT &nbrs, // lists of neighbors
     const size_t d, // dimension
     const size_t maxd, // max dimension
@@ -83,9 +83,9 @@ void add_dimension_recursive_flag(
 
 
 
-template <typename T, typename NT>
+template <typename CpxT, typename T, typename NT>
 void add_dimension_recursive_flag_unsafe(
-    Filtration<T, SimplicialComplex> &F,
+    Filtration<T, CpxT> &F,
     const NT &nbrs, // lists of neighbors
     const size_t d, // dimension
     const size_t maxd, // max dimension
@@ -131,9 +131,9 @@ void add_dimension_recursive_flag_unsafe(
 }
 
 // this version keeps track of whether we should attempt to pair
-template <typename T, typename NT>
+template <typename CpxT, typename T, typename NT>
 void add_dimension_recursive_flag(
-    Filtration<T, SimplicialComplex> &F,
+    Filtration<T, CpxT> &F,
     const NT &nbrs, // lists of neighbors
     const size_t d, // dimension
     const size_t maxd, // max dimension
@@ -224,8 +224,8 @@ void add_dimension_recursive_flag(
 // t0 - time for 0-simplices
 // n - number of vertices
 // maxdim - maximum dimension of simplices
-template <typename T>
-Filtration<T, SimplicialComplex> FlagFiltration(
+template <typename CpxT, typename T>
+Filtration<T, CpxT> FlagFiltration(
     std::vector<filtered_edge<T>> &edges,
     const size_t n, // number of 0-cells
     const size_t maxdim,
@@ -240,7 +240,8 @@ Filtration<T, SimplicialComplex> FlagFiltration(
     // X = SimplicialComplex(maxdim);
     // F = Filtration<T, SimplicialComplex>(X);
     // reset simplicial complex
-    Filtration<T, SimplicialComplex> F;
+    CpxT X(n, maxdim);
+    Filtration<T, CpxT> F(X);
 
     // sets 0-cells
     std::vector<size_t> spx_idxs(1);
@@ -261,6 +262,7 @@ Filtration<T, SimplicialComplex> FlagFiltration(
         T t = edges[k].r;
         spx_idxs[0] = i;
         spx_idxs[1] = j;
+        std::sort(spx_idxs.begin(), spx_idxs.end());
         F.add(t, spx_idxs); // auto ret =
         // std::cout << ret.second << std::endl;
         bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);

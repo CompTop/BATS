@@ -32,7 +32,7 @@ struct ReducedFilteredChainComplex {
 		for (size_t i =0; i < dim(k); i++) {
 			if (RC.R[k][i].nnz() == 0) {
 				// homology generated
-				if (k == maxdim() || RC.p2c[k+1].count(i) == 0)  {
+				if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
 					// infinite bar
 					pairs.emplace_back(
 						PersistencePair(k, i, bats::NO_IND,
