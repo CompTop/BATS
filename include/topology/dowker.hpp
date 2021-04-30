@@ -295,7 +295,7 @@ Filtration<T, SimplicialComplex> WitnessFiltration(
     size_t n = L.size(); // number of points in landmark set
     auto R = witness_edge_param(X, L, dist, 0); // nu=0
     auto edges = flag_filtration_edges(R, rmax);
-    return FlagFiltration(edges, n, dmax, T(0));
+    return FlagFiltration<SimplicialComplex>(edges, n, dmax, T(0));
 }
 
 // template over data type>
@@ -309,7 +309,7 @@ Filtration<T, SimplicialComplex> DowkerFiltration(
     size_t n = pdist.nrow(); // number of points in landmark set
     auto R = dowker_edge_param(pdist); // nu=0
     auto edges = flag_filtration_edges(R, rmax);
-    return FlagFiltration(edges, n, dmax, T(0));
+    return FlagFiltration<SimplicialComplex>(edges, n, dmax, T(0));
 }
 
 

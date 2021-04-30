@@ -68,7 +68,7 @@ Diagram<SimplicialComplex, CellularMap> Rips(
 	#pragma omp parallel for
 	for (size_t i = 0; i < n; i++) {
 	    auto XI = get_subset(X, D.node[i]);
-	    TD.set_node(i, RipsComplex(XI, dist, rmax, dmax));
+	    TD.set_node(i, RipsComplex<SimplicialComplex>(XI, dist, rmax, dmax));
 	}
 
 	// apply functor to edges
@@ -105,7 +105,7 @@ Diagram<SimplicialComplex, CellularMap> Rips(
 	#pragma omp parallel for
 	for (size_t i = 0; i < n; i++) {
 	    auto XI = get_subset(X, D.node[i]);
-	    TD.set_node(i, RipsComplex(XI, dist, rmax[i], dmax));
+	    TD.set_node(i, RipsComplex<SimplicialComplex>(XI, dist, rmax[i], dmax));
 	}
 
 	// apply functor to edges

@@ -60,7 +60,7 @@ Filtration<T, SimplicialComplex> RipsFiltration(
 ) {
     size_t n = X.size(); // number of points
     auto edges = rips_filtration_edges(X, cover, dist, rmax);
-    return FlagFiltration(edges, n, dmax, T(0));
+    return FlagFiltration<SimplicialComplex>(edges, n, dmax, T(0));
 }
 
 } // namespace bats

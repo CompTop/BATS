@@ -62,7 +62,7 @@ Filtration<T, SimplicialComplex> DowkerFiltration(
     size_t dmax
 ) {
     auto edges = dowker_filtration_edges(pdist, cover, rmax);
-    return FlagFiltration(edges, pdist.nrow(), dmax, T(0));
+    return FlagFiltration<SimplicialComplex>(edges, pdist.nrow(), dmax, T(0));
 }
 
 template <typename T, typename M>

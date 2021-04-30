@@ -194,6 +194,16 @@ public:
 		return simplices;
 	}
 
+	// return all simplices
+	std::vector<std::vector<size_t>> get_simplices() const {
+		std::vector<std::vector<size_t>> simplices;
+		for (size_t dim = 0; dim < maxdim() + 1; dim++){
+			auto spx_dim = get_simplices(dim);
+			simplices.insert(simplices.end(), spx_dim.begin(), spx_dim.end());
+		}
+		return simplices;
+	}
+
 	// find index of simplex s
 	// returns bats::NO_IND if s can not be found
 	inline size_t find_idx(const size_t dim, const index_type key) const {
