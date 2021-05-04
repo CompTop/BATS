@@ -139,6 +139,8 @@ inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, bats::extra_reduction_flag)
 template <class TVec>
 p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
+	if (M.ncol() != U.ncol()) {throw std::runtime_error("Number of columns are not the same!");}
+
 	// p2c_type pivot_to_col;
 	p2c_type pivot_to_col(M.nrow(), bats::NO_IND);
 	// create a temporary vector for use in axpys
@@ -170,6 +172,8 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 template <class TVec>
 p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
+
+	if (M.ncol() != U.ncol()) {throw std::runtime_error("Number of columns are not the same!");}
 
 	// p2c_type pivot_to_col;
 	p2c_type pivot_to_col(M.nrow(), bats::NO_IND);

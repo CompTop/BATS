@@ -201,6 +201,31 @@ public:
 		set_indices();
 	}
 
+	template <typename... Args>
+	void update_reduction2(size_t k, Args ...args) {
+		// step 1: make U[k] upper-triangular.  Similar to UQL factorization
+		// but we apply updates to R[k] instead of factorizing
+		// we can actually use the standard reduction algorithm on U
+		// then put it in increasing pivot order
+		p2c[k] = reduce_matrix_standard(U[k], R[k]); // we want standard reduction
+		// p2c[k] can be used since it will just be updated later.
+
+		// sort columns of U - apply same operations to R
+		for (size_t j = 0; j < dim(k); j++) {
+			// this loop will eventually terminate, since every pivot occurs
+			while (p2c[k][j] != j) {
+				// get pivot - we'll swap so this pivot is in correct location
+				size_t p = p2c[k][j];
+				U[k].swap_cols(p, j);
+				R[k].swap_cols(p, j);
+				std::swap(p2c[k][p], p2c[k][j]);
+			}
+		}
+
+		// step 2: finish reduction of matrix R[k]
+		p2c[k] = reduce_matrix(R[k], U[k], args...);
+	}
+
 	// update reduction B[k] U[k] = R[k]
 	template <typename... Args>
 	void update_reduction(size_t k, Args ...args) {
@@ -237,7 +262,7 @@ public:
 		}
 		// next we update the factorizations
 		for (size_t k = 0; k < perm.size(); k++) {
-			update_reduction(k, args...);
+			update_reduction2(k, args...);
 		}
 	}
 
