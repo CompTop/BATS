@@ -9,6 +9,9 @@ using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, siz
 
 int main() {
 
+    /*
+    First we build a simplicial complex which can be used to extend filtrations
+    */
     CpxT X(3,2);
 
     std::vector<size_t> s;
@@ -23,6 +26,9 @@ int main() {
 
     X.print_summary();
 
+    /*
+    Now let's exend a filtration
+    */
     std::vector<double> f0 = {0.0, 0.1, 0.2};
     // lower star filtration
     std::function<double(const std::vector<size_t>&)> filtfn = [&f0](
@@ -38,6 +44,9 @@ int main() {
         std::cout << "\n";
     }
 
+    /*
+    The above is wrapped by the lower_star_filtration function
+    */
     vals = lower_star_filtration(X, f0);
     for (auto& valsk: vals) {
         for (auto& v: valsk) {
@@ -46,6 +55,9 @@ int main() {
         std::cout << "\n";
     }
 
+    /*
+    Now let's build a filtration and reduce
+    */
     auto F = bats::Filtration(X, vals);
     auto C = bats::Chain(F, FT());
     auto R = bats::Reduce(C);
@@ -55,6 +67,11 @@ int main() {
         std::cout << p.str() << std::endl;
     }
 
+    /*
+    If we want to change the filtration we have a variety of options.
+    First is to update the filtration on the FilteredChainComplex
+    Then, we reduce the complex again
+    */
     // update filtration
     f0 = {1.1, 1.0, 1.2};
     vals = lower_star_filtration(X, f0);
@@ -66,6 +83,10 @@ int main() {
         std::cout << p.str() << std::endl;
     }
 
+    /*
+    The second option is to update the ReducedFilteredChainComplex
+    In some situations, this may be faster
+    */
     // update filtration again
     f0 = {0.0, 0.1, 0.2};
     vals = lower_star_filtration(X, f0);
@@ -75,6 +96,11 @@ int main() {
     for (auto& p: R.persistence_pairs(0)) {
         std::cout << p.str() << std::endl;
     }
+
+    /*
+    The final option would be to just call Chain() again to build
+    the updated chain complex.
+    */
 
     return EXIT_SUCCESS;
 }
