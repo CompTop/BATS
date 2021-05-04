@@ -267,16 +267,34 @@ public:
 		find_preferred_representative(x, k);
 		return from_hom_basis(x, k);
 	}
+
+	void print_summary() const {
+		std::cout << "ReducedChainComplex with " << maxdim() << " dimensions:" << std::endl;
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			std::cout << "\tdim " << k << ": " << dim(k)
+			<< ", betti_" << k << ": " << hdim(k) << "\n";
+		}
+	}
 };
 
 
 // defualt return
 template <typename T, typename CpxT, typename... Args>
-inline auto __ReducedChainComplex(const CpxT &F, T, Args... args) {
+inline auto __ReducedChainComplex(const CpxT &F, T, Args (&...args)) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
 	return ReducedChainComplex(ChainComplex<MT>(F), args...);
+}
+
+template <typename T, typename CpxT, typename... Args>
+inline auto Reduce(const CpxT &F, T, Args (&...args)) {
+	return __ReducedChainComplex(F, T(), args...);
+}
+
+template <typename MT, typename... Args>
+inline auto Reduce(const ChainComplex<MT>& C, Args (&...args)) {
+	return ReducedChainComplex(C, args...);
 }
 
 } // namespace bats

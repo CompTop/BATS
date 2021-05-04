@@ -61,9 +61,8 @@ private:
 
 public:
 
-    // TODO: complete pairs in MorsePairing
-    // TODO: extract pairs in MorseParing to get barcode
-	Filtration() {};
+
+	Filtration() {}
 
     // initialize on complex
     Filtration(const CpxT &C) : X(C) {
@@ -71,16 +70,20 @@ public:
 			// std::cout << "reserving " << P.ncells(dim) << std::endl;
 			reserve(dim, X.ncells(dim));
 		}
-    };
+    }
 
 	// initialize complex with arguments
 	template <class ...Ts>
-	Filtration(Ts (&...args)) : X(args...) {
+	Filtration(const Ts (&...args)) : X(args...) {
 		for (size_t dim = 0; dim < X.maxdim() + 1; dim++){
 			// std::cout << "reserving " << P.ncells(dim) << std::endl;
 			reserve(dim, X.ncells(dim));
 		}
 	}
+
+	Filtration(const CpxT& C, const std::vector<std::vector<TF>>& vals) : X(C), val(vals) {}
+
+
 
 	inline const CpxT& complex() const { return X; }
 	inline const std::vector<std::vector<TF>>& vals() const { return val;}

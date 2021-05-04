@@ -31,21 +31,21 @@ class LightSimplicialComplex {
 private:
     const index_type _n; // fixed size of vertex set
     const index_type _k; // fixed size of maximum simplex dimension
-    index_type* _offset = nullptr;     // table of powers of n
+    std::vector<index_type> _offset;     // table of powers of n
     std::vector<std::vector<index_type>> index_to_key;
 	std::vector<hash_table> key_to_index;
 
 
     // get offset for index i
     inline index_type& offset(size_t i) {
-        return *(_offset + i);
+        return _offset[i];
     }
     inline const index_type& offset(size_t i) const {
-        return *(_offset + i);
+        return _offset[i];
     }
 
     void _initialze() {
-        _offset = new index_type[_k+1];
+        _offset.resize(_k+1);
 
 		offset(0) = 1;
 		for (size_t i = 1; i < _k+1; i++) {
@@ -108,7 +108,7 @@ private:
 	};
 
 public:
-    LightSimplicialComplex() : _n(0), _k(0), _offset(nullptr) {}
+    LightSimplicialComplex() : _n(0), _k(0) {}
 
     LightSimplicialComplex(
         const index_type n,
@@ -119,29 +119,21 @@ public:
 		key_to_index.resize(_k+1);
     }
 
-    // copy constructor
-    LightSimplicialComplex(
-        const LightSimplicialComplex& other
-    ) : _n(other._n), _k(other._k),
-     index_to_key(other.index_to_key), key_to_index(other.key_to_index) {
-        _initialze();
-    }
-
-    // move constructor
-    // transfer ownership of binomial table
-    LightSimplicialComplex(
-        LightSimplicialComplex&& other
-    ) : _n(other._n), _k(other._k), _offset(other._offset) {
-        other._offset = nullptr;
-        index_to_key = std::move(index_to_key);
-        key_to_index = std::move(key_to_index);
-    }
-
-    ~LightSimplicialComplex() {
-        if (_offset!= nullptr) {
-            delete[] _offset;
-        }
-    }
+    // // copy constructor
+    // LightSimplicialComplex(
+    //     const LightSimplicialComplex& other
+    // ) : _n(other._n), _k(other._k), _offset(other._offset),
+    //  index_to_key(other.index_to_key), key_to_index(other.key_to_index) {}
+	//
+    // // move constructor
+    // // transfer ownership of binomial table
+    // LightSimplicialComplex(
+    //     LightSimplicialComplex&& other
+    // ) : _n(other._n), _k(other._k) {
+    //     _offset = std::move(other._offset);
+    //     index_to_key = std::move(index_to_key);
+    //     key_to_index = std::move(key_to_index);
+    // }
 
     inline index_type maxdim() const { return _k; }
     inline size_t ncells(size_t dim) const {
@@ -302,6 +294,7 @@ public:
 		} else {
 			// key was already inserted - we'll look up the index
 			ind = it->second;
+			return newcells;
 		}
 
 		// add cell index

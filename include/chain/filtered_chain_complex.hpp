@@ -66,4 +66,9 @@ inline auto __FilteredChainComplex(const Filtration<FT, CpxT> &F, T) {
 	return FilteredChainComplex<FT, MT>(F);
 }
 
+// defualt return
+template <typename FT, typename T, typename CpxT>
+inline auto Chain(const Filtration<FT, CpxT> &F, T) {return __FilteredChainComplex(F, T());}
+
+
 } // namespace bats

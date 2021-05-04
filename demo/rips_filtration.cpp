@@ -7,11 +7,12 @@
 #define MT ColumnMatrix<VT>
 
 using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+// using CpxT = bats::SimplicialComplex;
 
 int main (int argc, char* argv[]) {
 
 	size_t d = 2; // dimension of Euclidean Space
-	size_t n = 100;
+	size_t n = 250; // number of points to sample
 
 	// maximum simplex dimension
     size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
@@ -25,8 +26,9 @@ int main (int argc, char* argv[]) {
 
 	{
 		X.data.print();
-		auto R = bats::RipsComplex<CpxT>(X, dist, rmax, 3);
-		auto C = bats::__ChainComplex(R, FT());
+		auto R = bats::RipsComplex<CpxT>(X, dist, rmax, maxdim);
+		// auto C = bats::__ChainComplex(R, FT());
+		bats::ChainComplex<MT> C(R);
 		auto RC = bats::ReducedChainComplex(C);
 		std::cout << "non-filtered homology: " << RC.hdim(1) << std::endl;
 	}
@@ -43,23 +45,40 @@ int main (int argc, char* argv[]) {
 
 	//auto F = FlagFiltration(edges, ts, 3, 2, 0.);
 
-	auto FC = bats::__FilteredChainComplex(F, FT());
+	{
+		auto FC = bats::__FilteredChainComplex(F, FT());
 
-	auto RFC = bats::ReducedFilteredChainComplex(
-		FC
-		// bats::extra_reduction_flag(),
-		// bats::compression_flag()
-	);
-	// auto RFC = __ReducedFilteredChainComplex(F, FT());
+		auto RFC = bats::ReducedFilteredChainComplex(
+			FC
+			// bats::extra_reduction_flag(),
+			// bats::compression_flag()
+		);
+		// auto RFC = __ReducedFilteredChainComplex(F, FT());
 
-	std::cout << "hdim(1) = " << RFC.RC.hdim(1) << std::endl;
+		std::cout << "hdim(1) = " << RFC.RC.hdim(1) << std::endl;
 
-	// persistence pairs for H1
-	auto ps = RFC.persistence_pairs(1);
+		// persistence pairs for H1
+		auto ps = RFC.persistence_pairs(1);
 
-	for (auto p : ps) {
-		if (p.death > p.birth)
-			std::cout << p.str() << " " << p.death - p.birth << std::endl;
+		for (auto p : ps) {
+			if (p.death > p.birth)
+				std::cout << p.str() << " " << p.death - p.birth << std::endl;
+		}
+	}
+	{
+		std::cout << "\n\nauto reduction\n";
+		std::cout << F.complex().ncells(0) << ", " << F.ncells(0) << std::endl;
+		auto RFC = bats::__ReducedFilteredChainComplex(F, FT(), bats::extra_reduction_flag());
+
+		std::cout << "hdim(1) = " << RFC.RC.hdim(1) << std::endl;
+
+		// persistence pairs for H1
+		auto ps = RFC.persistence_pairs(1);
+
+		for (auto p : ps) {
+			if (p.death > p.birth)
+				std::cout << p.str() << " " << p.death - p.birth << std::endl;
+		}
 	}
 
 	return 0;

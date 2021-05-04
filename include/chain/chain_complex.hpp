@@ -189,6 +189,10 @@ inline auto __ChainComplex(const CpxT &X, T) {
 
 	return ChainComplex<MT>(X);
 }
+
+template <typename T, typename CpxT>
+inline auto Chain(const CpxT& X, T) {return __ChainComplex(X, T());}
+
 template <typename T, typename CpxT>
 inline auto __ChainComplex(const CpxT &X, const CpxT &A, T) {
 	using VT = SparseVector<T, size_t>;
@@ -196,5 +200,8 @@ inline auto __ChainComplex(const CpxT &X, const CpxT &A, T) {
 
 	return ChainComplex<MT>(X, A);
 }
+
+template <typename T, typename CpxT>
+inline auto Chain(const CpxT& X, const CpxT &A, T) {return __ChainComplex(X, A, T());}
 
 } // namespace bats

@@ -19,12 +19,13 @@ struct ReducedFilteredChainComplex {
 
 	// variadic template for passing arguments
 	template <typename... Args>
-	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args... args) :
+	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args (&...args)) :
 		val(C.vals()),
 		RC(C.complex(), args...) {}
 
 	inline size_t maxdim() const { return RC.maxdim(); }
 	inline size_t dim(const size_t k) const {return RC.dim(k);}
+	inline size_t hdim(const size_t k) const {return RC.hdim(k);}
 
 	// persistence pairs in dimension k
 	std::vector<PersistencePair<T>> persistence_pairs(const size_t k) {
@@ -80,15 +81,34 @@ struct ReducedFilteredChainComplex {
 	// get subcomplex
 	ReducedFilteredChainComplex get_subcomplex() const;
 
+	void print_summary() const {
+		std::cout << "ReducedFilteredChainComplex with " << maxdim() << " dimensions:" << std::endl;
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			std::cout << "\tdim " << k << ": " << dim(k)
+			<< ", betti_" << k << ": " << hdim(k) << "\n";
+		}
+	}
+
 };
 
 // defualt return
 template <typename FT, typename T, typename CpxT, typename... Args>
-inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args... args) {
+inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args (&...args)) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
 	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F), args...);
 }
+
+template <typename FT, typename T, typename CpxT, typename... Args>
+inline auto Reduce(const Filtration<FT, CpxT> &F, T, Args (&...args)) {
+	return __ReducedFilteredChainComplex(F, T(), args...);
+}
+
+template <typename T, typename MT, typename... Args>
+inline auto Reduce(const FilteredChainComplex<T, MT>& C, Args (&...args)) {
+	return ReducedFilteredChainComplex(C, args...);
+}
+
 
 } // namespace bats

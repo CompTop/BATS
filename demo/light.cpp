@@ -50,5 +50,10 @@ int main() {
     auto b2 = SparseVector(ind, val);
     b2.print();
 
+    bats::LightSimplicialComplex<size_t> Y = X;
+    Y.print_summary();
+
+    std::cout << &Y << " : "<< &X << std::endl;
+
     return EXIT_SUCCESS;
 }
