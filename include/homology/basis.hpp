@@ -12,6 +12,11 @@ namespace bats {
 struct compute_basis_flag {};
 
 
+/*
+Maintains factorizations
+B_k U_k = R_k
+or B_k = R_k U_k^{-1}
+*/
 template <typename MT>
 class ReducedChainComplex {
 public:
@@ -194,6 +199,46 @@ public:
 		}
 
 		set_indices();
+	}
+
+	// update reduction B[k] U[k] = R[k]
+	template <typename... Args>
+	void update_reduction(size_t k, Args ...args) {
+		// step 1: ensure U is upper triangular
+		auto F = UQL(U[k]); // UQL factorization
+		// step 2: move L and Q factors to R
+		R[k] = R[k] * l_inv(F.L) * F.E.transpose();
+		// step 3: update R
+		U[k] = F.U;
+		p2c[k] = reduce_matrix(R[k], U[k], args...);
+	}
+
+	// permute basis in dimension k
+	// B_k U_k = R_k, so when we permute columns of B_k, we must permute rows of U_k
+	// we also permute rows of R_{k+1}
+	void permute_basis(size_t k, const std::vector<size_t> &perm) {
+		auto iperm = bats::util::inv_perm(perm);
+		if (k == maxdim()) {
+			// only need to worry about rows of U[k]
+			U[k].permute_rows(iperm);
+		} else {
+			// need to handle boundary[k] and boundary[k+1]
+			U[k].permute_rows(iperm);
+			R[k+1].permute_rows(iperm);
+		}
+		// at end of this, homology classes are invalidated
+	}
+
+	// update basis in all dimensions
+	template <typename... Args>
+	void permute_basis(const std::vector<std::vector<size_t>> &perm, Args ...args) {
+		for (size_t k = 0; k < perm.size(); k++) {
+			permute_basis(k, perm[k]);
+		}
+		// next we update the factorizations
+		for (size_t k = 0; k < perm.size(); k++) {
+			update_reduction(k, args...);
+		}
 	}
 
 	// put vector/matrix in homology-revealing basis in dimension k

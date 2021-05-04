@@ -44,7 +44,6 @@ template <typename TF, class CpxT>
 class Filtration
 {
 private:
-    // MorsePairing<CpxT> P;
 	CpxT X; // complex type
     std::vector<std::vector<TF>> val; // filtration value for each cell
 

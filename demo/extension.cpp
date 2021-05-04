@@ -55,8 +55,6 @@ int main() {
         std::cout << p.str() << std::endl;
     }
 
-    C.complex()[1].print();
-
     // update filtration
     f0 = {1.1, 1.0, 1.2};
     vals = lower_star_filtration(X, f0);
@@ -68,7 +66,15 @@ int main() {
         std::cout << p.str() << std::endl;
     }
 
-    C.complex()[1].print();
+    // update filtration again
+    f0 = {0.0, 0.1, 0.2};
+    vals = lower_star_filtration(X, f0);
+    R.update_filtration(vals);
+    R.print_summary();
+
+    for (auto& p: R.persistence_pairs(0)) {
+        std::cout << p.str() << std::endl;
+    }
 
     return EXIT_SUCCESS;
 }
