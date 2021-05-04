@@ -53,6 +53,9 @@ struct FilteredChainComplex {
 		// step 4: store new inverse permutation
 		iperm = filtration_iperm(perms);
 
+		// store values as well
+		val = newval;
+
 	}
 
 };

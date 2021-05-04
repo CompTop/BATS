@@ -46,9 +46,9 @@ int main (int argc, char* argv[]) {
 	//auto F = FlagFiltration(edges, ts, 3, 2, 0.);
 
 	{
-		auto FC = bats::__FilteredChainComplex(F, FT());
+		auto FC = bats::Chain(F, FT());
 
-		auto RFC = bats::ReducedFilteredChainComplex(
+		auto RFC = bats::Reduce(
 			FC
 			// bats::extra_reduction_flag(),
 			// bats::compression_flag()
@@ -68,7 +68,7 @@ int main (int argc, char* argv[]) {
 	{
 		std::cout << "\n\nauto reduction\n";
 		std::cout << F.complex().ncells(0) << ", " << F.ncells(0) << std::endl;
-		auto RFC = bats::__ReducedFilteredChainComplex(F, FT(), bats::extra_reduction_flag());
+		auto RFC = bats::Reduce(F, FT(), bats::extra_reduction_flag());
 
 		std::cout << "hdim(1) = " << RFC.RC.hdim(1) << std::endl;
 

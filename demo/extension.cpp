@@ -47,10 +47,28 @@ int main() {
     }
 
     auto F = bats::Filtration(X, vals);
-    auto C = bats::Chain(X, FT());
+    auto C = bats::Chain(F, FT());
     auto R = bats::Reduce(C);
     R.print_summary();
 
+    for (auto& p: R.persistence_pairs(0)) {
+        std::cout << p.str() << std::endl;
+    }
+
+    C.complex()[1].print();
+
+    // update filtration
+    f0 = {1.1, 1.0, 1.2};
+    vals = lower_star_filtration(X, f0);
+    C.update_filtration(vals);
+    R = bats::Reduce(C);
+    R.print_summary();
+
+    for (auto& p: R.persistence_pairs(0)) {
+        std::cout << p.str() << std::endl;
+    }
+
+    C.complex()[1].print();
 
     return EXIT_SUCCESS;
 }

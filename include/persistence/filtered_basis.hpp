@@ -12,16 +12,18 @@ namespace bats {
 template <typename T, typename MT>
 struct ReducedFilteredChainComplex {
 
-	std::vector<std::vector<T>> val;
-	ReducedChainComplex<MT> RC;
+	ReducedChainComplex<MT> RC; // reduced in permutation order
+	std::vector<std::vector<T>> val; // stored in original order
+	std::vector<std::vector<size_t>> iperm; // inverse permutation from permutaiton order to original order
 
 	ReducedFilteredChainComplex() {}
 
 	// variadic template for passing arguments
 	template <typename... Args>
 	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args (&...args)) :
-		val(C.vals()),
-		RC(C.complex(), args...) {}
+		RC(C.complex(), args...),
+		val(C.val),
+		iperm(C.iperm) {}
 
 	inline size_t maxdim() const { return RC.maxdim(); }
 	inline size_t dim(const size_t k) const {return RC.dim(k);}
@@ -37,7 +39,8 @@ struct ReducedFilteredChainComplex {
 					// infinite bar
 					pairs.emplace_back(
 						PersistencePair(k, i, bats::NO_IND,
-							val[k][i], std::numeric_limits<T>::infinity()
+							val[k][iperm[k][i]], std::numeric_limits<T>::infinity()
+							// val[k][i], std::numeric_limits<T>::infinity()
 						)
 					);
 				} else {
@@ -45,7 +48,8 @@ struct ReducedFilteredChainComplex {
 					// finite bar
 					pairs.emplace_back(
 						PersistencePair(k, i, j,
-							val[k][i], val[k+1][j]
+							val[k][iperm[k][i]], val[k+1][iperm[k+1][j]]
+							// val[k][i], val[k+1][j]
 						)
 					);
 				}
@@ -93,7 +97,7 @@ struct ReducedFilteredChainComplex {
 
 // defualt return
 template <typename FT, typename T, typename CpxT, typename... Args>
-inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args (&...args)) {
+inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args ...args) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
@@ -101,12 +105,12 @@ inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args
 }
 
 template <typename FT, typename T, typename CpxT, typename... Args>
-inline auto Reduce(const Filtration<FT, CpxT> &F, T, Args (&...args)) {
+inline auto Reduce(const Filtration<FT, CpxT> &F, T, Args ...args) {
 	return __ReducedFilteredChainComplex(F, T(), args...);
 }
 
 template <typename T, typename MT, typename... Args>
-inline auto Reduce(const FilteredChainComplex<T, MT>& C, Args (&...args)) {
+inline auto Reduce(const FilteredChainComplex<T, MT>& C, Args ...args) {
 	return ReducedFilteredChainComplex(C, args...);
 }
 
