@@ -19,10 +19,10 @@ returns:
 	F_* (Eilenberg-Zilber map)
 	X \times Y
 */
-template <typename T>
+template <typename CpxT, typename T>
 auto EilenbergZilber(
-    const SimplicialComplex& X,     // first simplicial complex
-    const SimplicialComplex& Y,     // second simplicial complex
+    const CpxT& X,     // first simplicial complex
+    const CpxT& Y,     // second simplicial complex
     const size_t maxdim,       		// maximum constructed dimension
 	T								// field type
 ) {
@@ -31,7 +31,7 @@ auto EilenbergZilber(
 	using MT = ColumnMatrix<VT>;
 
 	const size_t n = X.ncells(0); // number of 0-cells in X
-	SimplicialComplex XY; // product simplicial complex
+	CpxT XY( n*n, maxdim); // product simplicial complex
 
 	ChainComplex<MT> CX(X); // chain complex of X
 	ChainComplex<MT> CY(Y); // chain complex of Y
@@ -72,9 +72,9 @@ auto EilenbergZilber(
 					product_paths(
 						XY,
 						X.simplex_begin(dX, iX),
-						(X.simplex_end(dX, iX) - 1),
+						X.simplex_end(dX, iX),
 						Y.simplex_begin(dY, iY),
-						(Y.simplex_end(dY, iY) - 1),
+						Y.simplex_end(dY, iY),
 						s,
 						n,
 						ci
@@ -173,12 +173,12 @@ returns:
 	F_* (Relative Eilenberg-Zilber map)
 	C_*(X \times Y, X \times B \cup A \times Y)
 */
-template <typename T>
+template <typename CpxT, typename T>
 auto EilenbergZilber(
-    const SimplicialComplex& X,     // first simplicial complex
-	const SimplicialComplex& A,
-    const SimplicialComplex& Y,     // second simplicial complex
-	const SimplicialComplex& B,
+    const CpxT& X,     // first simplicial complex
+	const CpxT& A,
+    const CpxT& Y,     // second simplicial complex
+	const CpxT& B,
     const size_t maxdim,       		// maximum constructed dimension
 	T								// field type
 ) {
@@ -193,7 +193,7 @@ auto EilenbergZilber(
 	auto ABinds = kron_index(X, Ainds, Y, Binds, maxdim);
 	auto RCXCY = CXCY.relative_complex(ABinds);
 
-	SimplicialComplex R = TriangulatedProduct(X, B, maxdim, X.ncells(0));
+	CpxT R = TriangulatedProduct(X, B, maxdim, X.ncells(0));
 	R.union_add(TriangulatedProduct(A, Y, maxdim, X.ncells(0)));
 
 	auto Rinds = XY.get_indices(R);

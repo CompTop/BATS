@@ -85,6 +85,17 @@ private:
 			c = (i & 0x1) ? -1 : 1;
 		}
 
+		simplex_boundary_iterator(
+			index_type s,
+			size_t dim,
+			const LightSimplicialComplex* p,
+			int i
+		) : p(p), dim(dim), c(-1), i(i), before(s), after(0) {}
+
+		simplex_boundary_iterator(
+			int i
+		) : i(i) {}
+
 		std::tuple<index_type, int> next() {
 			// face and coefficient
 			int coeff = c;
@@ -98,6 +109,40 @@ private:
 			c = -c;
 			i--;
 			return std::make_tuple(face, coeff);
+		}
+
+		index_type operator*() const {
+			return after + before % p->offset(i);
+		}
+
+		// prefix increment
+		simplex_boundary_iterator& operator++() {
+			index_type v = before / p->offset(i);
+			before = before % p->offset(i);
+			after += v * p->offset(i-1);
+
+			c = -c;
+			i--;
+			return *this;
+		}
+
+		// prefix decrement
+		simplex_boundary_iterator& operator--() {
+			// TODO: calculate before/after
+			index_type v = after / p->offset(i);
+			after = after % p->offset(i);
+			before += v * p->offset(i+1);
+
+			c = -c;
+			i++;
+			return *this;
+		}
+
+		bool operator!=(const simplex_boundary_iterator& other) {
+			return i != other.i;
+		}
+		bool operator==(const simplex_boundary_iterator& other) {
+			return i == other.i;
 		}
 
 		// returns true if i >= 0 (iterator not finished)
@@ -308,6 +353,14 @@ public:
 		auto k = simplex_key(s);
 		const size_t dim = s.size() - 1;
 		return add_recursive(dim, k);
+	}
+
+	auto simplex_begin(const size_t dim, const size_t i) const {
+		auto k = index_to_key[dim][i];
+		return simplex_boundary_iterator(k, dim, this);
+	}
+	auto simplex_end(const size_t dim, const size_t i) const {
+		return simplex_boundary_iterator(-1);
 	}
 
 	// return inds, vals in boundary of simplex i in dimension dim

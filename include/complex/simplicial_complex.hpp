@@ -593,18 +593,19 @@ inline size_t  prod_ind(size_t i, size_t j, size_t n) {
 // }
 
 // loop over all possible simplices
-template <typename itT>
+template <typename CpxT, typename itT>
 void product_paths(
-	SimplicialComplex &XY,
-	const itT xit,
+	CpxT &XY,
+	itT xit,
 	const itT xend,
-	const itT yit,
+	itT yit,
 	const itT yend,
 	std::vector<size_t> &s,
 	const size_t n
 ) {
 	// put on vertex
 	s.emplace_back(prod_ind(*xit, *yit, n));
+	++xit; ++yit;
 	if (xit == xend && yit == yend) {
 		XY.add_recursive(s);
 		s.pop_back();
@@ -612,11 +613,12 @@ void product_paths(
 	}
 	if (xit != xend) {
 		// increment in x direction
-		product_paths(XY, xit+1, xend, yit, yend, s, n);
+		product_paths(XY, xit, xend, --yit, yend, s, n);
+		++yit;
 	}
 	if (yit != yend) {
 		// increment in y direction
-		product_paths(XY, xit, xend, yit+1, yend, s, n);
+		product_paths(XY, --xit, xend, yit, yend, s, n);
 	}
 	// pop off vertex
 	s.pop_back();
@@ -624,12 +626,12 @@ void product_paths(
 }
 
 // loop over all possible simplices
-template <typename itT>
+template <typename CpxT, typename itT>
 void product_paths(
-	SimplicialComplex &XY,
-	const itT xit,
+	CpxT &XY,
+	itT xit,
 	const itT xend,
-	const itT yit,
+	itT yit,
 	const itT yend,
 	std::vector<size_t> &s,
 	const size_t n,
@@ -637,6 +639,7 @@ void product_paths(
 ) {
 	// put on vertex
 	s.emplace_back(prod_ind(*xit, *yit, n));
+	++xit; ++yit;
 	if (xit == xend && yit == yend) {
 		ci.emplace_back((XY.add_recursive(s)).back());
 		s.pop_back();
@@ -644,11 +647,12 @@ void product_paths(
 	}
 	if (xit != xend) {
 		// increment in x direction
-		product_paths(XY, xit+1, xend, yit, yend, s, n, ci);
+		product_paths(XY, xit, xend, --yit, yend, s, n, ci);
+		++yit;
 	}
 	if (yit != yend) {
 		// increment in y direction
-		product_paths(XY, xit, xend, yit+1, yend, s, n, ci);
+		product_paths(XY, --xit, xend, yit, yend, s, n, ci);
 	}
 	// pop off vertex
 	s.pop_back();
@@ -659,14 +663,15 @@ void product_paths(
 // Triangulated product of X and Y up to simplex dimension k
 // use translator
 // n is number of possible vertices on X
-SimplicialComplex TriangulatedProduct(
-	const SimplicialComplex& X,
-	const SimplicialComplex& Y,
+template <typename CpxT>
+CpxT TriangulatedProduct(
+	const CpxT& X,
+	const CpxT& Y,
 	const size_t maxdim,
 	const size_t n
 ) {
 
-	SimplicialComplex XY;
+	CpxT XY(n * Y.ncells(0), maxdim);
 
 	std::vector<size_t> s; // placeholder simplex
 	// loop over simplex dimension of product
@@ -683,9 +688,9 @@ SimplicialComplex TriangulatedProduct(
 					product_paths(
 						XY,
 						X.simplex_begin(dX, iX),
-						(X.simplex_end(dX, iX) - 1),
+						X.simplex_end(dX, iX),
 						Y.simplex_begin(dY, iY),
-						(Y.simplex_end(dY, iY) - 1),
+						Y.simplex_end(dY, iY),
 						s,
 						n
 					);
@@ -696,15 +701,17 @@ SimplicialComplex TriangulatedProduct(
 	return XY;
 }
 
-inline SimplicialComplex TriangulatedProduct(
-	const SimplicialComplex& X,
-	const SimplicialComplex& Y,
+template <typename CpxT>
+inline CpxT TriangulatedProduct(
+	const CpxT& X,
+	const CpxT& Y,
 	const size_t maxdim
 ) { return TriangulatedProduct(X, Y, maxdim, X.ncells(0)); }
 
-inline SimplicialComplex TriangulatedProduct(
-	const SimplicialComplex& X,
-	const SimplicialComplex& Y
+template <typename CpxT>
+inline CpxT TriangulatedProduct(
+	const CpxT& X,
+	const CpxT& Y
 ) { return TriangulatedProduct(X, Y, X.maxdim() + Y.maxdim(), X.ncells(0)); }
 
 } // namespace bats

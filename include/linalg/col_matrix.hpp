@@ -217,7 +217,6 @@ public:
 
 		auto prow = bats::util::partial_perm(rind, nrow());
 
-		size_t j = 0;
         // loop in column permutation order
         for ( size_t j : cind) {
 			newcol.emplace_back(col[j].subvector(prow));
