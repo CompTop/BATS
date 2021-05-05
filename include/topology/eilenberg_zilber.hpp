@@ -65,16 +65,18 @@ auto EilenbergZilber(
 
 			// loop over simplices of dimension dX
 			for (size_t iX = 0; iX < X.ncells(dX); iX++) {
+				auto sX = X.get_simplex(dX, iX);
 				// loop over simplices of dimension dY
 				for (size_t iY = 0; iY < Y.ncells(dY); iY++) {
+					auto sY = Y.get_simplex(dY, iY);
 					ci.clear();
 					// create target simplices
 					product_paths(
 						XY,
-						X.simplex_begin(dX, iX),
-						X.simplex_end(dX, iX),
-						Y.simplex_begin(dY, iY),
-						Y.simplex_end(dY, iY),
+						sX.begin(), //X.simplex_begin(dX, iX),
+						sX.end(), //X.simplex_end(dX, iX),
+						sY.begin(), //Y.simplex_begin(dY, iY),
+						sY.end(), //Y.simplex_end(dY, iY),
 						s,
 						n,
 						ci

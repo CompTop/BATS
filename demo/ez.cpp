@@ -9,8 +9,8 @@
 #define VT SparseVector<FT>
 #define MT ColumnMatrix<VT>
 
-// using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
-using CpxT = bats::SimplicialComplex;
+using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+// using CpxT = bats::SimplicialComplex;
 
 int main() {
 
