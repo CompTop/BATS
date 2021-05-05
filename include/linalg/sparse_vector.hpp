@@ -29,12 +29,14 @@ private:
 
 	std::vector<key_type> indval;
 
+public:
 	// sort in-place
 	void sort() {
 		// sort in-place
 		std::sort(indval.begin(), indval.end());
 	}
 
+private:
 	void check_sorted() const {
 		if (indval.size() < 2) { return; }
 		for (auto it = indval.begin(); it != --(indval.end()); ) {
@@ -75,6 +77,18 @@ public:
 		#ifdef BATS_DEBUG
 		check_sorted();
 		#endif
+	}
+
+	// constructor from tuples of indices and int values
+	SparseVector(const std::vector<std::tuple<size_t, int>>& ival) {
+		indval.reserve(ival.size());
+		for (auto& tup : ival) {
+			indval.emplace_back(key_type(
+				std::get<0>(tup),
+				std::get<1>(tup)
+			));
+		}
+		sort();
 	}
 
 	// constructor that loops over index and value iterators

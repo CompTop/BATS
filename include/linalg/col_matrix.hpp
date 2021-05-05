@@ -540,7 +540,7 @@ public:
 
     // template <typename IO>
     void write(std::ostream &io) const {
-		io << "Sparse Matrix\n";
+		io << "ColumnMatrix\n";
         io << nrow() << ',' << ncol() << '\n';
         for (size_t j = 0; j < ncol(); j++) {
             // write column as row
