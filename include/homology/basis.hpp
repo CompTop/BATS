@@ -162,7 +162,7 @@ public:
 		// for (auto i : comp_inds) {
 		// 	std::cout << i << std::endl;
 		// }
-		for (ssize_t k = 1; k < dmax; k++) {
+		for (size_t k = 1; k < dmax; k++) {
 			R[k] = C.boundary[k];
 			p2c[k] = reduce_matrix_compression(R[k], comp_inds, algflag());
 			comp_inds = get_compression_inds(R[k]);
@@ -191,7 +191,7 @@ public:
 		U[0] = MT::identity(C.dim(0));
 		p2c[0] = reduce_matrix(R[0], U[0], algflag());
 		std::vector<bool> comp_inds = get_compression_inds(R[0]);
-		for (ssize_t k = 1; k < dmax; k++) {
+		for (size_t k = 1; k < dmax; k++) {
 			R[k] = C.boundary[k];
 			U[k] = MT::identity(C.dim(k));
 			p2c[k] = reduce_matrix_compression(R[k], U[k], comp_inds, algflag());
@@ -350,7 +350,7 @@ public:
 
 // defualt return
 template <typename T, typename CpxT, typename... Args>
-inline auto __ReducedChainComplex(const CpxT &F, T, Args (&...args)) {
+inline auto __ReducedChainComplex(const CpxT &F, T, Args ...args) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
@@ -358,12 +358,12 @@ inline auto __ReducedChainComplex(const CpxT &F, T, Args (&...args)) {
 }
 
 template <typename T, typename CpxT, typename... Args>
-inline auto Reduce(const CpxT &F, T, Args (&...args)) {
+inline auto Reduce(const CpxT &F, T, Args ...args) {
 	return __ReducedChainComplex(F, T(), args...);
 }
 
 template <typename MT, typename... Args>
-inline auto Reduce(const ChainComplex<MT>& C, Args (&...args)) {
+inline auto Reduce(const ChainComplex<MT>& C, Args ...args) {
 	return ReducedChainComplex(C, args...);
 }
 

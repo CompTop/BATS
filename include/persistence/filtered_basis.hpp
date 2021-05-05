@@ -20,7 +20,7 @@ struct ReducedFilteredChainComplex {
 
 	// variadic template for passing arguments
 	template <typename... Args>
-	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args (&...args)) :
+	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args ...args) :
 		RC(C.complex(), args...),
 		val(C.val),
 		iperm(C.iperm) {}
