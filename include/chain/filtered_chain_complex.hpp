@@ -10,7 +10,7 @@ template <typename FT, typename MT>
 struct FilteredChainComplex {
 	std::vector<std::vector<FT>> val; // stored in original order
 	ChainComplex<MT> C; // stored in permutation order
-	std::vector<std::vector<size_t>> iperm; // inverse permutation from permutaiton order to original order
+	std::vector<std::vector<size_t>> perm; // map from column order in chain complex to val
 
 	FilteredChainComplex() {}
 
@@ -21,13 +21,10 @@ struct FilteredChainComplex {
 
 		// step 2: put ChainComplex C in permutation order
 		C.permute_basis(perms);
-		// permute vals as well
-		for (size_t i = 0; i < val.size(); i++) {
-			std::sort(val[i].begin(), val[i].end());
-		}
 
 		// step 3: store inverse perumutation to map back to original order
-		iperm = filtration_iperm(perms);
+		// iperm = filtration_iperm(perms);
+		perm = perms;
 	}
 
 	inline size_t dim(const size_t k) { return C.dim(k); }
@@ -40,6 +37,9 @@ struct FilteredChainComplex {
 		// step 1: determine permutation order for newval
 		auto perms = filtration_sortperm(newval);
 
+		// get inverse permutation for current permutation
+		auto iperm = filtration_iperm(perm);
+
 		// step 2: determine update to old permutation
 		// iperm[k] will hold the updated permutation temporarily
 		std::vector<FT> tmp; // temporary vector
@@ -50,8 +50,8 @@ struct FilteredChainComplex {
 		// step 3: apply permutation updates to ChainComplex C
 		C.permute_basis(iperm);
 
-		// step 4: store new inverse permutation
-		iperm = filtration_iperm(perms);
+		// step 4: store new permutation
+		perm = perms;
 
 		// store values as well
 		val = newval;

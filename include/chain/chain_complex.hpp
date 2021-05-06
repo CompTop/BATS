@@ -118,7 +118,7 @@ struct ChainComplex {
 	void permute_basis(size_t k, const std::vector<size_t> &perm) {
 		if (k == 0) {
 			// only worry about boundary[1]
-			boundary[1].permute_rows(perm);
+			boundary[1].permute_rows(bats::util::inv_perm(perm));
 		} else if (k == maxdim()) {
 			boundary[maxdim()].permute_cols(perm);
 			// only worry about boundary[maxdim()]

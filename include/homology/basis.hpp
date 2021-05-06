@@ -243,12 +243,21 @@ public:
 	// we also permute rows of R_{k+1}
 	void permute_basis(size_t k, const std::vector<size_t> &perm) {
 		auto iperm = bats::util::inv_perm(perm);
-		if (k == maxdim()) {
+		if (k == 0) {
+			// only worry about boundary[1]
+			R[1].permute_rows(iperm);
+		} else if (k == maxdim()) {
 			// only need to worry about rows of U[k]
-			U[k].permute_rows(iperm);
+			U[k].permute_rows(iperm); // iperm?
+			U[k].permute_cols(perm);
+			R[k].permute_cols(perm);
+			// U[k].permute_cols(perm);
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
-			U[k].permute_rows(iperm);
+			U[k].permute_rows(iperm); // iperm?
+			U[k].permute_cols(perm);
+			R[k].permute_cols(perm);
+			// U[k].permute_cols(perm);
 			R[k+1].permute_rows(iperm);
 		}
 		// at end of this, homology classes are invalidated
