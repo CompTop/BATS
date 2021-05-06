@@ -14,16 +14,16 @@ struct ReducedFilteredChainComplex {
 
 	ReducedChainComplex<MT> RC; // reduced in permutation order
 	std::vector<std::vector<T>> val; // stored in original order
-	std::vector<std::vector<size_t>> iperm; // inverse permutation from permutaiton order to original order
+	std::vector<std::vector<size_t>> perm; //from permutaiton order to original order
 
 	ReducedFilteredChainComplex() {}
 
 	// variadic template for passing arguments
 	template <typename... Args>
-	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args (&...args)) :
+	ReducedFilteredChainComplex(const FilteredChainComplex<T, MT>& C, Args ...args) :
 		RC(C.complex(), args...),
 		val(C.val),
-		iperm(C.iperm) {}
+		perm(C.perm) {}
 
 	inline size_t maxdim() const { return RC.maxdim(); }
 	inline size_t dim(const size_t k) const {return RC.dim(k);}
@@ -39,7 +39,7 @@ struct ReducedFilteredChainComplex {
 					// infinite bar
 					pairs.emplace_back(
 						PersistencePair(k, i, bats::NO_IND,
-							val[k][iperm[k][i]], std::numeric_limits<T>::infinity()
+							val[k][perm[k][i]], std::numeric_limits<T>::infinity()
 							// val[k][i], std::numeric_limits<T>::infinity()
 						)
 					);
@@ -48,7 +48,7 @@ struct ReducedFilteredChainComplex {
 					// finite bar
 					pairs.emplace_back(
 						PersistencePair(k, i, j,
-							val[k][iperm[k][i]], val[k+1][iperm[k+1][j]]
+							val[k][perm[k][i]], val[k+1][perm[k+1][j]]
 							// val[k][i], val[k+1][j]
 						)
 					);
@@ -74,6 +74,9 @@ struct ReducedFilteredChainComplex {
 	void update_filtration(const std::vector<std::vector<T>> newval) {
 		// step 1: determine permutation order for newval
 		auto perms = filtration_sortperm(newval);
+		
+		// get inverse permutation for current permutation
+		auto iperm = filtration_iperm(perm);
 
 		// step 2: determine update to old permutation
 		// iperm[k] will hold the updated permutation temporarily
@@ -85,9 +88,8 @@ struct ReducedFilteredChainComplex {
 		// step 3: apply permutation updates to ReducedChainComplex RC
 		RC.permute_basis(iperm);
 
-
-		// step 4: store new inverse permutation
-		iperm = filtration_iperm(perms);
+		// step 4: store new permutation
+		perm = perms;
 
 		// store values as well
 		val = newval;
