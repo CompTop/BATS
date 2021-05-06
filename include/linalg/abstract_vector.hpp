@@ -36,6 +36,16 @@ bool operator<(const nzpair<TI, TV>& a, const TI& b) { return a.ind < b; }
 template <typename TI, typename TV>
 bool operator<(const nzpair<TI, TV>& a, const nzpair<TI, TV>& b) { return a.ind < b.ind; }
 
+// template <typename TI, typename TV>
+// void std::swap(nzpair<TI, TV>& a, nzpair<TI, TV>& b) {
+// 	TI tmp = a.ind;
+// 	a.ind = b.ind;
+// 	b.ind = tmp;
+// 	TV tmp2 = a.val;
+// 	a.val = b.val;
+// 	b.val = tmp2;
+// }
+
 // printing
 template <typename TI, typename TV>
 std::ostream& operator<<( std::ostream& os, const nzpair<TI, TV> &x) {

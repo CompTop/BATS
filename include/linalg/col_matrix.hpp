@@ -174,39 +174,7 @@ public:
     //   return col[index];
     // }
 
-    // permutations: permute, permute_rows, permute_cols
 
-    // permute columns in-place
-    // TODO: evaluate if this is best method.
-    inline void permute_cols(const std::vector<size_t> &colperm) {
-        bats::util::apply_perm(col, colperm);
-    }
-
-	// vj <- a * vj + c * vk
-	// vk <- b * vj + d * vk
-	void mix_cols(const size_t j, const size_t k, const val_type& a, const val_type& b, const val_type& c, const val_type& d) {
-		TC cj(col[j]);
-		TC ck(col[k]);
-		col[j].scale_inplace(a);
-		col[j].axpy(c, ck);
-		col[k].scale_inplace(d);
-		col[k].axpy(b, cj);
-	}
-
-    // permute rows in-place
-    void permute_rows(const std::vector<size_t> &rowperm) {
-        // TODO: this is trivially parallelizable
-        for (size_t i = 0; i < col.size(); i++) {
-            col[i].permute(rowperm);
-        }
-    }
-
-    // permute both rows and columns
-    void permute(const std::vector<size_t> &rowperm,
-        const std::vector<size_t> &colperm) {
-        permute_cols(colperm);
-        permute_rows(rowperm);
-    }
 
 	ColumnMatrix submatrix(
 		const std::vector<size_t> &rind,
@@ -342,6 +310,57 @@ public:
 	}
 
 	inline ColumnMatrix T() const { return transpose(); }
+
+	// permutations: permute, permute_rows, permute_cols
+
+    // permute columns in-place
+    // TODO: evaluate if this is best method.
+    inline void permute_cols(const std::vector<size_t> &colperm) {
+        bats::util::apply_perm_swap(col, colperm);
+    }
+
+	// vj <- a * vj + c * vk
+	// vk <- b * vj + d * vk
+	void mix_cols(const size_t j, const size_t k, const val_type& a, const val_type& b, const val_type& c, const val_type& d) {
+		TC cj(col[j]);
+		TC ck(col[k]);
+		col[j].scale_inplace(a);
+		col[j].axpy(c, ck);
+		col[k].scale_inplace(d);
+		col[k].axpy(b, cj);
+	}
+
+    // permute rows in-place
+    void permute_rows(const std::vector<size_t> &rowperm) {
+        // // TODO: this is trivially parallelizable
+        for (size_t i = 0; i < col.size(); i++) {
+            col[i].permute(rowperm);
+        }
+		// // take transpose
+		// std::vector<TC> tcol(m);
+		// // loop over columns
+		// for (size_t j = 0; j < n; j++) {
+		// 	for (auto it = col[j].nzbegin(); it != col[j].nzend(); it++) {
+		// 		tcol[it->ind].emplace_back(j, it->val);
+		// 	}
+		// 	col[j].clear(); // clear so we overwrite later
+		// }
+		// // apply permutation to transpose
+		// bats::util::apply_perm_swap(tcol, rowperm);
+		// // now transpose again, and put back in col
+		// for (size_t i = 0; i < m; i++) {
+		// 	for (auto it = tcol[i].nzbegin(); it != tcol[i].nzend(); it++) {
+		// 		col[it->ind].emplace_back(i, it->val);
+		// 	}
+		// }
+    }
+
+    // permute both rows and columns
+    void permute(const std::vector<size_t> &rowperm,
+        const std::vector<size_t> &colperm) {
+        permute_cols(colperm);
+        permute_rows(rowperm);
+    }
 
 	// apply J matrix from the right
 	ColumnMatrix& J_right_inplace() {

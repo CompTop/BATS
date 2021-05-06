@@ -33,7 +33,21 @@ public:
 	// sort in-place
 	void sort() {
 		// sort in-place
+		if (indval.empty()) { return; } // nothing to do
 		std::sort(indval.begin(), indval.end());
+		// implement a simple bubble sort to avoid overhead of std::sort
+		// size_t max_swap = indval.size()-1;
+		// while (max_swap > 0) {
+		// 	size_t cur_max = max_swap;
+		// 	max_swap = 0;
+		// 	for (size_t i = 0; i < cur_max; i++) {
+		// 		if (indval[i+1] < indval[i]) {
+		// 			max_swap = i;
+		// 			// swap values
+		// 			std::swap(indval[i], indval[i+1]);
+		// 		}
+		// 	}
+		// }
 	}
 
 private:

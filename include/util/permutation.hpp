@@ -180,6 +180,25 @@ inline void apply_perm(
     return apply_perm(data.data(), perm);
 }
 
+/*
+uses std::swap instead of copying to temporary vector
+*/
+template <typename T>
+inline void apply_perm_swap(
+    std::vector<T> &data,
+    const std::vector<size_t> &perm
+) {
+    assert (perm.size() == data.size());
+    std::vector<T> tmp(data.size());
+    for (size_t i = 0; i < perm.size(); i++) {
+        std::swap(tmp[i], data[perm[i]]);
+    }
+    // put tmp in range
+    for (size_t i = 0; i < perm.size(); i++) {
+        std::swap(tmp[i], data[i]);
+    }
+}
+
 
 // partial perm
 // given a vector of inds, and a total size n
@@ -254,7 +273,12 @@ std::vector<size_t> rand_perm(const size_t n) {
 
 // compute inverse permutation
 inline std::vector<size_t> inv_perm(const std::vector<size_t> &p) {
-    return sortperm(p);
+    // return sortperm(p);
+    std::vector<size_t> invp(p.size());
+    for (size_t j = 0; j < p.size(); j++) {
+        invp[p[j]] = j;
+    }
+    return invp;
 }
 
 /*

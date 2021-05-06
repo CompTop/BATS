@@ -6,6 +6,7 @@ compute homology-revealing bases for a chain complex
 #include <set>
 #include <chain/chain_complex.hpp>
 #include "reduction.hpp"
+#include <chrono>
 
 namespace bats {
 // flag to indicate that basis should be computed
@@ -251,13 +252,11 @@ public:
 			U[k].permute_rows(iperm); // iperm?
 			U[k].permute_cols(perm);
 			R[k].permute_cols(perm);
-			// U[k].permute_cols(perm);
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
 			U[k].permute_rows(iperm); // iperm?
 			U[k].permute_cols(perm);
 			R[k].permute_cols(perm);
-			// U[k].permute_cols(perm);
 			R[k+1].permute_rows(iperm);
 		}
 		// at end of this, homology classes are invalidated
