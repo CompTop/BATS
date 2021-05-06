@@ -26,7 +26,7 @@ auto extend_filtration(
 template <typename CpxT, typename T>
 auto lower_star_filtration(
     const CpxT& X, // simplicial complex type
-    std::vector<T>& f0
+    const std::vector<T>& f0
 ) {
     std::function<double(const std::vector<size_t>&)> filtfn = [&f0](
         const std::vector<size_t>& s

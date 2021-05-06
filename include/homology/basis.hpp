@@ -279,23 +279,18 @@ public:
 
 
 
-	// get preferred representative i in dimension k
+	// get preferred representative j in dimension k
 	chain_type get_preferred_representative(
-		size_t i,
+		const size_t j,
 		const size_t k
 	) const {
-		auto Iptr = I[k].begin();
-		while (i > 0) {
-			Iptr++;
-			i--;
-		}
-		return U[k][*Iptr];
+		return U[k][I[k][j]];
 	}
 
 	// modify y in-place to be preferred representative for homology class in dimension k
 	// assumes y is in homology-revealing basis
 	void find_preferred_representative(
-		typename MT::col_type &y,
+		chain_type &y,
 		const size_t k
 	) const {
 		if (k == maxdim()) {

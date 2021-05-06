@@ -111,6 +111,81 @@ auto EilenbergZilber(
     return std::tuple(CXCY, F, XY);
 }
 
+// compute shift for kronecker product of
+// chain of dimension dx in CX with
+// chain of dimension dy in CY
+template <typename ChainCpx>
+size_t kron_chain_shift(
+	const size_t dx,
+	const ChainCpx& CX,
+	const size_t dy,
+	const ChainCpx& CY
+) {
+	size_t dim = dx + dy;
+
+	// compute index shift
+	size_t shift = 0;
+	for (size_t _dx = 0; _dx < dx; _dx++) {
+		size_t _dy = dim - _dx;
+		if (_dx > CX.maxdim() || _dy > CY.maxdim()) {continue;}
+		shift += shift += CX.dim(_dx) * CY.dim(_dy); // how much we'll shift for next pair of dimensions
+	}
+	return shift;
+}
+
+/*
+construct the Kronecker product of two chains
+*/
+template <typename VT, typename ChainCpx>
+auto kron_chains(
+	const VT& cx,  // chain in CX
+	const size_t dx, // dimension of chain
+	const ChainCpx& CX, // full chain complex
+	const VT& cy, // chain in CY
+	const size_t dy, // dimension of chain
+	const ChainCpx& CY // full chain complex
+) {
+	size_t shift = kron_chain_shift(dx, CX, dy, CY);
+	// shift now holds appropriate index shift for dx, dy
+	auto cxcy = cx.kron(cy, CY.dim(dy)).shift_inds(shift);
+	return cxcy;
+}
+
+/*
+construct Kronecker product of
+homology representatives of dimension dx in RX with
+homology representatives of dimension dy in RY
+find representative in RXRY (reducted tensor product)
+return this as a map on homology
+*/
+template <typename ReducedCpx>
+auto kron_homology(
+	const size_t dx,
+	const ReducedCpx& RX,
+	const size_t dy,
+	const ReducedCpx& RY,
+	const ReducedCpx& RXRY
+) {
+	using chain_type = typename ReducedCpx::chain_type;
+	std::vector<chain_type> col;
+	size_t dim = dx + dy;
+
+	size_t shift = kron_chain_shift(dx, RX, dy, RY);
+	for (size_t i = 0; i < RX.hdim(dx); i++ ) {
+		auto cx = RX.get_preferred_representative(i, dx);
+		for (size_t j = 0; j < RY.hdim(dy); j++) {
+			auto cy = RY.get_preferred_representative(j, dy);
+			// form kronecker product of chains
+			auto cxcy = cx.kron(cy, RY.dim(dy)).shift_inds(shift);
+			// find preferred representative in RXRY
+			RXRY.find_preferred_representative(cxcy, dim);
+			col.emplace_back(cxcy, RXRY.I[dim]);
+		}
+	}
+
+	return ColumnMatrix<chain_type>(RXRY.hdim(dim), RX.hdim(dx)*RY.hdim(dy), col);
+}
+
 // obtain kronecker product indices
 template <typename CpxT>
 std::vector<std::vector<size_t>> kron_index(
