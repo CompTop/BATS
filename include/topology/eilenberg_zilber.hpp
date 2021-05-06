@@ -128,7 +128,7 @@ size_t kron_chain_shift(
 	for (size_t _dx = 0; _dx < dx; _dx++) {
 		size_t _dy = dim - _dx;
 		if (_dx > CX.maxdim() || _dy > CY.maxdim()) {continue;}
-		shift += shift += CX.dim(_dx) * CY.dim(_dy); // how much we'll shift for next pair of dimensions
+		shift += CX.dim(_dx) * CY.dim(_dy); // how much we'll shift for next pair of dimensions
 	}
 	return shift;
 }
@@ -179,7 +179,7 @@ auto kron_homology(
 			auto cxcy = cx.kron(cy, RY.dim(dy)).shift_inds(shift);
 			// find preferred representative in RXRY
 			RXRY.find_preferred_representative(cxcy, dim);
-			col.emplace_back(cxcy, RXRY.I[dim]);
+			col.emplace_back(cxcy[RXRY.I[dim]]);
 		}
 	}
 

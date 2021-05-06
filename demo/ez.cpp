@@ -26,6 +26,9 @@ int main() {
 		spx = {1,2}; X.add(spx);
 
 		X.print_summary();
+		auto C = bats::Chain(X, FT());
+		auto R = bats::Reduce(C);
+		R.print_summary();
 
 		auto [CXCX, F, XX] = bats::EilenbergZilber(X, X, 2, FT());
 		XX.print_summary();
@@ -56,9 +59,19 @@ int main() {
 			auto Fk = bats::induced_map(F, RCXCX, RCXX, k);
 			Fk.print();
 		}
+
+		std::cout << "\nHomology kron" << std::endl;
+		for (size_t i = 0; i < 2; i++) {
+			for (size_t j = 0; j < 2; j++) {
+				std::cout << "H_" << i << "(X) \u2297 H_" << j << "(X)" << std::endl;
+				auto M = bats::kron_homology(i, R, j, R, RCXCX);
+				M.print();
+			}
+		}
+
 	}
-	std::cout << "\n\nrelative version:" << std::endl;
-	{
+	//std::cout << "\n\nrelative version:" << std::endl;
+	if (false) {
 		std::vector<size_t> spx;
 		bats::SimplicialComplex X, A;
 		spx = {0}; X.add(spx); A.add(spx);
