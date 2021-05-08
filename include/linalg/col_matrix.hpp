@@ -267,7 +267,7 @@ public:
     }
 
 	// scalar multiplication
-	ColumnMatrix operator*(const val_type a) {
+	ColumnMatrix operator*(const val_type a) const {
 		std::vector<TC> newcol;
 		newcol.reserve(n);
 		for (size_t j = 0; j < n; j++) {
@@ -302,7 +302,7 @@ public:
 
 	ColumnMatrix& operator+=(const ColumnMatrix &B) {
         for (size_t j = 0; j < n; j++) {
-            col[j].axpy(1, col[j]);
+            col[j].axpy(1, B.col[j]);
         }
         return *this;
     }
