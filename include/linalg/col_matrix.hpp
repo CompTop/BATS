@@ -290,6 +290,13 @@ public:
         return C;
     }
 
+	ColumnMatrix& operator+=(const ColumnMatrix &B) {
+        for (size_t j = 0; j < n; j++) {
+            col[j].axpy(1, col[j]);
+        }
+        return *this;
+    }
+
     ColumnMatrix operator-(const ColumnMatrix &B) {
         ColumnMatrix C(B); // copy constructor
         for (size_t j = 0; j < n; j++) {
