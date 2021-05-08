@@ -630,6 +630,16 @@ public:
 		return a;
 	}
 
+	// scalar multiplication
+	SparseVector operator*(const TV a) const {
+		if (a == 0) { return SparseVector(); }
+		SparseVector av(*this);
+		for (auto& ival : av.indval) {
+			ival.val = ival.val * a;
+		}
+		return av;
+	}
+
 	// return self + ax[firstind:lastind]
 	// template over sparse vector type
 	template <class SVT>

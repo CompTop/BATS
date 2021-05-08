@@ -266,6 +266,16 @@ public:
         return y;
     }
 
+	// scalar multiplication
+	ColumnMatrix operator*(const val_type a) {
+		std::vector<TC> newcol;
+		newcol.reserve(n);
+		for (size_t j = 0; j < n; j++) {
+			newcol.emplace_back(col[j] * a);
+		}
+		return ColumnMatrix(m, n, newcol);
+	}
+
     inline TC operator*(const TC &x) const { return gemv(x); }
 
     // gemm C = self * B
