@@ -292,7 +292,7 @@ public:
     }
 
 
-    ColumnMatrix operator+(const ColumnMatrix &B) {
+    ColumnMatrix operator+(const ColumnMatrix &B) const {
         ColumnMatrix C(B); // copy constructor
         for (size_t j = 0; j < n; j++) {
             C.col[j].axpy(1, col[j]);
@@ -307,7 +307,7 @@ public:
         return *this;
     }
 
-    ColumnMatrix operator-(const ColumnMatrix &B) {
+    ColumnMatrix operator-(const ColumnMatrix &B) const {
         ColumnMatrix C(B); // copy constructor
         for (size_t j = 0; j < n; j++) {
             C.col[j].axpy(-1, col[j]);
