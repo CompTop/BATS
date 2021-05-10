@@ -242,7 +242,7 @@ public:
 	// permute basis in dimension k
 	// B_k U_k = R_k, so when we permute columns of B_k, we must permute rows of U_k
 	// we also permute rows of R_{k+1}
-	void permute_basis(size_t k, const std::vector<size_t> &perm) {
+	void permute_matrices(size_t k, const std::vector<size_t> &perm) {
 		auto iperm = bats::util::inv_perm(perm);
 		if (k == 0) {
 			// only worry about boundary[1]
@@ -266,12 +266,13 @@ public:
 	template <typename... Args>
 	void permute_basis(const std::vector<std::vector<size_t>> &perm, Args ...args) {
 		for (size_t k = 0; k < perm.size(); k++) {
-			permute_basis(k, perm[k]);
+			permute_matrices(k, perm[k]);
 		}
 		// next we update the factorizations
 		for (size_t k = 0; k < perm.size(); k++) {
 			update_reduction2(k, args...);
 		}
+		set_indices(); // update homology indices
 	}
 
 	// put vector/matrix in homology-revealing basis in dimension k
