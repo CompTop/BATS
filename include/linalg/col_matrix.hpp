@@ -353,23 +353,14 @@ public:
         for (size_t i = 0; i < col.size(); i++) {
             col[i].permute(rowperm);
         }
-		// // take transpose
-		// std::vector<TC> tcol(m);
-		// // loop over columns
-		// for (size_t j = 0; j < n; j++) {
-		// 	for (auto it = col[j].nzbegin(); it != col[j].nzend(); it++) {
-		// 		tcol[it->ind].emplace_back(j, it->val);
-		// 	}
-		// 	col[j].clear(); // clear so we overwrite later
-		// }
-		// // apply permutation to transpose
-		// bats::util::apply_perm_swap(tcol, rowperm);
-		// // now transpose again, and put back in col
-		// for (size_t i = 0; i < m; i++) {
-		// 	for (auto it = tcol[i].nzbegin(); it != tcol[i].nzend(); it++) {
-		// 		col[it->ind].emplace_back(i, it->val);
-		// 	}
-		// }
+    }
+
+	// permute rows in-place
+    void ipermute_rows(const std::vector<size_t> &rowperm) {
+        // // TODO: this is trivially parallelizable
+        for (size_t i = 0; i < col.size(); i++) {
+            col[i].ipermute(rowperm);
+        }
     }
 
     // permute both rows and columns
@@ -472,10 +463,10 @@ public:
 
 	// tests to see if matrix has structure
 	bool is_upper() const {
-		for (size_t j = 0; j < n; j++) {
+		for (size_t j = 0; j < n; ++j) {
 			auto iv = col[j].nzend();
 			if (iv != col[j].nzbegin()) {
-				iv--;
+				--iv;
 				if (iv->ind > j) {
 					return false;
 				}

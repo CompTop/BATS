@@ -213,13 +213,15 @@ public:
 
 		// sort columns of U - apply same operations to R
 		for (size_t j = 0; j < dim(k); j++) {
-			// this loop will eventually terminate, since every pivot occurs
-			while (p2c[k][j] != j) {
+			// swap correct column if necessary
+			if (p2c[k][j] != j) {
 				// get pivot - we'll swap so this pivot is in correct location
-				size_t p = p2c[k][j];
+				size_t pj = U[k][j].lastnz().ind; // pivot of column j
+				size_t p = p2c[k][j]; // location of desired pivot
 				U[k].swap_cols(p, j);
 				R[k].swap_cols(p, j);
-				std::swap(p2c[k][p], p2c[k][j]);
+				p2c[k][j] = j; // we've put the pivot in the right place
+				p2c[k][pj] = p; // set pivot lookup to j
 			}
 		}
 
@@ -246,18 +248,14 @@ public:
 		auto iperm = bats::util::inv_perm(perm);
 		if (k == 0) {
 			// only worry about boundary[1]
-			R[1].permute_rows(iperm);
+			R[1].ipermute_rows(perm);
 		} else if (k == maxdim()) {
 			// only need to worry about rows of U[k]
-			U[k].permute_rows(iperm); // iperm?
-			U[k].permute_cols(perm);
-			R[k].permute_cols(perm);
+			U[k].ipermute_rows(iperm);
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
-			U[k].permute_rows(iperm); // iperm?
-			U[k].permute_cols(perm);
-			R[k].permute_cols(perm);
-			R[k+1].permute_rows(iperm);
+			U[k].ipermute_rows(iperm); 
+			R[k+1].ipermute_rows(iperm);
 		}
 		// at end of this, homology classes are invalidated
 	}

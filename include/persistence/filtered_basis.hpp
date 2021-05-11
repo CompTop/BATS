@@ -74,13 +74,13 @@ struct ReducedFilteredChainComplex {
 	void update_filtration(const std::vector<std::vector<T>> newval) {
 		// step 1: determine permutation order for newval
 		auto perms = filtration_sortperm(newval);
-		
+
 		// get inverse permutation for current permutation
 		auto iperm = filtration_iperm(perm);
 
 		// step 2: determine update to old permutation
 		// iperm[k] will hold the updated permutation temporarily
-		std::vector<T> tmp; // temporary vector
+		std::vector<size_t> tmp; // temporary vector
 		for (size_t k = 0; k < iperm.size(); k++) {
 			bats::util::apply_perm(iperm[k].data(), tmp, perms[k]);
 		}
