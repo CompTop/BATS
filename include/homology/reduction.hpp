@@ -147,8 +147,10 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 	typename TVec::tmp_type tmp;
 
 	// loop over columns
+	// size_t ct = 0;
 	for (size_t j = 0; j < M.ncol(); j++) {
 		while(M[j].nnz() > 0) {
+			// ++ct;
 			// std::cout << j << " : ";
 			// M[j].print_row();
 			// piv is index-value nzpair
@@ -167,6 +169,7 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 			}
 		}
 	}
+	// std::cout << "# iterations = " << ct << std::endl;
 	return pivot_to_col;
 }
 
@@ -323,11 +326,10 @@ p2c_type reduce_matrix_compression(
 // p2ck1 - p2c returned by reduction of B{k+1}
 // dimk - number of cells in dimension k
 template <typename MT>
-std::vector<size_t> extract_basis_indices(MT &&Rk, const p2c_type &p2ck1) {
+std::vector<size_t> extract_basis_indices(const MT& Rk, const p2c_type &p2ck1) {
 
 	std::vector<size_t> I;
 	size_t dimk = Rk.ncol();
-	I.reserve(dimk);
 
 	for (size_t j = 0; j < dimk; j++) {
 		if (Rk[j].nnz() == 0) {
@@ -352,7 +354,7 @@ std::vector<size_t> extract_basis_indices(const MT &Rk) {
 
 	std::vector<size_t> I;
 	size_t dimk = Rk.ncol();
-	I.reserve(dimk);
+	// I.reserve(dimk);
 
 	for (size_t j = 0; j < dimk; j++) {
 		if (Rk[j].nnz() == 0) {

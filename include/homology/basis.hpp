@@ -213,13 +213,15 @@ public:
 
 		// sort columns of U - apply same operations to R
 		for (size_t j = 0; j < dim(k); j++) {
-			// this loop will eventually terminate, since every pivot occurs
-			while (p2c[k][j] != j) {
+			// swap correct column if necessary
+			if (p2c[k][j] != j) {
 				// get pivot - we'll swap so this pivot is in correct location
-				size_t p = p2c[k][j];
+				size_t pj = U[k][j].lastnz().ind; // pivot of column j
+				size_t p = p2c[k][j]; // location of desired pivot
 				U[k].swap_cols(p, j);
 				R[k].swap_cols(p, j);
-				std::swap(p2c[k][p], p2c[k][j]);
+				p2c[k][j] = j; // we've put the pivot in the right place
+				p2c[k][pj] = p; // set pivot lookup to j
 			}
 		}
 
@@ -242,22 +244,18 @@ public:
 	// permute basis in dimension k
 	// B_k U_k = R_k, so when we permute columns of B_k, we must permute rows of U_k
 	// we also permute rows of R_{k+1}
-	void permute_basis(size_t k, const std::vector<size_t> &perm) {
+	void permute_matrices(size_t k, const std::vector<size_t> &perm) {
 		auto iperm = bats::util::inv_perm(perm);
 		if (k == 0) {
 			// only worry about boundary[1]
-			R[1].permute_rows(iperm);
+			R[1].ipermute_rows(perm);
 		} else if (k == maxdim()) {
 			// only need to worry about rows of U[k]
-			U[k].permute_rows(iperm); // iperm?
-			U[k].permute_cols(perm);
-			R[k].permute_cols(perm);
+			U[k].ipermute_rows(iperm);
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
-			U[k].permute_rows(iperm); // iperm?
-			U[k].permute_cols(perm);
-			R[k].permute_cols(perm);
-			R[k+1].permute_rows(iperm);
+			U[k].ipermute_rows(iperm);
+			R[k+1].ipermute_rows(iperm);
 		}
 		// at end of this, homology classes are invalidated
 	}
@@ -266,12 +264,13 @@ public:
 	template <typename... Args>
 	void permute_basis(const std::vector<std::vector<size_t>> &perm, Args ...args) {
 		for (size_t k = 0; k < perm.size(); k++) {
-			permute_basis(k, perm[k]);
+			permute_matrices(k, perm[k]);
 		}
 		// next we update the factorizations
 		for (size_t k = 0; k < perm.size(); k++) {
 			update_reduction2(k, args...);
 		}
+		set_indices(); // update homology indices
 	}
 
 	// put vector/matrix in homology-revealing basis in dimension k
@@ -345,7 +344,9 @@ public:
 		std::cout << "ReducedChainComplex with " << maxdim() << " dimensions:" << std::endl;
 		for (size_t k = 0; k < maxdim() + 1; k++) {
 			std::cout << "\tdim " << k << ": " << dim(k)
-			<< ", betti_" << k << ": " << hdim(k) << "\n";
+			<< ", betti_" << k << ": " << hdim(k)
+			<< " nnz(R): " << R[k].nnz()
+			<<" nnz(U): " << U[k].nnz() << "\n";
 		}
 	}
 };
