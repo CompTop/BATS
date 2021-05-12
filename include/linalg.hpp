@@ -6,6 +6,7 @@
 #include "linalg/matrix_interface.hpp"
 #include "linalg/naive_dense.hpp"
 #include "linalg/sparse_vector.hpp"
+#include "linalg/set_vector.hpp"
 #include "linalg/sparse_fact.hpp"
 #include "linalg/polynomial.hpp"
 #include "linalg/pid.hpp"

@@ -3,9 +3,8 @@
 #include <vector>
 #include <set>
 
-#include <linalg/field.hpp>
-#include <linalg/sparse_vector.hpp>
-#include <linalg/set_vector.hpp>
+#include <bats.hpp>
+using namespace bats;
 
 #define F2 ModP<int, 2>
 #define F3 ModP<int, 3>

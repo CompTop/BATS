@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <util/sorted.hpp>
+using namespace bats;
 
 TEST_CASE("sorting") {
 	std::vector<int> a = {1,2,3};

@@ -5,6 +5,7 @@
 #include <random>
 
 #include <bats.hpp>
+using namespace bats;
 
 #define F2 ModP<int, 2>
 #define F3 ModP<int, 3>

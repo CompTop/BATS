@@ -3,9 +3,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-#include <linalg/naive_dense.hpp>
-#include <linalg/field.hpp>
-#include <quiver/type_a.hpp>
+#include <bats.hpp>
+using namespace bats;
 
 #define F3 ModP<int, 3>
 

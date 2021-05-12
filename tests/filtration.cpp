@@ -5,6 +5,7 @@
 #include <random>
 
 #include <bats.hpp>
+using namespace bats;
 
 TEST_CASE("Filtered Simplicial Complex") {
 
@@ -29,7 +30,7 @@ TEST_CASE("Filtered Simplicial Complex") {
     REQUIRE(F.sortperm(0) == perm);
     REQUIRE(F.sortperm(1) == perm);
 
-    
+
 
 
 
