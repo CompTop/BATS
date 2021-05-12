@@ -147,8 +147,10 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 	typename TVec::tmp_type tmp;
 
 	// loop over columns
+	// size_t ct = 0;
 	for (size_t j = 0; j < M.ncol(); j++) {
 		while(M[j].nnz() > 0) {
+			// ++ct;
 			// std::cout << j << " : ";
 			// M[j].print_row();
 			// piv is index-value nzpair
@@ -167,6 +169,7 @@ p2c_type reduce_matrix_standard(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 			}
 		}
 	}
+	// std::cout << "# iterations = " << ct << std::endl;
 	return pivot_to_col;
 }
 

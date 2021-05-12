@@ -103,7 +103,9 @@ struct ReducedFilteredChainComplex {
 		std::cout << "ReducedFilteredChainComplex with " << maxdim() << " dimensions:" << std::endl;
 		for (size_t k = 0; k < maxdim() + 1; k++) {
 			std::cout << "\tdim " << k << ": " << dim(k)
-			<< ", betti_" << k << ": " << hdim(k) << "\n";
+			<< ", betti_" << k << ": " << hdim(k)
+			<< " nnz(R): " << RC.R[k].nnz()
+			<<" nnz(U): " << RC.U[k].nnz() << "\n";
 		}
 	}
 

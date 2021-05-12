@@ -254,7 +254,7 @@ public:
 			U[k].ipermute_rows(iperm);
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
-			U[k].ipermute_rows(iperm); 
+			U[k].ipermute_rows(iperm);
 			R[k+1].ipermute_rows(iperm);
 		}
 		// at end of this, homology classes are invalidated
@@ -344,7 +344,9 @@ public:
 		std::cout << "ReducedChainComplex with " << maxdim() << " dimensions:" << std::endl;
 		for (size_t k = 0; k < maxdim() + 1; k++) {
 			std::cout << "\tdim " << k << ": " << dim(k)
-			<< ", betti_" << k << ": " << hdim(k) << "\n";
+			<< ", betti_" << k << ": " << hdim(k)
+			<< " nnz(R): " << R[k].nnz()
+			<<" nnz(U): " << U[k].nnz() << "\n";
 		}
 	}
 };
