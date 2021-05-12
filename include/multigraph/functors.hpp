@@ -128,7 +128,7 @@ Diagram<SimplicialComplex, CellularMap> Rips(
 // ChainComplex functor
 // template over matrix type, diagram type
 template <typename TM, typename DT>
-Diagram<ChainComplex<TM>, ChainMap<TM>> Chain(const DT &D) {
+Diagram<ChainComplex<TM>, ChainMap<TM>> ChainFunctor(const DT &D) {
 	size_t n = D.nnode();
 	size_t m = D.nedge();
 	// Diagram of chain complexes and chain maps
@@ -153,11 +153,11 @@ Diagram<ChainComplex<TM>, ChainMap<TM>> Chain(const DT &D) {
 
 // easy chain functor
 template <typename DT, typename T>
-inline auto __Chain(const DT &D, T) {
+inline auto __ChainFunctor(const DT &D, T) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
-	return Chain<MT, DT>(D);
+	return ChainFunctor<MT, DT>(D);
 }
 
 
