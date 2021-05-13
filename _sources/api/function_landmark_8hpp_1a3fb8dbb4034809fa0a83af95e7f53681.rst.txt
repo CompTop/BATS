@@ -1,0 +1,13 @@
+.. _exhale_function_landmark_8hpp_1a3fb8dbb4034809fa0a83af95e7f53681:
+
+Template Function bats::hausdorff_landmarks
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::hausdorff_landmarks(const DataSet<T>&, const T, const M&, const size_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_inclusion_8hpp_1ae30e80f1223e088943c611f246ba93a1:
+
+Template Function bats::vertex_inclusion_map
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::vertex_inclusion_map(const T1&, const T2&)

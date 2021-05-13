@@ -1,0 +1,13 @@
+.. _exhale_function_pid_8hpp_1aa7cafd1997fdd2f0c64b4b8e9dca815c:
+
+Template Function smith_normal_form
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: smith_normal_form(ColumnMatrix<TC>&)

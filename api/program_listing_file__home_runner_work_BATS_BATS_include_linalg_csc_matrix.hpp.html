@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File csc_matrix.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File csc_matrix.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-csc-matrix-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-linalg-csc-matrix-hpp"></span><h1>Program Listing for File csc_matrix.hpp<a class="headerlink" href="#program-listing-for-file-csc-matrix-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp.html#file-home-runner-work-bats-bats-include-linalg-csc-matrix-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/csc_matrix.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;abstract_matrix.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;util/sorted.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iomanip&gt;</span><span class="cp"></span>
+
+<span class="c1">// template over value type and index type</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TV</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TI</span><span class="o">=</span><span class="kt">size_t</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">CSCMatrix</span> <span class="o">:</span> <span class="k">public</span> <span class="n">AbstractMatrix</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">colptr</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">rowind</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">;</span>
+
+    <span class="c1">// dimensions</span>
+    <span class="kt">size_t</span> <span class="n">m</span><span class="p">;</span> <span class="c1">// number of rows</span>
+    <span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// number of columns</span>
+
+    <span class="c1">// sort column j so row indices are in increasing order</span>
+    <span class="kt">void</span> <span class="nf">sort_col</span><span class="p">(</span>
+        <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">perm</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">tmp1</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">tmp2</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// get sortperm on row indices</span>
+        <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">fill_sortperm</span><span class="p">(</span>
+            <span class="n">rowind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span>
+            <span class="n">rowind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">perm</span>
+        <span class="p">);</span>
+        <span class="c1">// apply permutation to row indices</span>
+        <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span>
+            <span class="n">rowind</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span>
+            <span class="n">tmp1</span><span class="p">,</span>
+            <span class="n">perm</span>
+        <span class="p">);</span>
+        <span class="c1">// apply permutation to row values</span>
+        <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span>
+            <span class="n">val</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span>
+            <span class="n">tmp2</span><span class="p">,</span>
+            <span class="n">perm</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">sort_col</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">tmp1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+        <span class="n">sort_col</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">tmp1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// sort all columns</span>
+    <span class="kt">void</span> <span class="nf">sort</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">tmp1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sort_col</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">tmp1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="n">CSCMatrix</span><span class="p">()</span> <span class="o">:</span> <span class="n">m</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{};</span>
+
+    <span class="n">CSCMatrix</span><span class="p">(</span>
+        <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span>
+        <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">colptr</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rowind</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">val</span>
+    <span class="p">)</span> <span class="o">:</span> <span class="n">colptr</span><span class="p">(</span><span class="n">colptr</span><span class="p">),</span> <span class="n">rowind</span><span class="p">(</span><span class="n">rowind</span><span class="p">),</span> <span class="n">val</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sort</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">CSCMatrix</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">colptr</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rowind</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">val</span>
+    <span class="p">)</span> <span class="o">:</span> <span class="n">colptr</span><span class="p">(</span><span class="n">colptr</span><span class="p">),</span> <span class="n">rowind</span><span class="p">(</span><span class="n">rowind</span><span class="p">),</span> <span class="n">val</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="n">colptr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="mi">-1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sort</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">TV</span> <span class="n">getval</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">rowind</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">TV</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// access to data structures</span>
+    <span class="c1">// std::vector&lt;TI&gt; colptr;</span>
+    <span class="c1">// std::vector&lt;TI&gt; rowind;</span>
+    <span class="c1">// std::vector&lt;TV&gt; val;</span>
+    <span class="c1">//</span>
+    <span class="c1">// // dimensions</span>
+    <span class="c1">// size_t m; // number of rows</span>
+    <span class="c1">// size_t n; // number of columns</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;&amp;</span> <span class="n">get_colptr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">colptr</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;&amp;</span> <span class="n">get_rowind</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">rowind</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;&amp;</span> <span class="n">get_val</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">val</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">size_t</span> <span class="n">nrow</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">size_t</span> <span class="n">ncol</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print_size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;] : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; x &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">n</span> <span class="o">&lt;&lt;</span>\
+        <span class="s">&quot; CSCMatrix&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print</span><span class="p">(</span>
+        <span class="kt">size_t</span> <span class="n">rowmin</span><span class="p">,</span>
+        <span class="kt">size_t</span> <span class="n">rowmax</span><span class="p">,</span>
+        <span class="kt">size_t</span> <span class="n">colmin</span><span class="p">,</span>
+        <span class="kt">size_t</span> <span class="n">colmax</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="c1">// loop over rows</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rowmin</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">rowmax</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">colmin</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">colmax</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">getval</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">print_size</span><span class="p">();</span>
+        <span class="n">print</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return submatrix indexed by rows and columns</span>
+    <span class="n">CSCMatrix</span> <span class="n">submatrix</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rind</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">cind</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">CSCMatrix</span> <span class="n">A</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">rind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">cind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+        <span class="k">auto</span> <span class="n">prow</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">partial_perm</span><span class="p">(</span><span class="n">rind</span><span class="p">,</span> <span class="n">nrow</span><span class="p">());</span>
+
+        <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// loop in column permutation order</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="kt">size_t</span> <span class="nl">Mj</span> <span class="p">:</span> <span class="n">cind</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// loop over nzs in the jth column of M</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">Mp</span> <span class="o">=</span> <span class="n">colptr</span><span class="p">[</span><span class="n">Mj</span><span class="p">];</span> <span class="n">Mp</span> <span class="o">&lt;</span> <span class="n">colptr</span><span class="p">[</span><span class="n">Mj</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">Mp</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">prow</span><span class="p">[</span><span class="n">rowind</span><span class="p">[</span><span class="n">Mp</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// this item makes it to the block</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">prow</span><span class="p">[</span><span class="n">rowind</span><span class="p">[</span><span class="n">Mp</span><span class="p">]]);</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">Mp</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">A</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// obtain block A from M from columns cind and</span>
+    <span class="c1">// row permutation prow</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">block_select</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">cind</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">prow</span><span class="p">,</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span>
+        <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">A</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// number of columns</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// reserve enough space for 1 nonzero in each column.  This can always be expanded</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+        <span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+
+        <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// loop in column permutation order</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="kt">size_t</span> <span class="nl">Mj</span> <span class="p">:</span> <span class="n">cind</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// loop over nzs in the jth column of M</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">Mp</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">Mp</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">Mp</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">prow</span><span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">Mp</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// this item makes it to the block</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">prow</span><span class="p">[</span><span class="n">M</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">Mp</span><span class="p">]]);</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">Mp</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">    operates on multiple row blocks</span>
+<span class="cm">    WARNING: assumes that row blocks have unique indices</span>
+<span class="cm">    */</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="kt">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">block_select</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">cind</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;*</span> <span class="p">(</span><span class="o">&amp;&amp;</span><span class="n">prow</span><span class="p">)[</span><span class="n">N</span><span class="p">],</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="p">(</span><span class="o">&amp;&amp;</span><span class="n">m</span><span class="p">)[</span><span class="n">N</span><span class="p">],</span>
+        <span class="n">CSCMatrix</span><span class="o">*</span> <span class="p">(</span><span class="o">&amp;&amp;</span><span class="n">A</span><span class="p">)[</span><span class="n">N</span><span class="p">]</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// number of columns</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="c1">// reserve enough space for 1 nonzero in each column.  This can always be expanded</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">rowind</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">val</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// loop in column permutation order</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="kt">size_t</span> <span class="nl">Mj</span> <span class="p">:</span> <span class="n">cind</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// loop over nzs in the jth column of M</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">Mp</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">Mj</span><span class="p">];</span> <span class="n">Mp</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">Mj</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">Mp</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">((</span><span class="o">*</span><span class="n">prow</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="n">M</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">Mp</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="c1">// this item makes it to the block</span>
+                        <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">((</span><span class="o">*</span><span class="n">prow</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="n">M</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">Mp</span><span class="p">]]);</span>
+                        <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">Mp</span><span class="p">]);</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">sort</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// gemm implementation</span>
+    <span class="c1">// TV can be arbitrary ring</span>
+    <span class="c1">// C = A * B</span>
+    <span class="c1">// C is over-written</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">gemm</span><span class="p">(</span><span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">B</span><span class="p">,</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">B</span><span class="p">.</span><span class="n">m</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">m</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+
+        <span class="n">C</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+        <span class="c1">// loop over columns of C</span>
+        <span class="c1">// C[:,j] = A[:,k] * B[k, j]</span>
+        <span class="c1">// allocations for temp</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">tmp1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// loop over nonzeros in jth column of B</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pBj</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">pBj</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pBj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">TI</span> <span class="n">k</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pBj</span><span class="p">];</span>
+                <span class="n">TV</span> <span class="n">v</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pBj</span><span class="p">];</span>
+                <span class="c1">// push onto jth column of C</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pAk</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="n">pAk</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pAk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pAk</span><span class="p">]);</span>
+                    <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pAk</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="c1">// sort &amp; sum reduce column C[j]</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sort_sum_reduce</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">perm</span><span class="p">,</span> <span class="n">tmp1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">);</span>
+            <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="n">CSCMatrix</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">CSCMatrix</span> <span class="n">C</span><span class="p">;</span>
+        <span class="n">gemm</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">C</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// gemm implementation</span>
+    <span class="c1">// TV can be arbitrary ring</span>
+    <span class="c1">// C = A + B</span>
+    <span class="c1">// C is over-written</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">sum</span><span class="p">(</span><span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">B</span><span class="p">,</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">B</span><span class="p">.</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">m</span> <span class="o">==</span> <span class="n">B</span><span class="p">.</span><span class="n">m</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">m</span><span class="p">;</span>
+
+        <span class="n">C</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+        <span class="c1">// loop over columns of C</span>
+        <span class="c1">// C[:,j] = A[:,k] * B[k, j]</span>
+        <span class="c1">// allocations for temp</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">tmp1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// loop over noneros in jth column of B</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pBj</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">pBj</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pBj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pBj</span><span class="p">]);</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pBj</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pAj</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">pAj</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pAj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pAj</span><span class="p">]);</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pAj</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="c1">// sort &amp; sum reduce column C[j]</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sort_sum_reduce</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">perm</span><span class="p">,</span> <span class="n">tmp1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">);</span>
+            <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// c = alpha * A + B</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">sum</span><span class="p">(</span><span class="k">const</span> <span class="n">TV</span><span class="o">&amp;</span> <span class="n">alpha</span><span class="p">,</span> <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">B</span><span class="p">,</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">B</span><span class="p">.</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">m</span> <span class="o">==</span> <span class="n">B</span><span class="p">.</span><span class="n">m</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">m</span><span class="p">;</span>
+
+        <span class="n">C</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+        <span class="c1">// loop over columns of C</span>
+        <span class="c1">// C[:,j] = alpha * A[:,j] + B[:,j]</span>
+        <span class="c1">// allocations for temp</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">tmp1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// loop over noneros in jth column of B</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pBj</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">pBj</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pBj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pBj</span><span class="p">]);</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pBj</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pAj</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">pAj</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pAj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pAj</span><span class="p">]);</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pAj</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="c1">// sort &amp; sum reduce column C[j]</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sort_sum_reduce</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">perm</span><span class="p">,</span> <span class="n">tmp1</span><span class="p">,</span> <span class="n">tmp2</span><span class="p">);</span>
+            <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// upper triangular solve implementation</span>
+    <span class="c1">// TV can be arbitrary ring, assuming diagonal has units</span>
+    <span class="c1">// C = A \ B</span>
+    <span class="c1">// C is over-written</span>
+    <span class="c1">// WARNING: assumes A is upper-triangular, with units on diagonal</span>
+    <span class="c1">// TODO: this may be faster with a symbolic factorization first</span>
+    <span class="c1">// or using temporary arrays for storage as with sorted sparse vectors</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="n">trilu</span><span class="p">(</span><span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">B</span><span class="p">,</span> <span class="n">CSCMatrix</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">B</span><span class="p">.</span><span class="n">m</span><span class="p">);</span>
+        <span class="n">assert</span> <span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="n">A</span><span class="p">.</span><span class="n">m</span><span class="p">);</span> <span class="c1">// square = invertible</span>
+        <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">m</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+
+        <span class="n">C</span><span class="p">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+        <span class="c1">// loop over columns of C</span>
+        <span class="c1">// C[:,j] = A \ B[:,j]</span>
+        <span class="c1">// allocations for temp</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="n">tmp1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// y = U \ x:</span>
+            <span class="c1">// y = x</span>
+            <span class="c1">// for i = m:-1:1:</span>
+            <span class="c1">//      y[i] = y[i] / U[i,i]</span>
+            <span class="c1">//      y[:i-1] += y[i]*U[:i-1,i]</span>
+            <span class="c1">// first copy B[:,j] into C[:,j]</span>
+            <span class="kt">size_t</span> <span class="n">offsetCj</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">pBj</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="n">pBj</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="n">pBj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">rowind</span><span class="p">[</span><span class="n">pBj</span><span class="p">]);</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">pBj</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="kt">size_t</span> <span class="n">lastnz</span> <span class="o">=</span> <span class="n">find_sorted_lt</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="n">m</span><span class="p">);</span>
+
+            <span class="k">while</span> <span class="p">(</span><span class="n">lastnz</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="n">TI</span> <span class="n">i</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span> <span class="o">+</span> <span class="n">lastnz</span><span class="p">);</span>
+                <span class="n">TV</span> <span class="n">yi</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span> <span class="o">+</span> <span class="n">lastnz</span><span class="p">);</span>
+                <span class="o">*</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span> <span class="o">+</span> <span class="n">lastnz</span><span class="p">)</span> <span class="o">/=</span> <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">[</span><span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// y[i] = y[i] / U[i,i]</span>
+                <span class="c1">// y[:i-1] += y[i]*U[:i-1, i]</span>
+                <span class="kt">size_t</span> <span class="n">offsetAi</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+                <span class="k">auto</span> <span class="n">Cr</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">Cv</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">Ar</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetAi</span><span class="p">;</span>
+                <span class="k">auto</span> <span class="n">Av</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetAi</span><span class="p">;</span>
+                <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">Cr</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">||</span> <span class="o">*</span><span class="n">Ar</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">Cr</span> <span class="o">==</span> <span class="o">*</span><span class="n">Ar</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="o">*</span><span class="n">Cv</span> <span class="o">-=</span> <span class="o">*</span><span class="n">Av</span> <span class="o">*</span> <span class="n">yi</span><span class="p">;</span>
+                        <span class="o">++</span><span class="n">Cr</span><span class="p">;</span> <span class="o">++</span><span class="n">Cv</span><span class="p">;</span> <span class="o">++</span><span class="n">Ar</span><span class="p">;</span> <span class="o">++</span><span class="n">Av</span><span class="p">;</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">Cr</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">Ar</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="c1">// no update</span>
+                        <span class="o">++</span><span class="n">Cr</span><span class="p">;</span> <span class="o">++</span><span class="n">Cv</span><span class="p">;</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// *Cr &gt; *Ar, and we need to insert</span>
+                        <span class="n">Cr</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Cr</span><span class="p">,</span> <span class="o">*</span><span class="n">Ar</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                        <span class="n">Cv</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Cv</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="o">*</span><span class="n">Av</span><span class="p">)</span><span class="o">*</span><span class="n">yi</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                        <span class="o">++</span><span class="n">Ar</span><span class="p">;</span> <span class="o">++</span><span class="n">Av</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+
+                <span class="n">lastnz</span> <span class="o">=</span> <span class="n">find_sorted_lt</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offsetCj</span><span class="p">,</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">C</span><span class="p">.</span><span class="n">colptr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">rowind</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

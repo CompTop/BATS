@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1aed7a962465eaaf39f8e6d3a353946744:
+
+Template Function LEUP_inplace
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: LEUP_inplace(SparseFact<TC>&)

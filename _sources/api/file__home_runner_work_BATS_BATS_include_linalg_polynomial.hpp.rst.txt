@@ -1,0 +1,77 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp:
+
+File polynomial.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/polynomial.hpp``)
+--------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``initializer_list``
+
+- ``iostream``
+
+- ``sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``stdexcept``
+
+- ``type_traits``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structis__UnivariatePolynomial`
+
+- :ref:`exhale_struct_structis__UnivariatePolynomial_3_01UnivariatePolynomial_3_01T_01_4_01_4`
+
+- :ref:`exhale_class_classUnivariatePolynomial`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_polynomial_8hpp_1a90f874bfc7f2bd4d9a1bd1709939b054`
+

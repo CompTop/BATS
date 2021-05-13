@@ -1,0 +1,108 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_cover.hpp:
+
+File cover.hpp
+==============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/cover.hpp``)
+-----------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_cover.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``cmath``
+
+- ``cstddef``
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``inclusion.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`)
+
+- ``landmark.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`)
+
+- ``multigraph/diagram.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`)
+
+- ``neighborhood.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``tuple``
+
+- ``util/set.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_cover_8hpp_1a69e0d0acd1785129547c97f16477fd36`
+
+- :ref:`exhale_function_cover_8hpp_1a81f34ad49c42e6abd8a175940307e1cc`
+
+- :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
+
+- :ref:`exhale_function_cover_8hpp_1a5a3d53745a6383725062763dce12592d`
+
+- :ref:`exhale_function_cover_8hpp_1a3b8d8382e801abec0d7b373f1d124d2a`
+
+- :ref:`exhale_function_cover_8hpp_1a24771bc43dca07366824c2ce87577426`
+
+- :ref:`exhale_function_cover_8hpp_1a0feed29e1a159a924edd025c623b4633`
+
+- :ref:`exhale_function_cover_8hpp_1a7f31dac13834a3f0a48e0c61b18f6d39`
+
+
+Typedefs
+--------
+
+
+- :ref:`exhale_typedef_cover_8hpp_1a1b2e5d3f8a89d778d6da9d63fb884edd`
+

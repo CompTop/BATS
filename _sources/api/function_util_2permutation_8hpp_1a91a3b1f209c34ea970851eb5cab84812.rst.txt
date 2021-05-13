@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a91a3b1f209c34ea970851eb5cab84812:
+
+Function bats::util::fill_partial_sortperm
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::fill_partial_sortperm(const std::vector<size_t>&, const std::vector<size_t>&, std::vector<size_t>&)

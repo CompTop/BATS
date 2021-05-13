@@ -1,0 +1,16 @@
+.. _exhale_struct_structSI:
+
+Struct SI
+=========
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: SI
+   :members:
+   :protected-members:
+   :undoc-members:

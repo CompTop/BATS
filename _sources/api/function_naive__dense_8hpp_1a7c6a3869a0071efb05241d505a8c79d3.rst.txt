@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a7c6a3869a0071efb05241d505a8c79d3:
+
+Template Function UELP_fact(A<Dense<F, Acc>>&)
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: UELP_fact(A<Dense<F, Acc>>&)

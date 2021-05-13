@@ -1,0 +1,16 @@
+.. _exhale_class_classQuiver__A3:
+
+Template Class Quiver_A3
+========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver_a3.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: Quiver_A3
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,49 @@
+
+.. _file__home_runner_work_BATS_BATS_include_homology.hpp:
+
+File homology.hpp
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/homology.hpp``)
+-----------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_homology.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``homology/basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`)
+
+- ``homology/cohom_basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`)
+
+- ``homology/induced_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`)
+
+- ``homology/reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_bats.hpp`
+
+
+

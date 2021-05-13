@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1aa0ff427baee336d7817f3086a55b0e5a:
+
+Template Function update_pivot
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: update_pivot(const ColumnMatrix<TC>&, std::map<size_t, std::vector<size_t>>&, size_t, size_t)

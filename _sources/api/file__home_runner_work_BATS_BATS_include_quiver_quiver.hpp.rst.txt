@@ -1,0 +1,69 @@
+
+.. _file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp:
+
+File quiver.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_quiver>` (``/home/runner/work/BATS/BATS/include/quiver``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/quiver/quiver.hpp``)
+----------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/naive_dense.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`)
+
+- ``multigraph/diagram.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`)
+
+- ``stdexcept``
+
+- ``type_a.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_quiver_2quiver_8hpp_1a4438523e14952e1ae7fedbea74025365`
+
+- :ref:`exhale_function_quiver_2quiver_8hpp_1abb24576b369216d223af1b0ecbd963d8`
+

@@ -1,0 +1,13 @@
+.. _exhale_function_pid_8hpp_1a45ea3e2f8b94c3fee33c21d72a671b3e:
+
+Template Function extended_euclidean
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: extended_euclidean(const PID&, const PID&)

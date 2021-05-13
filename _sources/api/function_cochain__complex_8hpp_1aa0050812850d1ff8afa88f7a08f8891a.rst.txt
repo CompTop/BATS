@@ -1,0 +1,13 @@
+.. _exhale_function_cochain__complex_8hpp_1aa0050812850d1ff8afa88f7a08f8891a:
+
+Template Function bats::__CochainComplex
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::__CochainComplex(const CpxT&, T)

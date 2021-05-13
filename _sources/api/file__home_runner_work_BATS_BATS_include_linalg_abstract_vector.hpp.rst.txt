@@ -1,0 +1,69 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp:
+
+File abstract_vector.hpp
+========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/abstract_vector.hpp``)
+-------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``iostream``
+
+- ``string``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structnzpair`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_abstract__vector_8hpp_1ae0d3ad24774664f64f554a64bf0e8a2c`
+
+- :ref:`exhale_function_abstract__vector_8hpp_1a9275f5660ac8ec1148d5da019434df0b`
+
+- :ref:`exhale_function_abstract__vector_8hpp_1a018d5c6df5411da1bde87be37cab6d18`
+
+- :ref:`exhale_function_abstract__vector_8hpp_1aa7ed88a88593671e4e80ad8c42f59df4`
+

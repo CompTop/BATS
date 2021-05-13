@@ -1,0 +1,13 @@
+.. _exhale_function_persistence_2filtration_8hpp_1a4f5c1fc3761f6eabfdc994b9a6fdfd53:
+
+Template Function standard_reduce
+=================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: standard_reduce(const Filtration<T, CpxT>&, FT)

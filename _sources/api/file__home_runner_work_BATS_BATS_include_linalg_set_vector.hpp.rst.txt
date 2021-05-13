@@ -1,0 +1,64 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp:
+
+File set_vector.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/set_vector.hpp``)
+--------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``abstract_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+- ``algorithm``
+
+- ``cassert``
+
+- ``cstddef``
+
+- ``field.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`)
+
+- ``iostream``
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classSetVector`
+

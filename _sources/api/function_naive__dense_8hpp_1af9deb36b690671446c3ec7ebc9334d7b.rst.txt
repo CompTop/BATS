@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1af9deb36b690671446c3ec7ebc9334d7b:
+
+Template Function find_pivot
+============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: find_pivot(M, size_t, size_t)

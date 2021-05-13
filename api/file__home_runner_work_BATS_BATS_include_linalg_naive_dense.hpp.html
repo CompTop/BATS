@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File naive_dense.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File naive_dense.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-naive-dense-hpp">
+<span id="file-home-runner-work-bats-bats-include-linalg-naive-dense-hpp"></span><h1>File naive_dense.hpp<a class="headerlink" href="#file-naive-dense-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir__home_runner_work_BATS_BATS_include_linalg.html#dir-home-runner-work-bats-bats-include-linalg"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-home-runner-work-bats-bats-include-linalg-naive-dense-hpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/naive_dense.hpp</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id3">Included By</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id4">Classes</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id5">Functions</a></p></li>
+<li><p><a class="reference internal" href="#defines" id="id6">Defines</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-home-runner-work-bats-bats-include-linalg-naive-dense-hpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/naive_dense.hpp</span></code>)<a class="headerlink" href="#definition-home-runner-work-bats-bats-include-linalg-naive-dense-hpp" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp.html">Program Listing for File naive_dense.hpp</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">algorithm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">assert.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iostream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linalg/field.hpp</span></code> (<a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_field.hpp.html#file-home-runner-work-bats-bats-include-linalg-field-hpp"><span class="std std-ref">File field.hpp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matrix_interface.hpp</span></code> (<a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp.html#file-home-runner-work-bats-bats-include-linalg-matrix-interface-hpp"><span class="std std-ref">File matrix_interface.hpp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unordered_map</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">util/common.hpp</span></code> (<a class="reference internal" href="file__home_runner_work_BATS_BATS_include_util_common.hpp.html#file-home-runner-work-bats-bats-include-util-common-hpp"><span class="std std-ref">File common.hpp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vector</span></code> (<a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp.html#file-home-runner-work-bats-bats-include-linalg-abstract-vector-hpp"><span class="std std-ref">File abstract_vector.hpp</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg.hpp.html#file-home-runner-work-bats-bats-include-linalg-hpp"><span class="std std-ref">File linalg.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp.html#file-home-runner-work-bats-bats-include-quiver-quiver-hpp"><span class="std std-ref">File quiver.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp.html#file-home-runner-work-bats-bats-include-quiver-type-a-hpp"><span class="std std-ref">File type_a.hpp</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_runner_work_BATS_BATS_include_topology_data.hpp.html#file-home-runner-work-bats-bats-include-topology-data-hpp"><span class="std std-ref">File data.hpp</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structa-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct A&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structColMaj.html#exhale-struct-structcolmaj"><span class="std std-ref">Struct ColMaj</span></a></p></li>
+<li><p><a class="reference internal" href="structDense.html#exhale-struct-structdense"><span class="std std-ref">Template Struct Dense</span></a></p></li>
+<li><p><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structe-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct E&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structel-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct EL&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structelh-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct ELH&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structeu-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct EU&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structeuh-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct EUH&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T.html#exhale-struct-structjconj-t"><span class="std std-ref">Template Struct JConj_T</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01a-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01ColMaj_01_4.html#exhale-struct-structjconj-t-3-01colmaj-01-4"><span class="std std-ref">Template Struct JConj_T&lt; ColMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01el-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01elh-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01eu-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01euh-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01l-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01p-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01RevColMaj_01_4.html#exhale-struct-structjconj-t-3-01revcolmaj-01-4"><span class="std std-ref">Template Struct JConj_T&lt; RevColMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01RevRowMaj_01_4.html#exhale-struct-structjconj-t-3-01revrowmaj-01-4"><span class="std std-ref">Template Struct JConj_T&lt; RevRowMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01RowMaj_01_4.html#exhale-struct-structjconj-t-3-01rowmaj-01-4"><span class="std std-ref">Template Struct JConj_T&lt; RowMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01t-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structjconj-t-3-01u-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct JConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structl-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct L&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structMemAcc.html#exhale-struct-structmemacc"><span class="std std-ref">Template Struct MemAcc</span></a></p></li>
+<li><p><a class="reference internal" href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structp-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct P&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structRevColMaj.html#exhale-struct-structrevcolmaj"><span class="std std-ref">Struct RevColMaj</span></a></p></li>
+<li><p><a class="reference internal" href="structRevRowMaj.html#exhale-struct-structrevrowmaj"><span class="std std-ref">Struct RevRowMaj</span></a></p></li>
+<li><p><a class="reference internal" href="structRowMaj.html#exhale-struct-structrowmaj"><span class="std std-ref">Struct RowMaj</span></a></p></li>
+<li><p><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structt-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct T&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T.html#exhale-struct-structtjconj-t"><span class="std std-ref">Template Struct TJConj_T</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01a-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01ColMaj_01_4.html#exhale-struct-structtjconj-t-3-01colmaj-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; ColMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01el-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01elh-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01eu-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01euh-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01l-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01p-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01RevColMaj_01_4.html#exhale-struct-structtjconj-t-3-01revcolmaj-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; RevColMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01RevRowMaj_01_4.html#exhale-struct-structtjconj-t-3-01revrowmaj-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; RevRowMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01RowMaj_01_4.html#exhale-struct-structtjconj-t-3-01rowmaj-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; RowMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01t-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtjconj-t-3-01u-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct TJConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T.html#exhale-struct-structtrp-t"><span class="std std-ref">Template Struct Trp_T</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01a-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01ColMaj_01_4.html#exhale-struct-structtrp-t-3-01colmaj-01-4"><span class="std std-ref">Template Struct Trp_T&lt; ColMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01el-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01elh-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01eu-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01euh-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01l-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01p-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01RevColMaj_01_4.html#exhale-struct-structtrp-t-3-01revcolmaj-01-4"><span class="std std-ref">Template Struct Trp_T&lt; RevColMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01RevRowMaj_01_4.html#exhale-struct-structtrp-t-3-01revrowmaj-01-4"><span class="std std-ref">Template Struct Trp_T&lt; RevRowMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01RowMaj_01_4.html#exhale-struct-structtrp-t-3-01rowmaj-01-4"><span class="std std-ref">Template Struct Trp_T&lt; RowMaj &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01t-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structTrp__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structtrp-t-3-01u-3-01dense-3-01f-00-01acc-01-4-01-4-01-4"><span class="std std-ref">Template Struct Trp_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structu-3-01dense-3-01f-00-01acc-01-4-01-4"><span class="std std-ref">Template Struct U&lt; Dense&lt; F, Acc &gt; &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="structVectorView.html#exhale-struct-structvectorview"><span class="std std-ref">Template Struct VectorView</span></a></p></li>
+<li><p><a class="reference internal" href="classVectorView_1_1Iterator.html#exhale-class-classvectorview-1-1iterator"><span class="std std-ref">Class VectorView::Iterator</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1aea6289b2f01d98cd4b2f22851bf33063.html#exhale-function-naive-dense-8hpp-1aea6289b2f01d98cd4b2f22851bf33063"><span class="std std-ref">Template Function apply_inverse_on_left(U&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a48861caec8a4610c06d2b8f80c1e63b6.html#exhale-function-naive-dense-8hpp-1a48861caec8a4610c06d2b8f80c1e63b6"><span class="std std-ref">Template Function apply_inverse_on_left(L&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1aabd24825064f1b610b6b30d358906b17.html#exhale-function-naive-dense-8hpp-1aabd24825064f1b610b6b30d358906b17"><span class="std std-ref">Template Function apply_inverse_on_right(A&lt;Dense&lt;F, Acc2&gt;&gt;, U&lt;Dense&lt;F, Acc1&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1ad40f72cfc46ccdfd3121446b2950c57c.html#exhale-function-naive-dense-8hpp-1ad40f72cfc46ccdfd3121446b2950c57c"><span class="std std-ref">Template Function apply_inverse_on_right(A&lt;Dense&lt;F, Acc2&gt;&gt;, L&lt;Dense&lt;F, Acc1&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1af091996e3b7a076f2d91d2b176861cfc.html#exhale-function-naive-dense-8hpp-1af091996e3b7a076f2d91d2b176861cfc"><span class="std std-ref">Template Function apply_matmul_on_left</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a46340eca90e33125ea2255129fbe3136.html#exhale-function-naive-dense-8hpp-1a46340eca90e33125ea2255129fbe3136"><span class="std std-ref">Template Function apply_matmul_on_right</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1ab10643ecba33e43bee5dcfb8f7f3f1ce.html#exhale-function-naive-dense-8hpp-1ab10643ecba33e43bee5dcfb8f7f3f1ce"><span class="std std-ref">Template Function commute(EL&lt;Dense&lt;F, Acc1&gt;&gt;, L&lt;Dense&lt;F, Acc2&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a40a3616357eeb850344306ce28f0c056.html#exhale-function-naive-dense-8hpp-1a40a3616357eeb850344306ce28f0c056"><span class="std std-ref">Template Function commute(L&lt;Dense&lt;F, Acc2&gt;&gt;, ELH&lt;Dense&lt;F, Acc1&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1aaef55740424d69a4f58caa27b1b78563.html#exhale-function-naive-dense-8hpp-1aaef55740424d69a4f58caa27b1b78563"><span class="std std-ref">Template Function commute(EUH&lt;Dense&lt;F, Acc2&gt;&gt;, U&lt;Dense&lt;F, Acc1&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889.html#exhale-function-naive-dense-8hpp-1af576c7a6b52270b9fbf7b0da3e33e889"><span class="std std-ref">Template Function commute(U&lt;Dense&lt;F, Acc1&gt;&gt;, EU&lt;Dense&lt;F, Acc2&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab.html#exhale-function-naive-dense-8hpp-1a5fdbbab1008ffdfdbfda8f05151f41ab"><span class="std std-ref">Template Function fill_rand(M, int)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1aab25a5247f48274c7f24724032b6dd18.html#exhale-function-naive-dense-8hpp-1aab25a5247f48274c7f24724032b6dd18"><span class="std std-ref">Template Function fill_rand(M)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f.html#exhale-function-naive-dense-8hpp-1a5a9b390de1cf8d64680f391c1c3ed91f"><span class="std std-ref">Template Function fill_zeros</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1af9deb36b690671446c3ec7ebc9334d7b.html#exhale-function-naive-dense-8hpp-1af9deb36b690671446c3ec7ebc9334d7b"><span class="std std-ref">Template Function find_pivot</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a8ae843891a8ebdfabd8970761c2ad8ff.html#exhale-function-naive-dense-8hpp-1a8ae843891a8ebdfabd8970761c2ad8ff"><span class="std std-ref">Template Function l_solve(L&lt;Dense&lt;F, Acc&gt;&gt;, VectorView&lt;F&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a8fac21c33c8c269804a3925990ab4422.html#exhale-function-naive-dense-8hpp-1a8fac21c33c8c269804a3925990ab4422"><span class="std std-ref">Template Function LEUP_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1adad150143a9de5f5ceca11e0a9fcfca6.html#exhale-function-naive-dense-8hpp-1adad150143a9de5f5ceca11e0a9fcfca6"><span class="std std-ref">Template Function make_diag_ones</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a7707aa81653c1d68b97aad7adb13cdde.html#exhale-function-naive-dense-8hpp-1a7707aa81653c1d68b97aad7adb13cdde"><span class="std std-ref">Template Function matmul(A&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a1d1eefd0726d4b3fa4c57422e57224ff.html#exhale-function-naive-dense-8hpp-1a1d1eefd0726d4b3fa4c57422e57224ff"><span class="std std-ref">Template Function matmul(A&lt;Dense&lt;F, Acc1&gt;&gt;, VectorView&lt;F&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1aa9715d013de2ba73f388e5cc53270263.html#exhale-function-naive-dense-8hpp-1aa9715d013de2ba73f388e5cc53270263"><span class="std std-ref">Template Function matmul(VectorView&lt;F&gt;, A&lt;Dense&lt;F, Acc1&gt;&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a1a10bc86141f9ee725b452df7272fb10.html#exhale-function-naive-dense-8hpp-1a1a10bc86141f9ee725b452df7272fb10"><span class="std std-ref">Template Function norm</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a40fba0c8c2a9fbcd4db36f626ef48b70.html#exhale-function-naive-dense-8hpp-1a40fba0c8c2a9fbcd4db36f626ef48b70"><span class="std std-ref">Template Function PLEU_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a55526be45fe9fb9c1d55f9cca678cb8a.html#exhale-function-naive-dense-8hpp-1a55526be45fe9fb9c1d55f9cca678cb8a"><span class="std std-ref">Template Function PUEL_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_naive__dense_8hpp_1a7c6a3869a0071efb05241d505a8c79d3.html#exhale-function-naive-dense-8hpp-1a7c6a3869a0071efb05241d505a8c79d3"><span class="std std-ref">Template Function UELP_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="define_naive__dense_8hpp_1a200226d210f96ae711483679fd5a713a.html#exhale-define-naive-dense-8hpp-1a200226d210f96ae711483679fd5a713a"><span class="std std-ref">Define IMPLEMENT_JCONJ</span></a></p></li>
+<li><p><a class="reference internal" href="define_naive__dense_8hpp_1a28220c6e1886a55ed937adaefffb3396.html#exhale-define-naive-dense-8hpp-1a28220c6e1886a55ed937adaefffb3396"><span class="std std-ref">Define IMPLEMENT_TJCONJ</span></a></p></li>
+<li><p><a class="reference internal" href="define_naive__dense_8hpp_1a5f96169bc895544ca05acf6e6f247a13.html#exhale-define-naive-dense-8hpp-1a5f96169bc895544ca05acf6e6f247a13"><span class="std std-ref">Define IMPLEMENT_TRP</span></a></p></li>
+<li><p><a class="reference internal" href="define_naive__dense_8hpp_1a6abdb074dbaff38fca72615960144889.html#exhale-define-naive-dense-8hpp-1a6abdb074dbaff38fca72615960144889"><span class="std std-ref">Define INHERIT</span></a></p></li>
+<li><p><a class="reference internal" href="define_naive__dense_8hpp_1a27385de6fbdb5adea73bf5b83f46c7b0.html#exhale-define-naive-dense-8hpp-1a27385de6fbdb5adea73bf5b83f46c7b0"><span class="std std-ref">Define RULE</span></a></p></li>
+<li><p><a class="reference internal" href="define_naive__dense_8hpp_1ad764234ec3d628f63abb652af68b8b46.html#exhale-define-naive-dense-8hpp-1ad764234ec3d628f63abb652af68b8b46"><span class="std std-ref">Define SRULE</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

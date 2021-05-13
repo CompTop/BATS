@@ -1,0 +1,16 @@
+.. _exhale_struct_structTJConj__T_3_01RowMaj_01_4:
+
+Template Struct TJConj_T< RowMaj >
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: TJConj_T< RowMaj >
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,26 @@
+.. _exhale_struct_structVectorView:
+
+Template Struct VectorView
+==========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Nested Relationships
+--------------------
+
+
+Nested Types
+************
+
+- :ref:`exhale_class_classVectorView_1_1Iterator`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: VectorView
+   :members:
+   :protected-members:
+   :undoc-members:

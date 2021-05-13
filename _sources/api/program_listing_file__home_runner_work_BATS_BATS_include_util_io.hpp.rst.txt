@@ -1,0 +1,74 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_util_io.hpp:
+
+Program Listing for File io.hpp
+===============================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_util_io.hpp>` (``/home/runner/work/BATS/BATS/include/util/io.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   /*
+   Utilities for I/O
+   */
+   
+   #include <string>
+   #include <iostream>
+   #include <fstream>
+   #include <sstream>
+   
+   namespace bats {
+   namespace util {
+   namespace io {
+   
+   template<typename T>
+   T parse_argv(
+       const int argc,
+       char** argv,
+       const std::string &&token,
+       const T default_return
+   ) {
+       int i = 1; // skip first entry
+       while (i < argc) {
+           std::string entry(argv[i]);
+           std::istringstream iss(entry);
+           std::string prefix, postfix;
+           getline(iss, prefix, '=');
+           if (token.compare(prefix) == 0) {
+               getline(iss, postfix);
+               return T(std::stod(postfix));
+           }
+           i++;
+       }
+       return default_return;
+   }
+   
+   template<>
+   std::string parse_argv(
+       const int argc,
+       char** argv,
+       const std::string &&token,
+       const std::string default_return
+   ) {
+       int i = 1; // skip first entry
+       while (i < argc) {
+           std::string entry(argv[i]);
+           std::istringstream iss(entry);
+           std::string prefix, postfix;
+           getline(iss, prefix, '=');
+           if (token.compare(prefix) == 0) {
+               getline(iss, postfix);
+               return postfix;
+           }
+           i++;
+       }
+       return default_return;
+   }
+   
+   
+   } // namespace io
+   } // namespace util
+   } // namespace bats

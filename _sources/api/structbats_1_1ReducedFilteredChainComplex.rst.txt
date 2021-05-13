@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1ReducedFilteredChainComplex:
+
+Template Struct ReducedFilteredChainComplex
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::ReducedFilteredChainComplex
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,63 @@
+
+.. _file__home_runner_work_BATS_BATS_include_future_span.hpp:
+
+File span.hpp
+=============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_future>` (``/home/runner/work/BATS/BATS/include/future``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/future/span.hpp``)
+--------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_future_span.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``dense.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`)
+
+- ``lu.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`)
+
+- ``util.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_util.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_future.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__future`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbats_1_1future_1_1Span`
+

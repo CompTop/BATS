@@ -1,0 +1,22 @@
+.. _dir__home_runner_work_BATS_BATS_include_multigraph:
+
+
+Directory multigraph
+====================
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/multigraph``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_multigraph.hpp`
+
+

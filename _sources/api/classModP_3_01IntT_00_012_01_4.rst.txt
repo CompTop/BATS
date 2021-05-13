@@ -1,0 +1,25 @@
+.. _exhale_class_classModP_3_01IntT_00_012_01_4:
+
+Template Class ModP< IntT, 2 >
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public AbstractField< ModP< IntT, 2 > >`` (:ref:`exhale_class_classAbstractField`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: ModP< IntT, 2 >
+   :members:
+   :protected-members:
+   :undoc-members:

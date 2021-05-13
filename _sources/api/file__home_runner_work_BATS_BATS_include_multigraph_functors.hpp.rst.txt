@@ -1,0 +1,91 @@
+
+.. _file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp:
+
+File functors.hpp
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_multigraph>` (``/home/runner/work/BATS/BATS/include/multigraph``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/multigraph/functors.hpp``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``chain/chain_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`)
+
+- ``chain/chain_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`)
+
+- ``complex/simplicial_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`)
+
+- ``complex/simplicial_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`)
+
+- ``diagram.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`)
+
+- ``homology/basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`)
+
+- ``homology/induced_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`)
+
+- ``stdexcept``
+
+- ``topology/cover.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`)
+
+- ``topology/data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``topology/nerve.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`)
+
+- ``topology/rips.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_functors_8hpp_1a87f0bfc7ef050dbb40707104184ab050`
+
+- :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
+
+- :ref:`exhale_function_functors_8hpp_1a5178d1d29e8f42549c22417206aadd53`
+
+- :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
+
+- :ref:`exhale_function_functors_8hpp_1a0f99b26c184a52dddf196d766faa695a`
+
+- :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
+

@@ -1,0 +1,22 @@
+.. _exhale_struct_structMultiGraph_1_1Edge:
+
+Struct MultiGraph::Edge
+=======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_multigraph.hpp`
+
+
+Nested Relationships
+--------------------
+
+This struct is a nested type of :ref:`exhale_class_classMultiGraph`.
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: MultiGraph::Edge
+   :members:
+   :protected-members:
+   :undoc-members:

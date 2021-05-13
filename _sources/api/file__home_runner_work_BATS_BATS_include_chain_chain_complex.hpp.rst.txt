@@ -1,0 +1,82 @@
+
+.. _file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp:
+
+File chain_complex.hpp
+======================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_chain>` (``/home/runner/work/BATS/BATS/include/chain``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/chain/chain_complex.hpp``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``util/permutation.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1ChainComplex`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_chain__complex_8hpp_1ac2b99b961e41a72ed5680f3170d249ec`
+
+- :ref:`exhale_function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a`
+
+- :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
+
+- :ref:`exhale_function_chain__complex_8hpp_1a9056331ab85ea32b5a39e6306f4e3252`
+
+- :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
+

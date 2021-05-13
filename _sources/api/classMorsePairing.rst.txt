@@ -1,0 +1,16 @@
+.. _exhale_class_classMorsePairing:
+
+Template Class MorsePairing
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: MorsePairing
+   :members:
+   :protected-members:
+   :undoc-members:

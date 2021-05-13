@@ -1,0 +1,65 @@
+
+.. _file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp:
+
+File type_a.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_quiver>` (``/home/runner/work/BATS/BATS/include/quiver``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/quiver/type_a.hpp``)
+----------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``linalg/field.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`)
+
+- ``linalg/naive_dense.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`)
+
+- ``persistence/barcode.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp`)
+
+- ``string``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1Type__A`
+

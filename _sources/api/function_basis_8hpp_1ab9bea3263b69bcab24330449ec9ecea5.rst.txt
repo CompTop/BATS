@@ -1,0 +1,13 @@
+.. _exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5:
+
+Template Function bats::Reduce(const ChainComplex<MT>&, Args ...)
+=================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Reduce(const ChainComplex<MT>&, Args ...)

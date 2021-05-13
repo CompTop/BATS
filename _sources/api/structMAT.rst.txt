@@ -1,0 +1,27 @@
+.. _exhale_struct_structMAT:
+
+Struct MAT
+==========
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Derived Types
+*************
+
+- ``public A< Impl >`` (:ref:`exhale_struct_structA`)
+- ``public A< I >`` (:ref:`exhale_struct_structA`)
+- ``public A< T >`` (:ref:`exhale_struct_structA`)
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: MAT
+   :members:
+   :protected-members:
+   :undoc-members:

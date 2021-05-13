@@ -1,0 +1,13 @@
+.. _exhale_function_data__gen_8hpp_1a5043f25417b021629dd6935aa7b970f5:
+
+Template Function bats::add_normal_noise(Matrix<T>&, unsigned, const T, const T)
+================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_normal_noise(Matrix<T>&, unsigned, const T, const T)

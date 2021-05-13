@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1ae7a9c23a18cc490da61f286c7eec5d92:
+
+Template Function PLEU
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PLEU(const ColumnMatrix<TC>&)

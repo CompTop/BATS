@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File reduction.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File reduction.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_homology_reduction.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-reduction-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-homology-reduction-hpp"></span><h1>Program Listing for File reduction.hpp<a class="headerlink" href="#program-listing-for-file-reduction-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_homology_reduction.hpp.html#file-home-runner-work-bats-bats-include-homology-reduction-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/homology/reduction.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="c1">// #include &quot;tsl/hopscotch_map.h&quot;</span>
+<span class="c1">// #include &quot;tsl/robin_map.h&quot;</span>
+<span class="c1">// #include &quot;tsl/sparse_map.h&quot;</span>
+
+<span class="c1">// template &lt;typename T&gt;</span>
+<span class="c1">// struct vector_to_dict {</span>
+<span class="c1">//  std::vector&lt;T&gt; vals;</span>
+<span class="c1">//</span>
+<span class="c1">//  template &lt;typename ...Args&gt;</span>
+<span class="c1">//  vector_to_dict(Args (&amp;...args)) : vals(args...) {}</span>
+<span class="c1">//</span>
+<span class="c1">//  vector_to_dict(size_t n) : vals(n, bats::NO_IND) {}</span>
+<span class="c1">//</span>
+<span class="c1">//  inline T&amp; operator=(size_t i) {return vals[i];}</span>
+<span class="c1">//  inline const T&amp; operator=(size_t i) const {return vals[i];}</span>
+<span class="c1">//  inline size_t count(size_t i) const {return vals[i] != bats::NO_IND;}</span>
+<span class="c1">// };</span>
+
+<span class="c1">// #define p2c_type std::unordered_map&lt;size_t, size_t&gt;</span>
+<span class="c1">// #define p2c_type tsl::hopscotch_map&lt;size_t, size_t&gt;</span>
+<span class="c1">// #define p2c_type tsl::robin_map&lt;size_t, size_t&gt;</span>
+<span class="c1">// #define p2c_type tsl::sparse_map&lt;size_t, size_t&gt;</span>
+<span class="cp">#define p2c_type std::vector&lt;size_t&gt;</span>
+
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="c1">// flags for selecting optimizations</span>
+<span class="k">struct</span> <span class="nc">no_optimization_flag</span> <span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">clearing_flag</span> <span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">compression_flag</span> <span class="p">{};</span>
+
+<span class="c1">// flags for selecting algorithms</span>
+<span class="k">struct</span> <span class="nc">standard_reduction_flag</span> <span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">extra_reduction_flag</span> <span class="p">{};</span>
+
+
+<span class="c1">// perform reduction algorithm on a column matrix in-place</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// p2c_type pivot_to_col;</span>
+    <span class="n">p2c_type</span> <span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+    <span class="c1">// create a temporary vector for use in axpys</span>
+    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+
+    <span class="c1">// loop over columns</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot;;</span>
+            <span class="c1">// M[j].print_row();</span>
+            <span class="c1">// piv is index-value nzpair</span>
+            <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span>
+            <span class="c1">// if (pivot_to_col.count(piv.ind) &gt; 0) {</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// eliminate pivot</span>
+                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span>
+                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="p">.</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
+                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// new pivot</span>
+                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// perform reduction algorithm on a column matrix in-place</span>
+<span class="c1">// do extra reduction to eliminate nonzeros even after pivot has been found</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// p2c_type pivot_to_col;</span>
+    <span class="n">p2c_type</span> <span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+    <span class="c1">// create a temporary vector for use in axpys</span>
+    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+
+    <span class="c1">// loop over columns</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// while the nonzero we are looking at is in the vector</span>
+            <span class="c1">// piv is index-value nzpair</span>
+            <span class="c1">// auto piv = M[j].lastnz();</span>
+            <span class="c1">// if (pivot_to_col.count(piv-&gt;ind) &gt; 0) {</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// eliminate pivot</span>
+                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
+                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
+                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
+                <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found_pivot</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// new pivot</span>
+                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// we skip zeroing out this entry</span>
+                <span class="c1">// need to increment offset</span>
+                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// default behavior</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// behavior with standard flag</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">standard_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// behavior with extra flag</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">extra_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// perform reduction algorithm on a column matrix in-place</span>
+<span class="c1">// apply change of basis to U</span>
+<span class="c1">// invariant M * U = R</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">!=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span>
+
+    <span class="c1">// p2c_type pivot_to_col;</span>
+    <span class="n">p2c_type</span> <span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+    <span class="c1">// create a temporary vector for use in axpys</span>
+    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+
+    <span class="c1">// loop over columns</span>
+    <span class="c1">// size_t ct = 0;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// ++ct;</span>
+            <span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot;;</span>
+            <span class="c1">// M[j].print_row();</span>
+            <span class="c1">// piv is index-value nzpair</span>
+            <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span>
+            <span class="c1">// if (pivot_to_col.count(piv.ind) &gt; 0) {</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// eliminate pivot</span>
+                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span>
+                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="p">.</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
+                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
+                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update change of basis</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// new pivot</span>
+                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// std::cout &lt;&lt; &quot;# iterations = &quot; &lt;&lt; ct &lt;&lt; std::endl;</span>
+    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">!=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span>
+
+    <span class="c1">// p2c_type pivot_to_col;</span>
+    <span class="n">p2c_type</span> <span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+    <span class="c1">// create a temporary vector for use in axpys</span>
+    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+
+    <span class="c1">// loop over columns</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// while the nonzero we are looking at is in the vector</span>
+            <span class="c1">// piv is index-value nzpair</span>
+            <span class="c1">// auto piv = M[j].lastnz();</span>
+            <span class="c1">// if (pivot_to_col.count(piv-&gt;ind) &gt; 0) {</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// eliminate pivot</span>
+                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
+                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
+                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
+                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update change of basis</span>
+                <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found_pivot</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// new pivot</span>
+                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// we skip zeroing out this entry</span>
+                <span class="c1">// need to increment offset</span>
+                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// default behavior</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// behavior with standard flag</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">standard_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// behavior with extra flag</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">extra_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// get clearing indices from pivots</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_clearing_inds</span><span class="p">(</span><span class="k">const</span> <span class="n">p2c_type</span> <span class="o">&amp;</span><span class="n">p2c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">inds</span><span class="p">;</span>
+    <span class="n">inds</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">p2c</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// put keys into indices - these are the clearing indices for</span>
+        <span class="c1">// one dimension down.</span>
+        <span class="c1">// inds.emplace_back(it-&gt;first);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">it</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span> <span class="n">inds</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="p">}</span>
+        <span class="n">it</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">inds</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">inds</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">inds</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// perform reduction algorithm on a column matrix in-place</span>
+<span class="c1">// use clearing optimization</span>
+<span class="c1">// assume clear_inds is in sorted order</span>
+<span class="c1">// also known as the twist algorithm</span>
+<span class="c1">// get clearing indices from one dimension above</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_clearing</span><span class="p">(</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">clear_inds</span><span class="p">,</span>
+    <span class="n">flag</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;clearing cols&quot; &lt;&lt; std::endl;</span>
+    <span class="c1">// just zero-out columns ahead of time</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">cind</span> <span class="p">:</span> <span class="n">clear_inds</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// we hit an index we want to clear</span>
+        <span class="n">M</span><span class="p">[</span><span class="n">cind</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// just zero out column without doing work</span>
+    <span class="p">}</span>
+    <span class="c1">// std::cout &lt;&lt; &quot;reducing matrix&quot; &lt;&lt; std::endl;</span>
+
+    <span class="c1">// now run standard reduction algorithm with flag</span>
+    <span class="k">return</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">flag</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// get compression indices from reduced matrix R</span>
+<span class="c1">// compression indices are column indices</span>
+<span class="c1">// where column has not been zeroed out.</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">get_compression_inds</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">R</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">inds</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">inds</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">inds</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// reduce matrix using compression</span>
+<span class="c1">// comp_inds hold indices of rows which will never be pivots</span>
+<span class="c1">// we zero-out these rows to reduce number of operations</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_compression</span><span class="p">(</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">comp_inds</span><span class="p">,</span>
+    <span class="n">flag</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// first zero-out rows designated by comp_inds</span>
+    <span class="n">M</span><span class="p">.</span><span class="n">clear_rows</span><span class="p">(</span><span class="n">comp_inds</span><span class="p">);</span>
+
+    <span class="c1">// then run standard reduction algorithm</span>
+    <span class="k">return</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">flag</span><span class="p">());</span>
+<span class="p">}</span>
+
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span>
+<span class="n">p2c_type</span> <span class="n">reduce_matrix_compression</span><span class="p">(</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">comp_inds</span><span class="p">,</span>
+    <span class="n">flag</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// first zero-out rows designated by comp_inds</span>
+    <span class="n">M</span><span class="p">.</span><span class="n">clear_rows</span><span class="p">(</span><span class="n">comp_inds</span><span class="p">);</span>
+
+    <span class="c1">// we can still record basis.</span>
+    <span class="k">return</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">flag</span><span class="p">());</span>
+<span class="p">}</span>
+<span class="c1">// TODO: add flags</span>
+
+
+
+<span class="c1">// extract indices for homology-revealing basis</span>
+<span class="c1">// Rk - reduced boundary matrix</span>
+<span class="c1">// p2ck1 - p2c returned by reduction of B{k+1}</span>
+<span class="c1">// dimk - number of cells in dimension k</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">extract_basis_indices</span><span class="p">(</span><span class="k">const</span> <span class="n">MT</span><span class="o">&amp;</span> <span class="n">Rk</span><span class="p">,</span> <span class="k">const</span> <span class="n">p2c_type</span> <span class="o">&amp;</span><span class="n">p2ck1</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">I</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">dimk</span> <span class="o">=</span> <span class="n">Rk</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dimk</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Rk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// column is zero</span>
+            <span class="c1">// if (p2ck1.count(j) == 0) {</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">p2ck1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// column is not a pivot, so add</span>
+                <span class="n">I</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="c1">// TODO: can use emplace_hint with pointer to back</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// extract indices for homology-revealing basis</span>
+<span class="c1">// Rk - reduced boundary matrix</span>
+<span class="c1">// no p2c for dimension above</span>
+<span class="c1">// dimk - number of cells in dimension k</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">extract_basis_indices</span><span class="p">(</span><span class="k">const</span> <span class="n">MT</span> <span class="o">&amp;</span><span class="n">Rk</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">I</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">dimk</span> <span class="o">=</span> <span class="n">Rk</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+    <span class="c1">// I.reserve(dimk);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dimk</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Rk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// column is zero</span>
+            <span class="c1">// column is not a pivot, so add</span>
+            <span class="n">I</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="c1">// TODO: can use emplace_hint with pointer to back</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

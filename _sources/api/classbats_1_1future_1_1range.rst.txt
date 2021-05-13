@@ -1,0 +1,26 @@
+.. _exhale_class_classbats_1_1future_1_1range:
+
+Template Class range
+====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`
+
+
+Nested Relationships
+--------------------
+
+
+Nested Types
+************
+
+- :ref:`exhale_class_classbats_1_1future_1_1range_1_1const__iterator`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::future::range
+   :members:
+   :protected-members:
+   :undoc-members:

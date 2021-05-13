@@ -1,0 +1,90 @@
+
+.. _file__home_runner_work_BATS_BATS_include_homology_basis.hpp:
+
+File basis.hpp
+==============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_homology>` (``/home/runner/work/BATS/BATS/include/homology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/homology/basis.hpp``)
+-----------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_homology_basis.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``chain/chain_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`)
+
+- ``chrono``
+
+- ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1compute__basis__flag`
+
+- :ref:`exhale_class_classbats_1_1ReducedChainComplex`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_basis_8hpp_1aceb6dccb131821e8dd2082e427df43d0`
+
+- :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
+
+- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
+
+- :ref:`exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992`
+
+- :ref:`exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2`
+

@@ -1,0 +1,125 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp:
+
+File col_matrix.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/col_matrix.hpp``)
+--------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``abstract_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp`)
+
+- ``abstract_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+- ``algorithm``
+
+- ``chrono``
+
+- ``csc_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`)
+
+- ``cstddef``
+
+- ``fstream``
+
+- ``iostream``
+
+- ``map`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
+- ``random``
+
+- ``string``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_schur.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_extract.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classColumnMatrix`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_col__matrix_8hpp_1a35cdf4312a9e570693a49d4e33a0648e`
+
+- :ref:`exhale_function_col__matrix_8hpp_1a50704c02bec41743e03f7f74b4a6a8b2`
+
+- :ref:`exhale_function_col__matrix_8hpp_1a312149207447447ab25c9f57d630dc8d`
+
+- :ref:`exhale_function_col__matrix_8hpp_1af1e32562e5c5435c628a2dbaceb64e3c`
+
+- :ref:`exhale_function_col__matrix_8hpp_1ace18822d7157109c7049f4d8ec1824b2`
+
+- :ref:`exhale_function_col__matrix_8hpp_1ad5ffd5e74c1e50dfb64a16dbf2347b14`
+
+- :ref:`exhale_function_col__matrix_8hpp_1ae49c88a502db43137111c472026b96d7`
+

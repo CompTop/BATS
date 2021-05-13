@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1CellularMap:
+
+Class CellularMap
+=================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::CellularMap
+   :members:
+   :protected-members:
+   :undoc-members:

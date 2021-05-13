@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1ab226b6f6785f510460e76e5679ea88f4:
+
+Template Function bats::util::apply_perm(std::vector<T>&, const std::vector<size_t>&)
+=====================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::apply_perm(std::vector<T>&, const std::vector<size_t>&)

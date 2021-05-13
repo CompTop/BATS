@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a1da4343b1b9cbc15daa7dd04e31a1935:
+
+Function bats::util::rand_perm
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::rand_perm(const size_t)

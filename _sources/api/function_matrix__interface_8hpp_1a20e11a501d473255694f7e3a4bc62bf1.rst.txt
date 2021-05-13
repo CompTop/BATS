@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1a20e11a501d473255694f7e3a4bc62bf1:
+
+Function matmul(MAT, MAT)
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: matmul(MAT, MAT)

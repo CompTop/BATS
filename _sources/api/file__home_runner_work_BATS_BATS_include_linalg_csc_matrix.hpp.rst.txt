@@ -1,0 +1,76 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp:
+
+File csc_matrix.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/csc_matrix.hpp``)
+--------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``abstract_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp`)
+
+- ``cassert``
+
+- ``cstddef``
+
+- ``iomanip``
+
+- ``iostream``
+
+- ``util/sorted.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_light_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classCSCMatrix`
+

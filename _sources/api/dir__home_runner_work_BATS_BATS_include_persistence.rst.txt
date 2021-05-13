@@ -1,0 +1,23 @@
+.. _dir__home_runner_work_BATS_BATS_include_persistence:
+
+
+Directory persistence
+=====================
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/persistence``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_extract.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+

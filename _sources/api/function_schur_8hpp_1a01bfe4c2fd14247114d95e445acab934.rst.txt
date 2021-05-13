@@ -1,0 +1,13 @@
+.. _exhale_function_schur_8hpp_1a01bfe4c2fd14247114d95e445acab934:
+
+Template Function schur(T&, T&, T&, T&)
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_schur.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: schur(T&, T&, T&, T&)

@@ -1,0 +1,13 @@
+.. _exhale_define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384:
+
+Define MM
+=========
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: MM

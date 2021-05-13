@@ -1,0 +1,13 @@
+.. _exhale_function_sorted_8hpp_1ad6bfd6dbcb8856b350f6c17d77ff51d4:
+
+Template Function bats::util::intersect_sorted_lt
+=================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::intersect_sorted_lt(const C1&, const C2&, const T, std::vector<T>&)

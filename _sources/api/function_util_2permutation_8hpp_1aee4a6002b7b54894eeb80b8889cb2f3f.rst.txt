@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1aee4a6002b7b54894eeb80b8889cb2f3f:
+
+Template Function bats::util::perm_sign
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::perm_sign(const std::vector<T>&)

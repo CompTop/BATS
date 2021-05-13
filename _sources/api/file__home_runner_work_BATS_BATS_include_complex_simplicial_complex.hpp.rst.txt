@@ -1,0 +1,134 @@
+
+.. _file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp:
+
+File simplicial_complex.hpp
+===========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_complex>` (``/home/runner/work/BATS/BATS/include/complex``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/complex/simplicial_complex.hpp``)
+-----------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``abstract_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp`)
+
+- ``algorithm``
+
+- ``cstddef``
+
+- ``filtration/filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`)
+
+- ``fstream``
+
+- ``iostream``
+
+- ``iterator``
+
+- ``limits``
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/csc_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`)
+
+- ``linalg/sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``map`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
+- ``morse/pairing.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`)
+
+- ``string``
+
+- ``tuple``
+
+- ``util/common.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_common.hpp`)
+
+- ``util/simplex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`)
+
+- ``util/sorted.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`)
+
+- ``util/trie.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_trie.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbats_1_1SimplicialComplex`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1a638c58a925f4efd2f10ee932684c363d`
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1ad463df9dbbc917d805f2325d14522d86`
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1a235fdb8010a7dc627761055d4a5f3100`
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1adea5ebf11ef869d59081c07746e48d01`
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1a10e21fd6351157149ae42cfae28947dd`
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1a06ea072e08d6be92106ab64bf3f4c3b4`
+

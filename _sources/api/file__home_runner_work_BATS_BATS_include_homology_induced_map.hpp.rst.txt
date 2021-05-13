@@ -1,0 +1,69 @@
+
+.. _file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp:
+
+File induced_map.hpp
+====================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_homology>` (``/home/runner/work/BATS/BATS/include/homology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/homology/induced_map.hpp``)
+-----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`)
+
+- ``chain/chain_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`)
+
+- ``iostream``
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_induced__map_8hpp_1a77750544358124fd5b9d47f1bb416305`
+

@@ -1,0 +1,13 @@
+.. _exhale_define_naive__dense_8hpp_1a28220c6e1886a55ed937adaefffb3396:
+
+Define IMPLEMENT_TJCONJ
+=======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: IMPLEMENT_TJCONJ

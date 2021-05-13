@@ -1,0 +1,122 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp:
+
+File symbolic_implementation.hpp
+================================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/symbolic_implementation.hpp``)
+---------------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``assert.h``
+
+- ``iostream``
+
+- ``matrix_interface.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`)
+
+- ``tuple``
+
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structSI`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a82d579caf6eb1cded4b8db0f3018acac`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1ae52bd251ad621e2e02b079a2d272fd89`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1af5308b961ff2d94a09416f060abebbcf`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a8338a0cd26f0859b3a1e7312145353f1`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a181c4a1d85a0d65a35aafdadf7081d25`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a7bddb8833b5117ed79c2a337f6c3cfc9`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a2b22b9df4dc6e22152fce8808cc1e4bc`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a6d9c4ecd3c63d10da8fd79bd2bc8cd23`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a3547f7412c52ed98a9c9a0eef25dd27d`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1ad158acc376aa64a139307fe9d393aa30`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1adffc9db1b4558d720e3a720fb849d3b3`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1ae7ae62d29f06b77408c61ef9894ecafc`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1aa71e711b460701044e6e5b616f010391`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a89e947e99565109e5392a2dfc18ceca9`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a761946a26ad3abb9d4b40ecfc1ef5bc9`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1ae7fcc1404fba4d8325dd0157222bcc6e`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a2c699a4acd723807e4f9710ed912a65f`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a73d3e20b22c8ef5a87c8fce9782a210b`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a089ba383ac92cf4dc6a29439f00acba1`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1aab8f20dd44c870ad5d6a685c3cf35e06`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d`
+
+
+Defines
+-------
+
+
+- :ref:`exhale_define_symbolic__implementation_8hpp_1a64a102533e8247065aee5b5ed19859b2`
+
+- :ref:`exhale_define_symbolic__implementation_8hpp_1a85acb43eabc5d04810efad3b99726d88`
+
+- :ref:`exhale_define_symbolic__implementation_8hpp_1a0fdba80e023c428667d9cc9da3fd1f5c`
+
+- :ref:`exhale_define_symbolic__implementation_8hpp_1aa376a950addd1253d8ddf9df38df8ad5`
+
+- :ref:`exhale_define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384`
+

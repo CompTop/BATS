@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1tedge:
+
+Template Struct tedge
+=====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::tedge
+   :members:
+   :protected-members:
+   :undoc-members:

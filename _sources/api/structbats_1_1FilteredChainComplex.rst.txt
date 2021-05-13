@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1FilteredChainComplex:
+
+Template Struct FilteredChainComplex
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::FilteredChainComplex
+   :members:
+   :protected-members:
+   :undoc-members:

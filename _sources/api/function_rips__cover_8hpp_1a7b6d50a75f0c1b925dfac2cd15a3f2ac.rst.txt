@@ -1,0 +1,13 @@
+.. _exhale_function_rips__cover_8hpp_1a7b6d50a75f0c1b925dfac2cd15a3f2ac:
+
+Template Function bats::rips_filtration_edges(const DataSet<T>&, const bats::Cover&, const M&, const T)
+=======================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::rips_filtration_edges(const DataSet<T>&, const bats::Cover&, const M&, const T)

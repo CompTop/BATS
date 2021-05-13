@@ -1,0 +1,13 @@
+.. _exhale_function_induced__map_8hpp_1a77750544358124fd5b9d47f1bb416305:
+
+Template Function bats::induced_map
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::induced_map(const ChainMap<ColumnMatrix<TVec>>&, const ReducedChainComplex<ColumnMatrix<TVec>>&, const ReducedChainComplex<ColumnMatrix<TVec>>&, size_t)

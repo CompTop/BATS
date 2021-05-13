@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File type_a.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File type_a.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-type-a-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-quiver-type-a-hpp"></span><h1>Program Listing for File type_a.hpp<a class="headerlink" href="#program-listing-for-file-type-a-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp.html#file-home-runner-work-bats-bats-include-quiver-type-a-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/quiver/type_a.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/naive_dense.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/field.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;persistence/barcode.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>
+
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+
+<span class="c1">// type A quiver</span>
+<span class="k">template</span><span class="o">&lt;</span> <span class="k">typename</span> <span class="nc">F</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">Type_A</span><span class="p">{</span>
+    <span class="c1">// matrix types</span>
+    <span class="k">using</span> <span class="n">DI</span> <span class="o">=</span> <span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">AD</span> <span class="o">=</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="c1">//input data</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AD</span><span class="o">&gt;</span> <span class="n">mats</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">arrow_dir</span><span class="p">;</span>
+
+    <span class="c1">// number of edges</span>
+    <span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span>
+    <span class="c1">// dimension of each vector space</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">dims</span><span class="p">;</span>
+
+    <span class="c1">// reducedm pivot matrices</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">EL</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;&gt;</span> <span class="n">ELmats</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ELH</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;&gt;</span> <span class="n">ELHmats</span><span class="p">;</span>
+
+    <span class="c1">// factors from factorization</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">L</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;&gt;</span> <span class="n">Lmats</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;&gt;</span> <span class="n">Umats</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">P</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;&gt;</span> <span class="n">Pmats</span><span class="p">;</span>
+
+    <span class="c1">// basis and inverse basis matrices</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AD</span><span class="o">&gt;</span> <span class="n">basis</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AD</span><span class="o">&gt;</span> <span class="n">inv_basis</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <span class="n">fwd_sweep_complete</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">bwd_sweep_complete</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="cm">/* constructor</span>
+<span class="cm">    *   ms - Vector of matrices</span>
+<span class="cm">    *   as - Vector of bools indication arrow directions</span>
+<span class="cm">    */</span>
+    <span class="n">Type_A</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AD</span><span class="o">&gt;&amp;</span> <span class="n">ms</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&amp;</span> <span class="n">as</span> <span class="p">)</span> <span class="o">:</span><span class="n">mats</span><span class="p">(</span><span class="n">ms</span><span class="p">),</span> <span class="n">arrow_dir</span><span class="p">(</span><span class="n">as</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">ms</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">dims</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">get_dims</span><span class="p">();</span>
+
+        <span class="c1">// initialize basis matrices</span>
+        <span class="n">AD</span> <span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">b1</span> <span class="o">=</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;::</span><span class="n">identity</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">basis</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">b1</span><span class="p">);</span>
+            <span class="n">b2</span> <span class="o">=</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;::</span><span class="n">identity</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">inv_basis</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">b2</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/*</span>
+<span class="cm">    *  Extract dimesnions for vector spaces from matrices</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">get_dims</span><span class="p">(){</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nrow</span><span class="p">();</span>
+            <span class="k">else</span>
+                <span class="n">dims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">ncol</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">n</span><span class="mi">-1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">dims</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">n</span><span class="mi">-1</span><span class="p">].</span><span class="n">ncol</span><span class="p">();</span>
+        <span class="k">else</span>
+            <span class="n">dims</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">n</span><span class="mi">-1</span><span class="p">].</span><span class="n">nrow</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">    *  Performs the Forward sweep of the quiver algorithm</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">forward_sweep</span><span class="p">(){</span>
+        <span class="c1">// variables to hold factors</span>
+        <span class="n">L</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Lmat</span><span class="p">;</span>
+        <span class="n">EL</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">ELmat</span><span class="p">;</span>
+        <span class="n">P</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Pmat</span><span class="p">;</span>
+        <span class="n">U</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Umat</span><span class="p">;</span>
+        <span class="n">ELH</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">ELHmat</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="c1">// LEUP Factorization</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">ELmat</span><span class="p">,</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">Pmat</span><span class="p">)</span> <span class="o">=</span> <span class="n">LEUP_fact</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+                <span class="k">auto</span> <span class="n">Pinv</span> <span class="o">=</span> <span class="n">Pmat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span> <span class="c1">// inverse of transpose</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                        <span class="c1">// pass P and U</span>
+                        <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Pmat</span><span class="p">,</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                        <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Umat</span><span class="p">,</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+
+                    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                        <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Pinv</span><span class="p">);</span>
+                        <span class="n">apply_inverse_on_right</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Umat</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="c1">//inv basis change</span>
+                <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Pmat</span><span class="p">,</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Umat</span><span class="p">,</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="c1">//basis change</span>
+                <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Pinv</span><span class="p">);</span>
+                <span class="n">apply_inverse_on_right</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Umat</span><span class="p">);</span>
+
+                <span class="c1">// record all matrices</span>
+                <span class="n">ELmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ELmat</span><span class="p">);</span>
+                <span class="n">ELHmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ELH</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">());</span>
+                <span class="n">Lmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Lmat</span><span class="p">);</span>
+                <span class="n">Umats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Umat</span><span class="p">);</span>
+                <span class="n">Pmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Pmat</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="c1">// PUEL Factorization</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">Pmat</span><span class="p">,</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">ELHmat</span><span class="p">,</span> <span class="n">Lmat</span><span class="p">)</span> <span class="o">=</span> <span class="n">PUEL_fact</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="k">auto</span> <span class="n">Pinv</span> <span class="o">=</span> <span class="n">Pmat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                        <span class="c1">// pass Pinv and Uinv</span>
+                        <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Pinv</span><span class="p">,</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                        <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">Umat</span><span class="p">,</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                        <span class="c1">// pass P and U</span>
+                        <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Pmat</span><span class="p">);</span>
+                        <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Umat</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="c1">//inv basis change</span>
+                <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Pinv</span><span class="p">,</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">Umat</span><span class="p">,</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+                <span class="c1">//basis change</span>
+                <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Pmat</span><span class="p">);</span>
+                <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">Umat</span><span class="p">);</span>
+
+                <span class="c1">// record all matrices</span>
+                <span class="n">ELmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">EL</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">());</span>
+                <span class="n">ELHmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ELHmat</span><span class="p">);</span>
+                <span class="n">Lmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Lmat</span><span class="p">);</span>
+                <span class="n">Umats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Umat</span><span class="p">);</span>
+                <span class="n">Pmats</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Pmat</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">fwd_sweep_complete</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">    *  Computes inverse of a lower triangular matrix.</span>
+<span class="cm">    *  Allocates new memory.</span>
+<span class="cm">    */</span>
+    <span class="k">auto</span> <span class="n">L_inverse</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">La</span><span class="p">){</span>
+        <span class="k">auto</span> <span class="n">Linv</span> <span class="o">=</span> <span class="n">L</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(</span><span class="n">La</span><span class="p">.</span><span class="n">m</span><span class="p">,</span><span class="n">La</span><span class="p">.</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">make_diag_ones</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Linv</span><span class="p">);</span>
+        <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">La</span><span class="p">,</span><span class="n">Linv</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">Linv</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/*</span>
+<span class="cm">    *  Performs the Backward sweep of the quiver algorithm</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">backward_sweep</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">fwd_sweep_complete</span> <span class="p">){</span>
+            <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Forward sweep not completed&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">L</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Lt</span><span class="p">;</span> <span class="c1">// The L that gets passed</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="n">n</span><span class="mi">-1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span> <span class="c1">// i&lt;n instead of i&gt;=0 for unsignedint</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span> <span class="c1">// check if first step, then no incoming L</span>
+                    <span class="n">Lt</span> <span class="o">=</span> <span class="n">Lmats</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="p">}</span><span class="k">else</span><span class="p">{</span> <span class="c1">// if not, commute incoming with  E and multiply with existing L</span>
+                    <span class="k">auto</span> <span class="n">Lt2</span> <span class="o">=</span> <span class="n">commute</span><span class="p">(</span><span class="n">ELmats</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Lt</span><span class="p">);</span> <span class="c1">//allocates new mem</span>
+                    <span class="n">Lt</span><span class="p">.</span><span class="n">free</span><span class="p">();</span>
+                    <span class="n">Lt</span> <span class="o">=</span> <span class="n">Lt2</span><span class="p">;</span>
+                    <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Lmats</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Lt</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="c1">// apply the passing L to basis mats</span>
+                <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">Lt</span><span class="p">,</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Lt</span><span class="p">);</span>
+                <span class="c1">// If next arrow direction is opposite inverse the passing L</span>
+                <span class="k">if</span><span class="p">(</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span><span class="o">!=</span> <span class="mi">0</span> <span class="p">){</span>
+                    <span class="k">auto</span> <span class="n">Lt3</span> <span class="o">=</span> <span class="n">L_inverse</span><span class="p">(</span><span class="n">Lt</span><span class="p">);</span> <span class="c1">//allocates new mem</span>
+                    <span class="n">Lt</span><span class="p">.</span><span class="n">free</span><span class="p">();</span>
+                    <span class="n">Lt</span> <span class="o">=</span> <span class="n">Lt3</span><span class="p">;</span>
+                <span class="p">}</span>
+
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+                    <span class="n">Lt</span> <span class="o">=</span> <span class="n">Lmats</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="p">}</span><span class="k">else</span><span class="p">{</span> <span class="c1">// commute the other way</span>
+                    <span class="k">auto</span> <span class="n">Lt2</span> <span class="o">=</span> <span class="n">commute</span><span class="p">(</span><span class="n">Lt</span><span class="p">,</span><span class="n">ELHmats</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">//allocates new mem</span>
+                    <span class="n">Lt</span><span class="p">.</span><span class="n">free</span><span class="p">();</span>
+                    <span class="n">Lt</span> <span class="o">=</span> <span class="n">Lt2</span><span class="p">;</span>
+                    <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">Lt</span><span class="p">,</span><span class="n">Lmats</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="p">}</span>
+
+                <span class="c1">// apply the passing L to basis mats</span>
+                <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">Lt</span><span class="p">,</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="n">apply_inverse_on_right</span><span class="p">(</span><span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">Lt</span><span class="p">);</span>
+
+                <span class="c1">// If next arrow direction is opposite inverse the passing L</span>
+                <span class="k">if</span><span class="p">(</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span><span class="o">!=</span> <span class="mi">1</span> <span class="p">){</span>
+                    <span class="k">auto</span> <span class="n">Lt3</span> <span class="o">=</span> <span class="n">L_inverse</span><span class="p">(</span><span class="n">Lt</span><span class="p">);</span> <span class="c1">//allocates new mem</span>
+                    <span class="n">Lt</span><span class="p">.</span><span class="n">free</span><span class="p">();</span>
+                    <span class="n">Lt</span> <span class="o">=</span> <span class="n">Lt3</span><span class="p">;</span>
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">bwd_sweep_complete</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// copy for consistency check</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AD</span><span class="o">&gt;</span> <span class="n">mats_copy</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">is_copy_saved</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="cm">/*</span>
+<span class="cm">    * Create copy for consistency check</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="nf">create_copy_of_mats</span><span class="p">(){</span>
+        <span class="n">AD</span> <span class="n">a</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">copy</span><span class="p">();</span>
+            <span class="n">mats_copy</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">is_copy_saved</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/*</span>
+<span class="cm">    * Check consistency of factorization</span>
+<span class="cm">    */</span>
+    <span class="kt">bool</span> <span class="nf">is_consistent</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="n">is_copy_saved</span> <span class="p">)</span>
+            <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Copy of mats not saved&quot;</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span> <span class="n">bwd_sweep_complete</span> <span class="o">||</span> <span class="o">!</span><span class="n">fwd_sweep_complete</span> <span class="p">)</span>
+            <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Factorization not complete&quot;</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">AD</span><span class="o">&gt;</span> <span class="n">mats_recon2</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="k">auto</span> <span class="n">mtemp</span> <span class="o">=</span> <span class="n">matmul</span><span class="p">(</span><span class="n">matmul</span><span class="p">(</span>
+                        <span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ELmats</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="p">);</span>
+                <span class="n">mats_recon2</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">mtemp</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="k">auto</span> <span class="n">mtemp</span> <span class="o">=</span> <span class="n">matmul</span><span class="p">(</span><span class="n">matmul</span><span class="p">(</span>
+                        <span class="n">basis</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">ELHmats</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">inv_basis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="p">);</span>
+                <span class="n">mats_recon2</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">mtemp</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="kt">bool</span> <span class="n">consistent</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">consistent</span> <span class="o">&amp;=</span>  <span class="p">(</span><span class="n">mats_copy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">mats_recon2</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">consistent</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// put barcode into vector of Persistence Pairs</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">barcode_pairs</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">hdim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">pairs</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">active</span><span class="p">,</span> <span class="n">active2</span><span class="p">;</span>
+
+        <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Em</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">pairs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">PersistencePair</span><span class="p">(</span><span class="n">hdim</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kt">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kt">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kt">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">)));</span>
+            <span class="n">active</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// loop over edges</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">kk</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">kk</span><span class="o">&lt;</span><span class="n">ELmats</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">kk</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">Em</span><span class="o">=</span><span class="n">ELmats</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                    <span class="kt">size_t</span> <span class="n">i</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                        <span class="c1">// look for bar to continue</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">Em</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">!=</span><span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)){</span>
+                            <span class="n">pairs</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">death_ind</span> <span class="o">=</span> <span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                            <span class="n">pairs</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">death</span> <span class="o">=</span> <span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+                            <span class="n">active2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+
+                    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">()){</span>
+                        <span class="c1">// we are starting a new bar</span>
+                        <span class="n">active2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">pairs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                        <span class="n">pairs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">PersistencePair</span><span class="p">(</span><span class="n">hdim</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">Em</span><span class="o">=</span><span class="n">ELHmats</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">()</span><span class="mi">-1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span>
+                    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="mi">-1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">){</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">Em</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">!=</span><span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)){</span>
+                            <span class="c1">// look for bar to continue</span>
+                            <span class="n">pairs</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">death_ind</span> <span class="o">=</span> <span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                            <span class="n">pairs</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">death</span> <span class="o">=</span> <span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+                            <span class="n">active2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">active</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">-1</span><span class="p">){</span>
+                        <span class="c1">// we are starting a new bar</span>
+                        <span class="n">active2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">pairs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                        <span class="n">pairs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">PersistencePair</span><span class="p">(</span><span class="n">hdim</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">pairs</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/*</span>
+<span class="cm">    *   print barcodes</span>
+<span class="cm">    *       - Each line has eaxactly one bar</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">print_barcodes</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">lines</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">;</span>
+        <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Em</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">lines</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+            <span class="n">active</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">kk</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">kk</span><span class="o">&lt;</span><span class="n">ELmats</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">kk</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">Em</span><span class="o">=</span><span class="n">ELmats</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                    <span class="kt">size_t</span> <span class="n">i</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">Em</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+                            <span class="n">lines</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+=</span><span class="s">&quot;&lt;--*&quot;</span><span class="p">;</span>
+                            <span class="n">active2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">()){</span>
+                        <span class="n">string</span> <span class="n">plu</span> <span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">;</span>
+                        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">)</span>
+                            <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;    &quot;</span><span class="p">;</span>
+                        <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;*&quot;</span><span class="p">;</span>
+                        <span class="n">active2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                        <span class="n">lines</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">plu</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">Em</span><span class="o">=</span><span class="n">ELHmats</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">()</span><span class="mi">-1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span>
+                    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="mi">-1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">){</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">Em</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+                            <span class="n">lines</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">+=</span><span class="s">&quot;--&gt;*&quot;</span><span class="p">;</span>
+                            <span class="n">active2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">active</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">-1</span><span class="p">){</span>
+                        <span class="n">string</span> <span class="n">plu</span> <span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">;</span>
+                        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">)</span>
+                            <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;    &quot;</span><span class="p">;</span>
+                        <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;*&quot;</span><span class="p">;</span>
+                        <span class="n">active2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                        <span class="n">lines</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">plu</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">    *   print barcodes in compressed format,</span>
+<span class="cm">    *       - Each line can have multiple bars</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">print_barcodes_compressed</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">lines</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">;</span>
+        <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">Em</span> <span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lastup</span><span class="p">;</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">lines</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+            <span class="n">active</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">lastup</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">kk</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">kk</span><span class="o">&lt;</span><span class="n">ELmats</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">kk</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">arrow_dir</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">Em</span><span class="o">=</span><span class="n">ELmats</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                    <span class="kt">size_t</span> <span class="n">i</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">Em</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+                            <span class="n">lines</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+=</span><span class="s">&quot;&lt;--*&quot;</span><span class="p">;</span>
+                            <span class="n">lastup</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+                            <span class="n">active2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">active</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">()){</span>
+                        <span class="kt">size_t</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                        <span class="k">for</span><span class="p">(;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">l</span><span class="o">++</span><span class="p">){</span>
+                            <span class="kt">size_t</span> <span class="n">jj</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                            <span class="kt">bool</span> <span class="n">bad</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                            <span class="k">for</span><span class="p">(;</span><span class="n">jj</span><span class="o">&lt;</span><span class="n">active2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span><span class="n">jj</span><span class="o">++</span><span class="p">)</span>
+                                <span class="k">if</span><span class="p">(</span><span class="n">active2</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span><span class="o">==</span><span class="n">l</span> <span class="p">)</span> <span class="n">bad</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+                            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bad</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                        <span class="n">active2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">l</span><span class="p">;</span>
+
+                        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
+                            <span class="n">lines</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+                            <span class="n">lastup</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                        <span class="p">}</span>
+
+                        <span class="n">string</span> <span class="n">plu</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+                        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">ll</span><span class="o">=</span><span class="n">lastup</span><span class="p">[</span><span class="n">l</span><span class="p">];</span><span class="n">ll</span><span class="o">&lt;</span><span class="n">kk</span><span class="p">;</span><span class="n">ll</span><span class="o">++</span><span class="p">)</span>
+                            <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;    &quot;</span><span class="p">;</span>
+                        <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;   *&quot;</span><span class="p">;</span>
+
+                        <span class="n">lines</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="n">plu</span><span class="p">;</span>
+                        <span class="n">lastup</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">Em</span><span class="o">=</span><span class="n">ELHmats</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="n">active2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">Em</span><span class="p">.</span><span class="n">nrow</span><span class="p">()</span><span class="mi">-1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">){</span>
+                    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+                    <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">Em</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="mi">-1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">){</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">Em</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+                            <span class="n">lines</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">+=</span><span class="s">&quot;--&gt;*&quot;</span><span class="p">;</span>
+                            <span class="n">lastup</span><span class="p">[</span><span class="n">active</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+                            <span class="n">active2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">active</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+                            <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="mi">-1</span><span class="p">){</span>
+                        <span class="kt">size_t</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                        <span class="k">for</span><span class="p">(;</span><span class="n">l</span><span class="o">&lt;</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">l</span><span class="o">++</span><span class="p">){</span>
+                            <span class="kt">size_t</span> <span class="n">ii</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                            <span class="kt">bool</span> <span class="n">bad</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+                            <span class="k">for</span><span class="p">(;</span><span class="n">ii</span><span class="o">&lt;</span><span class="n">active2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span><span class="n">ii</span><span class="o">++</span><span class="p">)</span>
+                                <span class="k">if</span><span class="p">(</span><span class="n">active2</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">==</span><span class="n">l</span> <span class="p">)</span> <span class="n">bad</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+                            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bad</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+                        <span class="p">}</span>
+                        <span class="n">active2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">l</span><span class="p">;</span>
+
+                        <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
+                            <span class="n">lines</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+                            <span class="n">lastup</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                        <span class="p">}</span>
+
+                        <span class="n">string</span> <span class="n">plu</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+                        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">ll</span><span class="o">=</span><span class="n">lastup</span><span class="p">[</span><span class="n">l</span><span class="p">];</span><span class="n">ll</span><span class="o">&lt;</span><span class="n">kk</span><span class="p">;</span><span class="n">ll</span><span class="o">++</span><span class="p">)</span>
+                            <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;    &quot;</span><span class="p">;</span>
+                        <span class="n">plu</span><span class="o">+=</span><span class="s">&quot;   *&quot;</span><span class="p">;</span>
+
+                        <span class="n">lines</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="n">plu</span><span class="p">;</span>
+                        <span class="n">lastup</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">kk</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">active</span><span class="p">,</span><span class="n">active2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">lines</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

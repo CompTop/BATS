@@ -1,0 +1,25 @@
+.. _exhale_class_classCSCMatrix:
+
+Template Class CSCMatrix
+========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public AbstractMatrix`` (:ref:`exhale_class_classAbstractMatrix`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: CSCMatrix
+   :members:
+   :protected-members:
+   :undoc-members:

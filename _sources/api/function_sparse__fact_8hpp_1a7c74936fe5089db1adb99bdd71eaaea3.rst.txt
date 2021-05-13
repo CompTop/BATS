@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1a7c74936fe5089db1adb99bdd71eaaea3:
+
+Template Function UQL
+=====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: UQL(const ColumnMatrix<TC>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2rips_8hpp_1a994082e3aac3f0ab907933746c5fa5a1:
+
+Template Function bats::sort_edges
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::sort_edges(std::vector<size_t>&, std::vector<T>&)

@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File cell_map.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File cell_map.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-cell-map-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-complex-cell-map-hpp"></span><h1>Program Listing for File cell_map.hpp<a class="headerlink" href="#program-listing-for-file-cell-map-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp.html#file-home-runner-work-bats-bats-include-complex-cell-map-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/complex/cell_map.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cm">/*</span>
+<span class="cm">Cellular map f: X-&gt;Y</span>
+<span class="cm">data is how cells in X map to cells in Y</span>
+<span class="cm">essentially a chain map</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">CellularMap</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">using</span> <span class="n">vec_type</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">map_type</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">vec_type</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="c1">// store image of k-cells as linear combination of k-cells</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">map_type</span><span class="o">&gt;</span> <span class="n">cell_map</span><span class="p">;</span>
+
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">_resize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="p">{</span> <span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">_safe_resize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;=</span> <span class="n">cell_map</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span> <span class="n">_resize</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="p">}</span> <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="n">CellularMap</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="c1">// allocate for dim dimensions</span>
+    <span class="n">CellularMap</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">CellularMap</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="nf">file</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+            <span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span> <span class="c1">// TODO: should be CellularMap</span>
+            <span class="c1">// keep putting cell_maps on back</span>
+            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">cell_map</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">map_type</span><span class="p">(</span><span class="n">file</span><span class="p">));</span>
+            <span class="p">}</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to read CellularMap from &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">fname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">cell_map</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">map_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_safe_resize</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">map_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// identity map</span>
+    <span class="c1">// template over complex type</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+    <span class="k">static</span> <span class="n">CellularMap</span> <span class="n">identity</span><span class="p">(</span><span class="k">const</span> <span class="n">CpxT</span> <span class="o">&amp;</span><span class="n">X</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">maxk</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span>
+        <span class="n">CellularMap</span> <span class="nf">M</span><span class="p">(</span><span class="n">maxk</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_type</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">M</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="c1">// save each cellmap in the same file</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="nf">file</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">file</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;CellularMap</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">M</span> <span class="p">:</span> <span class="n">cell_map</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">M</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to write CellularMap to &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">fname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

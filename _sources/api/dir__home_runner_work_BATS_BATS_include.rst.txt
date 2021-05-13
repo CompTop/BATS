@@ -1,0 +1,42 @@
+.. _dir__home_runner_work_BATS_BATS_include:
+
+
+Directory include
+=================
+
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include``
+
+Subdirectories
+--------------
+
+- :ref:`dir__home_runner_work_BATS_BATS_include_chain`
+- :ref:`dir__home_runner_work_BATS_BATS_include_complex`
+- :ref:`dir__home_runner_work_BATS_BATS_include_filtration`
+- :ref:`dir__home_runner_work_BATS_BATS_include_future`
+- :ref:`dir__home_runner_work_BATS_BATS_include_homology`
+- :ref:`dir__home_runner_work_BATS_BATS_include_linalg`
+- :ref:`dir__home_runner_work_BATS_BATS_include_morse`
+- :ref:`dir__home_runner_work_BATS_BATS_include_multigraph`
+- :ref:`dir__home_runner_work_BATS_BATS_include_persistence`
+- :ref:`dir__home_runner_work_BATS_BATS_include_quiver`
+- :ref:`dir__home_runner_work_BATS_BATS_include_topology`
+- :ref:`dir__home_runner_work_BATS_BATS_include_util`
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_bats.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_chain.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_complex.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_future.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+

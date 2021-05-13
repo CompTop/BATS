@@ -1,0 +1,13 @@
+.. _exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230:
+
+Function bats::Nerve(const Diagram<bats::Cover, std::vector<size_t>>&, const size_t)
+====================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Nerve(const Diagram<bats::Cover, std::vector<size_t>>&, const size_t)

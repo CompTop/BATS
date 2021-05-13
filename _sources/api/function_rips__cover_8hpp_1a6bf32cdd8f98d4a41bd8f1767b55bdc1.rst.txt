@@ -1,0 +1,13 @@
+.. _exhale_function_rips__cover_8hpp_1a6bf32cdd8f98d4a41bd8f1767b55bdc1:
+
+Template Function bats::RipsFiltration(const DataSet<T>&, const bats::Cover&, const M&, T, size_t)
+==================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::RipsFiltration(const DataSet<T>&, const bats::Cover&, const M&, T, size_t)

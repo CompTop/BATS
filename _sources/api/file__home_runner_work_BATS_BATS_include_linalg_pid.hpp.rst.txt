@@ -1,0 +1,73 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_pid.hpp:
+
+File pid.hpp
+============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/pid.hpp``)
+-------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_pid.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``iostream``
+
+- ``polynomial.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`)
+
+- ``tuple``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structSmithFact`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_pid_8hpp_1a45ea3e2f8b94c3fee33c21d72a671b3e`
+
+- :ref:`exhale_function_pid_8hpp_1a28982564d7e1522306a64c315fc2385c`
+
+- :ref:`exhale_function_pid_8hpp_1a26a9871c5a65e180c8f14e569e024794`
+
+- :ref:`exhale_function_pid_8hpp_1aa7cafd1997fdd2f0c64b4b8e9dca815c`
+
+- :ref:`exhale_function_pid_8hpp_1a93a5c5310a63e81df1ef0f22189c9339`
+

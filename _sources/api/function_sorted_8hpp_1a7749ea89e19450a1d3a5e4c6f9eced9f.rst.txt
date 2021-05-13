@@ -1,0 +1,13 @@
+.. _exhale_function_sorted_8hpp_1a7749ea89e19450a1d3a5e4c6f9eced9f:
+
+Template Function bats::util::sort_sum_reduce
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sort_sum_reduce(std::vector<TI>&, std::vector<TV>&, const size_t, std::vector<size_t>&, std::vector<TI>&, std::vector<TV>&)

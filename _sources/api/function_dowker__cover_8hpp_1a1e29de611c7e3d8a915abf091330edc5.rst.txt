@@ -1,0 +1,13 @@
+.. _exhale_function_dowker__cover_8hpp_1a1e29de611c7e3d8a915abf091330edc5:
+
+Template Function bats::dowker_filtration_edges
+===============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::dowker_filtration_edges(const Matrix<T>&, const bats::Cover&, const T)

@@ -1,0 +1,79 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology.hpp:
+
+File topology.hpp
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology.hpp``)
+-----------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``topology/cover.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`)
+
+- ``topology/data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``topology/data_gen.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`)
+
+- ``topology/density.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_density.hpp`)
+
+- ``topology/dowker.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`)
+
+- ``topology/dowker_cover.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`)
+
+- ``topology/eilenberg_zilber.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`)
+
+- ``topology/extras.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_extras.hpp`)
+
+- ``topology/flag.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_flag.hpp`)
+
+- ``topology/inclusion.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`)
+
+- ``topology/landmark.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`)
+
+- ``topology/mayer_vietoris.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp`)
+
+- ``topology/metric.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`)
+
+- ``topology/neighborhood.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`)
+
+- ``topology/nerve.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`)
+
+- ``topology/rips.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`)
+
+- ``topology/rips_cover.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`)
+
+- ``topology/spherical.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_spherical.hpp`)
+
+- ``topology/zigzag_zoo.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_bats.hpp`
+
+
+

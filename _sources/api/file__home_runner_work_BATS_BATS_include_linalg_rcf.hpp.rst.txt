@@ -1,0 +1,60 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp:
+
+File rcf.hpp
+============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/rcf.hpp``)
+-------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``pid.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`)
+
+- ``polynomial.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`)
+
+- ``sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_rcf_8hpp_1a24245b442e2360f8fddb0384acb4d6a7`
+
+- :ref:`exhale_function_rcf_8hpp_1a9f9151b72a96f65e93ed9d73ef6503ab`
+

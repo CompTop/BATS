@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4:
+
+Template Function bats::rips_edges(std::vector<T>&, std::vector<size_t>&, std::vector<T>&)
+==========================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::rips_edges(std::vector<T>&, std::vector<size_t>&, std::vector<T>&)

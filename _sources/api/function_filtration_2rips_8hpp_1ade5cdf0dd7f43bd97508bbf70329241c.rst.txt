@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2rips_8hpp_1ade5cdf0dd7f43bd97508bbf70329241c:
+
+Template Function bats::euclidean
+=================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::euclidean(TI, TI, size_t)

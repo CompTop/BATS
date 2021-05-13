@@ -1,0 +1,13 @@
+.. _exhale_function_sparse_8hpp_1a1aa577688f2980cd27a0485319a3a674:
+
+Template Function bats::pass_L_left
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::pass_L_left(const Diagram<NT, TM>&, std::vector<SparseFact<TC>>&, ssize_t)

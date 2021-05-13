@@ -1,0 +1,77 @@
+
+.. _file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp:
+
+File diagram.hpp
+================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_multigraph>` (``/home/runner/work/BATS/BATS/include/multigraph``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/multigraph/diagram.hpp``)
+---------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``cstddef``
+
+- ``fstream``
+
+- ``string``
+
+- ``sys/stat.h``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1Diagram_1_1Edge`
+
+- :ref:`exhale_class_classbats_1_1Diagram`
+

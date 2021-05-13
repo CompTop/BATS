@@ -1,0 +1,46 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp:
+
+File abstract_matrix.hpp
+========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/abstract_matrix.hpp``)
+-------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classAbstractMatrix`
+

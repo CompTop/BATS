@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1a172e75ff8f991553d29483a63ec46096:
+
+Template Function L_EL_commute
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: L_EL_commute(const ColumnMatrix<TC>&, const ColumnMatrix<TC>&)

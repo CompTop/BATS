@@ -1,0 +1,33 @@
+.. _exhale_struct_structU:
+
+Template Struct U
+=================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public T< Impl >`` (:ref:`exhale_struct_structT`)
+
+
+Derived Types
+*************
+
+- ``public D< Impl >`` (:ref:`exhale_struct_structD`)
+- ``public EU< Impl >`` (:ref:`exhale_struct_structEU`)
+- ``public EUH< Impl >`` (:ref:`exhale_struct_structEUH`)
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: U
+   :members:
+   :protected-members:
+   :undoc-members:

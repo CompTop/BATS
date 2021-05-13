@@ -1,0 +1,16 @@
+.. _exhale_struct_structnzpair:
+
+Template Struct nzpair
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: nzpair
+   :members:
+   :protected-members:
+   :undoc-members:

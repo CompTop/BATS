@@ -1,0 +1,13 @@
+.. _exhale_function_simplex_8hpp_1a41ab7bf8a5092b1416268803e41b85d0:
+
+Template Function bats::util::simplex_sign
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::simplex_sign(std::vector<T>&)

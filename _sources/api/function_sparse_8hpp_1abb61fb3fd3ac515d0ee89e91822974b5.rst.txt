@@ -1,0 +1,13 @@
+.. _exhale_function_sparse_8hpp_1abb61fb3fd3ac515d0ee89e91822974b5:
+
+Template Function bats::pass_P_right
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::pass_P_right(const Diagram<NT, TM>&, std::vector<SparseFact<TC>>&, ssize_t)

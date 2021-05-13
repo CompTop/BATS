@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1acd015a97aac3742b5a16f9572e321621:
+
+Template Function bats::util::firstk
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::firstk(const TI&, const TI&, const size_t)

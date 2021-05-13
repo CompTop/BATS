@@ -1,0 +1,13 @@
+.. _exhale_function_simplicial__complex_8hpp_1a235fdb8010a7dc627761055d4a5f3100:
+
+Template Function bats::product_paths(CpxT&, itT, const itT, itT, const itT, std::vector<size_t>&, const size_t, std::vector<cell_ind>&)
+========================================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::product_paths(CpxT&, itT, const itT, itT, const itT, std::vector<size_t>&, const size_t, std::vector<cell_ind>&)

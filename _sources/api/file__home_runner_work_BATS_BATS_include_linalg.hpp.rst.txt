@@ -1,0 +1,63 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg.hpp:
+
+File linalg.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg.hpp``)
+---------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/csc_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`)
+
+- ``linalg/field.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`)
+
+- ``linalg/matrix_interface.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`)
+
+- ``linalg/naive_dense.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`)
+
+- ``linalg/pid.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`)
+
+- ``linalg/polynomial.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`)
+
+- ``linalg/rcf.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`)
+
+- ``linalg/set_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp`)
+
+- ``linalg/sparse_fact.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`)
+
+- ``linalg/sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_bats.hpp`
+
+
+

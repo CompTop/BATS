@@ -1,0 +1,26 @@
+.. _exhale_class_classbats_1_1Diagram:
+
+Template Class Diagram
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`
+
+
+Nested Relationships
+--------------------
+
+
+Nested Types
+************
+
+- :ref:`exhale_struct_structbats_1_1Diagram_1_1Edge`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::Diagram
+   :members:
+   :protected-members:
+   :undoc-members:

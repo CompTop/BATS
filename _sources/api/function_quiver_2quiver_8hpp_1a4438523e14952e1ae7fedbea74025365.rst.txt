@@ -1,0 +1,13 @@
+.. _exhale_function_quiver_2quiver_8hpp_1a4438523e14952e1ae7fedbea74025365:
+
+Template Function bats::A_type_rep
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::A_type_rep(Diagram<NT, ColumnMatrix<CT>>&)

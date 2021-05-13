@@ -1,0 +1,13 @@
+.. _exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a:
+
+Template Function bats::Reduce(const CpxT&, T, Args ...)
+========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Reduce(const CpxT&, T, Args ...)

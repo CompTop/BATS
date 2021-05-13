@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File symbolic_implementation.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File symbolic_implementation.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-symbolic-implementation-hpp">
+<span id="file-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp"></span><h1>File symbolic_implementation.hpp<a class="headerlink" href="#file-symbolic-implementation-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir__home_runner_work_BATS_BATS_include_linalg.html#dir-home-runner-work-bats-bats-include-linalg"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/symbolic_implementation.hpp</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id3">Classes</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+<li><p><a class="reference internal" href="#defines" id="id5">Defines</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/symbolic_implementation.hpp</span></code>)<a class="headerlink" href="#definition-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.html">Program Listing for File symbolic_implementation.hpp</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">assert.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iostream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matrix_interface.hpp</span></code> (<a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp.html#file-home-runner-work-bats-bats-include-linalg-matrix-interface-hpp"><span class="std std-ref">File matrix_interface.hpp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="structSI.html#exhale-struct-structsi"><span class="std std-ref">Struct SI</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a82d579caf6eb1cded4b8db0f3018acac.html#exhale-function-symbolic-implementation-8hpp-1a82d579caf6eb1cded4b8db0f3018acac"><span class="std std-ref">Function apply_inverse_on_left(L&lt;SI&gt;, L&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1ae52bd251ad621e2e02b079a2d272fd89.html#exhale-function-symbolic-implementation-8hpp-1ae52bd251ad621e2e02b079a2d272fd89"><span class="std std-ref">Function apply_inverse_on_left(U&lt;SI&gt;, U&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1af5308b961ff2d94a09416f060abebbcf.html#exhale-function-symbolic-implementation-8hpp-1af5308b961ff2d94a09416f060abebbcf"><span class="std std-ref">Function apply_inverse_on_left(L&lt;SI&gt;, A&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a8338a0cd26f0859b3a1e7312145353f1.html#exhale-function-symbolic-implementation-8hpp-1a8338a0cd26f0859b3a1e7312145353f1"><span class="std std-ref">Function apply_inverse_on_left(U&lt;SI&gt;, A&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a181c4a1d85a0d65a35aafdadf7081d25.html#exhale-function-symbolic-implementation-8hpp-1a181c4a1d85a0d65a35aafdadf7081d25"><span class="std std-ref">Function apply_inverse_on_right(A&lt;SI&gt;, L&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a7bddb8833b5117ed79c2a337f6c3cfc9.html#exhale-function-symbolic-implementation-8hpp-1a7bddb8833b5117ed79c2a337f6c3cfc9"><span class="std std-ref">Function apply_inverse_on_right(A&lt;SI&gt;, U&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a2b22b9df4dc6e22152fce8808cc1e4bc.html#exhale-function-symbolic-implementation-8hpp-1a2b22b9df4dc6e22152fce8808cc1e4bc"><span class="std std-ref">Function apply_inverse_on_right(L&lt;SI&gt;, L&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a6d9c4ecd3c63d10da8fd79bd2bc8cd23.html#exhale-function-symbolic-implementation-8hpp-1a6d9c4ecd3c63d10da8fd79bd2bc8cd23"><span class="std std-ref">Function apply_inverse_on_right(U&lt;SI&gt;, U&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3.html#exhale-function-symbolic-implementation-8hpp-1af1e58f1c6db9400e34f490eec060bec3"><span class="std std-ref">Function commute(EL&lt;SI&gt;, L&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d.html#exhale-function-symbolic-implementation-8hpp-1ad8af12274c30e5472bda6493950b039d"><span class="std std-ref">Function LEUP_fact(A&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a3547f7412c52ed98a9c9a0eef25dd27d.html#exhale-function-symbolic-implementation-8hpp-1a3547f7412c52ed98a9c9a0eef25dd27d"><span class="std std-ref">Function matmul(A&lt;SI&gt;, A&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad158acc376aa64a139307fe9d393aa30.html#exhale-function-symbolic-implementation-8hpp-1ad158acc376aa64a139307fe9d393aa30"><span class="std std-ref">Function matmul(D&lt;SI&gt;, D&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1adffc9db1b4558d720e3a720fb849d3b3.html#exhale-function-symbolic-implementation-8hpp-1adffc9db1b4558d720e3a720fb849d3b3"><span class="std std-ref">Function matmul(L&lt;SI&gt;, L&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1ae7ae62d29f06b77408c61ef9894ecafc.html#exhale-function-symbolic-implementation-8hpp-1ae7ae62d29f06b77408c61ef9894ecafc"><span class="std std-ref">Function matmul(U&lt;SI&gt;, U&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464.html#exhale-function-symbolic-implementation-8hpp-1a5ea1560a24375b05d40b3fe3ef700464"><span class="std std-ref">Function matmul(L&lt;SI&gt;, U&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1aa71e711b460701044e6e5b616f010391.html#exhale-function-symbolic-implementation-8hpp-1aa71e711b460701044e6e5b616f010391"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, L&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a89e947e99565109e5392a2dfc18ceca9.html#exhale-function-symbolic-implementation-8hpp-1a89e947e99565109e5392a2dfc18ceca9"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, U&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a761946a26ad3abb9d4b40ecfc1ef5bc9.html#exhale-function-symbolic-implementation-8hpp-1a761946a26ad3abb9d4b40ecfc1ef5bc9"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, EL&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1ae7fcc1404fba4d8325dd0157222bcc6e.html#exhale-function-symbolic-implementation-8hpp-1ae7fcc1404fba4d8325dd0157222bcc6e"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, EU&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a2c699a4acd723807e4f9710ed912a65f.html#exhale-function-symbolic-implementation-8hpp-1a2c699a4acd723807e4f9710ed912a65f"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, ELH&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a73d3e20b22c8ef5a87c8fce9782a210b.html#exhale-function-symbolic-implementation-8hpp-1a73d3e20b22c8ef5a87c8fce9782a210b"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, EUH&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a089ba383ac92cf4dc6a29439f00acba1.html#exhale-function-symbolic-implementation-8hpp-1a089ba383ac92cf4dc6a29439f00acba1"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, P&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1aab8f20dd44c870ad5d6a685c3cf35e06.html#exhale-function-symbolic-implementation-8hpp-1aab8f20dd44c870ad5d6a685c3cf35e06"><span class="std std-ref">Function operator&lt;&lt;(std::ostream&amp;, A&lt;SI&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.html#exhale-function-symbolic-implementation-8hpp-1a115591423db049b1c4a6cec0f7f5eb4f"><span class="std std-ref">Function PLEU_fact(A&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca.html#exhale-function-symbolic-implementation-8hpp-1a62db8a3e384cfa98eb8d4e7fb5b846ca"><span class="std std-ref">Function PUEL_fact(A&lt;SI&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.html#exhale-function-symbolic-implementation-8hpp-1a420f4028511c8005caed2f30ad41966d"><span class="std std-ref">Function UELP_fact(A&lt;SI&gt;)</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="define_symbolic__implementation_8hpp_1a64a102533e8247065aee5b5ed19859b2.html#exhale-define-symbolic-implementation-8hpp-1a64a102533e8247065aee5b5ed19859b2"><span class="std std-ref">Define APPLY_INVERSE_ON_LEFT</span></a></p></li>
+<li><p><a class="reference internal" href="define_symbolic__implementation_8hpp_1a85acb43eabc5d04810efad3b99726d88.html#exhale-define-symbolic-implementation-8hpp-1a85acb43eabc5d04810efad3b99726d88"><span class="std std-ref">Define APPLY_INVERSE_ON_RIGHT</span></a></p></li>
+<li><p><a class="reference internal" href="define_symbolic__implementation_8hpp_1a0fdba80e023c428667d9cc9da3fd1f5c.html#exhale-define-symbolic-implementation-8hpp-1a0fdba80e023c428667d9cc9da3fd1f5c"><span class="std std-ref">Define IMPL_COUT</span></a></p></li>
+<li><p><a class="reference internal" href="define_symbolic__implementation_8hpp_1aa376a950addd1253d8ddf9df38df8ad5.html#exhale-define-symbolic-implementation-8hpp-1aa376a950addd1253d8ddf9df38df8ad5"><span class="std std-ref">Define IMPL_FACT</span></a></p></li>
+<li><p><a class="reference internal" href="define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384.html#exhale-define-symbolic-implementation-8hpp-1a01b1537eef830685d146d14a67366384"><span class="std std-ref">Define MM</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+.. _dir__home_runner_work_BATS_BATS_include_future:
+
+
+Directory future
+================
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/future``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_future_permutation.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_future_similarity.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_future_span.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_future_util.hpp`
+
+

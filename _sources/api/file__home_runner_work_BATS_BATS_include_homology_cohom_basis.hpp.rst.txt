@@ -1,0 +1,72 @@
+
+.. _file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp:
+
+File cohom_basis.hpp
+====================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_homology>` (``/home/runner/work/BATS/BATS/include/homology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/homology/cohom_basis.hpp``)
+-----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`)
+
+- ``chain/cochain_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp`)
+
+- ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbats_1_1ReducedCochainComplex`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_cohom__basis_8hpp_1a9cbf6d6953888b8fd4c3605120073ed3`
+

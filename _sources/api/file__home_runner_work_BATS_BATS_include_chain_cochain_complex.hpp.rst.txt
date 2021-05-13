@@ -1,0 +1,68 @@
+
+.. _file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp:
+
+File cochain_complex.hpp
+========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_chain>` (``/home/runner/work/BATS/BATS/include/chain``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/chain/cochain_complex.hpp``)
+------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``util/permutation.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1CochainComplex`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_cochain__complex_8hpp_1aa0050812850d1ff8afa88f7a08f8891a`
+

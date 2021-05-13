@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Template Class Matrix &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Template Class MatrixView" href="classbats_1_1future_1_1MatrixView.html" />
+    <link rel="prev" title="Template Class const_strided_iterator" href="classbats_1_1future_1_1const__strided__iterator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Template Class Matrix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classbats_1_1future_1_1Matrix.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-matrix">
+<span id="exhale-class-classbats-1-1future-1-1matrix"></span><h1>Template Class Matrix<a class="headerlink" href="#template-class-matrix" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_future_dense.hpp.html#file-home-runner-work-bats-bats-include-future-dense-hpp"><span class="std std-ref">File dense.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats6future6MatrixE">
+<span id="_CPPv3I0EN4bats6future6MatrixE"></span><span id="_CPPv2I0EN4bats6future6MatrixE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><a class="headerlink" href="#_CPPv4I0EN4bats6future6MatrixE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix10value_typeE">
+<span id="_CPPv3N4bats6future6Matrix10value_typeE"></span><span id="_CPPv2N4bats6future6Matrix10value_typeE"></span><span id="bats::future::Matrix::value_type"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a80c1431d8cfcaa8af61b935a5f2e4a21"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix10value_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix3lenEv">
+<span id="_CPPv3NK4bats6future6Matrix3lenEv"></span><span id="_CPPv2NK4bats6future6Matrix3lenEv"></span><span id="bats::future::Matrix::lenC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a5b585422f088ac3eb7cfa25b12fb9856"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix3lenEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix4fillE1T">
+<span id="_CPPv3N4bats6future6Matrix4fillE1T"></span><span id="_CPPv2N4bats6future6Matrix4fillE1T"></span><span id="bats::future::Matrix::fill__T"></span><span class="target" id="classbats_1_1future_1_1Matrix_1aa3c300991d836d5971f6cb9b51251419"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix4fillE1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6MatrixEv">
+<span id="_CPPv3N4bats6future6Matrix6MatrixEv"></span><span id="_CPPv2N4bats6future6Matrix6MatrixEv"></span><span id="bats::future::Matrix::Matrix"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a324b952c250a59ee301df7f02661c39d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6MatrixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t8RowMajor">
+<span id="_CPPv3N4bats6future6Matrix6MatrixE6size_t6size_t8RowMajor"></span><span id="_CPPv2N4bats6future6Matrix6MatrixE6size_t6size_t8RowMajor"></span><span id="bats::future::Matrix::Matrix__s.s.RowMajor"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a90f84b98b18b964643daabafdbd801c9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <a class="reference internal" href="structbats_1_1future_1_1RowMajor.html#_CPPv4N4bats6future8RowMajorE" title="bats::future::RowMajor"><span class="n"><span class="pre">RowMajor</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t8RowMajor" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t11ColumnMajor">
+<span id="_CPPv3N4bats6future6Matrix6MatrixE6size_t6size_t11ColumnMajor"></span><span id="_CPPv2N4bats6future6Matrix6MatrixE6size_t6size_t11ColumnMajor"></span><span id="bats::future::Matrix::Matrix__s.s.ColumnMajor"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a5062b0c1ab45a96c3c66868f55f46af1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <a class="reference internal" href="structbats_1_1future_1_1ColumnMajor.html#_CPPv4N4bats6future11ColumnMajorE" title="bats::future::ColumnMajor"><span class="n"><span class="pre">ColumnMajor</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t11ColumnMajor" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix6MatrixE6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix6MatrixE6size_t6size_t"></span><span id="bats::future::Matrix::Matrix__s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a9fa0f7d726002290563cff50e140e7d7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t1T">
+<span id="_CPPv3N4bats6future6Matrix6MatrixE6size_t6size_t1T"></span><span id="_CPPv2N4bats6future6Matrix6MatrixE6size_t6size_t1T"></span><span id="bats::future::Matrix::Matrix__s.s.T"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a6d39414d816fdf7b786b3c040d451605"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6MatrixE6size_t6size_t1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats6future6Matrix6MatrixE6size_t6size_t1TR5Major">
+<span id="_CPPv3I0EN4bats6future6Matrix6MatrixE6size_t6size_t1TR5Major"></span><span id="_CPPv2I0EN4bats6future6Matrix6MatrixE6size_t6size_t1TR5Major"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Major</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1afd66c579ba899221dc9b6e9d014efd88"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats6future6Matrix6MatrixE6size_t6size_t1TR5Major" title="bats::future::Matrix::Matrix::Major"><span class="n"><span class="pre">Major</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ms</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats6future6Matrix6MatrixE6size_t6size_t1TR5Major" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6MatrixER6Matrix11ColumnMajor">
+<span id="_CPPv3N4bats6future6Matrix6MatrixER6Matrix11ColumnMajor"></span><span id="_CPPv2N4bats6future6Matrix6MatrixER6Matrix11ColumnMajor"></span><span id="bats::future::Matrix::Matrix__MatrixR.ColumnMajor"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a33a6534e5b86886a5ef819a7bd2c00c4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Matrix</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4bats6future6Matrix6MatrixER6Matrix11ColumnMajor" title="bats::future::Matrix::Matrix"><span class="n"><span class="pre">Matrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span>, <a class="reference internal" href="structbats_1_1future_1_1ColumnMajor.html#_CPPv4N4bats6future11ColumnMajorE" title="bats::future::ColumnMajor"><span class="n"><span class="pre">ColumnMajor</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6MatrixER6Matrix11ColumnMajor" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix4dataEv">
+<span id="_CPPv3N4bats6future6Matrix4dataEv"></span><span id="_CPPv2N4bats6future6Matrix4dataEv"></span><span id="bats::future::Matrix::data"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a37b79cfe5bb344addf22fdfd04856332"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix4dataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix4dataEv">
+<span id="_CPPv3NK4bats6future6Matrix4dataEv"></span><span id="_CPPv2NK4bats6future6Matrix4dataEv"></span><span id="bats::future::Matrix::dataC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a67d442a6b0ff4d72881e9aab8ec9c112"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix4dataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix4nrowEv">
+<span id="_CPPv3NK4bats6future6Matrix4nrowEv"></span><span id="_CPPv2NK4bats6future6Matrix4nrowEv"></span><span id="bats::future::Matrix::nrowC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1af6d4dcb62be08852a041921fe226a841"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrow</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix4nrowEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix4ncolEv">
+<span id="_CPPv3NK4bats6future6Matrix4ncolEv"></span><span id="_CPPv2NK4bats6future6Matrix4ncolEv"></span><span id="bats::future::Matrix::ncolC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a78eaafc3495b770c36c9efaa358603d5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ncol</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix4ncolEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix4dimsEv">
+<span id="_CPPv3NK4bats6future6Matrix4dimsEv"></span><span id="_CPPv2NK4bats6future6Matrix4dimsEv"></span><span id="bats::future::Matrix::dimsC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1abbbe63dfe306f990f282cb9426ac7871"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dims</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix4dimsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6MatrixixE6size_t">
+<span id="_CPPv3NK4bats6future6MatrixixE6size_t"></span><span id="_CPPv2NK4bats6future6MatrixixE6size_t"></span><span id="bats::future::Matrix::subscript-operator__sC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a0d6615903739d3a3a87c41b14d86d903"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6MatrixixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6MatrixixE6size_t">
+<span id="_CPPv3N4bats6future6MatrixixE6size_t"></span><span id="_CPPv2N4bats6future6MatrixixE6size_t"></span><span id="bats::future::Matrix::subscript-operator__s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1aef55b7a9321f44b359866dd5bf93aa4c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6MatrixixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6MatrixclE6size_t">
+<span id="_CPPv3NK4bats6future6MatrixclE6size_t"></span><span id="_CPPv2NK4bats6future6MatrixclE6size_t"></span><span id="bats::future::Matrix::call-operator__sC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1ad736e3b5e927f3f6961ae557f7d6bc26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6MatrixclE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6MatrixclE6size_t">
+<span id="_CPPv3N4bats6future6MatrixclE6size_t"></span><span id="_CPPv2N4bats6future6MatrixclE6size_t"></span><span id="bats::future::Matrix::call-operator__s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a864a6fcef830264882db3b5b3a1c87de"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6MatrixclE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ER2I1R2I2">
+<span id="_CPPv3I00EN4bats6future6Matrix4viewER2I1R2I2"></span><span id="_CPPv2I00EN4bats6future6Matrix4viewER2I1R2I2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1a3c8baee8493b13d5f359c1d9192b492b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1future_1_1MatrixView.html#_CPPv4I000EN4bats6future10MatrixViewE" title="bats::future::MatrixView"><span class="n"><span class="pre">MatrixView</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rows</span></span>, <a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cols</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ER2I1R2I2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ERR2I1RR2I2">
+<span id="_CPPv3I00EN4bats6future6Matrix4viewERR2I1RR2I2"></span><span id="_CPPv2I00EN4bats6future6Matrix4viewERR2I1RR2I2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1aeff71a28247cc827b9caf374ade33b73"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1future_1_1MatrixView.html#_CPPv4I000EN4bats6future10MatrixViewE" title="bats::future::MatrixView"><span class="n"><span class="pre">MatrixView</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rows</span></span>, <a class="reference internal" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cols</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4bats6future6Matrix4viewE10MatrixViewI1T2I12I2ERR2I1RR2I2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ER2I1R2I2">
+<span id="_CPPv3I00ENK4bats6future6Matrix4viewER2I1R2I2"></span><span id="_CPPv2I00ENK4bats6future6Matrix4viewER2I1R2I2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1a2940836574a3d3ad54f6000b52ffcc7c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1future_1_1MatrixView.html#_CPPv4I000EN4bats6future10MatrixViewE" title="bats::future::MatrixView"><span class="n"><span class="pre">MatrixView</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rows</span></span>, <a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ER2I1R2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cols</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ER2I1R2I2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ERR2I1RR2I2">
+<span id="_CPPv3I00ENK4bats6future6Matrix4viewERR2I1RR2I2"></span><span id="_CPPv2I00ENK4bats6future6Matrix4viewERR2I1RR2I2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1a6760c44301453304327e6a90aa3ac8e9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1future_1_1MatrixView.html#_CPPv4I000EN4bats6future10MatrixViewE" title="bats::future::MatrixView"><span class="n"><span class="pre">MatrixView</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">view</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I1"><span class="n"><span class="pre">I1</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rows</span></span>, <a class="reference internal" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ERR2I1RR2I2" title="bats::future::Matrix::view::I2"><span class="n"><span class="pre">I2</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cols</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I00ENK4bats6future6Matrix4viewEK10MatrixViewI1T2I12I2ERR2I1RR2I2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6MatrixclE6size_t6size_t">
+<span id="_CPPv3NK4bats6future6MatrixclE6size_t6size_t"></span><span id="_CPPv2NK4bats6future6MatrixclE6size_t6size_t"></span><span id="bats::future::Matrix::call-operator__s.sC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a7db779391426924f7dbbe835bc661fbe"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6MatrixclE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6MatrixclE6size_t6size_t">
+<span id="_CPPv3N4bats6future6MatrixclE6size_t6size_t"></span><span id="_CPPv2N4bats6future6MatrixclE6size_t6size_t"></span><span id="bats::future::Matrix::call-operator__s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a8a930b1be1ec52b8fe78254102253812"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6MatrixclE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix3rowE6size_t">
+<span id="_CPPv3N4bats6future6Matrix3rowE6size_t"></span><span id="_CPPv2N4bats6future6Matrix3rowE6size_t"></span><span id="bats::future::Matrix::row__s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a5e7dbaea4128c193a95a69591e148b0d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1future_1_1VectorView.html#_CPPv4I0EN4bats6future10VectorViewE" title="bats::future::VectorView"><span class="n"><span class="pre">VectorView</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">row</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix3rowE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix6columnE6size_t">
+<span id="_CPPv3N4bats6future6Matrix6columnE6size_t"></span><span id="_CPPv2N4bats6future6Matrix6columnE6size_t"></span><span id="bats::future::Matrix::column__s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a905aef2087b5d9fa1828eca915650323"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1future_1_1VectorView.html#_CPPv4I0EN4bats6future10VectorViewE" title="bats::future::VectorView"><span class="n"><span class="pre">VectorView</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">column</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix6columnE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix10print_infoEv">
+<span id="_CPPv3NK4bats6future6Matrix10print_infoEv"></span><span id="_CPPv2NK4bats6future6Matrix10print_infoEv"></span><span id="bats::future::Matrix::print_infoC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a0f888810344afe2024298017d86a54b8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_info</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix10print_infoEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix5printEv">
+<span id="_CPPv3NK4bats6future6Matrix5printEv"></span><span id="_CPPv2NK4bats6future6Matrix5printEv"></span><span id="bats::future::Matrix::printC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a84d2ba28964e8303c089938e66890f06"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix5printEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats6future6Matrix9transposeEv">
+<span id="_CPPv3NK4bats6future6Matrix9transposeEv"></span><span id="_CPPv2NK4bats6future6Matrix9transposeEv"></span><span id="bats::future::Matrix::transposeC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a53e40a4f914029980933b7de8ee3f0eb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix"><span class="n"><span class="pre">Matrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">transpose</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats6future6Matrix9transposeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix9swap_rowsE6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix9swap_rowsE6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix9swap_rowsE6size_t6size_t"></span><span id="bats::future::Matrix::swap_rows__s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a6ada887deb969582688f97ecfe432380"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swap_rows</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix9swap_rowsE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix12swap_columnsE6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix12swap_columnsE6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix12swap_columnsE6size_t6size_t"></span><span id="bats::future::Matrix::swap_columns__s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a27345f2e9f1fac20750c719c782931d6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swap_columns</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix12swap_columnsE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix13append_columnEK1T">
+<span id="_CPPv3N4bats6future6Matrix13append_columnEK1T"></span><span id="_CPPv2N4bats6future6Matrix13append_columnEK1T"></span><span id="bats::future::Matrix::append_column__TC"></span><span class="target" id="classbats_1_1future_1_1Matrix_1aec745ed8bcd2345135cc36972b0a81a9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append_column</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix13append_columnEK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix13delete_columnEv">
+<span id="_CPPv3N4bats6future6Matrix13delete_columnEv"></span><span id="_CPPv2N4bats6future6Matrix13delete_columnEv"></span><span id="bats::future::Matrix::delete_column"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a5d5e92af7eaf53f55383b4be14973a1b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">delete_column</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix13delete_columnEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix7add_rowE1T6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix7add_rowE1T6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix7add_rowE1T6size_t6size_t"></span><span id="bats::future::Matrix::add_row__T.s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a6bda643d4e2292e03223446ed1bbef14"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_row</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix7add_rowE1T6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix7add_rowE6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix7add_rowE6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix7add_rowE6size_t6size_t"></span><span id="bats::future::Matrix::add_row__s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a353ae48e54fe877c6781709f15dcb150"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_row</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix7add_rowE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix10add_columnE1T6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix10add_columnE1T6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix10add_columnE1T6size_t6size_t"></span><span id="bats::future::Matrix::add_column__T.s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1aab327133ea9b31f005fa6e27692568dd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_column</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix10add_columnE1T6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix10add_columnE6size_t6size_t">
+<span id="_CPPv3N4bats6future6Matrix10add_columnE6size_t6size_t"></span><span id="_CPPv2N4bats6future6Matrix10add_columnE6size_t6size_t"></span><span id="bats::future::Matrix::add_column__s.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a18e09c91fb25f0eba841bcf440ce47a8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_column</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix10add_columnE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix9scale_rowE1T6size_t">
+<span id="_CPPv3N4bats6future6Matrix9scale_rowE1T6size_t"></span><span id="_CPPv2N4bats6future6Matrix9scale_rowE1T6size_t"></span><span id="bats::future::Matrix::scale_row__T.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a8a88df4bb34c641ce21b8901cbd05d46"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_row</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix9scale_rowE1T6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix12scale_columnE1T6size_t">
+<span id="_CPPv3N4bats6future6Matrix12scale_columnE1T6size_t"></span><span id="_CPPv2N4bats6future6Matrix12scale_columnE1T6size_t"></span><span id="bats::future::Matrix::scale_column__T.s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1ab96b12d2a73857958a073942475d8687"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_column</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix12scale_columnE1T6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK4bats6future6Matrix2mmEDaRK2TB">
+<span id="_CPPv3I0ENK4bats6future6Matrix2mmERK2TB"></span><span id="_CPPv2I0ENK4bats6future6Matrix2mmERK2TB"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TB</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1aeadba161ce50fa399833cb1f1cb809b6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mm</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats6future6Matrix2mmEDaRK2TB" title="bats::future::Matrix::mm::TB"><span class="n"><span class="pre">TB</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK4bats6future6Matrix2mmEDaRK2TB" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK4bats6future6MatrixmlE6MatrixRK2TB">
+<span id="_CPPv3I0ENK4bats6future6MatrixmlERK2TB"></span><span id="_CPPv2I0ENK4bats6future6MatrixmlERK2TB"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TB</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1ac947d32715020f45ea7f9fe267a8b19e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix"><span class="n"><span class="pre">Matrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats6future6MatrixmlE6MatrixRK2TB" title="bats::future::Matrix::operator*::TB"><span class="n"><span class="pre">TB</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK4bats6future6MatrixmlE6MatrixRK2TB" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK4bats6future6Matrix2mvEDaRK2Tx">
+<span id="_CPPv3I0ENK4bats6future6Matrix2mvERK2Tx"></span><span id="_CPPv2I0ENK4bats6future6Matrix2mvERK2Tx"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Tx</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1future_1_1Matrix_1a0caecf04d7e3e300362c90e7d762505d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mv</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats6future6Matrix2mvEDaRK2Tx" title="bats::future::Matrix::mv::Tx"><span class="n"><span class="pre">Tx</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK4bats6future6Matrix2mvEDaRK2Tx" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6future6Matrix8identityE6size_t">
+<span id="_CPPv3N4bats6future6Matrix8identityE6size_t"></span><span id="_CPPv2N4bats6future6Matrix8identityE6size_t"></span><span id="bats::future::Matrix::identity__s"></span><span class="target" id="classbats_1_1future_1_1Matrix_1a03cff3a84f813ca8a0bda79c0f7d1416"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats6future6MatrixE" title="bats::future::Matrix"><span class="n"><span class="pre">Matrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">identity</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6future6Matrix8identityE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classbats_1_1future_1_1MatrixView.html" class="btn btn-neutral float-right" title="Template Class MatrixView" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classbats_1_1future_1_1const__strided__iterator.html" class="btn btn-neutral float-left" title="Template Class const_strided_iterator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

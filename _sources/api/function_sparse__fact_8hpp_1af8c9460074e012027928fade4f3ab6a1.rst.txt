@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1af8c9460074e012027928fade4f3ab6a1:
+
+Template Function extract_row_scale
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: extract_row_scale(ColumnMatrix<TC>&)

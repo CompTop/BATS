@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1util_1_1SimplexContainer:
+
+Class SimplexContainer
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::util::SimplexContainer
+   :members:
+   :protected-members:
+   :undoc-members:

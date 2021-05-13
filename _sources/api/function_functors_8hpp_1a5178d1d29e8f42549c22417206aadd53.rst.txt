@@ -1,0 +1,13 @@
+.. _exhale_function_functors_8hpp_1a5178d1d29e8f42549c22417206aadd53:
+
+Template Function bats::Hom
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Hom(const Diagram<ChainComplex<TM>, ChainMap<TM>>&, size_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_sorted_8hpp_1ad455409e65f618a7ff90980e9ec4de25:
+
+Template Function bats::util::find_sorted_lt
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::find_sorted_lt(const TI&, const TI&, const T&)

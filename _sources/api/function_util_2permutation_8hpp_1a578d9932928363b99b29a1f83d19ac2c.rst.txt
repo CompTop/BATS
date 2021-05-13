@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a578d9932928363b99b29a1f83d19ac2c:
+
+Function bats::util::sort_ind_by_perm
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sort_ind_by_perm(std::vector<size_t>&, const std::vector<size_t>&)

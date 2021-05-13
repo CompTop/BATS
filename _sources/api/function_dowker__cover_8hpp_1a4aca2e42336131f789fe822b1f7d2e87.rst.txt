@@ -1,0 +1,13 @@
+.. _exhale_function_dowker__cover_8hpp_1a4aca2e42336131f789fe822b1f7d2e87:
+
+Template Function bats::DowkerFiltration(const Matrix<T>&, const bats::Cover&, T, size_t)
+=========================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::DowkerFiltration(const Matrix<T>&, const bats::Cover&, T, size_t)

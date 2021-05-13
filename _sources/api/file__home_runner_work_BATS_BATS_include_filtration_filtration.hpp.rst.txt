@@ -1,0 +1,78 @@
+
+.. _file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp:
+
+File filtration.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_filtration>` (``/home/runner/work/BATS/BATS/include/filtration``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/filtration/filtration.hpp``)
+------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbats_1_1Filtration`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_filtration_2filtration_8hpp_1af381546c6d1b032109fd0e09e12a3ec3`
+
+- :ref:`exhale_function_filtration_2filtration_8hpp_1a7683d2e4cf71230efd2ca92fc8411cc1`
+
+- :ref:`exhale_function_filtration_2filtration_8hpp_1ab48c10453892c01d19b4b98b1107f17c`
+

@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1BarcodePair:
+
+Template Class BarcodePair
+==========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_barcode.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::BarcodePair
+   :members:
+   :protected-members:
+   :undoc-members:

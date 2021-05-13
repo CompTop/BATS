@@ -1,0 +1,98 @@
+
+.. _file__home_runner_work_BATS_BATS_include_future_dense.hpp:
+
+File dense.hpp
+==============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_future>` (``/home/runner/work/BATS/BATS/include/future``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/future/dense.hpp``)
+---------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_future_dense.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``iostream``
+
+- ``iterator``
+
+- ``string``
+
+- ``utility``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_future.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_future_span.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__future`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1future_1_1ColumnMajor`
+
+- :ref:`exhale_struct_structbats_1_1future_1_1RowMajor`
+
+- :ref:`exhale_class_classbats_1_1future_1_1const__strided__iterator`
+
+- :ref:`exhale_class_classbats_1_1future_1_1Matrix`
+
+- :ref:`exhale_class_classbats_1_1future_1_1MatrixView`
+
+- :ref:`exhale_class_classbats_1_1future_1_1range`
+
+- :ref:`exhale_class_classbats_1_1future_1_1range_1_1const__iterator`
+
+- :ref:`exhale_class_classbats_1_1future_1_1strided__iterator`
+
+- :ref:`exhale_class_classbats_1_1future_1_1VectorView`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_dense_8hpp_1a2b1d22ad3812d61e25eb9d218c19c59d`
+
+- :ref:`exhale_function_dense_8hpp_1a02f3fc22ee4d0ae25388f8577ecc29dc`
+
+- :ref:`exhale_function_dense_8hpp_1a9332d7fe49c847a1f7cc4ddf33423172`
+

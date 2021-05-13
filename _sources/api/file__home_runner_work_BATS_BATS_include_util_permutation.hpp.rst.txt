@@ -1,0 +1,117 @@
+
+.. _file__home_runner_work_BATS_BATS_include_util_permutation.hpp:
+
+File permutation.hpp
+====================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_util>` (``/home/runner/work/BATS/BATS/include/util``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/util/permutation.hpp``)
+-------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_util_permutation.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``cmath``
+
+- ``cstddef``
+
+- ``iostream``
+
+- ``random``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__util`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a4931f797f0ebb25435c76cbb40e86f43`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a45818f0490d1d1067b37f5655a4187f5`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1ab226b6f6785f510460e76e5679ea88f4`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a833b85b7c5bdce42da75663e1ad378a2`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a91a3b1f209c34ea970851eb5cab84812`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1aa54f5e3f7bca0fa891496efe66e623e5`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a7c8d2dc6114dacaf3164827614024b5b`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1acd015a97aac3742b5a16f9572e321621`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1ab1bd62eaead6e23849c9d013e2ccf2d5`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a185464000056f8b638294b33184be4c6`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a62c9c42e1a4096dbb2213d7834b49c64`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1aee4a6002b7b54894eeb80b8889cb2f3f`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a1da4343b1b9cbc15daa7dd04e31a1935`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a578d9932928363b99b29a1f83d19ac2c`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1ae3a8b161096f85cd4da084ff60952d43`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a9c044d53fa537387fb44e6b776240fd8`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1aeffea1b07fd829f06d13feb0227ebfc1`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1afaa946cde0cd3d5e3d5c95040250793f`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1ab9140dd1b8c76d49c52f5ab81cdb2f43`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1aea83cca6d4429e65802df136f9d0ca74`
+

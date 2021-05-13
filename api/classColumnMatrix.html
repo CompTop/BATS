@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Template Class ColumnMatrix &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Template Class CSCMatrix" href="classCSCMatrix.html" />
+    <link rel="prev" title="Class SimplexContainer" href="classbats_1_1util_1_1SimplexContainer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Template Class ColumnMatrix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classColumnMatrix.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-columnmatrix">
+<span id="exhale-class-classcolumnmatrix"></span><h1>Template Class ColumnMatrix<a class="headerlink" href="#template-class-columnmatrix" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp.html#file-home-runner-work-bats-bats-include-linalg-col-matrix-hpp"><span class="std std-ref">File col_matrix.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0E12ColumnMatrix">
+<span id="_CPPv3I0E12ColumnMatrix"></span><span id="_CPPv2I0E12ColumnMatrix"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TC</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classColumnMatrix"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><a class="headerlink" href="#_CPPv4I0E12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8val_typeE">
+<span id="_CPPv3N12ColumnMatrix8val_typeE"></span><span id="_CPPv2N12ColumnMatrix8val_typeE"></span><span class="target" id="classColumnMatrix_1a80d2b399d7cb9b6866aea9342be301fc"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">val_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">val_type</span></span><a class="headerlink" href="#_CPPv4N12ColumnMatrix8val_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8col_typeE">
+<span id="_CPPv3N12ColumnMatrix8col_typeE"></span><span id="_CPPv2N12ColumnMatrix8col_typeE"></span><span class="target" id="classColumnMatrix_1a555ecde7cbfca0077a2a4488b21bc5de"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">col_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><a class="headerlink" href="#_CPPv4N12ColumnMatrix8col_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixEv">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixEv"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixEv"></span><span id="ColumnMatrix::ColumnMatrix"></span><span class="target" id="classColumnMatrix_1ad21f50c30e7c38b0403325d887dd54cf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixE6size_t6size_t">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixE6size_t6size_t"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixE6size_t6size_t"></span><span id="ColumnMatrix::ColumnMatrix__s.s"></span><span class="target" id="classColumnMatrix_1ae9372a5aafc68d290e49eccf701b0e96"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixERNSt6vectorI2TCEE">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixERNSt6vectorI2TCEE"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixERNSt6vectorI2TCEE"></span><span id="ColumnMatrix::ColumnMatrix__std::vector:TC:R"></span><span class="target" id="classColumnMatrix_1a9cdf40a4541cc58e551481049cfffeb0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">col</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixERNSt6vectorI2TCEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixE6size_t6size_tRNSt6vectorI2TCEE">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixE6size_t6size_tRNSt6vectorI2TCEE"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixE6size_t6size_tRNSt6vectorI2TCEE"></span><span id="ColumnMatrix::ColumnMatrix__s.s.std::vector:TC:R"></span><span class="target" id="classColumnMatrix_1a6b31725830ce2dac985f9e10ce859f48"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">col</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixE6size_t6size_tRNSt6vectorI2TCEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12ColumnMatrix12ColumnMatrixERK12ColumnMatrixI3TC2E">
+<span id="_CPPv3I0EN12ColumnMatrix12ColumnMatrixERK12ColumnMatrixI3TC2E"></span><span id="_CPPv2I0EN12ColumnMatrix12ColumnMatrixERK12ColumnMatrixI3TC2E"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TC2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classColumnMatrix_1a57fb14693847b2c801e637a28dd248d9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12ColumnMatrix12ColumnMatrixERK12ColumnMatrixI3TC2E" title="ColumnMatrix::ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN12ColumnMatrix12ColumnMatrixERK12ColumnMatrixI3TC2E" title="ColumnMatrix::ColumnMatrix::TC2"><span class="n"><span class="pre">TC2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12ColumnMatrix12ColumnMatrixERK12ColumnMatrixI3TC2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixERK9CSCMatrixIi6size_tE">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixERK9CSCMatrixIi6size_tE"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixERK9CSCMatrixIi6size_tE"></span><span id="ColumnMatrix::ColumnMatrix__CSCMatrix:i.s:CR"></span><span class="target" id="classColumnMatrix_1a27db8a36c6d92a7d07d0aeb6869cda00"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classCSCMatrix.html#_CPPv4I00E9CSCMatrix" title="CSCMatrix"><span class="n"><span class="pre">CSCMatrix</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">A</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixERK9CSCMatrixIi6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix4readERNSt7istreamE">
+<span id="_CPPv3N12ColumnMatrix4readERNSt7istreamE"></span><span id="_CPPv2N12ColumnMatrix4readERNSt7istreamE"></span><span id="ColumnMatrix::read__isR"></span><span class="target" id="classColumnMatrix_1a51dc39a17536a9c6cf0c2413d5ff1ee8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">io</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix4readERNSt7istreamE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixERNSt7istreamE">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixERNSt7istreamE"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixERNSt7istreamE"></span><span id="ColumnMatrix::ColumnMatrix__isR"></span><span class="target" id="classColumnMatrix_1a0980888e6c31369869ff7f743b2e666c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">istream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">io</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixERNSt7istreamE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12ColumnMatrixERNSt6stringE">
+<span id="_CPPv3N12ColumnMatrix12ColumnMatrixERNSt6stringE"></span><span id="_CPPv2N12ColumnMatrix12ColumnMatrixERNSt6stringE"></span><span id="ColumnMatrix::ColumnMatrix__ssR"></span><span class="target" id="classColumnMatrix_1a1464c65bdf5173eca69af802925df18f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColumnMatrix</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">fname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12ColumnMatrixERNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix4nrowEv">
+<span id="_CPPv3NK12ColumnMatrix4nrowEv"></span><span id="_CPPv2NK12ColumnMatrix4nrowEv"></span><span id="ColumnMatrix::nrowC"></span><span class="target" id="classColumnMatrix_1ad3bbb879f65c0d9b625f5e7cbe2b36a5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nrow</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix4nrowEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix4ncolEv">
+<span id="_CPPv3NK12ColumnMatrix4ncolEv"></span><span id="_CPPv2NK12ColumnMatrix4ncolEv"></span><span id="ColumnMatrix::ncolC"></span><span class="target" id="classColumnMatrix_1a831e0d2fe1b40698c9bc652593e375e4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ncol</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix4ncolEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix4colsEv">
+<span id="_CPPv3N12ColumnMatrix4colsEv"></span><span id="_CPPv2N12ColumnMatrix4colsEv"></span><span id="ColumnMatrix::cols"></span><span class="target" id="classColumnMatrix_1a3e57258b21fc5d7637d37ffb4090d29c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">cols</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix4colsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix4colsEv">
+<span id="_CPPv3NK12ColumnMatrix4colsEv"></span><span id="_CPPv2NK12ColumnMatrix4colsEv"></span><span id="ColumnMatrix::colsC"></span><span class="target" id="classColumnMatrix_1a63e8bdbddd12c92bd7119e34abf7a6e6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">cols</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix4colsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8set_nrowE6size_t">
+<span id="_CPPv3N12ColumnMatrix8set_nrowE6size_t"></span><span id="_CPPv2N12ColumnMatrix8set_nrowE6size_t"></span><span id="ColumnMatrix::set_nrow__s"></span><span class="target" id="classColumnMatrix_1aa4676443a1c594265b0a7e67a909f79c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_nrow</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mnew</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix8set_nrowE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix6getvalEK6size_tK6size_t">
+<span id="_CPPv3NK12ColumnMatrix6getvalEK6size_tK6size_t"></span><span id="_CPPv2NK12ColumnMatrix6getvalEK6size_tK6size_t"></span><span id="ColumnMatrix::getval__sC.sCC"></span><span class="target" id="classColumnMatrix_1add45c701f796be8760f9cf9b85ca7deb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getval</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix6getvalEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN12ColumnMatrix13append_columnEvDpR2Ts">
+<span id="_CPPv3IDpEN12ColumnMatrix13append_columnEDpR2Ts"></span><span id="_CPPv2IDpEN12ColumnMatrix13append_columnEDpR2Ts"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Ts</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classColumnMatrix_1a4fadd269e48f605835b3fd26f57dad38"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append_column</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN12ColumnMatrix13append_columnEvDpR2Ts" title="ColumnMatrix::append_column::Ts"><span class="n"><span class="pre">Ts</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpEN12ColumnMatrix13append_columnEvDpR2Ts" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN12ColumnMatrix13append_columnEvDpRR2Ts">
+<span id="_CPPv3IDpEN12ColumnMatrix13append_columnEDpRR2Ts"></span><span id="_CPPv2IDpEN12ColumnMatrix13append_columnEDpRR2Ts"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Ts</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classColumnMatrix_1a89d88117e0738da596f528c33db0c336"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append_column</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN12ColumnMatrix13append_columnEvDpRR2Ts" title="ColumnMatrix::append_column::Ts"><span class="n"><span class="pre">Ts</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpEN12ColumnMatrix13append_columnEvDpRR2Ts" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrixixE6size_t">
+<span id="_CPPv3N12ColumnMatrixixE6size_t"></span><span id="_CPPv2N12ColumnMatrixixE6size_t"></span><span id="ColumnMatrix::subscript-operator__s"></span><span class="target" id="classColumnMatrix_1ac6d95663aa0f84519ac1d0bc2eb52914"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrixixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixixE6size_t">
+<span id="_CPPv3NK12ColumnMatrixixE6size_t"></span><span id="_CPPv2NK12ColumnMatrixixE6size_t"></span><span id="ColumnMatrix::subscript-operator__sC"></span><span class="target" id="classColumnMatrix_1ace9974a8a32400afa41ac232daa7d626"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixclE6size_t6size_t">
+<span id="_CPPv3NK12ColumnMatrixclE6size_t6size_t"></span><span id="_CPPv2NK12ColumnMatrixclE6size_t6size_t"></span><span id="ColumnMatrix::call-operator__s.sC"></span><span class="target" id="classColumnMatrix_1a786d1f5e31b55ce2097d88814c808609"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixclE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixeqERK12ColumnMatrix">
+<span id="_CPPv3NK12ColumnMatrixeqERK12ColumnMatrix"></span><span id="_CPPv2NK12ColumnMatrixeqERK12ColumnMatrix"></span><span id="ColumnMatrix::eq-operator__ColumnMatrixCRC"></span><span class="target" id="classColumnMatrix_1ad937f1a5c4cb895b73171d146569d69b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixeqERK12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix12to_row_arrayEv">
+<span id="_CPPv3NK12ColumnMatrix12to_row_arrayEv"></span><span id="_CPPv2NK12ColumnMatrix12to_row_arrayEv"></span><span id="ColumnMatrix::to_row_arrayC"></span><span class="target" id="classColumnMatrix_1ab3ebbc5cbdb4d537914ca8ead5a06775"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_row_array</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix12to_row_arrayEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix10dump_denseEv">
+<span id="_CPPv3NK12ColumnMatrix10dump_denseEv"></span><span id="_CPPv2NK12ColumnMatrix10dump_denseEv"></span><span id="ColumnMatrix::dump_denseC"></span><span class="target" id="classColumnMatrix_1ac3f358a3a89a3936f3a886620574cdaf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dump_dense</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix10dump_denseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix9submatrixERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE">
+<span id="_CPPv3NK12ColumnMatrix9submatrixERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE"></span><span id="_CPPv2NK12ColumnMatrix9submatrixERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE"></span><span id="ColumnMatrix::submatrix__std::vector:s:CR.std::vector:s:CRC"></span><span class="target" id="classColumnMatrix_1ae7c477ae5f50b11887627fee52b50b77"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">submatrix</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">cind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix9submatrixERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix5blockEK6size_tK6size_tK6size_tK6size_t">
+<span id="_CPPv3NK12ColumnMatrix5blockEK6size_tK6size_tK6size_tK6size_t"></span><span id="_CPPv2NK12ColumnMatrix5blockEK6size_tK6size_tK6size_tK6size_t"></span><span id="ColumnMatrix::block__sC.sC.sC.sCC"></span><span class="target" id="classColumnMatrix_1abfedabce0196fb13f8d6b01ce1115f40"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix5blockEK6size_tK6size_tK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix9set_blockEK6size_tK6size_tK6size_tK6size_tRK12ColumnMatrix">
+<span id="_CPPv3N12ColumnMatrix9set_blockEK6size_tK6size_tK6size_tK6size_tRK12ColumnMatrix"></span><span id="_CPPv2N12ColumnMatrix9set_blockEK6size_tK6size_tK6size_tK6size_tRK12ColumnMatrix"></span><span id="ColumnMatrix::set_block__sC.sC.sC.sC.ColumnMatrixCR"></span><span class="target" id="classColumnMatrix_1a51a88553e7bcf7947f726e544b4535cb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_block</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix9set_blockEK6size_tK6size_tK6size_tK6size_tRK12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix10clear_rowsERKNSt6vectorIbEE">
+<span id="_CPPv3N12ColumnMatrix10clear_rowsERKNSt6vectorIbEE"></span><span id="_CPPv2N12ColumnMatrix10clear_rowsERKNSt6vectorIbEE"></span><span id="ColumnMatrix::clear_rows__std::vector:b:CR"></span><span class="target" id="classColumnMatrix_1a54b0e67460a27199c270156331316abe"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix10clear_rowsERKNSt6vectorIbEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix9swap_rowsEK6size_tK6size_t">
+<span id="_CPPv3N12ColumnMatrix9swap_rowsEK6size_tK6size_t"></span><span id="_CPPv2N12ColumnMatrix9swap_rowsEK6size_tK6size_t"></span><span id="ColumnMatrix::swap_rows__sC.sC"></span><span class="target" id="classColumnMatrix_1ab865d3db8d26658128249831e0307d95"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swap_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix9swap_rowsEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8mix_rowsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type">
+<span id="_CPPv3N12ColumnMatrix8mix_rowsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type"></span><span id="_CPPv2N12ColumnMatrix8mix_rowsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type"></span><span id="ColumnMatrix::mix_rows__sC.sC.val_typeCR.val_typeCR.val_typeCR.val_typeCR"></span><span class="target" id="classColumnMatrix_1a93c52e00a3a47e352c317e0f2750e76e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mix_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i2</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix8mix_rowsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8add_rowsEK6size_tRK8val_typeK6size_t">
+<span id="_CPPv3N12ColumnMatrix8add_rowsEK6size_tRK8val_typeK6size_t"></span><span id="_CPPv2N12ColumnMatrix8add_rowsEK6size_tRK8val_typeK6size_t"></span><span id="ColumnMatrix::add_rows__sC.val_typeCR.sC"></span><span class="target" id="classColumnMatrix_1accbded6b6e4d496d8972c7914b9b0127"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix8add_rowsEK6size_tRK8val_typeK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix4gemvERK2TC">
+<span id="_CPPv3NK12ColumnMatrix4gemvERK2TC"></span><span id="_CPPv2NK12ColumnMatrix4gemvERK2TC"></span><span id="ColumnMatrix::gemv__TCCRC"></span><span class="target" id="classColumnMatrix_1a7bdc98855a1eac8c1903a118198d17aa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gemv</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix4gemvERK2TC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixmlEK8val_type">
+<span id="_CPPv3NK12ColumnMatrixmlEK8val_type"></span><span id="_CPPv2NK12ColumnMatrixmlEK8val_type"></span><span id="ColumnMatrix::mul-operator__val_typeCC"></span><span class="target" id="classColumnMatrix_1a26e89ee7104c9908c3a732c8b6ddfc26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixmlEK8val_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixmlERK2TC">
+<span id="_CPPv3NK12ColumnMatrixmlERK2TC"></span><span id="_CPPv2NK12ColumnMatrixmlERK2TC"></span><span id="ColumnMatrix::mul-operator__TCCRC"></span><span class="target" id="classColumnMatrix_1a89af8e5063f387d9ce92aaf184faaf2c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixmlERK2TC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixmlERK12ColumnMatrix">
+<span id="_CPPv3NK12ColumnMatrixmlERK12ColumnMatrix"></span><span id="_CPPv2NK12ColumnMatrixmlERK12ColumnMatrix"></span><span id="ColumnMatrix::mul-operator__ColumnMatrixCRC"></span><span class="target" id="classColumnMatrix_1a76b45a642eb623cfa26a9b065b71668e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixmlERK12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixplERK12ColumnMatrix">
+<span id="_CPPv3NK12ColumnMatrixplERK12ColumnMatrix"></span><span id="_CPPv2NK12ColumnMatrixplERK12ColumnMatrix"></span><span id="ColumnMatrix::add-operator__ColumnMatrixCRC"></span><span class="target" id="classColumnMatrix_1ad7b2e60d8fd86f7bdb9892be1693dead"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixplERK12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrixpLERK12ColumnMatrix">
+<span id="_CPPv3N12ColumnMatrixpLERK12ColumnMatrix"></span><span id="_CPPv2N12ColumnMatrixpLERK12ColumnMatrix"></span><span id="ColumnMatrix::add-assign-operator__ColumnMatrixCR"></span><span class="target" id="classColumnMatrix_1a8924f40d434416b2afb615ec58b2cd3e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrixpLERK12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrixmiERK12ColumnMatrix">
+<span id="_CPPv3NK12ColumnMatrixmiERK12ColumnMatrix"></span><span id="_CPPv2NK12ColumnMatrixmiERK12ColumnMatrix"></span><span id="ColumnMatrix::sub-operator__ColumnMatrixCRC"></span><span class="target" id="classColumnMatrix_1a7c6261ea40f2d046822a28d5df7d3d77"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">B</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrixmiERK12ColumnMatrix" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix9transposeEv">
+<span id="_CPPv3NK12ColumnMatrix9transposeEv"></span><span id="_CPPv2NK12ColumnMatrix9transposeEv"></span><span id="ColumnMatrix::transposeC"></span><span class="target" id="classColumnMatrix_1a6b4ed4817db5eb002b8fe95ff45b5488"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">transpose</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix9transposeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix1TEv">
+<span id="_CPPv3NK12ColumnMatrix1TEv"></span><span id="_CPPv2NK12ColumnMatrix1TEv"></span><span id="ColumnMatrix::TC"></span><span class="target" id="classColumnMatrix_1a9efc8ccba87e2236be59e51444bf3b50"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix1TEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12permute_colsERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N12ColumnMatrix12permute_colsERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N12ColumnMatrix12permute_colsERKNSt6vectorI6size_tEE"></span><span id="ColumnMatrix::permute_cols__std::vector:s:CR"></span><span class="target" id="classColumnMatrix_1ab3a49e41eb61fe5c4c55e2ba3b695fc1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">permute_cols</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">colperm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12permute_colsERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8mix_colsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type">
+<span id="_CPPv3N12ColumnMatrix8mix_colsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type"></span><span id="_CPPv2N12ColumnMatrix8mix_colsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type"></span><span id="ColumnMatrix::mix_cols__sC.sC.val_typeCR.val_typeCR.val_typeCR.val_typeCR"></span><span class="target" id="classColumnMatrix_1a5e835b83528f4519cf1f1af42801fb5f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mix_cols</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix8mix_colsEK6size_tK6size_tRK8val_typeRK8val_typeRK8val_typeRK8val_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix12permute_rowsERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N12ColumnMatrix12permute_rowsERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N12ColumnMatrix12permute_rowsERKNSt6vectorI6size_tEE"></span><span id="ColumnMatrix::permute_rows__std::vector:s:CR"></span><span class="target" id="classColumnMatrix_1a720692d86346ab5de3897ec46d0ec53a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">permute_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rowperm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix12permute_rowsERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix13ipermute_rowsERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N12ColumnMatrix13ipermute_rowsERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N12ColumnMatrix13ipermute_rowsERKNSt6vectorI6size_tEE"></span><span id="ColumnMatrix::ipermute_rows__std::vector:s:CR"></span><span class="target" id="classColumnMatrix_1a132b0c87d719a066002862e04051d5f6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ipermute_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rowperm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix13ipermute_rowsERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix7permuteERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N12ColumnMatrix7permuteERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N12ColumnMatrix7permuteERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE"></span><span id="ColumnMatrix::permute__std::vector:s:CR.std::vector:s:CR"></span><span class="target" id="classColumnMatrix_1a6a6fe793ad8ed3f7c295212fc904dbad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">permute</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rowperm</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">colperm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix7permuteERKNSt6vectorI6size_tEERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix15J_right_inplaceEv">
+<span id="_CPPv3N12ColumnMatrix15J_right_inplaceEv"></span><span id="_CPPv2N12ColumnMatrix15J_right_inplaceEv"></span><span id="ColumnMatrix::J_right_inplace"></span><span class="target" id="classColumnMatrix_1a6eee52e3ea1dfa512c0b43dd4f6c296d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">J_right_inplace</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix15J_right_inplaceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix7J_rightEv">
+<span id="_CPPv3NK12ColumnMatrix7J_rightEv"></span><span id="_CPPv2NK12ColumnMatrix7J_rightEv"></span><span id="ColumnMatrix::J_rightC"></span><span class="target" id="classColumnMatrix_1a0c5575b89920a15044026ffa562e3dbe"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">J_right</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix7J_rightEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix14J_left_inplaceEv">
+<span id="_CPPv3N12ColumnMatrix14J_left_inplaceEv"></span><span id="_CPPv2N12ColumnMatrix14J_left_inplaceEv"></span><span id="ColumnMatrix::J_left_inplace"></span><span class="target" id="classColumnMatrix_1a7c2f2d409c95c881ae62a875b39dd4be"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">J_left_inplace</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix14J_left_inplaceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix6J_leftEv">
+<span id="_CPPv3NK12ColumnMatrix6J_leftEv"></span><span id="_CPPv2NK12ColumnMatrix6J_leftEv"></span><span id="ColumnMatrix::J_leftC"></span><span class="target" id="classColumnMatrix_1a51b5d56def6fd2c813e8e6210f661eb0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">J_left</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix6J_leftEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix21J_conjugation_inplaceEv">
+<span id="_CPPv3N12ColumnMatrix21J_conjugation_inplaceEv"></span><span id="_CPPv2N12ColumnMatrix21J_conjugation_inplaceEv"></span><span id="ColumnMatrix::J_conjugation_inplace"></span><span class="target" id="classColumnMatrix_1aae3237daa37a82e1d6683ee732146a50"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">J_conjugation_inplace</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix21J_conjugation_inplaceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix13J_conjugationEv">
+<span id="_CPPv3NK12ColumnMatrix13J_conjugationEv"></span><span id="_CPPv2NK12ColumnMatrix13J_conjugationEv"></span><span id="ColumnMatrix::J_conjugationC"></span><span class="target" id="classColumnMatrix_1a1ef8fde8a8bfaeb05d39a08efaf7dce6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">J_conjugation</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix13J_conjugationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix9swap_colsE6size_t6size_t">
+<span id="_CPPv3N12ColumnMatrix9swap_colsE6size_t6size_t"></span><span id="_CPPv2N12ColumnMatrix9swap_colsE6size_t6size_t"></span><span id="ColumnMatrix::swap_cols__s.s"></span><span class="target" id="classColumnMatrix_1ac6372edf33fdd91f3c51110c5c1a1aa8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swap_cols</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix9swap_colsE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix16schur_complementE6size_t6size_t">
+<span id="_CPPv3N12ColumnMatrix16schur_complementE6size_t6size_t"></span><span id="_CPPv2N12ColumnMatrix16schur_complementE6size_t6size_t"></span><span id="ColumnMatrix::schur_complement__s.s"></span><span class="target" id="classColumnMatrix_1ab20f80d7a5ff2bb96375fc3fc1802b1f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">schur_complement</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix16schur_complementE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix9row_scaleERKNSt6vectorI8val_typeEE">
+<span id="_CPPv3N12ColumnMatrix9row_scaleERKNSt6vectorI8val_typeEE"></span><span id="_CPPv2N12ColumnMatrix9row_scaleERKNSt6vectorI8val_typeEE"></span><span id="ColumnMatrix::row_scale__std::vector:val_type:CR"></span><span class="target" id="classColumnMatrix_1a29467d6c606c43bd17b83cd11a76e1fa"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">row_scale</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">coeff</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix9row_scaleERKNSt6vectorI8val_typeEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix13col_inv_scaleERKNSt6vectorI8val_typeEE">
+<span id="_CPPv3N12ColumnMatrix13col_inv_scaleERKNSt6vectorI8val_typeEE"></span><span id="_CPPv2N12ColumnMatrix13col_inv_scaleERKNSt6vectorI8val_typeEE"></span><span id="ColumnMatrix::col_inv_scale__std::vector:val_type:CR"></span><span class="target" id="classColumnMatrix_1a77f41079bddb51a6b142f77bfef4360f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">col_inv_scale</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N12ColumnMatrix8val_typeE" title="ColumnMatrix::val_type"><span class="n"><span class="pre">val_type</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">coeff</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix13col_inv_scaleERKNSt6vectorI8val_typeEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix3nnzEv">
+<span id="_CPPv3NK12ColumnMatrix3nnzEv"></span><span id="_CPPv2NK12ColumnMatrix3nnzEv"></span><span id="ColumnMatrix::nnzC"></span><span class="target" id="classColumnMatrix_1a1c2a9f995b55219ca2aedb3e8bc6846c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nnz</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix3nnzEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix7is_zeroEv">
+<span id="_CPPv3NK12ColumnMatrix7is_zeroEv"></span><span id="_CPPv2NK12ColumnMatrix7is_zeroEv"></span><span id="ColumnMatrix::is_zeroC"></span><span class="target" id="classColumnMatrix_1ae88f37a6285d996362a82b1921676f39"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_zero</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix7is_zeroEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix8is_upperEv">
+<span id="_CPPv3NK12ColumnMatrix8is_upperEv"></span><span id="_CPPv2NK12ColumnMatrix8is_upperEv"></span><span id="ColumnMatrix::is_upperC"></span><span class="target" id="classColumnMatrix_1ac5882f1a30a842b9747faa89406e9c60"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_upper</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix8is_upperEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix8is_lowerEv">
+<span id="_CPPv3NK12ColumnMatrix8is_lowerEv"></span><span id="_CPPv2NK12ColumnMatrix8is_lowerEv"></span><span id="ColumnMatrix::is_lowerC"></span><span class="target" id="classColumnMatrix_1ac2dbf63912ceacface93da6c5bab236b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_lower</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix8is_lowerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix10is_reducedEv">
+<span id="_CPPv3NK12ColumnMatrix10is_reducedEv"></span><span id="_CPPv2NK12ColumnMatrix10is_reducedEv"></span><span id="ColumnMatrix::is_reducedC"></span><span class="target" id="classColumnMatrix_1a1b7aa81110897f4e370554dcb15e5fd8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_reduced</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix10is_reducedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix15is_pivot_matrixEv">
+<span id="_CPPv3NK12ColumnMatrix15is_pivot_matrixEv"></span><span id="_CPPv2NK12ColumnMatrix15is_pivot_matrixEv"></span><span id="ColumnMatrix::is_pivot_matrixC"></span><span class="target" id="classColumnMatrix_1a7b4da9343307296a867105d7d49052f8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_pivot_matrix</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix15is_pivot_matrixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix5is_ELEv">
+<span id="_CPPv3NK12ColumnMatrix5is_ELEv"></span><span id="_CPPv2NK12ColumnMatrix5is_ELEv"></span><span id="ColumnMatrix::is_ELC"></span><span class="target" id="classColumnMatrix_1a0f05c2185a844814facbffae42409254"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_EL</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix5is_ELEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix5is_EUEv">
+<span id="_CPPv3NK12ColumnMatrix5is_EUEv"></span><span id="_CPPv2NK12ColumnMatrix5is_EUEv"></span><span id="ColumnMatrix::is_EUC"></span><span class="target" id="classColumnMatrix_1a78c65133c6eae2990b6e4330b8b3e3f7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_EU</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix5is_EUEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix8is_ELhatEv">
+<span id="_CPPv3NK12ColumnMatrix8is_ELhatEv"></span><span id="_CPPv2NK12ColumnMatrix8is_ELhatEv"></span><span id="ColumnMatrix::is_ELhatC"></span><span class="target" id="classColumnMatrix_1acc9f829e563ab227e83e9b5a1b8fb349"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_ELhat</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix8is_ELhatEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix8is_EUhatEv">
+<span id="_CPPv3NK12ColumnMatrix8is_EUhatEv"></span><span id="_CPPv2NK12ColumnMatrix8is_EUhatEv"></span><span id="ColumnMatrix::is_EUhatC"></span><span class="target" id="classColumnMatrix_1a024a943834c39efee464de54ad22faf8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_EUhat</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix8is_EUhatEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix10print_sizeEv">
+<span id="_CPPv3NK12ColumnMatrix10print_sizeEv"></span><span id="_CPPv2NK12ColumnMatrix10print_sizeEv"></span><span id="ColumnMatrix::print_sizeC"></span><span class="target" id="classColumnMatrix_1a0697d439546b637762976edaedb33473"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix10print_sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix5printEv">
+<span id="_CPPv3NK12ColumnMatrix5printEv"></span><span id="_CPPv2NK12ColumnMatrix5printEv"></span><span id="ColumnMatrix::printC"></span><span class="target" id="classColumnMatrix_1aa123dfe4fec51ce567c138640a965159"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix5printEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix5writeERNSt7ostreamE">
+<span id="_CPPv3NK12ColumnMatrix5writeERNSt7ostreamE"></span><span id="_CPPv2NK12ColumnMatrix5writeERNSt7ostreamE"></span><span id="ColumnMatrix::write__osRC"></span><span class="target" id="classColumnMatrix_1a15f83e7562301d3f4b227a049226d3d7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">io</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix5writeERNSt7ostreamE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix3strEv">
+<span id="_CPPv3N12ColumnMatrix3strEv"></span><span id="_CPPv2N12ColumnMatrix3strEv"></span><span id="ColumnMatrix::str"></span><span class="target" id="classColumnMatrix_1a51cfa0e487c525a5536377397703c503"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">str</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix3strEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12ColumnMatrix4saveERNSt6stringE">
+<span id="_CPPv3NK12ColumnMatrix4saveERNSt6stringE"></span><span id="_CPPv2NK12ColumnMatrix4saveERNSt6stringE"></span><span id="ColumnMatrix::save__ssRC"></span><span class="target" id="classColumnMatrix_1a6492a6b19cb4417ac9aca169d64f6d67"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">save</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">fname</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12ColumnMatrix4saveERNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix8identityE6size_t">
+<span id="_CPPv3N12ColumnMatrix8identityE6size_t"></span><span id="_CPPv2N12ColumnMatrix8identityE6size_t"></span><span id="ColumnMatrix::identity__s"></span><span class="target" id="classColumnMatrix_1a9b3b75ab326d5b0cc7d21d21201da44e"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">identity</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix8identityE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix6randomE6size_t6size_tdiRNSt21default_random_engineE">
+<span id="_CPPv3N12ColumnMatrix6randomE6size_t6size_tdiRNSt21default_random_engineE"></span><span id="_CPPv2N12ColumnMatrix6randomE6size_t6size_tdiRNSt21default_random_engineE"></span><span id="ColumnMatrix::random__s.s.double.i.std::default_random_engineR"></span><span class="target" id="classColumnMatrix_1afc73981382c7a8ccc2a843efbff0cef8"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">random</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxval</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">default_random_engine</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">generator</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix6randomE6size_t6size_tdiRNSt21default_random_engineE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12ColumnMatrix6randomE6size_t6size_tdi">
+<span id="_CPPv3N12ColumnMatrix6randomE6size_t6size_tdi"></span><span id="_CPPv2N12ColumnMatrix6randomE6size_t6size_tdi"></span><span id="ColumnMatrix::random__s.s.double.i"></span><span class="target" id="classColumnMatrix_1a2fd70fda19e8dfca65b19dbb0828850f"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">random</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12ColumnMatrix6randomE6size_t6size_tdi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classColumnMatrix_1a1a185da72bac9e1986ec552bb4e5a8d6"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">friend</span> <span class="pre">ColumnMatrix</span> <span class="pre">tensor_product</span> <span class="pre">(const</span> <span class="pre">ColumnMatrix</span> <span class="pre">&amp;A,</span> <span class="pre">const</span> <span class="pre">ColumnMatrix</span> <span class="pre">&amp;B)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classColumnMatrix_1a5a19fb862d47346b0d4db5e1d786d9a4"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">friend</span> <span class="pre">ColumnMatrix</span> <span class="pre">direct_sum</span> <span class="pre">(const</span> <span class="pre">ColumnMatrix</span> <span class="pre">&amp;A,</span> <span class="pre">const</span> <span class="pre">ColumnMatrix</span> <span class="pre">&amp;B)</span></span></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classCSCMatrix.html" class="btn btn-neutral float-right" title="Template Class CSCMatrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classbats_1_1util_1_1SimplexContainer.html" class="btn btn-neutral float-left" title="Class SimplexContainer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

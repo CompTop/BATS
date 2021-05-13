@@ -1,0 +1,70 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_extras.hpp:
+
+File extras.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/extras.hpp``)
+------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_extras.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``complex/cell_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_complex.hpp`)
+
+- ``complex/cell_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1triangle`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_extras_8hpp_1aa822f034fed3e78558e04be80d6f5790`
+

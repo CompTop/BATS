@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2flag_8hpp_1a3354ec1103ef97dd0c11b1007156e382:
+
+Template Function bats::add_dimension_recursive_flag(Filtration<T, CpxT>&, const NT&, const size_t, const size_t, const std::vector<size_t>&, std::vector<size_t>&, const T&, bool, const cell_ind&)
+====================================================================================================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_dimension_recursive_flag(Filtration<T, CpxT>&, const NT&, const size_t, const size_t, const std::vector<size_t>&, std::vector<size_t>&, const T&, bool, const cell_ind&)

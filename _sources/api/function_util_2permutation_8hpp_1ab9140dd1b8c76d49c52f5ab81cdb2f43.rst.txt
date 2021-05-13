@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1ab9140dd1b8c76d49c52f5ab81cdb2f43:
+
+Template Function bats::util::top_k
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::top_k(const std::vector<T>&, const size_t)

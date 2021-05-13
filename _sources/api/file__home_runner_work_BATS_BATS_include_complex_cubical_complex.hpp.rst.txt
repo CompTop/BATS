@@ -1,0 +1,95 @@
+
+.. _file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp:
+
+File cubical_complex.hpp
+========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_complex>` (``/home/runner/work/BATS/BATS/include/complex``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/complex/cubical_complex.hpp``)
+--------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``abstract_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp`)
+
+- ``algorithm``
+
+- ``cstddef``
+
+- ``filtration/filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`)
+
+- ``fstream``
+
+- ``iostream``
+
+- ``iterator``
+
+- ``limits``
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/csc_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`)
+
+- ``linalg/sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``map`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
+- ``morse/pairing.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`)
+
+- ``stdexcept``
+
+- ``string``
+
+- ``util/common.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_common.hpp`)
+
+- ``util/simplex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`)
+
+- ``util/sorted.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`)
+
+- ``util/trie.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_trie.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbats_1_1CubicalComplex`
+

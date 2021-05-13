@@ -1,0 +1,13 @@
+.. _exhale_function_col__matrix_8hpp_1ad5ffd5e74c1e50dfb64a16dbf2347b14:
+
+Template Function u_solve(const ColumnMatrix<TC>&, const ColumnMatrix<TC>&)
+===========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: u_solve(const ColumnMatrix<TC>&, const ColumnMatrix<TC>&)

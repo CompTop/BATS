@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1adad150143a9de5f5ceca11e0a9fcfca6:
+
+Template Function make_diag_ones
+================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: make_diag_ones(M)

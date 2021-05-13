@@ -1,0 +1,13 @@
+.. _exhale_function_persistence_2filtration_8hpp_1af54d916c344db2665eeb4f606ef0e744:
+
+Template Function complete_pairs
+================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: complete_pairs(Filtration<T, CpxT>&, MorsePairing<CpxT>&, size_t, FT)

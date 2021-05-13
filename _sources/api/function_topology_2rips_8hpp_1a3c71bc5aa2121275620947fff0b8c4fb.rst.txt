@@ -1,0 +1,13 @@
+.. _exhale_function_topology_2rips_8hpp_1a3c71bc5aa2121275620947fff0b8c4fb:
+
+Template Function bats::RipsComplex(const Matrix<T>&, T, size_t)
+================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::RipsComplex(const Matrix<T>&, T, size_t)

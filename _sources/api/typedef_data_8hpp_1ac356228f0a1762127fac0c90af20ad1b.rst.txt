@@ -1,0 +1,13 @@
+.. _exhale_typedef_data_8hpp_1ac356228f0a1762127fac0c90af20ad1b:
+
+Typedef bats::Matrix
+====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: bats::Matrix

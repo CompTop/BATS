@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1aa20074a10e2d4e0aa9401c7d938777e9:
+
+Template Function get_pivots
+============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: get_pivots(const ColumnMatrix<TC>&)

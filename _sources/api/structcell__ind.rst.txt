@@ -1,0 +1,16 @@
+.. _exhale_struct_structcell__ind:
+
+Struct cell_ind
+===============
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: cell_ind
+   :members:
+   :protected-members:
+   :undoc-members:

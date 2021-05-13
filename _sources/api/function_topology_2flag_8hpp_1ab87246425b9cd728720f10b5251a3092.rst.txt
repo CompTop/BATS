@@ -1,0 +1,13 @@
+.. _exhale_function_topology_2flag_8hpp_1ab87246425b9cd728720f10b5251a3092:
+
+Template Function bats::FlagComplex
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_flag.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::FlagComplex(const std::vector<size_t>&, const size_t, const size_t)

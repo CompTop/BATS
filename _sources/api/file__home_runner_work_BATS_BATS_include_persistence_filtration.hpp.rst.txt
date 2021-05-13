@@ -1,0 +1,70 @@
+
+.. _file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp:
+
+File filtration.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_persistence>` (``/home/runner/work/BATS/BATS/include/persistence``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/persistence/filtration.hpp``)
+-------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``filtration/filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`)
+
+- ``homology_reduction.hpp``
+
+- ``iostream``
+
+- ``limits``
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/csc_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`)
+
+- ``linalg/field.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`)
+
+- ``linalg/schur.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_schur.hpp`)
+
+- ``linalg/sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``morse/pairing.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`)
+
+- ``util/sorted.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_persistence_2filtration_8hpp_1a93e6d14720ddf4a4987a0f1fcc7cb7be`
+
+- :ref:`exhale_function_persistence_2filtration_8hpp_1af54d916c344db2665eeb4f606ef0e744`
+
+- :ref:`exhale_function_persistence_2filtration_8hpp_1a4f5c1fc3761f6eabfdc994b9a6fdfd53`
+

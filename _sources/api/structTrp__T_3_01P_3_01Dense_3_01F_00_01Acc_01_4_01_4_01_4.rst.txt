@@ -1,0 +1,16 @@
+.. _exhale_struct_structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4:
+
+Template Struct Trp_T< P< Dense< F, Acc > > >
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: Trp_T< P< Dense< F, Acc > > >
+   :members:
+   :protected-members:
+   :undoc-members:

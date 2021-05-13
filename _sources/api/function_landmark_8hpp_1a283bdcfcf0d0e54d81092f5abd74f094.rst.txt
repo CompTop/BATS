@@ -1,0 +1,13 @@
+.. _exhale_function_landmark_8hpp_1a283bdcfcf0d0e54d81092f5abd74f094:
+
+Template Function bats::greedy_landmarks_hausdorff(const Matrix<T>&, const size_t)
+==================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::greedy_landmarks_hausdorff(const Matrix<T>&, const size_t)

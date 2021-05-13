@@ -1,0 +1,25 @@
+.. _exhale_class_classRational:
+
+Template Class Rational
+=======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public AbstractField< Rational< IntT > >`` (:ref:`exhale_class_classAbstractField`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: Rational
+   :members:
+   :protected-members:
+   :undoc-members:

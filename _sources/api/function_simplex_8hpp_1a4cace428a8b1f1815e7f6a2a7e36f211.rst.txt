@@ -1,0 +1,13 @@
+.. _exhale_function_simplex_8hpp_1a4cace428a8b1f1815e7f6a2a7e36f211:
+
+Template Function bats::util::write_simplex(IO&, std::vector<T>&)
+=================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::write_simplex(IO&, std::vector<T>&)

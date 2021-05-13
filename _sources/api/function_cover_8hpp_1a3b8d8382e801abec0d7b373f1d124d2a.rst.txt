@@ -1,0 +1,13 @@
+.. _exhale_function_cover_8hpp_1a3b8d8382e801abec0d7b373f1d124d2a:
+
+Template Function bats::get_subset
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::get_subset(const DataSet<T>&, const std::set<size_t>&)

@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File filtration.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File filtration.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-filtration-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-persistence-filtration-hpp"></span><h1>Program Listing for File filtration.hpp<a class="headerlink" href="#program-listing-for-file-filtration-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp.html#file-home-runner-work-bats-bats-include-persistence-filtration-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/persistence/filtration.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="c1">// compute homology over a filtration</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;util/sorted.hpp&gt;</span><span class="cp"></span>
+
+
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/field.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/csc_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/schur.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;morse/pairing.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;filtration/filtration.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;homology_reduction.hpp&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limits&gt;</span><span class="cp"></span>
+
+<span class="c1">// #define FF ModP&lt;int, 3&gt;</span>
+<span class="c1">// #define VecT SparseVector&lt;size_t, FF&gt;</span>
+<span class="c1">// #define MatT ColumnMatrix&lt;VecT&gt;</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">FT</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">standard_reduce</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">FT</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">using</span> <span class="n">CT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">MatT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">CT</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">maxd</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="c1">// maxdim of filtration</span>
+    <span class="k">auto</span> <span class="n">M</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">pairing</span><span class="p">();</span>
+    <span class="c1">// Copy the pairing</span>
+    <span class="c1">// this will have pairs added as reduction occurs</span>
+    <span class="n">MorsePairing</span> <span class="nf">M2</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+    <span class="n">M2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="c1">// for holding p2cs</span>
+    <span class="n">p2c_type</span> <span class="n">p2c</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm_row</span><span class="p">,</span> <span class="n">perm_col</span><span class="p">;</span>
+    <span class="c1">//std::vector&lt;size_t&gt; iperm_row, iperm_col;</span>
+    <span class="n">perm_row</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">sortperm</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="c1">// perm_col = F.sortperm(maxd);</span>
+    <span class="c1">//iperm_row = bats::sortperm(perm_row);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">maxd</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">d</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// for (size_t d = maxd; d &gt; 0; d--) {</span>
+        <span class="c1">//std::cout &lt;&lt; &quot;processing d = &quot; &lt;&lt; d &lt;&lt; std::endl;</span>
+        <span class="k">auto</span> <span class="n">B</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">boundary_csc</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="n">perm_col</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">sortperm</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="c1">// perm_row = F.sortperm(d-1);</span>
+        <span class="c1">//iperm_col = bats::sortperm(perm_col);</span>
+        <span class="n">MatT</span> <span class="nf">BC</span><span class="p">(</span><span class="n">B</span><span class="p">);</span>
+        <span class="c1">// permute rows and columns</span>
+        <span class="n">BC</span><span class="p">.</span><span class="n">permute</span><span class="p">(</span><span class="n">perm_row</span><span class="p">,</span> <span class="n">perm_col</span><span class="p">);</span>
+        <span class="n">p2c</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">BC</span><span class="p">);</span>
+
+        <span class="c1">// put pairs into pairing in original order</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">:</span> <span class="n">p2c</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">M2</span><span class="p">.</span><span class="n">set_pair</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">,</span> <span class="n">perm_row</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">perm_col</span><span class="p">[</span><span class="n">v</span><span class="p">]))</span> <span class="p">{</span>
+                <span class="c1">// this shouldn&#39;t happen. If it does, there&#39;s a problem :(</span>
+                <span class="k">auto</span> <span class="n">vald1</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">vald</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;!!!failed to set pair &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">perm_row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;,&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">perm_col</span><span class="p">[</span><span class="n">v</span><span class="p">];</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  in dimension &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">d</span><span class="mi">-1</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  filtration times &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vald1</span><span class="p">[</span><span class="n">perm_row</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;,&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">vald</span><span class="p">[</span><span class="n">perm_col</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">// in next dimension, column perm will be row perm.</span>
+        <span class="n">perm_row</span> <span class="o">=</span> <span class="n">perm_col</span><span class="p">;</span>
+        <span class="c1">// perm_col = perm_row;</span>
+        <span class="c1">//iperm_row = iperm_col;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// finally, we put all the completed pairs into a barcode</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">bars</span><span class="p">(</span><span class="n">maxd</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">maxd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// fill bars by accessing filtration in original order</span>
+        <span class="k">auto</span> <span class="n">up</span> <span class="o">=</span> <span class="n">M2</span><span class="p">.</span><span class="n">up_paired</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">down</span> <span class="o">=</span> <span class="n">M2</span><span class="p">.</span><span class="n">down_paired</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">unp</span> <span class="o">=</span> <span class="n">M2</span><span class="p">.</span><span class="n">unpaired</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">vald1</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">vald</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">reserve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">up</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">unp</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">up</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vald1</span><span class="p">[</span><span class="n">up</span><span class="p">[</span><span class="n">k</span><span class="p">]]);</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vald</span><span class="p">[</span><span class="n">down</span><span class="p">[</span><span class="n">k</span><span class="p">]]);</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">unp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vald1</span><span class="p">[</span><span class="n">unp</span><span class="p">[</span><span class="n">k</span><span class="p">]]);</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">infinity</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">bars</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// compute block matrices in dimension k</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">FT</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">complete_pairs</span><span class="p">(</span>
+    <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span>
+    <span class="n">MorsePairing</span><span class="o">&lt;</span><span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">d</span><span class="p">,</span>
+    <span class="n">FT</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">CSCM</span> <span class="o">=</span> <span class="n">CSCMatrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// csc matrix</span>
+    <span class="k">using</span> <span class="n">CT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// column type</span>
+    <span class="k">using</span> <span class="n">CM</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">CT</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// column matrix</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">rind1</span><span class="p">,</span> <span class="n">rind2</span><span class="p">,</span> <span class="n">cind1</span><span class="p">,</span> <span class="n">cind2</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">;</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;getting permuations&quot; &lt;&lt; std::endl;</span>
+    <span class="n">rind1</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">up_paired</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span> <span class="c1">// row indices that are paired with a column index</span>
+    <span class="n">rind2</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">unpaired</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>  <span class="c1">// row indices that are unpaired</span>
+    <span class="n">cind1</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">down_paired</span><span class="p">(</span><span class="n">d</span><span class="p">);</span> <span class="c1">// column indices that are paired with a row index</span>
+    <span class="n">cind2</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">unpaired</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>    <span class="c1">// column indices that are unparied</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">sortperm</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">sortperm</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;sorting&quot; &lt;&lt; std::endl;</span>
+    <span class="n">sort_ind_pair_by_perm</span><span class="p">(</span><span class="n">rind1</span><span class="p">,</span> <span class="n">cind1</span><span class="p">,</span> <span class="n">p1</span><span class="p">);</span> <span class="c1">// this ensures that the rind1, cind1 block will be upper triangular</span>
+    <span class="n">sort_ind_by_perm</span><span class="p">(</span><span class="n">rind2</span><span class="p">,</span> <span class="n">p1</span><span class="p">);</span> <span class="c1">// this ensures that rind2 will appear in filtration order</span>
+    <span class="n">sort_ind_by_perm</span><span class="p">(</span><span class="n">cind2</span><span class="p">,</span> <span class="n">p2</span><span class="p">);</span> <span class="c1">// this ensures that cind2 will appear in filtration order</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;getting partial perms&quot; &lt;&lt; std::endl;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">prind1</span> <span class="o">=</span> <span class="n">partial_perm</span><span class="p">(</span><span class="n">rind1</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">));</span> <span class="c1">// partial permutation for rind1</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">prind2</span> <span class="o">=</span> <span class="n">partial_perm</span><span class="p">(</span><span class="n">rind2</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">));</span> <span class="c1">// partial permutation for rind2</span>
+
+    <span class="n">CSCM</span> <span class="n">Bk</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">boundary_csc</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+
+    <span class="n">CSCM</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">;</span>
+    <span class="c1">// std::cout &lt;&lt; &quot;block select 1&quot; &lt;&lt; std::endl;</span>
+    <span class="n">block_select</span><span class="p">(</span><span class="n">Bk</span><span class="p">,</span> <span class="n">cind1</span><span class="p">,</span>
+        <span class="p">{</span><span class="o">&amp;</span><span class="n">prind1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prind2</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">rind1</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">rind2</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span>
+        <span class="p">{</span><span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">});</span>
+    <span class="c1">// std::cout &lt;&lt; &quot;block select 2&quot; &lt;&lt; std::endl;</span>
+    <span class="n">block_select</span><span class="p">(</span><span class="n">Bk</span><span class="p">,</span> <span class="n">cind2</span><span class="p">,</span>
+        <span class="p">{</span><span class="o">&amp;</span><span class="n">prind1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prind2</span><span class="p">},</span>
+        <span class="p">{</span><span class="n">rind1</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">rind2</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span>
+        <span class="p">{</span><span class="o">&amp;</span><span class="n">B</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">D</span><span class="p">});</span>
+
+
+    <span class="n">CM</span> <span class="nf">A1</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">B1</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="n">C1</span><span class="p">(</span><span class="n">C</span><span class="p">),</span> <span class="n">D1</span><span class="p">(</span><span class="n">D</span><span class="p">);</span>
+
+    <span class="c1">// get schur complement</span>
+    <span class="n">CM</span> <span class="n">S</span> <span class="o">=</span> <span class="n">schur</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">D1</span><span class="p">);</span>
+    <span class="c1">//MatT S = schur(A, B, C, D);</span>
+
+
+    <span class="c1">// run standard reduction alg on S</span>
+    <span class="k">auto</span> <span class="n">p2c</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">S</span><span class="p">);</span> <span class="c1">// segfault here</span>
+
+    <span class="c1">// put pairs into pairing in original order</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">:</span> <span class="n">p2c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//M.set_pair(d-1, rind2[k], cind2[v]);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">M</span><span class="p">.</span><span class="n">set_pair</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">,</span> <span class="n">rind2</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">cind2</span><span class="p">[</span><span class="n">v</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// this shouldn&#39;t happen.  If it does, there&#39;s a problem :(</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;!!!failed to set pair &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">rind2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;,&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">cind2</span><span class="p">[</span><span class="n">v</span><span class="p">];</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  in dimension &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">d</span><span class="mi">-1</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+
+
+<span class="c1">// use pre-pairs in M to complete reduction over field FT</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">FT</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">block_reduce</span><span class="p">(</span><span class="n">Filtration</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">FT</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">auto</span> <span class="n">M</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">pairing</span><span class="p">();</span>
+    <span class="c1">// Copy the pairing</span>
+    <span class="c1">// this will have pairs added as reduction occurs</span>
+    <span class="n">MorsePairing</span> <span class="nf">M2</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+    <span class="c1">//std::vector&lt;std::vector&lt;T&gt;&gt; bars(maxd);</span>
+
+    <span class="kt">size_t</span> <span class="n">maxd</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="c1">// maxdim of filtration</span>
+    <span class="c1">// we assume that 0-1 pairs have been found already using union find.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="n">maxd</span><span class="p">;</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// complete the pairs between dims d and d-1</span>
+        <span class="n">complete_pairs</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">FT</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="c1">// finally, we put all the completed pairs into a barcode</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">bars</span><span class="p">(</span><span class="n">maxd</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">maxd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// fill bars by accessing filtration in original order</span>
+        <span class="k">auto</span> <span class="n">up</span> <span class="o">=</span> <span class="n">M2</span><span class="p">.</span><span class="n">up_paired</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">down</span> <span class="o">=</span> <span class="n">M2</span><span class="p">.</span><span class="n">down_paired</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">unp</span> <span class="o">=</span> <span class="n">M2</span><span class="p">.</span><span class="n">unpaired</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">vald1</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">d</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">vald</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">reserve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">up</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">unp</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">up</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vald1</span><span class="p">[</span><span class="n">up</span><span class="p">[</span><span class="n">k</span><span class="p">]]);</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vald</span><span class="p">[</span><span class="n">down</span><span class="p">[</span><span class="n">k</span><span class="p">]]);</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">unp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vald1</span><span class="p">[</span><span class="n">unp</span><span class="p">[</span><span class="n">k</span><span class="p">]]);</span>
+            <span class="n">bars</span><span class="p">[</span><span class="n">d</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">infinity</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">bars</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">// void extract_barcode(</span>
+<span class="c1">//     MatT&amp; Rk,</span>
+<span class="c1">//     std::map&lt;size_t, size_t&gt;&amp; p2ck1,</span>
+<span class="c1">//     std::vector&lt;size_t&gt;&amp; inf_bars,</span>
+<span class="c1">//     std::vector&lt;size_t&gt;&amp; births,</span>
+<span class="c1">//     std::vector&lt;size_t&gt;&amp; deaths</span>
+<span class="c1">// ) {</span>
+<span class="c1">//     // clear vectors</span>
+<span class="c1">//     inf_bars.clear();</span>
+<span class="c1">//     births.clear();</span>
+<span class="c1">//     deaths.clear();</span>
+<span class="c1">//</span>
+<span class="c1">//     for (size_t j = 0; j &lt; Rk.width(); j++) {</span>
+<span class="c1">//         if (Rk[j].nnz() == 0) {</span>
+<span class="c1">//             // homology born</span>
+<span class="c1">//             if (p2ck1.count(j) &gt; 0) {</span>
+<span class="c1">//                 births.emplace_back(j);</span>
+<span class="c1">//                 deaths.emplace_back(p2ck1[j]); // killed by k+1 simplex</span>
+<span class="c1">//             } else {</span>
+<span class="c1">//                 inf_bars.emplace_back(j);</span>
+<span class="c1">//             }</span>
+<span class="c1">//         }</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     return;</span>
+<span class="c1">// }</span>
+
+
+
+<span class="c1">// template over type of object</span>
+<span class="c1">// only needs to have method to get boundary</span>
+<span class="c1">// compute barcode in dimension k</span>
+<span class="c1">// template &lt;typename T&gt;</span>
+<span class="c1">// void compute_barcode(</span>
+<span class="c1">//     T&amp; F,</span>
+<span class="c1">//     size_t k,</span>
+<span class="c1">//     std::vector&lt;size_t&gt;&amp; inf_bars,</span>
+<span class="c1">//     std::vector&lt;size_t&gt;&amp; births,</span>
+<span class="c1">//     std::vector&lt;size_t&gt;&amp; deaths</span>
+<span class="c1">// ) {</span>
+<span class="c1">//     auto Bk = F.template boundary&lt;VecT&gt;(k);</span>
+<span class="c1">//     auto Bk1 = F.template boundary&lt;VecT&gt;(k+1);</span>
+<span class="c1">//</span>
+<span class="c1">//     auto p2c = reduce_matrix(Bk);</span>
+<span class="c1">//     auto p2c1 = reduce_matrix(Bk1);</span>
+<span class="c1">//</span>
+<span class="c1">//     extract_barcode(Bk, p2c1, inf_bars, births, deaths);</span>
+<span class="c1">//     return;</span>
+<span class="c1">//</span>
+<span class="c1">// }</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+.. _exhale_function_schur_8hpp_1a8900e551fa747274061e13497af799c6:
+
+Template Function schur(const ColumnMatrix<TV>&, const size_t, const size_t, const size_t, const size_t)
+========================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_schur.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: schur(const ColumnMatrix<TV>&, const size_t, const size_t, const size_t, const size_t)

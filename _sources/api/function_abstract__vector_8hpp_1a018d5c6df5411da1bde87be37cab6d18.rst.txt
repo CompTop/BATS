@@ -1,0 +1,13 @@
+.. _exhale_function_abstract__vector_8hpp_1a018d5c6df5411da1bde87be37cab6d18:
+
+Template Function operator<(const nzpair<TI, TV>&, const nzpair<TI, TV>&)
+=========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: operator<(const nzpair<TI, TV>&, const nzpair<TI, TV>&)

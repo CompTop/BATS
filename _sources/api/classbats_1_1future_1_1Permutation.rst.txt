@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1future_1_1Permutation:
+
+Class Permutation
+=================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_permutation.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::future::Permutation
+   :members:
+   :protected-members:
+   :undoc-members:

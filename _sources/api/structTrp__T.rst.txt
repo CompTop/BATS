@@ -1,0 +1,16 @@
+.. _exhale_struct_structTrp__T:
+
+Template Struct Trp_T
+=====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: Trp_T
+   :members:
+   :protected-members:
+   :undoc-members:

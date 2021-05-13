@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1future_1_1VectorView:
+
+Template Class VectorView
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::future::VectorView
+   :members:
+   :protected-members:
+   :undoc-members:

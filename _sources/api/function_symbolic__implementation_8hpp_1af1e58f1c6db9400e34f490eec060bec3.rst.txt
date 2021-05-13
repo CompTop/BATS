@@ -1,0 +1,13 @@
+.. _exhale_function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3:
+
+Function commute(EL<SI>, L<SI>)
+===============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: commute(EL<SI>, L<SI>)

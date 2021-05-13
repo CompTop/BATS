@@ -1,0 +1,63 @@
+
+.. _file__home_runner_work_BATS_BATS_include_util_io.hpp:
+
+File io.hpp
+===========
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_util>` (``/home/runner/work/BATS/BATS/include/util``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/util/io.hpp``)
+----------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_util_io.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``fstream``
+
+- ``iostream``
+
+- ``sstream``
+
+- ``string``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__util`
+
+- :ref:`namespace_bats__util__io`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_io_8hpp_1aa57ec952a681b6bcc94543fffc28baa4`
+
+- :ref:`exhale_function_io_8hpp_1ae2a92712cb70710face494bd240aa89f`
+

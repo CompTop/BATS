@@ -1,0 +1,94 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp:
+
+File sparse_vector.hpp
+======================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/sparse_vector.hpp``)
+-----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``abstract_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+- ``algorithm``
+
+- ``chrono``
+
+- ``cstddef``
+
+- ``field.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`)
+
+- ``iostream``
+
+- ``random``
+
+- ``sstream``
+
+- ``string``
+
+- ``utility``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_extract.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classSparseVector`
+

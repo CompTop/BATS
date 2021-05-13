@@ -1,0 +1,25 @@
+.. _exhale_struct_structbats_1_1RPAngleDist:
+
+Struct RPAngleDist
+==================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public bats::AbstractMetric< RPAngleDist >`` (:ref:`exhale_struct_structbats_1_1AbstractMetric`)
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::RPAngleDist
+   :members:
+   :protected-members:
+   :undoc-members:

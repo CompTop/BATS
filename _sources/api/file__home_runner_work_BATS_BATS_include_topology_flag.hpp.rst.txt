@@ -1,0 +1,55 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_flag.hpp:
+
+File flag.hpp
+=============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/flag.hpp``)
+----------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_flag.hpp.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_topology_2flag_8hpp_1a85161d655d3fe9f727bc5a743d6ba05f`
+
+- :ref:`exhale_function_topology_2flag_8hpp_1ab87246425b9cd728720f10b5251a3092`
+

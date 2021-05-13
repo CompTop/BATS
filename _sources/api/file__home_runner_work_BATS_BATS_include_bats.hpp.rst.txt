@@ -1,0 +1,55 @@
+
+.. _file__home_runner_work_BATS_BATS_include_bats.hpp:
+
+File bats.hpp
+=============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/bats.hpp``)
+-------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_bats.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``chain.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain.hpp`)
+
+- ``complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp`)
+
+- ``filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`)
+
+- ``future.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future.hpp`)
+
+- ``homology.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`)
+
+- ``linalg.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`)
+
+- ``multigraph.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_multigraph.hpp`)
+
+- ``persistence.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_persistence.hpp`)
+
+- ``quiver.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`)
+
+- ``topology.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`)
+
+
+
+
+

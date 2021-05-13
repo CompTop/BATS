@@ -1,0 +1,87 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_metric.hpp:
+
+File metric.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/metric.hpp``)
+------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_metric.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``cmath``
+
+- ``cstddef``
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_density.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1AbstractMetric`
+
+- :ref:`exhale_struct_structbats_1_1AngleDist`
+
+- :ref:`exhale_struct_structbats_1_1CosineDist`
+
+- :ref:`exhale_struct_structbats_1_1Euclidean`
+
+- :ref:`exhale_struct_structbats_1_1L1Dist`
+
+- :ref:`exhale_struct_structbats_1_1LInfDist`
+
+- :ref:`exhale_struct_structbats_1_1RPAngleDist`
+
+- :ref:`exhale_struct_structbats_1_1RPCosineDist`
+

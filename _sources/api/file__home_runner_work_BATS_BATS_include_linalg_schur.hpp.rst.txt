@@ -1,0 +1,56 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_schur.hpp:
+
+File schur.hpp
+==============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/schur.hpp``)
+---------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_schur.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``iostream``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_schur_8hpp_1a6b54e017976b6c430408f331e44ea048`
+
+- :ref:`exhale_function_schur_8hpp_1a01bfe4c2fd14247114d95e445acab934`
+
+- :ref:`exhale_function_schur_8hpp_1a8900e551fa747274061e13497af799c6`
+

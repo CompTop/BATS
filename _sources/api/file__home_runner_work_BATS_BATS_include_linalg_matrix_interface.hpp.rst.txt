@@ -1,0 +1,91 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp:
+
+File matrix_interface.hpp
+=========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/matrix_interface.hpp``)
+--------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver_a3.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structA`
+
+- :ref:`exhale_struct_structD`
+
+- :ref:`exhale_struct_structE`
+
+- :ref:`exhale_struct_structEL`
+
+- :ref:`exhale_struct_structELH`
+
+- :ref:`exhale_struct_structEU`
+
+- :ref:`exhale_struct_structEUH`
+
+- :ref:`exhale_struct_structL`
+
+- :ref:`exhale_struct_structMAT`
+
+- :ref:`exhale_struct_structP`
+
+- :ref:`exhale_struct_structT`
+
+- :ref:`exhale_struct_structU`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_matrix__interface_8hpp_1ad5867ebb7295eb677ff1dda81e9f0f7d`
+
+- :ref:`exhale_function_matrix__interface_8hpp_1a09c123394fe122461562851f96fbc2c6`
+
+- :ref:`exhale_function_matrix__interface_8hpp_1ab5b023163f23b542959edeb58e87bf52`
+
+- :ref:`exhale_function_matrix__interface_8hpp_1a20e11a501d473255694f7e3a4bc62bf1`
+
+- :ref:`exhale_function_matrix__interface_8hpp_1aa4c75e6f6aaa5cd5f3cc3cbd189a2e5d`
+
+- :ref:`exhale_function_matrix__interface_8hpp_1a370d1aa26a1d24439d5450fe29c16a86`
+
+- :ref:`exhale_function_matrix__interface_8hpp_1adfc4ae5388763f633b61fd25861fd635`
+

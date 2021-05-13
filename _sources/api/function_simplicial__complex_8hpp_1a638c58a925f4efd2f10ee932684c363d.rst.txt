@@ -1,0 +1,13 @@
+.. _exhale_function_simplicial__complex_8hpp_1a638c58a925f4efd2f10ee932684c363d:
+
+Function bats::prod_ind
+=======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::prod_ind(size_t, size_t, size_t)

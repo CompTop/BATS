@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a62c9c42e1a4096dbb2213d7834b49c64:
+
+Template Function bats::util::perm_inversions
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::perm_inversions(const std::vector<T>&)

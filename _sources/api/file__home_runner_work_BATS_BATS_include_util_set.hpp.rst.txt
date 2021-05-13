@@ -1,0 +1,71 @@
+
+.. _file__home_runner_work_BATS_BATS_include_util_set.hpp:
+
+File set.hpp
+============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_util>` (``/home/runner/work/BATS/BATS/include/util``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/util/set.hpp``)
+-----------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_util_set.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``random``
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__util`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_set_8hpp_1a1e4bf3807103e6ac1bc3136fdc0947f4`
+
+- :ref:`exhale_function_set_8hpp_1a4d772271a5324ef112d7128e0331c82f`
+
+- :ref:`exhale_function_set_8hpp_1ae4e855292f3c7a8226d94b5be0404a5f`
+
+- :ref:`exhale_function_set_8hpp_1a26538356bd4353988db4dd8ebac5fc3b`
+

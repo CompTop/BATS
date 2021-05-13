@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a55526be45fe9fb9c1d55f9cca678cb8a:
+
+Template Function PUEL_fact(A<Dense<F, Acc>>&)
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PUEL_fact(A<Dense<F, Acc>>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_sparse_8hpp_1a53f3d220031e4c7f180bf0801ed21d92:
+
+Template Function bats::barcode_sparse_divide_conquer
+=====================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::barcode_sparse_divide_conquer(const Diagram<NT, TM>&, size_t)

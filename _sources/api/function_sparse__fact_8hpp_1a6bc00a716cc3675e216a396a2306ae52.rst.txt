@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1a6bc00a716cc3675e216a396a2306ae52:
+
+Template Function PUEL_inplace
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PUEL_inplace(SparseFact<TC>&)

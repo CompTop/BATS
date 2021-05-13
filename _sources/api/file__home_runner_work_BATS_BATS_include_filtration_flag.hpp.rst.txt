@@ -1,0 +1,94 @@
+
+.. _file__home_runner_work_BATS_BATS_include_filtration_flag.hpp:
+
+File flag.hpp
+=============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_filtration>` (``/home/runner/work/BATS/BATS/include/filtration``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/filtration/flag.hpp``)
+------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_filtration_flag.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``complex/simplicial_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`)
+
+- ``filtration/filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`)
+
+- ``iostream``
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``tuple``
+
+- ``util/sorted.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`)
+
+- ``utility``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1filtered__edge`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_filtration_2flag_8hpp_1af9b2781bd3d42f4ec2abc965707c5ce4`
+
+- :ref:`exhale_function_filtration_2flag_8hpp_1a3354ec1103ef97dd0c11b1007156e382`
+
+- :ref:`exhale_function_filtration_2flag_8hpp_1a02204eecf1d35d518e2e3b33e96e54eb`
+
+- :ref:`exhale_function_filtration_2flag_8hpp_1a1db3b24adac0bd7a95b7475285c057ee`
+
+- :ref:`exhale_function_filtration_2flag_8hpp_1af9579d7774015277ee15e77dd728676c`
+

@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a185464000056f8b638294b33184be4c6:
+
+Function bats::util::partial_perm
+=================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::partial_perm(const std::vector<size_t>&, const size_t)

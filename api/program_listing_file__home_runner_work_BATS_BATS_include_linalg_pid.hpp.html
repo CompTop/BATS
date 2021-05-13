@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File pid.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File pid.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_linalg_pid.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-pid-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-linalg-pid-hpp"></span><h1>Program Listing for File pid.hpp<a class="headerlink" href="#program-listing-for-file-pid-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_pid.hpp.html#file-home-runner-work-bats-bats-include-linalg-pid-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/pid.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;col_matrix.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;polynomial.hpp&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span> <span class="nf">sgn</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="mi">-1</span> <span class="o">:</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">compute extended euclidean algorithm.</span>
+<span class="cm">given a and b, compute x and y so that</span>
+<span class="cm">ax + by = gcd(a,b)</span>
+<span class="cm">returns x, y, gcd(a,b), a/gcd(a,b), b/gcd(a,b)</span>
+<span class="cm">*/</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">PID</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">PID</span><span class="p">,</span> <span class="n">PID</span><span class="p">,</span> <span class="n">PID</span><span class="p">,</span> <span class="n">PID</span><span class="p">,</span> <span class="n">PID</span><span class="o">&gt;</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="k">const</span> <span class="n">PID</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">PID</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// TODO: check if a or b is 0.</span>
+    <span class="c1">// if (a == 0) {</span>
+    <span class="c1">//</span>
+    <span class="c1">//     return std::tie(old_s, old_t, old_r, t, s); // x, y, gcd, a/gcd, b/gcd</span>
+    <span class="c1">// } else if (b == 0) {</span>
+    <span class="c1">//</span>
+    <span class="c1">// }</span>
+
+    <span class="n">PID</span> <span class="nf">s</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">old_s</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">PID</span> <span class="nf">t</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">old_t</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">PID</span> <span class="nf">r</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">old_r</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">r</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">PID</span> <span class="n">quotient</span> <span class="o">=</span> <span class="n">old_r</span> <span class="o">/</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// division without remainder</span>
+        <span class="n">PID</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">old_r</span><span class="p">;</span>
+        <span class="n">old_r</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// remember remainder</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">-</span> <span class="n">quotient</span> <span class="o">*</span> <span class="n">r</span><span class="p">;</span> <span class="c1">// new remainder</span>
+
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">old_s</span><span class="p">;</span>
+        <span class="n">old_s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">-</span> <span class="n">quotient</span> <span class="o">*</span> <span class="n">s</span><span class="p">;</span>
+
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">old_t</span><span class="p">;</span>
+        <span class="n">old_t</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">-</span> <span class="n">quotient</span> <span class="o">*</span> <span class="n">t</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// correct sign of division by gcd</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span><span class="n">t</span> <span class="o">=</span> <span class="o">-</span><span class="n">t</span><span class="p">;}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span><span class="n">s</span> <span class="o">=</span> <span class="o">-</span><span class="n">s</span><span class="p">;}</span>
+
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">old_s</span><span class="p">,</span> <span class="n">old_t</span><span class="p">,</span> <span class="n">old_r</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="c1">// x, y, gcd, a/gcd, b/gcd</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">Compute the Smith normal form of a matrix A</span>
+<span class="cm">Do this in-place</span>
+<span class="cm">note that row operations are generally inefficent</span>
+<span class="cm">*/</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">smith_normal_form</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">T</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// loop over columns</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// STEP 1: put pivot in top-left corner</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// swap columns so there is a non-zero</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="c1">// if A[j] is still zero, we&#39;re done</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">rank</span><span class="o">++</span><span class="p">;</span> <span class="c1">// increment the rank</span>
+
+        <span class="c1">// now we have at least one non-zero in column</span>
+        <span class="c1">// pivot non-zero to pivot location</span>
+        <span class="k">auto</span> <span class="n">pind</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pind</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//swap rows to put in in pivot location</span>
+            <span class="n">A</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">pind</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+        <span class="c1">// STEP 2: improve pivot</span>
+        <span class="c1">// and eliminate entries in row and column</span>
+        <span class="kt">bool</span> <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">continue_reduction</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// first, we loop over columns to the right</span>
+            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">A</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">firstnz</span><span class="p">().</span><span class="n">ind</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">firstnz</span><span class="p">().</span><span class="n">val</span><span class="p">);</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="c1">// now we loop over rows</span>
+            <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+            <span class="k">auto</span> <span class="n">rp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">rp</span> <span class="o">!=</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">continue_reduction</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// we&#39;re going to mix a row with the pivot row.</span>
+                    <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="n">A</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="n">rp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+
+
+            <span class="c1">// if continue_reduction is true, we mixed a row with the pivot row</span>
+            <span class="c1">// so need to continue while-loop</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// finalize by ensuring divisibility condition</span>
+    <span class="c1">// these loops take O(rank^2)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// check that j divides everything after it</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">;</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">A</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span><span class="n">j2</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">!=</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// we need to put gcd in A(j,j)</span>
+                <span class="n">A</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                <span class="k">auto</span> <span class="n">yz</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">;</span>
+                <span class="n">A</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="n">yz</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yz</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// if working over polynomials, make monic</span>
+        <span class="k">if</span> <span class="k">constexpr</span> <span class="p">(</span><span class="n">is_UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// std::cout &lt;&lt; &quot;UnivariatePolynomial detected!&quot; &lt;&lt; std::endl;</span>
+            <span class="k">auto</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">leading_coeff</span><span class="p">().</span><span class="n">inv</span><span class="p">();</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span> <span class="c1">// only one non-zero in row, so just scale column</span>
+            <span class="c1">// R[j].scale_inplace(coeff.inv()); // corresponding inverse op</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// factorization for Smith normal form</span>
+<span class="c1">// A = R * S * C</span>
+<span class="c1">// S is smith normal form of A</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">SmithFact</span> <span class="p">{</span>
+    <span class="c1">// struct to hold matrices in factorization</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">S</span><span class="p">;</span>
+    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">;</span>
+
+    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">R</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">C</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
+<span class="n">SmithFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">smith_factorization</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Smith factorization of matrix A</span>
+
+    <span class="k">using</span> <span class="n">MatT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">T</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+
+    <span class="n">MatT</span> <span class="n">R</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="c1">// row operations</span>
+    <span class="n">MatT</span> <span class="n">S</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
+    <span class="n">MatT</span> <span class="n">C</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// column operations</span>
+
+    <span class="kt">size_t</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// loop over columns</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// STEP 1: put pivot in top-left corner</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// swap columns so there is a non-zero</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">S</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
+                    <span class="n">C</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="c1">// if A[j] is still zero, we&#39;re done</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">rank</span><span class="o">++</span><span class="p">;</span> <span class="c1">// increment the rank</span>
+
+        <span class="c1">// now we have at least one non-zero in column</span>
+        <span class="c1">// pivot non-zero to pivot location</span>
+        <span class="k">auto</span> <span class="n">pind</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pind</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//swap rows to put in in pivot location</span>
+            <span class="n">S</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">pind</span><span class="p">);</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">pind</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+        <span class="c1">// STEP 2: improve pivot</span>
+        <span class="c1">// and eliminate entries in row and column</span>
+        <span class="kt">bool</span> <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">continue_reduction</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// first, we loop over columns to the right</span>
+            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">firstnz</span><span class="p">().</span><span class="n">ind</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">firstnz</span><span class="p">().</span><span class="n">val</span><span class="p">);</span>
+                    <span class="n">S</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                    <span class="n">C</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="c1">// now we loop over rows</span>
+            <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">rp</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">rp</span> <span class="o">!=</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">continue_reduction</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                    <span class="n">R</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// we&#39;re going to mix a row with the pivot row.</span>
+                    <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="n">S</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                    <span class="n">R</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="n">rp</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">// if continue_reduction is true, we mixed a row with the pivot row</span>
+            <span class="c1">// so need to continue while-loop</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// finalize by ensuring divisibility condition</span>
+    <span class="c1">// these loops take O(rank^2)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// check that j divides everything after it</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">;</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">S</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span><span class="n">j2</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">!=</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// we need to put gcd in A(j,j)</span>
+                <span class="n">S</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                <span class="n">C</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+                <span class="k">auto</span> <span class="n">yz</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">;</span>
+                <span class="n">S</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="n">yz</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yz</span><span class="p">);</span>
+                <span class="n">R</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yz</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">yz</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// if working over polynomials, make monic</span>
+        <span class="k">if</span> <span class="k">constexpr</span> <span class="p">(</span><span class="n">is_UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// std::cout &lt;&lt; &quot;UnivariatePolynomial detected!&quot; &lt;&lt; std::endl;</span>
+            <span class="k">auto</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">leading_coeff</span><span class="p">().</span><span class="n">inv</span><span class="p">();</span>
+            <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span> <span class="c1">// only one non-zero in row, so just scale column</span>
+            <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">coeff</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span> <span class="c1">// corresponding inverse op</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">SmithFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">{</span><span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">C</span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// smith normal form of matrix A</span>
+<span class="c1">// only keep track of inverse row operations</span>
+<span class="c1">// useful for RCF</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="n">smith_rows</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">using</span> <span class="n">MatT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">T</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
+
+    <span class="n">MatT</span> <span class="n">R</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="c1">// row operations</span>
+    <span class="n">MatT</span> <span class="n">S</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// loop over columns</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// STEP 1: put pivot in top-left corner</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// swap columns so there is a non-zero</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">S</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="c1">// if A[j] is still zero, we&#39;re done</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">rank</span><span class="o">++</span><span class="p">;</span> <span class="c1">// increment the rank</span>
+
+        <span class="c1">// now we have at least one non-zero in column</span>
+        <span class="c1">// pivot non-zero to pivot location</span>
+        <span class="k">auto</span> <span class="n">pind</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pind</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//swap rows to put in in pivot location</span>
+            <span class="n">S</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">pind</span><span class="p">);</span>
+            <span class="n">R</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">pind</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+        <span class="c1">// STEP 2: improve pivot</span>
+        <span class="c1">// and eliminate entries in row and column</span>
+        <span class="kt">bool</span> <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">continue_reduction</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// first, we loop over columns to the right</span>
+            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">firstnz</span><span class="p">().</span><span class="n">ind</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">S</span><span class="p">[</span><span class="n">j2</span><span class="p">].</span><span class="n">firstnz</span><span class="p">().</span><span class="n">val</span><span class="p">);</span>
+                    <span class="n">S</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="c1">// now we loop over rows</span>
+            <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">rp</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">rp</span> <span class="o">!=</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">continue_reduction</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                    <span class="n">R</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// we&#39;re going to mix a row with the pivot row.</span>
+                    <span class="n">continue_reduction</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="n">S</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+                    <span class="n">R</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">rp</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="n">rp</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">// if continue_reduction is true, we mixed a row with the pivot row</span>
+            <span class="c1">// so need to continue while-loop</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// finalize by ensuring divisibility condition</span>
+    <span class="c1">// these loops take O(rank^2)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// check that j divides everything after it</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j2</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">;</span> <span class="n">j2</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">extended_euclidean</span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">),</span> <span class="n">S</span><span class="p">(</span><span class="n">j2</span><span class="p">,</span><span class="n">j2</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">!=</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// we need to put gcd in A(j,j)</span>
+                <span class="n">S</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+
+                <span class="k">auto</span> <span class="n">yz</span> <span class="o">=</span> <span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">;</span>
+                <span class="n">S</span><span class="p">.</span><span class="n">mix_rows</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="n">yz</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yz</span><span class="p">);</span>
+                <span class="n">R</span><span class="p">.</span><span class="n">mix_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">yz</span><span class="p">,</span> <span class="o">-</span><span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">yz</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// if working over polynomials, make monic</span>
+        <span class="k">if</span> <span class="k">constexpr</span> <span class="p">(</span><span class="n">is_UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// std::cout &lt;&lt; &quot;UnivariatePolynomial detected!&quot; &lt;&lt; std::endl;</span>
+            <span class="k">auto</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">leading_coeff</span><span class="p">().</span><span class="n">inv</span><span class="p">();</span>
+            <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span> <span class="c1">// only one non-zero in row, so just scale column</span>
+            <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">coeff</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span> <span class="c1">// corresponding inverse op</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

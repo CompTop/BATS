@@ -1,0 +1,16 @@
+.. _exhale_class_classUnivariatePolynomial:
+
+Template Class UnivariatePolynomial
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: UnivariatePolynomial
+   :members:
+   :protected-members:
+   :undoc-members:

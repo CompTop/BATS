@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1ab1bd62eaead6e23849c9d013e2ccf2d5:
+
+Function bats::util::inv_perm
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::inv_perm(const std::vector<size_t>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_lu_8hpp_1af09e842d82eb095563822c1b98c14362:
+
+Template Function bats::future::find_pivot_complete
+===================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::future::find_pivot_complete(const MT&, size_t)

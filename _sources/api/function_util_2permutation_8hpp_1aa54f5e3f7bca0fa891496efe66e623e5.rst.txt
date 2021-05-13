@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1aa54f5e3f7bca0fa891496efe66e623e5:
+
+Template Function bats::util::fill_sortperm(const T&, const T&, std::vector<size_t>&)
+=====================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::fill_sortperm(const T&, const T&, std::vector<size_t>&)

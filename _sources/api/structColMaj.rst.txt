@@ -1,0 +1,16 @@
+.. _exhale_struct_structColMaj:
+
+Struct ColMaj
+=============
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: ColMaj
+   :members:
+   :protected-members:
+   :undoc-members:

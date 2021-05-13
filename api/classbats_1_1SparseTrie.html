@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Template Class SparseTrie &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class SimplexContainer" href="classbats_1_1util_1_1SimplexContainer.html" />
+    <link rel="prev" title="Class SimplicialComplex" href="classbats_1_1SimplicialComplex.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Template Class SparseTrie</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classbats_1_1SparseTrie.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-sparsetrie">
+<span id="exhale-class-classbats-1-1sparsetrie"></span><h1>Template Class SparseTrie<a class="headerlink" href="#template-class-sparsetrie" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_util_trie.hpp.html#file-home-runner-work-bats-bats-include-util-trie-hpp"><span class="std std-ref">File trie.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4bats10SparseTrieE">
+<span id="_CPPv3I00EN4bats10SparseTrieE"></span><span id="_CPPv2I00EN4bats10SparseTrieE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">A</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1SparseTrie"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SparseTrie</span></span></span><a class="headerlink" href="#_CPPv4I00EN4bats10SparseTrieE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie10child_typeE">
+<span id="_CPPv3N4bats10SparseTrie10child_typeE"></span><span id="_CPPv2N4bats10SparseTrie10child_typeE"></span><span id="bats::SparseTrie::child_type"></span><span class="target" id="classbats_1_1SparseTrie_1a936e3d2460dfa692a68ca3b62b6cb46d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::A"><span class="n"><span class="pre">A</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">child_type</span></span></span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie10child_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie15child_containerE">
+<span id="_CPPv3N4bats10SparseTrie15child_containerE"></span><span id="_CPPv2N4bats10SparseTrie15child_containerE"></span><span id="bats::SparseTrie::child_container"></span><span class="target" id="classbats_1_1SparseTrie_1a58fb9ff0033fd87a5c493f95cd63af6c"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::A"><span class="n"><span class="pre">A</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats10SparseTrie10child_typeE" title="bats::SparseTrie::child_type"><span class="n"><span class="pre">child_type</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">child_container</span></span></span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie15child_containerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie10SparseTrieERK10SparseTrie">
+<span id="_CPPv3N4bats10SparseTrie10SparseTrieERK10SparseTrie"></span><span id="_CPPv2N4bats10SparseTrie10SparseTrieERK10SparseTrie"></span><span id="bats::SparseTrie::SparseTrie__SparseTrieCR"></span><span class="target" id="classbats_1_1SparseTrie_1a16ab42ebae511e437bb967b17a9bbe08"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseTrie</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats10SparseTrie10SparseTrieERK10SparseTrie" title="bats::SparseTrie::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie10SparseTrieERK10SparseTrie" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie10SparseTrieERR10SparseTrie">
+<span id="_CPPv3N4bats10SparseTrie10SparseTrieERR10SparseTrie"></span><span id="_CPPv2N4bats10SparseTrie10SparseTrieERR10SparseTrie"></span><span id="bats::SparseTrie::SparseTrie__SparseTrieRR"></span><span class="target" id="classbats_1_1SparseTrie_1a02e965e4154b158a068f39983228a66f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseTrie</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N4bats10SparseTrie10SparseTrieERR10SparseTrie" title="bats::SparseTrie::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie10SparseTrieERR10SparseTrie" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie10SparseTrieE1T">
+<span id="_CPPv3N4bats10SparseTrie10SparseTrieE1T"></span><span id="_CPPv2N4bats10SparseTrie10SparseTrieE1T"></span><span id="bats::SparseTrie::SparseTrie__T"></span><span class="target" id="classbats_1_1SparseTrie_1ae8a14a82cc8105981bde9699c5db0260"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseTrie</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie10SparseTrieE1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie10SparseTrieEv">
+<span id="_CPPv3N4bats10SparseTrie10SparseTrieEv"></span><span id="_CPPv2N4bats10SparseTrie10SparseTrieEv"></span><span id="bats::SparseTrie::SparseTrie"></span><span class="target" id="classbats_1_1SparseTrie_1a03dade2b0e3dd2e784f8f18925c08983"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseTrie</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie10SparseTrieEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrieD0Ev">
+<span id="_CPPv3N4bats10SparseTrieD0Ev"></span><span id="_CPPv2N4bats10SparseTrieD0Ev"></span><span id="bats::SparseTrie::~SparseTrie"></span><span class="target" id="classbats_1_1SparseTrie_1a3f0618eeabc9ec298b1cfe8f8d60b07e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~SparseTrie</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrieD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrieaSERK10SparseTrie">
+<span id="_CPPv3N4bats10SparseTrieaSERK10SparseTrie"></span><span id="_CPPv2N4bats10SparseTrieaSERK10SparseTrie"></span><span id="bats::SparseTrie::assign-operator__SparseTrieCR"></span><span class="target" id="classbats_1_1SparseTrie_1a00d2e5a253ef8810c805cbd7fa0de565"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrieaSERK10SparseTrie" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrieaSERR10SparseTrie">
+<span id="_CPPv3N4bats10SparseTrieaSERR10SparseTrie"></span><span id="_CPPv2N4bats10SparseTrieaSERR10SparseTrie"></span><span id="bats::SparseTrie::assign-operator__SparseTrieRR"></span><span class="target" id="classbats_1_1SparseTrie_1a82a2ad5be5a29190a58127da2bd46cb8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie"><span class="n"><span class="pre">SparseTrie</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrieaSERR10SparseTrie" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats10SparseTrie6insertEv3ITTK3ITTRK1T">
+<span id="_CPPv3I0EN4bats10SparseTrie6insertE3ITTK3ITTRK1T"></span><span id="_CPPv2I0EN4bats10SparseTrie6insertE3ITTK3ITTRK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ITT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1SparseTrie_1ad666c938a5cd3f5b17937152e85857f6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie6insertEv3ITTK3ITTRK1T" title="bats::SparseTrie::insert::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie6insertEv3ITTK3ITTRK1T" title="bats::SparseTrie::insert::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">endptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats10SparseTrie6insertEv3ITTK3ITTRK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERR1T">
+<span id="_CPPv3N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERR1T"></span><span id="_CPPv2N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERR1T"></span><span id="bats::SparseTrie::emplace__std::vector:A:CR.TRR"></span><span class="target" id="classbats_1_1SparseTrie_1a66568f37e90a2adafa8b1ba6a6713876"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emplace</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::A"><span class="n"><span class="pre">A</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span>, <a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERR1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERK1T">
+<span id="_CPPv3N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERK1T"></span><span id="_CPPv2N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERK1T"></span><span id="bats::SparseTrie::emplace__std::vector:A:CR.TCR"></span><span class="target" id="classbats_1_1SparseTrie_1a0b03120d14b01131872d14d657746098"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emplace</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::A"><span class="n"><span class="pre">A</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie7emplaceERKNSt6vectorI1AEERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats10SparseTrie3getER1T3ITTK3ITT">
+<span id="_CPPv3I0EN4bats10SparseTrie3getE3ITTK3ITT"></span><span id="_CPPv2I0EN4bats10SparseTrie3getE3ITTK3ITT"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ITT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1SparseTrie_1aa9e397424792cd4b970000f9d6d550b2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie3getER1T3ITTK3ITT" title="bats::SparseTrie::get::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie3getER1T3ITTK3ITT" title="bats::SparseTrie::get::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">endptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats10SparseTrie3getER1T3ITTK3ITT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrieixERKNSt6vectorI1TEE">
+<span id="_CPPv3N4bats10SparseTrieixERKNSt6vectorI1TEE"></span><span id="_CPPv2N4bats10SparseTrieixERKNSt6vectorI1TEE"></span><span id="bats::SparseTrie::subscript-operator__std::vector:T:CR"></span><span class="target" id="classbats_1_1SparseTrie_1a3ac00abf5c92a767999496690adabc32"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrieixERKNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats10SparseTrie3getE1T3ITTK3ITTRK1T">
+<span id="_CPPv3I0EN4bats10SparseTrie3getE3ITTK3ITTRK1T"></span><span id="_CPPv2I0EN4bats10SparseTrie3getE3ITTK3ITTRK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ITT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1SparseTrie_1ae3fc4df87054d77635bcb0098f44bde8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie3getE1T3ITTK3ITTRK1T" title="bats::SparseTrie::get::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie3getE1T3ITTK3ITTRK1T" title="bats::SparseTrie::get::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">endptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">def_ret</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats10SparseTrie3getE1T3ITTK3ITTRK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie3getERKNSt6vectorI1TEERK1T">
+<span id="_CPPv3N4bats10SparseTrie3getERKNSt6vectorI1TEERK1T"></span><span id="_CPPv2N4bats10SparseTrie3getERKNSt6vectorI1TEERK1T"></span><span id="bats::SparseTrie::get__std::vector:T:CR.TCR"></span><span class="target" id="classbats_1_1SparseTrie_1ae71a34ecc404694b0af815894c2e06a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">def_ret</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie3getERKNSt6vectorI1TEERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK4bats10SparseTrie3getE1T3ITTK3ITTRK1T">
+<span id="_CPPv3I0ENK4bats10SparseTrie3getE3ITTK3ITTRK1T"></span><span id="_CPPv2I0ENK4bats10SparseTrie3getE3ITTK3ITTRK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ITT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1SparseTrie_1a4f063f0bd083b06d123c822b2c47c861"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK4bats10SparseTrie3getE1T3ITTK3ITTRK1T" title="bats::SparseTrie::get::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats10SparseTrie3getE1T3ITTK3ITTRK1T" title="bats::SparseTrie::get::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">endptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">def_ret</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK4bats10SparseTrie3getE1T3ITTK3ITTRK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats10SparseTrie3getERKNSt6vectorI1TEERK1T">
+<span id="_CPPv3NK4bats10SparseTrie3getERKNSt6vectorI1TEERK1T"></span><span id="_CPPv2NK4bats10SparseTrie3getERKNSt6vectorI1TEERK1T"></span><span id="bats::SparseTrie::get__std::vector:T:CR.TCRC"></span><span class="target" id="classbats_1_1SparseTrie_1ad65e922b5443aef2f1319ddbda865ada"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">def_ret</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats10SparseTrie3getERKNSt6vectorI1TEERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats10SparseTrie5countE6size_t3ITTK3ITT">
+<span id="_CPPv3I0EN4bats10SparseTrie5countE3ITTK3ITT"></span><span id="_CPPv2I0EN4bats10SparseTrie5countE3ITTK3ITT"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ITT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1SparseTrie_1adb0dd52503229cb17bfbab588eda076f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie5countE6size_t3ITTK3ITT" title="bats::SparseTrie::count::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stptr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats10SparseTrie5countE6size_t3ITTK3ITT" title="bats::SparseTrie::count::ITT"><span class="n"><span class="pre">ITT</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">endptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats10SparseTrie5countE6size_t3ITTK3ITT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie5countERKNSt6vectorI1TEE">
+<span id="_CPPv3N4bats10SparseTrie5countERKNSt6vectorI1TEE"></span><span id="_CPPv2N4bats10SparseTrie5countERKNSt6vectorI1TEE"></span><span id="bats::SparseTrie::count__std::vector:T:CR"></span><span class="target" id="classbats_1_1SparseTrie_1a9474ed123ce3dddc3d47b12e033e7ca8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">count</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie5countERKNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie3valE">
+<span id="_CPPv3N4bats10SparseTrie3valE"></span><span id="_CPPv2N4bats10SparseTrie3valE"></span><span id="bats::SparseTrie::val__T"></span><span class="target" id="classbats_1_1SparseTrie_1a63f435bd123d3293e4659764a64ac757"></span><a class="reference internal" href="#_CPPv4I00EN4bats10SparseTrieE" title="bats::SparseTrie::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">val</span></span></span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie3valE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats10SparseTrie8childrenE">
+<span id="_CPPv3N4bats10SparseTrie8childrenE"></span><span id="_CPPv2N4bats10SparseTrie8childrenE"></span><span id="bats::SparseTrie::children__child_containerP"></span><span class="target" id="classbats_1_1SparseTrie_1a8c19c579e107781515463fabd0ac8c1c"></span><a class="reference internal" href="#_CPPv4N4bats10SparseTrie15child_containerE" title="bats::SparseTrie::child_container"><span class="n"><span class="pre">child_container</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">children</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><a class="headerlink" href="#_CPPv4N4bats10SparseTrie8childrenE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classbats_1_1util_1_1SimplexContainer.html" class="btn btn-neutral float-right" title="Class SimplexContainer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classbats_1_1SimplicialComplex.html" class="btn btn-neutral float-left" title="Class SimplicialComplex" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

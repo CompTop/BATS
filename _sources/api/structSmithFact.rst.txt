@@ -1,0 +1,16 @@
+.. _exhale_struct_structSmithFact:
+
+Template Struct SmithFact
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: SmithFact
+   :members:
+   :protected-members:
+   :undoc-members:

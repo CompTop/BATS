@@ -1,0 +1,25 @@
+.. _exhale_class_classbats_1_1future_1_1const__strided__iterator:
+
+Template Class const_strided_iterator
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public std::iterator< std::random_access_iterator_tag, T >``
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::future::const_strided_iterator
+   :members:
+   :protected-members:
+   :undoc-members:

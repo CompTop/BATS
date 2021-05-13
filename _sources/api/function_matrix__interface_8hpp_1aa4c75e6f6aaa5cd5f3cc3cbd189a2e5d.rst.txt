@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1aa4c75e6f6aaa5cd5f3cc3cbd189a2e5d:
+
+Function PLEU_Fact
+==================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PLEU_Fact(MAT)

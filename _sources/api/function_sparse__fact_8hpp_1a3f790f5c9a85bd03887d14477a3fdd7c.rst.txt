@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1a3f790f5c9a85bd03887d14477a3fdd7c:
+
+Template Function UELP_inplace
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: UELP_inplace(SparseFact<TC>&)

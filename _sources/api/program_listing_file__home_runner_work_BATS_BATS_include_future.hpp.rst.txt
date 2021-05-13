@@ -1,0 +1,20 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_future.hpp:
+
+Program Listing for File future.hpp
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_future.hpp>` (``/home/runner/work/BATS/BATS/include/future.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include "future/dense.hpp"
+   #include "future/lu.hpp"
+   #include "future/permutation.hpp"
+   #include "future/similarity.hpp"
+   #include "future/span.hpp"
+   #include "future/util.hpp"

@@ -1,0 +1,20 @@
+.. _dir__home_runner_work_BATS_BATS_include_morse:
+
+
+Directory morse
+===============
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/morse``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`
+
+

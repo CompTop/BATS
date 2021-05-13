@@ -1,0 +1,13 @@
+.. _exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac:
+
+Template Function bats::ChainFunctor
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::ChainFunctor(const DT&)

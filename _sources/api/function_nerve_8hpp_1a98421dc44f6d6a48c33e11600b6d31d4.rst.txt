@@ -1,0 +1,13 @@
+.. _exhale_function_nerve_8hpp_1a98421dc44f6d6a48c33e11600b6d31d4:
+
+Function bats::Nerve(const bats::Cover&, const size_t)
+======================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Nerve(const bats::Cover&, const size_t)

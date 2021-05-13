@@ -1,0 +1,13 @@
+.. _exhale_function_lu_8hpp_1ac627fba0f8141564aaf91892b1495033:
+
+Template Function bats::future::upper
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::future::upper(const MT&)

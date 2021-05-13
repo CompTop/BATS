@@ -1,0 +1,75 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp:
+
+File zigzag_zoo.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/zigzag_zoo.hpp``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``inclusion.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`)
+
+- ``iostream``
+
+- ``landmark.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`)
+
+- ``multigraph/diagram.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`)
+
+- ``multigraph/functors.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`)
+
+- ``tuple``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_zigzag__zoo_8hpp_1a346839e705eec218bde8fee4864d9a31`
+
+- :ref:`exhale_function_zigzag__zoo_8hpp_1aa834d3b0b6acb3ec1b3c11d2219c80e0`
+
+- :ref:`exhale_function_zigzag__zoo_8hpp_1a0ac7df6b08aa32689f3ebbcffd884627`
+

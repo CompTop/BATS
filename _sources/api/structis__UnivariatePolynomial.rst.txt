@@ -1,0 +1,25 @@
+.. _exhale_struct_structis__UnivariatePolynomial:
+
+Template Struct is_UnivariatePolynomial
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public false_type``
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: is_UnivariatePolynomial
+   :members:
+   :protected-members:
+   :undoc-members:

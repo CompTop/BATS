@@ -1,0 +1,13 @@
+.. _exhale_function_spherical_8hpp_1a18ff33c5f70f69f3a9fce1831b50e683:
+
+Template Function bats::normalize_entries
+=========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_spherical.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::normalize_entries(DataSet<T>&)

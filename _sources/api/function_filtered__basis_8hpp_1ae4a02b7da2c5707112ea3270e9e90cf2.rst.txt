@@ -1,0 +1,13 @@
+.. _exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2:
+
+Template Function bats::Reduce(const FilteredChainComplex<T, MT>&, Args ...)
+============================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Reduce(const FilteredChainComplex<T, MT>&, Args ...)

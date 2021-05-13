@@ -1,0 +1,29 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_util_common.hpp:
+
+Program Listing for File common.hpp
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_util_common.hpp>` (``/home/runner/work/BATS/BATS/include/util/common.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   #include <cstddef>
+   #include <limits>
+   
+   
+   namespace bats {
+   
+   // no index
+   const size_t NO_IND = std::numeric_limits<size_t>::max();
+   
+   // get global ops
+   #ifdef BATS_OPCOUNT
+   unsigned get_global_ops() {return global_ops;}
+   void reset_global_ops() {global_ops = 0;}
+   #endif
+   
+   }

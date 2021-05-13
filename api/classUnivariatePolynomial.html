@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Template Class UnivariatePolynomial &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class VectorView::Iterator" href="classVectorView_1_1Iterator.html" />
+    <link rel="prev" title="Template Class SparseVector" href="classSparseVector.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Template Class UnivariatePolynomial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classUnivariatePolynomial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-univariatepolynomial">
+<span id="exhale-class-classunivariatepolynomial"></span><h1>Template Class UnivariatePolynomial<a class="headerlink" href="#template-class-univariatepolynomial" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp.html#file-home-runner-work-bats-bats-include-linalg-polynomial-hpp"><span class="std std-ref">File polynomial.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0E20UnivariatePolynomial">
+<span id="_CPPv3I0E20UnivariatePolynomial"></span><span id="_CPPv2I0E20UnivariatePolynomial"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classUnivariatePolynomial"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnivariatePolynomial</span></span></span><a class="headerlink" href="#_CPPv4I0E20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial20UnivariatePolynomialERKNSt6vectorI1TEE">
+<span id="_CPPv3N20UnivariatePolynomial20UnivariatePolynomialERKNSt6vectorI1TEE"></span><span id="_CPPv2N20UnivariatePolynomial20UnivariatePolynomialERKNSt6vectorI1TEE"></span><span id="UnivariatePolynomial::UnivariatePolynomial__std::vector:T:CR"></span><span class="target" id="classUnivariatePolynomial_1aa3f04d544918e29db417cdca1607dea1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnivariatePolynomial</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial20UnivariatePolynomialERKNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial20UnivariatePolynomialENSt16initializer_listI1TEE">
+<span id="_CPPv3N20UnivariatePolynomial20UnivariatePolynomialENSt16initializer_listI1TEE"></span><span id="_CPPv2N20UnivariatePolynomial20UnivariatePolynomialENSt16initializer_listI1TEE"></span><span id="UnivariatePolynomial::UnivariatePolynomial__std::initializer_list:T:"></span><span class="target" id="classUnivariatePolynomial_1a9b64a9ad7c7eb931d3af6a89be07ff48"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnivariatePolynomial</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">initializer_list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">l</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial20UnivariatePolynomialENSt16initializer_listI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial20UnivariatePolynomialERK1T">
+<span id="_CPPv3N20UnivariatePolynomial20UnivariatePolynomialERK1T"></span><span id="_CPPv2N20UnivariatePolynomial20UnivariatePolynomialERK1T"></span><span id="UnivariatePolynomial::UnivariatePolynomial__TCR"></span><span class="target" id="classUnivariatePolynomial_1a9e658dc7c969673fb47c21bfc53e68e5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnivariatePolynomial</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial20UnivariatePolynomialERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial20UnivariatePolynomialEv">
+<span id="_CPPv3N20UnivariatePolynomial20UnivariatePolynomialEv"></span><span id="_CPPv2N20UnivariatePolynomial20UnivariatePolynomialEv"></span><span id="UnivariatePolynomial::UnivariatePolynomial"></span><span class="target" id="classUnivariatePolynomial_1a3e9c96e70d874c5c38cd741d3241b87a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnivariatePolynomial</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial20UnivariatePolynomialEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial7is_zeroEv">
+<span id="_CPPv3NK20UnivariatePolynomial7is_zeroEv"></span><span id="_CPPv2NK20UnivariatePolynomial7is_zeroEv"></span><span id="UnivariatePolynomial::is_zeroC"></span><span class="target" id="classUnivariatePolynomial_1a0d8d2e166d5562b4afef410d4ba5089a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_zero</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial7is_zeroEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK20UnivariatePolynomialixEK1TK2TI">
+<span id="_CPPv3I0ENK20UnivariatePolynomialixEK2TI"></span><span id="_CPPv2I0ENK20UnivariatePolynomialixEK2TI"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TI</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classUnivariatePolynomial_1aeea2291ae7f40f28da956b2330673984"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK20UnivariatePolynomialixEK1TK2TI" title="UnivariatePolynomial::operator[]::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK20UnivariatePolynomialixEK1TK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN20UnivariatePolynomialixER1TK2TI">
+<span id="_CPPv3I0EN20UnivariatePolynomialixEK2TI"></span><span id="_CPPv2I0EN20UnivariatePolynomialixEK2TI"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TI</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classUnivariatePolynomial_1a3d8783500f5c22d0c194df4777d18810"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN20UnivariatePolynomialixER1TK2TI" title="UnivariatePolynomial::operator[]::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN20UnivariatePolynomialixER1TK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial3dimEv">
+<span id="_CPPv3NK20UnivariatePolynomial3dimEv"></span><span id="_CPPv2NK20UnivariatePolynomial3dimEv"></span><span id="UnivariatePolynomial::dimC"></span><span class="target" id="classUnivariatePolynomial_1abdc61e0e91dc471d48c5f1527dd3e688"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dim</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial3dimEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial6degreeEv">
+<span id="_CPPv3NK20UnivariatePolynomial6degreeEv"></span><span id="_CPPv2NK20UnivariatePolynomial6degreeEv"></span><span id="UnivariatePolynomial::degreeC"></span><span class="target" id="classUnivariatePolynomial_1ab8fb9105a7f763b6127f7536b37db215"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">degree</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial6degreeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial4sizeEv">
+<span id="_CPPv3NK20UnivariatePolynomial4sizeEv"></span><span id="_CPPv2NK20UnivariatePolynomial4sizeEv"></span><span id="UnivariatePolynomial::sizeC"></span><span class="target" id="classUnivariatePolynomial_1a91d9a408b5956c4212b435af0c90d2d4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial13leading_coeffEv">
+<span id="_CPPv3NK20UnivariatePolynomial13leading_coeffEv"></span><span id="_CPPv2NK20UnivariatePolynomial13leading_coeffEv"></span><span id="UnivariatePolynomial::leading_coeffC"></span><span class="target" id="classUnivariatePolynomial_1aefa777edd86b9a411567fae6a77a01b1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">leading_coeff</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial13leading_coeffEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialclERK1T">
+<span id="_CPPv3NK20UnivariatePolynomialclERK1T"></span><span id="_CPPv2NK20UnivariatePolynomialclERK1T"></span><span id="UnivariatePolynomial::call-operator__TCRC"></span><span class="target" id="classUnivariatePolynomial_1ab42cbaab4a96035d3653110044b61c05"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialclERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK20UnivariatePolynomialclE2TCRK12ColumnMatrixI2TCERK2TC">
+<span id="_CPPv3I0ENK20UnivariatePolynomialclERK12ColumnMatrixI2TCERK2TC"></span><span id="_CPPv2I0ENK20UnivariatePolynomialclERK12ColumnMatrixI2TCERK2TC"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TC</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classUnivariatePolynomial_1a47fe32d65916d1527dcd829fca876812"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK20UnivariatePolynomialclE2TCRK12ColumnMatrixI2TCERK2TC" title="UnivariatePolynomial::operator()::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">()</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classColumnMatrix.html#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0ENK20UnivariatePolynomialclE2TCRK12ColumnMatrixI2TCERK2TC" title="UnivariatePolynomial::operator()::TC"><span class="n"><span class="pre">TC</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">A</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK20UnivariatePolynomialclE2TCRK12ColumnMatrixI2TCERK2TC" title="UnivariatePolynomial::operator()::TC"><span class="n"><span class="pre">TC</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK20UnivariatePolynomialclE2TCRK12ColumnMatrixI2TCERK2TC" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialmiEv">
+<span id="_CPPv3NK20UnivariatePolynomialmiEv"></span><span id="_CPPv2NK20UnivariatePolynomialmiEv"></span><span id="UnivariatePolynomial::sub-operatorC"></span><span class="target" id="classUnivariatePolynomial_1a6057e59a91542afe750317ee8b2680dc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialmiEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialplERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomialplERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomialplERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::add-operator__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a4227f832976d08838972bfa89b103ddf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialplERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomialpLERK20UnivariatePolynomial">
+<span id="_CPPv3N20UnivariatePolynomialpLERK20UnivariatePolynomial"></span><span id="_CPPv2N20UnivariatePolynomialpLERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::add-assign-operator__UnivariatePolynomialCR"></span><span class="target" id="classUnivariatePolynomial_1a0377fedf9396a6801da9a83ceef4fa30"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomialpLERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomialmIERK20UnivariatePolynomial">
+<span id="_CPPv3N20UnivariatePolynomialmIERK20UnivariatePolynomial"></span><span id="_CPPv2N20UnivariatePolynomialmIERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::sub-assign-operator__UnivariatePolynomialCR"></span><span class="target" id="classUnivariatePolynomial_1a75043e82083bc73b2bdc89ee2f72b480"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomialmIERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialmiERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomialmiERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomialmiERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::sub-operator__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a07f94e1db20e3423a84f4ac0e0d8ffad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">-</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialmiERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialmlERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomialmlERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomialmlERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::mul-operator__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1af0b9ad8434c5ab6573eb049c813e0f6c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialmlERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial6divremERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomial6divremERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomial6divremERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::divrem__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a464279140f060b93c47fb090ce3df2eb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">divrem</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial6divremERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialdvERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomialdvERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomialdvERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::div-operator__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a869d8c0d9b8ee33794e5674248ff8ac3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">/</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialdvERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial9remainderERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomial9remainderERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomial9remainderERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::remainder__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a2ca4f2d6e6e018db48fb6f1806202340"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remainder</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial9remainderERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK20UnivariatePolynomialeqEbRK2T2">
+<span id="_CPPv3I0ENK20UnivariatePolynomialeqERK2T2"></span><span id="_CPPv2I0ENK20UnivariatePolynomialeqERK2T2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classUnivariatePolynomial_1ab701b040d9e887b29d1ffed44a1e8109"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK20UnivariatePolynomialeqEbRK2T2" title="UnivariatePolynomial::operator==::T2"><span class="n"><span class="pre">T2</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK20UnivariatePolynomialeqEbRK2T2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialeqERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomialeqERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomialeqERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::eq-operator__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a1362ed3dfdabf57c6e6e257826e9cfa6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialeqERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK20UnivariatePolynomialneEbRK2T2">
+<span id="_CPPv3I0ENK20UnivariatePolynomialneERK2T2"></span><span id="_CPPv2I0ENK20UnivariatePolynomialneERK2T2"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classUnivariatePolynomial_1a44193959fe93858dac67653045eeb594"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK20UnivariatePolynomialneEbRK2T2" title="UnivariatePolynomial::operator!=::T2"><span class="n"><span class="pre">T2</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK20UnivariatePolynomialneEbRK2T2" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomialneERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomialneERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomialneERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::neq-operator__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a1ff7159c6bbc43f8af734445728d4bd2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomialneERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial3gcdERK20UnivariatePolynomial">
+<span id="_CPPv3NK20UnivariatePolynomial3gcdERK20UnivariatePolynomial"></span><span id="_CPPv2NK20UnivariatePolynomial3gcdERK20UnivariatePolynomial"></span><span id="UnivariatePolynomial::gcd__UnivariatePolynomialCRC"></span><span class="target" id="classUnivariatePolynomial_1a714bcb67be61c3ae2ed5bf8141142484"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gcd</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial3gcdERK20UnivariatePolynomial" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial8is_monicEv">
+<span id="_CPPv3NK20UnivariatePolynomial8is_monicEv"></span><span id="_CPPv2NK20UnivariatePolynomial8is_monicEv"></span><span id="UnivariatePolynomial::is_monicC"></span><span class="target" id="classUnivariatePolynomial_1adac3d9f8bc3ac810b1c575a6fd289ed4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_monic</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial8is_monicEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK20UnivariatePolynomial16companion_matrixEv">
+<span id="_CPPv3NK20UnivariatePolynomial16companion_matrixEv"></span><span id="_CPPv2NK20UnivariatePolynomial16companion_matrixEv"></span><span id="UnivariatePolynomial::companion_matrixC"></span><span class="target" id="classUnivariatePolynomial_1ae8738b82005af144e4ba90530953705a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classColumnMatrix.html#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="classSparseVector.html#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">companion_matrix</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK20UnivariatePolynomial16companion_matrixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial5printEv">
+<span id="_CPPv3N20UnivariatePolynomial5printEv"></span><span id="_CPPv2N20UnivariatePolynomial5printEv"></span><span id="UnivariatePolynomial::print"></span><span class="target" id="classUnivariatePolynomial_1aadf9c12d70d9e957c62d0529a75ec6b6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial5printEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial8identityEv">
+<span id="_CPPv3N20UnivariatePolynomial8identityEv"></span><span id="_CPPv2N20UnivariatePolynomial8identityEv"></span><span id="UnivariatePolynomial::identity"></span><span class="target" id="classUnivariatePolynomial_1aea30ce84e02525f212563890e968dbf5"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">identity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial8identityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial4zeroEv">
+<span id="_CPPv3N20UnivariatePolynomial4zeroEv"></span><span id="_CPPv2N20UnivariatePolynomial4zeroEv"></span><span id="UnivariatePolynomial::zero"></span><span class="target" id="classUnivariatePolynomial_1af8a6ed2fc7f147b2a5a4b64d83f0d931"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">zero</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial4zeroEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N20UnivariatePolynomial8monomialE6size_t1T">
+<span id="_CPPv3N20UnivariatePolynomial8monomialE6size_t1T"></span><span id="_CPPv2N20UnivariatePolynomial8monomialE6size_t1T"></span><span id="UnivariatePolynomial::monomial__s.T"></span><span class="target" id="classUnivariatePolynomial_1af443ac7b8885377a4c3abd26d274e8c0"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial"><span class="n"><span class="pre">UnivariatePolynomial</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">monomial</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">d</span></span>, <a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">scale</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0E20UnivariatePolynomial" title="UnivariatePolynomial::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N20UnivariatePolynomial8monomialE6size_t1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classUnivariatePolynomial_1adfc16552a4084341f8875c512bfb6be0"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">friend</span> <span class="pre">std::ostream</span> <span class="pre">&amp;</span> <span class="pre">operator&lt;&lt;</span> <span class="pre">(std::ostream</span> <span class="pre">&amp;os,</span> <span class="pre">const</span> <span class="pre">UnivariatePolynomial</span> <span class="pre">&amp;p)</span></span></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classVectorView_1_1Iterator.html" class="btn btn-neutral float-right" title="Class VectorView::Iterator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classSparseVector.html" class="btn btn-neutral float-left" title="Template Class SparseVector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

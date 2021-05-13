@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1a370d1aa26a1d24439d5450fe29c16a86:
+
+Function PUEL_Fact
+==================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PUEL_Fact(MAT)

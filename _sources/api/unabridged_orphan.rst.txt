@@ -1,0 +1,538 @@
+:orphan:
+
+
+Full API
+========
+
+Directories
+***********
+
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_chain.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_complex.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_filtration.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_future.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_homology.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_linalg.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_morse.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_multigraph.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_persistence.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_quiver.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_topology.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_util.rst
+
+Files
+*****
+
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_barcode.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_homology_basis.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_bats.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_cell_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_chain.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_common.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_cover.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_data.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future_dense.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_density.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_dowker.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration_extension.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_persistence_extract.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_extras.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_field.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration_flag.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_flag.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_homology.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_io.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_landmark.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_light_simplicial_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future_lu.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_metric.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_multigraph_multigraph.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_multigraph.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_nerve.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_morse_pairing.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future_permutation.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_permutation.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_persistence.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_pid.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_quiver.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_quiver_quiver_a3.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_homology_reduction.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration_rips.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_rips.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_schur.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_set.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future_similarity.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_simplex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_sorted.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future_span.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_spherical.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration_star.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_util_trie.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_future_util.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp.rst

@@ -1,0 +1,13 @@
+.. _exhale_function_set_8hpp_1a26538356bd4353988db4dd8ebac5fc3b:
+
+Template Function bats::util::to_set
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::to_set(const std::vector<T>&)

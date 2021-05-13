@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a1a10bc86141f9ee725b452df7272fb10:
+
+Template Function norm
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: norm(const VectorView<T>&)

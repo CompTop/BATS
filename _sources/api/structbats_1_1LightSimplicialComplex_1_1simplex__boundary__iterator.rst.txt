@@ -1,0 +1,22 @@
+.. _exhale_struct_structbats_1_1LightSimplicialComplex_1_1simplex__boundary__iterator:
+
+Struct LightSimplicialComplex::simplex_boundary_iterator
+========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_light_simplicial_complex.hpp`
+
+
+Nested Relationships
+--------------------
+
+This struct is a nested type of :ref:`exhale_class_classbats_1_1LightSimplicialComplex`.
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::LightSimplicialComplex::simplex_boundary_iterator
+   :members:
+   :protected-members:
+   :undoc-members:

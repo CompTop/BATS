@@ -1,0 +1,87 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_landmark.hpp:
+
+File landmark.hpp
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/landmark.hpp``)
+--------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_landmark.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``iterator``
+
+- ``metric.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`)
+
+- ``random``
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``tuple``
+
+- ``util/set.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_landmark_8hpp_1aac217dd95bcc561e763da7df40aca6f2`
+
+- :ref:`exhale_function_landmark_8hpp_1a55daa22ab891eca55997859c8acaf0d9`
+
+- :ref:`exhale_function_landmark_8hpp_1a3981334a0aeeb8bac0913e4c9358157d`
+
+- :ref:`exhale_function_landmark_8hpp_1a283bdcfcf0d0e54d81092f5abd74f094`
+
+- :ref:`exhale_function_landmark_8hpp_1a3fb8dbb4034809fa0a83af95e7f53681`
+
+- :ref:`exhale_function_landmark_8hpp_1a1252bc28668300f6e575a8a912839efa`
+

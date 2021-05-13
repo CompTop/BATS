@@ -1,0 +1,13 @@
+.. _exhale_function_data__gen_8hpp_1a371ce13ca3ae1861d453c49babee9a75:
+
+Template Function bats::product_space
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::product_space(const DataSet<T>&, const DataSet<T>&)

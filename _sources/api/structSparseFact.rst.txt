@@ -1,0 +1,16 @@
+.. _exhale_struct_structSparseFact:
+
+Template Struct SparseFact
+==========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: SparseFact
+   :members:
+   :protected-members:
+   :undoc-members:

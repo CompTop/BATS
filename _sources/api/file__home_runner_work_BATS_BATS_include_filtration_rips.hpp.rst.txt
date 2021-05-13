@@ -1,0 +1,76 @@
+
+.. _file__home_runner_work_BATS_BATS_include_filtration_rips.hpp:
+
+File rips.hpp
+=============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_filtration>` (``/home/runner/work/BATS/BATS/include/filtration``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/filtration/rips.hpp``)
+------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_filtration_rips.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``cmath``
+
+- ``iostream``
+
+- ``util/sorted.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`)
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1tedge`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1a40600eb45e3a6797b650c79a3146d6be`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1ade5cdf0dd7f43bd97508bbf70329241c`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1a046e96f52a9cdedccc958752139cbf7c`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1a0fbb8ec9180d4d2ad3fc988589171557`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1acc910da92ca8a22cb56e46643faf7ca3`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1a3188a1bcdf5d9c4efab5d19855c4e75d`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1a994082e3aac3f0ab907933746c5fa5a1`
+

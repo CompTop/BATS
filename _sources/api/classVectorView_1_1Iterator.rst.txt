@@ -1,0 +1,22 @@
+.. _exhale_class_classVectorView_1_1Iterator:
+
+Class VectorView::Iterator
+==========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Nested Relationships
+--------------------
+
+This class is a nested type of :ref:`exhale_struct_structVectorView`.
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: VectorView::Iterator
+   :members:
+   :protected-members:
+   :undoc-members:

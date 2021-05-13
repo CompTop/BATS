@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1a525be82ad13ee710893e6985f7e6a1f2:
+
+Template Function EU_U_commute
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: EU_U_commute(const ColumnMatrix<TC>&, const ColumnMatrix<TC>&)

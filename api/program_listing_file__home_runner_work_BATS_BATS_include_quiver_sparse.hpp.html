@@ -1,0 +1,830 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File sparse.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File sparse.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-sparse-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-quiver-sparse-hpp"></span><h1>Program Listing for File sparse.hpp<a class="headerlink" href="#program-listing-for-file-sparse-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp.html#file-home-runner-work-bats-bats-include-quiver-sparse-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/quiver/sparse.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;multigraph/diagram.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_fact.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;persistence/barcode.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;omp.h&gt;</span><span class="c1"> // openMP header</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Edge</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="kt">bool</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="k">const</span> <span class="n">Edge</span> <span class="o">&amp;</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">e</span><span class="p">.</span><span class="n">targ</span> <span class="o">&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">src</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// pass facts[i].U, P to mats[i+1]</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">pass_UP_right</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">i</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// A = U * P * A</span>
+            <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">*</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// A = U^{-1} * P^{-1} * A</span>
+            <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">)</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+             <span class="c1">// A = A * P^{-1} * U^{-1}</span>
+             <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+             <span class="c1">// A = A * P * U</span>
+             <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// TODO: clear facts[i].U and facts[i].P</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">pass_P_right</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">i</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// A = U^{-1} * P^{-1} * A</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+             <span class="c1">// A = A * P^{-1} * U^{-1}</span>
+             <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+             <span class="c1">// A = A * P * U</span>
+             <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// clear facts[i].P</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// pass facts[i].L, to facts[i-1].L, with EL commute</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">pass_L_left</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">i</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// L E_L L</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span> <span class="o">*</span> <span class="n">EL_L_commute</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span><span class="p">,</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// L E_L L^{-1}</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span> <span class="o">*</span> <span class="n">EL_L_commute</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span><span class="p">,</span> <span class="n">l_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">L_EL_commute</span><span class="p">(</span><span class="n">l_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">),</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">L_EL_commute</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">,</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">L</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// clear facts[i].L</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// sweep 1 from left to right</span>
+<span class="c1">// start at index j0</span>
+<span class="c1">// end at index j1</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_leftright_sweep1</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do first arrow</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">j0</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j0</span><span class="p">])</span> <span class="o">?</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j0</span><span class="p">])</span> <span class="o">:</span> <span class="n">PUEL</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j0</span><span class="p">]);</span>
+
+    <span class="c1">// left to right - apply change of basis, then do factorization</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">j1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// first apply change of basis from left</span>
+        <span class="n">pass_UP_right</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="c1">// now perform factorization</span>
+        <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">?</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">:</span> <span class="n">PUEL</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// sweep 2 - commute L matrices back through quiver</span>
+<span class="c1">// start at index j1</span>
+<span class="c1">// end at index j0+1</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_leftright_sweep2</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// right to left</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">j0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pass_L_left</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">barcode_form_leftright</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">nedge</span><span class="p">();</span>
+
+    <span class="k">using</span> <span class="n">TC</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">::</span><span class="n">col_type</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="n">facts</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+
+    <span class="c1">// copy matrices on edges</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">edata</span><span class="p">;</span>
+
+    <span class="n">type_A_leftright_sweep1</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="c1">// we don&#39;t do second sweep if we only want barcode form</span>
+    <span class="c1">// type_A_leftright_sweep2(dgm, facts, 0, m-1);</span>
+    <span class="c1">// dump E matrices to return</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="k">return</span> <span class="n">mats</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// pass facts[i].L, P to mats[i-1]</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">pass_PL_left</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">i</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// A = A * P * L</span>
+            <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// A = A * P^{-1} * L^{-1}</span>
+            <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">l_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// A = L^{-1} * P^{-1} * A</span>
+            <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// A = L * P * A</span>
+            <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">*</span> <span class="n">mats</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">L</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// pass facts[i].L, P to mats[i-1]</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">pass_P_left</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">i</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// A = A * P * L</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// A = A * P^{-1} * L^{-1}</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// A = L^{-1} * P^{-1} * A</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// A = L * P * A</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">P</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// pass facts[i].U, to facts[i+1].U, with EL commute</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">pass_U_right</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">i</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span> <span class="o">=</span> <span class="n">U_EU_commute</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">,</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span> <span class="o">*</span> <span class="n">EU_U_commute</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span><span class="p">,</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span> <span class="o">=</span> <span class="n">U_EU_commute</span><span class="p">(</span><span class="n">u_inv</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">),</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">U</span> <span class="o">*</span> <span class="n">EU_U_commute</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">E</span><span class="p">,</span> <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span> <span class="o">=</span> <span class="n">TM</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">U</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// sweep 1 from right to left</span>
+<span class="c1">// start at index j0</span>
+<span class="c1">// end at index j1</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_rightleft_sweep2</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// left to right</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">j1</span> <span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pass_U_right</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_rightleft_sweep1</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// first factorization</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">j1</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j1</span><span class="p">])</span> <span class="o">?</span> <span class="n">PLEU</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j1</span><span class="p">])</span> <span class="o">:</span> <span class="n">UELP</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j1</span><span class="p">]);</span>
+    <span class="c1">// right to left</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j1</span><span class="mi">-1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">j0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// change basis from the right</span>
+        <span class="n">pass_PL_left</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="c1">// compute factorization</span>
+        <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">?</span> <span class="n">PLEU</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">:</span> <span class="n">UELP</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">barcode_form_rightleft</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">nedge</span><span class="p">();</span>
+
+    <span class="k">using</span> <span class="n">TC</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">::</span><span class="n">col_type</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="n">facts</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+
+    <span class="c1">// copy matrices on edges</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">edata</span><span class="p">;</span>
+
+    <span class="n">type_A_rightleft_sweep1</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="c1">// we don&#39;t do second sweep if we only want barcode form</span>
+    <span class="n">type_A_rightleft_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="c1">// dump E matrices to return</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">mats</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">Divide and conquer declarations</span>
+<span class="cm">*/</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_dq_EL</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_dq_EU</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">ssize_t</span> <span class="n">type_A_dq_common</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// phase 1 - divide into two sub-quivers</span>
+    <span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="p">(</span><span class="n">j0</span> <span class="o">+</span> <span class="n">j1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//edge at j2 will be LQU factorization</span>
+    <span class="c1">// std::cout &lt;&lt; &quot;partitioning at &quot; &lt;&lt; j2 &lt;&lt;  std::endl;</span>
+    <span class="kt">size_t</span> <span class="n">j0b</span> <span class="o">=</span> <span class="n">j2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">j1a</span> <span class="o">=</span> <span class="n">j2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+
+    <span class="c1">// left side will be EL-type, right-side will be EU-type</span>
+    <span class="cp">#pragma omp task shared(dgm, facts, mats) firstprivate(j0, j0b)</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">type_A_dq_EL</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j0b</span><span class="p">);</span>
+    <span class="cp">#pragma omp task shared(dgm, facts, mats) firstprivate(j1a, j1)</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">type_A_dq_EU</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j1a</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+    <span class="cp">#pragma omp taskwait</span>
+
+    <span class="c1">// now do the LQU factorization in the middle</span>
+    <span class="c1">// first pass the UP and PL terms from left and right</span>
+    <span class="n">pass_PL_left</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j1a</span><span class="p">);</span>
+    <span class="n">pass_UP_right</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j0b</span><span class="p">);</span>
+
+    <span class="c1">// take LQU factorization</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">j2</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j2</span><span class="p">])</span> <span class="o">?</span> <span class="n">LQU</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j2</span><span class="p">])</span> <span class="o">:</span> <span class="n">UQL</span><span class="p">(</span><span class="n">mats</span><span class="p">[</span><span class="n">j2</span><span class="p">]);</span>
+
+    <span class="c1">// pass L and U factors out</span>
+    <span class="n">pass_U_right</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
+    <span class="n">pass_L_left</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
+
+    <span class="c1">// commute L and U factors out</span>
+    <span class="c1">// TODO: could specialize for identity</span>
+    <span class="cp">#pragma omp task shared(dgm, facts) firstprivate(j0, j0b)</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">type_A_leftright_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j0b</span><span class="p">);</span>
+    <span class="cp">#pragma omp task shared(dgm, facts) firstprivate(j1a, j1)</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">type_A_rightleft_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j1a</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+    <span class="cp">#pragma omp taskwait</span>
+
+    <span class="c1">// quiver now has pivot matrices everywhere</span>
+    <span class="c1">// there is a dangling L on the left and a dangling U on the right.</span>
+
+    <span class="k">return</span> <span class="n">j2</span><span class="p">;</span> <span class="c1">// return break location</span>
+
+<span class="p">}</span>
+
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_dq_EU</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// first check if j1 - j0 is small enough - then no recursion</span>
+    <span class="c1">// alternatively, if we shouldn&#39;t be spawining new levels of recursion</span>
+    <span class="c1">// if (j1 - j0 &lt; 4) {</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">j1</span> <span class="o">-</span> <span class="n">j0</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">type_A_rightleft_sweep1</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+        <span class="n">type_A_rightleft_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// else, we will recurse on two sub-quivers</span>
+    <span class="kt">ssize_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">type_A_dq_common</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+
+    <span class="c1">// now update the left-hand side to be EU-type</span>
+    <span class="c1">// start with Q term (at j2), then propagate leftward</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">j0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">?</span> <span class="n">PLEU</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">:</span> <span class="n">UELP</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">);</span>
+        <span class="c1">// pass P term to left (L term is identity)</span>
+        <span class="n">pass_P_left</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+        <span class="c1">// pass_PL_left(dgm, facts, j);</span>
+    <span class="p">}</span>
+    <span class="c1">// handle last node - has dangling L term.</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">j0</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j0</span><span class="p">])</span> <span class="o">?</span> <span class="n">PLEU</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j0</span><span class="p">].</span><span class="n">L</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">j0</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">:</span> <span class="n">UELP</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j0</span><span class="p">].</span><span class="n">E</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">j0</span><span class="p">].</span><span class="n">L</span><span class="p">);</span>
+    <span class="c1">// now commute U term all the way back</span>
+    <span class="n">type_A_rightleft_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+
+    <span class="c1">// at the end, we have:</span>
+    <span class="c1">// a hanging PL on the left</span>
+    <span class="c1">// a hanging U on the right</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TC</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">type_A_dq_EL</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">facts</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mats</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j0</span><span class="p">,</span>
+    <span class="kt">ssize_t</span> <span class="n">j1</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// first check if j1 - j0 is small enough - then no recursion</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">j1</span> <span class="o">-</span> <span class="n">j0</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">type_A_leftright_sweep1</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+        <span class="n">type_A_leftright_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// else, we will recurse on two sub-quivers</span>
+    <span class="kt">ssize_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">type_A_dq_common</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+
+    <span class="c1">// now update the right-hand side to be EL-type</span>
+    <span class="c1">// start with Q term (at j2), then propagate rightward</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">j1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">?</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">)</span> <span class="o">:</span> <span class="n">PUEL</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">);</span>
+        <span class="c1">// pass P term to right (U term is identity)</span>
+        <span class="n">pass_P_right</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+        <span class="c1">// pass_UP_right(dgm, facts, j);</span>
+    <span class="p">}</span>
+    <span class="c1">// handle last node - has dangling U term.</span>
+    <span class="n">facts</span><span class="p">[</span><span class="n">j1</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">j1</span><span class="p">])</span> <span class="o">?</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j1</span><span class="p">].</span><span class="n">E</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">j1</span><span class="p">].</span><span class="n">U</span><span class="p">)</span> <span class="o">:</span> <span class="n">PUEL</span><span class="p">(</span><span class="n">facts</span><span class="p">[</span><span class="n">j1</span><span class="p">].</span><span class="n">U</span> <span class="o">*</span> <span class="n">facts</span><span class="p">[</span><span class="n">j1</span><span class="p">].</span><span class="n">E</span><span class="p">);</span>
+    <span class="c1">// now commute L term all the way back</span>
+    <span class="n">type_A_leftright_sweep2</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
+
+    <span class="c1">// at the end, we have:</span>
+    <span class="c1">// a hanging L on the left</span>
+    <span class="c1">// a hanging UP on the right</span>
+    <span class="k">return</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">barcode_form_divide_conquer</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">nedge</span><span class="p">();</span>
+
+    <span class="c1">// compute number of levels of recursion to use</span>
+    <span class="kt">int</span> <span class="n">nthreads</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">omp_get_num_threads</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">nlevels</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">nthreads</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">nlevels</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="c1">// check if we should just do sequential algorithm</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="o">||</span> <span class="n">nlevels</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">barcode_form_leftright</span><span class="p">(</span><span class="n">dgm</span><span class="p">);}</span>
+
+    <span class="k">using</span> <span class="n">TC</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">::</span><span class="n">col_type</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;&gt;</span> <span class="n">facts</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+
+    <span class="c1">// copy matrices on edges</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">edata</span><span class="p">;</span>
+
+    <span class="c1">// begin parallel region</span>
+    <span class="cp">#pragma omp parallel default(none) shared(dgm, facts, mats, m, nlevels)</span>
+    <span class="p">{</span>
+        <span class="cp">#pragma omp single nowait</span>
+        <span class="p">{</span>
+            <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">type_A_dq_common</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">facts</span><span class="p">,</span> <span class="n">mats</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// we don&#39;t do second sweep if we only want barcode form</span>
+
+    <span class="c1">// dump E matrices to return</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mats</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">facts</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">E</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">mats</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+
+
+<span class="k">struct</span> <span class="nc">bar</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">start</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">start_ind</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">end</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">end_ind</span><span class="p">;</span>
+
+    <span class="n">bar</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="n">bar</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">s</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">si</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">t</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">ti</span><span class="p">)</span> <span class="o">:</span> <span class="n">start</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">start_ind</span><span class="p">(</span><span class="n">si</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">end_ind</span><span class="p">(</span><span class="n">ti</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TN</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="n">barcode_from_barcode_form</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">mat</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">TN</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">dgm</span><span class="p">.</span><span class="n">nedge</span><span class="p">();</span> <span class="c1">// number of edges</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="n">bars</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">piv_to_ind</span><span class="p">,</span> <span class="n">piv_to_ind2</span><span class="p">;</span>
+
+    <span class="c1">// first edge</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="c1">// &lt;-</span>
+        <span class="c1">// loop over rows</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">nrow</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bars</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">bar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+            <span class="n">piv_to_ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// -&gt;</span>
+        <span class="c1">// loop over columns</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bars</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">bar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">));</span>
+            <span class="n">piv_to_ind</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">piv_to_ind2</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// updated pivots</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_left_arrow</span><span class="p">(</span><span class="n">dgm</span><span class="p">.</span><span class="n">elist</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="c1">// &lt;-</span>
+            <span class="c1">// extend bar by row</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">mat</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">piv</span> <span class="o">==</span> <span class="n">mat</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
+                    <span class="c1">// no extension to complete. start new bar</span>
+                    <span class="n">piv_to_ind2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bars</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                    <span class="n">bars</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">bar</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">));</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// extend bar that is in pivot row</span>
+                    <span class="kt">size_t</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">piv_to_ind</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
+                    <span class="n">bars</span><span class="p">[</span><span class="n">pi</span><span class="p">].</span><span class="n">end</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="n">bars</span><span class="p">[</span><span class="n">pi</span><span class="p">].</span><span class="n">end_ind</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                    <span class="n">piv_to_ind2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// -&gt;</span>
+            <span class="c1">// extend bar by column</span>
+            <span class="c1">// easier to work on transpose</span>
+            <span class="k">auto</span> <span class="n">matT</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">T</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">matT</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">matT</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">piv</span> <span class="o">==</span> <span class="n">matT</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
+                    <span class="c1">// no extension to complete. start new bar</span>
+                    <span class="c1">// i.e. row was not in range of matrix</span>
+                    <span class="n">piv_to_ind2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bars</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+                    <span class="n">bars</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">bar</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">));</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="c1">// extend bar that is in pivot row</span>
+                    <span class="kt">size_t</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">piv_to_ind</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
+                    <span class="n">bars</span><span class="p">[</span><span class="n">pi</span><span class="p">].</span><span class="n">end</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="n">bars</span><span class="p">[</span><span class="n">pi</span><span class="p">].</span><span class="n">end_ind</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                    <span class="n">piv_to_ind2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+        <span class="c1">// swap roles of pivot lookups</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">piv_to_ind</span><span class="p">,</span> <span class="n">piv_to_ind2</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="k">return</span> <span class="n">bars</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">bars_to_pairs</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">bars</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">hdim</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">bars</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">pairs</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">PersistencePair</span><span class="p">(</span><span class="n">hdim</span><span class="p">,</span> <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">start_ind</span><span class="p">,</span> <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end_ind</span><span class="p">,</span> <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">start</span><span class="p">,</span> <span class="n">bars</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">end</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">pairs</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">barcode_sparse</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">hdim</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">barcode_form_leftright</span><span class="p">(</span><span class="n">dgm</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">bars</span> <span class="o">=</span> <span class="n">barcode_from_barcode_form</span><span class="p">(</span><span class="n">mats</span><span class="p">,</span> <span class="n">dgm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">bars_to_pairs</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">hdim</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">barcode_sparse_rightleft</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">hdim</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">barcode_form_rightleft</span><span class="p">(</span><span class="n">dgm</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">bars</span> <span class="o">=</span> <span class="n">barcode_from_barcode_form</span><span class="p">(</span><span class="n">mats</span><span class="p">,</span> <span class="n">dgm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">bars_to_pairs</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">hdim</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">barcode_sparse_leftright</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">hdim</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">barcode_form_leftright</span><span class="p">(</span><span class="n">dgm</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">bars</span> <span class="o">=</span> <span class="n">barcode_from_barcode_form</span><span class="p">(</span><span class="n">mats</span><span class="p">,</span> <span class="n">dgm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">bars_to_pairs</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">hdim</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">barcode_sparse_divide_conquer</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">hdim</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mats</span> <span class="o">=</span> <span class="n">barcode_form_divide_conquer</span><span class="p">(</span><span class="n">dgm</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">bars</span> <span class="o">=</span> <span class="n">barcode_from_barcode_form</span><span class="p">(</span><span class="n">mats</span><span class="p">,</span> <span class="n">dgm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">bars_to_pairs</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">hdim</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

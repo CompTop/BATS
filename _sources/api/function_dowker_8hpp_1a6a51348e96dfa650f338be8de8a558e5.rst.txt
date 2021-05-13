@@ -1,0 +1,13 @@
+.. _exhale_function_dowker_8hpp_1a6a51348e96dfa650f338be8de8a558e5:
+
+Template Function bats::increment_m
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::increment_m(const Matrix<T>&, std::vector<T>&)

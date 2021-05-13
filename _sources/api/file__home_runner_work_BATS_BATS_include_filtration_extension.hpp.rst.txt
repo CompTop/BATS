@@ -1,0 +1,54 @@
+
+.. _file__home_runner_work_BATS_BATS_include_filtration_extension.hpp:
+
+File extension.hpp
+==================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_filtration>` (``/home/runner/work/BATS/BATS/include/filtration``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/filtration/extension.hpp``)
+-----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_filtration_extension.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``functional``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration.hpp`
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_extension_8hpp_1aa3786aaa9529d8dd73eb57f7b08e5000`
+
+- :ref:`exhale_function_extension_8hpp_1aa0fbf74d891298a893a71eaba441b84e`
+

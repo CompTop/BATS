@@ -1,0 +1,32 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_bats.hpp:
+
+Program Listing for File bats.hpp
+=================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_bats.hpp>` (``/home/runner/work/BATS/BATS/include/bats.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   /*
+   Single header file to include all functionality
+   */
+   #ifdef BATS_OPCOUNT
+   namespace bats {
+       unsigned global_ops;
+   }
+   #endif
+   
+   #include "linalg.hpp"
+   #include "complex.hpp"
+   #include "filtration.hpp"
+   #include "chain.hpp"
+   #include "homology.hpp"
+   #include "persistence.hpp"
+   #include "multigraph.hpp"
+   #include "quiver.hpp"
+   #include "topology.hpp"
+   #include "future.hpp"

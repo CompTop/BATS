@@ -1,0 +1,13 @@
+.. _exhale_function_col__matrix_8hpp_1a35cdf4312a9e570693a49d4e33a0648e:
+
+Template Function gemv
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: gemv(ColumnMatrix<TC>&, const TC&)

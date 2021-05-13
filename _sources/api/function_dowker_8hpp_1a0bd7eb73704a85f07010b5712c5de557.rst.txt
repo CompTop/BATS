@@ -1,0 +1,13 @@
+.. _exhale_function_dowker_8hpp_1a0bd7eb73704a85f07010b5712c5de557:
+
+Template Function bats::witness_edges(const DataSet<T>&, const DataSet<T>&, const M&)
+=====================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::witness_edges(const DataSet<T>&, const DataSet<T>&, const M&)

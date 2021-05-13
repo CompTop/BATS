@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File zigzag_zoo.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File zigzag_zoo.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-zigzag-zoo-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-topology-zigzag-zoo-hpp"></span><h1>Program Listing for File zigzag_zoo.hpp<a class="headerlink" href="#program-listing-for-file-zigzag-zoo-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp.html#file-home-runner-work-bats-bats-include-topology-zigzag-zoo-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/topology/zigzag_zoo.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cm">/*</span>
+<span class="cm">helpers for constructions in &quot;Zigzag Zoology: Rips Zigzags for Homology Inference&quot;</span>
+<span class="cm">by Oudot and Sheehy (2015) [OS15]</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;data.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;inclusion.hpp&quot;</span><span class="c1">                // linear_subset_union_diagram</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;landmark.hpp&quot;</span><span class="c1">             // greedy_landmarks_hausdorff</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;multigraph/diagram.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;multigraph/functors.hpp&gt;</span><span class="c1">  // Rips functor</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="cm">/*</span>
+<span class="cm">determine set of indices to use for dM-ZZ construction</span>
+<span class="cm">hds - hausdorff distance of each point to point set.</span>
+<span class="cm">    assume in decreasing order.</span>
+<span class="cm">rho - rips multiplier - should be &gt;10 [OS15 thm 4.6]</span>
+<span class="cm">theta - depends on dimension of data.  In [0.5, 1/sqrt(2))[OS15 eq. 1]</span>
+<span class="cm">      - if unsure, set to 0.5 for finer discretization</span>
+<span class="cm">*/</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_dM_ZZ_inds</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">hds</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">T</span> <span class="n">rho</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">T</span> <span class="n">theta</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="n">eta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">+</span> <span class="mi">20</span><span class="p">);</span> <span class="c1">// [OS15 eq. 12]</span>
+
+    <span class="c1">// to return</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">inds2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">hds2</span><span class="p">;</span>
+
+    <span class="n">inds2</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>      <span class="c1">// emplace first point</span>
+    <span class="n">hds2</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">hds</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>  <span class="c1">// Hausdorff distance of first point to full set</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">hds</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="p">(</span><span class="n">hds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">hds2</span><span class="p">.</span><span class="n">back</span><span class="p">())</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">inds2</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">hds2</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">hds</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">inds2</span><span class="p">;</span> <span class="c1">//make_tuple(inds2, hds2);</span>
+<span class="p">}</span>
+
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Diagram</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">DiscreteMorozovZigzagSets</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">DataSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">D</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">M</span> <span class="o">&amp;</span><span class="n">dist</span><span class="p">,</span>
+    <span class="n">T</span> <span class="n">rho</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">i0</span> <span class="o">=</span> <span class="n">approx_center</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">dist</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="p">[</span> <span class="n">inds</span><span class="p">,</span> <span class="n">hds</span> <span class="p">]</span> <span class="o">=</span> <span class="n">greedy_landmarks_hausdorff</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">i0</span><span class="p">);</span>
+
+    <span class="n">T</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">dim</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">dim</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span> <span class="c1">// [OS15 eq. 1]</span>
+
+    <span class="k">auto</span> <span class="n">inds2</span> <span class="o">=</span> <span class="n">get_dM_ZZ_inds</span><span class="p">(</span><span class="n">hds</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">inds2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+    <span class="c1">// construct sets for Rips</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">rmax</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// stores rips parameters</span>
+
+    <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">SetDgm</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+
+
+    <span class="k">auto</span> <span class="n">indit</span>  <span class="o">=</span> <span class="n">inds</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">indit2</span> <span class="o">=</span> <span class="n">inds2</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;constructing sets&quot; &lt;&lt; std::endl;</span>
+    <span class="c1">// loop over each set size</span>
+    <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// node index</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">indit2</span> <span class="o">!=</span> <span class="n">inds2</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// std::cout &lt;&lt; j &lt;&lt; std::endl;</span>
+
+        <span class="c1">// fill in sets up to level specified by inds2[i]</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="o">*</span><span class="n">indit2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="o">*</span><span class="n">indit</span><span class="o">++</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot; &lt;&lt; s.size() &lt;&lt; &quot;,&quot; &lt;&lt; *indit2 &lt;&lt; std::endl;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">SetDgm</span><span class="p">.</span><span class="n">set_node</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="c1">// set node</span>
+            <span class="n">rmax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">hds</span><span class="p">[</span><span class="o">*</span><span class="p">(</span><span class="n">indit2</span> <span class="mi">-1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">rho</span><span class="p">;</span> <span class="c1">// rips level</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">SetDgm</span><span class="p">.</span><span class="n">set_node</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span> <span class="c1">// set node</span>
+        <span class="n">rmax</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">hds</span><span class="p">[</span><span class="o">*</span><span class="n">indit2</span><span class="o">++</span><span class="p">]</span> <span class="o">*</span> <span class="n">rho</span><span class="p">;</span> <span class="c1">// rips level</span>
+        <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;constructing edges&quot; &lt;&lt; std::endl;</span>
+    <span class="c1">// set edges to be inclusion maps</span>
+    <span class="c1">// #pragma omp parallel for</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// -&gt;</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">;</span> <span class="c1">// edge_index</span>
+        <span class="kt">size_t</span> <span class="n">src</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">targ</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="n">SetDgm</span><span class="p">.</span><span class="n">set_edge</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">targ</span><span class="p">,</span> <span class="n">vertex_inclusion_map</span><span class="p">(</span><span class="n">SetDgm</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">src</span><span class="p">],</span> <span class="n">SetDgm</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">targ</span><span class="p">]));</span>
+
+        <span class="c1">// &lt;-</span>
+        <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// update edge index</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// update source</span>
+        <span class="n">SetDgm</span><span class="p">.</span><span class="n">set_edge</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">targ</span><span class="p">,</span> <span class="n">vertex_inclusion_map</span><span class="p">(</span><span class="n">SetDgm</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">src</span><span class="p">],</span> <span class="n">SetDgm</span><span class="p">.</span><span class="n">node</span><span class="p">[</span><span class="n">targ</span><span class="p">]));</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">make_tuple</span><span class="p">(</span><span class="n">SetDgm</span><span class="p">,</span> <span class="n">rmax</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="c1">// rho - rips multiplier - should be &gt;10 [OS15 thm 4.6]</span>
+<span class="c1">// returns diagram of Rips complexes, rips parameter for each complex.</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Diagram</span><span class="o">&lt;</span><span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">CellularMap</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">DiscreteMorozovZigzag</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">DataSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">D</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">M</span> <span class="o">&amp;</span><span class="n">dist</span><span class="p">,</span>
+    <span class="n">T</span> <span class="n">rho</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">dmax</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">auto</span> <span class="p">[</span><span class="n">SetDgm</span><span class="p">,</span> <span class="n">rmax</span><span class="p">]</span> <span class="o">=</span> <span class="n">DiscreteMorozovZigzagSets</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rho</span><span class="p">);</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;applying Rips&quot; &lt;&lt; std::endl;</span>
+    <span class="c1">// now apply Rips functor</span>
+    <span class="k">auto</span> <span class="n">RipsDgm</span> <span class="o">=</span> <span class="n">Rips</span><span class="p">(</span><span class="n">SetDgm</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rmax</span><span class="p">,</span> <span class="n">dmax</span><span class="p">);</span>
+
+    <span class="c1">// std::cout &lt;&lt; &quot;constructing tuple&quot; &lt;&lt; std::endl;</span>
+    <span class="k">return</span> <span class="n">make_tuple</span><span class="p">(</span><span class="n">RipsDgm</span><span class="p">,</span> <span class="n">rmax</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// TODO: add magic function that computes barcode for you</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

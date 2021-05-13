@@ -1,0 +1,17 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_filtration.hpp:
+
+Program Listing for File filtration.hpp
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_filtration.hpp>` (``/home/runner/work/BATS/BATS/include/filtration.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include "filtration/filtration.hpp"
+   #include "filtration/extension.hpp"
+   #include "filtration/flag.hpp"

@@ -1,0 +1,13 @@
+.. _exhale_function_cubical__map_8hpp_1a51c796239cb41f2376336b0b40e93d2c:
+
+Function bats::CubicalMap
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::CubicalMap(const CubicalComplex&, const CubicalComplex&)

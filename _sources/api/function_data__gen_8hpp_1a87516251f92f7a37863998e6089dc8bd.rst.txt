@@ -1,0 +1,13 @@
+.. _exhale_function_data__gen_8hpp_1a87516251f92f7a37863998e6089dc8bd:
+
+Template Function bats::sample_sphere
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::sample_sphere(const size_t, const size_t)

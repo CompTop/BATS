@@ -1,0 +1,13 @@
+.. _exhale_function_sparse_8hpp_1a03301a2ba626da435f78604431d12866:
+
+Template Function bats::type_A_rightleft_sweep1
+===============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::type_A_rightleft_sweep1(const Diagram<NT, TM>&, std::vector<SparseFact<TC>>&, std::vector<TM>&, ssize_t, ssize_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_simplex_8hpp_1a34bcefda794c5895617e86ae6ccbcb78:
+
+Template Function bats::util::read_simplex
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::read_simplex(std::string&, std::vector<T>&)

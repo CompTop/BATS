@@ -1,0 +1,929 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File simplicial_complex.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File simplicial_complex.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-simplicial-complex-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-complex-simplicial-complex-hpp"></span><h1>Program Listing for File simplicial_complex.hpp<a class="headerlink" href="#program-listing-for-file-simplicial-complex-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp.html#file-home-runner-work-bats-bats-include-complex-simplicial-complex-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/complex/simplicial_complex.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limits&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iterator&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;abstract_complex.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;util/common.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/csc_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;util/sorted.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;util/trie.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;filtration/filtration.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;morse/pairing.hpp&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;util/simplex.hpp&gt;</span><span class="c1"> // for hash function</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="cm">/*</span>
+<span class="cm">simplicial complex implementation</span>
+<span class="cm">TODO: if forming full clique complex</span>
+<span class="cm">can give all simplices unique location for lookup</span>
+<span class="cm">*/</span>
+<span class="k">class</span> <span class="nc">SimplicialComplex</span>
+<span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">// maybe make template parameter for container?</span>
+    <span class="c1">// using spx_map = std::unordered_map&lt;std::vector&lt;size_t&gt;, size_t, SimplexHasher&gt;;</span>
+    <span class="c1">// using spx_map = std::map&lt;std::vector&lt;size_t&gt;, size_t&gt;;</span>
+    <span class="k">using</span> <span class="n">spx_map</span> <span class="o">=</span> <span class="n">SparseTrie</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="c1">// container that holds simplices</span>
+    <span class="c1">// TODO: can combine this with Trie pointer</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">spx</span><span class="p">;</span>
+
+    <span class="c1">// container for simplices of a fixed dimension</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">faces</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">coeff</span><span class="p">;</span>
+
+
+    <span class="c1">// keeps track of how many cells are in given dimension</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">_ncells</span><span class="p">;</span>
+    <span class="c1">// keeps track of reserved capacity</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">_reserved</span><span class="p">;</span>
+    <span class="c1">// for iterating over faces</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">__face</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">__perm</span><span class="p">;</span> <span class="c1">// for sortperms</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">__tmpc</span><span class="p">;</span> <span class="c1">// temporary coeff</span>
+
+
+    <span class="c1">// map to find simplices when forming boundary</span>
+    <span class="n">spx_map</span> <span class="n">spx_to_idx</span><span class="p">;</span>
+
+
+    <span class="c1">// reserve for maxdim dimensional simplices</span>
+    <span class="kt">void</span> <span class="nf">reserve</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">_ncells</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxdim</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_ncells</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxdim</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">_reserved</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxdim</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_reserved</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxdim</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">spx</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxdim</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span> <span class="n">spx</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxdim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">faces</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxdim</span> <span class="p">)</span> <span class="p">{</span> <span class="n">faces</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxdim</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">coeff</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxdim</span> <span class="p">)</span> <span class="p">{</span> <span class="n">coeff</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxdim</span><span class="p">);</span> <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// assume dim &gt; 0</span>
+    <span class="kt">void</span> <span class="nf">reserve</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reserve</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+        <span class="n">_reserved</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">_reserved</span><span class="p">[</span><span class="n">dim</span><span class="p">],</span> <span class="n">k</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">reserve</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">reserve</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+            <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">reserve</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// adds a simplex to the complex without doing any checks</span>
+    <span class="c1">// assume dim &gt; 0</span>
+    <span class="n">cell_ind</span> <span class="nf">_add_unsafe</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="c1">// get index of simplex</span>
+        <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">_ncells</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="c1">// determine faces</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+            <span class="c1">// first we&#39;ll add faces</span>
+            <span class="kt">size_t</span> <span class="n">old_size</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+
+            <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span>
+            <span class="c1">// loop over faces in lexicographical order</span>
+            <span class="kt">size_t</span> <span class="n">spx_len</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">spx_len</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="kt">size_t</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">dim</span><span class="o">-</span><span class="n">k</span><span class="p">;</span> <span class="c1">// index to skip</span>
+                <span class="n">__face</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">__face</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k2</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">spx_len</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">__face</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+                <span class="p">}</span>
+
+                <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">find_idx</span><span class="p">(</span><span class="n">__face</span><span class="p">);</span>
+                <span class="c1">// return NO_IND if faces haven&#39;t been added</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">ind</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// remove boundary placed so far</span>
+                    <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">resize</span><span class="p">(</span><span class="n">old_size</span><span class="p">);</span>
+                    <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">resize</span><span class="p">(</span><span class="n">old_size</span><span class="p">);</span>
+                    <span class="n">_ncells</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span><span class="o">--</span><span class="p">;</span> <span class="c1">// we don&#39;t add the cell</span>
+                    <span class="k">return</span> <span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ind</span><span class="p">);</span>
+                <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">// if we made it to this point, the simplex will be added</span>
+            <span class="c1">// we should sort the faces and coeff</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">fill_sortperm</span><span class="p">(</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ind</span><span class="p">),</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span>
+                <span class="n">__perm</span>
+            <span class="p">);</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ind</span><span class="p">),</span>
+                <span class="n">__face</span><span class="p">,</span>
+                <span class="n">__perm</span>
+            <span class="p">);</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span>
+                <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ind</span><span class="p">),</span>
+                <span class="n">__tmpc</span><span class="p">,</span>
+                <span class="n">__perm</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// if we succeeded (faces were present), we add the simplex</span>
+
+        <span class="c1">// add to map</span>
+        <span class="n">spx_to_idx</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// add simplex to complex with appropriate checks</span>
+    <span class="n">cell_ind</span> <span class="nf">add_safe</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="c1">// check that we have reserved memory for dimension</span>
+        <span class="n">reserve</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+
+        <span class="c1">// ensure simplex is sorted</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="c1">// check if simplex is already in complex</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">spx_to_idx</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// simplex is already in complex</span>
+            <span class="k">return</span> <span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">spx_to_idx</span><span class="p">[</span><span class="n">s</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="c1">// we&#39;re clear to add</span>
+        <span class="k">return</span> <span class="n">_add_unsafe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// adds a simplex to the complex without doing any checks</span>
+    <span class="c1">// recurse on faces</span>
+    <span class="c1">// put any added cells in ci</span>
+    <span class="n">cell_ind</span> <span class="nf">_add_recursive</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ci</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="c1">// get index of simplex</span>
+        <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">_ncells</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+
+        <span class="c1">// determine faces</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+            <span class="c1">// first we&#39;ll add faces</span>
+
+            <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">face</span><span class="p">;</span> <span class="c1">// newly allocated face</span>
+
+            <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span>
+            <span class="c1">// loop over faces in lexicographical order</span>
+            <span class="kt">size_t</span> <span class="n">spx_len</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">spx_len</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="kt">size_t</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">dim</span><span class="o">-</span><span class="n">k</span><span class="p">;</span> <span class="c1">// index to skip</span>
+                <span class="n">face</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">face</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k2</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">spx_len</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">face</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+                <span class="p">}</span>
+
+                <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">find_idx</span><span class="p">(</span><span class="n">face</span><span class="p">);</span>
+                <span class="c1">// add face recursively</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">ind</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">cell_ind</span> <span class="n">fci</span> <span class="o">=</span> <span class="n">_add_recursive</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="n">ci</span><span class="p">);</span>
+                    <span class="n">ind</span> <span class="o">=</span> <span class="n">fci</span><span class="p">.</span><span class="n">ind</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ind</span><span class="p">);</span>
+                <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">// if we made it to this point, the simplex will be added</span>
+            <span class="c1">// we should sort the faces and coeff</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">fill_sortperm</span><span class="p">(</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ind</span><span class="p">),</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span>
+                <span class="n">__perm</span>
+            <span class="p">);</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span>
+                <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ind</span><span class="p">),</span>
+                <span class="n">__face</span><span class="p">,</span>
+                <span class="n">__perm</span>
+            <span class="p">);</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span>
+                <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ind</span><span class="p">),</span>
+                <span class="n">__tmpc</span><span class="p">,</span>
+                <span class="n">__perm</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// if we succeeded (faces were present), we add the simplex</span>
+
+        <span class="c1">// add to map</span>
+        <span class="n">spx_to_idx</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">ci</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">ind</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// add simplex to complex with appropriate checks</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">add_safe_recursive</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="c1">// check that we have reserved memory for dimension</span>
+        <span class="n">reserve</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+
+        <span class="c1">// ensure simplex is sorted</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="c1">// check if simplex is already in complex</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">spx_to_idx</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// simplex is already in complex</span>
+            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="p">{</span><span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">spx_to_idx</span><span class="p">[</span><span class="n">s</span><span class="p">])};</span>
+        <span class="p">}</span>
+        <span class="c1">// we&#39;re clear to add</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">ci</span><span class="p">;</span>
+        <span class="n">_add_recursive</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ci</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">ci</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="c1">// default constructor</span>
+    <span class="n">SimplicialComplex</span><span class="p">()</span> <span class="p">{</span> <span class="n">reserve</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="c1">// constructor that initializes to set dimension</span>
+    <span class="n">SimplicialComplex</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">)</span> <span class="p">{</span> <span class="n">reserve</span><span class="p">(</span><span class="n">maxdim</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="n">SimplicialComplex</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reserve</span><span class="p">(</span><span class="n">maxdim</span><span class="p">);</span>
+        <span class="n">reserve</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// constructor that reserves space for given number of simplices in each dimension</span>
+    <span class="n">SimplicialComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dim</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">d</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">reserve</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">dim</span><span class="p">[</span><span class="n">d</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">SimplicialComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;&amp;</span><span class="n">fname</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reserve</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="nf">file</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+            <span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span> <span class="c1">// TODO: should be &quot;SimplicialComplex&quot;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">spx</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">read_simplex</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">spx</span><span class="p">);</span>
+                <span class="k">this</span><span class="o">-&gt;</span><span class="n">add_safe</span><span class="p">(</span><span class="n">spx</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to read simplicial complex from &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">fname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// // read from file</span>
+    <span class="c1">// SimplicialComplex(const std::string fname) {</span>
+    <span class="c1">//</span>
+    <span class="c1">// }</span>
+
+    <span class="c1">// inline spx_map&amp; trie() { return spx_to_idx; }</span>
+
+    <span class="c1">// returns index of simplex</span>
+    <span class="c1">// TODO: find a way to do this with a single traversal of spx_to_idx</span>
+    <span class="kt">size_t</span> <span class="n">find_idx</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">spx_to_idx</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">size_t</span> <span class="n">find_idx</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">spx_to_idx</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// maximum dimension of cell</span>
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_ncells</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+    <span class="c1">// number of cells in dimension k</span>
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">ncells</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_ncells</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="p">}</span>
+    <span class="c1">// total number of cells</span>
+    <span class="kt">size_t</span> <span class="n">ncells</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ct</span> <span class="o">+=</span> <span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">ct</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// inline cell_ind add_unsafe(</span>
+    <span class="c1">//     std::vector&lt;size_t&gt; &amp;s</span>
+    <span class="c1">// ) { return add_unsafe(s); }</span>
+
+    <span class="c1">// add simplex to complex</span>
+    <span class="kr">inline</span> <span class="n">cell_ind</span> <span class="n">add</span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">add_safe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="n">cell_ind</span> <span class="n">add</span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">s</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">add_safe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">add_recursive</span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">add_safe_recursive</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">add_recursive</span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span><span class="n">s</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">add_safe_recursive</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="p">}</span>
+    <span class="c1">// inline size_t add_vertex() { return _add_vertex(); }</span>
+    <span class="c1">// inline size_t add_vertices(size_t k) { return _add_vertices(k); }</span>
+
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">faces_begin</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">faces_begin</span><span class="p">(</span><span class="k">const</span> <span class="n">cell_ind</span> <span class="o">&amp;</span><span class="n">ci</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">faces_begin</span><span class="p">(</span><span class="n">ci</span><span class="p">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">ci</span><span class="p">.</span><span class="n">ind</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">faces_end</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">faces_end</span><span class="p">(</span><span class="k">const</span> <span class="n">cell_ind</span> <span class="o">&amp;</span><span class="n">ci</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">faces_end</span><span class="p">(</span><span class="n">ci</span><span class="p">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">ci</span><span class="p">.</span><span class="n">ind</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="c1">// get simplex from index</span>
+    <span class="c1">// get simplex i in dimension dim</span>
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">simplex_end</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return simplex i in dimension dim</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_simplex</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">simplex_end</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="n">it</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// return simplices in dimension dim</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">get_simplices</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">simplices</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">simplices</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">simplices</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return all simplices</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">get_simplices</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">simplices</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">simplices</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+                    <span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">simplices</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// take union of simplicial complex with Y</span>
+    <span class="kt">void</span> <span class="n">union_add</span><span class="p">(</span><span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">Y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="n">Y</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">Y</span><span class="p">.</span><span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">add_safe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+                    <span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">friend</span> <span class="n">SimplicialComplex</span> <span class="n">simplicial_union</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">X</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">Y</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">SimplicialComplex</span> <span class="n">XY</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">nk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">nk</span> <span class="o">&lt;</span> <span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="n">nk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">s</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">get_simplex</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">nk</span><span class="p">);</span>
+                <span class="n">XY</span><span class="p">.</span><span class="n">add_safe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">Y</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">nk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">nk</span> <span class="o">&lt;</span> <span class="n">Y</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="n">nk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Y</span><span class="p">.</span><span class="n">get_simplex</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">nk</span><span class="p">);</span>
+                <span class="n">XY</span><span class="p">.</span><span class="n">add_safe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">XY</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// get indices in subcomplex A in dimension dim</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_indices</span><span class="p">(</span><span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">.</span><span class="n">maxdim</span><span class="p">())</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span> <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">inds</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">));</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">s</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">get_simplex</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">inds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_idx</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">inds</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">get_indices</span><span class="p">(</span><span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">inds</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">inds</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">get_indices</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dim</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">inds</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return intersection of simplicial complexes X and Y</span>
+    <span class="k">friend</span> <span class="n">SimplicialComplex</span> <span class="n">intersection</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">X</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">SimplicialComplex</span><span class="o">&amp;</span> <span class="n">Y</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">SimplicialComplex</span> <span class="nf">XY</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">());</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">nk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">nk</span> <span class="o">&lt;</span> <span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="n">nk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">s</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">get_simplex</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">nk</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">Y</span><span class="p">.</span><span class="n">find_idx</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">XY</span><span class="p">.</span><span class="n">_add_unsafe</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">XY</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return inds, vals in boundary</span>
+    <span class="k">auto</span> <span class="n">boundary</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">indbegin</span> <span class="o">=</span> <span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>
+        <span class="kt">size_t</span> <span class="n">indend</span> <span class="o">=</span> <span class="n">indbegin</span> <span class="o">+</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">ind</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">indbegin</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">indend</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+            <span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// get CSC integer matrix boundary in dimension dim</span>
+    <span class="n">CSCMatrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">boundary_csc</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+        <span class="c1">// create colptr</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">colptr</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">vbeg</span> <span class="o">=</span> <span class="n">colptr</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+        <span class="k">auto</span> <span class="n">vend</span> <span class="o">=</span> <span class="n">colptr</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+        <span class="kt">size_t</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">vbeg</span> <span class="o">!=</span> <span class="n">vend</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">vbeg</span><span class="o">++</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+            <span class="n">val</span> <span class="o">+=</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// create rowind</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">rowind</span><span class="p">;</span>
+        <span class="n">rowind</span><span class="p">.</span><span class="n">reserve</span><span class="p">((</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="c1">// create val</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">ival</span><span class="p">.</span><span class="n">reserve</span><span class="p">((</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span>
+            <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">cbegin</span><span class="p">(),</span>
+            <span class="n">faces</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">cend</span><span class="p">(),</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">rowind</span><span class="p">)</span>
+        <span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span>
+            <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">cbegin</span><span class="p">(),</span>
+            <span class="n">coeff</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">cend</span><span class="p">(),</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">ival</span><span class="p">)</span>
+        <span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">CSCMatrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span>
+            <span class="n">m</span><span class="p">,</span>
+            <span class="n">n</span><span class="p">,</span>
+            <span class="n">colptr</span><span class="p">,</span>
+            <span class="n">rowind</span><span class="p">,</span>
+            <span class="n">ival</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="k">friend</span> <span class="k">class</span> <span class="nc">MorsePairing</span><span class="o">&lt;</span><span class="n">SimplicialComplex</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="o">~</span><span class="n">SimplicialComplex</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//std::cout &lt;&lt; &quot;in simplicial complex destructor&quot; &lt;&lt; std::endl;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="nf">file</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">file</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;SimplicialComplex</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">write_simplex</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">simplex_end</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to write simplicial complex to &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">fname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print_summary</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;SimplicialComplex, maxdim = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">dim &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; cells&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ncells</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; total&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print_cells</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;SimplicialComplex, maxdim = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">sx</span> <span class="p">:</span> <span class="n">get_simplices</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">s</span> <span class="p">:</span> <span class="n">sx</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;,&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+
+
+
+<span class="c1">// helper functions for TriangulatedProduct</span>
+<span class="c1">// prod_ind turns product of 0-simplices to 0-simplex</span>
+<span class="c1">// ind_prod performs inverse operation</span>
+<span class="kr">inline</span> <span class="kt">size_t</span>  <span class="nf">prod_ind</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">j</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// std::tuple&lt;size_t, size_t&gt; ind_prod(size_t k, size_t n) {</span>
+<span class="c1">//  return std::tie(k % n, k / n);</span>
+<span class="c1">// }</span>
+
+<span class="c1">// loop over all possible simplices</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">itT</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">product_paths</span><span class="p">(</span>
+    <span class="n">CpxT</span> <span class="o">&amp;</span><span class="n">XY</span><span class="p">,</span>
+    <span class="n">itT</span> <span class="n">xit</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">itT</span> <span class="n">xend</span><span class="p">,</span>
+    <span class="n">itT</span> <span class="n">yit</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">itT</span> <span class="n">yend</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// put on vertex</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">prod_ind</span><span class="p">(</span><span class="o">*</span><span class="n">xit</span><span class="p">,</span> <span class="o">*</span><span class="n">yit</span><span class="p">,</span> <span class="n">n</span><span class="p">));</span>
+    <span class="o">++</span><span class="n">xit</span><span class="p">;</span> <span class="o">++</span><span class="n">yit</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xit</span> <span class="o">==</span> <span class="n">xend</span> <span class="o">&amp;&amp;</span> <span class="n">yit</span> <span class="o">==</span> <span class="n">yend</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">XY</span><span class="p">.</span><span class="n">add_recursive</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xit</span> <span class="o">!=</span> <span class="n">xend</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// increment in x direction</span>
+        <span class="n">product_paths</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span> <span class="n">xit</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="o">--</span><span class="n">yit</span><span class="p">,</span> <span class="n">yend</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="o">++</span><span class="n">yit</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">yit</span> <span class="o">!=</span> <span class="n">yend</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// increment in y direction</span>
+        <span class="n">product_paths</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span> <span class="o">--</span><span class="n">xit</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="n">yit</span><span class="p">,</span> <span class="n">yend</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// pop off vertex</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// loop over all possible simplices</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">itT</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">product_paths</span><span class="p">(</span>
+    <span class="n">CpxT</span> <span class="o">&amp;</span><span class="n">XY</span><span class="p">,</span>
+    <span class="n">itT</span> <span class="n">xit</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">itT</span> <span class="n">xend</span><span class="p">,</span>
+    <span class="n">itT</span> <span class="n">yit</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">itT</span> <span class="n">yend</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ci</span> <span class="c1">// holds all top-level simplices added</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// put on vertex</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">prod_ind</span><span class="p">(</span><span class="o">*</span><span class="n">xit</span><span class="p">,</span> <span class="o">*</span><span class="n">yit</span><span class="p">,</span> <span class="n">n</span><span class="p">));</span>
+    <span class="o">++</span><span class="n">xit</span><span class="p">;</span> <span class="o">++</span><span class="n">yit</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xit</span> <span class="o">==</span> <span class="n">xend</span> <span class="o">&amp;&amp;</span> <span class="n">yit</span> <span class="o">==</span> <span class="n">yend</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ci</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">((</span><span class="n">XY</span><span class="p">.</span><span class="n">add_recursive</span><span class="p">(</span><span class="n">s</span><span class="p">)).</span><span class="n">back</span><span class="p">());</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xit</span> <span class="o">!=</span> <span class="n">xend</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// increment in x direction</span>
+        <span class="n">product_paths</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span> <span class="n">xit</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="o">--</span><span class="n">yit</span><span class="p">,</span> <span class="n">yend</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ci</span><span class="p">);</span>
+        <span class="o">++</span><span class="n">yit</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">yit</span> <span class="o">!=</span> <span class="n">yend</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// increment in y direction</span>
+        <span class="n">product_paths</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span> <span class="o">--</span><span class="n">xit</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="n">yit</span><span class="p">,</span> <span class="n">yend</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ci</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// pop off vertex</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// Triangulated product of X and Y up to simplex dimension k</span>
+<span class="c1">// use translator</span>
+<span class="c1">// n is number of possible vertices on X</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+<span class="n">CpxT</span> <span class="n">TriangulatedProduct</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">X</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">Y</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">CpxT</span> <span class="nf">XY</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">Y</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">maxdim</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// placeholder simplex</span>
+    <span class="c1">// loop over simplex dimension of product</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;=</span><span class="n">maxdim</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// dimension of simplices we&#39;ll take a product of</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dX</span> <span class="o">&lt;=</span> <span class="n">dim</span><span class="p">;</span> <span class="n">dX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">size_t</span> <span class="n">dY</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">-</span> <span class="n">dX</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dX</span> <span class="o">&gt;</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">||</span> <span class="n">dY</span> <span class="o">&gt;</span> <span class="n">Y</span><span class="p">.</span><span class="n">maxdim</span><span class="p">())</span> <span class="p">{</span><span class="k">continue</span><span class="p">;}</span>
+
+            <span class="c1">// loop over simplices of dimension dX</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">iX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iX</span> <span class="o">&lt;</span> <span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">dX</span><span class="p">);</span> <span class="n">iX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// loop over simplices of dimension dY</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">iY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iY</span> <span class="o">&lt;</span> <span class="n">Y</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">dY</span><span class="p">);</span> <span class="n">iY</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">product_paths</span><span class="p">(</span>
+                        <span class="n">XY</span><span class="p">,</span>
+                        <span class="n">X</span><span class="p">.</span><span class="n">simplex_begin</span><span class="p">(</span><span class="n">dX</span><span class="p">,</span> <span class="n">iX</span><span class="p">),</span>
+                        <span class="n">X</span><span class="p">.</span><span class="n">simplex_end</span><span class="p">(</span><span class="n">dX</span><span class="p">,</span> <span class="n">iX</span><span class="p">),</span>
+                        <span class="n">Y</span><span class="p">.</span><span class="n">simplex_begin</span><span class="p">(</span><span class="n">dY</span><span class="p">,</span> <span class="n">iY</span><span class="p">),</span>
+                        <span class="n">Y</span><span class="p">.</span><span class="n">simplex_end</span><span class="p">(</span><span class="n">dY</span><span class="p">,</span> <span class="n">iY</span><span class="p">),</span>
+                        <span class="n">s</span><span class="p">,</span>
+                        <span class="n">n</span>
+                    <span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">XY</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">CpxT</span> <span class="n">TriangulatedProduct</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">X</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">Y</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">maxdim</span>
+<span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">TriangulatedProduct</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">maxdim</span><span class="p">,</span> <span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span> <span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">CpxT</span> <span class="n">TriangulatedProduct</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">X</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">Y</span>
+<span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">TriangulatedProduct</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="n">Y</span><span class="p">.</span><span class="n">maxdim</span><span class="p">(),</span> <span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span> <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1a09c123394fe122461562851f96fbc2c6:
+
+Function commute(MAT, MAT)
+==========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: commute(MAT, MAT)

@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1adfc4ae5388763f633b61fd25861fd635:
+
+Function UELP_Fact
+==================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: UELP_Fact(MAT)

@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1ac625d96f949720b3f7a29b3b6ee2c7da:
+
+Template Function LQU_inplace
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: LQU_inplace(SparseFact<TC>&)

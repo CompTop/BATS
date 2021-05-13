@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File nerve.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File nerve.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_topology_nerve.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-nerve-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-topology-nerve-hpp"></span><h1>Program Listing for File nerve.hpp<a class="headerlink" href="#program-listing-for-file-nerve-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_topology_nerve.hpp.html#file-home-runner-work-bats-bats-include-topology-nerve-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/topology/nerve.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cm">/*</span>
+<span class="cm">Nerve of a cover</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;util/sorted.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;complex/simplicial_complex.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cover.hpp&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="kt">void</span> <span class="nf">add_dimension_recursive_nerve</span><span class="p">(</span>
+    <span class="n">SimplicialComplex</span> <span class="o">&amp;</span><span class="n">N</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">spx</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">bats</span><span class="o">::</span><span class="n">Cover</span> <span class="o">&amp;</span><span class="n">cover</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">intersection</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dmax</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">spx</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;=</span> <span class="n">dmax</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">// finds maximum k</span>
+    <span class="kt">size_t</span> <span class="n">kmax</span> <span class="o">=</span> <span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">min_element</span><span class="p">(</span><span class="n">spx</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">spx</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">intersectionk</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">spxk</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">kmax</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">intersect_sorted</span><span class="p">(</span><span class="n">cover</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">intersection</span><span class="p">,</span> <span class="n">intersectionk</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">intersectionk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// add simplex</span>
+            <span class="n">spx</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sort_into</span><span class="p">(</span><span class="n">spx</span><span class="p">,</span> <span class="n">spxk</span><span class="p">);</span>
+            <span class="c1">// add to nerve</span>
+            <span class="n">N</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">spxk</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dmax</span> <span class="o">&gt;</span> <span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">add_dimension_recursive_nerve</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">spxk</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">intersectionk</span><span class="p">,</span> <span class="n">dmax</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">spx</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="c1">// remove k</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">Build nerve of cover up to dmax skeleton</span>
+<span class="cm">*/</span>
+<span class="n">SimplicialComplex</span> <span class="nf">Nerve</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">bats</span><span class="o">::</span><span class="n">Cover</span> <span class="o">&amp;</span><span class="n">cover</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dmax</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// initialize complex</span>
+    <span class="n">SimplicialComplex</span> <span class="n">N</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">intersection</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">spx</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cover</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// add 0-simplex i</span>
+        <span class="n">N</span><span class="p">.</span><span class="n">add</span><span class="p">({</span><span class="n">i</span><span class="p">});</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// check to add edge between i and j</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">intersect_sorted</span><span class="p">(</span><span class="n">cover</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cover</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">intersection</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">intersection</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// add edge</span>
+                <span class="n">spx</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">};</span>
+                <span class="n">N</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">spx</span><span class="p">);</span>
+                <span class="c1">// add higher order simplices recursively, but only for elements &lt; j</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">dmax</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">add_dimension_recursive_nerve</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">spx</span><span class="p">,</span> <span class="n">cover</span><span class="p">,</span> <span class="n">intersection</span><span class="p">,</span> <span class="n">dmax</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">N</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

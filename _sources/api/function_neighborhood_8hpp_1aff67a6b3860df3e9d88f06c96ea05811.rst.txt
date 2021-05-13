@@ -1,0 +1,13 @@
+.. _exhale_function_neighborhood_8hpp_1aff67a6b3860df3e9d88f06c96ea05811:
+
+Template Function bats::neighborhoods(const DataSet<T>&, const DataSet<T>&, const M&, const size_t)
+===================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::neighborhoods(const DataSet<T>&, const DataSet<T>&, const M&, const size_t)

@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Template Class SparseVector &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Template Class UnivariatePolynomial" href="classUnivariatePolynomial.html" />
+    <link rel="prev" title="Template Class SetVector" href="classSetVector.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Template Class SparseVector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classSparseVector.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-sparsevector">
+<span id="exhale-class-classsparsevector"></span><h1>Template Class SparseVector<a class="headerlink" href="#template-class-sparsevector" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp.html#file-home-runner-work-bats-bats-include-linalg-sparse-vector-hpp"><span class="std std-ref">File sparse_vector.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I00E12SparseVector">
+<span id="_CPPv3I00E12SparseVector"></span><span id="_CPPv2I00E12SparseVector"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TV</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TI</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><a class="headerlink" href="#_CPPv4I00E12SparseVector" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector8val_typeE">
+<span id="_CPPv3N12SparseVector8val_typeE"></span><span id="_CPPv2N12SparseVector8val_typeE"></span><span class="target" id="classSparseVector_1a69a511f5ed7d4905d47f61ee6c76ecfb"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">val_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><a class="headerlink" href="#_CPPv4N12SparseVector8val_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector8tmp_typeE">
+<span id="_CPPv3N12SparseVector8tmp_typeE"></span><span id="_CPPv2N12SparseVector8tmp_typeE"></span><span class="target" id="classSparseVector_1a920550bb5ce10a406a56f1ae9cff17d2"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tmp_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">key_type</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N12SparseVector8tmp_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector4sortEv">
+<span id="_CPPv3N12SparseVector4sortEv"></span><span id="_CPPv2N12SparseVector4sortEv"></span><span id="SparseVector::sort"></span><span class="target" id="classSparseVector_1a4e1b405399bab1e9042fe06cb8b4a91d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sort</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector4sortEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12SparseVectorEv">
+<span id="_CPPv3N12SparseVector12SparseVectorEv"></span><span id="_CPPv2N12SparseVector12SparseVectorEv"></span><span id="SparseVector::SparseVector"></span><span class="target" id="classSparseVector_1aaa0caf6acb23a0e5896fe8f3826179a2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12SparseVectorEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12SparseVectorERKNSt6vectorI8key_typeEE">
+<span id="_CPPv3N12SparseVector12SparseVectorERKNSt6vectorI8key_typeEE"></span><span id="_CPPv2N12SparseVector12SparseVectorERKNSt6vectorI8key_typeEE"></span><span id="SparseVector::SparseVector__std::vector:key_type:CR"></span><span class="target" id="classSparseVector_1ae8af03aa49fbf9dddd56925123d08183"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">key_type</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">indval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12SparseVectorERKNSt6vectorI8key_typeEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12SparseVectorERKNSt6vectorI2TIEERKNSt6vectorI2TVEE">
+<span id="_CPPv3N12SparseVector12SparseVectorERKNSt6vectorI2TIEERKNSt6vectorI2TVEE"></span><span id="_CPPv2N12SparseVector12SparseVectorERKNSt6vectorI2TIEERKNSt6vectorI2TVEE"></span><span id="SparseVector::SparseVector__std::vector:TI:CR.std::vector:TV:CR"></span><span class="target" id="classSparseVector_1a6b4e6f2093b46b23822de37a494b3c8a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12SparseVectorERKNSt6vectorI2TIEERKNSt6vectorI2TVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector12SparseVectorERK12SparseVectorIi3TI2E">
+<span id="_CPPv3I0EN12SparseVector12SparseVectorERK12SparseVectorIi3TI2E"></span><span id="_CPPv2I0EN12SparseVector12SparseVectorERK12SparseVectorIi3TI2E"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TI2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a0cc15cdde2a743ed5e4d33282c21b075"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12SparseVector12SparseVectorERK12SparseVectorIi3TI2E" title="SparseVector::SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12SparseVector12SparseVectorERK12SparseVectorIi3TI2E" title="SparseVector::SparseVector::TI2"><span class="n"><span class="pre">TI2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector12SparseVectorERK12SparseVectorIi3TI2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12SparseVectorERKNSt6vectorINSt5tupleI6size_tiEEEE">
+<span id="_CPPv3N12SparseVector12SparseVectorERKNSt6vectorINSt5tupleI6size_tiEEEE"></span><span id="_CPPv2N12SparseVector12SparseVectorERKNSt6vectorINSt5tupleI6size_tiEEEE"></span><span id="SparseVector::SparseVector__std::vector:std::tuple:s.i::CR"></span><span class="target" id="classSparseVector_1a87b9d5b054af594ab0cbc5cad6d866ff"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ival</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12SparseVectorERKNSt6vectorINSt5tupleI6size_tiEEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN12SparseVector12SparseVectorE3IT13IT26size_t">
+<span id="_CPPv3I00EN12SparseVector12SparseVectorE3IT13IT26size_t"></span><span id="_CPPv2I00EN12SparseVector12SparseVectorE3IT13IT26size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IT1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IT2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1ac1f78a0dbc959c72f63eb1b0a355fce9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00EN12SparseVector12SparseVectorE3IT13IT26size_t" title="SparseVector::SparseVector::IT1"><span class="n"><span class="pre">IT1</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">indit</span></span>, <a class="reference internal" href="#_CPPv4I00EN12SparseVector12SparseVectorE3IT13IT26size_t" title="SparseVector::SparseVector::IT2"><span class="n"><span class="pre">IT2</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">valit</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN12SparseVector12SparseVectorE3IT13IT26size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12SparseVectorEK2TIK2TV">
+<span id="_CPPv3N12SparseVector12SparseVectorEK2TIK2TV"></span><span id="_CPPv2N12SparseVector12SparseVectorEK2TIK2TV"></span><span id="SparseVector::SparseVector__TIC.TVC"></span><span class="target" id="classSparseVector_1ae7316082850ce7f47b1a0b6560949492"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">v</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12SparseVectorEK2TIK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12SparseVectorERNSt6stringE">
+<span id="_CPPv3N12SparseVector12SparseVectorERNSt6stringE"></span><span id="_CPPv2N12SparseVector12SparseVectorERNSt6stringE"></span><span id="SparseVector::SparseVector__ssR"></span><span class="target" id="classSparseVector_1a3d3726ba60f822de23bb71ca9ef144e5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SparseVector</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">line</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12SparseVectorERNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector10shift_indsE2TI">
+<span id="_CPPv3NK12SparseVector10shift_indsE2TI"></span><span id="_CPPv2NK12SparseVector10shift_indsE2TI"></span><span id="SparseVector::shift_inds__TIC"></span><span class="target" id="classSparseVector_1afc4374afdfc60062ce68fcda3b7fa23e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shift_inds</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector10shift_indsE2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK12SparseVectoreqEbRK1T">
+<span id="_CPPv3I0ENK12SparseVectoreqERK1T"></span><span id="_CPPv2I0ENK12SparseVectoreqERK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a6cb13c5dcb848a20ae88d372ea9d1b14"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">==</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK12SparseVectoreqEbRK1T" title="SparseVector::operator==::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK12SparseVectoreqEbRK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK12SparseVectorneEbRK1T">
+<span id="_CPPv3I0ENK12SparseVectorneERK1T"></span><span id="_CPPv2I0ENK12SparseVectorneERK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1aff0e0bc30209bd5a8be1287ccf51630a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">!=</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK12SparseVectorneEbRK1T" title="SparseVector::operator!=::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK12SparseVectorneEbRK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK12SparseVectorixE12SparseVectorRK1T">
+<span id="_CPPv3I0ENK12SparseVectorixERK1T"></span><span id="_CPPv2I0ENK12SparseVectorixERK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a2eeb36aab82d8d84f32378c4a8e4f6b4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK12SparseVectorixE12SparseVectorRK1T" title="SparseVector::operator[]::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">indset</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK12SparseVectorixE12SparseVectorRK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector7nzbeginEv">
+<span id="_CPPv3NK12SparseVector7nzbeginEv"></span><span id="_CPPv2NK12SparseVector7nzbeginEv"></span><span id="SparseVector::nzbeginC"></span><span class="target" id="classSparseVector_1ab05dfa20045790a63c8bf5e768552531"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector7nzbeginEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector5nzendEv">
+<span id="_CPPv3NK12SparseVector5nzendEv"></span><span id="_CPPv2NK12SparseVector5nzendEv"></span><span id="SparseVector::nzendC"></span><span class="target" id="classSparseVector_1a35a8c5a63ea1355060b0547f5fc613fb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector5nzendEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector7nzbeginEv">
+<span id="_CPPv3N12SparseVector7nzbeginEv"></span><span id="_CPPv2N12SparseVector7nzbeginEv"></span><span id="SparseVector::nzbegin"></span><span class="target" id="classSparseVector_1aa701d5fecc1966b0484a0eaadefb10cf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector7nzbeginEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector5nzendEv">
+<span id="_CPPv3N12SparseVector5nzendEv"></span><span id="_CPPv2N12SparseVector5nzendEv"></span><span id="SparseVector::nzend"></span><span class="target" id="classSparseVector_1ad43fa4a5c92805c04db0cdf691b76942"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector5nzendEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector5clearEv">
+<span id="_CPPv3N12SparseVector5clearEv"></span><span id="_CPPv2N12SparseVector5clearEv"></span><span id="SparseVector::clear"></span><span class="target" id="classSparseVector_1a1982fd99860ad592a52f31dfe3b22253"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector5clearEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector11clear_zerosEv">
+<span id="_CPPv3N12SparseVector11clear_zerosEv"></span><span id="_CPPv2N12SparseVector11clear_zerosEv"></span><span id="SparseVector::clear_zeros"></span><span class="target" id="classSparseVector_1ab2de16ced0655f687a75944a8f350830"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear_zeros</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector11clear_zerosEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector10clear_indsERKNSt6vectorIbEE">
+<span id="_CPPv3N12SparseVector10clear_indsERKNSt6vectorIbEE"></span><span id="_CPPv2N12SparseVector10clear_indsERKNSt6vectorIbEE"></span><span id="SparseVector::clear_inds__std::vector:b:CR"></span><span class="target" id="classSparseVector_1aa76c8de2ee0b009e3967ae728d206101"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clear_inds</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">bool</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector10clear_indsERKNSt6vectorIbEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector3nnzEv">
+<span id="_CPPv3NK12SparseVector3nnzEv"></span><span id="_CPPv2NK12SparseVector3nnzEv"></span><span id="SparseVector::nnzC"></span><span class="target" id="classSparseVector_1a513b345fd7ff5f176dcffaacba1e6dc2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nnz</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector3nnzEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector6nzindsEv">
+<span id="_CPPv3NK12SparseVector6nzindsEv"></span><span id="_CPPv2NK12SparseVector6nzindsEv"></span><span id="SparseVector::nzindsC"></span><span class="target" id="classSparseVector_1aafaa4abe8449f1295bbf064840b4da97"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzinds</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector6nzindsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector6nzvalsEv">
+<span id="_CPPv3NK12SparseVector6nzvalsEv"></span><span id="_CPPv2NK12SparseVector6nzvalsEv"></span><span id="SparseVector::nzvalsC"></span><span class="target" id="classSparseVector_1a6f961b9a9712a4b3e03393600936a386"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzvals</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector6nzvalsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector3nzsEv">
+<span id="_CPPv3NK12SparseVector3nzsEv"></span><span id="_CPPv2NK12SparseVector3nzsEv"></span><span id="SparseVector::nzsC"></span><span class="target" id="classSparseVector_1ab019699fbed6cd11dfde9648dfbf8a85"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nzs</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector3nzsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector11lower_boundERK2TI">
+<span id="_CPPv3N12SparseVector11lower_boundERK2TI"></span><span id="_CPPv2N12SparseVector11lower_boundERK2TI"></span><span id="SparseVector::lower_bound__TICR"></span><span class="target" id="classSparseVector_1a0323b260585336b4ea177004ab2aeb5a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lower_bound</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector11lower_boundERK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector11lower_boundERK2TI">
+<span id="_CPPv3NK12SparseVector11lower_boundERK2TI"></span><span id="_CPPv2NK12SparseVector11lower_boundERK2TI"></span><span id="SparseVector::lower_bound__TICRC"></span><span class="target" id="classSparseVector_1a6cf99f11eccab4d9f1738f473706d974"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lower_bound</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector11lower_boundERK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector11upper_boundERK2TI">
+<span id="_CPPv3N12SparseVector11upper_boundERK2TI"></span><span id="_CPPv2N12SparseVector11upper_boundERK2TI"></span><span id="SparseVector::upper_bound__TICR"></span><span class="target" id="classSparseVector_1a8d07f851c093e0302c117e1211f45161"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">upper_bound</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector11upper_boundERK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector11upper_boundERK2TI">
+<span id="_CPPv3NK12SparseVector11upper_boundERK2TI"></span><span id="_CPPv2NK12SparseVector11upper_boundERK2TI"></span><span id="SparseVector::upper_bound__TICRC"></span><span class="target" id="classSparseVector_1ae459d76c2f33b0e56cded5020c860623"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">upper_bound</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector11upper_boundERK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector7replaceEDaR3itTRK8key_type">
+<span id="_CPPv3I0EN12SparseVector7replaceER3itTRK8key_type"></span><span id="_CPPv2I0EN12SparseVector7replaceER3itTRK8key_type"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a3836e36d40452f510d48ab2c3dd74a60"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">replace</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN12SparseVector7replaceEDaR3itTRK8key_type" title="SparseVector::replace::itT"><span class="n"><span class="pre">itT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">it</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">key_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector7replaceEDaR3itTRK8key_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector7replaceEDaR3itTK2TIK2TV">
+<span id="_CPPv3I0EN12SparseVector7replaceER3itTK2TIK2TV"></span><span id="_CPPv2I0EN12SparseVector7replaceER3itTK2TIK2TV"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a714168ea3d37d6140f3ea8590fa6e771"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">replace</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN12SparseVector7replaceEDaR3itTK2TIK2TV" title="SparseVector::replace::itT"><span class="n"><span class="pre">itT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">it</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector7replaceEDaR3itTK2TIK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector7replaceEDaR3itTK2TV">
+<span id="_CPPv3I0EN12SparseVector7replaceER3itTK2TV"></span><span id="_CPPv2I0EN12SparseVector7replaceER3itTK2TV"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a478ba82cfd4a53ad0ca5d1ee100c418b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">replace</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN12SparseVector7replaceEDaR3itTK2TV" title="SparseVector::replace::itT"><span class="n"><span class="pre">itT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">it</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector7replaceEDaR3itTK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector6getvalEK6size_t">
+<span id="_CPPv3NK12SparseVector6getvalEK6size_t"></span><span id="_CPPv2NK12SparseVector6getvalEK6size_t"></span><span id="SparseVector::getval__sCC"></span><span class="target" id="classSparseVector_1a5debb4fa5a30d98958c936e548215516"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">getval</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector6getvalEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVectorixE6size_t">
+<span id="_CPPv3NK12SparseVectorixE6size_t"></span><span id="_CPPv2NK12SparseVectorixE6size_t"></span><span id="SparseVector::subscript-operator__sC"></span><span class="target" id="classSparseVector_1a786014e6b91342c5099ea5ed7012abcd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVectorixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12emplace_backERK8key_type">
+<span id="_CPPv3N12SparseVector12emplace_backERK8key_type"></span><span id="_CPPv2N12SparseVector12emplace_backERK8key_type"></span><span id="SparseVector::emplace_back__key_typeCR"></span><span class="target" id="classSparseVector_1a88ecf17ebd4a3da385bc31e4a4b7094b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emplace_back</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">key_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12emplace_backERK8key_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12emplace_backE2TI2TV">
+<span id="_CPPv3N12SparseVector12emplace_backE2TI2TV"></span><span id="_CPPv2N12SparseVector12emplace_backE2TI2TV"></span><span id="SparseVector::emplace_back__TI.TV"></span><span class="target" id="classSparseVector_1a275d7fe1f97401bfdb6f68e14d42f352"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emplace_back</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ind</span></span>, <a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">val</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12emplace_backE2TI2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector12find_last_nzE2TI">
+<span id="_CPPv3N12SparseVector12find_last_nzE2TI"></span><span id="_CPPv2N12SparseVector12find_last_nzE2TI"></span><span id="SparseVector::find_last_nz__TI"></span><span class="target" id="classSparseVector_1a8cdf4d4afffc0b52f9c16f5252490c91"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_last_nz</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector12find_last_nzE2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector6lastnzEv">
+<span id="_CPPv3NK12SparseVector6lastnzEv"></span><span id="_CPPv2NK12SparseVector6lastnzEv"></span><span id="SparseVector::lastnzC"></span><span class="target" id="classSparseVector_1a0e775472583ceebeef7a407b2f1e0b49"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">key_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">lastnz</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector6lastnzEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector7firstnzEv">
+<span id="_CPPv3NK12SparseVector7firstnzEv"></span><span id="_CPPv2NK12SparseVector7firstnzEv"></span><span id="SparseVector::firstnzC"></span><span class="target" id="classSparseVector_1aaba380c9d9230443b4b6c5e92ecca34e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">key_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">firstnz</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector7firstnzEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector7permuteERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N12SparseVector7permuteERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N12SparseVector7permuteERKNSt6vectorI6size_tEE"></span><span id="SparseVector::permute__std::vector:s:CR"></span><span class="target" id="classSparseVector_1a122367826c34e1f452f16554fbcec3b5"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">permute</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">perm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector7permuteERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector8ipermuteERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N12SparseVector8ipermuteERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N12SparseVector8ipermuteERKNSt6vectorI6size_tEE"></span><span id="SparseVector::ipermute__std::vector:s:CR"></span><span class="target" id="classSparseVector_1abb945f2359e4dfc54d14968d42484837"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ipermute</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">perm</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector8ipermuteERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector9subvectorERKNSt6vectorI6size_tEE">
+<span id="_CPPv3NK12SparseVector9subvectorERKNSt6vectorI6size_tEE"></span><span id="_CPPv2NK12SparseVector9subvectorERKNSt6vectorI6size_tEE"></span><span id="SparseVector::subvector__std::vector:s:CRC"></span><span class="target" id="classSparseVector_1ae6077ad22f003037ed55746cb8af81d1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">subvector</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">pind</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector9subvectorERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector5blockEK6size_tK6size_t">
+<span id="_CPPv3NK12SparseVector5blockEK6size_tK6size_t"></span><span id="_CPPv2NK12SparseVector5blockEK6size_tK6size_t"></span><span id="SparseVector::block__sC.sCC"></span><span class="target" id="classSparseVector_1ae7559b1314e149d0aaa50f416ac4a9c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector5blockEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector9set_blockEK6size_tK6size_tRK12SparseVector">
+<span id="_CPPv3N12SparseVector9set_blockEK6size_tK6size_tRK12SparseVector"></span><span id="_CPPv2N12SparseVector9set_blockEK6size_tK6size_tRK12SparseVector"></span><span id="SparseVector::set_block__sC.sC.SparseVectorCR"></span><span class="target" id="classSparseVector_1a314ad6622f40f2a44bb89a64224b4117"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_block</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector9set_blockEK6size_tK6size_tRK12SparseVector" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector1JEK6size_t">
+<span id="_CPPv3N12SparseVector1JEK6size_t"></span><span id="_CPPv2N12SparseVector1JEK6size_t"></span><span id="SparseVector::J__sC"></span><span class="target" id="classSparseVector_1a902eef4d5843afa543d8f932398dc404"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">J</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector1JEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector9swap_rowsEK6size_tK6size_t">
+<span id="_CPPv3N12SparseVector9swap_rowsEK6size_tK6size_t"></span><span id="_CPPv2N12SparseVector9swap_rowsEK6size_tK6size_t"></span><span id="SparseVector::swap_rows__sC.sC"></span><span class="target" id="classSparseVector_1a3d87c52b43a71c119c2571facc55ae71"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swap_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector9swap_rowsEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector13scale_inplaceEK2TIRK2TV">
+<span id="_CPPv3N12SparseVector13scale_inplaceEK2TIRK2TV"></span><span id="_CPPv2N12SparseVector13scale_inplaceEK2TIRK2TV"></span><span id="SparseVector::scale_inplace__TIC.TVCR"></span><span class="target" id="classSparseVector_1ac467663340e7be2d704349d6c4b65340"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_inplace</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector13scale_inplaceEK2TIRK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector8mix_rowsEK6size_tK6size_tRK2TVRK2TVRK2TVRK2TV">
+<span id="_CPPv3N12SparseVector8mix_rowsEK6size_tK6size_tRK2TVRK2TVRK2TVRK2TV"></span><span id="_CPPv2N12SparseVector8mix_rowsEK6size_tK6size_tRK2TVRK2TVRK2TVRK2TV"></span><span id="SparseVector::mix_rows__sC.sC.TVCR.TVCR.TVCR.TVCR"></span><span class="target" id="classSparseVector_1a3129c03cde48f5770bd68df4ab3fdbe9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mix_rows</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">b</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">d</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector8mix_rowsEK6size_tK6size_tRK2TVRK2TVRK2TVRK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVTRNSt6vectorI8key_typeEE">
+<span id="_CPPv3I0EN12SparseVector4axpyERK2TVRK3SVTRNSt6vectorI8key_typeEE"></span><span id="_CPPv2I0EN12SparseVector4axpyERK2TVRK3SVTRNSt6vectorI8key_typeEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SVT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1ac670abe20d9b71adf1bfd1540c730903"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">axpy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVTRNSt6vectorI8key_typeEE" title="SparseVector::axpy::SVT"><span class="n"><span class="pre">SVT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">key_type</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">tmp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVTRNSt6vectorI8key_typeEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVT">
+<span id="_CPPv3I0EN12SparseVector4axpyERK2TVRK3SVT"></span><span id="_CPPv2I0EN12SparseVector4axpyERK2TVRK3SVT"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SVT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a04817e9fe4b5ada87ebe844c47b0f35f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">axpy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVT" title="SparseVector::axpy::SVT"><span class="n"><span class="pre">SVT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVT" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVectorplERK12SparseVector">
+<span id="_CPPv3NK12SparseVectorplERK12SparseVector"></span><span id="_CPPv2NK12SparseVectorplERK12SparseVector"></span><span id="SparseVector::add-operator__SparseVectorCRC"></span><span class="target" id="classSparseVector_1a8b41a17e0093556d0b631483ad3c7787"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">+</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVectorplERK12SparseVector" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVectormlEK2TV">
+<span id="_CPPv3NK12SparseVectormlEK2TV"></span><span id="_CPPv2NK12SparseVectormlEK2TV"></span><span id="SparseVector::mul-operator__TVCC"></span><span class="target" id="classSparseVector_1a14a1aed6b0d2d828d90b32fee1d90f56"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">*</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVectormlEK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVTRK2TIRK2TI">
+<span id="_CPPv3I0EN12SparseVector4axpyERK2TVRK3SVTRK2TIRK2TI"></span><span id="_CPPv2I0EN12SparseVector4axpyERK2TVRK3SVTRK2TIRK2TI"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SVT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1ae864ff2307c3f5ff61bcee358509d02c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">axpy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVTRK2TIRK2TI" title="SparseVector::axpy::SVT"><span class="n"><span class="pre">SVT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">firstind</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lastind</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector4axpyEvRK2TVRK3SVTRK2TIRK2TI" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN12SparseVector4axpyEvRK3SVTRKNSt6vectorI2TVEERKNSt6vectorI2TIEE">
+<span id="_CPPv3I0EN12SparseVector4axpyERK3SVTRKNSt6vectorI2TVEERKNSt6vectorI2TIEE"></span><span id="_CPPv2I0EN12SparseVector4axpyERK3SVTRKNSt6vectorI2TVEERKNSt6vectorI2TIEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SVT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a7cd3e197b985c55bd7f44a1f7f8fe380"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">axpy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN12SparseVector4axpyEvRK3SVTRKNSt6vectorI2TVEERKNSt6vectorI2TIEE" title="SparseVector::axpy::SVT"><span class="n"><span class="pre">SVT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">x</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">coeff</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TI"><span class="n"><span class="pre">TI</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">inds</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN12SparseVector4axpyEvRK3SVTRKNSt6vectorI2TVEERKNSt6vectorI2TIEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector13scale_inplaceERKNSt6vectorI2TVEE">
+<span id="_CPPv3N12SparseVector13scale_inplaceERKNSt6vectorI2TVEE"></span><span id="_CPPv2N12SparseVector13scale_inplaceERKNSt6vectorI2TVEE"></span><span id="SparseVector::scale_inplace__std::vector:TV:CR"></span><span class="target" id="classSparseVector_1af6bbac3fe0b09f0f1e52c6cb0d441e6b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_inplace</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">coeff</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector13scale_inplaceERKNSt6vectorI2TVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector13scale_inplaceEK2TV">
+<span id="_CPPv3N12SparseVector13scale_inplaceEK2TV"></span><span id="_CPPv2N12SparseVector13scale_inplaceEK2TV"></span><span id="SparseVector::scale_inplace__TVC"></span><span class="target" id="classSparseVector_1ad7645d054c4f389916ba076048d029f9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_inplace</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector13scale_inplaceEK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector5scaleEK2TV">
+<span id="_CPPv3NK12SparseVector5scaleEK2TV"></span><span id="_CPPv2NK12SparseVector5scaleEK2TV"></span><span id="SparseVector::scale__TVCC"></span><span class="target" id="classSparseVector_1a29cb6d62bf7b3039bb80610e9e4e14fc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector5scaleEK2TV" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector5printEv">
+<span id="_CPPv3NK12SparseVector5printEv"></span><span id="_CPPv2NK12SparseVector5printEv"></span><span id="SparseVector::printC"></span><span class="target" id="classSparseVector_1af025baf9089507a7bb835c30ee6b9574"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector5printEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector9print_rowEv">
+<span id="_CPPv3NK12SparseVector9print_rowEv"></span><span id="_CPPv2NK12SparseVector9print_rowEv"></span><span id="SparseVector::print_rowC"></span><span class="target" id="classSparseVector_1a0010582f01c41aba46996516019d34df"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_row</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector9print_rowEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK12SparseVector5writeEvR2IO">
+<span id="_CPPv3I0ENK12SparseVector5writeER2IO"></span><span id="_CPPv2I0ENK12SparseVector5writeER2IO"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IO</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classSparseVector_1a7094334813356a62957d7d1cc9057c55"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0ENK12SparseVector5writeEvR2IO" title="SparseVector::write::IO"><span class="n"><span class="pre">IO</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">io</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK12SparseVector5writeEvR2IO" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector3strEv">
+<span id="_CPPv3N12SparseVector3strEv"></span><span id="_CPPv2N12SparseVector3strEv"></span><span id="SparseVector::str"></span><span class="target" id="classSparseVector_1acfa0b1e442f96b4f9aabbb63576ebb2c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">str</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector3strEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector4kronERK12SparseVector6size_t">
+<span id="_CPPv3NK12SparseVector4kronERK12SparseVector6size_t"></span><span id="_CPPv2NK12SparseVector4kronERK12SparseVector6size_t"></span><span id="SparseVector::kron__SparseVectorCR.sC"></span><span class="target" id="classSparseVector_1aba11bd937e40eac57fb6cef46044be8f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">kron</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector4kronERK12SparseVector6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK12SparseVector6tensorERK12SparseVector6size_t">
+<span id="_CPPv3NK12SparseVector6tensorERK12SparseVector6size_t"></span><span id="_CPPv2NK12SparseVector6tensorERK12SparseVector6size_t"></span><span id="SparseVector::tensor__SparseVectorCR.sC"></span><span class="target" id="classSparseVector_1a1c9b1e47068094108724ea7f3f671692"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tensor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">m</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK12SparseVector6tensorERK12SparseVector6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector6randomE6size_tdiRNSt21default_random_engineE">
+<span id="_CPPv3N12SparseVector6randomE6size_tdiRNSt21default_random_engineE"></span><span id="_CPPv2N12SparseVector6randomE6size_tdiRNSt21default_random_engineE"></span><span id="SparseVector::random__s.double.i.std::default_random_engineR"></span><span class="target" id="classSparseVector_1ac535ad3f287b4c1a8e6ac775e1662dd4"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">random</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxval</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">default_random_engine</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">generator</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector6randomE6size_tdiRNSt21default_random_engineE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N12SparseVector6randomE6size_tdi">
+<span id="_CPPv3N12SparseVector6randomE6size_tdi"></span><span id="_CPPv2N12SparseVector6randomE6size_tdi"></span><span id="SparseVector::random__s.double.i"></span><span class="target" id="classSparseVector_1adb33543d85750918ab97a54c80e8e213"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12SparseVector" title="SparseVector"><span class="n"><span class="pre">SparseVector</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">random</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">p</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxval</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N12SparseVector6randomE6size_tdi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classUnivariatePolynomial.html" class="btn btn-neutral float-right" title="Template Class UnivariatePolynomial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classSetVector.html" class="btn btn-neutral float-left" title="Template Class SetVector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

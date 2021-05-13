@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1aeffea1b07fd829f06d13feb0227ebfc1:
+
+Template Function bats::util::sortperm(const TI&, const TI&)
+============================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sortperm(const TI&, const TI&)

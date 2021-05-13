@@ -1,0 +1,83 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_field.hpp:
+
+File field.hpp
+==============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/field.hpp``)
+---------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_field.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``iostream``
+
+- ``numeric``
+
+- ``stdexcept``
+
+- ``string``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classAbstractField`
+
+- :ref:`exhale_class_classModP`
+
+- :ref:`exhale_class_classModP_3_01IntT_00_012_01_4`
+
+- :ref:`exhale_class_classRational`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_field_8hpp_1a8cbfbaa0c7d2a3e9ba47dc128d347c31`
+
+- :ref:`exhale_function_field_8hpp_1a017f600edeedf37ebe6773da4678f027`
+
+- :ref:`exhale_function_field_8hpp_1a67fe3ec5d3ca66d4fdf8527adf5ee2e5`
+

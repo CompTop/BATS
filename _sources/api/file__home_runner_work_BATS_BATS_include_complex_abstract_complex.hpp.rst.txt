@@ -1,0 +1,64 @@
+
+.. _file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp:
+
+File abstract_complex.hpp
+=========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_complex>` (``/home/runner/work/BATS/BATS/include/complex``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/complex/abstract_complex.hpp``)
+---------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``cstddef``
+
+- ``iostream``
+
+- ``sstream``
+
+- ``string``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cell_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_light_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_morse_pairing.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structcell__ind`
+

@@ -1,0 +1,31 @@
+.. _exhale_class_classbats_1_1future_1_1range_1_1const__iterator:
+
+Class range::const_iterator
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`
+
+
+Nested Relationships
+--------------------
+
+This class is a nested type of :ref:`exhale_class_classbats_1_1future_1_1range`.
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public std::iterator< std::random_access_iterator_tag, T >``
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::future::range::const_iterator
+   :members:
+   :protected-members:
+   :undoc-members:

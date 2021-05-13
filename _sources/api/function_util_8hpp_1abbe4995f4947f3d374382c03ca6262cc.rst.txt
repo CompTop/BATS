@@ -1,0 +1,13 @@
+.. _exhale_function_util_8hpp_1abbe4995f4947f3d374382c03ca6262cc:
+
+Template Function bats::future::find_pivot_high(const RandomAccessIterator&, ssize_t)
+=====================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_util.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::future::find_pivot_high(const RandomAccessIterator&, ssize_t)

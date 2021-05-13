@@ -1,0 +1,67 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp:
+
+File inclusion.hpp
+==================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/inclusion.hpp``)
+---------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``util/set.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_inclusion_8hpp_1a942326b12cf0a306012e723c47decea4`
+
+- :ref:`exhale_function_inclusion_8hpp_1a6b33754b46ff53eba126e7dffe22a35f`
+
+- :ref:`exhale_function_inclusion_8hpp_1ae30e80f1223e088943c611f246ba93a1`
+

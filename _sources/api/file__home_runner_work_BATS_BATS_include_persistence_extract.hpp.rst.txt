@@ -1,0 +1,52 @@
+
+.. _file__home_runner_work_BATS_BATS_include_persistence_extract.hpp:
+
+File extract.hpp
+================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_persistence>` (``/home/runner/work/BATS/BATS/include/persistence``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/persistence/extract.hpp``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_persistence_extract.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/sparse_vector.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`)
+
+- ``map`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
+- ``util/barcode.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_barcode.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_extract_8hpp_1af594271e829e31993ade36639164e9be`
+

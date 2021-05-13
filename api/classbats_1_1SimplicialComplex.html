@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class SimplicialComplex &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Template Class SparseTrie" href="classbats_1_1SparseTrie.html" />
+    <link rel="prev" title="Template Class ReducedCochainComplex" href="classbats_1_1ReducedCochainComplex.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Class SimplicialComplex</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classbats_1_1SimplicialComplex.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-simplicialcomplex">
+<span id="exhale-class-classbats-1-1simplicialcomplex"></span><h1>Class SimplicialComplex<a class="headerlink" href="#class-simplicialcomplex" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp.html#file-home-runner-work-bats-bats-include-complex-simplicial-complex-hpp"><span class="std std-ref">File simplicial_complex.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplexE">
+<span id="_CPPv3N4bats17SimplicialComplexE"></span><span id="_CPPv2N4bats17SimplicialComplexE"></span><span id="bats::SimplicialComplex"></span><span class="target" id="classbats_1_1SimplicialComplex"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplexE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexEv">
+<span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexEv"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexEv"></span><span id="bats::SimplicialComplex::SimplicialComplex"></span><span class="target" id="classbats_1_1SimplicialComplex_1a9a7207720db409b2ff7c66523a11358a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t">
+<span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexE6size_t"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexE6size_t"></span><span id="bats::SimplicialComplex::SimplicialComplex__s"></span><span class="target" id="classbats_1_1SimplicialComplex_1a05d64f5c2ab52a91ddc5a557de9050dd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxdim</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t">
+<span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t"></span><span id="bats::SimplicialComplex::SimplicialComplex__s.s"></span><span class="target" id="classbats_1_1SimplicialComplex_1a5a262faf209117ecaf682214055178c1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxdim</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexERKNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::SimplicialComplex__std::vector:s:CR"></span><span class="target" id="classbats_1_1SimplicialComplex_1aa15f2c188666d89941c665a0fb26100d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexERRKNSt6stringE">
+<span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexERRKNSt6stringE"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexERRKNSt6stringE"></span><span id="bats::SimplicialComplex::SimplicialComplex__ssCRR"></span><span class="target" id="classbats_1_1SimplicialComplex_1a8b1a96f134d6e2a25d37452ff66dfa3c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">fname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexERRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE">
+<span id="_CPPv3N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::find_idx__std::vector:s:CR"></span><span class="target" id="classbats_1_1SimplicialComplex_1a838f088156aef4dc63ad9742a84908cc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_idx</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE">
+<span id="_CPPv3NK4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE"></span><span id="_CPPv2NK4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::find_idx__std::vector:s:CRC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a9183ba306fcbd35a9ff92c8811168256"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_idx</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex6maxdimEv">
+<span id="_CPPv3NK4bats17SimplicialComplex6maxdimEv"></span><span id="_CPPv2NK4bats17SimplicialComplex6maxdimEv"></span><span id="bats::SimplicialComplex::maxdimC"></span><span class="target" id="classbats_1_1SimplicialComplex_1af3ee04af5797be1f6bb7b0933ae27a3a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxdim</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex6maxdimEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex6ncellsEK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex6ncellsEK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex6ncellsEK6size_t"></span><span id="bats::SimplicialComplex::ncells__sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a48d6748b5857924af671fbe779280608"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ncells</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex6ncellsEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex6ncellsEv">
+<span id="_CPPv3NK4bats17SimplicialComplex6ncellsEv"></span><span id="_CPPv2NK4bats17SimplicialComplex6ncellsEv"></span><span id="bats::SimplicialComplex::ncellsC"></span><span class="target" id="classbats_1_1SimplicialComplex_1af856c818ae3effc853eef03d76de2781"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ncells</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex6ncellsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex3addERNSt6vectorI6size_tEE">
+<span id="_CPPv3N4bats17SimplicialComplex3addERNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex3addERNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::add__std::vector:s:R"></span><span class="target" id="classbats_1_1SimplicialComplex_1ace6fdd09781d797182a7064cdf3ff97d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structcell__ind.html#_CPPv48cell_ind" title="cell_ind"><span class="n"><span class="pre">cell_ind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex3addERNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex3addERRNSt6vectorI6size_tEE">
+<span id="_CPPv3N4bats17SimplicialComplex3addERRNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex3addERRNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::add__std::vector:s:RR"></span><span class="target" id="classbats_1_1SimplicialComplex_1a612fbe3d6713afd20fc97c523fd19ef9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="structcell__ind.html#_CPPv48cell_ind" title="cell_ind"><span class="n"><span class="pre">cell_ind</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex3addERRNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex13add_recursiveERNSt6vectorI6size_tEE">
+<span id="_CPPv3N4bats17SimplicialComplex13add_recursiveERNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex13add_recursiveERNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::add_recursive__std::vector:s:R"></span><span class="target" id="classbats_1_1SimplicialComplex_1a3111191c8b5065cb2652e25f6cec76bb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structcell__ind.html#_CPPv48cell_ind" title="cell_ind"><span class="n"><span class="pre">cell_ind</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_recursive</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex13add_recursiveERNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex13add_recursiveERRNSt6vectorI6size_tEE">
+<span id="_CPPv3N4bats17SimplicialComplex13add_recursiveERRNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex13add_recursiveERRNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::add_recursive__std::vector:s:RR"></span><span class="target" id="classbats_1_1SimplicialComplex_1a2612e2af456ce49bda9943d0231787bc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="structcell__ind.html#_CPPv48cell_ind" title="cell_ind"><span class="n"><span class="pre">cell_ind</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_recursive</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex13add_recursiveERRNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11faces_beginEK6size_tK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex11faces_beginEK6size_tK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex11faces_beginEK6size_tK6size_t"></span><span id="bats::SimplicialComplex::faces_begin__sC.sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a129a4b12f406b63770264ff96b63b44f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">faces_begin</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11faces_beginEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11faces_beginERK8cell_ind">
+<span id="_CPPv3NK4bats17SimplicialComplex11faces_beginERK8cell_ind"></span><span id="_CPPv2NK4bats17SimplicialComplex11faces_beginERK8cell_ind"></span><span id="bats::SimplicialComplex::faces_begin__cell_indCRC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a5c380563ef0295427f3b5bbbea8323a9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">faces_begin</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structcell__ind.html#_CPPv48cell_ind" title="cell_ind"><span class="n"><span class="pre">cell_ind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ci</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11faces_beginERK8cell_ind" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex9faces_endEK6size_tK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex9faces_endEK6size_tK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex9faces_endEK6size_tK6size_t"></span><span id="bats::SimplicialComplex::faces_end__sC.sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a97fb3ab607c10c6830a2b1cc15d6b2c4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">faces_end</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex9faces_endEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex9faces_endERK8cell_ind">
+<span id="_CPPv3NK4bats17SimplicialComplex9faces_endERK8cell_ind"></span><span id="_CPPv2NK4bats17SimplicialComplex9faces_endERK8cell_ind"></span><span id="bats::SimplicialComplex::faces_end__cell_indCRC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a8a58dc1b885278c3dbef3cb373ee4f19"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">faces_end</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structcell__ind.html#_CPPv48cell_ind" title="cell_ind"><span class="n"><span class="pre">cell_ind</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">ci</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex9faces_endERK8cell_ind" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex13simplex_beginEK6size_tK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex13simplex_beginEK6size_tK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex13simplex_beginEK6size_tK6size_t"></span><span id="bats::SimplicialComplex::simplex_begin__sC.sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a4b270929dc60508c0fe5da603d83cb91"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">simplex_begin</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex13simplex_beginEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11simplex_endEK6size_tK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex11simplex_endEK6size_tK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex11simplex_endEK6size_tK6size_t"></span><span id="bats::SimplicialComplex::simplex_end__sC.sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a598ef1d750157335e17cc1e10cab66db"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">simplex_end</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11simplex_endEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11get_simplexE6size_t6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex11get_simplexE6size_t6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex11get_simplexE6size_t6size_t"></span><span id="bats::SimplicialComplex::get_simplex__s.sC"></span><span class="target" id="classbats_1_1SimplicialComplex_1af9e4581e288667829dbbf1bb809095c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_simplex</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11get_simplexE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex13get_simplicesEK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex13get_simplicesEK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex13get_simplicesEK6size_t"></span><span id="bats::SimplicialComplex::get_simplices__sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1ab9a20174c0b23c8031d11a04119e62f2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_simplices</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex13get_simplicesEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex13get_simplicesEv">
+<span id="_CPPv3NK4bats17SimplicialComplex13get_simplicesEv"></span><span id="_CPPv2NK4bats17SimplicialComplex13get_simplicesEv"></span><span id="bats::SimplicialComplex::get_simplicesC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a918aaff4645baacc5915105fdcda2f89"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_simplices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex13get_simplicesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex9union_addERK17SimplicialComplex">
+<span id="_CPPv3N4bats17SimplicialComplex9union_addERK17SimplicialComplex"></span><span id="_CPPv2N4bats17SimplicialComplex9union_addERK17SimplicialComplex"></span><span id="bats::SimplicialComplex::union_add__SimplicialComplexCR"></span><span class="target" id="classbats_1_1SimplicialComplex_1aca91e856ad596157c9206e0a08548ee4"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">union_add</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats17SimplicialComplexE" title="bats::SimplicialComplex"><span class="n"><span class="pre">SimplicialComplex</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">Y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex9union_addERK17SimplicialComplex" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex6size_t"></span><span id="bats::SimplicialComplex::get_indices__SimplicialComplexCR.sC"></span><span class="target" id="classbats_1_1SimplicialComplex_1aa7e05ed6a71d5c8ea04cca91e48a5948"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_indices</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats17SimplicialComplexE" title="bats::SimplicialComplex"><span class="n"><span class="pre">SimplicialComplex</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">A</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex">
+<span id="_CPPv3NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex"></span><span id="_CPPv2NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex"></span><span id="bats::SimplicialComplex::get_indices__SimplicialComplexCRC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a9c1c356167d1e1258d48feb48be66c81"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_indices</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats17SimplicialComplexE" title="bats::SimplicialComplex"><span class="n"><span class="pre">SimplicialComplex</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">A</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11get_indicesERK17SimplicialComplex" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex8boundaryEK6size_tK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex8boundaryEK6size_tK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex8boundaryEK6size_tK6size_t"></span><span id="bats::SimplicialComplex::boundary__sC.sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1aa8484003aaf171c33f8d75920e669389"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">boundary</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex8boundaryEK6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex12boundary_cscEK6size_t">
+<span id="_CPPv3NK4bats17SimplicialComplex12boundary_cscEK6size_t"></span><span id="_CPPv2NK4bats17SimplicialComplex12boundary_cscEK6size_t"></span><span id="bats::SimplicialComplex::boundary_csc__sCC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a88265a1e9d7c7979063342f8a2f0c42a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="classCSCMatrix.html#_CPPv4I00E9CSCMatrix" title="CSCMatrix"><span class="n"><span class="pre">CSCMatrix</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">boundary_csc</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dim</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex12boundary_cscEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplexD0Ev">
+<span id="_CPPv3N4bats17SimplicialComplexD0Ev"></span><span id="_CPPv2N4bats17SimplicialComplexD0Ev"></span><span id="bats::SimplicialComplex::~SimplicialComplex"></span><span class="target" id="classbats_1_1SimplicialComplex_1a3a2d46a41e3683a655c6d4fedd5af9e6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplexD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex4saveERNSt6stringE">
+<span id="_CPPv3NK4bats17SimplicialComplex4saveERNSt6stringE"></span><span id="_CPPv2NK4bats17SimplicialComplex4saveERNSt6stringE"></span><span id="bats::SimplicialComplex::save__ssRC"></span><span class="target" id="classbats_1_1SimplicialComplex_1a28f77b85c68b90d6883142e74d89d4a9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">save</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">fname</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex4saveERNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex13print_summaryEv">
+<span id="_CPPv3NK4bats17SimplicialComplex13print_summaryEv"></span><span id="_CPPv2NK4bats17SimplicialComplex13print_summaryEv"></span><span id="bats::SimplicialComplex::print_summaryC"></span><span class="target" id="classbats_1_1SimplicialComplex_1af629c70b1c434b0802dc2f7821ebc273"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_summary</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex13print_summaryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex11print_cellsEv">
+<span id="_CPPv3NK4bats17SimplicialComplex11print_cellsEv"></span><span id="_CPPv2NK4bats17SimplicialComplex11print_cellsEv"></span><span id="bats::SimplicialComplex::print_cellsC"></span><span class="target" id="classbats_1_1SimplicialComplex_1ac05e9e15893918162ac7b548ee0d98ce"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">print_cells</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats17SimplicialComplex11print_cellsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl>
+<dt class="sig sig-object cpp">
+<em class="property"><span class="pre">friend</span> <span class="pre">class</span></em> <span class="pre">MorsePairing&lt;</span> <span class="pre">SimplicialComplex</span> <span class="pre">&gt;</span></dt>
+</dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classbats_1_1SimplicialComplex_1ab860fde7b1f0e78a25f408c425df2e5c"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">friend</span> <span class="pre">SimplicialComplex</span> <span class="pre">simplicial_union</span> <span class="pre">(const</span> <span class="pre">SimplicialComplex</span> <span class="pre">&amp;X,</span> <span class="pre">const</span> <span class="pre">SimplicialComplex</span> <span class="pre">&amp;Y)</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="classbats_1_1SimplicialComplex_1a5b54b98da5e341ef4bc0a5c4fd01e1dc"></span><span class="sig-name descname"><span class="pre">inline</span> <span class="pre">friend</span> <span class="pre">friend</span> <span class="pre">SimplicialComplex</span> <span class="pre">intersection</span> <span class="pre">(const</span> <span class="pre">SimplicialComplex</span> <span class="pre">&amp;X,</span> <span class="pre">const</span> <span class="pre">SimplicialComplex</span> <span class="pre">&amp;Y)</span></span></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classbats_1_1SparseTrie.html" class="btn btn-neutral float-right" title="Template Class SparseTrie" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classbats_1_1ReducedCochainComplex.html" class="btn btn-neutral float-left" title="Template Class ReducedCochainComplex" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

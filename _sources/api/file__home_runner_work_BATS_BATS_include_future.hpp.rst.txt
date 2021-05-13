@@ -1,0 +1,53 @@
+
+.. _file__home_runner_work_BATS_BATS_include_future.hpp:
+
+File future.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/future.hpp``)
+---------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_future.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``future/dense.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`)
+
+- ``future/lu.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`)
+
+- ``future/permutation.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_permutation.hpp`)
+
+- ``future/similarity.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_similarity.hpp`)
+
+- ``future/span.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_span.hpp`)
+
+- ``future/util.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_util.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_bats.hpp`
+
+
+

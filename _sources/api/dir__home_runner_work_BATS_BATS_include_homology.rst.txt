@@ -1,0 +1,23 @@
+.. _dir__home_runner_work_BATS_BATS_include_homology:
+
+
+Directory homology
+==================
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/homology``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+

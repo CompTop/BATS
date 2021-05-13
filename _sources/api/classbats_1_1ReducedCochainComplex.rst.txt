@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1ReducedCochainComplex:
+
+Template Class ReducedCochainComplex
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::ReducedCochainComplex
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,13 @@
+.. _exhale_function_future_2permutation_8hpp_1ada334aabf4835b665d5c2fb1e152c590:
+
+Function bats::future::operator<<(std::ostream&, const ElementaryPermutation&)
+==============================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::future::operator<<(std::ostream&, const ElementaryPermutation&)

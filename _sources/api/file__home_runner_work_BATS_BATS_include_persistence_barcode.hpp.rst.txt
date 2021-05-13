@@ -1,0 +1,74 @@
+
+.. _file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp:
+
+File barcode.hpp
+================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_persistence>` (``/home/runner/work/BATS/BATS/include/persistence``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/persistence/barcode.hpp``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``iostream``
+
+- ``string``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1PersistencePair`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_persistence_2barcode_8hpp_1ab6a5a5e287f1aa3400548761fcaa8a9d`
+

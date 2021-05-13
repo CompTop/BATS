@@ -1,0 +1,13 @@
+.. _exhale_function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464:
+
+Function matmul(L<SI>, U<SI>)
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: matmul(L<SI>, U<SI>)

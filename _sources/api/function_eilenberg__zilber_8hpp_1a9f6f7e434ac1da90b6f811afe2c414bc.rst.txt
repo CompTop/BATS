@@ -1,0 +1,13 @@
+.. _exhale_function_eilenberg__zilber_8hpp_1a9f6f7e434ac1da90b6f811afe2c414bc:
+
+Template Function bats::kron_chains
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::kron_chains(const VT&, const size_t, const ChainCpx&, const VT&, const size_t, const ChainCpx&)

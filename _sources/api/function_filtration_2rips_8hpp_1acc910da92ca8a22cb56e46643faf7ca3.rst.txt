@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2rips_8hpp_1acc910da92ca8a22cb56e46643faf7ca3:
+
+Template Function bats::operator<<
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::operator<<(std::ostream&, tedge<TF, TI>&)

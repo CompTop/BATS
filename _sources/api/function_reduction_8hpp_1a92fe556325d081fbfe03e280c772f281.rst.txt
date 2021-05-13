@@ -1,0 +1,13 @@
+.. _exhale_function_reduction_8hpp_1a92fe556325d081fbfe03e280c772f281:
+
+Template Function bats::reduce_matrix_compression(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const std::vector<bool>&, flag)
+===========================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_matrix_compression(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const std::vector<bool>&, flag)

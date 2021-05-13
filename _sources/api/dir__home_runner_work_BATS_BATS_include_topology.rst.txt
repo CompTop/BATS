@@ -1,0 +1,38 @@
+.. _dir__home_runner_work_BATS_BATS_include_topology:
+
+
+Directory topology
+==================
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/topology``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_density.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_extras.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_flag.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_spherical.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+

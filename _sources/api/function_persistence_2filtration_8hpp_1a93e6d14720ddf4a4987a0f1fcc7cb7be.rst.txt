@@ -1,0 +1,13 @@
+.. _exhale_function_persistence_2filtration_8hpp_1a93e6d14720ddf4a4987a0f1fcc7cb7be:
+
+Template Function block_reduce
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: block_reduce(Filtration<T, CpxT>&, FT)

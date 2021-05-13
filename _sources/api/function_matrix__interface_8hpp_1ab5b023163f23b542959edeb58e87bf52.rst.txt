@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1ab5b023163f23b542959edeb58e87bf52:
+
+Function LEUP_Fact
+==================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: LEUP_Fact(MAT)

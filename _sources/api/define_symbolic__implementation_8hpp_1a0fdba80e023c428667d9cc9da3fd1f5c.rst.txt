@@ -1,0 +1,13 @@
+.. _exhale_define_symbolic__implementation_8hpp_1a0fdba80e023c428667d9cc9da3fd1f5c:
+
+Define IMPL_COUT
+================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: IMPL_COUT

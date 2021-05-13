@@ -1,0 +1,13 @@
+.. _exhale_function_dowker_8hpp_1aaffcfba1c34ddde5779274d7f906691f:
+
+Template Function bats::witness_neighborhoods
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::witness_neighborhoods(const DataSet<T>&, const DataSet<T>&, const M&, const size_t, const T)

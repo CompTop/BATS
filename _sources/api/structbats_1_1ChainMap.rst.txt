@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1ChainMap:
+
+Template Struct ChainMap
+========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::ChainMap
+   :members:
+   :protected-members:
+   :undoc-members:

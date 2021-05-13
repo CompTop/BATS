@@ -1,0 +1,13 @@
+.. _exhale_function_field_8hpp_1a017f600edeedf37ebe6773da4678f027:
+
+Function isprime
+================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: isprime(unsigned)

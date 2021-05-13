@@ -1,0 +1,31 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_persistence_extract.hpp:
+
+Program Listing for File extract.hpp
+====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_persistence_extract.hpp>` (``/home/runner/work/BATS/BATS/include/persistence/extract.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   // extract barcode pairs from reduced matrix
+   
+   #include <map>
+   #include <vector>
+   #include <linalg/sparse_vector.hpp>
+   #include <linalg/col_matrix.hpp>
+   #include <util/barcode.hpp>
+   
+   /*
+   returns vector of pairs
+   two entries = two pairs
+   */
+   std::vector<size_t> extract_pairs(
+     ColumnMatrix<TVec> &M,
+     std::map<size_t, size_t> pivot_to_col)
+   {
+       std::vector<size_t> p;
+   }

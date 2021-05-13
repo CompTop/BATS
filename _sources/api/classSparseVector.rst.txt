@@ -1,0 +1,16 @@
+.. _exhale_class_classSparseVector:
+
+Template Class SparseVector
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: SparseVector
+   :members:
+   :protected-members:
+   :undoc-members:

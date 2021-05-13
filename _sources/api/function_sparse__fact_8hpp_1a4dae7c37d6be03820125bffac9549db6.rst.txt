@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1a4dae7c37d6be03820125bffac9549db6:
+
+Template Function PLEU_inplace
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PLEU_inplace(SparseFact<TC>&)

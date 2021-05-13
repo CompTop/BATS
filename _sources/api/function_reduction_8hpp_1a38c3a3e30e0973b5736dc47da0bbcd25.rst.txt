@@ -1,0 +1,13 @@
+.. _exhale_function_reduction_8hpp_1a38c3a3e30e0973b5736dc47da0bbcd25:
+
+Template Function bats::reduce_matrix_standard(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&)
+========================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_matrix_standard(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&)

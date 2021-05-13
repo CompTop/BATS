@@ -1,0 +1,13 @@
+.. _exhale_function_quiver_2quiver_8hpp_1abb24576b369216d223af1b0ecbd963d8:
+
+Template Function bats::barcode
+===============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::barcode(Diagram<ReducedChainComplex<MT>, MT>&, size_t)

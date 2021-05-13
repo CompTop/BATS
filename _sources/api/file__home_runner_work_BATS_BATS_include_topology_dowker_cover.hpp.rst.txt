@@ -1,0 +1,77 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp:
+
+File dowker_cover.hpp
+=====================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/dowker_cover.hpp``)
+------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``complex/simplicial_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`)
+
+- ``cover.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`)
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``dowker.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`)
+
+- ``filtration/flag.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`)
+
+- ``metric.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``tuple``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_dowker__cover_8hpp_1a1e29de611c7e3d8a915abf091330edc5`
+
+- :ref:`exhale_function_dowker__cover_8hpp_1a4aca2e42336131f789fe822b1f7d2e87`
+
+- :ref:`exhale_function_dowker__cover_8hpp_1ab0ff4928102e869d085645ca47383869`
+

@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1SimplicialComplex:
+
+Class SimplicialComplex
+=======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::SimplicialComplex
+   :members:
+   :protected-members:
+   :undoc-members:

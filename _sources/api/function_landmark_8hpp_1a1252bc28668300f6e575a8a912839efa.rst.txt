@@ -1,0 +1,13 @@
+.. _exhale_function_landmark_8hpp_1a1252bc28668300f6e575a8a912839efa:
+
+Template Function bats::random_landmarks
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::random_landmarks(const DataSet<T>&, const size_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag__zoo_8hpp_1a0ac7df6b08aa32689f3ebbcffd884627:
+
+Template Function bats::get_dM_ZZ_inds
+======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::get_dM_ZZ_inds(const std::vector<T>&, const T, const T)

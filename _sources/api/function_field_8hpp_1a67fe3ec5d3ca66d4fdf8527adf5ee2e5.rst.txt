@@ -1,0 +1,13 @@
+.. _exhale_function_field_8hpp_1a67fe3ec5d3ca66d4fdf8527adf5ee2e5:
+
+Template Function sgn(T)
+========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: sgn(T)

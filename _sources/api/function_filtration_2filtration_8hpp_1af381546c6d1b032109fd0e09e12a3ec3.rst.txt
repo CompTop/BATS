@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2filtration_8hpp_1af381546c6d1b032109fd0e09e12a3ec3:
+
+Function bats::filtration_iperm
+===============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::filtration_iperm(const std::vector<std::vector<size_t>>&)

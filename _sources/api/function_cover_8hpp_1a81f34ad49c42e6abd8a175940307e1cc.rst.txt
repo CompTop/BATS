@@ -1,0 +1,13 @@
+.. _exhale_function_cover_8hpp_1a81f34ad49c42e6abd8a175940307e1cc:
+
+Template Function bats::assign_set_upper
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::assign_set_upper(const T, const T, const double, const size_t)

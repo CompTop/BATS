@@ -1,0 +1,88 @@
+
+.. _file__home_runner_work_BATS_BATS_include_util_simplex.hpp:
+
+File simplex.hpp
+================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_util>` (``/home/runner/work/BATS/BATS/include/util``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/util/simplex.hpp``)
+---------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_util_simplex.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``functional``
+
+- ``permutation.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_permutation.hpp`)
+
+- ``sstream``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__util`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1util_1_1SimplexHasher`
+
+- :ref:`exhale_class_classbats_1_1util_1_1SimplexContainer`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_simplex_8hpp_1aa37f3dee69e4b607fc69af16ea362765`
+
+- :ref:`exhale_function_simplex_8hpp_1a34bcefda794c5895617e86ae6ccbcb78`
+
+- :ref:`exhale_function_simplex_8hpp_1a41ab7bf8a5092b1416268803e41b85d0`
+
+- :ref:`exhale_function_simplex_8hpp_1a4cace428a8b1f1815e7f6a2a7e36f211`
+
+- :ref:`exhale_function_simplex_8hpp_1abb0404c7f64353f32f44a08cde44d1d3`
+

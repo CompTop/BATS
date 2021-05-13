@@ -1,0 +1,105 @@
+
+.. _file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp:
+
+File sparse_fact.hpp
+====================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_linalg>` (``/home/runner/work/BATS/BATS/include/linalg``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/linalg/sparse_fact.hpp``)
+---------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``map`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structSparseFact`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a851e8f0d1cbc94996bc8a8e99223d394`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1acad508a98b1e818ec2cbbbbb24e169aa`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a405ea5981afc1d3d91ca6f09418eda1f`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a525be82ad13ee710893e6985f7e6a1f2`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1af8c9460074e012027928fade4f3ab6a1`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1aa20074a10e2d4e0aa9401c7d938777e9`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a1c633477fcba5134ae057cf9a3fc2f8b`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a172e75ff8f991553d29483a63ec46096`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1afe41f780477217b6db4e84eb2b37eaf6`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1aed7a962465eaaf39f8e6d3a353946744`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1af211da6246ce8372b1225afbeb5d0f94`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1ac625d96f949720b3f7a29b3b6ee2c7da`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a1cf0dd64e9dc0eb429fa4d479ac121cd`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1ae7a9c23a18cc490da61f286c7eec5d92`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a4dae7c37d6be03820125bffac9549db6`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a0a61a1b77fb7b637c9d15831b910720c`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a6bc00a716cc3675e216a396a2306ae52`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a31a310cdecf1c988f1d0802a8a0aca26`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1af38408b4c62fc4ac75d324db0000b87d`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a3f790f5c9a85bd03887d14477a3fdd7c`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1aa0ff427baee336d7817f3086a55b0e5a`
+
+- :ref:`exhale_function_sparse__fact_8hpp_1a7c74936fe5089db1adb99bdd71eaaea3`
+

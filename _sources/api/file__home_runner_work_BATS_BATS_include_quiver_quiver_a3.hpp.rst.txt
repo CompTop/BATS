@@ -1,0 +1,46 @@
+
+.. _file__home_runner_work_BATS_BATS_include_quiver_quiver_a3.hpp:
+
+File quiver_a3.hpp
+==================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_quiver>` (``/home/runner/work/BATS/BATS/include/quiver``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/quiver/quiver_a3.hpp``)
+-------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_quiver_quiver_a3.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``../linalg/matrix_interface.hpp``
+
+- ``tuple``
+
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classQuiver__A3`
+

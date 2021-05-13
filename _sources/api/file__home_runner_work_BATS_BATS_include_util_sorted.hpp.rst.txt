@@ -1,0 +1,101 @@
+
+.. _file__home_runner_work_BATS_BATS_include_util_sorted.hpp:
+
+File sorted.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_util>` (``/home/runner/work/BATS/BATS/include/util``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/util/sorted.hpp``)
+--------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_util_sorted.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``common.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_common.hpp`)
+
+- ``cstddef``
+
+- ``iostream``
+
+- ``permutation.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future_permutation.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_complex.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__util`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_sorted_8hpp_1ad455409e65f618a7ff90980e9ec4de25`
+
+- :ref:`exhale_function_sorted_8hpp_1a84ca5b41f955d21b5ce336aceb95b229`
+
+- :ref:`exhale_function_sorted_8hpp_1a9db0da9ec85f1d24fdb972719881dfae`
+
+- :ref:`exhale_function_sorted_8hpp_1ae579006d3d6cd4da6cf24914d42ce028`
+
+- :ref:`exhale_function_sorted_8hpp_1a388f51b3788c21fca798e9ac65219915`
+
+- :ref:`exhale_function_sorted_8hpp_1ad6bfd6dbcb8856b350f6c17d77ff51d4`
+
+- :ref:`exhale_function_sorted_8hpp_1a79590767a6a9e7db564e30ed6243b40d`
+
+- :ref:`exhale_function_sorted_8hpp_1a7749ea89e19450a1d3a5e4c6f9eced9f`
+
+- :ref:`exhale_function_sorted_8hpp_1aea909837671b772729eb9201b0f41f55`
+

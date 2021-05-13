@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File symbolic_implementation.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File symbolic_implementation.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-symbolic-implementation-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp"></span><h1>Program Listing for File symbolic_implementation.hpp<a class="headerlink" href="#program-listing-for-file-symbolic-implementation-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.html#file-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/symbolic_implementation.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;matrix_interface.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="nc">SI</span><span class="p">{};</span>
+
+<span class="cp">#define IMPL_COUT(M) \</span>
+<span class="cp">std::ostream &amp; operator &lt;&lt; (std::ostream &amp;out, M&lt;SI&gt; &amp;c) \</span>
+<span class="cp">{ \</span>
+<span class="cp">    out &lt;&lt; #M; \</span>
+<span class="cp">    return out; \</span>
+<span class="cp">}</span>
+
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EL</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EU</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">ELH</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EUH</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+
+<span class="cp">#define MM(A,B,C) \</span>
+<span class="cp">C&lt;SI&gt; matmul(A&lt;SI&gt; a, B&lt;SI&gt; b){\</span>
+<span class="cp">    C&lt;SI&gt; c;\</span>
+<span class="cp">    (void) a;\</span>
+<span class="cp">    (void) b;\</span>
+<span class="cp">    return c;\</span>
+<span class="cp">};</span>
+
+
+<span class="n">MM</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">MM</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+<span class="n">MM</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+<span class="n">MM</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+<span class="n">MM</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+
+<span class="cp">#define APPLY_INVERSE_ON_LEFT(A,B,C) \</span>
+<span class="cp">C&lt;SI&gt; apply_inverse_on_left(A&lt;SI&gt; a, B&lt;SI&gt; b){\</span>
+<span class="cp">    C&lt;SI&gt; c;\</span>
+<span class="cp">    (void) a;\</span>
+<span class="cp">    (void) b;\</span>
+<span class="cp">    return c;\</span>
+<span class="cp">};</span>
+
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+
+<span class="cp">#define APPLY_INVERSE_ON_RIGHT(A,B,C) \</span>
+<span class="cp">C&lt;SI&gt; apply_inverse_on_right(A&lt;SI&gt; a, B&lt;SI&gt; b){\</span>
+<span class="cp">    C&lt;SI&gt; c;\</span>
+<span class="cp">    (void) a;\</span>
+<span class="cp">    (void) b;\</span>
+<span class="cp">    return c;\</span>
+<span class="cp">};</span>
+
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="cp">#define IMPL_FACT(TYPE,F1,F2,F3,F4,f1,f2,f3,f4) \</span>
+<span class="cp">std::tuple&lt;F1&lt;SI&gt; , F2&lt;SI&gt; , F3&lt;SI&gt; , F4&lt;SI&gt;&gt; TYPE##_fact(A&lt;SI&gt; a){ \</span>
+<span class="cp">    L&lt;SI&gt; l; \</span>
+<span class="cp">    EL&lt;SI&gt; el; \</span>
+<span class="cp">    EU&lt;SI&gt; eu;\</span>
+<span class="cp">    ELH&lt;SI&gt; elh;\</span>
+<span class="cp">    EUH&lt;SI&gt; euh;\</span>
+<span class="cp">    U&lt;SI&gt; u;\</span>
+<span class="cp">    P&lt;SI&gt; p;\</span>
+<span class="cp">    (void)a;\</span>
+<span class="cp">    (void)el;\</span>
+<span class="cp">    (void)eu;\</span>
+<span class="cp">    (void)elh;\</span>
+<span class="cp">    (void)euh;\</span>
+<span class="cp">    return std::make_tuple( f1,f2,f3,f4);\</span>
+<span class="cp">}</span>
+
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">LEUP</span><span class="p">,</span>  <span class="n">L</span><span class="p">,</span><span class="n">EL</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">,</span>  <span class="n">l</span><span class="p">,</span><span class="n">el</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">PLEU</span><span class="p">,</span>  <span class="n">P</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">EU</span><span class="p">,</span><span class="n">U</span><span class="p">,</span>  <span class="n">p</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">eu</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">UELP</span><span class="p">,</span>  <span class="n">U</span><span class="p">,</span><span class="n">EUH</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">P</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span><span class="n">euh</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">PUEL</span><span class="p">,</span>  <span class="n">P</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">ELH</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">elh</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+
+
+
+<span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">commute</span><span class="p">(</span> <span class="n">EL</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">el1</span><span class="p">,</span> <span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">l1</span> <span class="p">){</span>
+    <span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">l</span><span class="p">;</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">l1</span><span class="p">;</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">el1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

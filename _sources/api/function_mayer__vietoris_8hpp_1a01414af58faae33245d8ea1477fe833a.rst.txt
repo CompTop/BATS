@@ -1,0 +1,13 @@
+.. _exhale_function_mayer__vietoris_8hpp_1a01414af58faae33245d8ea1477fe833a:
+
+Template Function bats::mayer_vietoris_boundary
+===============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::mayer_vietoris_boundary(const CpxT&, const CpxT&, const CpxT&, size_t)

@@ -1,0 +1,16 @@
+.. _exhale_class_classColumnMatrix:
+
+Template Class ColumnMatrix
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: ColumnMatrix
+   :members:
+   :protected-members:
+   :undoc-members:

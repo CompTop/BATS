@@ -1,0 +1,16 @@
+.. _exhale_struct_structTrp__T_3_01ColMaj_01_4:
+
+Template Struct Trp_T< ColMaj >
+===============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: Trp_T< ColMaj >
+   :members:
+   :protected-members:
+   :undoc-members:

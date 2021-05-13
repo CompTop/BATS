@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a48861caec8a4610c06d2b8f80c1e63b6:
+
+Template Function apply_inverse_on_left(L<Dense<F, Acc1>>, A<Dense<F, Acc2>>)
+=============================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: apply_inverse_on_left(L<Dense<F, Acc1>>, A<Dense<F, Acc2>>)

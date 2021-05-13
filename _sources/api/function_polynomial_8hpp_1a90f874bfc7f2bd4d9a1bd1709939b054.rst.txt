@@ -1,0 +1,13 @@
+.. _exhale_function_polynomial_8hpp_1a90f874bfc7f2bd4d9a1bd1709939b054:
+
+Template Function characteristic_matrix
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: characteristic_matrix(const ColumnMatrix<SparseVector<T>>&)

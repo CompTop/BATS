@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f:
+
+Template Function fill_zeros
+============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: fill_zeros(M)

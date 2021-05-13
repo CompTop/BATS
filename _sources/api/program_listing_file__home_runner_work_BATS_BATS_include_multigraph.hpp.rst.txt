@@ -1,0 +1,17 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_multigraph.hpp:
+
+Program Listing for File multigraph.hpp
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_multigraph.hpp>` (``/home/runner/work/BATS/BATS/include/multigraph.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include "multigraph/diagram.hpp"
+   #include "multigraph/functors.hpp"
+   #include "multigraph/multigraph.hpp"

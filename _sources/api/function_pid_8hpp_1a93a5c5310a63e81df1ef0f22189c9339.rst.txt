@@ -1,0 +1,13 @@
+.. _exhale_function_pid_8hpp_1a93a5c5310a63e81df1ef0f22189c9339:
+
+Template Function smith_rows
+============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: smith_rows(const ColumnMatrix<TC>&)

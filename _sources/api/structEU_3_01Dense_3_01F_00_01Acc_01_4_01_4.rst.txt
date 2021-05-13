@@ -1,0 +1,25 @@
+.. _exhale_struct_structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4:
+
+Template Struct EU< Dense< F, Acc > >
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Base Type
+*********
+
+- ``public E< Dense< F, Acc > >`` (:ref:`exhale_struct_structE_3_01Dense_3_01F_00_01Acc_01_4_01_4`)
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: EU< Dense< F, Acc > >
+   :members:
+   :protected-members:
+   :undoc-members:

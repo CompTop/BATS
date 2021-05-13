@@ -1,0 +1,13 @@
+.. _exhale_function_sparse_8hpp_1a1aae54e14396d951f0958797eb677863:
+
+Function bats::bars_to_pairs
+============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::bars_to_pairs(const std::vector<bar>&, size_t)

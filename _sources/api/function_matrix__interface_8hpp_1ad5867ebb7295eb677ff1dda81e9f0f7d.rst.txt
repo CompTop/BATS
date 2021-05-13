@@ -1,0 +1,13 @@
+.. _exhale_function_matrix__interface_8hpp_1ad5867ebb7295eb677ff1dda81e9f0f7d:
+
+Function apply_inverse
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: apply_inverse(MAT, MAT)

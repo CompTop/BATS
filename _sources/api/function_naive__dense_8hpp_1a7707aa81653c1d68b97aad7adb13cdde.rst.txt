@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a7707aa81653c1d68b97aad7adb13cdde:
+
+Template Function matmul(A<Dense<F, Acc1>>, A<Dense<F, Acc2>>)
+==============================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: matmul(A<Dense<F, Acc1>>, A<Dense<F, Acc2>>)

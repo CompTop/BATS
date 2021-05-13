@@ -1,0 +1,13 @@
+.. _exhale_function_simplex_8hpp_1aa37f3dee69e4b607fc69af16ea362765:
+
+Template Function bats::util::is_degenerate
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::is_degenerate(const std::vector<T>&)

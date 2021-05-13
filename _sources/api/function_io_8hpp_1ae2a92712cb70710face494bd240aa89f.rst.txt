@@ -1,0 +1,13 @@
+.. _exhale_function_io_8hpp_1ae2a92712cb70710face494bd240aa89f:
+
+Template Function bats::util::io::parse_argv(const int, char \*\*, const std::string&&, const T)
+================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_io.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::io::parse_argv(const int, char **, const std::string&&, const T)

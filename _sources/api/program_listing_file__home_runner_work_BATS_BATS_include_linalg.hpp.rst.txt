@@ -1,0 +1,26 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_linalg.hpp:
+
+Program Listing for File linalg.hpp
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_linalg.hpp>` (``/home/runner/work/BATS/BATS/include/linalg.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include "linalg/col_matrix.hpp"
+   #include "linalg/csc_matrix.hpp"
+   #include "linalg/field.hpp"
+   #include "linalg/matrix_interface.hpp"
+   #include "linalg/naive_dense.hpp"
+   #include "linalg/sparse_vector.hpp"
+   #include "linalg/set_vector.hpp"
+   #include "linalg/sparse_fact.hpp"
+   #include "linalg/polynomial.hpp"
+   #include "linalg/pid.hpp"
+   #include "linalg/rcf.hpp"
+   //#include "linalg/schur.hpp"

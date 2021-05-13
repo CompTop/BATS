@@ -1,0 +1,22 @@
+.. _exhale_struct_structbats_1_1Diagram_1_1Edge:
+
+Struct Diagram::Edge
+====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`
+
+
+Nested Relationships
+--------------------
+
+This struct is a nested type of :ref:`exhale_class_classbats_1_1Diagram`.
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::Diagram::Edge
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,13 @@
+.. _exhale_function_spherical_8hpp_1a08a88fae7181466a53760d17f786a071:
+
+Template Function bats::force_repel_rp
+======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_spherical.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::force_repel_rp(DataSet<T>&, T)

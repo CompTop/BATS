@@ -1,0 +1,73 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp:
+
+File rips_cover.hpp
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/rips_cover.hpp``)
+----------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``complex/simplicial_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`)
+
+- ``cover.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`)
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``filtration/flag.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`)
+
+- ``metric.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+
+- ``tuple``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_rips__cover_8hpp_1a7b6d50a75f0c1b925dfac2cd15a3f2ac`
+
+- :ref:`exhale_function_rips__cover_8hpp_1a6bf32cdd8f98d4a41bd8f1767b55bdc1`
+

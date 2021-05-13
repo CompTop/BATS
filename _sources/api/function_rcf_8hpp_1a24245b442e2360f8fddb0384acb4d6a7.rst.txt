@@ -1,0 +1,13 @@
+.. _exhale_function_rcf_8hpp_1a24245b442e2360f8fddb0384acb4d6a7:
+
+Template Function generating_basis
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: generating_basis(const ColumnMatrix<SparseVector<UnivariatePolynomial<T>>>&, const ColumnMatrix<SparseVector<T>>&)

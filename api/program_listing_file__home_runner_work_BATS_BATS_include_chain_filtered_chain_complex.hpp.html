@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File filtered_chain_complex.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File filtered_chain_complex.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-filtered-chain-complex-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-chain-filtered-chain-complex-hpp"></span><h1>Program Listing for File filtered_chain_complex.hpp<a class="headerlink" href="#program-listing-for-file-filtered-chain-complex-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp.html#file-home-runner-work-bats-bats-include-chain-filtered-chain-complex-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/chain/filtered_chain_complex.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;chain_complex.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;filtration/filtration.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="c1">// template over filtration and matrix type</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">FilteredChainComplex</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;</span> <span class="n">val</span><span class="p">;</span> <span class="c1">// stored in original order</span>
+    <span class="n">ChainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">;</span> <span class="c1">// stored in permutation order</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">perm</span><span class="p">;</span> <span class="c1">// map from column order in chain complex to val</span>
+
+    <span class="n">FilteredChainComplex</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+    <span class="n">FilteredChainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">()),</span> <span class="n">C</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">complex</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// step 1: compute permutation to put val in order</span>
+        <span class="k">auto</span> <span class="n">perms</span> <span class="o">=</span> <span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+
+        <span class="c1">// step 2: put ChainComplex C in permutation order</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">permute_basis</span><span class="p">(</span><span class="n">perms</span><span class="p">);</span>
+
+        <span class="c1">// step 3: store inverse perumutation to map back to original order</span>
+        <span class="c1">// iperm = filtration_iperm(perms);</span>
+        <span class="n">perm</span> <span class="o">=</span> <span class="n">perms</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">ChainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;&amp;</span> <span class="n">complex</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">C</span><span class="p">;}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vals</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">// update filtration</span>
+    <span class="kt">void</span> <span class="n">update_filtration</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;</span> <span class="n">newval</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// step 1: determine permutation order for newval</span>
+        <span class="k">auto</span> <span class="n">perms</span> <span class="o">=</span> <span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">newval</span><span class="p">);</span>
+
+        <span class="c1">// get inverse permutation for current permutation</span>
+        <span class="k">auto</span> <span class="n">iperm</span> <span class="o">=</span> <span class="n">filtration_iperm</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
+
+        <span class="c1">// step 2: determine update to old permutation</span>
+        <span class="c1">// iperm[k] will hold the updated permutation temporarily</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// temporary vector</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">iperm</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span><span class="n">iperm</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">data</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">perms</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// step 3: apply permutation updates to ChainComplex C</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">permute_basis</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
+
+        <span class="c1">// step 4: store new permutation</span>
+        <span class="n">perm</span> <span class="o">=</span> <span class="n">perms</span><span class="p">;</span>
+
+        <span class="c1">// store values as well</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">newval</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="c1">// defualt return</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="k">auto</span> <span class="n">__FilteredChainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">MT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">FilteredChainComplex</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// defualt return</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="k">auto</span> <span class="n">Chain</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">__FilteredChainComplex</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">());}</span>
+
+
+<span class="p">}</span> <span class="c1">// namespace bats</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

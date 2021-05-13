@@ -1,0 +1,13 @@
+.. _exhale_function_persistence_2barcode_8hpp_1ab6a5a5e287f1aa3400548761fcaa8a9d:
+
+Template Function bats::barcode_equality
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::barcode_equality(const std::vector<PersistencePair<T>>&, const std::vector<PersistencePair<T>>&)

@@ -1,0 +1,1077 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File naive_dense.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File naive_dense.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-naive-dense-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-linalg-naive-dense-hpp"></span><h1>Program Listing for File naive_dense.hpp<a class="headerlink" href="#program-listing-for-file-naive-dense-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp.html#file-home-runner-work-bats-bats-include-linalg-naive-dense-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/naive_dense.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;util/common.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;matrix_interface.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="c1">//required for fill_rand&lt;Rational&lt;int&gt;&gt;()</span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/field.hpp&gt;</span><span class="cp"></span>
+
+
+<span class="c1">// storage type</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">Dense</span><span class="p">{};</span>
+
+<span class="c1">// memory access types</span>
+<span class="k">struct</span> <span class="nc">RowMaj</span><span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">ColMaj</span><span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">RevRowMaj</span><span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">RevColMaj</span><span class="p">{};</span>
+
+<span class="c1">// represents either a row view or column view</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">VectorView</span><span class="p">{</span>
+    <span class="n">T</span><span class="o">*</span> <span class="n">first</span><span class="p">;</span>
+    <span class="n">T</span><span class="o">*</span> <span class="n">last</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">stride</span><span class="p">;</span>
+
+    <span class="n">VectorView</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">start</span><span class="p">,</span> <span class="n">T</span><span class="o">*</span> <span class="n">end</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">s</span><span class="p">)</span> <span class="o">:</span> <span class="n">first</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="n">last</span><span class="p">(</span><span class="n">end</span><span class="p">),</span> <span class="n">stride</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{};</span>
+
+    <span class="k">class</span> <span class="nc">Iterator</span> <span class="p">{</span>
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">stride</span><span class="p">;</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">Iterator</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">s</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">ptr</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">stride</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+        <span class="c1">// Prefix ++ overload</span>
+        <span class="n">Iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">ptr</span><span class="o">+=</span><span class="n">stride</span><span class="p">;</span>
+            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Postfix ++ overload</span>
+        <span class="n">Iterator</span> <span class="k">operator</span><span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Iterator</span> <span class="n">iterator</span> <span class="o">=</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+            <span class="o">++*</span><span class="k">this</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">iterator</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kr">inline</span> <span class="n">Iterator</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">offset</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">ptr</span> <span class="o">+</span> <span class="n">stride</span><span class="o">*</span><span class="n">offset</span><span class="p">,</span> <span class="n">stride</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ptr</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">ptr</span><span class="p">;}</span>
+        <span class="kr">inline</span> <span class="kt">size_t</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">Iterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">ptr</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kr">inline</span> <span class="n">T</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;}</span>
+
+    <span class="p">};</span>
+
+    <span class="n">Iterator</span> <span class="nf">begin</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">stride</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">Iterator</span> <span class="nf">end</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Iterator</span><span class="p">(</span><span class="n">last</span><span class="p">,</span> <span class="n">stride</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="c1">// self += a * x</span>
+    <span class="kt">void</span> <span class="nf">axpy</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">xptr</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="n">last</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">ptr</span> <span class="o">+=</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">xptr</span><span class="p">);</span>
+            <span class="n">ptr</span><span class="o">+=</span><span class="n">stride</span><span class="p">;</span>
+            <span class="n">xptr</span><span class="o">+=</span><span class="n">x</span><span class="p">.</span><span class="n">stride</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">VectorView</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">){</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">xptr</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="n">last</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">xptr</span><span class="p">);</span>
+            <span class="n">ptr</span><span class="o">+=</span><span class="n">stride</span><span class="p">;</span>
+            <span class="n">xptr</span><span class="o">+=</span><span class="n">x</span><span class="p">.</span><span class="n">stride</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">last</span> <span class="o">-</span> <span class="n">first</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span> <span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">stride</span><span class="o">*</span><span class="n">i</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">stride</span><span class="o">*</span><span class="n">i</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">stride</span><span class="o">*</span><span class="n">i</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">stride</span><span class="o">*</span><span class="n">i</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="n">T</span> <span class="n">norm</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="c1">// 2-norm of vector</span>
+        <span class="n">T</span> <span class="n">n</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="n">last</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+            <span class="n">ptr</span> <span class="o">+=</span> <span class="n">stride</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// basic arithmetic</span>
+    <span class="n">VectorView</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">/=</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="n">last</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">ptr</span> <span class="o">/=</span> <span class="n">c</span><span class="p">;</span>
+            <span class="n">ptr</span> <span class="o">+=</span> <span class="n">stride</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">T</span> <span class="n">norm</span><span class="p">(</span><span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span> <span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">MemAcc</span><span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">F</span><span class="o">*</span> <span class="n">mat</span><span class="p">;</span>
+
+    <span class="n">MemAcc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">mm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nn</span><span class="p">,</span> <span class="n">F</span><span class="o">*</span> <span class="n">mat</span><span class="p">)</span> <span class="o">:</span> <span class="n">m</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="n">nn</span><span class="p">),</span> <span class="n">mat</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="c1">// null constructor</span>
+    <span class="n">MemAcc</span><span class="p">(){</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">mat</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;}</span>
+
+    <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">mm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nn</span><span class="p">,</span> <span class="n">F</span><span class="o">*</span> <span class="n">mmat</span><span class="p">){</span>
+        <span class="n">m</span><span class="o">=</span><span class="n">mm</span><span class="p">;</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">nn</span><span class="p">;</span>
+        <span class="n">mat</span><span class="o">=</span><span class="n">mmat</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// single element access</span>
+    <span class="kr">inline</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">mat</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">mat</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="o">+</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[(</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="mi">-1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="o">+</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="mi">-1</span><span class="p">)];</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevRowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="mi">-1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="mi">-1</span><span class="p">)];</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[</span><span class="n">j</span><span class="o">*</span><span class="n">m</span><span class="o">+</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="n">j</span><span class="p">];</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[(</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="mi">-1</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="o">+</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="mi">-1</span><span class="p">)];</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevRowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mat</span><span class="p">[(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="mi">-1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="mi">-1</span><span class="p">)];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return a column view of column j</span>
+    <span class="kr">inline</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span> <span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevRowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span><span class="n">j</span><span class="mi">-1</span><span class="p">,</span> <span class="n">mat</span> <span class="mi">-1</span><span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="n">n</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return a column view of column j</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">j</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span> <span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="o">-</span><span class="n">j</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevRowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span><span class="n">j</span><span class="mi">-1</span><span class="p">,</span> <span class="n">mat</span> <span class="mi">-1</span><span class="o">-</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="n">n</span> <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return a view of row i</span>
+    <span class="kr">inline</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span><span class="n">i</span><span class="mi">-1</span><span class="p">,</span> <span class="n">mat</span> <span class="mi">-1</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span> <span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevRowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="mi">-1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return a view of row i</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">ColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevColMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span><span class="n">i</span><span class="mi">-1</span><span class="p">,</span> <span class="n">mat</span> <span class="mi">-1</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span> <span class="p">);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">Acc</span><span class="p">,</span><span class="n">RevRowMaj</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="n">mat</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="mi">-1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print</span><span class="p">(){</span>
+        <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">oss</span><span class="o">&lt;&lt;</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">oss</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+
+
+<span class="c1">// define the type changes for trp, Jconj versions</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">Trp_T</span><span class="p">{};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">JConj_T</span><span class="p">{};</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">TJConj_T</span><span class="p">{};</span>
+
+<span class="cp">#define RULE(K,A,B) \</span>
+<span class="cp">template&lt;&gt; \</span>
+<span class="cp">struct K&lt;A&gt;{ \</span>
+<span class="cp">    using type = B; \</span>
+<span class="cp">};</span>
+
+<span class="c1">//memory accessor rules</span>
+
+<span class="n">RULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">RowMaj</span><span class="p">,</span> <span class="n">ColMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">ColMaj</span><span class="p">,</span> <span class="n">RowMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">RevRowMaj</span><span class="p">,</span> <span class="n">RevColMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">RevColMaj</span><span class="p">,</span> <span class="n">RevRowMaj</span> <span class="p">)</span>
+
+<span class="n">RULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">RowMaj</span><span class="p">,</span> <span class="n">RevRowMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">ColMaj</span><span class="p">,</span> <span class="n">RevColMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">RevRowMaj</span><span class="p">,</span> <span class="n">RowMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">RevColMaj</span><span class="p">,</span> <span class="n">ColMaj</span> <span class="p">)</span>
+
+<span class="n">RULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">RowMaj</span><span class="p">,</span> <span class="n">RevColMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">ColMaj</span><span class="p">,</span> <span class="n">RevRowMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">RevRowMaj</span><span class="p">,</span> <span class="n">ColMaj</span> <span class="p">)</span>
+<span class="n">RULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">RevColMaj</span><span class="p">,</span> <span class="n">RowMaj</span> <span class="p">)</span>
+
+<span class="c1">//matrix shape rules</span>
+
+<span class="cp">#define SRULE(K,A,B) \</span>
+<span class="cp">template&lt;typename F, typename Acc&gt; \</span>
+<span class="cp">struct K&lt;A&lt;Dense&lt;F,Acc&gt;&gt;&gt;{ \</span>
+<span class="cp">    using type = B&lt;Dense&lt;F,typename K&lt;Acc&gt;::type&gt;&gt;; \</span>
+<span class="cp">};</span>
+
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">A</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">L</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">EL</span><span class="p">,</span> <span class="n">EU</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">EU</span><span class="p">,</span> <span class="n">EL</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">ELH</span><span class="p">,</span> <span class="n">EUH</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">EUH</span><span class="p">,</span> <span class="n">ELH</span> <span class="p">)</span>
+
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">A</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">L</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">EL</span><span class="p">,</span> <span class="n">EUH</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">EU</span><span class="p">,</span> <span class="n">ELH</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">ELH</span><span class="p">,</span> <span class="n">EU</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">EUH</span><span class="p">,</span> <span class="n">EL</span> <span class="p">)</span>
+
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">A</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">U</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">EL</span><span class="p">,</span> <span class="n">ELH</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">EU</span><span class="p">,</span> <span class="n">EUH</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">ELH</span><span class="p">,</span> <span class="n">EL</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">EUH</span><span class="p">,</span> <span class="n">EU</span> <span class="p">)</span>
+
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">Trp_T</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">JConj_T</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="p">)</span>
+<span class="n">SRULE</span><span class="p">(</span> <span class="n">TJConj_T</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="p">)</span>
+
+<span class="cp">#define IMPLEMENT_TRP(M) \</span>
+<span class="cp">auto Trp(){ \</span>
+<span class="cp">        typename Trp_T&lt;M&gt;::type rmat(Base::n,Base::m,Base::mat); \</span>
+<span class="cp">        return rmat; \</span>
+<span class="cp">} \</span>
+
+<span class="cp">#define IMPLEMENT_JCONJ(M) \</span>
+<span class="cp">auto JConj(){ \</span>
+<span class="cp">        typename JConj_T&lt;M&gt;::type rmat(Base::m,Base::n,Base::mat); \</span>
+<span class="cp">        return rmat; \</span>
+<span class="cp">} \</span>
+
+<span class="cp">#define IMPLEMENT_TJCONJ(M) \</span>
+<span class="cp">auto TJConj(){ \</span>
+<span class="cp">        typename TJConj_T&lt;M&gt;::type rmat(Base::n,Base::m,Base::mat); \</span>
+<span class="cp">        return rmat; \</span>
+<span class="cp">} \</span>
+
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;</span><span class="p">{</span>
+    <span class="k">using</span> <span class="n">DI</span> <span class="o">=</span> <span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="c1">// to make things consistent with all the derived classes, Makes the macro work</span>
+    <span class="k">using</span> <span class="n">Base</span> <span class="o">=</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">FieldType</span> <span class="o">=</span> <span class="n">F</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">F</span><span class="o">*</span> <span class="n">mat</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">MemAcc</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;</span> <span class="n">macc</span><span class="p">;</span>
+
+    <span class="c1">// null constructor</span>
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(){</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;}</span>
+
+    <span class="c1">//&quot;copy&quot; constructor</span>
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">m2</span><span class="p">)</span> <span class="p">{</span><span class="n">m</span> <span class="o">=</span> <span class="n">m2</span><span class="p">.</span><span class="n">m</span><span class="p">;</span> <span class="n">n</span> <span class="o">=</span> <span class="n">m2</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">m2</span><span class="p">.</span><span class="n">mat</span><span class="p">;</span> <span class="n">macc</span><span class="o">=</span><span class="n">m2</span><span class="p">.</span><span class="n">macc</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">mm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nn</span><span class="p">,</span> <span class="n">F</span><span class="o">*</span> <span class="n">mat</span><span class="p">)</span> <span class="o">:</span> <span class="n">m</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="n">nn</span><span class="p">),</span> <span class="n">mat</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">macc</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span><span class="n">nn</span><span class="p">,</span><span class="n">mat</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">mm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nn</span><span class="p">)</span> <span class="o">:</span> <span class="n">m</span><span class="p">(</span><span class="n">mm</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="n">nn</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">F</span><span class="p">[</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">];</span>
+        <span class="c1">// std::fill</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+        <span class="n">macc</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">mat</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">copy</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">F</span><span class="o">*</span> <span class="n">newmat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">F</span><span class="p">[</span><span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">];</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">mat</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">newmat</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">newmat</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">nrow</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">ncol</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print</span><span class="p">(){</span>
+        <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">print_arr</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;{</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot;,&quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;};&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span> <span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">oss</span><span class="o">&lt;&lt;</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">oss</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return a column view of column j</span>
+    <span class="kr">inline</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">macc</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">macc</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return a row view of row i</span>
+    <span class="kr">inline</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">macc</span><span class="p">.</span><span class="n">r</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">macc</span><span class="p">.</span><span class="n">r</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">macc</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">macc</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">macc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">macc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">free</span><span class="p">(){</span>
+        <span class="k">delete</span> <span class="p">[]</span> <span class="n">mat</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//equality check</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+    <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">M</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">m</span><span class="o">!=</span><span class="n">other</span><span class="p">.</span><span class="n">m</span> <span class="o">||</span> <span class="n">n</span><span class="o">!=</span><span class="n">other</span><span class="p">.</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+                <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">!=</span> <span class="n">other</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="p">)</span>
+                    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">add_col_to</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="n">F</span> <span class="n">a</span><span class="p">);</span>
+
+    <span class="kt">void</span> <span class="nf">add_row_to</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="n">F</span> <span class="n">a</span><span class="p">);</span>
+
+    <span class="kt">void</span> <span class="nf">swap_cols</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">);</span>
+
+    <span class="kt">void</span> <span class="nf">swap_rows</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">);</span>
+
+    <span class="k">static</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">identity</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">mat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">mat</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="n">IMPLEMENT_TRP</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">)</span>
+    <span class="n">IMPLEMENT_JCONJ</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">)</span>
+    <span class="n">IMPLEMENT_TJCONJ</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">DI</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="p">};</span>
+
+
+
+<span class="c1">// Inherit all the constructors and implement mem acc transforms</span>
+<span class="cp">#define INHERIT(T1,T2) \</span>
+<span class="cp">template&lt;typename F,typename Acc&gt; \</span>
+<span class="cp">struct T1&lt;Dense&lt;F,Acc&gt;&gt;:T2&lt;Dense&lt;F,Acc&gt;&gt;{ \</span>
+<span class="cp">    using Base = T2&lt;Dense&lt;F,Acc&gt;&gt;; \</span>
+<span class="cp">    using Self = T1&lt;Dense&lt;F,Acc&gt;&gt;; \</span>
+<span class="cp">    using Base::Base ; \</span>
+<span class="cp">    IMPLEMENT_TRP(Self)\</span>
+<span class="cp">    IMPLEMENT_JCONJ(Self)\</span>
+<span class="cp">    IMPLEMENT_TJCONJ(Self)\</span>
+<span class="cp">}; \</span>
+
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">T</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">EL</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">EU</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">ELH</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">EUH</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+<span class="n">INHERIT</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+
+
+<span class="c1">// naive matmul</span>
+<span class="k">template</span><span class="o">&lt;</span> <span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">m1</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">m2</span><span class="p">){</span>
+    <span class="n">assert</span><span class="p">(</span> <span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="o">==</span><span class="n">m2</span><span class="p">.</span><span class="n">m</span> <span class="p">);</span>
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">prod</span><span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="n">m</span><span class="p">,</span><span class="n">m2</span><span class="p">.</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">.</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">m2</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">prod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">+=</span> <span class="n">m1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">m2</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+            <span class="p">}</span>
+    <span class="k">return</span> <span class="n">prod</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//inplace</span>
+<span class="k">template</span><span class="o">&lt;</span> <span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">m1</span><span class="p">,</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">y</span><span class="p">){</span>
+    <span class="n">F</span> <span class="n">temp</span><span class="p">[</span><span class="n">m1</span><span class="p">.</span><span class="n">m</span><span class="p">];</span>
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">prod</span><span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">.</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">prod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">+=</span> <span class="n">m1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+            <span class="p">}</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">prod</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span> <span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">matmul</span><span class="p">(</span><span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">y</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">m1</span> <span class="p">){</span>
+    <span class="n">F</span> <span class="n">temp</span><span class="p">[</span><span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="p">];</span>
+    <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">prod</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="p">,</span><span class="n">temp</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">m1</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+                <span class="n">prod</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">+=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">m1</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+            <span class="p">}</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">prod</span><span class="p">.</span><span class="n">r</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">apply_matmul_on_left</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Amat1</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Amat2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">Amat2</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">matmul</span><span class="p">(</span><span class="n">Amat1</span><span class="p">,</span> <span class="n">Amat2</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">Amat2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">apply_matmul_on_right</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Amat1</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Amat2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">Amat1</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">matmul</span><span class="p">(</span><span class="n">Amat1</span><span class="p">.</span><span class="n">r</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">Amat2</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">Amat2</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="cm">/*</span>
+<span class="cm">Lret * ELmat = ELmat *Lmat</span>
+<span class="cm">*/</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">commute</span><span class="p">(</span><span class="n">EL</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">ELmat</span><span class="p">,</span> <span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Lmat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ELmat</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ELmat</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">Lmat</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">==</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">nrow</span><span class="p">());</span>
+    <span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Lret</span> <span class="o">=</span> <span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+
+    <span class="c1">// step 1 is to make an index map from ELmat</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">idx_map</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// pointer to current row</span>
+    <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// pointer to column</span>
+    <span class="c1">// loop over columns of ELmat</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// increment i until we find a non-zero, or run out of column</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ELmat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// column is all zero</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">idx_map</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// i is the non-zer index</span>
+        <span class="n">idx_map</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// step 2 is to form Lret</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Lret</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// default unit-diagonal</span>
+    <span class="p">}</span>
+
+    <span class="c1">// perform actual commutation</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">idx_map</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">idx_map</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+            <span class="n">Lret</span><span class="p">(</span><span class="n">idx_map</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">idx_map</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">=</span> <span class="n">Lmat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">Lret</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">commute</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Lmat</span><span class="p">,</span> <span class="n">ELH</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">ELHmat</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">ELm</span> <span class="o">=</span> <span class="n">ELHmat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lm</span> <span class="o">=</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lp</span> <span class="o">=</span> <span class="n">commute</span><span class="p">(</span><span class="n">ELm</span><span class="p">,</span><span class="n">Lm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">Lp</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">commute</span><span class="p">(</span><span class="n">EUH</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">EUHmat</span><span class="p">,</span> <span class="n">U</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Umat</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">ELm</span> <span class="o">=</span> <span class="n">EUHmat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lm</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lp</span> <span class="o">=</span> <span class="n">commute</span><span class="p">(</span><span class="n">ELm</span><span class="p">,</span><span class="n">Lm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">Lp</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">commute</span><span class="p">(</span><span class="n">U</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">EU</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">EUmat</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">ELm</span> <span class="o">=</span> <span class="n">EUmat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lm</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lp</span> <span class="o">=</span> <span class="n">commute</span><span class="p">(</span><span class="n">ELm</span><span class="p">,</span><span class="n">Lm</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">Lp</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// solve Lmat x = y in-place</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">l_solve</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;</span> <span class="n">Lmat</span><span class="p">,</span> <span class="n">VectorView</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/=</span> <span class="n">Lmat</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+        <span class="c1">// apply forward-looking update</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">Lmat</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm">solve Aret = Lmat \ Amat</span>
+<span class="cm">*/</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Lmat</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Amat</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">//size_t m = Amat.nrow();</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">Amat</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+
+    <span class="c1">//A&lt;Dense&lt;F,Acc2&gt;&gt; Aret = Amat.copy();</span>
+
+    <span class="c1">// apply lower triangular solve to each column</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">l_solve</span><span class="p">(</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">Amat</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">Amat</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+<span class="c1">// implementations of naive matrix ops</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;::</span><span class="n">swap_cols</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">),(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;::</span><span class="n">swap_rows</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">((</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;::</span><span class="n">add_col_to</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="n">F</span> <span class="n">a</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+       <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;::</span><span class="n">add_row_to</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="n">F</span> <span class="n">a</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">k</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">){</span>
+       <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)(</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="c1">// mat creation utils</span>
+
+<span class="c1">// template&lt;typename M&gt;</span>
+<span class="c1">// void make_diag_ones(M mat){</span>
+<span class="c1">//     for(size_t i=0;i&lt;mat.m;i++)</span>
+<span class="c1">//         mat(i,i)=1;</span>
+<span class="c1">// }</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">make_diag_ones</span><span class="p">(</span><span class="n">M</span> <span class="n">mat</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">mat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">fill_zeros</span><span class="p">(</span><span class="n">M</span> <span class="n">mat</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">mat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">fill_rand</span><span class="p">(</span><span class="n">M</span> <span class="n">mat</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">mat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">=</span><span class="n">rand</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">fill_rand</span><span class="p">(</span><span class="n">M</span> <span class="n">mat</span><span class="p">,</span> <span class="kt">int</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">10</span><span class="p">){</span>
+    <span class="c1">// fill put random numbers in matrix</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">j</span><span class="o">&lt;</span><span class="n">mat</span><span class="p">.</span><span class="n">n</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">mat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">=</span><span class="n">F</span><span class="p">(</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="n">vmax</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">// Find pivot in lower right block of pr,pc</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">find_pivot</span><span class="p">(</span><span class="n">M</span> <span class="n">mat</span><span class="p">,</span><span class="kt">size_t</span> <span class="n">pr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">pc</span><span class="p">){</span>
+    <span class="kt">size_t</span> <span class="n">prow</span> <span class="o">=</span> <span class="n">pr</span><span class="mi">-1</span><span class="p">;</span> <span class="c1">// start 1 less as its immediately incremented</span>
+    <span class="kt">size_t</span> <span class="n">pcol</span> <span class="o">=</span> <span class="n">pc</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">F</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">M</span><span class="o">::</span><span class="n">FieldType</span><span class="p">;</span>
+
+    <span class="c1">// outer loop searches rows</span>
+    <span class="k">do</span><span class="p">{</span>
+        <span class="n">prow</span> <span class="o">++</span><span class="p">;</span> <span class="c1">// try new row</span>
+        <span class="n">pcol</span> <span class="o">=</span> <span class="n">pc</span><span class="p">;</span>
+        <span class="c1">//search col, give up if u reach last col</span>
+        <span class="k">while</span><span class="p">(</span> <span class="p">(</span><span class="n">mat</span><span class="p">(</span><span class="n">prow</span><span class="p">,</span><span class="n">pcol</span><span class="p">)</span><span class="o">==</span><span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pcol</span> <span class="o">&lt;</span> <span class="n">mat</span><span class="p">.</span><span class="n">n</span><span class="p">)){</span>
+            <span class="n">pcol</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">while</span><span class="p">((</span><span class="n">pcol</span> <span class="o">==</span> <span class="n">mat</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">prow</span> <span class="o">==</span> <span class="n">mat</span><span class="p">.</span><span class="n">m</span><span class="mi">-1</span><span class="p">));</span>
+
+    <span class="c1">// if col is outside limit, whole sublock is 0</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pcol</span> <span class="o">==</span> <span class="n">mat</span><span class="p">.</span><span class="n">n</span><span class="p">){</span>
+        <span class="n">prow</span><span class="o">=</span><span class="n">mat</span><span class="p">.</span><span class="n">m</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">prow</span><span class="p">,</span><span class="n">pcol</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="c1">// Find the L EL U P factorization</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">LEUP_fact</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat_arg</span><span class="p">){</span>
+    <span class="c1">//create copy</span>
+    <span class="k">auto</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">mat_arg</span><span class="p">.</span><span class="n">copy</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">p_col</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">pr</span><span class="p">,</span><span class="n">pc</span><span class="p">;</span>
+    <span class="c1">//return values</span>
+    <span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;</span> <span class="n">Lmat</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
+    <span class="n">EL</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;</span> <span class="n">ELmat</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">P</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;</span> <span class="n">Pmat</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">U</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;</span> <span class="n">Umat</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">pivots</span><span class="p">;</span>
+
+    <span class="n">make_diag_ones</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Lmat</span><span class="p">);</span>
+    <span class="n">make_diag_ones</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Pmat</span><span class="p">);</span>
+    <span class="n">make_diag_ones</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Umat</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">pr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pc</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">pc</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">pc</span><span class="o">++</span><span class="p">,</span><span class="n">pr</span><span class="o">++</span><span class="p">){</span>
+        <span class="c1">//if pr++ exceeds range</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pr</span><span class="o">==</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="c1">// find pivot in lower right region of pr,pc</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">p_col</span><span class="p">)</span><span class="o">=</span><span class="n">find_pivot</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="n">pr</span><span class="p">,</span><span class="n">pc</span><span class="p">);</span>
+        <span class="c1">// if full zero sublock then done</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pr</span><span class="o">==</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="c1">// apply and record permutation</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pc</span> <span class="o">!=</span> <span class="n">p_col</span><span class="p">){</span>
+            <span class="n">mat</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">pc</span><span class="p">,</span><span class="n">p_col</span><span class="p">);</span>
+            <span class="n">Pmat</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">pc</span><span class="p">,</span><span class="n">p_col</span><span class="p">);</span> <span class="c1">// !inefficient!</span>
+        <span class="p">}</span>
+
+        <span class="c1">//zero out column pc below pr - apply schur complement</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="o">=</span><span class="n">pr</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="p">(</span><span class="n">mat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pc</span><span class="p">)</span><span class="o">==</span><span class="n">F</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">){</span>
+                <span class="k">auto</span> <span class="n">coef</span> <span class="o">=</span> <span class="n">mat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pc</span><span class="p">)</span><span class="o">/</span><span class="n">mat</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">pc</span><span class="p">);</span>
+                <span class="n">mat</span><span class="p">.</span><span class="n">add_row_to</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pr</span><span class="p">,</span> <span class="o">-</span><span class="n">coef</span><span class="p">);</span>
+                <span class="c1">//Lmat.add_col_to(pr,i, coef); //inefficient</span>
+                <span class="n">Lmat</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">pr</span><span class="p">)</span> <span class="o">=</span> <span class="n">coef</span><span class="p">;</span> <span class="c1">// record L</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">//record pivot</span>
+        <span class="n">pivots</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">pc</span><span class="p">));</span>
+        <span class="n">ELmat</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">pc</span><span class="p">)</span><span class="o">=</span><span class="n">F</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="p">}</span>
+    <span class="c1">//extract U from upper echelon mat</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">pair</span><span class="p">:</span><span class="n">pivots</span><span class="p">){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span><span class="n">pc</span><span class="p">)</span> <span class="o">=</span> <span class="n">pair</span><span class="p">;</span>
+        <span class="n">Umat</span><span class="p">.</span><span class="n">r</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">r</span><span class="p">(</span><span class="n">pr</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">mat</span><span class="p">.</span><span class="n">free</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span> <span class="n">Lmat</span><span class="p">,</span> <span class="n">ELmat</span><span class="p">,</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">Pmat</span> <span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">PLEU_fact</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat_arg</span><span class="p">){</span>
+    <span class="k">auto</span>  <span class="n">mat_trp</span> <span class="o">=</span> <span class="n">mat_arg</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="p">[</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">ELmat</span><span class="p">,</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">Pmat</span><span class="p">]</span> <span class="o">=</span> <span class="n">LEUP_fact</span><span class="p">(</span><span class="n">mat_trp</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">Pret</span> <span class="o">=</span> <span class="n">Pmat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lret</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">EUret</span> <span class="o">=</span> <span class="n">ELmat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Uret</span> <span class="o">=</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span> <span class="n">Pret</span><span class="p">,</span><span class="n">Lret</span> <span class="p">,</span><span class="n">EUret</span><span class="p">,</span><span class="n">Uret</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">UELP_fact</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat_arg</span><span class="p">){</span>
+    <span class="k">auto</span>  <span class="n">mat_jconj</span> <span class="o">=</span> <span class="n">mat_arg</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="p">[</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">ELmat</span><span class="p">,</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">Pmat</span><span class="p">]</span> <span class="o">=</span> <span class="n">LEUP_fact</span><span class="p">(</span><span class="n">mat_jconj</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">Uret</span> <span class="o">=</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">EUHret</span> <span class="o">=</span> <span class="n">ELmat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lret</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Pret</span> <span class="o">=</span> <span class="n">Pmat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span> <span class="n">Uret</span><span class="p">,</span><span class="n">EUHret</span> <span class="p">,</span><span class="n">Lret</span><span class="p">,</span><span class="n">Pret</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">PUEL_fact</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat_arg</span><span class="p">){</span>
+    <span class="k">auto</span>  <span class="n">mat_tjconj</span> <span class="o">=</span> <span class="n">mat_arg</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="p">[</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">ELmat</span><span class="p">,</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">Pmat</span><span class="p">]</span> <span class="o">=</span> <span class="n">LEUP_fact</span><span class="p">(</span><span class="n">mat_tjconj</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">Pret</span> <span class="o">=</span> <span class="n">Pmat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Uret</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">ELHret</span> <span class="o">=</span> <span class="n">ELmat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lret</span> <span class="o">=</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span> <span class="n">Pret</span><span class="p">,</span><span class="n">Uret</span> <span class="p">,</span><span class="n">ELHret</span><span class="p">,</span><span class="n">Lret</span> <span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">U</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Umat</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Amat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">Amat_jconj</span> <span class="o">=</span> <span class="n">Amat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lm</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">Lm</span><span class="p">,</span><span class="n">Amat_jconj</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">ret2</span> <span class="o">=</span> <span class="n">ret</span><span class="p">.</span><span class="n">JConj</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">ret2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">apply_inverse_on_right</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Amat</span><span class="p">,</span><span class="n">U</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Umat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">Amat_trp</span> <span class="o">=</span> <span class="n">Amat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lm</span> <span class="o">=</span> <span class="n">Umat</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">Lm</span><span class="p">,</span><span class="n">Amat_trp</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">ret2</span> <span class="o">=</span> <span class="n">ret</span><span class="p">.</span><span class="n">Trp</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">ret2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">F</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc1</span><span class="p">,</span><span class="k">typename</span> <span class="nc">Acc2</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">apply_inverse_on_right</span><span class="p">(</span><span class="n">A</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc2</span><span class="o">&gt;&gt;</span> <span class="n">Amat</span><span class="p">,</span><span class="n">L</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="n">Acc1</span><span class="o">&gt;&gt;</span> <span class="n">Lmat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">Amat_tjconj</span> <span class="o">=</span> <span class="n">Amat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">Lm</span> <span class="o">=</span> <span class="n">Lmat</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">apply_inverse_on_left</span><span class="p">(</span><span class="n">Lm</span><span class="p">,</span><span class="n">Amat_tjconj</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">ret2</span> <span class="o">=</span> <span class="n">ret</span><span class="p">.</span><span class="n">TJConj</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">ret2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

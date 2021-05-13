@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File field.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File field.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_linalg_field.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-field-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-linalg-field-hpp"></span><h1>Program Listing for File field.hpp<a class="headerlink" href="#program-listing-for-file-field-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_field.hpp.html#file-home-runner-work-bats-bats-include-linalg-field-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/field.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cm">/*</span>
+<span class="cm">Implementation of fields</span>
+
+<span class="cm">TODO: this could be swapped out for some library</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp"></span>
+
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Derived</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">AbstractField</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// addition</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// +=, -=, *=, /=</span>
+
+  <span class="c1">// subtraction</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// additive inverse</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">-</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">-</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// multiplication</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// division</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">/</span><span class="p">(</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">/</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// multiplicative inverse</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="n">inv</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">inv</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// equalivalence</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Derived</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// integer equivalence</span>
+  <span class="kr">inline</span> <span class="n">Derived</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="n">AbstractField</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Derived</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
+    <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+  <span class="p">}</span>
+
+
+<span class="p">};</span>
+
+<span class="k">constexpr</span> <span class="kt">bool</span> <span class="nf">isprime</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="p">}</span>
+     <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">p</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">IntT</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">P</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ModP</span> <span class="o">:</span> <span class="k">public</span> <span class="n">AbstractField</span><span class="o">&lt;</span><span class="n">ModP</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="n">P</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">IntT</span> <span class="n">val</span><span class="p">;</span>
+  <span class="c1">// Check whether P is prime before compiling</span>
+  <span class="k">static_assert</span><span class="p">(</span><span class="n">isprime</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="s">&quot;not prime!&quot;</span><span class="p">);</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+
+  <span class="n">ModP</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">ModP</span><span class="p">(</span><span class="n">IntT</span> <span class="n">val</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">((</span><span class="n">val</span> <span class="o">+</span> <span class="n">P</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kr">inline</span> <span class="n">IntT</span> <span class="n">to_int</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">+=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span>  <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">P</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">-=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">P</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">-</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">P</span> <span class="o">-</span> <span class="n">val</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">b</span> <span class="o">-</span> <span class="n">val</span> <span class="o">+</span> <span class="n">P</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">val</span> <span class="o">-</span> <span class="n">b</span> <span class="o">+</span> <span class="n">P</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ModP operator=(const int &amp;a) {</span>
+  <span class="c1">//   return ModP(a);</span>
+  <span class="c1">// }</span>
+
+  <span class="n">ModP</span> <span class="n">inv</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">/</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;division by 0&quot;</span><span class="p">);}</span>
+    <span class="n">ModP</span> <span class="n">binv</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">inv</span><span class="p">();</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">binv</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">/=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;division by 0&quot;</span><span class="p">);}</span>
+    <span class="n">ModP</span> <span class="n">binv</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">inv</span><span class="p">();</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">binv</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">%</span> <span class="n">P</span><span class="p">;</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">iszero</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="c1">// std::cout &lt;&lt; val &lt;&lt; &quot; == 0:&quot; &lt;&lt; (val == 0) &lt;&lt; std::endl;</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//os &lt;&lt; x.val &lt;&lt; &quot; mod &quot; &lt;&lt; P;</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="c1">// helper function for inversion</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">IntT</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">P</span><span class="o">&gt;</span>
+<span class="n">IntT</span> <span class="n">ff_inv</span><span class="p">(</span><span class="k">const</span> <span class="n">IntT</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;inversion of 0&quot;</span><span class="p">);}</span>
+  <span class="n">IntT</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">IntT</span> <span class="n">c</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">c</span> <span class="o">%</span> <span class="n">P</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">b</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">c</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// implementation of field inversion</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">IntT</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">P</span><span class="o">&gt;</span>
+<span class="n">ModP</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="n">P</span><span class="o">&gt;</span> <span class="n">ModP</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span><span class="n">P</span><span class="o">&gt;::</span><span class="n">inv</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">ModP</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="n">P</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ff_inv</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="n">P</span><span class="o">&gt;</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// specialized Mod2 implementation</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">IntT</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">ModP</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span> <span class="o">:</span> <span class="k">public</span> <span class="n">AbstractField</span><span class="o">&lt;</span><span class="n">ModP</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">IntT</span> <span class="n">val</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+  <span class="n">ModP</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">ModP</span><span class="p">(</span><span class="n">IntT</span> <span class="n">val</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kr">inline</span> <span class="n">IntT</span> <span class="n">to_int</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span> <span class="o">^</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">);</span> <span class="c1">// xor</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">+=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">^</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span> <span class="c1">// xor</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span> <span class="o">^</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">);</span> <span class="c1">// xor</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">-=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">^</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span> <span class="c1">// xor</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">-</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="c1">// no-op</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">);</span> <span class="c1">// or</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*=</span><span class="p">(</span><span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">;</span> <span class="c1">// or</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">/</span><span class="p">(</span><span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Division by zero!&quot;</span><span class="p">);}</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">val</span><span class="p">);</span> <span class="c1">// or</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">/=</span><span class="p">(</span><span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Division by zero!&quot;</span><span class="p">);}</span>
+    <span class="cp">#ifdef BATS_OPCOUNT</span>
+    <span class="n">bats</span><span class="o">::</span><span class="n">global_ops</span><span class="o">++</span><span class="p">;</span>
+    <span class="cp">#endif</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="c1">// no-op</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="n">inv</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Inversion of zero!&quot;</span><span class="p">);}</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="mh">0x1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span> <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">b</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ModP</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">ModP</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">iszero</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="c1">// std::cout &lt;&lt; val &lt;&lt; &quot; == 0:&quot; &lt;&lt; (val == 0) &lt;&lt; std::endl;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// os &lt;&lt; (x.val &amp; 0x1) &lt;&lt; &quot; mod &quot; &lt;&lt; 2;</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="c1">// sign function</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">T</span> <span class="n">sgn</span><span class="p">(</span><span class="n">T</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">val</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">IntT</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Rational</span> <span class="o">:</span> <span class="k">public</span> <span class="n">AbstractField</span><span class="o">&lt;</span><span class="n">Rational</span><span class="o">&lt;</span><span class="n">IntT</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">IntT</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// numerator</span>
+  <span class="n">IntT</span> <span class="n">d</span><span class="p">;</span> <span class="c1">// denominator</span>
+
+  <span class="c1">// reduction of numerator and denominator</span>
+  <span class="kt">void</span> <span class="nf">reduce</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">IntT</span> <span class="n">gcd</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+    <span class="n">IntT</span> <span class="n">s</span> <span class="o">=</span> <span class="n">sgn</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">gcd</span><span class="p">);</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="n">gcd</span><span class="p">);</span>
+    <span class="cp">#ifdef WARN_RATIONAL_OVERFLOW</span>
+    <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span><span class="kt">int32_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="kt">int32_t</span> <span class="n">mask</span> <span class="o">=</span> <span class="mh">0x7F00</span><span class="p">;</span> <span class="c1">// ignore sign bit</span>
+      <span class="k">auto</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="o">-</span><span class="nl">n</span> <span class="p">:</span> <span class="n">n</span><span class="p">;</span>  <span class="c1">// make numerator positive</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="p">((</span><span class="n">n2</span> <span class="o">|</span><span class="n">d</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span> <span class="s">&quot;Rational overflow possibility! &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">constexpr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same</span><span class="o">&lt;</span><span class="n">IntT</span><span class="p">,</span> <span class="kt">int64_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">mask</span> <span class="o">=</span> <span class="mh">0x7FFF0000</span><span class="p">;</span> <span class="c1">// ignore sign bit</span>
+      <span class="k">auto</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="o">-</span><span class="nl">n</span> <span class="p">:</span> <span class="n">n</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="p">((</span><span class="n">n2</span><span class="o">|</span><span class="n">d</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="o">&lt;&lt;</span> <span class="s">&quot;Rational overflow possibility! &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="cp">#endif</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+  <span class="n">Rational</span><span class="p">()</span> <span class="o">:</span> <span class="n">n</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">Rational</span><span class="p">(</span><span class="n">IntT</span> <span class="n">n0</span><span class="p">,</span> <span class="n">IntT</span> <span class="n">d0</span><span class="p">)</span> <span class="o">:</span> <span class="n">n</span><span class="p">(</span><span class="n">n0</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="n">d0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">reduce</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span><span class="p">(</span><span class="n">IntT</span> <span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="n">n</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kr">inline</span> <span class="n">IntT</span> <span class="n">to_int</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">n</span> <span class="o">/</span> <span class="n">d</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">Rational</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Rational</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">d</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">*</span> <span class="n">d</span><span class="p">;</span>
+    <span class="n">d</span> <span class="o">*=</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+    <span class="n">reduce</span><span class="p">();</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Rational</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">d</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">-=</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">*</span> <span class="n">d</span><span class="p">;</span>
+    <span class="n">d</span> <span class="o">*=</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+    <span class="n">reduce</span><span class="p">();</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span> <span class="k">operator</span><span class="o">-</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Rational</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span> <span class="k">operator</span><span class="o">*</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Rational</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">*=</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">n</span> <span class="o">*=</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">d</span> <span class="o">*=</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+    <span class="n">reduce</span><span class="p">();</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">d</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">d</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">d</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">!=</span> <span class="n">b</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">d</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">*</span> <span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span> <span class="n">inv</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Inversion of zero!&quot;</span><span class="p">);}</span>
+    <span class="k">return</span> <span class="n">Rational</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span> <span class="k">operator</span><span class="o">/</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Division by zero!&quot;</span><span class="p">);}</span>
+    <span class="k">return</span> <span class="n">Rational</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span> <span class="o">*</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Rational</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">/=</span><span class="p">(</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Division by zero!&quot;</span><span class="p">);}</span>
+    <span class="n">n</span> <span class="o">*=</span> <span class="n">b</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+    <span class="n">d</span> <span class="o">*=</span> <span class="n">b</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">reduce</span><span class="p">();</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">iszero</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rational</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">n</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;/&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

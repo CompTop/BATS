@@ -1,0 +1,13 @@
+.. _exhale_function_lu_8hpp_1a812da078290cceea16e1cb13b115576b:
+
+Template Function bats::future::l_residual(const MT&, I1&)
+==========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::future::l_residual(const MT&, I1&)

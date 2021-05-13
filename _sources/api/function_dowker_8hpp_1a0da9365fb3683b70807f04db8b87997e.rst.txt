@@ -1,0 +1,13 @@
+.. _exhale_function_dowker_8hpp_1a0da9365fb3683b70807f04db8b87997e:
+
+Template Function bats::dowker_edge_param(const Matrix<T>&)
+===========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::dowker_edge_param(const Matrix<T>&)

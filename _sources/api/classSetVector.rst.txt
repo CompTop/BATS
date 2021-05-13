@@ -1,0 +1,16 @@
+.. _exhale_class_classSetVector:
+
+Template Class SetVector
+========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: SetVector
+   :members:
+   :protected-members:
+   :undoc-members:

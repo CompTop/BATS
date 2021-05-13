@@ -1,0 +1,13 @@
+.. _exhale_function_symbolic__implementation_8hpp_1a2c699a4acd723807e4f9710ed912a65f:
+
+Function operator<<(std::ostream&, ELH<SI>&)
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: operator<<(std::ostream&, ELH<SI>&)

@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1Type__A:
+
+Template Struct Type_A
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::Type_A
+   :members:
+   :protected-members:
+   :undoc-members:

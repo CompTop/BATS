@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1future_1_1ColumnMajor:
+
+Struct ColumnMajor
+==================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_dense.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::future::ColumnMajor
+   :members:
+   :protected-members:
+   :undoc-members:

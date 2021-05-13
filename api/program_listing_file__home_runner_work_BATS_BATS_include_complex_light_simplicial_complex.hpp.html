@@ -1,0 +1,919 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File light_simplicial_complex.hpp &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File light_simplicial_complex.hpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file__home_runner_work_BATS_BATS_include_complex_light_simplicial_complex.hpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-light-simplicial-complex-hpp">
+<span id="program-listing-file-home-runner-work-bats-bats-include-complex-light-simplicial-complex-hpp"></span><h1>Program Listing for File light_simplicial_complex.hpp<a class="headerlink" href="#program-listing-for-file-light-simplicial-complex-hpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_complex_light_simplicial_complex.hpp.html#file-home-runner-work-bats-bats-include-complex-light-simplicial-complex-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/complex/light_simplicial_complex.hpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cm">/*</span>
+<span class="cm">A lightweight simplicial complex</span>
+<span class="cm">based on k-dimensional simplicies on a vertex set of size n</span>
+<span class="cm">every possible simplex is given a unique key</span>
+<span class="cm">and a hash table is used to store the simplices in the complex</span>
+
+<span class="cm">This avoids overhead of vectors and tries for the most part</span>
+
+<span class="cm">the idea comes from Ripser</span>
+<span class="cm">but this implementation is independent</span>
+<span class="cm">and more flexible</span>
+
+<span class="cm">the binomial numbering scheme is more compact</span>
+<span class="cm">but there are inefficiencies, e.g. in binary search.</span>
+
+<span class="cm">We&#39;ll just use a base-n numbering system</span>
+<span class="cm">e.g. for simplex (x_0, ... x_k), we use sum x_i n^i</span>
+<span class="cm">*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;linalg/csc_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;abstract_complex.hpp&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">index_type</span><span class="o">=</span><span class="kt">size_t</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">hash_table</span><span class="o">=</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">index_type</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&gt;</span>
+<span class="k">class</span> <span class="nc">LightSimplicialComplex</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="k">const</span> <span class="n">index_type</span> <span class="n">_n</span><span class="p">;</span> <span class="c1">// fixed size of vertex set</span>
+    <span class="k">const</span> <span class="n">index_type</span> <span class="n">_k</span><span class="p">;</span> <span class="c1">// fixed size of maximum simplex dimension</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;</span> <span class="n">_offset</span><span class="p">;</span>     <span class="c1">// table of powers of n</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&gt;</span> <span class="n">index_to_key</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">hash_table</span><span class="o">&gt;</span> <span class="n">key_to_index</span><span class="p">;</span>
+
+
+    <span class="c1">// get offset for index i</span>
+    <span class="kr">inline</span> <span class="n">index_type</span><span class="o">&amp;</span> <span class="nf">offset</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">_offset</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="kr">inline</span> <span class="k">const</span> <span class="n">index_type</span><span class="o">&amp;</span> <span class="nf">offset</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">_offset</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">_initialze</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">_offset</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">_k</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">offset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">_k</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">_n</span> <span class="o">*</span> <span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="c1">// get largest vertex from s of dimension dim</span>
+    <span class="c1">// s is sum over j=0, j &lt;= dim, x_i n^i where j is sorted</span>
+    <span class="c1">// we can use integer division to do this</span>
+    <span class="kr">inline</span> <span class="n">index_type</span> <span class="n">max_vertex</span><span class="p">(</span><span class="n">index_type</span> <span class="n">s</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">s</span> <span class="o">/</span> <span class="n">offset</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="c1">// integer division</span>
+    <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+    <span class="k">struct</span> <span class="nc">simplex_boundary_iterator</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="n">LightSimplicialComplex</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// parent complex</span>
+        <span class="kt">size_t</span> <span class="n">dim</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">index_type</span> <span class="n">before</span><span class="p">;</span> <span class="c1">// sum of simplices before</span>
+        <span class="n">index_type</span> <span class="n">after</span><span class="p">;</span> <span class="c1">// sum of vertices after</span>
+
+
+
+        <span class="n">simplex_boundary_iterator</span><span class="p">(</span>
+            <span class="n">index_type</span> <span class="n">s</span><span class="p">,</span>
+            <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">LightSimplicialComplex</span><span class="o">*</span> <span class="n">p</span>
+        <span class="p">)</span> <span class="o">:</span>  <span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="n">before</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">after</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// index for removal - remove last index first</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">dim</span><span class="p">;</span>
+            <span class="c1">// determine coefficient (-1)^i = -1 if i is odd, 1 if even</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">?</span> <span class="mi">-1</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">simplex_boundary_iterator</span><span class="p">(</span>
+            <span class="n">index_type</span> <span class="n">s</span><span class="p">,</span>
+            <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">LightSimplicialComplex</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span>
+            <span class="kt">int</span> <span class="n">i</span>
+        <span class="p">)</span> <span class="o">:</span> <span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="mi">-1</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">before</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">after</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+
+        <span class="n">simplex_boundary_iterator</span><span class="p">(</span>
+            <span class="kt">int</span> <span class="n">i</span>
+        <span class="p">)</span> <span class="o">:</span> <span class="n">i</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{}</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">index_type</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">next</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// face and coefficient</span>
+            <span class="kt">int</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+            <span class="c1">// get max vertex and remainder</span>
+            <span class="n">index_type</span> <span class="n">v</span> <span class="o">=</span> <span class="n">before</span> <span class="o">/</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">before</span> <span class="o">=</span> <span class="n">before</span> <span class="o">%</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">index_type</span> <span class="n">face</span> <span class="o">=</span> <span class="n">before</span> <span class="o">+</span> <span class="n">after</span><span class="p">;</span>
+            <span class="n">after</span> <span class="o">+=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="mi">-1</span><span class="p">);</span>
+
+            <span class="c1">// prepare for next iteration</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">face</span><span class="p">,</span> <span class="n">coeff</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">index_type</span> <span class="k">operator</span><span class="o">*</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">after</span> <span class="o">+</span> <span class="n">before</span> <span class="o">%</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// prefix increment</span>
+        <span class="n">simplex_boundary_iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">index_type</span> <span class="n">v</span> <span class="o">=</span> <span class="n">before</span> <span class="o">/</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">before</span> <span class="o">=</span> <span class="n">before</span> <span class="o">%</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">after</span> <span class="o">+=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="mi">-1</span><span class="p">);</span>
+
+            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// prefix decrement</span>
+        <span class="n">simplex_boundary_iterator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">--</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// TODO: calculate before/after</span>
+            <span class="n">index_type</span> <span class="n">v</span> <span class="o">=</span> <span class="n">after</span> <span class="o">/</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">after</span> <span class="o">=</span> <span class="n">after</span> <span class="o">%</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">before</span> <span class="o">+=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+            <span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">simplex_boundary_iterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">simplex_boundary_iterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">i</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// returns true if i &gt;= 0 (iterator not finished)</span>
+        <span class="c1">// returns fals if finished</span>
+        <span class="k">operator</span> <span class="kt">bool</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">LightSimplicialComplex</span><span class="p">()</span> <span class="o">:</span> <span class="n">_n</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">_k</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="n">LightSimplicialComplex</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">index_type</span> <span class="n">n</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">index_type</span> <span class="n">k</span>
+    <span class="p">)</span> <span class="o">:</span> <span class="n">_n</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">_k</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_initialze</span><span class="p">();</span>
+        <span class="n">index_to_key</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">_k</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">key_to_index</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">_k</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// // copy constructor</span>
+    <span class="c1">// LightSimplicialComplex(</span>
+    <span class="c1">//     const LightSimplicialComplex&amp; other</span>
+    <span class="c1">// ) : _n(other._n), _k(other._k), _offset(other._offset),</span>
+    <span class="c1">//  index_to_key(other.index_to_key), key_to_index(other.key_to_index) {}</span>
+    <span class="c1">//</span>
+    <span class="c1">// // move constructor</span>
+    <span class="c1">// // transfer ownership of binomial table</span>
+    <span class="c1">// LightSimplicialComplex(</span>
+    <span class="c1">//     LightSimplicialComplex&amp;&amp; other</span>
+    <span class="c1">// ) : _n(other._n), _k(other._k) {</span>
+    <span class="c1">//     _offset = std::move(other._offset);</span>
+    <span class="c1">//     index_to_key = std::move(index_to_key);</span>
+    <span class="c1">//     key_to_index = std::move(key_to_index);</span>
+    <span class="c1">// }</span>
+
+    <span class="kr">inline</span> <span class="n">index_type</span> <span class="n">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_k</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">ncells</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kt">size_t</span> <span class="n">ncells</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ct</span> <span class="o">+=</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">ct</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// get simplex key</span>
+    <span class="c1">// assume simplex is sorted</span>
+    <span class="n">index_type</span> <span class="n">simplex_key</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&amp;</span> <span class="n">s</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">index_type</span> <span class="n">key</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">key</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">offset</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">key</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// get simplex corresponding to a particular key</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;</span> <span class="n">key_to_simplex</span><span class="p">(</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span>
+        <span class="n">index_type</span> <span class="n">key</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="n">dim</span><span class="p">;</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">d</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_vertex</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+            <span class="n">key</span> <span class="o">-=</span> <span class="n">s</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">*</span> <span class="n">offset</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// get simplex at index i</span>
+    <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;</span> <span class="n">get_simplex</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">key_to_simplex</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&gt;</span> <span class="n">get_simplices</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&gt;</span> <span class="n">simplices</span><span class="p">(</span><span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">));</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">simplices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_simplex</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">simplices</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return all simplices</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">get_simplices</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">simplices</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dim</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">dim</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">auto</span> <span class="n">spx_dim</span> <span class="o">=</span> <span class="n">get_simplices</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+            <span class="n">simplices</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">simplices</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">spx_dim</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">spx_dim</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">simplices</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// find index of simplex s</span>
+    <span class="c1">// returns bats::NO_IND if s can not be found</span>
+    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">find_idx</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="n">index_type</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">loc</span> <span class="o">==</span> <span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">end</span><span class="p">())</span> <span class="o">?</span> <span class="n">bats</span><span class="o">::</span><span class="nl">NO_IND</span> <span class="p">:</span> <span class="n">loc</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// find index of simplex s</span>
+    <span class="c1">// returns bats::NO_IND if s can not be found</span>
+    <span class="kt">size_t</span> <span class="n">find_idx</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">key</span> <span class="o">=</span> <span class="n">simplex_key</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">find_idx</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// add simplex key k to dimension dim</span>
+    <span class="n">cell_ind</span> <span class="n">add_unsafe</span><span class="p">(</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">index_type</span> <span class="n">k</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+
+        <span class="c1">// add to lookup</span>
+        <span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">emplace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+
+        <span class="c1">// add to list of simplicies</span>
+        <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// add simplex key k to dimension dim</span>
+    <span class="c1">// check if key has already been added</span>
+    <span class="n">cell_ind</span> <span class="n">add</span><span class="p">(</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">index_type</span> <span class="n">k</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// query if key has already been added</span>
+        <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">auto</span> <span class="p">[</span><span class="n">it</span><span class="p">,</span> <span class="n">newkey</span><span class="p">]</span> <span class="o">=</span> <span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">try_emplace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">newkey</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// new key was inserted</span>
+            <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// key was already inserted - we&#39;ll look up the index</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// add simplex</span>
+    <span class="c1">// assumptions:</span>
+    <span class="c1">// s is sorted</span>
+    <span class="c1">// boundary is already added</span>
+    <span class="c1">// s has not already been added</span>
+    <span class="n">cell_ind</span> <span class="n">add_unsafe</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&amp;</span> <span class="n">s</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">k</span> <span class="o">=</span> <span class="n">simplex_key</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">add_unsafe</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+
+    <span class="c1">// safe add</span>
+    <span class="c1">// assumes s is sorted</span>
+    <span class="kr">inline</span> <span class="k">auto</span> <span class="n">add</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">k</span> <span class="o">=</span> <span class="n">simplex_key</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">add</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// add key recursively</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">add_recursive</span><span class="p">(</span>
+        <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">index_type</span> <span class="n">k</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">newcells</span><span class="p">;</span>
+        <span class="c1">// first see if the key is already added</span>
+        <span class="kt">size_t</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">auto</span> <span class="p">[</span><span class="n">it</span><span class="p">,</span> <span class="n">newkey</span><span class="p">]</span> <span class="o">=</span> <span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">try_emplace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ind</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">newkey</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// new key was inserted</span>
+            <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+            <span class="c1">// iterate over faces if dim &gt; 0</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">bdry</span> <span class="o">=</span> <span class="n">simplex_boundary_iterator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+                <span class="c1">// check that every face has been added recursively</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">bdry</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">bdry</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+                    <span class="k">auto</span> <span class="n">fc</span> <span class="o">=</span> <span class="n">add_recursive</span><span class="p">(</span><span class="n">dim</span><span class="mi">-1</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+                    <span class="n">newcells</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">newcells</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">fc</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">fc</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// key was already inserted - we&#39;ll look up the index</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">newcells</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// add cell index</span>
+        <span class="n">newcells</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cell_ind</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">ind</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="n">newcells</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cell_ind</span><span class="o">&gt;</span> <span class="n">add_recursive</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">index_type</span><span class="o">&gt;&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">k</span> <span class="o">=</span> <span class="n">simplex_key</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">add_recursive</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">k</span> <span class="o">=</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">return</span> <span class="n">simplex_boundary_iterator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">simplex_end</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">simplex_boundary_iterator</span><span class="p">(</span><span class="mi">-1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// return inds, vals in boundary of simplex i in dimension dim</span>
+    <span class="k">auto</span> <span class="n">boundary</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">k</span> <span class="o">=</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">ind</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">bdry</span> <span class="o">=</span> <span class="n">simplex_boundary_iterator</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">bdry</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">bdry</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+            <span class="n">ind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">at</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+            <span class="n">val</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">// ensure indices are in sorted order</span>
+        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sortperm</span><span class="p">(</span><span class="n">ind</span><span class="p">);</span>
+        <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+        <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// get CSC integer matrix boundary in dimension dim</span>
+    <span class="n">CSCMatrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">boundary_csc</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ncells</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span>
+        <span class="c1">// create colptr</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">colptr</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">vbeg</span> <span class="o">=</span> <span class="n">colptr</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+        <span class="k">auto</span> <span class="n">vend</span> <span class="o">=</span> <span class="n">colptr</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+        <span class="kt">size_t</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">vbeg</span> <span class="o">!=</span> <span class="n">vend</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">vbeg</span><span class="o">++</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+            <span class="n">val</span> <span class="o">+=</span> <span class="p">(</span><span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// create rowind</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">rowind</span><span class="p">;</span>
+        <span class="n">rowind</span><span class="p">.</span><span class="n">reserve</span><span class="p">((</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="c1">// create val</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">ival</span><span class="p">.</span><span class="n">reserve</span><span class="p">((</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="c1">// iterate over simplices in dimension dim</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">s</span> <span class="p">:</span> <span class="n">index_to_key</span><span class="p">[</span><span class="n">dim</span><span class="p">])</span> <span class="p">{</span>
+            <span class="c1">// iterate over boundary of simplex</span>
+            <span class="c1">// for face of simplex</span>
+            <span class="k">auto</span> <span class="n">bdry</span> <span class="o">=</span> <span class="n">simplex_boundary_iterator</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">bdry</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">bdry</span><span class="p">.</span><span class="n">next</span><span class="p">();</span>
+                <span class="n">rowind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_to_index</span><span class="p">[</span><span class="n">dim</span><span class="mi">-1</span><span class="p">].</span><span class="n">at</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+                <span class="n">ival</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">CSCMatrix</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span>
+            <span class="n">m</span><span class="p">,</span>
+            <span class="n">n</span><span class="p">,</span>
+            <span class="n">colptr</span><span class="p">,</span>
+            <span class="n">rowind</span><span class="p">,</span>
+            <span class="n">ival</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="kt">void</span> <span class="n">print_summary</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;LightSimplicialComplex, maxdim = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">dim &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; cells&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ncells</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; total&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">};</span>
+
+
+
+<span class="c1">// // binomial simplicial complex</span>
+<span class="c1">// template &lt;typename index_type=size_t, typename hash_table=std::unordered_map&lt;index_type, size_t&gt;&gt;</span>
+<span class="c1">// class BinomialSimplicialComplex {</span>
+<span class="c1">// private:</span>
+<span class="c1">//     const index_type n; // fixed size of vertex set</span>
+<span class="c1">//     const index_type k; // fixed size of maximum simplex dimension</span>
+<span class="c1">//     index_type* _binom = nullptr;     // binomial coefficient table</span>
+<span class="c1">//     std::vector&lt;std::vector&lt;index_type&gt;&gt; index_to_key;</span>
+<span class="c1">//  std::vector&lt;hash_table&gt; key_to_index;</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">//     // get binomial coefficient for _n choose _k</span>
+<span class="c1">//     // assume _n &lt; n and _k &lt; k</span>
+<span class="c1">//     inline index_type&amp; binom(size_t _n, size_t _k) {</span>
+<span class="c1">//         return *(_binom + (_k - 1)  * (n+1) + _n);</span>
+<span class="c1">//     }</span>
+<span class="c1">//     inline const index_type&amp; binom(size_t _n, size_t _k) const {</span>
+<span class="c1">//         return *(_binom + (_k - 1)  * (n+1) + _n);</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     void _initialze() {</span>
+<span class="c1">//         _binom = new index_type[(n+1)*(k+1)];</span>
+<span class="c1">//</span>
+<span class="c1">//         // store so single value of k is in contiguous blocks</span>
+<span class="c1">//         // set (n 1)</span>
+<span class="c1">//         for (size_t _n = 0; _n &lt; n+1; _n++) {</span>
+<span class="c1">//             binom(_n, 1) = _n;</span>
+<span class="c1">//         }</span>
+<span class="c1">//         // set (0, k) = 0 for all k</span>
+<span class="c1">//         for (size_t _k  = 1; _k &lt; k+2; _k++) {</span>
+<span class="c1">//             binom(0, _k) = 0;</span>
+<span class="c1">//         }</span>
+<span class="c1">//         // use identity (n k) = (n-1 k) + (n-1 k-1)</span>
+<span class="c1">//         for (size_t _k = 2; _k &lt; k+2; _k++) {</span>
+<span class="c1">//             for (size_t _n = 1; _n &lt; n+1; _n++) {</span>
+<span class="c1">//                 binom(_n, _k) = binom(_n-1, _k) + binom(_n-1, _k-1);</span>
+<span class="c1">//             }</span>
+<span class="c1">//         }</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">// public:</span>
+<span class="c1">//</span>
+<span class="c1">//  // get largest vertex from s of dimension dim</span>
+<span class="c1">//  // s is sum over j=0, j &lt;= dim, (x_j j+1) where j is sorted</span>
+<span class="c1">//  // we look for x_dim by searching for</span>
+<span class="c1">//  // binom(x_dim, dim+1) &lt;= s &lt; binom(x_dim+1, dim+1)</span>
+<span class="c1">//  // use binary search</span>
+<span class="c1">//  index_type max_vertex(index_type s, size_t dim) const {</span>
+<span class="c1">//      index_type low(0), high(n);</span>
+<span class="c1">//      size_t d1 = dim + 1;</span>
+<span class="c1">//      while (s &lt; binom(high, d1)) {</span>
+<span class="c1">//          index_type diff = high - low;</span>
+<span class="c1">//          index_type mid = high - (diff &gt;&gt; 1);</span>
+<span class="c1">//          if (s &lt; binom(mid, d1)) {</span>
+<span class="c1">//              high = mid - 1;</span>
+<span class="c1">//          } else {</span>
+<span class="c1">//              low = mid;</span>
+<span class="c1">//          }</span>
+<span class="c1">//      }</span>
+<span class="c1">//      return high;</span>
+<span class="c1">//  }</span>
+<span class="c1">//</span>
+<span class="c1">// private:</span>
+<span class="c1">//</span>
+<span class="c1">//  struct simplex_boundary_iterator {</span>
+<span class="c1">//      const LightSimplicialComplex* p; // parent complex</span>
+<span class="c1">//      size_t dim;</span>
+<span class="c1">//      int c;</span>
+<span class="c1">//      int i;</span>
+<span class="c1">//      index_type before; // sum of simplices before</span>
+<span class="c1">//      index_type after; // sum of vertices after</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">//      simplex_boundary_iterator(</span>
+<span class="c1">//          index_type s,</span>
+<span class="c1">//          size_t dim,</span>
+<span class="c1">//          const LightSimplicialComplex* p</span>
+<span class="c1">//      ) :  p(p), dim(dim), before(s), after(0) {</span>
+<span class="c1">//          // index for removal - remove last index first</span>
+<span class="c1">//          i = (int) dim;</span>
+<span class="c1">//          // determine coefficient (-1)^i = -1 if i is odd, 1 if even</span>
+<span class="c1">//          c = (i &amp; 0x1) ? -1 : 1;</span>
+<span class="c1">//      }</span>
+<span class="c1">//</span>
+<span class="c1">//      std::tuple&lt;index_type, int&gt; next() {</span>
+<span class="c1">//          // face and coefficient</span>
+<span class="c1">//          int coeff = c;</span>
+<span class="c1">//          index_type v = p-&gt;max_vertex(before, i);</span>
+<span class="c1">//          before -= p-&gt;binom(v, i+1);</span>
+<span class="c1">//          index_type face = before + after;</span>
+<span class="c1">//          after += p-&gt;binom(v, i);</span>
+<span class="c1">//</span>
+<span class="c1">//          // prepare for next iteration</span>
+<span class="c1">//          c = -c;</span>
+<span class="c1">//          i--;</span>
+<span class="c1">//          return std::make_tuple(face, coeff);</span>
+<span class="c1">//      }</span>
+<span class="c1">//</span>
+<span class="c1">//      // returns true if i &gt;= 0 (iterator not finished)</span>
+<span class="c1">//      // returns fals if finished</span>
+<span class="c1">//      operator bool() const {</span>
+<span class="c1">//          return !(i &lt; 0);</span>
+<span class="c1">//      }</span>
+<span class="c1">//  };</span>
+<span class="c1">//</span>
+<span class="c1">// public:</span>
+<span class="c1">//     LightSimplicialComplex() : n(0), k(0), _binom(nullptr) {}</span>
+<span class="c1">//</span>
+<span class="c1">//     LightSimplicialComplex(</span>
+<span class="c1">//         const index_type _n,</span>
+<span class="c1">//         const index_type _k</span>
+<span class="c1">//     ) : n(_n), k(_k) {</span>
+<span class="c1">//         _initialze();</span>
+<span class="c1">//         index_to_key.resize(k+1);</span>
+<span class="c1">//      key_to_index.resize(k+1);</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     // copy constructor</span>
+<span class="c1">//     LightSimplicialComplex(</span>
+<span class="c1">//         const LightSimplicialComplex&amp; other</span>
+<span class="c1">//     ) : n(other.n), k(other.k),</span>
+<span class="c1">//      index_to_key(other.index_to_key), key_to_index(other.key_to_index) {</span>
+<span class="c1">//         _initialze();</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     // move constructor</span>
+<span class="c1">//     // transfer ownership of binomial table</span>
+<span class="c1">//     LightSimplicialComplex(</span>
+<span class="c1">//         LightSimplicialComplex&amp;&amp; other</span>
+<span class="c1">//     ) : n(other.n), k(other.k), _binom(other._binom) {</span>
+<span class="c1">//         other._binom = nullptr;</span>
+<span class="c1">//         index_to_key = std::move(index_to_key);</span>
+<span class="c1">//         key_to_index = std::move(key_to_index);</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     ~LightSimplicialComplex() {</span>
+<span class="c1">//         if (_binom != nullptr) {</span>
+<span class="c1">//             delete[] _binom;</span>
+<span class="c1">//         }</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     inline index_type maxdim() const { return k; }</span>
+<span class="c1">//     inline size_t ncells(size_t dim) const {</span>
+<span class="c1">//         return index_to_key[dim].size();</span>
+<span class="c1">//     }</span>
+<span class="c1">//     size_t ncells() const {</span>
+<span class="c1">//       size_t ct = 0;</span>
+<span class="c1">//       for (size_t dim = 0; dim &lt; maxdim() + 1; dim++) {</span>
+<span class="c1">//         ct += ncells(dim);</span>
+<span class="c1">//       }</span>
+<span class="c1">//       return ct;</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     // get simplex key</span>
+<span class="c1">//     // assume simplex is sorted</span>
+<span class="c1">//     index_type simplex_key(</span>
+<span class="c1">//         const std::vector&lt;index_type&gt;&amp; s</span>
+<span class="c1">//     ) const {</span>
+<span class="c1">//         index_type key = 0;</span>
+<span class="c1">//         for (size_t j = 0; j &lt; s.size(); j++) {</span>
+<span class="c1">//             key += binom(s[j], j+1);</span>
+<span class="c1">//         }</span>
+<span class="c1">//         return key;</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//  // TODO</span>
+<span class="c1">//  std::vector&lt;index_type&gt; key_to_simplex(</span>
+<span class="c1">//      const size_t dim,</span>
+<span class="c1">//      index_type key</span>
+<span class="c1">//  ) {</span>
+<span class="c1">//      std::vector&lt;index_type&gt; s(dim+1);</span>
+<span class="c1">//      for (size_t d = dim; d &gt; 0; d--) {</span>
+<span class="c1">//          s[d] = max_vertex(key, d);</span>
+<span class="c1">//          std::cout &lt;&lt; &quot;(&quot; &lt;&lt; s[d] &lt;&lt; &quot;\t&quot; &lt;&lt; d &lt;&lt; &quot;) =  &quot; &lt;&lt;  binom(s[d], d) &lt;&lt; &quot;\n&quot;;</span>
+<span class="c1">//          key -= binom(s[d], d);</span>
+<span class="c1">//      }</span>
+<span class="c1">//      s[0] = key;</span>
+<span class="c1">//      return s;</span>
+<span class="c1">//  }</span>
+<span class="c1">//</span>
+<span class="c1">//     // add simplex</span>
+<span class="c1">//     // assumptions:</span>
+<span class="c1">//     // s is sorted</span>
+<span class="c1">//     // boundary is already added</span>
+<span class="c1">//     // s has not already been added</span>
+<span class="c1">//     void add_unsafe(</span>
+<span class="c1">//         const std::vector&lt;index_type&gt;&amp; s</span>
+<span class="c1">//     ) {</span>
+<span class="c1">//         auto k = simplex_key(s);</span>
+<span class="c1">//      size_t dim = s.size() - 1;</span>
+<span class="c1">//</span>
+<span class="c1">//      // add to lookup</span>
+<span class="c1">//      key_to_index[dim][k] = index_to_key[dim].size();</span>
+<span class="c1">//</span>
+<span class="c1">//         // add to list of simplicies</span>
+<span class="c1">//      index_to_key[dim].emplace_back(k);</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//  // TODO: make this safe</span>
+<span class="c1">//  inline void add(const std::vector&lt;index_type&gt;&amp; s) {return add_unsafe(s);}</span>
+<span class="c1">//</span>
+<span class="c1">//  // get CSC integer matrix boundary in dimension dim</span>
+<span class="c1">//     CSCMatrix&lt;int, size_t&gt; boundary_csc(const size_t dim) const {</span>
+<span class="c1">//         size_t m = ncells(dim-1);</span>
+<span class="c1">//         size_t n = ncells(dim);</span>
+<span class="c1">//         // create colptr</span>
+<span class="c1">//         std::vector&lt;size_t&gt; colptr(n+1);</span>
+<span class="c1">//         auto vbeg = colptr.begin();</span>
+<span class="c1">//         auto vend = colptr.end();</span>
+<span class="c1">//         size_t val = 0;</span>
+<span class="c1">//         while (vbeg != vend) {</span>
+<span class="c1">//             *vbeg++ = val;</span>
+<span class="c1">//             val += (dim + 1);</span>
+<span class="c1">//         }</span>
+<span class="c1">//</span>
+<span class="c1">//      // create rowind</span>
+<span class="c1">//         std::vector&lt;size_t&gt; rowind;</span>
+<span class="c1">//         rowind.reserve((dim+1)*n);</span>
+<span class="c1">//</span>
+<span class="c1">//         // create val</span>
+<span class="c1">//         std::vector&lt;int&gt; ival;</span>
+<span class="c1">//         ival.reserve((dim+1)*n);</span>
+<span class="c1">//</span>
+<span class="c1">//      // iterate over simplices in dimension dim</span>
+<span class="c1">//      for (auto s : index_to_key[dim]) {</span>
+<span class="c1">//          // iterate over boundary of simplex</span>
+<span class="c1">//          // for face of simplex</span>
+<span class="c1">//          auto bdry = simplex_boundary_iterator(s, dim, this);</span>
+<span class="c1">//          while (bdry) {</span>
+<span class="c1">//              auto [f, c] = bdry.next();</span>
+<span class="c1">//              rowind.emplace_back(key_to_index[dim-1].at(f));</span>
+<span class="c1">//              ival.emplace_back(c);</span>
+<span class="c1">//          }</span>
+<span class="c1">//      }</span>
+<span class="c1">//</span>
+<span class="c1">//         return CSCMatrix&lt;int, size_t&gt;(</span>
+<span class="c1">//             m,</span>
+<span class="c1">//             n,</span>
+<span class="c1">//             colptr,</span>
+<span class="c1">//             rowind,</span>
+<span class="c1">//             ival</span>
+<span class="c1">//         );</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">//</span>
+<span class="c1">//     // mostly for debugging</span>
+<span class="c1">//     void print_binom() const {</span>
+<span class="c1">//         for (size_t _n = 0; _n &lt; n+1; _n++) {</span>
+<span class="c1">//             for (size_t _k = 1; _k &lt; k+2; _k++) {</span>
+<span class="c1">//                 std::cout &lt;&lt; &quot;(&quot; &lt;&lt; _n &lt;&lt; &quot;\t&quot; &lt;&lt; _k &lt;&lt; &quot;) = &quot; &lt;&lt; binom(_n, _k) &lt;&lt; std::endl;</span>
+<span class="c1">//             }</span>
+<span class="c1">//         }</span>
+<span class="c1">//     }</span>
+<span class="c1">//</span>
+<span class="c1">//     void print_summary() const {</span>
+<span class="c1">//      std::cout &lt;&lt; &quot;LightSimplicialComplex, maxdim = &quot; &lt;&lt; maxdim() &lt;&lt; std::endl;</span>
+<span class="c1">//      for (size_t k = 0; k &lt; maxdim() + 1; k++) {</span>
+<span class="c1">//          std::cout &lt;&lt; &quot;\tdim &quot; &lt;&lt; k &lt;&lt; &quot; : &quot; &lt;&lt; ncells(k) &lt;&lt; &quot; cells&quot; &lt;&lt; std::endl;</span>
+<span class="c1">//      }</span>
+<span class="c1">//      std::cout &lt;&lt; ncells() &lt;&lt; &quot; total&quot; &lt;&lt; std::endl;</span>
+<span class="c1">//  }</span>
+<span class="c1">//</span>
+<span class="c1">// };</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

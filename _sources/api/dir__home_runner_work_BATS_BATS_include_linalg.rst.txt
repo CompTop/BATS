@@ -1,0 +1,34 @@
+.. _dir__home_runner_work_BATS_BATS_include_linalg:
+
+
+Directory linalg
+================
+
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include>` (``/home/runner/work/BATS/BATS/include``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``/home/runner/work/BATS/BATS/include/linalg``
+
+
+Files
+-----
+
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_csc_matrix.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_field.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_polynomial.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_rcf.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_schur.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_vector.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+

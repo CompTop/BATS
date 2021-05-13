@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2rips_8hpp_1a3188a1bcdf5d9c4efab5d19855c4e75d:
+
+Template Function bats::pairwise_dist
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::pairwise_dist(const std::vector<T>&, const std::vector<size_t>&, const size_t)

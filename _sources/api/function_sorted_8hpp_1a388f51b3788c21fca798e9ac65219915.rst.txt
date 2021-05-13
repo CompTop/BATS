@@ -1,0 +1,13 @@
+.. _exhale_function_sorted_8hpp_1a388f51b3788c21fca798e9ac65219915:
+
+Template Function bats::util::intersect_sorted(const C1&, const C2&, std::set<T>&)
+==================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::intersect_sorted(const C1&, const C2&, std::set<T>&)

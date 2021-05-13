@@ -1,0 +1,75 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp:
+
+File neighborhood.hpp
+=====================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/neighborhood.hpp``)
+------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
+
+- ``util/permutation.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_density.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
+
+- :ref:`exhale_function_neighborhood_8hpp_1ac344ced71c636b9cf05aab03c98bcd85`
+
+- :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
+
+- :ref:`exhale_function_neighborhood_8hpp_1a77dcdce06ffc1e4ccce66cc52a0b490a`
+
+- :ref:`exhale_function_neighborhood_8hpp_1aff67a6b3860df3e9d88f06c96ea05811`
+

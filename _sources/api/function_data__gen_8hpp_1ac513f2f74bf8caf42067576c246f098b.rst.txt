@@ -1,0 +1,13 @@
+.. _exhale_function_data__gen_8hpp_1ac513f2f74bf8caf42067576c246f098b:
+
+Function bats::gen_cylinder
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::gen_cylinder(const size_t, const size_t)

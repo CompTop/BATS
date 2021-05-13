@@ -1,0 +1,13 @@
+.. _exhale_function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d:
+
+Function UELP_fact(A<SI>)
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: UELP_fact(A<SI>)

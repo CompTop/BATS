@@ -1,0 +1,13 @@
+.. _exhale_function_set_8hpp_1a4d772271a5324ef112d7128e0331c82f:
+
+Template Function bats::util::set_intersection
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::set_intersection(const C1&, const C2&)

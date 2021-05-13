@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1af091996e3b7a076f2d91d2b176861cfc:
+
+Template Function apply_matmul_on_left
+======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: apply_matmul_on_left(A<Dense<F, Acc1>>, A<Dense<F, Acc2>>)

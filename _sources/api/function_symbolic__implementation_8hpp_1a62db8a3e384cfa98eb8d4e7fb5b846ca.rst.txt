@@ -1,0 +1,13 @@
+.. _exhale_function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca:
+
+Function PUEL_fact(A<SI>)
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PUEL_fact(A<SI>)

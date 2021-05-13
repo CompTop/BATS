@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1compute__basis__flag:
+
+Struct compute_basis_flag
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::compute_basis_flag
+   :members:
+   :protected-members:
+   :undoc-members:

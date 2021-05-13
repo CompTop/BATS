@@ -1,0 +1,13 @@
+.. _exhale_function_sorted_8hpp_1a79590767a6a9e7db564e30ed6243b40d:
+
+Template Function bats::util::sort_into
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sort_into(const std::vector<T>&, std::vector<T>&)

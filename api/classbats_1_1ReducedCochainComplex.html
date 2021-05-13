@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Template Class ReducedCochainComplex &mdash; Basic Applied Topology Subprograms  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class SimplicialComplex" href="classbats_1_1SimplicialComplex.html" />
+    <link rel="prev" title="Template Class ReducedChainComplex" href="classbats_1_1ReducedChainComplex.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Applied Topology Subprograms
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Applied Topology Subprograms</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Template Class ReducedCochainComplex</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classbats_1_1ReducedCochainComplex.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="template-class-reducedcochaincomplex">
+<span id="exhale-class-classbats-1-1reducedcochaincomplex"></span><h1>Template Class ReducedCochainComplex<a class="headerlink" href="#template-class-reducedcochaincomplex" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp.html#file-home-runner-work-bats-bats-include-homology-cohom-basis-hpp"><span class="std std-ref">File cohom_basis.hpp</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats21ReducedCochainComplexE">
+<span id="_CPPv3I0EN4bats21ReducedCochainComplexE"></span><span id="_CPPv2I0EN4bats21ReducedCochainComplexE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><a class="headerlink" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex12cochain_typeE">
+<span id="_CPPv3N4bats21ReducedCochainComplex12cochain_typeE"></span><span id="_CPPv2N4bats21ReducedCochainComplex12cochain_typeE"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a92d0ca844793ee017c869d348eb044c1"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cochain_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">col_type</span></span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex12cochain_typeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats21ReducedCochainComplex4hdimE6size_t">
+<span id="_CPPv3NK4bats21ReducedCochainComplex4hdimE6size_t"></span><span id="_CPPv2NK4bats21ReducedCochainComplex4hdimE6size_t"></span><span id="bats::ReducedCochainComplex::hdim__sC"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1aefdf43fc9cd035f3030be15f813bc659"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hdim</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats21ReducedCochainComplex4hdimE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats21ReducedCochainComplex6maxdimEv">
+<span id="_CPPv3NK4bats21ReducedCochainComplex6maxdimEv"></span><span id="_CPPv2NK4bats21ReducedCochainComplex6maxdimEv"></span><span id="bats::ReducedCochainComplex::maxdimC"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a3f0598d76df6b05653e5d878e0a0c484"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maxdim</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats21ReducedCochainComplex6maxdimEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplexixE6size_t">
+<span id="_CPPv3N4bats21ReducedCochainComplexixE6size_t"></span><span id="_CPPv2N4bats21ReducedCochainComplexixE6size_t"></span><span id="bats::ReducedCochainComplex::subscript-operator__s"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a1b185bc67721d79ba9f5179d120880ec"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplexixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex21ReducedCochainComplexEv">
+<span id="_CPPv3N4bats21ReducedCochainComplex21ReducedCochainComplexEv"></span><span id="_CPPv2N4bats21ReducedCochainComplex21ReducedCochainComplexEv"></span><span id="bats::ReducedCochainComplex::ReducedCochainComplex"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a49e992eefa6be281afeea97d6a5afd1d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex21ReducedCochainComplexEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE">
+<span id="_CPPv3N4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE"></span><span id="_CPPv2N4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE"></span><span id="bats::ReducedCochainComplex::ReducedCochainComplex__CochainComplex:MT:CR"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a43686cde757b673d58d7e7800340543e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structbats_1_1CochainComplex.html#_CPPv4I0EN4bats14CochainComplexE" title="bats::CochainComplex"><span class="n"><span class="pre">CochainComplex</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">C</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflag">
+<span id="_CPPv3I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflag"></span><span id="_CPPv2I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflag"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">algflag</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex_1abf8991f0d7921cd8a54b5cfbaca73050"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structbats_1_1CochainComplex.html#_CPPv4I0EN4bats14CochainComplexE" title="bats::CochainComplex"><span class="n"><span class="pre">CochainComplex</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">C</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflag" title="bats::ReducedCochainComplex::ReducedCochainComplex::algflag"><span class="n"><span class="pre">algflag</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflag" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats18compute_basis_flagE">
+<span id="_CPPv3I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats18compute_basis_flagE"></span><span id="_CPPv2I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats18compute_basis_flagE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">algflag</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex_1a2ab0949d727fe03528d9a7e533fbb70b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structbats_1_1CochainComplex.html#_CPPv4I0EN4bats14CochainComplexE" title="bats::CochainComplex"><span class="n"><span class="pre">CochainComplex</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">C</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats18compute_basis_flagE" title="bats::ReducedCochainComplex::ReducedCochainComplex::algflag"><span class="n"><span class="pre">algflag</span></span></a>, <span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structbats_1_1compute__basis__flag.html#_CPPv4N4bats18compute_basis_flagE" title="bats::compute_basis_flag"><span class="n"><span class="pre">compute_basis_flag</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats18compute_basis_flagE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats13clearing_flagE">
+<span id="_CPPv3I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats13clearing_flagE"></span><span id="_CPPv2I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats13clearing_flagE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">algflag</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex_1a45b42aa6edcc489f9704bd47997a9149"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structbats_1_1CochainComplex.html#_CPPv4I0EN4bats14CochainComplexE" title="bats::CochainComplex"><span class="n"><span class="pre">CochainComplex</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">C</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats13clearing_flagE" title="bats::ReducedCochainComplex::ReducedCochainComplex::algflag"><span class="n"><span class="pre">algflag</span></span></a>, <span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structbats_1_1clearing__flag.html#_CPPv4N4bats13clearing_flagE" title="bats::clearing_flag"><span class="n"><span class="pre">clearing_flag</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats13clearing_flagE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats16compression_flagE">
+<span id="_CPPv3I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats16compression_flagE"></span><span id="_CPPv2I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats16compression_flagE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">algflag</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex_1a617a5992e298f51032b5707a2889c384"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ReducedCochainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="structbats_1_1CochainComplex.html#_CPPv4I0EN4bats14CochainComplexE" title="bats::CochainComplex"><span class="n"><span class="pre">CochainComplex</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">C</span></span>, <a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats16compression_flagE" title="bats::ReducedCochainComplex::ReducedCochainComplex::algflag"><span class="n"><span class="pre">algflag</span></span></a>, <span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="structbats_1_1compression__flag.html#_CPPv4N4bats16compression_flagE" title="bats::compression_flag"><span class="n"><span class="pre">compression_flag</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats21ReducedCochainComplex21ReducedCochainComplexERK14CochainComplexI2MTE7algflagN4bats16compression_flagE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK4bats21ReducedCochainComplex12to_hom_basisE2TVRK2TV6size_t">
+<span id="_CPPv3I0ENK4bats21ReducedCochainComplex12to_hom_basisERK2TV6size_t"></span><span id="_CPPv2I0ENK4bats21ReducedCochainComplex12to_hom_basisERK2TV6size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TV</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex_1a110cfc0220fb26d1f121dd6eb327ad7d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats21ReducedCochainComplex12to_hom_basisE2TVRK2TV6size_t" title="bats::ReducedCochainComplex::to_hom_basis::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_hom_basis</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats21ReducedCochainComplex12to_hom_basisE2TVRK2TV6size_t" title="bats::ReducedCochainComplex::to_hom_basis::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK4bats21ReducedCochainComplex12to_hom_basisE2TVRK2TV6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0ENK4bats21ReducedCochainComplex14from_hom_basisE2TVRK2TV6size_t">
+<span id="_CPPv3I0ENK4bats21ReducedCochainComplex14from_hom_basisERK2TV6size_t"></span><span id="_CPPv2I0ENK4bats21ReducedCochainComplex14from_hom_basisERK2TV6size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TV</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classbats_1_1ReducedCochainComplex_1a005ceb726890dbfd656d526a5a459f41"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats21ReducedCochainComplex14from_hom_basisE2TVRK2TV6size_t" title="bats::ReducedCochainComplex::from_hom_basis::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">from_hom_basis</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0ENK4bats21ReducedCochainComplex14from_hom_basisE2TVRK2TV6size_t" title="bats::ReducedCochainComplex::from_hom_basis::TV"><span class="n"><span class="pre">TV</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">v</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I0ENK4bats21ReducedCochainComplex14from_hom_basisE2TVRK2TV6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats21ReducedCochainComplex28get_preferred_representativeE6size_tK6size_t">
+<span id="_CPPv3NK4bats21ReducedCochainComplex28get_preferred_representativeE6size_tK6size_t"></span><span id="_CPPv2NK4bats21ReducedCochainComplex28get_preferred_representativeE6size_tK6size_t"></span><span id="bats::ReducedCochainComplex::get_preferred_representative__s.sCC"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a3396a8929219343ab14728da05470a27"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats21ReducedCochainComplex12cochain_typeE" title="bats::ReducedCochainComplex::cochain_type"><span class="n"><span class="pre">cochain_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_preferred_representative</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats21ReducedCochainComplex28get_preferred_representativeE6size_tK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats21ReducedCochainComplex29find_preferred_representativeERN2MT8col_typeEK6size_t">
+<span id="_CPPv3NK4bats21ReducedCochainComplex29find_preferred_representativeERN2MT8col_typeEK6size_t"></span><span id="_CPPv2NK4bats21ReducedCochainComplex29find_preferred_representativeERN2MT8col_typeEK6size_t"></span><span id="bats::ReducedCochainComplex::find_preferred_representative__MT::col_typeR.sCC"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1afa024decd20619a1e52fbc94a05dde76"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_preferred_representative</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">col_type</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">y</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats21ReducedCochainComplex29find_preferred_representativeERN2MT8col_typeEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK4bats21ReducedCochainComplex30chain_preferred_representativeERK12cochain_type6size_t">
+<span id="_CPPv3NK4bats21ReducedCochainComplex30chain_preferred_representativeERK12cochain_type6size_t"></span><span id="_CPPv2NK4bats21ReducedCochainComplex30chain_preferred_representativeERK12cochain_type6size_t"></span><span id="bats::ReducedCochainComplex::chain_preferred_representative__cochain_typeCR.sC"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1af466862cb15f38f87d75043e1b0e5ecc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats21ReducedCochainComplex12cochain_typeE" title="bats::ReducedCochainComplex::cochain_type"><span class="n"><span class="pre">cochain_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chain_preferred_representative</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4bats21ReducedCochainComplex12cochain_typeE" title="bats::ReducedCochainComplex::cochain_type"><span class="n"><span class="pre">cochain_type</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">c</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK4bats21ReducedCochainComplex30chain_preferred_representativeERK12cochain_type6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex3dimE">
+<span id="_CPPv3N4bats21ReducedCochainComplex3dimE"></span><span id="_CPPv2N4bats21ReducedCochainComplex3dimE"></span><span id="bats::ReducedCochainComplex::dim__std::vector:s:"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1af6de6b03e56635b9a59ffb47b120ded4"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dim</span></span></span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex3dimE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex1UE">
+<span id="_CPPv3N4bats21ReducedCochainComplex1UE"></span><span id="_CPPv2N4bats21ReducedCochainComplex1UE"></span><span id="bats::ReducedCochainComplex::U__std::vector:MT:"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1af8f5afc0cbbb33f8557ad239ead18fc1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex1UE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex1RE">
+<span id="_CPPv3N4bats21ReducedCochainComplex1RE"></span><span id="_CPPv2N4bats21ReducedCochainComplex1RE"></span><span id="bats::ReducedCochainComplex::R__std::vector:MT:"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a9c92a4acf367f1c8138276c17436a5d1"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats21ReducedCochainComplexE" title="bats::ReducedCochainComplex::MT"><span class="n"><span class="pre">MT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">R</span></span></span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex1RE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex1IE">
+<span id="_CPPv3N4bats21ReducedCochainComplex1IE"></span><span id="_CPPv2N4bats21ReducedCochainComplex1IE"></span><span id="bats::ReducedCochainComplex::I__std::vector:std::set:s::"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1af73d75192738f9954f4443436cf20bf7"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">set</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">I</span></span></span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex1IE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4bats21ReducedCochainComplex3p2cE">
+<span id="_CPPv3N4bats21ReducedCochainComplex3p2cE"></span><span id="_CPPv2N4bats21ReducedCochainComplex3p2cE"></span><span id="bats::ReducedCochainComplex::p2c__std::vector:std::vector:s::"></span><span class="target" id="classbats_1_1ReducedCochainComplex_1a8be9f7fddf91f6bf17924286f913ff2e"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">p2c</span></span></span><a class="headerlink" href="#_CPPv4N4bats21ReducedCochainComplex3p2cE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classbats_1_1SimplicialComplex.html" class="btn btn-neutral float-right" title="Class SimplicialComplex" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classbats_1_1ReducedChainComplex.html" class="btn btn-neutral float-left" title="Template Class ReducedChainComplex" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Brad Nelson.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

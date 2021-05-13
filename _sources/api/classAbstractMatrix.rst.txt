@@ -1,0 +1,25 @@
+.. _exhale_class_classAbstractMatrix:
+
+Class AbstractMatrix
+====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_matrix.hpp`
+
+
+Inheritance Relationships
+-------------------------
+
+Derived Type
+************
+
+- ``public CSCMatrix< TV, TI >`` (:ref:`exhale_class_classCSCMatrix`)
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: AbstractMatrix
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,13 @@
+.. _exhale_typedef_cover_8hpp_1a1b2e5d3f8a89d778d6da9d63fb884edd:
+
+Typedef bats::Cover
+===================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: bats::Cover

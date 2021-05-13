@@ -1,0 +1,13 @@
+.. _exhale_define_naive__dense_8hpp_1ad764234ec3d628f63abb652af68b8b46:
+
+Define SRULE
+============
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: SRULE

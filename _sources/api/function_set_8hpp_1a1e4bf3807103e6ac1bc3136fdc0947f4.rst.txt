@@ -1,0 +1,13 @@
+.. _exhale_function_set_8hpp_1a1e4bf3807103e6ac1bc3136fdc0947f4:
+
+Function bats::util::random_subset
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::random_subset(const size_t, const size_t)

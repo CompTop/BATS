@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1filtered__edge:
+
+Template Struct filtered_edge
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::filtered_edge
+   :members:
+   :protected-members:
+   :undoc-members:

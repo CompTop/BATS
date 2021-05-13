@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889:
+
+Template Function commute(U<Dense<F, Acc1>>, EU<Dense<F, Acc2>>)
+================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: commute(U<Dense<F, Acc1>>, EU<Dense<F, Acc2>>)

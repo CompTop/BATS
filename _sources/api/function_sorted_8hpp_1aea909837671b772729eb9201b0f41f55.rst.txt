@@ -1,0 +1,13 @@
+.. _exhale_function_sorted_8hpp_1aea909837671b772729eb9201b0f41f55:
+
+Template Function bats::util::sorted_complement
+===============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sorted_complement(const std::vector<T>&, size_t)

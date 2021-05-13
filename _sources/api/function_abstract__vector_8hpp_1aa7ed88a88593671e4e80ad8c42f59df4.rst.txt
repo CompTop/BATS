@@ -1,0 +1,13 @@
+.. _exhale_function_abstract__vector_8hpp_1aa7ed88a88593671e4e80ad8c42f59df4:
+
+Template Function operator<<(std::ostream&, const nzpair<TI, TV>&)
+==================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: operator<<(std::ostream&, const nzpair<TI, TV>&)

@@ -1,0 +1,13 @@
+.. _exhale_define_naive__dense_8hpp_1a27385de6fbdb5adea73bf5b83f46c7b0:
+
+Define RULE
+===========
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: RULE

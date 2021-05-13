@@ -1,0 +1,13 @@
+.. _exhale_function_pid_8hpp_1a28982564d7e1522306a64c315fc2385c:
+
+Function sgn(const int&)
+========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_pid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: sgn(const int&)

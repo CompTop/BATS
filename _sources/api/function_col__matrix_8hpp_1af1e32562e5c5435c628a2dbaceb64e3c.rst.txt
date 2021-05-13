@@ -1,0 +1,13 @@
+.. _exhale_function_col__matrix_8hpp_1af1e32562e5c5435c628a2dbaceb64e3c:
+
+Template Function l_solve(const ColumnMatrix<TC>&, const ColumnMatrix<TC>&)
+===========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: l_solve(const ColumnMatrix<TC>&, const ColumnMatrix<TC>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908:
+
+Function bats::bivariate_cover
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::bivariate_cover(const std::vector<std::set<size_t>>&, const std::vector<std::set<size_t>>&)

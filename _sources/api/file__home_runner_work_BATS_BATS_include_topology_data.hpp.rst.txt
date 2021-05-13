@@ -1,0 +1,105 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_data.hpp:
+
+File data.hpp
+=============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/data.hpp``)
+----------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_data.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``fstream``
+
+- ``iostream``
+
+- ``linalg/naive_dense.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`)
+
+- ``sstream``
+
+- ``string``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_density.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_rips_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_spherical.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker_cover.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1DataSet`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_data_8hpp_1a68dcb239df5c2f250100cabcb5489b54`
+
+
+Typedefs
+--------
+
+
+- :ref:`exhale_typedef_data_8hpp_1ac356228f0a1762127fac0c90af20ad1b`
+

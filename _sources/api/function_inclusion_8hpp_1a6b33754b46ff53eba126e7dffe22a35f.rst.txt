@@ -1,0 +1,13 @@
+.. _exhale_function_inclusion_8hpp_1a6b33754b46ff53eba126e7dffe22a35f:
+
+Function bats::linear_subset_union_diagram
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::linear_subset_union_diagram(std::vector<std::set<size_t>>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_simplicial__map_8hpp_1a128372bb68bf4282bf0f02aa88cf6772:
+
+Template Function bats::SimplicialMap(const CpxT&, const CpxT&)
+===============================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::SimplicialMap(const CpxT&, const CpxT&)

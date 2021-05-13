@@ -1,0 +1,13 @@
+.. _exhale_function_col__matrix_8hpp_1a50704c02bec41743e03f7f74b4a6a8b2:
+
+Template Function l_inv
+=======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: l_inv(const ColumnMatrix<TC>&)

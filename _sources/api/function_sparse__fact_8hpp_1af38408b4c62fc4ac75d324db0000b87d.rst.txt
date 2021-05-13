@@ -1,0 +1,13 @@
+.. _exhale_function_sparse__fact_8hpp_1af38408b4c62fc4ac75d324db0000b87d:
+
+Template Function UELP
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: UELP(const ColumnMatrix<TC>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992:
+
+Template Function bats::Reduce(const Filtration<FT, CpxT>&, T, Args ...)
+========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Reduce(const Filtration<FT, CpxT>&, T, Args ...)

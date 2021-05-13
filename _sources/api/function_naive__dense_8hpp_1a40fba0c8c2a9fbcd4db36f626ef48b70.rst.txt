@@ -1,0 +1,13 @@
+.. _exhale_function_naive__dense_8hpp_1a40fba0c8c2a9fbcd4db36f626ef48b70:
+
+Template Function PLEU_fact(A<Dense<F, Acc>>&)
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_naive_dense.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: PLEU_fact(A<Dense<F, Acc>>&)

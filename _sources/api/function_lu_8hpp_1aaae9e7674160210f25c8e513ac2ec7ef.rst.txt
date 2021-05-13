@@ -1,0 +1,13 @@
+.. _exhale_function_lu_8hpp_1aaae9e7674160210f25c8e513ac2ec7ef:
+
+Template Function bats::future::unit_lower
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_future_lu.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::future::unit_lower(const MT&)

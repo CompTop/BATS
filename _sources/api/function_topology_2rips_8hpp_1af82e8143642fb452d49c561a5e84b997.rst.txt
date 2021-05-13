@@ -1,0 +1,13 @@
+.. _exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997:
+
+Template Function bats::rips_edges(const DataSet<T>&, const M&, const T)
+========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::rips_edges(const DataSet<T>&, const M&, const T)

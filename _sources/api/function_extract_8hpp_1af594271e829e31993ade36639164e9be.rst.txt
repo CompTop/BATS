@@ -1,0 +1,13 @@
+.. _exhale_function_extract_8hpp_1af594271e829e31993ade36639164e9be:
+
+Function extract_pairs
+======================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_extract.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: extract_pairs(ColumnMatrix<TVec>&, std::map<size_t, size_t>)
