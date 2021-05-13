@@ -3,13 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Basic Applied Topology Subprograms's documentation!
+Welcome to Basic Applied Topology Subprograms' documentation!
 ==============================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   install
    api/library_root
 
 

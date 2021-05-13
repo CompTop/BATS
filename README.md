@@ -11,7 +11,7 @@ The contents of this repository were originally developed to implement the compu
 
 Python bindings for a subset of BATS can be found in a separate repository: [BATS.py](https://github.com/bnels/BATS.py).  
 
-Documentation:
+Documentation is being migrated to [bnels.github.io/BATS](https://bnels.github.io/BATS).  You can find an API reference there.
 
 ## Features
 
