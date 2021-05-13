@@ -18,10 +18,10 @@ jobs:
         python-version: 3.7
       - name: Generate documentation with Sphinx
         run: |
-        cd doc/sphinx
-        pip install -r requirements.txt
-        make html
-        cd ../.. # return to root
+          cd doc/sphinx
+          pip install -r requirements.txt
+          make html
+          cd ../.. # return to root
       # Publish built docs to gh-pages branch
       - name: Commit documentation changes
         run: |
