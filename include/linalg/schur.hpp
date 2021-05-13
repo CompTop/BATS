@@ -62,7 +62,7 @@ so that A = L1 U1 AS L2 U2
 */
 template <typename TV>
 auto schur(
-    const ColumnMatrix<TV>& A
+    const ColumnMatrix<TV>& A,
     const size_t i0,
     const size_t i1,
     const size_t j0,

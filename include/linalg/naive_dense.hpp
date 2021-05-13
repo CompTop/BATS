@@ -682,11 +682,11 @@ void A<Dense<F,Acc>>::add_row_to(size_t i, size_t j, F a){
 
 // mat creation utils
 
-template<typename M>
-void make_diag_ones(M mat){
-    for(size_t i=0;i<mat.m;i++)
-        mat(i,i)=1;
-}
+// template<typename M>
+// void make_diag_ones(M mat){
+//     for(size_t i=0;i<mat.m;i++)
+//         mat(i,i)=1;
+// }
 
 template<typename F,typename M>
 void make_diag_ones(M mat){
