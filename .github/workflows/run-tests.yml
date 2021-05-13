@@ -1,0 +1,12 @@
+name: run-tests
+on: [push]
+jobs:
+  run-all-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: egor-tensin/setup-gcc@v1
+      - name: Run from test directory
+        run: |
+          cd tests
+          make test
