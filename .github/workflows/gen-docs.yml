@@ -12,9 +12,16 @@ jobs:
       - name: Install doxygen
         run: sudo apt-get install doxygen
       # this should generate the documentation using Doxygen/Sphinx/Exhale
-      - uses: ammaraskar/sphinx-action@master
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
         with:
-          docs-folder: "doc/sphinx/"
+        python-version: 3.7
+      - name: Generate documentation with Sphinx
+        run: |
+        cd doc/sphinx
+        pip install -r requirements.txt
+        make html
+        cd ../.. # return to root
       # Publish built docs to gh-pages branch
       - name: Commit documentation changes
         run: |
