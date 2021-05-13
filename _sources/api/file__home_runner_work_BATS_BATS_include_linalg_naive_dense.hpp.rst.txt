@@ -213,9 +213,9 @@ Functions
 
 - :ref:`exhale_function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889`
 
-- :ref:`exhale_function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab`
-
 - :ref:`exhale_function_naive__dense_8hpp_1aab25a5247f48274c7f24724032b6dd18`
+
+- :ref:`exhale_function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab`
 
 - :ref:`exhale_function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f`
 

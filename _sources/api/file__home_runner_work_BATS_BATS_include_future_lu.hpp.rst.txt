@@ -66,9 +66,9 @@ Functions
 
 - :ref:`exhale_function_lu_8hpp_1af09e842d82eb095563822c1b98c14362`
 
-- :ref:`exhale_function_lu_8hpp_1a812da078290cceea16e1cb13b115576b`
-
 - :ref:`exhale_function_lu_8hpp_1a35c25dc1326940a439d0481111aefc9e`
+
+- :ref:`exhale_function_lu_8hpp_1a812da078290cceea16e1cb13b115576b`
 
 - :ref:`exhale_function_lu_8hpp_1a2ee2201909147eba3d910a264e7a33ee`
 

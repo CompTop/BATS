@@ -109,9 +109,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a`
-
 - :ref:`exhale_function_chain__complex_8hpp_1ac2b99b961e41a72ed5680f3170d249ec`
+
+- :ref:`exhale_function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a`
 
 - :ref:`exhale_function_functors_8hpp_1a87f0bfc7ef050dbb40707104184ab050`
 
@@ -181,11 +181,11 @@ Functions
 
 - :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
 
+- :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
+
 - :ref:`exhale_function_chain__complex_8hpp_1a9056331ab85ea32b5a39e6306f4e3252`
 
 - :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
-
-- :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
 
 - :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
 
@@ -207,13 +207,13 @@ Functions
 
 - :ref:`exhale_function_dowker__cover_8hpp_1a1e29de611c7e3d8a915abf091330edc5`
 
+- :ref:`exhale_function_dowker_8hpp_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
+
 - :ref:`exhale_function_dowker_8hpp_1a883880c5732d01b74451cc68e47021fa`
 
 - :ref:`exhale_function_dowker__cover_8hpp_1a4aca2e42336131f789fe822b1f7d2e87`
 
 - :ref:`exhale_function_dowker__cover_8hpp_1ab0ff4928102e869d085645ca47383869`
-
-- :ref:`exhale_function_dowker_8hpp_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
 
 - :ref:`exhale_function_eilenberg__zilber_8hpp_1afeb9ea6f0eaf382cbcda6054a45a93ba`
 
@@ -293,9 +293,9 @@ Functions
 
 - :ref:`exhale_function_mayer__vietoris_8hpp_1a01414af58faae33245d8ea1477fe833a`
 
-- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
-
 - :ref:`exhale_function_neighborhood_8hpp_1ac344ced71c636b9cf05aab03c98bcd85`
+
+- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
 
 - :ref:`exhale_function_neighborhood_8hpp_1a77dcdce06ffc1e4ccce66cc52a0b490a`
 
@@ -303,9 +303,9 @@ Functions
 
 - :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
 
-- :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
-
 - :ref:`exhale_function_nerve_8hpp_1a98421dc44f6d6a48c33e11600b6d31d4`
+
+- :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
 
 - :ref:`exhale_function_spherical_8hpp_1a18ff33c5f70f69f3a9fce1831b50e683`
 
@@ -339,13 +339,13 @@ Functions
 
 - :ref:`exhale_function_data_8hpp_1a68dcb239df5c2f250100cabcb5489b54`
 
-- :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
-
-- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
+- :ref:`exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2`
 
 - :ref:`exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992`
 
-- :ref:`exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2`
+- :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
+
+- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
 
 - :ref:`exhale_function_reduction_8hpp_1a91b11073b2bb54ed0e8ed0e4d3f0a5bf`
 
@@ -377,11 +377,11 @@ Functions
 
 - :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
 
-- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
-
 - :ref:`exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a8d88d925f0c8a77c597d46e7b073aba7`
+
+- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a9a1dc66df690a01219961c0dff46532e`
 
