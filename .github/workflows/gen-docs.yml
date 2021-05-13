@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       # this should generate the documentation using Doxygen/Sphinx/Exhale
-      - uses: ammaraskar/sphinx-action@v0.4
+      - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "doc/sphinx/"
       # Publish built docs to gh-pages branch
