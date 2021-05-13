@@ -38,11 +38,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structbats_1_1AbstractMetric.rst
 
 .. toctree::
@@ -218,17 +213,7 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structColMaj.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structD.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structDense.rst
 
 .. toctree::
    :maxdepth: 5
@@ -238,17 +223,7 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structEL.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
 
 .. toctree::
    :maxdepth: 5
@@ -258,27 +233,12 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structEU.rst
 
 .. toctree::
    :maxdepth: 5
 
-   structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structEUH.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
 
 .. toctree::
    :maxdepth: 5
@@ -293,92 +253,12 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structJConj__T.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01ColMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01RevColMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01RevRowMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01RowMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structL.rst
 
 .. toctree::
    :maxdepth: 5
 
-   structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structMAT.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structMemAcc.rst
 
 .. toctree::
    :maxdepth: 5
@@ -403,26 +283,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structRevColMaj.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structRevRowMaj.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structRowMaj.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structSI.rst
 
 .. toctree::
@@ -443,162 +303,7 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01ColMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01RevColMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01RevRowMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01RowMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01ColMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01RevColMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01RevRowMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01RowMaj_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structTrp__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structU.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   structVectorView.rst
 
 .. toctree::
    :maxdepth: 5
@@ -775,11 +480,6 @@ Classes and Structs
 
    classUnivariatePolynomial.rst
 
-.. toctree::
-   :maxdepth: 5
-
-   classVectorView_1_1Iterator.rst
-
 Functions
 *********
 
@@ -788,16 +488,6 @@ Functions
    :maxdepth: 5
 
    function_matrix__interface_8hpp_1ad5867ebb7295eb677ff1dda81e9f0f7d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a48861caec8a4610c06d2b8f80c1e63b6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1aea6289b2f01d98cd4b2f22851bf33063.rst
 
 .. toctree::
    :maxdepth: 5
@@ -822,16 +512,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1aabd24825064f1b610b6b30d358906b17.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1ad40f72cfc46ccdfd3121446b2950c57c.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_symbolic__implementation_8hpp_1a2b22b9df4dc6e22152fce8808cc1e4bc.rst
 
 .. toctree::
@@ -848,16 +528,6 @@ Functions
    :maxdepth: 5
 
    function_symbolic__implementation_8hpp_1a7bddb8833b5117ed79c2a337f6c3cfc9.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1af091996e3b7a076f2d91d2b176861cfc.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a46340eca90e33125ea2255129fbe3136.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2012,26 +1682,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1ab10643ecba33e43bee5dcfb8f7f3f1ce.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a40a3616357eeb850344306ce28f0c056.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1aaef55740424d69a4f58caa27b1b78563.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3.rst
 
 .. toctree::
@@ -2087,26 +1737,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1aab25a5247f48274c7f24724032b6dd18.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1af9deb36b690671446c3ec7ebc9334d7b.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_col__matrix_8hpp_1a35cdf4312a9e570693a49d4e33a0648e.rst
 
 .. toctree::
@@ -2152,22 +1782,12 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1a8ae843891a8ebdfabd8970761c2ad8ff.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_sparse__fact_8hpp_1afe41f780477217b6db4e84eb2b37eaf6.rst
 
 .. toctree::
    :maxdepth: 5
 
    function_matrix__interface_8hpp_1ab5b023163f23b542959edeb58e87bf52.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a8fac21c33c8c269804a3925990ab4422.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2197,27 +1817,7 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1adad150143a9de5f5ceca11e0a9fcfca6.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_matrix__interface_8hpp_1a20e11a501d473255694f7e3a4bc62bf1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a7707aa81653c1d68b97aad7adb13cdde.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a1d1eefd0726d4b3fa4c57422e57224ff.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1aa9715d013de2ba73f388e5cc53270263.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2243,11 +1843,6 @@ Functions
    :maxdepth: 5
 
    function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a1a10bc86141f9ee725b452df7272fb10.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2327,11 +1922,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1a40fba0c8c2a9fbcd4db36f626ef48b70.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.rst
 
 .. toctree::
@@ -2348,11 +1938,6 @@ Functions
    :maxdepth: 5
 
    function_matrix__interface_8hpp_1a370d1aa26a1d24439d5450fe29c16a86.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_naive__dense_8hpp_1a55526be45fe9fb9c1d55f9cca678cb8a.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2447,11 +2032,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_naive__dense_8hpp_1a7c6a3869a0071efb05241d505a8c79d3.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.rst
 
 .. toctree::
@@ -2505,42 +2085,12 @@ Defines
 .. toctree::
    :maxdepth: 5
 
-   define_naive__dense_8hpp_1a200226d210f96ae711483679fd5a713a.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   define_naive__dense_8hpp_1a28220c6e1886a55ed937adaefffb3396.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   define_naive__dense_8hpp_1a5f96169bc895544ca05acf6e6f247a13.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   define_naive__dense_8hpp_1a6abdb074dbaff38fca72615960144889.rst
-
-.. toctree::
-   :maxdepth: 5
-
    define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384.rst
 
 .. toctree::
    :maxdepth: 5
 
    define_reduction_8hpp_1af20e2d9e89945206baf5e88710ceffc1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   define_naive__dense_8hpp_1a27385de6fbdb5adea73bf5b83f46c7b0.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   define_naive__dense_8hpp_1ad764234ec3d628f63abb652af68b8b46.rst
 
 Typedefs
 ********

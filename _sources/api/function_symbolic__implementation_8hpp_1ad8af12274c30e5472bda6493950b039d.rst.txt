@@ -1,7 +1,7 @@
 .. _exhale_function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d:
 
-Function LEUP_fact(A<SI>)
-=========================
+Function LEUP_fact
+==================
 
 - Defined in :ref:`file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp`
 

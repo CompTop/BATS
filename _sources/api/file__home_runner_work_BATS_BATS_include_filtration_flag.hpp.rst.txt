@@ -82,9 +82,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_filtration_2flag_8hpp_1af9b2781bd3d42f4ec2abc965707c5ce4`
-
 - :ref:`exhale_function_filtration_2flag_8hpp_1a3354ec1103ef97dd0c11b1007156e382`
+
+- :ref:`exhale_function_filtration_2flag_8hpp_1af9b2781bd3d42f4ec2abc965707c5ce4`
 
 - :ref:`exhale_function_filtration_2flag_8hpp_1a02204eecf1d35d518e2e3b33e96e54eb`
 

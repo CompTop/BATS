@@ -42,6 +42,7 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Template Class SparseTrie" href="classbats_1_1SparseTrie.html" />
@@ -93,7 +94,11 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tut_menu.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/ex_menu.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About BATS</a></li>
 </ul>
 
             
@@ -173,7 +178,9 @@
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplexE">
 <span id="_CPPv3N4bats17SimplicialComplexE"></span><span id="_CPPv2N4bats17SimplicialComplexE"></span><span id="bats::SimplicialComplex"></span><span class="target" id="classbats_1_1SimplicialComplex"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplexE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p><a class="reference internal" href="structA.html#structA"><span class="std std-ref">A</span></a> simplicial complex based using a trie data structure. </p>
+<p><a class="reference internal" href="structA.html#structA"><span class="std std-ref">A</span></a> class which can be used to hold simplicial complexes on large or exapanding vertex sets. For a lighter-weight option, see <a class="reference internal" href="classbats_1_1LightSimplicialComplex.html#classbats_1_1LightSimplicialComplex"><span class="std std-ref">LightSimplicialComplex</span></a> </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexEv">
@@ -183,12 +190,27 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t">
 <span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexE6size_t"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexE6size_t"></span><span id="bats::SimplicialComplex::SimplicialComplex__s"></span><span class="target" id="classbats_1_1SimplicialComplex_1a05d64f5c2ab52a91ddc5a557de9050dd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxdim</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Initialization up to a certain dimension </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>maxdim</strong> – <strong>[in]</strong> - the maximum dimension simplex expected to be added </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t">
 <span id="_CPPv3N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t"></span><span id="_CPPv2N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t"></span><span id="bats::SimplicialComplex::SimplicialComplex__s.s"></span><span class="target" id="classbats_1_1SimplicialComplex_1a5a262faf209117ecaf682214055178c1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SimplicialComplex</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">maxdim</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex17SimplicialComplexE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Initialization on a certain vertex </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – <strong>[in]</strong> - the maximum expected vertex index </p></li>
+<li><p><strong>maxdim</strong> – <strong>[in]</strong> - the maximum dimension simplex expected to be added </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex17SimplicialComplexERKNSt6vectorI6size_tEE">
@@ -203,7 +225,16 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE">
 <span id="_CPPv3N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE"></span><span id="_CPPv2N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE"></span><span id="bats::SimplicialComplex::find_idx__std::vector:s:CR"></span><span class="target" id="classbats_1_1SimplicialComplex_1a838f088156aef4dc63ad9742a84908cc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">find_idx</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Find the index of a simplex </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> – <strong>[in]</strong> <a class="reference internal" href="structA.html#structA"><span class="std std-ref">A</span></a> vector containing the simplex </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The index associated with the simplex. Returns bats::NO_IND if the simplex is not in the complex. </p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK4bats17SimplicialComplex8find_idxERKNSt6vectorI6size_tEE">

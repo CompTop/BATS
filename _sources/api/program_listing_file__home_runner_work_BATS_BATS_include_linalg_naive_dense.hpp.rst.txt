@@ -24,6 +24,7 @@ Program Listing for File naive_dense.hpp
    //required for fill_rand<Rational<int>>()
    #include <linalg/field.hpp>
    
+   // this is all obsolete and should not be in documentation
    
    // storage type
    template<typename F,typename Acc>
@@ -875,3 +876,4 @@ Program Listing for File naive_dense.hpp
        auto ret2 = ret.TJConj();
        return ret2;
    }
+   

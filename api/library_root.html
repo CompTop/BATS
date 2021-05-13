@@ -42,10 +42,11 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Namespace bats" href="namespace_bats.html" />
-    <link rel="prev" title="Installation" href="../install.html" /> 
+    <link rel="prev" title="Levelset Zigzag" href="../examples/zigzag_levelset.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,6 +94,9 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tut_menu.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/ex_menu.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Library API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
@@ -106,7 +110,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#classes-and-structs">Classes and Structs</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="structA.html">Template Struct A</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct A&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structbats_1_1AbstractMetric.html">Template Struct AbstractMetric</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structbats_1_1AngleDist.html">Struct AngleDist</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structbats_1_1bar.html">Struct bar</a></li>
@@ -142,83 +145,25 @@
 <li class="toctree-l4"><a class="reference internal" href="structbats_1_1Type__A.html">Template Struct Type_A</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structbats_1_1util_1_1SimplexHasher.html">Struct SimplexHasher</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structcell__ind.html">Struct cell_ind</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structColMaj.html">Struct ColMaj</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structD.html">Template Struct D</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structDense.html">Template Struct Dense</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structE.html">Template Struct E</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct E&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structEL.html">Template Struct EL</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct EL&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structELH.html">Template Struct ELH</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct ELH&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structEU.html">Template Struct EU</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct EU&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structEUH.html">Template Struct EUH</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct EUH&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structis__UnivariatePolynomial.html">Template Struct is_UnivariatePolynomial</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structis__UnivariatePolynomial_3_01UnivariatePolynomial_3_01T_01_4_01_4.html">Template Struct is_UnivariatePolynomial&lt; UnivariatePolynomial&lt; T &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T.html">Template Struct JConj_T</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01ColMaj_01_4.html">Template Struct JConj_T&lt; ColMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01RevColMaj_01_4.html">Template Struct JConj_T&lt; RevColMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01RevRowMaj_01_4.html">Template Struct JConj_T&lt; RevRowMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01RowMaj_01_4.html">Template Struct JConj_T&lt; RowMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structL.html">Template Struct L</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct L&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structMAT.html">Struct MAT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structMemAcc.html">Template Struct MemAcc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structMultiGraph_1_1Edge.html">Struct MultiGraph::Edge</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structMultiGraph_1_1Node.html">Struct MultiGraph::Node</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structnzpair.html">Template Struct nzpair</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structP.html">Template Struct P</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct P&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structRevColMaj.html">Struct RevColMaj</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structRevRowMaj.html">Struct RevRowMaj</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structRowMaj.html">Struct RowMaj</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structSI.html">Struct SI</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structSmithFact.html">Template Struct SmithFact</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structSparseFact.html">Template Struct SparseFact</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structT.html">Template Struct T</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct T&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T.html">Template Struct TJConj_T</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01ColMaj_01_4.html">Template Struct TJConj_T&lt; ColMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01RevColMaj_01_4.html">Template Struct TJConj_T&lt; RevColMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01RevRowMaj_01_4.html">Template Struct TJConj_T&lt; RevRowMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01RowMaj_01_4.html">Template Struct TJConj_T&lt; RowMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T.html">Template Struct Trp_T</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01ColMaj_01_4.html">Template Struct Trp_T&lt; ColMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01RevColMaj_01_4.html">Template Struct Trp_T&lt; RevColMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01RevRowMaj_01_4.html">Template Struct Trp_T&lt; RevRowMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01RowMaj_01_4.html">Template Struct Trp_T&lt; RowMaj &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structTrp__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structU.html">Template Struct U</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct U&lt; Dense&lt; F, Acc &gt; &gt;</a></li>
-<li class="toctree-l4"><a class="reference internal" href="structVectorView.html">Template Struct VectorView</a></li>
 <li class="toctree-l4"><a class="reference internal" href="classAbstractField.html">Template Class AbstractField</a></li>
 <li class="toctree-l4"><a class="reference internal" href="classAbstractMatrix.html">Class AbstractMatrix</a></li>
 <li class="toctree-l4"><a class="reference internal" href="classbats_1_1BarcodePair.html">Template Class BarcodePair</a></li>
@@ -254,25 +199,18 @@
 <li class="toctree-l4"><a class="reference internal" href="classSetVector.html">Template Class SetVector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="classSparseVector.html">Template Class SparseVector</a></li>
 <li class="toctree-l4"><a class="reference internal" href="classUnivariatePolynomial.html">Template Class UnivariatePolynomial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="classVectorView_1_1Iterator.html">Class VectorView::Iterator</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1ad5867ebb7295eb677ff1dda81e9f0f7d.html">Function apply_inverse</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a48861caec8a4610c06d2b8f80c1e63b6.html">Template Function apply_inverse_on_left(L&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1aea6289b2f01d98cd4b2f22851bf33063.html">Template Function apply_inverse_on_left(U&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a82d579caf6eb1cded4b8db0f3018acac.html">Function apply_inverse_on_left(L&lt;SI&gt;, L&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ae52bd251ad621e2e02b079a2d272fd89.html">Function apply_inverse_on_left(U&lt;SI&gt;, U&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1af5308b961ff2d94a09416f060abebbcf.html">Function apply_inverse_on_left(L&lt;SI&gt;, A&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a8338a0cd26f0859b3a1e7312145353f1.html">Function apply_inverse_on_left(U&lt;SI&gt;, A&lt;SI&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1aabd24825064f1b610b6b30d358906b17.html">Template Function apply_inverse_on_right(A&lt;Dense&lt;F, Acc2&gt;&gt;, U&lt;Dense&lt;F, Acc1&gt;&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1ad40f72cfc46ccdfd3121446b2950c57c.html">Template Function apply_inverse_on_right(A&lt;Dense&lt;F, Acc2&gt;&gt;, L&lt;Dense&lt;F, Acc1&gt;&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a2b22b9df4dc6e22152fce8808cc1e4bc.html">Function apply_inverse_on_right(L&lt;SI&gt;, L&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a6d9c4ecd3c63d10da8fd79bd2bc8cd23.html">Function apply_inverse_on_right(U&lt;SI&gt;, U&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a181c4a1d85a0d65a35aafdadf7081d25.html">Function apply_inverse_on_right(A&lt;SI&gt;, L&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a7bddb8833b5117ed79c2a337f6c3cfc9.html">Function apply_inverse_on_right(A&lt;SI&gt;, U&lt;SI&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1af091996e3b7a076f2d91d2b176861cfc.html">Template Function apply_matmul_on_left</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a46340eca90e33125ea2255129fbe3136.html">Template Function apply_matmul_on_right</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_chain__complex_8hpp_1ac2b99b961e41a72ed5680f3170d249ec.html">Template Function bats::__ChainComplex(const CpxT&amp;, T)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a.html">Template Function bats::__ChainComplex(const CpxT&amp;, const CpxT&amp;, T)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_functors_8hpp_1a87f0bfc7ef050dbb40707104184ab050.html">Template Function bats::__ChainFunctor</a></li>
@@ -503,10 +441,6 @@
 <li class="toctree-l4"><a class="reference internal" href="function_persistence_2filtration_8hpp_1a93e6d14720ddf4a4987a0f1fcc7cb7be.html">Template Function block_reduce</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_polynomial_8hpp_1a90f874bfc7f2bd4d9a1bd1709939b054.html">Template Function characteristic_matrix</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1a09c123394fe122461562851f96fbc2c6.html">Function commute(MAT, MAT)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1ab10643ecba33e43bee5dcfb8f7f3f1ce.html">Template Function commute(EL&lt;Dense&lt;F, Acc1&gt;&gt;, L&lt;Dense&lt;F, Acc2&gt;&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a40a3616357eeb850344306ce28f0c056.html">Template Function commute(L&lt;Dense&lt;F, Acc2&gt;&gt;, ELH&lt;Dense&lt;F, Acc1&gt;&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1aaef55740424d69a4f58caa27b1b78563.html">Template Function commute(EUH&lt;Dense&lt;F, Acc2&gt;&gt;, U&lt;Dense&lt;F, Acc1&gt;&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889.html">Template Function commute(U&lt;Dense&lt;F, Acc1&gt;&gt;, EU&lt;Dense&lt;F, Acc2&gt;&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3.html">Function commute(EL&lt;SI&gt;, L&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_persistence_2filtration_8hpp_1af54d916c344db2665eeb4f606ef0e744.html">Template Function complete_pairs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a851e8f0d1cbc94996bc8a8e99223d394.html">Template Function CU_inplace</a></li>
@@ -518,10 +452,6 @@
 <li class="toctree-l4"><a class="reference internal" href="function_extract_8hpp_1af594271e829e31993ade36639164e9be.html">Function extract_pairs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1af8c9460074e012027928fade4f3ab6a1.html">Template Function extract_row_scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_field_8hpp_1a8cbfbaa0c7d2a3e9ba47dc128d347c31.html">Template Function ff_inv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1aab25a5247f48274c7f24724032b6dd18.html">Template Function fill_rand(M)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab.html">Template Function fill_rand(M, int)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f.html">Template Function fill_zeros</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1af9deb36b690671446c3ec7ebc9334d7b.html">Template Function find_pivot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_col__matrix_8hpp_1a35cdf4312a9e570693a49d4e33a0648e.html">Template Function gemv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_rcf_8hpp_1a24245b442e2360f8fddb0384acb4d6a7.html">Template Function generating_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1aa20074a10e2d4e0aa9401c7d938777e9.html">Template Function get_pivots</a></li>
@@ -531,26 +461,19 @@
 <li class="toctree-l4"><a class="reference internal" href="function_col__matrix_8hpp_1a50704c02bec41743e03f7f74b4a6a8b2.html">Template Function l_inv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_col__matrix_8hpp_1a312149207447447ab25c9f57d630dc8d.html">Template Function l_solve(const ColumnMatrix&lt;TC&gt;&amp;, const TC&amp;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_col__matrix_8hpp_1af1e32562e5c5435c628a2dbaceb64e3c.html">Template Function l_solve(const ColumnMatrix&lt;TC&gt;&amp;, const ColumnMatrix&lt;TC&gt;&amp;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a8ae843891a8ebdfabd8970761c2ad8ff.html">Template Function l_solve(L&lt;Dense&lt;F, Acc&gt;&gt;, VectorView&lt;F&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1afe41f780477217b6db4e84eb2b37eaf6.html">Template Function LEUP</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1ab5b023163f23b542959edeb58e87bf52.html">Function LEUP_Fact</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a8fac21c33c8c269804a3925990ab4422.html">Template Function LEUP_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d.html">Function LEUP_fact(A&lt;SI&gt;)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d.html">Function LEUP_fact</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1aed7a962465eaaf39f8e6d3a353946744.html">Template Function LEUP_inplace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_extension_8hpp_1aa0fbf74d891298a893a71eaba441b84e.html">Template Function lower_star_filtration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1af211da6246ce8372b1225afbeb5d0f94.html">Template Function LQU</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1ac625d96f949720b3f7a29b3b6ee2c7da.html">Template Function LQU_inplace</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1adad150143a9de5f5ceca11e0a9fcfca6.html">Template Function make_diag_ones</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1a20e11a501d473255694f7e3a4bc62bf1.html">Function matmul(MAT, MAT)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a7707aa81653c1d68b97aad7adb13cdde.html">Template Function matmul(A&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a1d1eefd0726d4b3fa4c57422e57224ff.html">Template Function matmul(A&lt;Dense&lt;F, Acc1&gt;&gt;, VectorView&lt;F&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1aa9715d013de2ba73f388e5cc53270263.html">Template Function matmul(VectorView&lt;F&gt;, A&lt;Dense&lt;F, Acc1&gt;&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a3547f7412c52ed98a9c9a0eef25dd27d.html">Function matmul(A&lt;SI&gt;, A&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad158acc376aa64a139307fe9d393aa30.html">Function matmul(D&lt;SI&gt;, D&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1adffc9db1b4558d720e3a720fb849d3b3.html">Function matmul(L&lt;SI&gt;, L&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ae7ae62d29f06b77408c61ef9894ecafc.html">Function matmul(U&lt;SI&gt;, U&lt;SI&gt;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464.html">Function matmul(L&lt;SI&gt;, U&lt;SI&gt;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a1a10bc86141f9ee725b452df7272fb10.html">Template Function norm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_abstract__vector_8hpp_1a9275f5660ac8ec1148d5da019434df0b.html">Template Function operator&lt;(const TI&amp;, const nzpair&lt;TI, TV&gt;&amp;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_abstract__vector_8hpp_1ae0d3ad24774664f64f554a64bf0e8a2c.html">Template Function operator&lt;(const nzpair&lt;TI, TV&gt;&amp;, const TI&amp;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_abstract__vector_8hpp_1a018d5c6df5411da1bde87be37cab6d18.html">Template Function operator&lt;(const nzpair&lt;TI, TV&gt;&amp;, const nzpair&lt;TI, TV&gt;&amp;)</a></li>
@@ -566,13 +489,11 @@
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a1cf0dd64e9dc0eb429fa4d479ac121cd.html">Template Function pivot_ind</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1ae7a9c23a18cc490da61f286c7eec5d92.html">Template Function PLEU</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1aa4c75e6f6aaa5cd5f3cc3cbd189a2e5d.html">Function PLEU_Fact</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a40fba0c8c2a9fbcd4db36f626ef48b70.html">Template Function PLEU_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.html">Function PLEU_fact(A&lt;SI&gt;)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.html">Function PLEU_fact</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a4dae7c37d6be03820125bffac9549db6.html">Template Function PLEU_inplace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a0a61a1b77fb7b637c9d15831b910720c.html">Template Function PUEL</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1a370d1aa26a1d24439d5450fe29c16a86.html">Function PUEL_Fact</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a55526be45fe9fb9c1d55f9cca678cb8a.html">Template Function PUEL_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca.html">Function PUEL_fact(A&lt;SI&gt;)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca.html">Function PUEL_fact</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a6bc00a716cc3675e216a396a2306ae52.html">Template Function PUEL_inplace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_rcf_8hpp_1a9f9151b72a96f65e93ed9d73ef6503ab.html">Template Function RCF_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_schur_8hpp_1a01bfe4c2fd14247114d95e445acab934.html">Template Function schur(T&amp;, T&amp;, T&amp;, T&amp;)</a></li>
@@ -590,8 +511,7 @@
 <li class="toctree-l4"><a class="reference internal" href="function_col__matrix_8hpp_1ad5ffd5e74c1e50dfb64a16dbf2347b14.html">Template Function u_solve(const ColumnMatrix&lt;TC&gt;&amp;, const ColumnMatrix&lt;TC&gt;&amp;)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1af38408b4c62fc4ac75d324db0000b87d.html">Template Function UELP</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_matrix__interface_8hpp_1adfc4ae5388763f633b61fd25861fd635.html">Function UELP_Fact</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_naive__dense_8hpp_1a7c6a3869a0071efb05241d505a8c79d3.html">Template Function UELP_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.html">Function UELP_fact(A&lt;SI&gt;)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.html">Function UELP_fact</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a3f790f5c9a85bd03887d14477a3fdd7c.html">Template Function UELP_inplace</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1aa0ff427baee336d7817f3086a55b0e5a.html">Template Function update_pivot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_sparse__fact_8hpp_1a7c74936fe5089db1adb99bdd71eaaea3.html">Template Function UQL</a></li>
@@ -606,14 +526,8 @@
 <li class="toctree-l4"><a class="reference internal" href="define_symbolic__implementation_8hpp_1a85acb43eabc5d04810efad3b99726d88.html">Define APPLY_INVERSE_ON_RIGHT</a></li>
 <li class="toctree-l4"><a class="reference internal" href="define_symbolic__implementation_8hpp_1a0fdba80e023c428667d9cc9da3fd1f5c.html">Define IMPL_COUT</a></li>
 <li class="toctree-l4"><a class="reference internal" href="define_symbolic__implementation_8hpp_1aa376a950addd1253d8ddf9df38df8ad5.html">Define IMPL_FACT</a></li>
-<li class="toctree-l4"><a class="reference internal" href="define_naive__dense_8hpp_1a200226d210f96ae711483679fd5a713a.html">Define IMPLEMENT_JCONJ</a></li>
-<li class="toctree-l4"><a class="reference internal" href="define_naive__dense_8hpp_1a28220c6e1886a55ed937adaefffb3396.html">Define IMPLEMENT_TJCONJ</a></li>
-<li class="toctree-l4"><a class="reference internal" href="define_naive__dense_8hpp_1a5f96169bc895544ca05acf6e6f247a13.html">Define IMPLEMENT_TRP</a></li>
-<li class="toctree-l4"><a class="reference internal" href="define_naive__dense_8hpp_1a6abdb074dbaff38fca72615960144889.html">Define INHERIT</a></li>
 <li class="toctree-l4"><a class="reference internal" href="define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384.html">Define MM</a></li>
 <li class="toctree-l4"><a class="reference internal" href="define_reduction_8hpp_1af20e2d9e89945206baf5e88710ceffc1.html">Define p2c_type</a></li>
-<li class="toctree-l4"><a class="reference internal" href="define_naive__dense_8hpp_1a27385de6fbdb5adea73bf5b83f46c7b0.html">Define RULE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="define_naive__dense_8hpp_1ad764234ec3d628f63abb652af68b8b46.html">Define SRULE</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#typedefs">Typedefs</a><ul>
@@ -625,6 +539,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About BATS</a></li>
 </ul>
 
             
@@ -699,7 +614,7 @@
 <ul class="treeView" id="class-treeView">
   <li>
     <ul class="collapsibleList">
-      <li>Namespace <a href="namespace_bats.html#namespace-bats">bats</a><ul><li>Namespace <a href="namespace_bats__future.html#namespace-bats-future">bats::future</a><ul><li>Struct <a href="structbats_1_1future_1_1ColumnMajor.html#exhale-struct-structbats-1-1future-1-1ColumnMajor">ColumnMajor</a></li><li>Struct <a href="structbats_1_1future_1_1ElementaryPermutation.html#exhale-struct-structbats-1-1future-1-1ElementaryPermutation">ElementaryPermutation</a></li><li>Template Struct <a href="structbats_1_1future_1_1LUFact.html#exhale-struct-structbats-1-1future-1-1LUFact">LUFact</a></li><li>Struct <a href="structbats_1_1future_1_1RowMajor.html#exhale-struct-structbats-1-1future-1-1RowMajor">RowMajor</a></li><li>Template Struct <a href="structbats_1_1future_1_1SimilarityTransform.html#exhale-struct-structbats-1-1future-1-1SimilarityTransform">SimilarityTransform</a></li><li>Class <a href="classbats_1_1future_1_1CompositePermutation.html#exhale-class-classbats-1-1future-1-1CompositePermutation">CompositePermutation</a></li><li>Template Class <a href="classbats_1_1future_1_1const__strided__iterator.html#exhale-class-classbats-1-1future-1-1const-strided-iterator">const_strided_iterator</a></li><li>Template Class <a href="classbats_1_1future_1_1Matrix.html#exhale-class-classbats-1-1future-1-1Matrix">Matrix</a></li><li>Template Class <a href="classbats_1_1future_1_1MatrixView.html#exhale-class-classbats-1-1future-1-1MatrixView">MatrixView</a></li><li>Class <a href="classbats_1_1future_1_1Permutation.html#exhale-class-classbats-1-1future-1-1Permutation">Permutation</a></li><li>Template Class <a href="classbats_1_1future_1_1range.html#exhale-class-classbats-1-1future-1-1range">range</a><ul><li class="lastChild">Class <a href="classbats_1_1future_1_1range_1_1const__iterator.html#exhale-class-classbats-1-1future-1-1range-1-1const-iterator">range::const_iterator</a></li></ul></li><li>Template Class <a href="classbats_1_1future_1_1Span.html#exhale-class-classbats-1-1future-1-1Span">Span</a></li><li>Template Class <a href="classbats_1_1future_1_1strided__iterator.html#exhale-class-classbats-1-1future-1-1strided-iterator">strided_iterator</a></li><li class="lastChild">Template Class <a href="classbats_1_1future_1_1VectorView.html#exhale-class-classbats-1-1future-1-1VectorView">VectorView</a></li></ul></li><li>Namespace <a href="namespace_bats__util.html#namespace-bats-util">bats::util</a><ul><li>Struct <a href="structbats_1_1util_1_1SimplexHasher.html#exhale-struct-structbats-1-1util-1-1SimplexHasher">SimplexHasher</a></li><li class="lastChild">Class <a href="classbats_1_1util_1_1SimplexContainer.html#exhale-class-classbats-1-1util-1-1SimplexContainer">SimplexContainer</a></li></ul></li><li>Template Struct <a href="structbats_1_1AbstractMetric.html#exhale-struct-structbats-1-1AbstractMetric">AbstractMetric</a></li><li>Struct <a href="structbats_1_1AngleDist.html#exhale-struct-structbats-1-1AngleDist">AngleDist</a></li><li>Struct <a href="structbats_1_1bar.html#exhale-struct-structbats-1-1bar">bar</a></li><li>Template Struct <a href="structbats_1_1ChainComplex.html#exhale-struct-structbats-1-1ChainComplex">ChainComplex</a></li><li>Template Struct <a href="structbats_1_1ChainMap.html#exhale-struct-structbats-1-1ChainMap">ChainMap</a></li><li>Struct <a href="structbats_1_1clearing__flag.html#exhale-struct-structbats-1-1clearing-flag">clearing_flag</a></li><li>Template Struct <a href="structbats_1_1CochainComplex.html#exhale-struct-structbats-1-1CochainComplex">CochainComplex</a></li><li>Struct <a href="structbats_1_1compression__flag.html#exhale-struct-structbats-1-1compression-flag">compression_flag</a></li><li>Struct <a href="structbats_1_1compute__basis__flag.html#exhale-struct-structbats-1-1compute-basis-flag">compute_basis_flag</a></li><li>Struct <a href="structbats_1_1CosineDist.html#exhale-struct-structbats-1-1CosineDist">CosineDist</a></li><li>Template Struct <a href="structbats_1_1DataSet.html#exhale-struct-structbats-1-1DataSet">DataSet</a></li><li>Struct <a href="structbats_1_1Euclidean.html#exhale-struct-structbats-1-1Euclidean">Euclidean</a></li><li>Struct <a href="structbats_1_1extra__reduction__flag.html#exhale-struct-structbats-1-1extra-reduction-flag">extra_reduction_flag</a></li><li>Template Struct <a href="structbats_1_1filtered__edge.html#exhale-struct-structbats-1-1filtered-edge">filtered_edge</a></li><li>Template Struct <a href="structbats_1_1FilteredChainComplex.html#exhale-struct-structbats-1-1FilteredChainComplex">FilteredChainComplex</a></li><li>Struct <a href="structbats_1_1L1Dist.html#exhale-struct-structbats-1-1L1Dist">L1Dist</a></li><li>Struct <a href="structbats_1_1LInfDist.html#exhale-struct-structbats-1-1LInfDist">LInfDist</a></li><li>Struct <a href="structbats_1_1no__optimization__flag.html#exhale-struct-structbats-1-1no-optimization-flag">no_optimization_flag</a></li><li>Template Struct <a href="structbats_1_1PersistencePair.html#exhale-struct-structbats-1-1PersistencePair">PersistencePair</a></li><li>Template Struct <a href="structbats_1_1ReducedFilteredChainComplex.html#exhale-struct-structbats-1-1ReducedFilteredChainComplex">ReducedFilteredChainComplex</a></li><li>Struct <a href="structbats_1_1RPAngleDist.html#exhale-struct-structbats-1-1RPAngleDist">RPAngleDist</a></li><li>Struct <a href="structbats_1_1RPCosineDist.html#exhale-struct-structbats-1-1RPCosineDist">RPCosineDist</a></li><li>Struct <a href="structbats_1_1standard__reduction__flag.html#exhale-struct-structbats-1-1standard-reduction-flag">standard_reduction_flag</a></li><li>Template Struct <a href="structbats_1_1tedge.html#exhale-struct-structbats-1-1tedge">tedge</a></li><li>Struct <a href="structbats_1_1triangle.html#exhale-struct-structbats-1-1triangle">triangle</a></li><li>Template Struct <a href="structbats_1_1Type__A.html#exhale-struct-structbats-1-1Type-A">Type_A</a></li><li>Template Class <a href="classbats_1_1BarcodePair.html#exhale-class-classbats-1-1BarcodePair">BarcodePair</a></li><li>Class <a href="classbats_1_1CellComplex.html#exhale-class-classbats-1-1CellComplex">CellComplex</a></li><li>Class <a href="classbats_1_1CellularMap.html#exhale-class-classbats-1-1CellularMap">CellularMap</a></li><li>Class <a href="classbats_1_1CubicalComplex.html#exhale-class-classbats-1-1CubicalComplex">CubicalComplex</a></li><li>Template Class <a href="classbats_1_1Diagram.html#exhale-class-classbats-1-1Diagram">Diagram</a><ul><li class="lastChild">Struct <a href="structbats_1_1Diagram_1_1Edge.html#exhale-struct-structbats-1-1Diagram-1-1Edge">Diagram::Edge</a></li></ul></li><li>Template Class <a href="classbats_1_1Filtration.html#exhale-class-classbats-1-1Filtration">Filtration</a></li><li>Template Class <a href="classbats_1_1LightSimplicialComplex.html#exhale-class-classbats-1-1LightSimplicialComplex">LightSimplicialComplex</a><ul><li class="lastChild">Struct <a href="structbats_1_1LightSimplicialComplex_1_1simplex__boundary__iterator.html#exhale-struct-structbats-1-1LightSimplicialComplex-1-1simplex-boundary-iterator">LightSimplicialComplex::simplex_boundary_iterator</a></li></ul></li><li>Template Class <a href="classbats_1_1ReducedChainComplex.html#exhale-class-classbats-1-1ReducedChainComplex">ReducedChainComplex</a></li><li>Template Class <a href="classbats_1_1ReducedCochainComplex.html#exhale-class-classbats-1-1ReducedCochainComplex">ReducedCochainComplex</a></li><li>Class <a href="classbats_1_1SimplicialComplex.html#exhale-class-classbats-1-1SimplicialComplex">SimplicialComplex</a></li><li class="lastChild">Template Class <a href="classbats_1_1SparseTrie.html#exhale-class-classbats-1-1SparseTrie">SparseTrie</a></li></ul></li><li>Template Struct <a href="structA.html#exhale-struct-structA">A</a></li><li>Template Struct <a href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structA-3-01Dense-3-01F-00-01Acc-01-4-01-4">A&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Struct <a href="structcell__ind.html#exhale-struct-structcell-ind">cell_ind</a></li><li>Struct <a href="structColMaj.html#exhale-struct-structColMaj">ColMaj</a></li><li>Template Struct <a href="structD.html#exhale-struct-structD">D</a></li><li>Template Struct <a href="structDense.html#exhale-struct-structDense">Dense</a></li><li>Template Struct <a href="structE.html#exhale-struct-structE">E</a></li><li>Template Struct <a href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structE-3-01Dense-3-01F-00-01Acc-01-4-01-4">E&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structEL.html#exhale-struct-structEL">EL</a></li><li>Template Struct <a href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structEL-3-01Dense-3-01F-00-01Acc-01-4-01-4">EL&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structELH.html#exhale-struct-structELH">ELH</a></li><li>Template Struct <a href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structELH-3-01Dense-3-01F-00-01Acc-01-4-01-4">ELH&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structEU.html#exhale-struct-structEU">EU</a></li><li>Template Struct <a href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structEU-3-01Dense-3-01F-00-01Acc-01-4-01-4">EU&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structEUH.html#exhale-struct-structEUH">EUH</a></li><li>Template Struct <a href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structEUH-3-01Dense-3-01F-00-01Acc-01-4-01-4">EUH&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structis__UnivariatePolynomial.html#exhale-struct-structis-UnivariatePolynomial">is_UnivariatePolynomial</a></li><li>Template Struct <a href="structis__UnivariatePolynomial_3_01UnivariatePolynomial_3_01T_01_4_01_4.html#exhale-struct-structis-UnivariatePolynomial-3-01UnivariatePolynomial-3-01T-01-4-01-4">is_UnivariatePolynomial&lt; UnivariatePolynomial&lt; T &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T.html#exhale-struct-structJConj-T">JConj_T</a></li><li>Template Struct <a href="structJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01A-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template <a href="structJConj__T_3_01ColMaj_01_4.html#exhale-struct-structJConj-T-3-01ColMaj-01-4">Struct JConj_T&lt; ColMaj &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01EL-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01ELH-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01EU-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01EUH-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01L-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01P-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template <a href="structJConj__T_3_01RevColMaj_01_4.html#exhale-struct-structJConj-T-3-01RevColMaj-01-4">Struct JConj_T&lt; RevColMaj &gt;</a></li><li>Template <a href="structJConj__T_3_01RevRowMaj_01_4.html#exhale-struct-structJConj-T-3-01RevRowMaj-01-4">Struct JConj_T&lt; RevRowMaj &gt;</a></li><li>Template <a href="structJConj__T_3_01RowMaj_01_4.html#exhale-struct-structJConj-T-3-01RowMaj-01-4">Struct JConj_T&lt; RowMaj &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01T-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structJConj-T-3-01U-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">JConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structL.html#exhale-struct-structL">L</a></li><li>Template Struct <a href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structL-3-01Dense-3-01F-00-01Acc-01-4-01-4">L&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Struct <a href="structMAT.html#exhale-struct-structMAT">MAT</a></li><li>Template Struct <a href="structMemAcc.html#exhale-struct-structMemAcc">MemAcc</a></li><li>Template Struct <a href="structnzpair.html#exhale-struct-structnzpair">nzpair</a></li><li>Template Struct <a href="structP.html#exhale-struct-structP">P</a></li><li>Template Struct <a href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structP-3-01Dense-3-01F-00-01Acc-01-4-01-4">P&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Struct <a href="structRevColMaj.html#exhale-struct-structRevColMaj">RevColMaj</a></li><li>Struct <a href="structRevRowMaj.html#exhale-struct-structRevRowMaj">RevRowMaj</a></li><li>Struct <a href="structRowMaj.html#exhale-struct-structRowMaj">RowMaj</a></li><li>Struct <a href="structSI.html#exhale-struct-structSI">SI</a></li><li>Template Struct <a href="structSmithFact.html#exhale-struct-structSmithFact">SmithFact</a></li><li>Template Struct <a href="structSparseFact.html#exhale-struct-structSparseFact">SparseFact</a></li><li>Template Struct <a href="structT.html#exhale-struct-structT">T</a></li><li>Template Struct <a href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structT-3-01Dense-3-01F-00-01Acc-01-4-01-4">T&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T.html#exhale-struct-structTJConj-T">TJConj_T</a></li><li>Template Struct <a href="structTJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01A-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template <a href="structTJConj__T_3_01ColMaj_01_4.html#exhale-struct-structTJConj-T-3-01ColMaj-01-4">Struct TJConj_T&lt; ColMaj &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01EL-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01ELH-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01EU-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01EUH-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01L-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01P-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template <a href="structTJConj__T_3_01RevColMaj_01_4.html#exhale-struct-structTJConj-T-3-01RevColMaj-01-4">Struct TJConj_T&lt; RevColMaj &gt;</a></li><li>Template <a href="structTJConj__T_3_01RevRowMaj_01_4.html#exhale-struct-structTJConj-T-3-01RevRowMaj-01-4">Struct TJConj_T&lt; RevRowMaj &gt;</a></li><li>Template <a href="structTJConj__T_3_01RowMaj_01_4.html#exhale-struct-structTJConj-T-3-01RowMaj-01-4">Struct TJConj_T&lt; RowMaj &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01T-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTJConj-T-3-01U-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">TJConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T.html#exhale-struct-structTrp-T">Trp_T</a></li><li>Template Struct <a href="structTrp__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01A-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template <a href="structTrp__T_3_01ColMaj_01_4.html#exhale-struct-structTrp-T-3-01ColMaj-01-4">Struct Trp_T&lt; ColMaj &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01EL-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01ELH-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01EU-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01EUH-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01L-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01P-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template <a href="structTrp__T_3_01RevColMaj_01_4.html#exhale-struct-structTrp-T-3-01RevColMaj-01-4">Struct Trp_T&lt; RevColMaj &gt;</a></li><li>Template <a href="structTrp__T_3_01RevRowMaj_01_4.html#exhale-struct-structTrp-T-3-01RevRowMaj-01-4">Struct Trp_T&lt; RevRowMaj &gt;</a></li><li>Template <a href="structTrp__T_3_01RowMaj_01_4.html#exhale-struct-structTrp-T-3-01RowMaj-01-4">Struct Trp_T&lt; RowMaj &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01T-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structTrp__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#exhale-struct-structTrp-T-3-01U-3-01Dense-3-01F-00-01Acc-01-4-01-4-01-4">Trp_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a></li><li>Template Struct <a href="structU.html#exhale-struct-structU">U</a></li><li>Template Struct <a href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#exhale-struct-structU-3-01Dense-3-01F-00-01Acc-01-4-01-4">U&lt; Dense&lt; F, Acc &gt; &gt;</a></li><li>Template Struct <a href="structVectorView.html#exhale-struct-structVectorView">VectorView</a><ul><li class="lastChild">Class <a href="classVectorView_1_1Iterator.html#exhale-class-classVectorView-1-1Iterator">VectorView::Iterator</a></li></ul></li><li>Template Class <a href="classAbstractField.html#exhale-class-classAbstractField">AbstractField</a></li><li>Class <a href="classAbstractMatrix.html#exhale-class-classAbstractMatrix">AbstractMatrix</a></li><li>Template Class <a href="classColumnMatrix.html#exhale-class-classColumnMatrix">ColumnMatrix</a></li><li>Template Class <a href="classCSCMatrix.html#exhale-class-classCSCMatrix">CSCMatrix</a></li><li>Template Class <a href="classModP.html#exhale-class-classModP">ModP</a></li><li>Template Class <a href="classModP_3_01IntT_00_012_01_4.html#exhale-class-classModP-3-01IntT-00-012-01-4">ModP&lt; IntT, 2 &gt;</a></li><li>Template Class <a href="classMorsePairing.html#exhale-class-classMorsePairing">MorsePairing</a></li><li>Template Class <a href="classMultiGraph.html#exhale-class-classMultiGraph">MultiGraph</a><ul><li>Struct <a href="structMultiGraph_1_1Edge.html#exhale-struct-structMultiGraph-1-1Edge">MultiGraph::Edge</a></li><li class="lastChild">Struct <a href="structMultiGraph_1_1Node.html#exhale-struct-structMultiGraph-1-1Node">MultiGraph::Node</a></li></ul></li><li>Template Class <a href="classQuiver__A3.html#exhale-class-classQuiver-A3">Quiver_A3</a></li><li>Template Class <a href="classRational.html#exhale-class-classRational">Rational</a></li><li>Template Class <a href="classSetVector.html#exhale-class-classSetVector">SetVector</a></li><li>Template Class <a href="classSparseVector.html#exhale-class-classSparseVector">SparseVector</a></li><li class="lastChild">Template Class <a href="classUnivariatePolynomial.html#exhale-class-classUnivariatePolynomial">UnivariatePolynomial</a></li>
+      <li>Namespace <a href="namespace_bats.html#namespace-bats">bats</a><ul><li>Namespace <a href="namespace_bats__future.html#namespace-bats-future">bats::future</a><ul><li>Struct <a href="structbats_1_1future_1_1ColumnMajor.html#exhale-struct-structbats-1-1future-1-1ColumnMajor">ColumnMajor</a></li><li>Struct <a href="structbats_1_1future_1_1ElementaryPermutation.html#exhale-struct-structbats-1-1future-1-1ElementaryPermutation">ElementaryPermutation</a></li><li>Template Struct <a href="structbats_1_1future_1_1LUFact.html#exhale-struct-structbats-1-1future-1-1LUFact">LUFact</a></li><li>Struct <a href="structbats_1_1future_1_1RowMajor.html#exhale-struct-structbats-1-1future-1-1RowMajor">RowMajor</a></li><li>Template Struct <a href="structbats_1_1future_1_1SimilarityTransform.html#exhale-struct-structbats-1-1future-1-1SimilarityTransform">SimilarityTransform</a></li><li>Class <a href="classbats_1_1future_1_1CompositePermutation.html#exhale-class-classbats-1-1future-1-1CompositePermutation">CompositePermutation</a></li><li>Template Class <a href="classbats_1_1future_1_1const__strided__iterator.html#exhale-class-classbats-1-1future-1-1const-strided-iterator">const_strided_iterator</a></li><li>Template Class <a href="classbats_1_1future_1_1Matrix.html#exhale-class-classbats-1-1future-1-1Matrix">Matrix</a></li><li>Template Class <a href="classbats_1_1future_1_1MatrixView.html#exhale-class-classbats-1-1future-1-1MatrixView">MatrixView</a></li><li>Class <a href="classbats_1_1future_1_1Permutation.html#exhale-class-classbats-1-1future-1-1Permutation">Permutation</a></li><li>Template Class <a href="classbats_1_1future_1_1range.html#exhale-class-classbats-1-1future-1-1range">range</a><ul><li class="lastChild">Class <a href="classbats_1_1future_1_1range_1_1const__iterator.html#exhale-class-classbats-1-1future-1-1range-1-1const-iterator">range::const_iterator</a></li></ul></li><li>Template Class <a href="classbats_1_1future_1_1Span.html#exhale-class-classbats-1-1future-1-1Span">Span</a></li><li>Template Class <a href="classbats_1_1future_1_1strided__iterator.html#exhale-class-classbats-1-1future-1-1strided-iterator">strided_iterator</a></li><li class="lastChild">Template Class <a href="classbats_1_1future_1_1VectorView.html#exhale-class-classbats-1-1future-1-1VectorView">VectorView</a></li></ul></li><li>Namespace <a href="namespace_bats__util.html#namespace-bats-util">bats::util</a><ul><li>Struct <a href="structbats_1_1util_1_1SimplexHasher.html#exhale-struct-structbats-1-1util-1-1SimplexHasher">SimplexHasher</a></li><li class="lastChild">Class <a href="classbats_1_1util_1_1SimplexContainer.html#exhale-class-classbats-1-1util-1-1SimplexContainer">SimplexContainer</a></li></ul></li><li>Template Struct <a href="structbats_1_1AbstractMetric.html#exhale-struct-structbats-1-1AbstractMetric">AbstractMetric</a></li><li>Struct <a href="structbats_1_1AngleDist.html#exhale-struct-structbats-1-1AngleDist">AngleDist</a></li><li>Struct <a href="structbats_1_1bar.html#exhale-struct-structbats-1-1bar">bar</a></li><li>Template Struct <a href="structbats_1_1ChainComplex.html#exhale-struct-structbats-1-1ChainComplex">ChainComplex</a></li><li>Template Struct <a href="structbats_1_1ChainMap.html#exhale-struct-structbats-1-1ChainMap">ChainMap</a></li><li>Struct <a href="structbats_1_1clearing__flag.html#exhale-struct-structbats-1-1clearing-flag">clearing_flag</a></li><li>Template Struct <a href="structbats_1_1CochainComplex.html#exhale-struct-structbats-1-1CochainComplex">CochainComplex</a></li><li>Struct <a href="structbats_1_1compression__flag.html#exhale-struct-structbats-1-1compression-flag">compression_flag</a></li><li>Struct <a href="structbats_1_1compute__basis__flag.html#exhale-struct-structbats-1-1compute-basis-flag">compute_basis_flag</a></li><li>Struct <a href="structbats_1_1CosineDist.html#exhale-struct-structbats-1-1CosineDist">CosineDist</a></li><li>Template Struct <a href="structbats_1_1DataSet.html#exhale-struct-structbats-1-1DataSet">DataSet</a></li><li>Struct <a href="structbats_1_1Euclidean.html#exhale-struct-structbats-1-1Euclidean">Euclidean</a></li><li>Struct <a href="structbats_1_1extra__reduction__flag.html#exhale-struct-structbats-1-1extra-reduction-flag">extra_reduction_flag</a></li><li>Template Struct <a href="structbats_1_1filtered__edge.html#exhale-struct-structbats-1-1filtered-edge">filtered_edge</a></li><li>Template Struct <a href="structbats_1_1FilteredChainComplex.html#exhale-struct-structbats-1-1FilteredChainComplex">FilteredChainComplex</a></li><li>Struct <a href="structbats_1_1L1Dist.html#exhale-struct-structbats-1-1L1Dist">L1Dist</a></li><li>Struct <a href="structbats_1_1LInfDist.html#exhale-struct-structbats-1-1LInfDist">LInfDist</a></li><li>Struct <a href="structbats_1_1no__optimization__flag.html#exhale-struct-structbats-1-1no-optimization-flag">no_optimization_flag</a></li><li>Template Struct <a href="structbats_1_1PersistencePair.html#exhale-struct-structbats-1-1PersistencePair">PersistencePair</a></li><li>Template Struct <a href="structbats_1_1ReducedFilteredChainComplex.html#exhale-struct-structbats-1-1ReducedFilteredChainComplex">ReducedFilteredChainComplex</a></li><li>Struct <a href="structbats_1_1RPAngleDist.html#exhale-struct-structbats-1-1RPAngleDist">RPAngleDist</a></li><li>Struct <a href="structbats_1_1RPCosineDist.html#exhale-struct-structbats-1-1RPCosineDist">RPCosineDist</a></li><li>Struct <a href="structbats_1_1standard__reduction__flag.html#exhale-struct-structbats-1-1standard-reduction-flag">standard_reduction_flag</a></li><li>Template Struct <a href="structbats_1_1tedge.html#exhale-struct-structbats-1-1tedge">tedge</a></li><li>Struct <a href="structbats_1_1triangle.html#exhale-struct-structbats-1-1triangle">triangle</a></li><li>Template Struct <a href="structbats_1_1Type__A.html#exhale-struct-structbats-1-1Type-A">Type_A</a></li><li>Template Class <a href="classbats_1_1BarcodePair.html#exhale-class-classbats-1-1BarcodePair">BarcodePair</a></li><li>Class <a href="classbats_1_1CellComplex.html#exhale-class-classbats-1-1CellComplex">CellComplex</a></li><li>Class <a href="classbats_1_1CellularMap.html#exhale-class-classbats-1-1CellularMap">CellularMap</a></li><li>Class <a href="classbats_1_1CubicalComplex.html#exhale-class-classbats-1-1CubicalComplex">CubicalComplex</a></li><li>Template Class <a href="classbats_1_1Diagram.html#exhale-class-classbats-1-1Diagram">Diagram</a><ul><li class="lastChild">Struct <a href="structbats_1_1Diagram_1_1Edge.html#exhale-struct-structbats-1-1Diagram-1-1Edge">Diagram::Edge</a></li></ul></li><li>Template Class <a href="classbats_1_1Filtration.html#exhale-class-classbats-1-1Filtration">Filtration</a></li><li>Template Class <a href="classbats_1_1LightSimplicialComplex.html#exhale-class-classbats-1-1LightSimplicialComplex">LightSimplicialComplex</a><ul><li class="lastChild">Struct <a href="structbats_1_1LightSimplicialComplex_1_1simplex__boundary__iterator.html#exhale-struct-structbats-1-1LightSimplicialComplex-1-1simplex-boundary-iterator">LightSimplicialComplex::simplex_boundary_iterator</a></li></ul></li><li>Template Class <a href="classbats_1_1ReducedChainComplex.html#exhale-class-classbats-1-1ReducedChainComplex">ReducedChainComplex</a></li><li>Template Class <a href="classbats_1_1ReducedCochainComplex.html#exhale-class-classbats-1-1ReducedCochainComplex">ReducedCochainComplex</a></li><li>Class <a href="classbats_1_1SimplicialComplex.html#exhale-class-classbats-1-1SimplicialComplex">SimplicialComplex</a></li><li class="lastChild">Template Class <a href="classbats_1_1SparseTrie.html#exhale-class-classbats-1-1SparseTrie">SparseTrie</a></li></ul></li><li>Template Struct <a href="structA.html#exhale-struct-structA">A</a></li><li>Struct <a href="structcell__ind.html#exhale-struct-structcell-ind">cell_ind</a></li><li>Template Struct <a href="structD.html#exhale-struct-structD">D</a></li><li>Template Struct <a href="structE.html#exhale-struct-structE">E</a></li><li>Template Struct <a href="structEL.html#exhale-struct-structEL">EL</a></li><li>Template Struct <a href="structELH.html#exhale-struct-structELH">ELH</a></li><li>Template Struct <a href="structEU.html#exhale-struct-structEU">EU</a></li><li>Template Struct <a href="structEUH.html#exhale-struct-structEUH">EUH</a></li><li>Template Struct <a href="structis__UnivariatePolynomial.html#exhale-struct-structis-UnivariatePolynomial">is_UnivariatePolynomial</a></li><li>Template Struct <a href="structis__UnivariatePolynomial_3_01UnivariatePolynomial_3_01T_01_4_01_4.html#exhale-struct-structis-UnivariatePolynomial-3-01UnivariatePolynomial-3-01T-01-4-01-4">is_UnivariatePolynomial&lt; UnivariatePolynomial&lt; T &gt; &gt;</a></li><li>Template Struct <a href="structL.html#exhale-struct-structL">L</a></li><li>Struct <a href="structMAT.html#exhale-struct-structMAT">MAT</a></li><li>Template Struct <a href="structnzpair.html#exhale-struct-structnzpair">nzpair</a></li><li>Template Struct <a href="structP.html#exhale-struct-structP">P</a></li><li>Struct <a href="structSI.html#exhale-struct-structSI">SI</a></li><li>Template Struct <a href="structSmithFact.html#exhale-struct-structSmithFact">SmithFact</a></li><li>Template Struct <a href="structSparseFact.html#exhale-struct-structSparseFact">SparseFact</a></li><li>Template Struct <a href="structT.html#exhale-struct-structT">T</a></li><li>Template Struct <a href="structU.html#exhale-struct-structU">U</a></li><li>Template Class <a href="classAbstractField.html#exhale-class-classAbstractField">AbstractField</a></li><li>Class <a href="classAbstractMatrix.html#exhale-class-classAbstractMatrix">AbstractMatrix</a></li><li>Template Class <a href="classColumnMatrix.html#exhale-class-classColumnMatrix">ColumnMatrix</a></li><li>Template Class <a href="classCSCMatrix.html#exhale-class-classCSCMatrix">CSCMatrix</a></li><li>Template Class <a href="classModP.html#exhale-class-classModP">ModP</a></li><li>Template Class <a href="classModP_3_01IntT_00_012_01_4.html#exhale-class-classModP-3-01IntT-00-012-01-4">ModP&lt; IntT, 2 &gt;</a></li><li>Template Class <a href="classMorsePairing.html#exhale-class-classMorsePairing">MorsePairing</a></li><li>Template Class <a href="classMultiGraph.html#exhale-class-classMultiGraph">MultiGraph</a><ul><li>Struct <a href="structMultiGraph_1_1Edge.html#exhale-struct-structMultiGraph-1-1Edge">MultiGraph::Edge</a></li><li class="lastChild">Struct <a href="structMultiGraph_1_1Node.html#exhale-struct-structMultiGraph-1-1Node">MultiGraph::Node</a></li></ul></li><li>Template Class <a href="classQuiver__A3.html#exhale-class-classQuiver-A3">Quiver_A3</a></li><li>Template Class <a href="classRational.html#exhale-class-classRational">Rational</a></li><li>Template Class <a href="classSetVector.html#exhale-class-classSetVector">SetVector</a></li><li>Template Class <a href="classSparseVector.html#exhale-class-classSparseVector">SparseVector</a></li><li class="lastChild">Template Class <a href="classUnivariatePolynomial.html#exhale-class-classUnivariatePolynomial">UnivariatePolynomial</a></li>
     </ul>
   </li><!-- only tree view element -->
 </ul><!-- /treeView class-treeView --></div>
@@ -767,18 +682,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structA.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct A&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#derived-types">Derived Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structA_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -1095,28 +998,12 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structColMaj.html">Struct ColMaj</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structColMaj.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structD.html">Template Struct D</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structD.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structD.html#base-types">Base Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structD.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structDense.html">Template Struct Dense</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structDense.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -1136,37 +1023,12 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct E&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-<li class="toctree-l3"><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#derived-types">Derived Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structE_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structEL.html">Template Struct EL</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structEL.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structEL.html#base-types">Base Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structEL.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct EL&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structEL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -1185,18 +1047,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct ELH&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structELH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structEU.html">Template Struct EU</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structEU.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structEU.html#base-types">Base Types</a></li>
@@ -1209,36 +1059,12 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct EU&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structEU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structEUH.html">Template Struct EUH</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structEUH.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structEUH.html#base-types">Base Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structEUH.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct EUH&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structEUH_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -1269,118 +1095,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T.html">Template Struct JConj_T</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01ColMaj_01_4.html">Template Struct JConj_T&lt; ColMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01ColMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01RevColMaj_01_4.html">Template Struct JConj_T&lt; RevColMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01RevColMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01RevRowMaj_01_4.html">Template Struct JConj_T&lt; RevRowMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01RevRowMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01RowMaj_01_4.html">Template Struct JConj_T&lt; RowMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01RowMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct JConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structL.html">Template Struct L</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structL.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structL.html#base-type">Base Type</a></li>
@@ -1394,32 +1108,12 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct L&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structL_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structMAT.html">Struct MAT</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structMAT.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structMAT.html#derived-types">Derived Types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structMAT.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structMemAcc.html">Template Struct MemAcc</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structMemAcc.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -1464,42 +1158,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct P&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structP_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structRevColMaj.html">Struct RevColMaj</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structRevColMaj.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structRevRowMaj.html">Struct RevRowMaj</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structRevRowMaj.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structRowMaj.html">Struct RowMaj</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structRowMaj.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structSI.html">Struct SI</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structSI.html#struct-documentation">Struct Documentation</a></li>
 </ul>
@@ -1537,243 +1195,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct T&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-<li class="toctree-l3"><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#derived-types">Derived Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structT_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T.html">Template Struct TJConj_T</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01ColMaj_01_4.html">Template Struct TJConj_T&lt; ColMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01ColMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01RevColMaj_01_4.html">Template Struct TJConj_T&lt; RevColMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01RevColMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01RevRowMaj_01_4.html">Template Struct TJConj_T&lt; RevRowMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01RevRowMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01RowMaj_01_4.html">Template Struct TJConj_T&lt; RowMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01RowMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct TJConj_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTJConj__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T.html">Template Struct Trp_T</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; A&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01A_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01ColMaj_01_4.html">Template Struct Trp_T&lt; ColMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01ColMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; EL&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01EL_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; ELH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01ELH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; EU&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01EU_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; EUH&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01EUH_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; L&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01L_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; P&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01P_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01RevColMaj_01_4.html">Template Struct Trp_T&lt; RevColMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01RevColMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01RevRowMaj_01_4.html">Template Struct Trp_T&lt; RevRowMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01RevRowMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01RowMaj_01_4.html">Template Struct Trp_T&lt; RowMaj &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01RowMaj_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; T&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01T_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structTrp__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html">Template Struct Trp_T&lt; U&lt; Dense&lt; F, Acc &gt; &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structTrp__T_3_01U_3_01Dense_3_01F_00_01Acc_01_4_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="structU.html">Template Struct U</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structU.html#inheritance-relationships">Inheritance Relationships</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structU.html#base-type">Base Type</a></li>
@@ -1781,30 +1202,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structU.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html">Template Struct U&lt; Dense&lt; F, Acc &gt; &gt;</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#inheritance-relationships">Inheritance Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#base-type">Base Type</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structU_3_01Dense_3_01F_00_01Acc_01_4_01_4.html#struct-documentation">Struct Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="structVectorView.html">Template Struct VectorView</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structVectorView.html#nested-relationships">Nested Relationships</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structVectorView.html#nested-types">Nested Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="structVectorView.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -2138,15 +1535,6 @@
 </li>
 </ul>
 </div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="classVectorView_1_1Iterator.html">Class VectorView::Iterator</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="classVectorView_1_1Iterator.html#nested-relationships">Nested Relationships</a></li>
-<li class="toctree-l2"><a class="reference internal" href="classVectorView_1_1Iterator.html#class-documentation">Class Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 <div class="section" id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
@@ -2154,22 +1542,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="function_matrix__interface_8hpp_1ad5867ebb7295eb677ff1dda81e9f0f7d.html">Function apply_inverse</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_matrix__interface_8hpp_1ad5867ebb7295eb677ff1dda81e9f0f7d.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a48861caec8a4610c06d2b8f80c1e63b6.html">Template Function apply_inverse_on_left(L&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a48861caec8a4610c06d2b8f80c1e63b6.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1aea6289b2f01d98cd4b2f22851bf33063.html">Template Function apply_inverse_on_left(U&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1aea6289b2f01d98cd4b2f22851bf33063.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -2208,22 +1580,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1aabd24825064f1b610b6b30d358906b17.html">Template Function apply_inverse_on_right(A&lt;Dense&lt;F, Acc2&gt;&gt;, U&lt;Dense&lt;F, Acc1&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1aabd24825064f1b610b6b30d358906b17.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1ad40f72cfc46ccdfd3121446b2950c57c.html">Template Function apply_inverse_on_right(A&lt;Dense&lt;F, Acc2&gt;&gt;, L&lt;Dense&lt;F, Acc1&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1ad40f72cfc46ccdfd3121446b2950c57c.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a2b22b9df4dc6e22152fce8808cc1e4bc.html">Function apply_inverse_on_right(L&lt;SI&gt;, L&lt;SI&gt;)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a2b22b9df4dc6e22152fce8808cc1e4bc.html#function-documentation">Function Documentation</a></li>
 </ul>
@@ -2250,22 +1606,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a7bddb8833b5117ed79c2a337f6c3cfc9.html">Function apply_inverse_on_right(A&lt;SI&gt;, U&lt;SI&gt;)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a7bddb8833b5117ed79c2a337f6c3cfc9.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1af091996e3b7a076f2d91d2b176861cfc.html">Template Function apply_matmul_on_left</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1af091996e3b7a076f2d91d2b176861cfc.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a46340eca90e33125ea2255129fbe3136.html">Template Function apply_matmul_on_right</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a46340eca90e33125ea2255129fbe3136.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -4112,38 +3452,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1ab10643ecba33e43bee5dcfb8f7f3f1ce.html">Template Function commute(EL&lt;Dense&lt;F, Acc1&gt;&gt;, L&lt;Dense&lt;F, Acc2&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1ab10643ecba33e43bee5dcfb8f7f3f1ce.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a40a3616357eeb850344306ce28f0c056.html">Template Function commute(L&lt;Dense&lt;F, Acc2&gt;&gt;, ELH&lt;Dense&lt;F, Acc1&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a40a3616357eeb850344306ce28f0c056.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1aaef55740424d69a4f58caa27b1b78563.html">Template Function commute(EUH&lt;Dense&lt;F, Acc2&gt;&gt;, U&lt;Dense&lt;F, Acc1&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1aaef55740424d69a4f58caa27b1b78563.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889.html">Template Function commute(U&lt;Dense&lt;F, Acc1&gt;&gt;, EU&lt;Dense&lt;F, Acc2&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1af576c7a6b52270b9fbf7b0da3e33e889.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3.html">Function commute(EL&lt;SI&gt;, L&lt;SI&gt;)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1af1e58f1c6db9400e34f490eec060bec3.html#function-documentation">Function Documentation</a></li>
 </ul>
@@ -4232,38 +3540,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1aab25a5247f48274c7f24724032b6dd18.html">Template Function fill_rand(M)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1aab25a5247f48274c7f24724032b6dd18.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab.html">Template Function fill_rand(M, int)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a5fdbbab1008ffdfdbfda8f05151f41ab.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f.html">Template Function fill_zeros</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a5a9b390de1cf8d64680f391c1c3ed91f.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1af9deb36b690671446c3ec7ebc9334d7b.html">Template Function find_pivot</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1af9deb36b690671446c3ec7ebc9334d7b.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="function_col__matrix_8hpp_1a35cdf4312a9e570693a49d4e33a0648e.html">Template Function gemv</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_col__matrix_8hpp_1a35cdf4312a9e570693a49d4e33a0648e.html#function-documentation">Function Documentation</a></li>
 </ul>
@@ -4336,14 +3612,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a8ae843891a8ebdfabd8970761c2ad8ff.html">Template Function l_solve(L&lt;Dense&lt;F, Acc&gt;&gt;, VectorView&lt;F&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a8ae843891a8ebdfabd8970761c2ad8ff.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="function_sparse__fact_8hpp_1afe41f780477217b6db4e84eb2b37eaf6.html">Template Function LEUP</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_sparse__fact_8hpp_1afe41f780477217b6db4e84eb2b37eaf6.html#function-documentation">Function Documentation</a></li>
 </ul>
@@ -4360,15 +3628,7 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a8fac21c33c8c269804a3925990ab4422.html">Template Function LEUP_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a8fac21c33c8c269804a3925990ab4422.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d.html">Function LEUP_fact(A&lt;SI&gt;)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d.html">Function LEUP_fact</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1ad8af12274c30e5472bda6493950b039d.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
@@ -4408,40 +3668,8 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1adad150143a9de5f5ceca11e0a9fcfca6.html">Template Function make_diag_ones</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1adad150143a9de5f5ceca11e0a9fcfca6.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="function_matrix__interface_8hpp_1a20e11a501d473255694f7e3a4bc62bf1.html">Function matmul(MAT, MAT)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_matrix__interface_8hpp_1a20e11a501d473255694f7e3a4bc62bf1.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a7707aa81653c1d68b97aad7adb13cdde.html">Template Function matmul(A&lt;Dense&lt;F, Acc1&gt;&gt;, A&lt;Dense&lt;F, Acc2&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a7707aa81653c1d68b97aad7adb13cdde.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a1d1eefd0726d4b3fa4c57422e57224ff.html">Template Function matmul(A&lt;Dense&lt;F, Acc1&gt;&gt;, VectorView&lt;F&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a1d1eefd0726d4b3fa4c57422e57224ff.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1aa9715d013de2ba73f388e5cc53270263.html">Template Function matmul(VectorView&lt;F&gt;, A&lt;Dense&lt;F, Acc1&gt;&gt;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1aa9715d013de2ba73f388e5cc53270263.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -4482,14 +3710,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464.html">Function matmul(L&lt;SI&gt;, U&lt;SI&gt;)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a1a10bc86141f9ee725b452df7272fb10.html">Template Function norm</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a1a10bc86141f9ee725b452df7272fb10.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -4616,15 +3836,7 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a40fba0c8c2a9fbcd4db36f626ef48b70.html">Template Function PLEU_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a40fba0c8c2a9fbcd4db36f626ef48b70.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.html">Function PLEU_fact(A&lt;SI&gt;)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.html">Function PLEU_fact</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
@@ -4656,15 +3868,7 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a55526be45fe9fb9c1d55f9cca678cb8a.html">Template Function PUEL_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a55526be45fe9fb9c1d55f9cca678cb8a.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca.html">Function PUEL_fact(A&lt;SI&gt;)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca.html">Function PUEL_fact</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a62db8a3e384cfa98eb8d4e7fb5b846ca.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
@@ -4808,15 +4012,7 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_naive__dense_8hpp_1a7c6a3869a0071efb05241d505a8c79d3.html">Template Function UELP_fact(A&lt;Dense&lt;F, Acc&gt;&gt;&amp;)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_naive__dense_8hpp_1a7c6a3869a0071efb05241d505a8c79d3.html#function-documentation">Function Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.html">Function UELP_fact(A&lt;SI&gt;)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.html">Function UELP_fact</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_symbolic__implementation_8hpp_1a420f4028511c8005caed2f30ad41966d.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
@@ -4894,38 +4090,6 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_naive__dense_8hpp_1a200226d210f96ae711483679fd5a713a.html">Define IMPLEMENT_JCONJ</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_naive__dense_8hpp_1a200226d210f96ae711483679fd5a713a.html#define-documentation">Define Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="define_naive__dense_8hpp_1a28220c6e1886a55ed937adaefffb3396.html">Define IMPLEMENT_TJCONJ</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_naive__dense_8hpp_1a28220c6e1886a55ed937adaefffb3396.html#define-documentation">Define Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="define_naive__dense_8hpp_1a5f96169bc895544ca05acf6e6f247a13.html">Define IMPLEMENT_TRP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_naive__dense_8hpp_1a5f96169bc895544ca05acf6e6f247a13.html#define-documentation">Define Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="define_naive__dense_8hpp_1a6abdb074dbaff38fca72615960144889.html">Define INHERIT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_naive__dense_8hpp_1a6abdb074dbaff38fca72615960144889.html#define-documentation">Define Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384.html">Define MM</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="define_symbolic__implementation_8hpp_1a01b1537eef830685d146d14a67366384.html#define-documentation">Define Documentation</a></li>
 </ul>
@@ -4936,22 +4100,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="define_reduction_8hpp_1af20e2d9e89945206baf5e88710ceffc1.html">Define p2c_type</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="define_reduction_8hpp_1af20e2d9e89945206baf5e88710ceffc1.html#define-documentation">Define Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="define_naive__dense_8hpp_1a27385de6fbdb5adea73bf5b83f46c7b0.html">Define RULE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_naive__dense_8hpp_1a27385de6fbdb5adea73bf5b83f46c7b0.html#define-documentation">Define Documentation</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="define_naive__dense_8hpp_1ad764234ec3d628f63abb652af68b8b46.html">Define SRULE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_naive__dense_8hpp_1ad764234ec3d628f63abb652af68b8b46.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -4986,7 +4134,7 @@
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="namespace_bats.html" class="btn btn-neutral float-right" title="Namespace bats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples/zigzag_levelset.html" class="btn btn-neutral float-left" title="Levelset Zigzag" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
