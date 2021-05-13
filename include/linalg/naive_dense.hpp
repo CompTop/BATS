@@ -12,6 +12,8 @@
 //required for fill_rand<Rational<int>>()
 #include <linalg/field.hpp>
 
+/// @cond
+// this is all obsolete and should not be in documentation
 
 // storage type
 template<typename F,typename Acc>
@@ -863,3 +865,5 @@ auto apply_inverse_on_right(A<Dense<F,Acc2>> Amat,L<Dense<F,Acc1>> Lmat) {
     auto ret2 = ret.TJConj();
     return ret2;
 }
+
+/// @endcond

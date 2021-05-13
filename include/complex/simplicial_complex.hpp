@@ -25,10 +25,12 @@
 
 namespace bats {
 
-/*
-simplicial complex implementation
-TODO: if forming full clique complex
-can give all simplices unique location for lookup
+/**
+@brief A simplicial complex based using a trie data structure
+
+A class which can be used to hold simplicial complexes on large or exapanding vertex sets.
+For a lighter-weight option, see LightSimplicialComplex
+
 */
 class SimplicialComplex
 {
@@ -266,12 +268,20 @@ private:
 
 public:
 
-    // default constructor
+
     SimplicialComplex() { reserve(0); }
 
-    // constructor that initializes to set dimension
+	/**
+	Initialization up to a certain dimension
+	@param[in] maxdim - the maximum dimension simplex expected to be added
+	*/
     SimplicialComplex(size_t maxdim) { reserve(maxdim); }
 
+	/**
+	Initialization on a certain vertex
+	@param[in] n - the maximum expected vertex index
+	@param[in] maxdim - the maximum dimension simplex expected to be added
+	*/
 	SimplicialComplex(size_t n, size_t maxdim) {
 		reserve(maxdim);
 		reserve(0, n);
@@ -308,12 +318,15 @@ public:
 
     // inline spx_map& trie() { return spx_to_idx; }
 
-    // returns index of simplex
-    // TODO: find a way to do this with a single traversal of spx_to_idx
+	/**
+	Find the index of a simplex
+	@param[in]	s	A vector containing the simplex
+	@return The index associated with the simplex.
+	Returns bats::NO_IND if the simplex is not in the complex.
+	*/
     size_t find_idx(const std::vector<size_t> &s) {
         return spx_to_idx.get(s, bats::NO_IND);
     }
-
     size_t find_idx(const std::vector<size_t> &s) const {
         return spx_to_idx.get(s, bats::NO_IND);
     }

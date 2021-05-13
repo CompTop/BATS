@@ -11,7 +11,11 @@ Welcome to Basic Applied Topology Subprograms' documentation!
    :caption: Contents:
 
    install
+   quickstart
+   tutorials/tut_menu
+   examples/ex_menu
    api/library_root
+   about
 
 
 
