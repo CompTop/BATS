@@ -10,3 +10,13 @@ jobs:
         run: |
           cd tests
           make test
+  run-demos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: egor-tensin/setup-gcc@v1
+      - name: Run quickstart demo
+        run: |
+          cd demo
+          make quickstart.out
+          ./quickstart
