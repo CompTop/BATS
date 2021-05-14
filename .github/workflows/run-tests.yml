@@ -19,4 +19,4 @@ jobs:
         run: |
           cd demo
           make quickstart.out
-          ./quickstart
+          ./quickstart.out
