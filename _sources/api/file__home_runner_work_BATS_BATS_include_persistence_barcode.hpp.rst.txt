@@ -45,8 +45,6 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
 
-- :ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`
-
 - :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
 
 

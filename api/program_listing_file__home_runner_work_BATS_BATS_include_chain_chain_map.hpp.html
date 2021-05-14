@@ -257,6 +257,15 @@
 
 <span class="p">};</span>
 
+<span class="c1">// defualt return</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="k">auto</span> <span class="n">Chain</span><span class="p">(</span><span class="k">const</span> <span class="n">CellularMap</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">MT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">ChainMap</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="p">}</span>
+
 <span class="p">}</span> <span class="c1">// namespace bats</span>
 </pre></div>
 </div>

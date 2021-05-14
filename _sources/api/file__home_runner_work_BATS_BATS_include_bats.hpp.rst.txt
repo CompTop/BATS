@@ -45,7 +45,7 @@ Includes
 
 - ``persistence.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_persistence.hpp`)
 
-- ``quiver.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`)
+- ``quiver.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_quiver.hpp`)
 
 - ``topology.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`)
 

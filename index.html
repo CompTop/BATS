@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Welcome to Basic Applied Topology Subprograms’ documentation! &mdash; Basic Applied Topology Subprograms  documentation</title>
+  <title>Basic Applied Topology Subprograms &mdash; Basic Applied Topology Subprograms  documentation</title>
   
 
   
@@ -146,7 +146,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to Basic Applied Topology Subprograms’ documentation!</li>
+      <li>Basic Applied Topology Subprograms</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -165,8 +165,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-basic-applied-topology-subprograms-documentation">
-<h1>Welcome to Basic Applied Topology Subprograms’ documentation!<a class="headerlink" href="#welcome-to-basic-applied-topology-subprograms-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="basic-applied-topology-subprograms">
+<h1>Basic Applied Topology Subprograms<a class="headerlink" href="#basic-applied-topology-subprograms" title="Permalink to this headline">¶</a></h1>
+<p>The Basic Applied Topology Subprograms (BATS) are a C++ header-only library for
+applied algebraic topology.  It includes functionality for</p>
+<ul class="simple">
+<li><p>Creation of simplicial, cubical, and cell complexes, as well as cellular maps</p></li>
+<li><p>Implementation of chain and homology functors</p></li>
+<li><p>Filtered complexes and persistent homology</p></li>
+<li><p>Diagrams of spaces and maps, and computation of zigzag homology</p></li>
+<li><p>Topological constructions such as Vietoris-Rips complexes, Witness complexes, Nerves of covers</p></li>
+<li><p>Sparse linear algebra over (finite) fields</p></li>
+<li><p>And more!</p></li>
+</ul>
+<p>BATS attempts to balance performance with extensibility.  The library uses template
+metaprogramming to make it easy to swap in and out different constructions
+while maintaining a consistent core functionality.</p>
+<div class="section" id="why-bats">
+<h2>Why BATS?<a class="headerlink" href="#why-bats" title="Permalink to this headline">¶</a></h2>
+<p>There are many very high-performance libraries for computing things like persistent
+homology that have been developed over the past decade.  Unlike many of these libraries
+BATS is focused on functorality, and provides functionality to handle maps between
+topological spaces, chain maps, and induced maps on homology.  The goal is to make
+it easier for researchers and practitioners to implement and explore the vast back
+catalog of algebraic topology while also providing applied functionality.</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -180,6 +202,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#persistent-homology">Persistent Homology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#maps">Maps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html#zigzag-homology">Zigzag Homology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#source-code">Source Code</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tut_menu.html">Tutorials</a><ul>
@@ -198,6 +221,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About BATS</a></li>
 </ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">

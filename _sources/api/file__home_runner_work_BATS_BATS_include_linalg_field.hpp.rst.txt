@@ -51,8 +51,6 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_linalg_set_vector.hpp`
 
-- :ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`
-
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
 
 

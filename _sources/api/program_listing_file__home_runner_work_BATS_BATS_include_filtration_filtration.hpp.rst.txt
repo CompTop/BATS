@@ -49,9 +49,6 @@ Program Listing for File filtration.hpp
    }
    
    
-   // template over
-   //  TC - complex type
-   //  TF - filtration type
    template <typename TF, class CpxT>
    class Filtration
    {
@@ -83,7 +80,6 @@ Program Listing for File filtration.hpp
            }
        }
    
-       // initialize complex with arguments
        template <class ...Ts>
        Filtration(const Ts (&...args)) : X(args...) {
            for (size_t dim = 0; dim < X.maxdim() + 1; dim++){

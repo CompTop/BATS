@@ -352,13 +352,16 @@ Program Listing for File basis.hpp
            return from_hom_basis(x, k);
        }
    
-       void print_summary() const {
-           std::cout << "ReducedChainComplex with " << maxdim() << " dimensions:" << std::endl;
+       void print_summary(bool print_nnz=false) const {
+           std::cout << "ReducedChainComplex, maxdim =  " << maxdim() << std::endl;
            for (size_t k = 0; k < maxdim() + 1; k++) {
                std::cout << "\tdim " << k << ": " << dim(k)
-               << ", betti_" << k << ": " << hdim(k)
-               << " nnz(R): " << R[k].nnz()
-               <<" nnz(U): " << U[k].nnz() << "\n";
+               << ", betti_" << k << ": " << hdim(k);
+               if (print_nnz) {
+                   std::cout << " nnz(R): " << R[k].nnz()
+                               <<" nnz(U): " << U[k].nnz();
+               }
+               std::cout << "\n";
            }
        }
    };
@@ -382,5 +385,7 @@ Program Listing for File basis.hpp
    inline auto Reduce(const ChainComplex<MT>& C, Args ...args) {
        return ReducedChainComplex(C, args...);
    }
+   
+   
    
    } // namespace bats

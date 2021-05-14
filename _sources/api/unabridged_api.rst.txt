@@ -198,11 +198,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   structbats_1_1Type__A.rst
-
-.. toctree::
-   :maxdepth: 5
-
    structbats_1_1util_1_1SimplexHasher.rst
 
 .. toctree::
@@ -458,11 +453,6 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
-   classQuiver__A3.rst
-
-.. toctree::
-   :maxdepth: 5
-
    classRational.rst
 
 .. toctree::
@@ -572,11 +562,6 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_quiver_2quiver_8hpp_1a4438523e14952e1ae7fedbea74025365.rst
-
-.. toctree::
-   :maxdepth: 5
-
    function_filtration_2flag_8hpp_1af9b2781bd3d42f4ec2abc965707c5ce4.rst
 
 .. toctree::
@@ -652,7 +637,7 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_quiver_2quiver_8hpp_1abb24576b369216d223af1b0ecbd963d8.rst
+   function_sparse_8hpp_1a23389c313645876b11d690d575d5aff4.rst
 
 .. toctree::
    :maxdepth: 5
@@ -722,7 +707,17 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_chain__map_8hpp_1ab7c092cc3ee1bb887889d43a4f7f84dd.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1.rst
 
 .. toctree::
    :maxdepth: 5

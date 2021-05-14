@@ -1,0 +1,13 @@
+.. _exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1:
+
+Template Function bats::Chain(const Diagram<CpxT, CellularMap>&, T)
+===================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Chain(const Diagram<CpxT, CellularMap>&, T)

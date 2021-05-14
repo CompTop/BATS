@@ -15,9 +15,6 @@ Directory quiver
 Files
 -----
 
-- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
-- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver_a3.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
-- :ref:`file__home_runner_work_BATS_BATS_include_quiver_type_a.hpp`
 
 

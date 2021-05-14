@@ -784,6 +784,11 @@
     <span class="k">return</span> <span class="n">bars_to_pairs</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">hdim</span><span class="p">);</span>
 <span class="p">}</span>
 
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">NT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TM</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="k">auto</span> <span class="n">barcode</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">NT</span><span class="p">,</span> <span class="n">TM</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dgm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">hdim</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">barcode_sparse_divide_conquer</span><span class="p">(</span><span class="n">dgm</span><span class="p">,</span> <span class="n">hdim</span><span class="p">);</span>
+<span class="p">}</span>
+
 <span class="p">}</span> <span class="c1">// namespace bats</span>
 </pre></div>
 </div>

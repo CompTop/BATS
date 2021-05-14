@@ -13,7 +13,6 @@ Derived Types
 *************
 
 - ``public A< Impl >`` (:ref:`exhale_struct_structA`)
-- ``public A< I >`` (:ref:`exhale_struct_structA`)
 - ``public A< T >`` (:ref:`exhale_struct_structA`)
 
 

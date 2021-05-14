@@ -72,6 +72,8 @@ Functions
 ---------
 
 
+- :ref:`exhale_function_sparse_8hpp_1a23389c313645876b11d690d575d5aff4`
+
 - :ref:`exhale_function_sparse_8hpp_1ac1bb532265595d2b8bd304081df415ad`
 
 - :ref:`exhale_function_sparse_8hpp_1af0abb56a53fc704da282ce656a866178`

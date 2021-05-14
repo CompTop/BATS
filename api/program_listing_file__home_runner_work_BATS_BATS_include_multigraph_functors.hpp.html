@@ -329,6 +329,14 @@
     <span class="k">return</span> <span class="n">ChainFunctor</span><span class="o">&lt;</span><span class="n">MT</span><span class="p">,</span> <span class="n">DT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">D</span><span class="p">);</span>
 <span class="p">}</span>
 
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="k">auto</span> <span class="n">Chain</span><span class="p">(</span><span class="k">const</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">CpxT</span><span class="p">,</span> <span class="n">CellularMap</span><span class="o">&gt;&amp;</span> <span class="n">D</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">MT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">ChainFunctor</span><span class="o">&lt;</span><span class="n">MT</span><span class="p">,</span> <span class="n">Diagram</span><span class="o">&lt;</span><span class="n">CpxT</span><span class="p">,</span> <span class="n">CellularMap</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">D</span><span class="p">);</span>
+<span class="p">}</span>
+
 
 <span class="c1">// Homology functor for dimension k</span>
 <span class="c1">// template over matrix type</span>

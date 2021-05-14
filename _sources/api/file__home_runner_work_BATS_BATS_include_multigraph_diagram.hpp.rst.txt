@@ -49,8 +49,6 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
 
-- :ref:`file__home_runner_work_BATS_BATS_include_quiver_quiver.hpp`
-
 - :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
