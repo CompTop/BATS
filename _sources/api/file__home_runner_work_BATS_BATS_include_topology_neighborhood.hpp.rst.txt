@@ -63,13 +63,13 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
-
 - :ref:`exhale_function_neighborhood_8hpp_1ac344ced71c636b9cf05aab03c98bcd85`
 
-- :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
+- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
 
 - :ref:`exhale_function_neighborhood_8hpp_1a77dcdce06ffc1e4ccce66cc52a0b490a`
 
 - :ref:`exhale_function_neighborhood_8hpp_1aff67a6b3860df3e9d88f06c96ea05811`
+
+- :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
 
