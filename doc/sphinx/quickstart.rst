@@ -117,7 +117,7 @@ a ReducedFilteredChainComplex.
 The output will show one persistent 0-dimensional homology class
 as well as one persistent 1-dimensional homology class
 
--- code-block:: none
+.. code-block:: none
 
    0-dimensional barcode:
    0 : (0,inf) <0,-1>
