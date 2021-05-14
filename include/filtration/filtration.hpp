@@ -37,9 +37,12 @@ std::vector<std::vector<size_t>> filtration_iperm(
 }
 
 
-// template over
-//  TC - complex type
-//  TF - filtration type
+/**
+@brief A filtration which can be used to wrap a simplicial/cubical/cell complex
+
+A filtration class, templated over the type of the filtration parameter, and
+the type of the underlying complex
+*/
 template <typename TF, class CpxT>
 class Filtration
 {
@@ -71,7 +74,10 @@ public:
 		}
     }
 
-	// initialize complex with arguments
+	/**
+	Initialization which passes arguments to initialize the underlying complex
+	@param args... - passed to complex initialization
+	*/
 	template <class ...Ts>
 	Filtration(const Ts (&...args)) : X(args...) {
 		for (size_t dim = 0; dim < X.maxdim() + 1; dim++){
@@ -80,6 +86,11 @@ public:
 		}
 	}
 
+	/**
+	Initialization which passes arguments to initialize the underlying complex
+	@param C - complex
+	@param vals - filtration values for every cell in C
+	*/
 	Filtration(const CpxT& C, const std::vector<std::vector<TF>>& vals) : X(C), val(vals) {}
 
 

@@ -88,4 +88,13 @@ struct ChainMap {
 
 };
 
+// defualt return
+template <typename T>
+inline auto Chain(const CellularMap &F, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return ChainMap<MT>(F);
+}
+
 } // namespace bats

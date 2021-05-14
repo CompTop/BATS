@@ -160,6 +160,14 @@ inline auto __ChainFunctor(const DT &D, T) {
 	return ChainFunctor<MT, DT>(D);
 }
 
+template <typename CpxT, typename T>
+inline auto Chain(const Diagram<CpxT, CellularMap>& D, T) {
+	using VT = SparseVector<T, size_t>;
+	using MT = ColumnMatrix<VT>;
+
+	return ChainFunctor<MT, Diagram<CpxT, CellularMap>>(D);
+}
+
 
 // Homology functor for dimension k
 // template over matrix type

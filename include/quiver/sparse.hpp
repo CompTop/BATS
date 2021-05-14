@@ -615,4 +615,9 @@ std::vector<PersistencePair<size_t>> barcode_sparse_divide_conquer(const Diagram
     return bars_to_pairs(bars, hdim);
 }
 
+template <typename NT, typename TM>
+inline auto barcode(const Diagram<NT, TM> &dgm, size_t hdim) {
+    return barcode_sparse_divide_conquer(dgm, hdim);
+}
+
 } // namespace bats
