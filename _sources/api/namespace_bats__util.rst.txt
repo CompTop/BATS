@@ -43,9 +43,9 @@ Functions
 
 - :ref:`exhale_function_util_2permutation_8hpp_1a91a3b1f209c34ea970851eb5cab84812`
 
-- :ref:`exhale_function_util_2permutation_8hpp_1a7c8d2dc6114dacaf3164827614024b5b`
-
 - :ref:`exhale_function_util_2permutation_8hpp_1aa54f5e3f7bca0fa891496efe66e623e5`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1a7c8d2dc6114dacaf3164827614024b5b`
 
 - :ref:`exhale_function_sorted_8hpp_1ad455409e65f618a7ff90980e9ec4de25`
 
