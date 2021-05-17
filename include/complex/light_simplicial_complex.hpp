@@ -29,8 +29,8 @@ namespace bats {
 template <typename index_type=size_t, typename hash_table=std::unordered_map<index_type, size_t>>
 class LightSimplicialComplex {
 private:
-    const index_type _n; // fixed size of vertex set
-    const index_type _k; // fixed size of maximum simplex dimension
+    index_type _n; // fixed size of vertex set
+    index_type _k; // fixed size of maximum simplex dimension
     std::vector<index_type> _offset;     // table of powers of n
     std::vector<std::vector<index_type>> index_to_key;
 	std::vector<hash_table> key_to_index;
@@ -163,6 +163,7 @@ public:
         index_to_key.resize(_k+1);
 		key_to_index.resize(_k+1);
     }
+
 
     // // copy constructor
     // LightSimplicialComplex(
