@@ -248,7 +248,7 @@ public:
 		auto iperm = bats::util::inv_perm(perm);
 		if (k == 0) {
 			// only worry about boundary[1]
-			R[1].ipermute_rows(perm);
+			R[1].ipermute_rows(iperm);
 		} else if (k == maxdim()) {
 			// only need to worry about rows of U[k]
 			U[k].ipermute_rows(iperm);
