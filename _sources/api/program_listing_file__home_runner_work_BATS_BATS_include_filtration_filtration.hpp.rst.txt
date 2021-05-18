@@ -93,13 +93,15 @@ Program Listing for File filtration.hpp
    
    
        inline const CpxT& complex() const { return X; }
+   
        inline const std::vector<std::vector<TF>>& vals() const { return val;}
+   
        inline const std::vector<TF>& vals(const size_t k) const { return val[k]; }
    
        inline size_t maxdim() const { return val.size() - 1; }
+   
        inline size_t ncells(const size_t dim) const { return val[dim].size(); }
    
-       // add to underlying complex
        template <class ...Ts>
        inline cell_ind add(TF t, Ts (&...args)) {
            cell_ind ret = X.add(args...);

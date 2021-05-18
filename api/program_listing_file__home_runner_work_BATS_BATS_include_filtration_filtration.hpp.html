@@ -250,13 +250,15 @@
 
 
     <span class="kr">inline</span> <span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">complex</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">X</span><span class="p">;</span> <span class="p">}</span>
+
     <span class="kr">inline</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TF</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vals</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">;}</span>
+
     <span class="kr">inline</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TF</span><span class="o">&gt;&amp;</span> <span class="n">vals</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="n">k</span><span class="p">];</span> <span class="p">}</span>
 
     <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+
     <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">ncells</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="p">}</span>
 
-    <span class="c1">// add to underlying complex</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="p">...</span><span class="n">Ts</span><span class="o">&gt;</span>
     <span class="kr">inline</span> <span class="n">cell_ind</span> <span class="n">add</span><span class="p">(</span><span class="n">TF</span> <span class="n">t</span><span class="p">,</span> <span class="n">Ts</span> <span class="p">(</span><span class="o">&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">))</span> <span class="p">{</span>
         <span class="n">cell_ind</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">args</span><span class="p">...);</span>
