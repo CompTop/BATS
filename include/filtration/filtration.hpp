@@ -76,7 +76,8 @@ public:
 
 	/**
 	Initialization which passes arguments to initialize the underlying complex
-	@param args... - passed to complex initialization
+	
+	@param args...	passed to complex initialization
 	*/
 	template <class ...Ts>
 	Filtration(const Ts (&...args)) : X(args...) {
@@ -88,8 +89,8 @@ public:
 
 	/**
 	Initialization which passes arguments to initialize the underlying complex
-	@param C - complex
-	@param vals - filtration values for every cell in C
+	@param C		complex
+	@param vals		filtration values for every cell in C
 	*/
 	Filtration(const CpxT& C, const std::vector<std::vector<TF>>& vals) : X(C), val(vals) {}
 
@@ -108,7 +109,7 @@ public:
 	/**
 	return const reference to filtration values
 
-	@param k - dimension of values to return
+	@param k	dimension of values to return
 	*/
 	inline const std::vector<TF>& vals(const size_t k) const { return val[k]; }
 
@@ -120,15 +121,15 @@ public:
 	/**
 	return number of cells in specified dimension
 
-	@param dim - dimension
+	@param dim	dimension
 	*/
 	inline size_t ncells(const size_t dim) const { return val[dim].size(); }
 
 	/**
 	add cell to filtration
 
-	@param t - filtration parameter
-	@param ...args - passed to add method of underlying complex
+	@param t		filtration parameter
+	@param ...args	passed to add method of underlying complex
 	*/
 	template <class ...Ts>
 	inline cell_ind add(TF t, Ts (&...args)) {
@@ -138,9 +139,14 @@ public:
 		return ret;
 	}
 
-	// add to complex
-	// recursively add faces as needed
-	// anything added takes filtration value t
+
+	/**
+	Add recursively to filtration.  Any cells added will take filtration
+	value t.
+
+	@param t		filtration parameter
+	@param ...args	passed to add_recursive method of underlying complex
+	*/
 	template <class ...Ts>
 	inline std::vector<cell_ind> add_recursive(TF t, Ts (&...args)) {
 		std::vector<cell_ind> ret = X.add_recursive(args...);
