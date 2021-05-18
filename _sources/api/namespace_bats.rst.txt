@@ -123,21 +123,21 @@ Functions
 
 - :ref:`exhale_function_filtered__basis_8hpp_1a4bb6b250a088ddf81546cf9e225819fa`
 
+- :ref:`exhale_function_topology_2flag_8hpp_1a85161d655d3fe9f727bc5a743d6ba05f`
+
 - :ref:`exhale_function_filtration_2flag_8hpp_1af9b2781bd3d42f4ec2abc965707c5ce4`
 
 - :ref:`exhale_function_filtration_2flag_8hpp_1a3354ec1103ef97dd0c11b1007156e382`
-
-- :ref:`exhale_function_topology_2flag_8hpp_1a85161d655d3fe9f727bc5a743d6ba05f`
 
 - :ref:`exhale_function_filtration_2flag_8hpp_1a02204eecf1d35d518e2e3b33e96e54eb`
 
 - :ref:`exhale_function_nerve_8hpp_1a478328b5591ff8fb8be8dcf8e06c258e`
 
-- :ref:`exhale_function_data__gen_8hpp_1a80fc1d83d9d909662fdb398e95f29c47`
-
 - :ref:`exhale_function_data__gen_8hpp_1a1f47f63ff24dbd590481527564ed9b3f`
 
 - :ref:`exhale_function_data__gen_8hpp_1a5043f25417b021629dd6935aa7b970f5`
+
+- :ref:`exhale_function_data__gen_8hpp_1a80fc1d83d9d909662fdb398e95f29c47`
 
 - :ref:`exhale_function_data__gen_8hpp_1a4a640d48ec5939b74e2c6ef175f29d88`
 
@@ -177,15 +177,15 @@ Functions
 
 - :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
 
-- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
-
-- :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
-
 - :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
+
+- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
 
 - :ref:`exhale_function_chain__complex_8hpp_1a9056331ab85ea32b5a39e6306f4e3252`
 
 - :ref:`exhale_function_chain__map_8hpp_1ab7c092cc3ee1bb887889d43a4f7f84dd`
+
+- :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
 
 - :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
 
@@ -207,13 +207,13 @@ Functions
 
 - :ref:`exhale_function_dowker__cover_8hpp_1a1e29de611c7e3d8a915abf091330edc5`
 
-- :ref:`exhale_function_dowker_8hpp_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
-
 - :ref:`exhale_function_dowker_8hpp_1a883880c5732d01b74451cc68e47021fa`
 
 - :ref:`exhale_function_dowker__cover_8hpp_1a4aca2e42336131f789fe822b1f7d2e87`
 
 - :ref:`exhale_function_dowker__cover_8hpp_1ab0ff4928102e869d085645ca47383869`
+
+- :ref:`exhale_function_dowker_8hpp_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
 
 - :ref:`exhale_function_eilenberg__zilber_8hpp_1afeb9ea6f0eaf382cbcda6054a45a93ba`
 
@@ -347,6 +347,8 @@ Functions
 
 - :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
 
+- :ref:`exhale_function_reduction_8hpp_1a8559debe3ecde49f55bff7d92f17d9fb`
+
 - :ref:`exhale_function_reduction_8hpp_1a0101cb1c0bcdbd99d5cbb4db4a9df924`
 
 - :ref:`exhale_function_reduction_8hpp_1a5920474e13f38792f5c8fb1d43d0b409`
@@ -357,21 +359,19 @@ Functions
 
 - :ref:`exhale_function_reduction_8hpp_1af4e042b9698fb7cb79becce57d089d21`
 
-- :ref:`exhale_function_reduction_8hpp_1a8559debe3ecde49f55bff7d92f17d9fb`
-
 - :ref:`exhale_function_reduction_8hpp_1ac0e79a899be3c1d5b4a76ea071fd79bf`
 
 - :ref:`exhale_function_reduction_8hpp_1a1f615afaac832b9d0cf895060f8f0e2e`
 
 - :ref:`exhale_function_reduction_8hpp_1a92fe556325d081fbfe03e280c772f281`
 
-- :ref:`exhale_function_reduction_8hpp_1ac8a60869010cb73b724dda3a2cf703a1`
-
 - :ref:`exhale_function_reduction_8hpp_1a3068d4e763beee924a79f0bbcdbf2ff2`
 
-- :ref:`exhale_function_reduction_8hpp_1ad61c7634820a245686f34152ce49581a`
+- :ref:`exhale_function_reduction_8hpp_1ac8a60869010cb73b724dda3a2cf703a1`
 
 - :ref:`exhale_function_reduction_8hpp_1a38c3a3e30e0973b5736dc47da0bbcd25`
+
+- :ref:`exhale_function_reduction_8hpp_1ad61c7634820a245686f34152ce49581a`
 
 - :ref:`exhale_function_functors_8hpp_1a0f99b26c184a52dddf196d766faa695a`
 
@@ -415,11 +415,11 @@ Functions
 
 - :ref:`exhale_function_dowker_8hpp_1a8205e2df24d0850d0a2472770c0da907`
 
+- :ref:`exhale_function_simplicial__complex_8hpp_1a06ea072e08d6be92106ab64bf3f4c3b4`
+
 - :ref:`exhale_function_simplicial__complex_8hpp_1adea5ebf11ef869d59081c07746e48d01`
 
 - :ref:`exhale_function_simplicial__complex_8hpp_1a10e21fd6351157149ae42cfae28947dd`
-
-- :ref:`exhale_function_simplicial__complex_8hpp_1a06ea072e08d6be92106ab64bf3f4c3b4`
 
 - :ref:`exhale_function_sparse_8hpp_1a0818a039d02f945e027b35d0b877176a`
 

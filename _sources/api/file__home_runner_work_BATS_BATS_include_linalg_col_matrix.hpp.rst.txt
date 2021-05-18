@@ -117,7 +117,7 @@ Functions
 
 - :ref:`exhale_function_col__matrix_8hpp_1ace18822d7157109c7049f4d8ec1824b2`
 
-- :ref:`exhale_function_col__matrix_8hpp_1ae49c88a502db43137111c472026b96d7`
-
 - :ref:`exhale_function_col__matrix_8hpp_1ad5ffd5e74c1e50dfb64a16dbf2347b14`
+
+- :ref:`exhale_function_col__matrix_8hpp_1ae49c88a502db43137111c472026b96d7`
 
