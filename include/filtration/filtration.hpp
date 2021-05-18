@@ -95,14 +95,41 @@ public:
 
 
 
+	/**
+	return const reference to underlying complex
+	*/
 	inline const CpxT& complex() const { return X; }
+
+	/**
+	return const reference to filtration values
+	*/
 	inline const std::vector<std::vector<TF>>& vals() const { return val;}
+
+	/**
+	return const reference to filtration values
+
+	@param k - dimension of values to return
+	*/
 	inline const std::vector<TF>& vals(const size_t k) const { return val[k]; }
 
+	/**
+	return maximum dimension of cells
+	*/
 	inline size_t maxdim() const { return val.size() - 1; }
+
+	/**
+	return number of cells in specified dimension
+
+	@param dim - dimension
+	*/
 	inline size_t ncells(const size_t dim) const { return val[dim].size(); }
 
-	// add to underlying complex
+	/**
+	add cell to filtration
+
+	@param t - filtration parameter
+	@param ...args - passed to add method of underlying complex
+	*/
 	template <class ...Ts>
 	inline cell_ind add(TF t, Ts (&...args)) {
 		cell_ind ret = X.add(args...);
