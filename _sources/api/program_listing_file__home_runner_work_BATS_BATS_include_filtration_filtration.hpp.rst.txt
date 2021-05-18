@@ -110,9 +110,7 @@ Program Listing for File filtration.hpp
            return ret;
        }
    
-       // add to complex
-       // recursively add faces as needed
-       // anything added takes filtration value t
+   
        template <class ...Ts>
        inline std::vector<cell_ind> add_recursive(TF t, Ts (&...args)) {
            std::vector<cell_ind> ret = X.add_recursive(args...);
