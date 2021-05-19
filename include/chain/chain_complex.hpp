@@ -101,16 +101,16 @@ struct ChainComplex {
 		return ChainComplex(newboundary);
 	}
 
+
+	/**
+	reference to k-dimensional boundary
+
+	@param k	dimension
+	*/
 	MT& operator[](size_t k) {
-		if (k >= boundary.size()) {
-			// throw error
-		}
 		return boundary[k];
 	}
 	const MT& operator[](size_t k) const {
-		if (k >= boundary.size()) {
-			// throw error
-		}
 		return boundary[k];
 	}
 

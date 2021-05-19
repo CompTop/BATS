@@ -66,6 +66,31 @@ std::vector<size_t> sortperm(
     return perm;
 }
 
+/**
+filll a sortperm using custom comparator
+
+@param first    random acces iterator at beginning of range to sort
+@param last     random access iterator just past the last element of range to sort
+@param comp     comparison function, comp(a, b) should return whether a should come before b
+*/
+template <typename RAI, class Compare>
+std::vector<size_t> sortperm(
+    RAI first,
+    RAI last,
+    Compare comp
+) {
+    std::vector<size_t> perm(std::distance(first, last));
+    std::iota(perm.begin(), perm.end(), 0);
+    std::sort(
+        perm.begin(),
+        perm.end(),
+        [&](const size_t& a, const size_t& b) {
+            return comp(*(first+a), *(first+b));
+        }
+    );
+    return perm;
+}
+
 template <typename T>
 std::vector<size_t> stable_sortperm(const std::vector<T>& data) {
     std::vector<size_t> perm(data.size());
