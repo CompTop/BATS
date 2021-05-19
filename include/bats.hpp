@@ -14,6 +14,7 @@ namespace bats {
 #include "chain.hpp"
 #include "homology.hpp"
 #include "persistence.hpp"
+#include "zigzag.hpp"
 #include "multigraph.hpp"
 #include "quiver.hpp"
 #include "topology.hpp"
