@@ -348,13 +348,22 @@ public:
         return spx[dim].cbegin() + ((2*__maxdim) * (i+1));
     }
 
-	// return simplex i in dimension dim
-	std::vector<size_t> get_cube(size_t dim, size_t i) const {
-		std::vector<size_t> s;
-		s.reserve(2*__maxdim);
+	// return cube i in dimension dim
+	void get_cube(
+		size_t dim, // cube dimension
+		size_t i, // cube index
+		std::vector<size_t>& s // cube will be put in this vector
+	) const {
+		s.clear();
 		for (auto it = cell_begin(dim, i); it != cell_end(dim, i); it++) {
 			s.emplace_back(*it);
 		}
+		return;
+	}
+	std::vector<size_t> get_cube(size_t dim, size_t i) const {
+		std::vector<size_t> s;
+		s.reserve(2*__maxdim);
+		get_cube(dim, i, s);
 		return s;
 	}
 
@@ -468,6 +477,25 @@ public:
 		return;
 	}
 
+	/**
+	generate a discretized cube on n^3 vertices
+
+	@param n	number of vertex locations along each dimension
+	*/
+	static CubicalComplex generate_cube(
+		const size_t n
+	) {
+		if (n < 2) {throw std::runtime_error("Cube must have at least 2 verices in each dimension.");}
+	    CubicalComplex X(3);
+	    for (size_t i = 0; i < n-1; ++i) {
+	        for (size_t j = 0; j < n-1; ++j) {
+	            for (size_t k = 0; k < n-1; ++k) {
+	                X.add_recursive({i, i+1, j, j+1, k, k+1});
+	            }
+	        }
+	    }
+	    return X;
+	}
 
 };
 

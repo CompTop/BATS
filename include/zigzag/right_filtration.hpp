@@ -49,6 +49,22 @@ public:
     RightFiltration(const Ts (&...args)) : X(args...) {}
 
 	/**
+	Construct right filtration explicitly on a complex
+
+	@param X	complex representing topological space
+	@param val	right filtration values for each cell in X
+
+	val should be a vector of vector of pairs.
+	val[k][i] is the pair of entry times for cell i in dimension k in X.
+
+	No checks are done to make sure the number of values matches the number of cells
+	*/
+	RightFiltration(
+		const CpxT& X,
+		const std::vector<std::vector<std::pair<T, T>>>& val
+	) : X(X), val(val) {}
+
+	/**
 	return const reference to underlying complex
 	*/
     inline const CpxT& complex() const { return X; }
@@ -184,14 +200,17 @@ auto prepare_ChainComplex(
 
 }
 
-template <typename CpxT, typename T, typename FT>
+template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag>
 auto barcode(
 	const RightFiltration<CpxT, T>& F,
-	FT // field for coefficients
+	FT, // field for coefficients
+	opt_flag,
+	reduction_flag
 ) {
 	auto [C, filt_order] = prepare_ChainComplex(F, FT());
 
-	return zigzag_barcode_reduction(C, filt_order);
+	// return zigzag_barcode_reduction(C, filt_order);
+	return zigzag_barcode_reduction(C, filt_order, opt_flag(), reduction_flag());
 }
 
 

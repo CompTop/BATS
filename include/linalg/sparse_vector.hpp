@@ -222,8 +222,10 @@ public:
 		indval = indval2;
 	}
 
-	// clear indices marked true in c
-	// i.e. remove entry i if c[i] is true
+	/**
+	clear indices marked true in c
+	i.e. remove entry i if c[i] is true
+	*/
 	void clear_inds(const std::vector<bool> &c) {
 		std::vector<key_type> indval2;
 		for (auto iv : indval) {
@@ -233,6 +235,20 @@ public:
 			}
 		}
 		indval = indval2;
+	}
+	// use temporary vector
+	void clear_inds(
+		const std::vector<bool> &c,
+		std::vector<key_type>& tmp
+	) {
+		tmp.clear(); // clear temporary vector
+		for (auto iv : indval) {
+			// put indval pair in if it is not marked for clearing
+			if (!c[iv.ind]) {
+				tmp.emplace_back(iv);
+			}
+		}
+		std::swap(indval, tmp);
 	}
 
 	// nnz
