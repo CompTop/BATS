@@ -115,5 +115,35 @@ std::vector<std::vector<std::pair<T,T>>> extend_levelset(
     return val;
 }
 
+template <typename T>
+RightFiltration<CubicalComplex, T> extend_zigzag_filtration(
+    const std::vector<T>& f0, // function on vertices
+    const CubicalComplex& X,
+    const T eps,
+    const size_t n // length of cube
+) {
+
+    RightFiltration<CubicalComplex, T> F(3); // initialize filtration
+
+    std::vector<size_t> cube;
+    std::pair<T, T> minmax;
+    for (size_t dim = 0; dim < X.maxdim() + 1; ++dim) {
+        for (size_t i = 0; i < X.ncells(dim); ++i) {
+            X.get_cube(dim, i, cube);
+            // get extremal function values on cube vertices
+            minmax = detail::cube_extrema(f0, cube, n);
+            // entry time is max - eps
+            T entry = minmax.second - eps;
+            // removal time is min + eps
+            T removal = minmax.first + eps;
+            if (entry > removal) {continue;} // do not add
+            F.add(entry, removal, cube); // cube is present in filtration
+        }
+
+    }
+    return F;
+
+}
+
 
 } // namespace bats

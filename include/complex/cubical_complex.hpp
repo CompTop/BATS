@@ -300,7 +300,7 @@ public:
 		reserve(maxdim);
 	}
 
-    void print_summary() {
+    void print_summary() const {
         std::cout << "CubicalComplex, maxdim = " << maxdim() << std::endl;
         for (size_t k = 0; k < maxdim() + 1; k++) {
             std::cout << "\tdim " << k << " : " << ncells(k) << " cells" << std::endl;
