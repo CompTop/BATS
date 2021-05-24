@@ -177,6 +177,8 @@ Functions
 
 - :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
 
+- :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
+
 - :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
 
 - :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
@@ -184,8 +186,6 @@ Functions
 - :ref:`exhale_function_chain__complex_8hpp_1a9056331ab85ea32b5a39e6306f4e3252`
 
 - :ref:`exhale_function_chain__map_8hpp_1ab7c092cc3ee1bb887889d43a4f7f84dd`
-
-- :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
 
 - :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
 
@@ -303,9 +303,9 @@ Functions
 
 - :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
 
-- :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
-
 - :ref:`exhale_function_nerve_8hpp_1a98421dc44f6d6a48c33e11600b6d31d4`
+
+- :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
 
 - :ref:`exhale_function_spherical_8hpp_1a18ff33c5f70f69f3a9fce1831b50e683`
 
@@ -339,13 +339,13 @@ Functions
 
 - :ref:`exhale_function_data_8hpp_1a68dcb239df5c2f250100cabcb5489b54`
 
-- :ref:`exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992`
-
-- :ref:`exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2`
-
 - :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
 
 - :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
+
+- :ref:`exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992`
+
+- :ref:`exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2`
 
 - :ref:`exhale_function_reduction_8hpp_1a91b11073b2bb54ed0e8ed0e4d3f0a5bf`
 
@@ -377,11 +377,11 @@ Functions
 
 - :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
 
+- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
+
 - :ref:`exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a8d88d925f0c8a77c597d46e7b073aba7`
-
-- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a9a1dc66df690a01219961c0dff46532e`
 
@@ -399,9 +399,9 @@ Functions
 
 - :ref:`exhale_function_rips__cover_8hpp_1a6bf32cdd8f98d4a41bd8f1767b55bdc1`
 
-- :ref:`exhale_function_data__gen_8hpp_1a102d2dd30445a0bd7934af5793631da9`
-
 - :ref:`exhale_function_data__gen_8hpp_1a8d60f6854ea11bddda8a4a26b77a20fb`
+
+- :ref:`exhale_function_data__gen_8hpp_1a102d2dd30445a0bd7934af5793631da9`
 
 - :ref:`exhale_function_data__gen_8hpp_1a87516251f92f7a37863998e6089dc8bd`
 
