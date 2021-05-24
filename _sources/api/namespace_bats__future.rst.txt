@@ -60,9 +60,9 @@ Functions
 
 - :ref:`exhale_function_dense_8hpp_1a2b1d22ad3812d61e25eb9d218c19c59d`
 
-- :ref:`exhale_function_dense_8hpp_1a02f3fc22ee4d0ae25388f8577ecc29dc`
-
 - :ref:`exhale_function_dense_8hpp_1a9332d7fe49c847a1f7cc4ddf33423172`
+
+- :ref:`exhale_function_dense_8hpp_1a02f3fc22ee4d0ae25388f8577ecc29dc`
 
 - :ref:`exhale_function_lu_8hpp_1a812da078290cceea16e1cb13b115576b`
 
