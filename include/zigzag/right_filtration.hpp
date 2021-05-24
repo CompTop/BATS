@@ -7,6 +7,7 @@ Right filtrations for complexes
 #include <utility> // std::pair
 #include <chain/chain_complex.hpp>
 #include "reduction.hpp"
+#include <type_traits>
 
 namespace bats {
 
@@ -200,14 +201,19 @@ auto prepare_ChainComplex(
 
 }
 
-template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag>
+template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag, typename pairs_flag>
 auto barcode(
 	const RightFiltration<CpxT, T>& F,
 	FT, // field for coefficients
 	opt_flag,
-	reduction_flag
+	reduction_flag,
+	pairs_flag
 ) {
 	auto [C, filt_order] = prepare_ChainComplex(F, FT());
+
+	if constexpr(std::is_same<pairs_flag, apparent_pairs_flag>::value) {
+		C.clear_compress_apparent_pairs();
+	}
 
 	// return zigzag_barcode_reduction(C, filt_order);
 	return zigzag_barcode_reduction(C, filt_order, opt_flag(), reduction_flag());

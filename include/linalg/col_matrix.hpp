@@ -223,12 +223,28 @@ public:
 		}
 	}
 
-	// clear rows i for which c[i] is true
-	// use vector of bools for quick lookup - vector of inds would require search
+	/**
+	clear rows i for which c[i] is true
+	use vector of bools for quick lookup - vector of inds would require search
+	*/
 	void clear_rows(const std::vector<bool> &c) {
-		// TODO: check that length of vector agrees with number of rows
-		for (size_t j = 0; j < ncol(); j++) {
+		if (c.size() != nrow()) {throw std::runtime_error("input vector does not match number of rows.");}
+		for (size_t j = 0; j < ncol(); ++j) {
 			col[j].clear_inds(c);
+		}
+	}
+
+	/**
+	clear columns j for which c[j] is true
+
+	frees memory as well
+	*/
+	void clear_cols(const std::vector<bool> &c) {
+		if (c.size() != ncol()) {throw std::runtime_error("input vector does not match number of columns.");}
+		for (size_t j = 0; j < ncol(); ++j) {
+			if (c[j]) {
+				col[j].clear_dealloc();
+			}
 		}
 	}
 

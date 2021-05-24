@@ -113,7 +113,8 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(F, F2(),
             bats::no_optimization_flag(),
-            bats::extra_reduction_flag()
+            bats::extra_reduction_flag(),
+            bats::no_apparent_pairs_flag()
         );
 
         for (auto& pk : ps) {
@@ -134,7 +135,8 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(F, F2(),
             bats::no_optimization_flag(),
-            bats::extra_reduction_flag()
+            bats::extra_reduction_flag(),
+            bats::no_apparent_pairs_flag()
         );
 
         for (auto& pk : ps) {
@@ -196,7 +198,8 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(XF, F2(),
             bats::no_optimization_flag(),
-            bats::standard_reduction_flag()
+            bats::standard_reduction_flag(),
+            bats::no_apparent_pairs_flag()
         );
         end = std::chrono::steady_clock::now();
         std::cout << "\nCompute barcode: "
@@ -205,7 +208,7 @@ int main() {
     }
 
     {
-        size_t n = 65;
+        size_t n = 129;
         double eps = 8.0;
         auto start = std::chrono::steady_clock::now();
         auto F = gen_cube_zigzag(n, eps);
@@ -219,8 +222,9 @@ int main() {
         start = std::chrono::steady_clock::now();
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(F, F2(),
-            bats::compression_flag(),
-            bats::extra_reduction_flag()
+            bats::no_optimization_flag(),
+            bats::standard_reduction_flag(),
+            bats::apparent_pairs_flag()
         );
         end = std::chrono::steady_clock::now();
         std::cout << "\nCompute barcode: "

@@ -174,6 +174,54 @@ struct ChainComplex {
 		return C;
 	}
 
+	/**
+	A preprocessing step for computing homology using the reduction algorithm.
+
+	@warning using this function will invalidate any basis used by
+	a homology algorithm since no basis vector will be obtained for
+	the cleared columns
+	*/
+	void clear_compress_apparent_pairs() {
+
+		std::vector<bool> comp_inds;
+		std::vector<bool> clear_inds;
+		for (size_t dim = 1; dim < maxdim() + 1; ++dim) {
+			// prepare clearing and compression indices
+			clear_inds.resize(boundary[dim].nrow());
+			std::fill(clear_inds.begin(), clear_inds.end(), false);
+			comp_inds.resize(boundary[dim].ncol());
+			std::fill(comp_inds.begin(), comp_inds.end(), false);
+			// look at pivots to determine clearing/compression inds
+			for (size_t j = 0; j < boundary[dim].ncol(); ++j) {
+				auto it = boundary[dim][j].nzend();
+				// check that nnz > 0
+				if (it != boundary[dim][j].nzbegin()) {
+					--it; // point to last nonzero
+					size_t i = it->ind; // pivot index
+					if (!clear_inds[i]) {
+						// this is the first time we have seen this pivot
+						// mark j as a compression ind
+						comp_inds[j] = true;
+						// mark i as a clearing ind
+						clear_inds[i] = true;
+					}
+				}
+			}
+			// we can now clear indices one dimension lower
+			if (dim > 1) {
+				boundary[dim-1].clear_cols(clear_inds);
+			}
+			// we can now compress indices one dimension higher
+			if (dim < maxdim()) {
+				boundary[dim+1].clear_rows(comp_inds);
+			}
+		}
+
+
+
+
+	}
+
 	inline friend ChainComplex tensor_product(
 		const ChainComplex &A,
 		const ChainComplex& B

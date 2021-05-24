@@ -211,6 +211,8 @@ public:
 	inline auto nzend(){ return indval.end(); }
 
 	inline void clear() {indval.clear();}
+	// clear and release memory by swapping with empty vector.
+	inline void clear_dealloc() { std::vector<key_type>().swap(indval); }
 
 	void clear_zeros() {
 		std::vector<key_type> indval2;

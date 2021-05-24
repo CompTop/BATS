@@ -36,6 +36,8 @@ namespace bats {
 struct no_optimization_flag {};
 struct clearing_flag {};
 struct compression_flag {};
+struct apparent_pairs_flag {};
+struct no_apparent_pairs_flag {};
 
 // flags for selecting algorithms
 struct standard_reduction_flag {};
