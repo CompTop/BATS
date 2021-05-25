@@ -36,10 +36,12 @@ public:
     size_t nnode() const { return node.size(); }
     size_t nedge() const { return edata.size(); }
 
-    inline NT node_data(size_t i) {return node[i];}
-    inline ET edge_data(size_t j) {return edata[j];}
-    inline size_t edge_source(size_t j) {return elist[j].src;}
-    inline size_t edge_target(size_t j) {return elist[j].targ;}
+    inline NT& node_data(size_t i) {return node[i];}
+    inline const NT& node_data(size_t i) const {return node[i];}
+    inline ET& edge_data(size_t j) {return edata[j];}
+    inline const ET& edge_data(size_t j) const {return edata[j];}
+    inline size_t edge_source(size_t j) const {return elist[j].src;}
+    inline size_t edge_target(size_t j) const {return elist[j].targ;}
 
     size_t add_node(NT &a) {
         node.emplace_back(a);
