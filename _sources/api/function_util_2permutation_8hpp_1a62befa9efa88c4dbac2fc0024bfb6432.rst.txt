@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a62befa9efa88c4dbac2fc0024bfb6432:
+
+Template Function bats::util::sortperm(RAI, RAI, Compare)
+=========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sortperm(RAI, RAI, Compare)

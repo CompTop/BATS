@@ -270,16 +270,11 @@
         <span class="k">return</span> <span class="n">ChainComplex</span><span class="p">(</span><span class="n">newboundary</span><span class="p">);</span>
     <span class="p">}</span>
 
+
     <span class="n">MT</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="n">boundary</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
-            <span class="c1">// throw error</span>
-        <span class="p">}</span>
         <span class="k">return</span> <span class="n">boundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
     <span class="p">}</span>
     <span class="k">const</span> <span class="n">MT</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="n">boundary</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
-            <span class="c1">// throw error</span>
-        <span class="p">}</span>
         <span class="k">return</span> <span class="n">boundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
     <span class="p">}</span>
 

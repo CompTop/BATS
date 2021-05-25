@@ -113,16 +113,11 @@ Program Listing for File chain_complex.hpp
            return ChainComplex(newboundary);
        }
    
+   
        MT& operator[](size_t k) {
-           if (k >= boundary.size()) {
-               // throw error
-           }
            return boundary[k];
        }
        const MT& operator[](size_t k) const {
-           if (k >= boundary.size()) {
-               // throw error
-           }
            return boundary[k];
        }
    
