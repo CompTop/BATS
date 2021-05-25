@@ -40,8 +40,8 @@ public:
     inline const NT& node_data(size_t i) const {return node[i];}
     inline ET& edge_data(size_t j) {return edata[j];}
     inline const ET& edge_data(size_t j) const {return edata[j];}
-    inline size_t edge_source(size_t j) {return elist[j].src;}
-    inline size_t edge_target(size_t j) {return elist[j].targ;}
+    inline size_t edge_source(size_t j) const {return elist[j].src;}
+    inline size_t edge_target(size_t j) const {return elist[j].targ;}
 
     size_t add_node(NT &a) {
         node.emplace_back(a);
