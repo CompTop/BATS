@@ -45,11 +45,11 @@ public:
         col.resize(n, TC());
     }
 
-    ColumnMatrix(std::vector<TC> &col) : col(col) {
+    ColumnMatrix(const std::vector<TC> &_col) : col(_col) {
         n = col.size();
     }
 
-    ColumnMatrix(size_t m, size_t n, std::vector<TC> &col) : m(m), n(n), col(col) {}
+    ColumnMatrix(size_t _m, size_t _n, const std::vector<TC>& _col) : m(_m), n(_n), col(_col) {}
 
     // constructor from ColumnMatrix with integer type
     template <typename TC2>
@@ -335,7 +335,7 @@ public:
 		std::vector<TC> tcol(m);
 		// loop over columns
 		for (size_t j = 0; j < n; j++) {
-			for (auto it = col[j].nzbegin(); it != col[j].nzend(); it++) {
+			for (auto it = col[j].nzbegin(); it != col[j].nzend(); ++it) {
 				tcol[it->ind].emplace_back(j, it->val);
 			}
 		}

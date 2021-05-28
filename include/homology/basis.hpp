@@ -43,6 +43,23 @@ public:
 		return R[k];
 	}
 
+	/**
+	initialize with chain complex C, but do not do reduction
+	*/
+	void initialize(const ChainComplex<MT>& C) {
+		size_t dmax = C.maxdim() + 1;
+		U.resize(dmax);
+		R.resize(dmax);
+		I.resize(dmax);
+		p2c.resize(dmax);
+
+		for (size_t k = 0; k < dmax; ++k) {
+			U[k] = MT::identity(C.dim(k));
+			R[k] = C.boundary[k];
+			p2c[k].resize(C[k].nrow(), bats::NO_IND);
+		}
+	}
+
 private:
 	// set homology indices after reduction is completed
 	void set_indices() {

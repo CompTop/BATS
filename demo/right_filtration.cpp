@@ -74,6 +74,23 @@ auto gen_cube_zigzag(
     return bats::extend_zigzag_filtration(f0, X, eps, n);
 }
 
+auto gen_rips_cylinder(
+    const size_t n_len, // number of points in interval
+    const size_t n_cir, // number of points around circle
+    const double r, // Rips parameter
+    const double eps // levelset radius
+) {
+    auto X = bats::gen_cylinder(n_len, n_cir);
+    auto p = bats::coordinate_projection(X, 0);
+
+    auto R = bats::RipsComplex<bats::SimplicialComplex>(
+        X, bats::Euclidean(), r, 2
+    );
+    R.print_summary();
+
+    return bats::extend_zigzag_filtration(p, R, eps);
+}
+
 // determine Lipschitz constant
 template <typename T>
 T lipschitz_constant(
@@ -113,8 +130,7 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(F, F2(),
             bats::no_optimization_flag(),
-            bats::extra_reduction_flag(),
-            bats::no_apparent_pairs_flag()
+            bats::standard_reduction_flag()
         );
 
         for (auto& pk : ps) {
@@ -135,8 +151,7 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(F, F2(),
             bats::no_optimization_flag(),
-            bats::extra_reduction_flag(),
-            bats::no_apparent_pairs_flag()
+            bats::standard_reduction_flag()
         );
 
         for (auto& pk : ps) {
@@ -147,71 +162,11 @@ int main() {
         }
     }
 
-    // test for generating cubes
-    // for (auto n : {3, 5, 9, 17, 33, 65, 129}) {
     {
-        size_t n = 65;
-        double eps = 8.0;
+        double r = 0.4;
+        double eps = 0.2;
         auto start = std::chrono::steady_clock::now();
-        auto scon = start;
-        bats::CubicalComplex X = bats::CubicalComplex::generate_cube(n);
-        auto end = std::chrono::steady_clock::now();
-        std::cout << "\nBuild cube on " << n << "^3 vertices: "
-            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
-            << "\u03BCs" << std::endl;
-        X.print_summary();
-
-        start = std::chrono::steady_clock::now();
-        auto f0 = smooth_cube_fn(n);
-        end = std::chrono::steady_clock::now();
-        std::cout << "\nBuild smooth cube function: "
-            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
-            << "\u03BCs" << std::endl;
-
-        std::cout << "Lipschitz constant: " << lipschitz_constant(f0, n) << std::endl;
-        auto it1 = std::min_element(f0.begin(), f0.end());
-        std::cout << "minimum: " << *it1 << std::endl;
-        auto it2 = std::max_element(f0.begin(), f0.end());
-        std::cout << "maximum: " << *it2 << std::endl;
-
-
-        start = std::chrono::steady_clock::now();
-        auto val = bats::extend_levelset(f0, X, eps, n);
-        end = std::chrono::steady_clock::now();
-        std::cout << "\nExtend to zigzag filtration: "
-            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
-            << "\u03BCs" << std::endl;
-
-        start = std::chrono::steady_clock::now();
-        auto XF = bats::RightFiltration(X, val);
-        end = std::chrono::steady_clock::now();
-        std::cout << "\nPut in RightFiltration: "
-            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
-            << "\u03BCs" << std::endl;
-        auto econ = end;
-        std::cout << "\nTotal setup: "
-            << std::chrono::duration_cast<std::chrono::microseconds>(econ - scon).count()
-            << "\u03BCs" << std::endl;
-
-
-        start = std::chrono::steady_clock::now();
-        using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(XF, F2(),
-            bats::no_optimization_flag(),
-            bats::standard_reduction_flag(),
-            bats::no_apparent_pairs_flag()
-        );
-        end = std::chrono::steady_clock::now();
-        std::cout << "\nCompute barcode: "
-            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
-            << "\u03BCs" << std::endl;
-    }
-
-    {
-        size_t n = 129;
-        double eps = 8.0;
-        auto start = std::chrono::steady_clock::now();
-        auto F = gen_cube_zigzag(n, eps);
+        auto F = gen_rips_cylinder(10, 10,  r, eps);
         auto end = std::chrono::steady_clock::now();
         std::cout << "\nSetup: "
             << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
@@ -223,14 +178,107 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::barcode(F, F2(),
             bats::no_optimization_flag(),
-            bats::standard_reduction_flag(),
-            bats::apparent_pairs_flag()
+            bats::standard_reduction_flag()
         );
         end = std::chrono::steady_clock::now();
         std::cout << "\nCompute barcode: "
             << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
             << "\u03BCs" << std::endl;
+
+        for (auto& pk : ps) {
+            for (auto p : pk) {
+                if (p.length() > 0)
+                    std::cout << p.str() << std::endl;
+            }
+        }
     }
+
+    // TODO: create Rips complex on samples
+    // extend function on vertices
+
+    // // test for generating cubes
+    // // for (auto n : {3, 5, 9, 17, 33, 65, 129}) {
+    // {
+    //     size_t n = 65;
+    //     double eps = 8.0;
+    //     auto start = std::chrono::steady_clock::now();
+    //     auto scon = start;
+    //     bats::CubicalComplex X = bats::CubicalComplex::generate_cube(n);
+    //     auto end = std::chrono::steady_clock::now();
+    //     std::cout << "\nBuild cube on " << n << "^3 vertices: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //     X.print_summary();
+    //
+    //     start = std::chrono::steady_clock::now();
+    //     auto f0 = smooth_cube_fn(n);
+    //     end = std::chrono::steady_clock::now();
+    //     std::cout << "\nBuild smooth cube function: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //
+    //     std::cout << "Lipschitz constant: " << lipschitz_constant(f0, n) << std::endl;
+    //     auto it1 = std::min_element(f0.begin(), f0.end());
+    //     std::cout << "minimum: " << *it1 << std::endl;
+    //     auto it2 = std::max_element(f0.begin(), f0.end());
+    //     std::cout << "maximum: " << *it2 << std::endl;
+    //
+    //
+    //     start = std::chrono::steady_clock::now();
+    //     auto val = bats::extend_levelset(f0, X, eps, n);
+    //     end = std::chrono::steady_clock::now();
+    //     std::cout << "\nExtend to zigzag filtration: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //
+    //     start = std::chrono::steady_clock::now();
+    //     auto XF = bats::RightFiltration(X, val);
+    //     end = std::chrono::steady_clock::now();
+    //     std::cout << "\nPut in RightFiltration: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //     auto econ = end;
+    //     std::cout << "\nTotal setup: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(econ - scon).count()
+    //         << "\u03BCs" << std::endl;
+    //
+    //
+    //     start = std::chrono::steady_clock::now();
+    //     using F2 = ModP<int, 2>;
+    //     auto ps = bats::barcode(XF, F2(),
+    //         bats::no_optimization_flag(),
+    //         bats::standard_reduction_flag(),
+    //         bats::no_apparent_pairs_flag()
+    //     );
+    //     end = std::chrono::steady_clock::now();
+    //     std::cout << "\nCompute barcode: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    // }
+    //
+    // {
+    //     size_t n = 8;
+    //     double eps = 8.0;
+    //     auto start = std::chrono::steady_clock::now();
+    //     auto F = gen_cube_zigzag(n, eps);
+    //     auto end = std::chrono::steady_clock::now();
+    //     std::cout << "\nSetup: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //     F.complex().print_summary();
+    //
+    //
+    //     start = std::chrono::steady_clock::now();
+    //     using F2 = ModP<int, 2>;
+    //     auto ps = bats::barcode(F, F2(),
+    //         bats::no_optimization_flag(),
+    //         bats::standard_reduction_flag()
+    //     );
+    //     end = std::chrono::steady_clock::now();
+    //     std::cout << "\nCompute barcode: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    // }
 
 
 

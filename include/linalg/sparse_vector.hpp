@@ -328,7 +328,7 @@ public:
 		return indval.emplace_back(k);
 	}
 	inline auto emplace_back(TI ind, TV val) {
-		return emplace_back(key_type(ind, val));
+		return indval.emplace_back(key_type(ind, val));
 	}
 
 	// find nonzero index of last element with index < i

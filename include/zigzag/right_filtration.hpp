@@ -139,6 +139,7 @@ auto prepare_ChainComplex(
 ) {
 	// chain complex
 	auto C = Chain(F.complex(), FT());
+	std::cout << "valid complex: " << C.is_valid_complex() << std::endl;
 
 	// compute permutations to order chain complex
 	// order is by decreasing removal time
@@ -151,6 +152,7 @@ auto prepare_ChainComplex(
 	 	);
 	}
 	C.permute_basis(perm);
+	std::cout << "after perm valid complex: " << C.is_valid_complex() << std::endl;
 
 	// compute order to process column
 	// at same filtration value:
@@ -159,12 +161,13 @@ auto prepare_ChainComplex(
 	std::vector<rfilt_val<T>> filt_order;
 	filt_order.reserve(F.complex().ncells() * 2);
 	for (size_t k = 0; k < C.maxdim() + 1; ++k) {
+		auto permk = perm[k]; //bats::util::inv_perm(perm[k]);
 		for (size_t i = 0; i < F.ncells(k); ++i) {
 			auto pair = F.vals(k)[i];
 			filt_order.emplace_back(
 				rfilt_val(
 					k, // dimension
-					perm[k][i], // index in permuted chain complex
+					permk[i], // index in permuted chain complex
 					i, // index in original complex
 					pair.first, // entry time
 					true // entry
@@ -173,7 +176,7 @@ auto prepare_ChainComplex(
 			filt_order.emplace_back(
 				rfilt_val(
 					k, // dimension
-					perm[k][i], // index in permuted chain complex
+					permk[i], // index in permuted chain complex
 					i, // index in original complex
 					pair.second, // removal time
 					false // removal
@@ -201,19 +204,18 @@ auto prepare_ChainComplex(
 
 }
 
-template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag, typename pairs_flag>
+template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag>
 auto barcode(
 	const RightFiltration<CpxT, T>& F,
 	FT, // field for coefficients
 	opt_flag,
-	reduction_flag,
-	pairs_flag
+	reduction_flag
 ) {
 	auto [C, filt_order] = prepare_ChainComplex(F, FT());
 
-	if constexpr(std::is_same<pairs_flag, apparent_pairs_flag>::value) {
-		C.clear_compress_apparent_pairs();
-	}
+	// if constexpr(std::is_same<pairs_flag, apparent_pairs_flag>::value) {
+	// 	C.clear_compress_apparent_pairs();
+	// }
 
 	// return zigzag_barcode_reduction(C, filt_order);
 	return zigzag_barcode_reduction(C, filt_order, opt_flag(), reduction_flag());

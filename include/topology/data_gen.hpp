@@ -114,19 +114,21 @@ DataSet<T> product_space(
     size_t nz = nx * ny;
     size_t dz = dx + dy;
     //std::cout << 'x' << nx << 'y' << ny << 'z' <<  nz << 'd' << dz << std::endl;
-    Matrix<T> Z(dz, nz);
+    Matrix<T> Z(nz, dz);
     //z.reserve(nz * dz);
-    size_t k = 0;
+    size_t k = 0; // Z index
     for (size_t i = 0; i < nx; i++) {
         for (size_t j = 0; j < ny; j++) {
             // put x[i] in first coordinate block
+            size_t dk = 0; // Z row index
             for (size_t di = 0; di < dx; di++) {
-                Z(k++) = X(i, di);
+                Z(k, dk++) = X(i, di);
             }
             // put y[j] in second coordinate block
             for (size_t dj = 0; dj < dy; dj++) {
-                Z(k++) = Y(j, dj);
+                Z(k, dk++) = Y(j, dj);
             }
+            ++k;
         }
     }
     return DataSet(Z);
@@ -186,7 +188,7 @@ DataSet<T> interval(
     const T max,
     const size_t n
 ) {
-    Matrix<T> x(n,1);
+    Matrix<T> x(n, 1);
     T stride = (max - min) / (n-1);
     x(0) = min;
     for (size_t i = 1; i < n; i++) {

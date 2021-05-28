@@ -197,7 +197,8 @@ template <class TC>
 SparseFact<TC> PLEU(const ColumnMatrix<TC> &A) {
     // LEUP factorization of matrix A
 
-    auto F = LEUP(A.T());
+    auto At = A.T();
+    auto F = LEUP(At);
 
     // take transposes of everything
     F.E = F.E.T();

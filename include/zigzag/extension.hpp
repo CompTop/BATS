@@ -9,6 +9,26 @@ Extension functions for right filtrations
 
 namespace bats {
 
+namespace detail {
+
+template <typename T, typename Iterator>
+std::pair<T,T> simplex_extrema(
+    Iterator it,
+    const Iterator& end,
+    const std::vector<T>& f0
+) {
+    T cmax = std::numeric_limits<T>::min();
+    T cmin = std::numeric_limits<T>::max();
+    while (it != end) {
+        cmin = std::min(cmin, f0[*it]);
+        cmax = std::max(cmax, f0[*it]);
+        ++it;
+    }
+    return std::make_pair(cmin, cmax);
+}
+
+} // namespace detail
+
 /**
 Extension of right filtration on 0-cells to right-filtration on
 all cells in a complex.  Right filtration goes from low to high values
@@ -23,11 +43,36 @@ is removed from the filtration at parameter f0(x) + eps
 Higher-dimensional cells are present for the interval that all faces are also present.
 */
 template <typename T, typename CpxT>
-auto extend_levelset(
+auto extend_zigzag_filtration(
     const std::vector<T>& f0, // function on 0-cells
     const CpxT& X,
     const T eps
-);
+) {
+    std::vector<std::vector<std::pair<T,T>>> val(X.maxdim() + 1);
+    for (size_t k = 0; k < X.maxdim() + 1; ++k) {
+        val[k].resize(X.ncells(k));
+        for (size_t i = 0; i < X.ncells(k); ++i) {
+            auto minmax = detail::simplex_extrema(
+                X.simplex_begin(k, i), X.simplex_end(k, i), f0
+            );
+            T entry = minmax.second - eps;
+            T removal = minmax.first + eps;
+            if (entry > removal) {
+                auto spx = X.get_simplex(k, i);
+                for (auto s : spx) { std::cout << s << ","; }
+                std::cout << std::endl;
+                std::cout << minmax.first << ", " << minmax.second << ", eps = " << eps << std::endl;
+                throw std::runtime_error("entry time after removal!");
+            }
+            val[k][i] = std::make_pair(entry, removal);
+
+        }
+    }
+
+    return RightFiltration(X, val);
+}
+// TODO: fill in above assuming Simplicial complex
+
 
 namespace detail {
 
