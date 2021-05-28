@@ -20,7 +20,7 @@ A class that wraps a complex with a right-filtration. Cells can have entry times
 These intervals are stored as std::pair<T, T>
 */
 template <typename CpxT, typename T=double>
-class RightFiltration
+class ZigzagFiltration
 {
 private:
     CpxT X; // underlying complex
@@ -39,7 +39,7 @@ private:
 
 public:
 
-    RightFiltration() {}
+    ZigzagFiltration() {}
 
     /**
     Initialization which passes arguments to initialize the underlying complex
@@ -47,7 +47,7 @@ public:
     @param args...	passed to complex initialization
     */
     template <class ...Ts>
-    RightFiltration(const Ts (&...args)) : X(args...) {}
+    ZigzagFiltration(const Ts (&...args)) : X(args...) {}
 
 	/**
 	Construct right filtration explicitly on a complex
@@ -60,7 +60,7 @@ public:
 
 	No checks are done to make sure the number of values matches the number of cells
 	*/
-	RightFiltration(
+	ZigzagFiltration(
 		const CpxT& X,
 		const std::vector<std::vector<std::pair<T, T>>>& val
 	) : X(X), val(val) {}
@@ -134,7 +134,7 @@ public:
 // and determine order in which to process everything
 template <typename CpxT, typename T, typename FT>
 auto prepare_ChainComplex(
-	const RightFiltration<CpxT, T>& F,
+	const ZigzagFiltration<CpxT, T>& F,
 	FT // field for coefficients
 ) {
 	// chain complex
@@ -206,7 +206,7 @@ auto prepare_ChainComplex(
 
 template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag>
 auto barcode(
-	const RightFiltration<CpxT, T>& F,
+	const ZigzagFiltration<CpxT, T>& F,
 	FT, // field for coefficients
 	opt_flag,
 	reduction_flag

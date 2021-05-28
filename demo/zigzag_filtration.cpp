@@ -91,6 +91,22 @@ auto gen_rips_cylinder(
     return bats::extend_zigzag_filtration(p, R, eps);
 }
 
+auto gen_rips_line(
+    const size_t n_len, // number of points in interval
+    const double r, // Rips parameter
+    const double eps // levelset radius
+) {
+    auto X = bats::interval(0.0, 1.0, n_len);
+    auto p = bats::coordinate_projection(X, 0);
+
+    auto R = bats::RipsComplex<bats::SimplicialComplex>(
+        X, bats::Euclidean(), r, 2
+    );
+    R.print_summary();
+
+    return bats::extend_zigzag_filtration(p, R, eps);
+}
+
 // determine Lipschitz constant
 template <typename T>
 T lipschitz_constant(
@@ -116,7 +132,7 @@ T lipschitz_constant(
 
 int main() {
 
-    bats::RightFiltration<bats::SimplicialComplex> F;
+    bats::ZigzagFiltration<bats::SimplicialComplex> F;
 
     std::vector<size_t> spx;
     // create a cycle that persists for a while
@@ -163,15 +179,23 @@ int main() {
     }
 
     {
-        double r = 0.4;
-        double eps = 0.2;
+
+        using F2 = ModP<int, 2>;
+        double r = 0.3;
+        double eps = 0.15;
         auto start = std::chrono::steady_clock::now();
-        auto F = gen_rips_cylinder(10, 10,  r, eps);
+        // auto F = gen_rips_cylinder(10, 20,  r, eps);
+        auto F = gen_rips_line(10, r, eps);
         auto end = std::chrono::steady_clock::now();
         std::cout << "\nSetup: "
             << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
             << "\u03BCs" << std::endl;
         F.complex().print_summary();
+
+        auto R = bats::Reduce(F.complex(), F2());
+        for (size_t k = 0; k < R.maxdim()+1; ++k) {
+            std::cout <<"betti " << k << ": " << R.hdim(k) << std::endl;
+        }
 
 
         start = std::chrono::steady_clock::now();
@@ -232,9 +256,9 @@ int main() {
     //         << "\u03BCs" << std::endl;
     //
     //     start = std::chrono::steady_clock::now();
-    //     auto XF = bats::RightFiltration(X, val);
+    //     auto XF = bats::ZigzagFiltration(X, val);
     //     end = std::chrono::steady_clock::now();
-    //     std::cout << "\nPut in RightFiltration: "
+    //     std::cout << "\nPut in ZigzagFiltration: "
     //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
     //         << "\u03BCs" << std::endl;
     //     auto econ = end;

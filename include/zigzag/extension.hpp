@@ -6,6 +6,7 @@ Extension functions for right filtrations
 #include <utility> // pair
 #include <limits> // numeric limits
 #include <algorithm> // std::min, std::max
+#include "zigzag_filtration.hpp"
 
 namespace bats {
 
@@ -69,7 +70,7 @@ auto extend_zigzag_filtration(
         }
     }
 
-    return RightFiltration(X, val);
+    return ZigzagFiltration(X, val);
 }
 // TODO: fill in above assuming Simplicial complex
 
@@ -161,14 +162,14 @@ std::vector<std::vector<std::pair<T,T>>> extend_levelset(
 }
 
 template <typename T>
-RightFiltration<CubicalComplex, T> extend_zigzag_filtration(
+ZigzagFiltration<CubicalComplex, T> extend_zigzag_filtration(
     const std::vector<T>& f0, // function on vertices
     const CubicalComplex& X,
     const T eps,
     const size_t n // length of cube
 ) {
 
-    RightFiltration<CubicalComplex, T> F(3); // initialize filtration
+    ZigzagFiltration<CubicalComplex, T> F(3); // initialize filtration
 
     std::vector<size_t> cube;
     std::pair<T, T> minmax;
