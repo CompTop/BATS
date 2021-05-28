@@ -14,6 +14,30 @@ using namespace bats;
 
 #define N_SEEDS 4
 
+TEST_CASE_TEMPLATE("Col Matrix Permute", F, F2, F3) {
+	using VT = SparseVector<F, size_t>;
+	using MatT = ColumnMatrix<VT>;
+
+	MatT A = MatT::identity(4);
+	std::vector<size_t> p = {2,0,3,1};
+	A.permute_cols(p);
+
+	for (size_t i = 0; i < 4; ++i) {
+		REQUIRE(A(i, p[i]) == 1);
+	}
+
+	// permute back to identity
+	std::vector ip = bats::util::inv_perm(p);
+	A.permute_cols(ip);
+
+	A.permute_rows(p);
+	for (size_t i = 0; i < 4; ++i) {
+		REQUIRE(A(p[i], i) == 1);
+	}
+
+}
+
+
 TEST_CASE_TEMPLATE("Col Matrix Solve", F, F2, F3, F5, Q, int) {
 
 	using VT = SparseVector<F, size_t>;
