@@ -139,7 +139,7 @@ auto prepare_ChainComplex(
 ) {
 	// chain complex
 	auto C = Chain(F.complex(), FT());
-	std::cout << "valid complex: " << C.is_valid_complex() << std::endl;
+	// std::cout << "valid complex: " << C.is_valid_complex() << std::endl;
 
 	// compute permutations to order chain complex
 	// order is by decreasing removal time
@@ -150,9 +150,18 @@ auto prepare_ChainComplex(
 			F.vals(k).end(),
 			[&](const std::pair<T,T>& a, const std::pair<T,T>& b) { return a.second > b.second; }
 	 	);
+		// for (auto i : perm[k]) {std::cout << i << ',';}
+		// std::cout << std::endl;
+		// for (auto i : bats::util::inv_perm(perm[k])) {std::cout << i << ',';}
+		// std::cout << std::endl;
 	}
+	// C[2].print();
+	// C[2][3].print_row();
+	// auto iperm = filtration_iperm(perm);
 	C.permute_basis(perm);
-	std::cout << "after perm valid complex: " << C.is_valid_complex() << std::endl;
+	// C[2].print();
+	// C[2][4].print_row();
+	// std::cout << "after perm valid complex: " << C.is_valid_complex() << std::endl;
 
 	// compute order to process column
 	// at same filtration value:
@@ -162,6 +171,7 @@ auto prepare_ChainComplex(
 	filt_order.reserve(F.complex().ncells() * 2);
 	for (size_t k = 0; k < C.maxdim() + 1; ++k) {
 		auto permk = perm[k]; //bats::util::inv_perm(perm[k]);
+		// auto permk = bats::util::inv_perm(perm[k]);
 		for (size_t i = 0; i < F.ncells(k); ++i) {
 			auto pair = F.vals(k)[i];
 			filt_order.emplace_back(

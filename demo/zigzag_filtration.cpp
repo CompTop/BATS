@@ -178,6 +178,7 @@ int main() {
         }
     }
 
+    std::cout << "\n\nRips on line:\n";
     {
 
         using F2 = ModP<int, 2>;
@@ -216,6 +217,46 @@ int main() {
             }
         }
     }
+
+    // std::cout << "\n\nRips on cylinder:\n";
+    // {
+    //
+    //     using F2 = ModP<int, 2>;
+    //     double r = 0.3;
+    //     double eps = 0.15;
+    //     auto start = std::chrono::steady_clock::now();
+    //     auto F = gen_rips_cylinder(10, 30,  r, eps);
+    //     // auto F = gen_rips_line(10, r, eps);
+    //     auto end = std::chrono::steady_clock::now();
+    //     std::cout << "\nSetup: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //     F.complex().print_summary();
+    //
+    //     auto R = bats::Reduce(F.complex(), F2());
+    //     for (size_t k = 0; k < R.maxdim()+1; ++k) {
+    //         std::cout <<"betti " << k << ": " << R.hdim(k) << std::endl;
+    //     }
+    //
+    //
+    //     start = std::chrono::steady_clock::now();
+    //     using F2 = ModP<int, 2>;
+    //     auto ps = bats::barcode(F, F2(),
+    //         bats::no_optimization_flag(),
+    //         bats::standard_reduction_flag()
+    //     );
+    //     end = std::chrono::steady_clock::now();
+    //     std::cout << "\nCompute barcode: "
+    //         << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+    //         << "\u03BCs" << std::endl;
+    //
+    //     for (auto& pk : ps) {
+    //         for (auto p : pk) {
+    //             if (p.length() > 0)
+    //                 std::cout << p.str() << std::endl;
+    //         }
+    //     }
+    // }
 
     // TODO: create Rips complex on samples
     // extend function on vertices

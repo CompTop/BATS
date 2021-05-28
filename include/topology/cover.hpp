@@ -92,7 +92,7 @@ std::vector<T> coordinate_projection(const DataSet<T> &X, const size_t i) {
     std::vector<T> p;
     p.reserve(X.size());
     for (size_t j = 0; j < X.size(); j++) {
-		std::cout << j << ": " << X(j, i) << std::endl;
+		// std::cout << j << ": " << X(j, i) << std::endl;
 		p.emplace_back(X(j, i));
     }
     return p;

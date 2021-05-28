@@ -281,6 +281,10 @@ ColumnMatrix<VecT> boundary_insertion_map(
 			col[k+1] = VecT(k);
 		}
 	}
+	if (!seen_i) {
+		// if last HRB is boundary pivot
+		col[m] = v; // insert v
+	}
 	return ColumnMatrix(m, n, col);
 }
 
@@ -428,24 +432,26 @@ auto zigzag_barcode_reduction(
 	std::vector<MT> prev_P(C.maxdim() + 1); // used for applying running change of basis
 	std::vector<bool> prev_dir(C.maxdim() + 1, false); // keep track of previous arrow direction
 
-	for (auto& fval : filt_order) {
-		if (fval.dim == 0 && (fval.ind == 78|| fval.ind == 88 || fval.ind == 92)) {
-			std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
-		}
-		if (fval.dim == 1 && (fval.ind == 132 || fval.ind == 153 || fval.ind == 168)) {
-			std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
-		}
-		if (fval.dim == 2 && fval.ind == 72 ) {
-			std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
-		}
-	}
+	// size_t ct = 0;
+	// for (auto& fval : filt_order) {
+	// 	// if (fval.dim == 0 && (fval.ind == 78|| fval.ind == 88 || fval.ind == 92)) {
+	// 	// 	std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
+	// 	// }
+	// 	if (fval.dim == 1 && (fval.ind == 7 || fval.ind == 9 || fval.ind == 10 || fval.cind == 7)) {
+	// 		std::cout << ct << ":\t" << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
+	// 	}
+	// 	if (fval.dim == 2 && fval.ind == 4 ) {
+	// 		std::cout << ct << ":\t" << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
+	// 	}
+	// 	ct++;
+	// }
 	// if (filt_order.size() > 400) {throw std::runtime_error("help!");}
 
 
 	for (auto& fval : filt_order) {
 		size_t k = fval.dim; // dimension
-		std::cout << "cell dimension " << k << "\t\t";
-		std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
+		// std::cout << "cell dimension " << k << "\t\t";
+		// std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
 		if (fval.entry) {
 			// right arrow -->
 			// PLEU factorization
@@ -454,7 +460,7 @@ auto zigzag_barcode_reduction(
 			size_t j = reduce_column(fval.ind, F.R[k], F.U[k], F.p2c[k], tmp, reduction_flag());
 			// determine if homology was created or destroyed
 			if (F.R[k][j].nnz() > 0) {
-				std::cout << "adding boundary" << std::endl;
+				// std::cout << "adding boundary at " << j << "\tfval.ind: " << fval.ind << std::endl;
 				// pivot in final column - homology destroyed
 				// look up pivot of this column
 				auto piv = F.R[k][j].lastnz();
@@ -470,11 +476,13 @@ auto zigzag_barcode_reduction(
 				v = v[F.I[k-1]]; // induced map
 				MT induced_map = detail::boundary_insertion_map(F.I[k-1], i, v);
 				// induced_map.print();
+				// if (k-1 == 0) {std::cout << "-->\n";v.print_row(); induced_map.print();}
 				// apply running change-of-basis
 				detail::apply_basis(induced_map, prev_L[k-1], prev_P[k-1], prev_dir[k-1], true);
 				// induced_map.print();
 				// compute new factorization
 				auto fact = PLEU(induced_map);
+				// if (k-1 == 0) {std::cout << "-->\n";fact.E.print();}
 				// store L, P, and direction for next time
 				prev_L[k-1] = fact.L;
 				prev_P[k-1] = fact.P;
@@ -486,7 +494,7 @@ auto zigzag_barcode_reduction(
 				// delete bar from active_bars and transform initial indices of active_bars
 
 			} else {
-				std::cout << "adding cycle" << std::endl;
+				// std::cout << "adding cycle at " << j << "\tfval.ind: " << fval.ind << std::endl;
 				// final column is cleared - homology created
 				// determine where new vector inserted into HRB
 				auto it = std::upper_bound(F.I[k].begin(), F.I[k].end(), j);
@@ -494,12 +502,13 @@ auto zigzag_barcode_reduction(
 				it = F.I[k].insert(it, j);
 				// induced map
 				MT induced_map = detail::cycle_insertion_map<VecT>(F.I[k], j);
-				// induced_map.print();
+				// if (k == 0) {std::cout << "-->\n";induced_map.print();}
 				// apply running change-of-basis
 				detail::apply_basis(induced_map, prev_L[k], prev_P[k], prev_dir[k], true);
 				// induced_map.print();
 				// compute new factorization
 				auto fact = PLEU(induced_map);
+				// if (k == 0) {std::cout << "-->\n";fact.E.print();}
 				// store L, P, and direction for next time
 				prev_L[k] = fact.L;
 				prev_P[k] = fact.P;
@@ -517,7 +526,7 @@ auto zigzag_barcode_reduction(
 			// we are deleting a column
 			// determine if this will create or destroy homology
 			if (F.R[k][fval.ind].nnz() > 0) {
-				std::cout << "deleting boundary" << std::endl;
+				// std::cout << "deleting boundary at " << fval.ind << std::endl;
 				// homology will be created since we remove column with pivot
 				// look up pivot of this column
 				auto piv = F.R[k][fval.ind].lastnz();
@@ -527,6 +536,7 @@ auto zigzag_barcode_reduction(
 				F.find_preferred_representative(v, k-1); // find preferred rep 1-dimension down
 				v = v[F.I[k-1]]; // induced map
 				MT induced_map = detail::boundary_insertion_map(F.I[k-1], i, v);
+				// if (k-1 == 0) {std::cout << "<--\n";v.print_row(); induced_map.print();}
 				// induced_map.print();
 				// add column i to HRB one dimension down
 				auto it = std::upper_bound(F.I[k-1].begin(), F.I[k-1].end(), i);
@@ -537,6 +547,7 @@ auto zigzag_barcode_reduction(
 				// induced_map.print();
 				// compute new factorization
 				auto fact = UELP(induced_map);
+				// if (k-1 == 0) {std::cout << "<--\n"; fact.E.print();}
 				// store L, P, and direction for next time
 				prev_L[k-1] = fact.L;
 				prev_P[k-1] = fact.P;
@@ -549,10 +560,11 @@ auto zigzag_barcode_reduction(
 				// remove i from list of pivots
 				F.p2c[k][i] = bats::NO_IND;
 			} else {
-				std::cout << "deleting cycle" << std::endl;
+				// std::cout << "deleting cycle at " << fval.ind << std::endl;
 				// homology will be destroyed since we remove zero column
 				// induced map of insertion <--
 				MT induced_map = detail::cycle_insertion_map<VecT>(F.I[k], fval.ind);
+				// if (k == 0) {std::cout << "<--\n";induced_map.print();}
 				// induced_map.print();
 				// delete from HRB
 				F.I[k].pop_back();
@@ -562,6 +574,7 @@ auto zigzag_barcode_reduction(
 				// induced_map.print();
 				// compute new factorization
 				auto fact = UELP(induced_map);
+				// if (k == 0) {std::cout << "<--\n"; fact.E.print();}
 				// store L, P, and direction for next time
 				prev_L[k] = fact.L;
 				prev_P[k] = fact.P;
