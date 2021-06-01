@@ -139,8 +139,7 @@ auto prepare_ChainComplex(
 ) {
 	// chain complex
 	auto C = Chain(F.complex(), FT());
-	// std::cout << "valid complex: " << C.is_valid_complex() << std::endl;
-
+	
 	// compute permutations to order chain complex
 	// order is by decreasing removal time
 	std::vector<std::vector<size_t>> perm(C.maxdim() + 1);
@@ -215,7 +214,6 @@ auto barcode(
 ) {
 	auto [C, filt_order] = prepare_ChainComplex(F, FT());
 
-	// return zigzag_barcode_reduction(C, filt_order);
 	return zigzag_barcode_reduction(C, filt_order, maxdim, opt_flag(), reduction_flag());
 }
 

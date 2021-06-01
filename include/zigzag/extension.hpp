@@ -72,7 +72,6 @@ auto extend_zigzag_filtration(
 
     return ZigzagFiltration(X, val);
 }
-// TODO: fill in above assuming Simplicial complex
 
 
 namespace detail {

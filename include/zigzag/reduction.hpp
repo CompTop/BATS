@@ -75,14 +75,10 @@ size_t reduce_column(
 		auto piv = M[j].lastnz();
 		if (p2c[piv.ind] != bats::NO_IND) {
 			size_t k = p2c[piv.ind];
-			// std::cout << j << ": "; M[j].print_row();
-			// std::cout << k << ": "; M[k].print_row();
 			if (k > j) {
-				// std::cout << k << ',' << j << std::endl;
 				// switch to reducing column to right
 				p2c[piv.ind] = j;
 				std::swap(k, j); // swap values of k and j
-				// std::cout << k << ',' << j << std::endl;
 				piv = M[j].lastnz(); // update pivot after swap
 			}
 			// eliminate pivot in column j
