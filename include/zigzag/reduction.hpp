@@ -450,6 +450,12 @@ auto zigzag_barcode_reduction(
 
 	for (auto& fval : filt_order) {
 		size_t k = fval.dim; // dimension
+		if (fval.dim == 1 && (fval.ind == 585)) {
+			std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
+		}
+		if (fval.dim == 2 && (fval.ind == 1163)) {
+			std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
+		}
 		// std::cout << "cell dimension " << k << "\t\t";
 		// std::cout << fval.dim << ","<< fval.ind << ","<< fval.cind << ","<< fval.val << "," << fval.entry << std::endl;
 		if (fval.entry) {

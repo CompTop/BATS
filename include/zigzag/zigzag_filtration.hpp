@@ -158,7 +158,7 @@ auto prepare_ChainComplex(
 	// C[2].print();
 	// C[2][3].print_row();
 	// auto iperm = filtration_iperm(perm);
-	C.permute_basis(perm);
+	C.ipermute_basis(perm);
 	// C[2].print();
 	// C[2][4].print_row();
 	// std::cout << "after perm valid complex: " << C.is_valid_complex() << std::endl;
@@ -170,8 +170,8 @@ auto prepare_ChainComplex(
 	std::vector<rfilt_val<T>> filt_order;
 	filt_order.reserve(F.complex().ncells() * 2);
 	for (size_t k = 0; k < C.maxdim() + 1; ++k) {
-		auto permk = perm[k]; //bats::util::inv_perm(perm[k]);
-		// auto permk = bats::util::inv_perm(perm[k]);
+		// auto permk = perm[k];
+		auto permk = bats::util::inv_perm(perm[k]);
 		for (size_t i = 0; i < F.ncells(k); ++i) {
 			auto pair = F.vals(k)[i];
 			filt_order.emplace_back(
@@ -222,6 +222,13 @@ auto barcode(
 	reduction_flag
 ) {
 	auto [C, filt_order] = prepare_ChainComplex(F, FT());
+
+	// sanity check
+	std::cout << "betti numbers of permuted complex:\n";
+	auto R = bats::Reduce(C);
+	for (size_t k = 0; k < R.maxdim()+1; ++k) {
+		std::cout <<"betti " << k << ": " << R.hdim(k) << std::endl;
+	}
 
 	// if constexpr(std::is_same<pairs_flag, apparent_pairs_flag>::value) {
 	// 	C.clear_compress_apparent_pairs();

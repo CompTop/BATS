@@ -352,6 +352,10 @@ public:
         bats::util::apply_perm_swap(col, colperm);
     }
 
+	inline void ipermute_cols(const std::vector<size_t> &colperm) {
+        bats::util::apply_iperm_swap(col, colperm);
+    }
+
 	// vj <- a * vj + c * vk
 	// vk <- b * vj + d * vk
 	void mix_cols(const size_t j, const size_t k, const val_type& a, const val_type& b, const val_type& c, const val_type& d) {

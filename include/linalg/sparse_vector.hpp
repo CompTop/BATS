@@ -356,6 +356,8 @@ public:
 
 	// permute in-place
 	// O(nz log nz) where nz is #non-zeros
+	// index i maps to perm[i]
+	// i.e. [2, 0, 1] applied to indval(0, 1) will map to indval(2,1)
 	void permute(const std::vector<size_t>  &perm) {
 		for (size_t i = 0; i < nnz(); i++) {
 			indval[i].ind = perm[indval[i].ind];
@@ -365,7 +367,6 @@ public:
 
 	// apply inverse permutation in-place
 	// O(nz log nz) where nz is #non-zeros
-	// TODO: this is actually applicaiton of permutation
 	void ipermute(const std::vector<size_t>  &perm) {
 		for (size_t i = 0; i < nnz(); i++) {
 			indval[i].ind = perm[indval[i].ind];

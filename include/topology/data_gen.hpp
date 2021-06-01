@@ -220,10 +220,11 @@ DataSet<T> circle(
 */
 DataSet<double> gen_cylinder(
     const size_t n_len,
-    const size_t n_cir
+    const size_t n_cir,
+    const double rad=1.0
 ) {
     auto I = interval(0.0, 1.0, n_len);
-    auto S = circle(1.0, n_cir);
+    auto S = circle(rad, n_cir);
 
     return product_space(I, S);
 }

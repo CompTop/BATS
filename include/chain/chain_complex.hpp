@@ -137,6 +137,26 @@ struct ChainComplex {
 		}
 	}
 
+	void ipermute_basis(size_t k, const std::vector<size_t> &perm) {
+		if (k == 0) {
+			// only worry about boundary[1]
+			boundary[1].permute_rows(bats::util::inv_perm(perm));
+		} else if (k == maxdim()) {
+			boundary[k].ipermute_cols(perm);
+			// only worry about boundary[maxdim()]
+		} else {
+			// need to handle boundary[k] and boundary[k+1]
+			boundary[k].ipermute_cols(perm);
+			boundary[k+1].permute_rows(bats::util::inv_perm(perm));
+		}
+	}
+
+	void ipermute_basis(const std::vector<std::vector<size_t>> &perm) {
+		for (size_t k = 0; k < perm.size(); k++) {
+			ipermute_basis(k, perm[k]);
+		}
+	}
+
 	// tensor product of chain complexes A\otimes B
 	// construct tensor product up to dimension dmax
 	friend ChainComplex tensor_product(const ChainComplex &A, const ChainComplex &B, size_t dmax) {

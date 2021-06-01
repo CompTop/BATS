@@ -208,6 +208,7 @@ inline void apply_perm(
 /*
 uses std::swap instead of copying to temporary vector
 data[i] should map to data[perm[i]]
+i.e. [2, 0, 1] applied to [0.0, 1.0, 2.0] should be [1.0, 2.0, 0.0]
 */
 template <typename T>
 inline void apply_perm_swap(
@@ -218,6 +219,27 @@ inline void apply_perm_swap(
     std::vector<T> tmp(data.size());
     for (size_t i = 0; i < perm.size(); i++) {
         std::swap(tmp[perm[i]], data[i]);
+    }
+    // put tmp in range
+    for (size_t i = 0; i < perm.size(); i++) {
+        std::swap(tmp[i], data[i]);
+    }
+}
+
+/*
+uses std::swap instead of copying to temporary vector
+data[perm[i]] should map to data[i]
+i.e. [2, 0, 1] applied to [0.0, 1.0, 2.0] should be [2.0, 0.0, 1.0]
+*/
+template <typename T>
+inline void apply_iperm_swap(
+    std::vector<T> &data,
+    const std::vector<size_t> &perm
+) {
+    assert (perm.size() == data.size());
+    std::vector<T> tmp(data.size());
+    for (size_t i = 0; i < perm.size(); i++) {
+        std::swap(tmp[i], data[perm[i]]);
     }
     // put tmp in range
     for (size_t i = 0; i < perm.size(); i++) {
