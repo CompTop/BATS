@@ -77,11 +77,11 @@ Functions
 
 - :ref:`exhale_function_util_2permutation_8hpp_1ae98f4fd7114c627f9d066ad1c9bb2293`
 
-- :ref:`exhale_function_util_2permutation_8hpp_1ab226b6f6785f510460e76e5679ea88f4`
-
 - :ref:`exhale_function_util_2permutation_8hpp_1a4931f797f0ebb25435c76cbb40e86f43`
 
 - :ref:`exhale_function_util_2permutation_8hpp_1a45818f0490d1d1067b37f5655a4187f5`
+
+- :ref:`exhale_function_util_2permutation_8hpp_1ab226b6f6785f510460e76e5679ea88f4`
 
 - :ref:`exhale_function_util_2permutation_8hpp_1a833b85b7c5bdce42da75663e1ad378a2`
 

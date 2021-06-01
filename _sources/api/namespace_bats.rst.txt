@@ -165,9 +165,9 @@ Functions
 
 - :ref:`exhale_function_cover_8hpp_1a81f34ad49c42e6abd8a175940307e1cc`
 
-- :ref:`exhale_function_zigzag__filtration_8hpp_1ac4ca2b9fad2d3bf9545a4fec8038c2e0`
-
 - :ref:`exhale_function_sparse_8hpp_1a23389c313645876b11d690d575d5aff4`
+
+- :ref:`exhale_function_zigzag__filtration_8hpp_1ac4ca2b9fad2d3bf9545a4fec8038c2e0`
 
 - :ref:`exhale_function_persistence_2barcode_8hpp_1ab6a5a5e287f1aa3400548761fcaa8a9d`
 
@@ -191,15 +191,15 @@ Functions
 
 - :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
 
+- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
+
+- :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
+
 - :ref:`exhale_function_chain__complex_8hpp_1a9056331ab85ea32b5a39e6306f4e3252`
 
 - :ref:`exhale_function_chain__map_8hpp_1ab7c092cc3ee1bb887889d43a4f7f84dd`
 
 - :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
-
-- :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
-
-- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
 
 - :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
 
@@ -323,9 +323,9 @@ Functions
 
 - :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
 
-- :ref:`exhale_function_nerve_8hpp_1a98421dc44f6d6a48c33e11600b6d31d4`
-
 - :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
+
+- :ref:`exhale_function_nerve_8hpp_1a98421dc44f6d6a48c33e11600b6d31d4`
 
 - :ref:`exhale_function_spherical_8hpp_1a18ff33c5f70f69f3a9fce1831b50e683`
 
@@ -397,9 +397,9 @@ Functions
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a38c3a3e30e0973b5736dc47da0bbcd25`
 
-- :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
-
 - :ref:`exhale_function_functors_8hpp_1a0f99b26c184a52dddf196d766faa695a`
+
+- :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997`
 

@@ -71,7 +71,7 @@ Functions
 
 - :ref:`exhale_function_zigzag_2extension_8hpp_1ad5d02d8d39f74d0ce062b53df7d6f892`
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1a25bfa67b704ebd6aff14a567b783c65c`
-
 - :ref:`exhale_function_zigzag_2extension_8hpp_1abfa1afde3e577d8977d8286dbf23679d`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a25bfa67b704ebd6aff14a567b783c65c`
 
