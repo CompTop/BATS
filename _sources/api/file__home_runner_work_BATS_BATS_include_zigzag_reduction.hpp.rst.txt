@@ -1,0 +1,88 @@
+
+.. _file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp:
+
+File reduction.hpp
+==================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_zigzag>` (``/home/runner/work/BATS/BATS/include/zigzag``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/zigzag/reduction.hpp``)
+-------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``homology/reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+- ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
+
+- ``linalg/sparse_fact.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_sparse_fact.hpp`)
+
+- ``utility``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__detail`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1rfilt__val`
+
+- :ref:`exhale_struct_structbats_1_1ZigzagPair`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1ad8894aae2042b4cb4da68931864d5845`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a294495708e8abdd218e3a14c6edb6531`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a5d988513a6d8c40176b299d2b545f5de`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a0655c2fb5a3639843fb2b6bd4fd76b50`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1abc0b1c9a8e7a2f7b0f56df12c8a23665`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a09a1c141c1ddcf9e67a42fa4b2196ed4`
+

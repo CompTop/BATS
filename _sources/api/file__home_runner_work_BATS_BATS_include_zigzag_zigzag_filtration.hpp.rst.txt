@@ -1,0 +1,76 @@
+
+.. _file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp:
+
+File zigzag_filtration.hpp
+==========================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_zigzag>` (``/home/runner/work/BATS/BATS/include/zigzag``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/zigzag/zigzag_filtration.hpp``)
+---------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``chain/chain_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`)
+
+- ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+- ``type_traits``
+
+- ``utility``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbats_1_1ZigzagFiltration`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_zigzag__filtration_8hpp_1ac4ca2b9fad2d3bf9545a4fec8038c2e0`
+
+- :ref:`exhale_function_zigzag__filtration_8hpp_1a8b13aa90b2503ce50515a5371fab11fb`
+

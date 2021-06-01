@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2extension_8hpp_1aa3786aaa9529d8dd73eb57f7b08e5000:
+
+Template Function extend_filtration
+===================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: extend_filtration(const CpxT&, std::function<T(const std::vector<size_t>&)>&)

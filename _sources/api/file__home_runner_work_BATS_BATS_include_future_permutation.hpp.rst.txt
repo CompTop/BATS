@@ -72,7 +72,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_future_2permutation_8hpp_1aa111182cfaa380b51038ef68cf87cefc`
-
 - :ref:`exhale_function_future_2permutation_8hpp_1ada334aabf4835b665d5c2fb1e152c590`
+
+- :ref:`exhale_function_future_2permutation_8hpp_1aa111182cfaa380b51038ef68cf87cefc`
 

@@ -1,0 +1,13 @@
+.. _exhale_function_homology_2reduction_8hpp_1a862049151ea00a23c55aca9e68b5b036:
+
+Template Function bats::extract_basis_indices(const MT&)
+========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::extract_basis_indices(const MT&)

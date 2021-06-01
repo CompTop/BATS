@@ -1,0 +1,77 @@
+
+.. _file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp:
+
+File extension.hpp
+==================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_zigzag>` (``/home/runner/work/BATS/BATS/include/zigzag``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/zigzag/extension.hpp``)
+-------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``algorithm``
+
+- ``limits``
+
+- ``utility``
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+- ``zigzag_filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+- :ref:`namespace_bats__detail`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a539d85347c64fc7e705971166a61aa87`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a157917f4f200c0ec56d1b7c849693d1f`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a111f868927b728fbc2db34a31458f2dd`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1ad5d02d8d39f74d0ce062b53df7d6f892`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a25bfa67b704ebd6aff14a567b783c65c`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1abfa1afde3e577d8977d8286dbf23679d`
+

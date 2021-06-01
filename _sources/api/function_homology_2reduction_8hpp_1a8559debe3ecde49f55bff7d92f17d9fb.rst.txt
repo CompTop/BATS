@@ -1,0 +1,13 @@
+.. _exhale_function_homology_2reduction_8hpp_1a8559debe3ecde49f55bff7d92f17d9fb:
+
+Template Function bats::reduce_matrix(ColumnMatrix<TVec>&, bats::extra_reduction_flag)
+======================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_matrix(ColumnMatrix<TVec>&, bats::extra_reduction_flag)

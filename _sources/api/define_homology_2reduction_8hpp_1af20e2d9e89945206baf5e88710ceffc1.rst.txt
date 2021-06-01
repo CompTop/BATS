@@ -1,0 +1,13 @@
+.. _exhale_define_homology_2reduction_8hpp_1af20e2d9e89945206baf5e88710ceffc1:
+
+Define p2c_type
+===============
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: p2c_type

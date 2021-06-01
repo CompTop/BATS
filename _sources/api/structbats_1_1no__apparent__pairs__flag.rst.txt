@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1no__apparent__pairs__flag:
+
+Struct no_apparent_pairs_flag
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::no_apparent_pairs_flag
+   :members:
+   :protected-members:
+   :undoc-members:

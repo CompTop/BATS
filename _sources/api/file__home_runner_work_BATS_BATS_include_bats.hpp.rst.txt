@@ -49,6 +49,8 @@ Includes
 
 - ``topology.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`)
 
+- ``zigzag.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_zigzag.hpp`)
+
 
 
 

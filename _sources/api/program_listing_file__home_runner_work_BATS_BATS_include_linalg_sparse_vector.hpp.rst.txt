@@ -223,6 +223,8 @@ Program Listing for File sparse_vector.hpp
        inline auto nzend(){ return indval.end(); }
    
        inline void clear() {indval.clear();}
+       // clear and release memory by swapping with empty vector.
+       inline void clear_dealloc() { std::vector<key_type>().swap(indval); }
    
        void clear_zeros() {
            std::vector<key_type> indval2;
@@ -234,8 +236,6 @@ Program Listing for File sparse_vector.hpp
            indval = indval2;
        }
    
-       // clear indices marked true in c
-       // i.e. remove entry i if c[i] is true
        void clear_inds(const std::vector<bool> &c) {
            std::vector<key_type> indval2;
            for (auto iv : indval) {
@@ -245,6 +245,20 @@ Program Listing for File sparse_vector.hpp
                }
            }
            indval = indval2;
+       }
+       // use temporary vector
+       void clear_inds(
+           const std::vector<bool> &c,
+           std::vector<key_type>& tmp
+       ) {
+           tmp.clear(); // clear temporary vector
+           for (auto iv : indval) {
+               // put indval pair in if it is not marked for clearing
+               if (!c[iv.ind]) {
+                   tmp.emplace_back(iv);
+               }
+           }
+           std::swap(indval, tmp);
        }
    
        // nnz
@@ -322,7 +336,7 @@ Program Listing for File sparse_vector.hpp
            return indval.emplace_back(k);
        }
        inline auto emplace_back(TI ind, TV val) {
-           return emplace_back(key_type(ind, val));
+           return indval.emplace_back(key_type(ind, val));
        }
    
        // find nonzero index of last element with index < i
@@ -349,7 +363,9 @@ Program Listing for File sparse_vector.hpp
    
    
        // permute in-place
-       // TODO: this is actually applicaiton of inverse permutation
+       // O(nz log nz) where nz is #non-zeros
+       // index i maps to perm[i]
+       // i.e. [2, 0, 1] applied to indval(0, 1) will map to indval(2,1)
        void permute(const std::vector<size_t>  &perm) {
            for (size_t i = 0; i < nnz(); i++) {
                indval[i].ind = perm[indval[i].ind];

@@ -1,0 +1,13 @@
+.. _exhale_function_homology_2reduction_8hpp_1a764dd99ed0c79342a1cf68c6f73804c8:
+
+Function bats::get_clearing_inds
+================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::get_clearing_inds(const std::vector<size_t>&)

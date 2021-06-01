@@ -469,7 +469,7 @@
         <span class="n">reserve</span><span class="p">(</span><span class="n">maxdim</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="kt">void</span> <span class="n">print_summary</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">print_summary</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
         <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;CubicalComplex, maxdim = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
         <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">dim &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; cells&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -517,13 +517,22 @@
         <span class="k">return</span> <span class="n">spx</span><span class="p">[</span><span class="n">dim</span><span class="p">].</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">__maxdim</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
     <span class="p">}</span>
 
-    <span class="c1">// return simplex i in dimension dim</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_cube</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
-        <span class="n">s</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">__maxdim</span><span class="p">);</span>
+    <span class="c1">// return cube i in dimension dim</span>
+    <span class="kt">void</span> <span class="n">get_cube</span><span class="p">(</span>
+        <span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="c1">// cube dimension</span>
+        <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="c1">// cube index</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">s</span> <span class="c1">// cube will be put in this vector</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
         <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">cell_begin</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">cell_end</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="n">it</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">s</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
         <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_cube</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">__maxdim</span><span class="p">);</span>
+        <span class="n">get_cube</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
         <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -637,6 +646,20 @@
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 
+    <span class="k">static</span> <span class="n">CubicalComplex</span> <span class="n">generate_cube</span><span class="p">(</span>
+        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Cube must have at least 2 verices in each dimension.&quot;</span><span class="p">);}</span>
+        <span class="n">CubicalComplex</span> <span class="n">X</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="mi">-1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="mi">-1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="mi">-1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">X</span><span class="p">.</span><span class="n">add_recursive</span><span class="p">({</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">X</span><span class="p">;</span>
+    <span class="p">}</span>
 
 <span class="p">};</span>
 

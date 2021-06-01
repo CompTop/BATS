@@ -81,7 +81,7 @@ Functions
 
 - :ref:`exhale_function_data__gen_8hpp_1a4579e599b40f46a7047e1a37afac31be`
 
-- :ref:`exhale_function_data__gen_8hpp_1ac513f2f74bf8caf42067576c246f098b`
+- :ref:`exhale_function_data__gen_8hpp_1ad8f7933b7f032c10735171e68d829583`
 
 - :ref:`exhale_function_data__gen_8hpp_1a8d27f560303a5e8697dd1ef19c54267f`
 

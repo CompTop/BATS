@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2reduction_8hpp_1ad8894aae2042b4cb4da68931864d5845:
+
+Template Function bats::detail::apply_basis
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::detail::apply_basis(MT&, MT&, MT&, const bool, const bool)

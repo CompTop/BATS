@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2extension_8hpp_1a539d85347c64fc7e705971166a61aa87:
+
+Template Function bats::detail::cube_extrema
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::detail::cube_extrema(const std::vector<T>&, const std::vector<size_t>&, const size_t)

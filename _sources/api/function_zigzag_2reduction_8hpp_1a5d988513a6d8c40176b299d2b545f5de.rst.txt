@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2reduction_8hpp_1a5d988513a6d8c40176b299d2b545f5de:
+
+Template Function bats::detail::cycle_insertion_map
+===================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::detail::cycle_insertion_map(const std::vector<size_t>&, const size_t)

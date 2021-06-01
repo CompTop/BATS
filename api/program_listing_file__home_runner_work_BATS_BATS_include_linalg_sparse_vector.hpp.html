@@ -380,6 +380,8 @@
     <span class="kr">inline</span> <span class="k">auto</span> <span class="n">nzend</span><span class="p">(){</span> <span class="k">return</span> <span class="n">indval</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="p">}</span>
 
     <span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{</span><span class="n">indval</span><span class="p">.</span><span class="n">clear</span><span class="p">();}</span>
+    <span class="c1">// clear and release memory by swapping with empty vector.</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">clear_dealloc</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;</span><span class="p">().</span><span class="n">swap</span><span class="p">(</span><span class="n">indval</span><span class="p">);</span> <span class="p">}</span>
 
     <span class="kt">void</span> <span class="n">clear_zeros</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;</span> <span class="n">indval2</span><span class="p">;</span>
@@ -391,8 +393,6 @@
         <span class="n">indval</span> <span class="o">=</span> <span class="n">indval2</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1">// clear indices marked true in c</span>
-    <span class="c1">// i.e. remove entry i if c[i] is true</span>
     <span class="kt">void</span> <span class="n">clear_inds</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;</span> <span class="n">indval2</span><span class="p">;</span>
         <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">iv</span> <span class="p">:</span> <span class="n">indval</span><span class="p">)</span> <span class="p">{</span>
@@ -402,6 +402,20 @@
             <span class="p">}</span>
         <span class="p">}</span>
         <span class="n">indval</span> <span class="o">=</span> <span class="n">indval2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// use temporary vector</span>
+    <span class="kt">void</span> <span class="n">clear_inds</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;&amp;</span> <span class="n">tmp</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">tmp</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// clear temporary vector</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">iv</span> <span class="p">:</span> <span class="n">indval</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// put indval pair in if it is not marked for clearing</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">c</span><span class="p">[</span><span class="n">iv</span><span class="p">.</span><span class="n">ind</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">iv</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">indval</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="c1">// nnz</span>
@@ -479,7 +493,7 @@
         <span class="k">return</span> <span class="n">indval</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="kr">inline</span> <span class="k">auto</span> <span class="n">emplace_back</span><span class="p">(</span><span class="n">TI</span> <span class="n">ind</span><span class="p">,</span> <span class="n">TV</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">indval</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">));</span>
     <span class="p">}</span>
 
     <span class="c1">// find nonzero index of last element with index &lt; i</span>
@@ -506,7 +520,9 @@
 
 
     <span class="c1">// permute in-place</span>
-    <span class="c1">// TODO: this is actually applicaiton of inverse permutation</span>
+    <span class="c1">// O(nz log nz) where nz is #non-zeros</span>
+    <span class="c1">// index i maps to perm[i]</span>
+    <span class="c1">// i.e. [2, 0, 1] applied to indval(0, 1) will map to indval(2,1)</span>
     <span class="kt">void</span> <span class="n">permute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span>  <span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nnz</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">indval</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">ind</span> <span class="o">=</span> <span class="n">perm</span><span class="p">[</span><span class="n">indval</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">ind</span><span class="p">];</span>

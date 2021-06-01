@@ -22,6 +22,7 @@ Subdirectories
 - :ref:`dir__home_runner_work_BATS_BATS_include_quiver`
 - :ref:`dir__home_runner_work_BATS_BATS_include_topology`
 - :ref:`dir__home_runner_work_BATS_BATS_include_util`
+- :ref:`dir__home_runner_work_BATS_BATS_include_zigzag`
 
 
 Files
@@ -38,5 +39,6 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_quiver.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag.hpp`
 
 

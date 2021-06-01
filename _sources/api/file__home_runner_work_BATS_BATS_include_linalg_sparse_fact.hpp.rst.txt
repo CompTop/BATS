@@ -43,6 +43,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_linalg.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
 
 

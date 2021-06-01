@@ -104,6 +104,7 @@ Program Listing for File cover.hpp
        std::vector<T> p;
        p.reserve(X.size());
        for (size_t j = 0; j < X.size(); j++) {
+           // std::cout << j << ": " << X(j, i) << std::endl;
            p.emplace_back(X(j, i));
        }
        return p;

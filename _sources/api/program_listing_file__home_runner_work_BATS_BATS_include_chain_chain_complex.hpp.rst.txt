@@ -125,14 +125,15 @@ Program Listing for File chain_complex.hpp
        void permute_basis(size_t k, const std::vector<size_t> &perm) {
            if (k == 0) {
                // only worry about boundary[1]
-               boundary[1].ipermute_rows(bats::util::inv_perm(perm));
+               boundary[1].permute_rows(perm);
            } else if (k == maxdim()) {
-               boundary[maxdim()].permute_cols(perm);
+               boundary[k].permute_cols(perm);
                // only worry about boundary[maxdim()]
            } else {
                // need to handle boundary[k] and boundary[k+1]
                boundary[k].permute_cols(perm);
-               boundary[k+1].ipermute_rows(bats::util::inv_perm(perm));
+               boundary[k+1].permute_rows(perm);
+               // boundary[k+1].ipermute_rows(bats::util::inv_perm(perm));
            }
        }
    
@@ -140,6 +141,26 @@ Program Listing for File chain_complex.hpp
        void permute_basis(const std::vector<std::vector<size_t>> &perm) {
            for (size_t k = 0; k < perm.size(); k++) {
                permute_basis(k, perm[k]);
+           }
+       }
+   
+       void ipermute_basis(size_t k, const std::vector<size_t> &perm) {
+           if (k == 0) {
+               // only worry about boundary[1]
+               boundary[1].permute_rows(bats::util::inv_perm(perm));
+           } else if (k == maxdim()) {
+               boundary[k].ipermute_cols(perm);
+               // only worry about boundary[maxdim()]
+           } else {
+               // need to handle boundary[k] and boundary[k+1]
+               boundary[k].ipermute_cols(perm);
+               boundary[k+1].permute_rows(bats::util::inv_perm(perm));
+           }
+       }
+   
+       void ipermute_basis(const std::vector<std::vector<size_t>> &perm) {
+           for (size_t k = 0; k < perm.size(); k++) {
+               ipermute_basis(k, perm[k]);
            }
        }
    
@@ -179,6 +200,47 @@ Program Listing for File chain_complex.hpp
                }
            }
            return C;
+       }
+   
+       void clear_compress_apparent_pairs() {
+   
+           std::vector<bool> comp_inds;
+           std::vector<bool> clear_inds;
+           for (size_t dim = 1; dim < maxdim() + 1; ++dim) {
+               // prepare clearing and compression indices
+               clear_inds.resize(boundary[dim].nrow());
+               std::fill(clear_inds.begin(), clear_inds.end(), false);
+               comp_inds.resize(boundary[dim].ncol());
+               std::fill(comp_inds.begin(), comp_inds.end(), false);
+               // look at pivots to determine clearing/compression inds
+               for (size_t j = 0; j < boundary[dim].ncol(); ++j) {
+                   auto it = boundary[dim][j].nzend();
+                   // check that nnz > 0
+                   if (it != boundary[dim][j].nzbegin()) {
+                       --it; // point to last nonzero
+                       size_t i = it->ind; // pivot index
+                       if (!clear_inds[i]) {
+                           // this is the first time we have seen this pivot
+                           // mark j as a compression ind
+                           comp_inds[j] = true;
+                           // mark i as a clearing ind
+                           clear_inds[i] = true;
+                       }
+                   }
+               }
+               // we can now clear indices one dimension lower
+               if (dim > 1) {
+                   boundary[dim-1].clear_cols(clear_inds);
+               }
+               // we can now compress indices one dimension higher
+               if (dim < maxdim()) {
+                   boundary[dim+1].clear_rows(comp_inds);
+               }
+           }
+   
+   
+   
+   
        }
    
        inline friend ChainComplex tensor_product(

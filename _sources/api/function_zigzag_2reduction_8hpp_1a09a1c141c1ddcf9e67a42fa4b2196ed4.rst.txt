@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2reduction_8hpp_1a09a1c141c1ddcf9e67a42fa4b2196ed4:
+
+Template Function bats::zigzag_barcode_reduction
+================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag_barcode_reduction(const ChainComplex<MT>&, const std::vector<rfilt_val<T>>&, ssize_t, opt_flag, reduction_flag)

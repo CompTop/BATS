@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1rfilt__val:
+
+Template Struct rfilt_val
+=========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::rfilt_val
+   :members:
+   :protected-members:
+   :undoc-members:

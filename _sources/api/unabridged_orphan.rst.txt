@@ -73,6 +73,11 @@ Directories
 
    dir__home_runner_work_BATS_BATS_include_util.rst
 
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_runner_work_BATS_BATS_include_zigzag.rst
+
 Files
 *****
 
@@ -226,6 +231,11 @@ Files
    :maxdepth: 5
 
    file__home_runner_work_BATS_BATS_include_filtration_extension.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp.rst
 
 .. toctree::
    :maxdepth: 5
@@ -415,6 +425,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file__home_runner_work_BATS_BATS_include_filtration_rips.hpp.rst
 
 .. toctree::
@@ -516,6 +531,16 @@ Files
    :maxdepth: 5
 
    file__home_runner_work_BATS_BATS_include_future_util.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_zigzag.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp.rst
 
 .. toctree::
    :maxdepth: 5

@@ -366,7 +366,8 @@
 <span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">PLEU</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// LEUP factorization of matrix A</span>
 
-    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">T</span><span class="p">());</span>
+    <span class="k">auto</span> <span class="n">At</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">At</span><span class="p">);</span>
 
     <span class="c1">// take transposes of everything</span>
     <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
