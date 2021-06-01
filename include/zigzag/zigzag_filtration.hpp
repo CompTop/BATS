@@ -129,7 +129,7 @@ public:
 
 };
 
-// TODO: write a function to extract chain complex,
+
 // permute complex to processing order for reduction
 // and determine order in which to process everything
 template <typename CpxT, typename T, typename FT>
@@ -150,18 +150,9 @@ auto prepare_ChainComplex(
 			F.vals(k).end(),
 			[&](const std::pair<T,T>& a, const std::pair<T,T>& b) { return a.second > b.second; }
 	 	);
-		// for (auto i : perm[k]) {std::cout << i << ',';}
-		// std::cout << std::endl;
-		// for (auto i : bats::util::inv_perm(perm[k])) {std::cout << i << ',';}
-		// std::cout << std::endl;
+
 	}
-	// C[2].print();
-	// C[2][3].print_row();
-	// auto iperm = filtration_iperm(perm);
 	C.ipermute_basis(perm);
-	// C[2].print();
-	// C[2][4].print_row();
-	// std::cout << "after perm valid complex: " << C.is_valid_complex() << std::endl;
 
 	// compute order to process column
 	// at same filtration value:
@@ -217,25 +208,15 @@ auto prepare_ChainComplex(
 template <typename CpxT, typename T, typename FT, typename opt_flag, typename reduction_flag>
 auto barcode(
 	const ZigzagFiltration<CpxT, T>& F,
+	ssize_t maxdim,
 	FT, // field for coefficients
 	opt_flag,
 	reduction_flag
 ) {
 	auto [C, filt_order] = prepare_ChainComplex(F, FT());
 
-	// sanity check
-	std::cout << "betti numbers of permuted complex:\n";
-	auto R = bats::Reduce(C);
-	for (size_t k = 0; k < R.maxdim()+1; ++k) {
-		std::cout <<"betti " << k << ": " << R.hdim(k) << std::endl;
-	}
-
-	// if constexpr(std::is_same<pairs_flag, apparent_pairs_flag>::value) {
-	// 	C.clear_compress_apparent_pairs();
-	// }
-
 	// return zigzag_barcode_reduction(C, filt_order);
-	return zigzag_barcode_reduction(C, filt_order, opt_flag(), reduction_flag());
+	return zigzag_barcode_reduction(C, filt_order, maxdim, opt_flag(), reduction_flag());
 }
 
 

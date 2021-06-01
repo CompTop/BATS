@@ -144,7 +144,7 @@ int main() {
         F.complex().print_summary();
 
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, F2(),
+        auto ps = bats::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
@@ -165,7 +165,7 @@ int main() {
         F.complex().print_summary();
 
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, F2(),
+        auto ps = bats::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
@@ -201,7 +201,7 @@ int main() {
 
         start = std::chrono::steady_clock::now();
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, F2(),
+        auto ps = bats::barcode(F, 0, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
@@ -241,7 +241,7 @@ int main() {
 
         start = std::chrono::steady_clock::now();
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, F2(),
+        auto ps = bats::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
