@@ -81,7 +81,7 @@ Functions
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a3c71bc5aa2121275620947fff0b8c4fb`
 
-- :ref:`exhale_function_topology_2rips_8hpp_1af499fa3dcc5c2d190d1e78b4790eb9ec`
-
 - :ref:`exhale_function_topology_2rips_8hpp_1a1b8a18155dcdf33385902ce4eee29b84`
+
+- :ref:`exhale_function_topology_2rips_8hpp_1af499fa3dcc5c2d190d1e78b4790eb9ec`
 

@@ -119,9 +119,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_chain__complex_8hpp_1ac2b99b961e41a72ed5680f3170d249ec`
-
 - :ref:`exhale_function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a`
+
+- :ref:`exhale_function_chain__complex_8hpp_1ac2b99b961e41a72ed5680f3170d249ec`
 
 - :ref:`exhale_function_functors_8hpp_1a87f0bfc7ef050dbb40707104184ab050`
 
@@ -135,11 +135,11 @@ Functions
 
 - :ref:`exhale_function_filtered__basis_8hpp_1a4bb6b250a088ddf81546cf9e225819fa`
 
+- :ref:`exhale_function_topology_2flag_8hpp_1a85161d655d3fe9f727bc5a743d6ba05f`
+
 - :ref:`exhale_function_filtration_2flag_8hpp_1af9b2781bd3d42f4ec2abc965707c5ce4`
 
 - :ref:`exhale_function_filtration_2flag_8hpp_1a3354ec1103ef97dd0c11b1007156e382`
-
-- :ref:`exhale_function_topology_2flag_8hpp_1a85161d655d3fe9f727bc5a743d6ba05f`
 
 - :ref:`exhale_function_filtration_2flag_8hpp_1a02204eecf1d35d518e2e3b33e96e54eb`
 
@@ -401,11 +401,11 @@ Functions
 
 - :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
 
+- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
+
 - :ref:`exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a8d88d925f0c8a77c597d46e7b073aba7`
-
-- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a9a1dc66df690a01219961c0dff46532e`
 

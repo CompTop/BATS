@@ -176,7 +176,7 @@
 <p>A zigzag filtration allows cells to enter and exit a complex at specified
 parameters.  Construction is similar to a filtration, but you need to specify
 entry as well as exit time.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">bats</span><span class="o">::</span><span class="n">Filtration</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">SimplicialComplex</span><span class="o">&gt;</span> <span class="n">F</span><span class="p">;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">bats</span><span class="o">::</span><span class="n">ZigzagFiltration</span><span class="o">&lt;</span><span class="n">bats</span><span class="o">::</span><span class="n">SimplicialComplex</span><span class="o">&gt;</span> <span class="n">F</span><span class="p">;</span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">spx</span><span class="p">;</span>
 <span class="c1">// create a cycle that persists for a while</span>
@@ -188,7 +188,7 @@ entry as well as exit time.</p>
 <span class="n">spx</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span> <span class="n">F</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">spx</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You can compute a barcode using <code class="code docutils literal notranslate"><span class="pre">bats.barcode</span></code></p>
+<p>You can compute a barcode using <code class="code docutils literal notranslate"><span class="pre">bats::barcode</span></code></p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">F2</span> <span class="o">=</span> <span class="n">ModP</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">auto</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">barcode</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">F2</span><span class="p">(),</span>
    <span class="n">bats</span><span class="o">::</span><span class="n">no_optimization_flag</span><span class="p">(),</span>
