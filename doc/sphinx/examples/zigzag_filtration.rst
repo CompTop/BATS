@@ -8,7 +8,7 @@ entry as well as exit time.
 .. code-block:: cpp
 
 
-   bats::Filtration<double, bats::SimplicialComplex> F;
+   bats::ZigzagFiltration<bats::SimplicialComplex> F;
 
    std::vector<size_t> spx;
    // create a cycle that persists for a while
@@ -20,7 +20,7 @@ entry as well as exit time.
    spx = {0,1,2}; F.add(2.0, 4.0, spx);
 
 
-You can compute a barcode using :code:`bats.barcode`
+You can compute a barcode using :code:`bats::barcode`
 
 .. code-block:: cpp
 

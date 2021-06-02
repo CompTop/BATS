@@ -219,6 +219,7 @@ int main() {
     }
 
     std::cout << "\n\nRips on cylinder:\n";
+    // for (size_t loop = 0; loop < 10; ++loop){ // for profiling
     {
 
         using F2 = ModP<int, 2>;
