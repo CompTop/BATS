@@ -72,7 +72,7 @@ Functions
 
 - :ref:`exhale_function_filtration_2filtration_8hpp_1af381546c6d1b032109fd0e09e12a3ec3`
 
-- :ref:`exhale_function_filtration_2filtration_8hpp_1ab48c10453892c01d19b4b98b1107f17c`
-
 - :ref:`exhale_function_filtration_2filtration_8hpp_1a7683d2e4cf71230efd2ca92fc8411cc1`
+
+- :ref:`exhale_function_filtration_2filtration_8hpp_1ab48c10453892c01d19b4b98b1107f17c`
 

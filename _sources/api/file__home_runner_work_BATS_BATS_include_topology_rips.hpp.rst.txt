@@ -69,9 +69,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_topology_2rips_8hpp_1a8d88d925f0c8a77c597d46e7b073aba7`
-
 - :ref:`exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997`
+
+- :ref:`exhale_function_topology_2rips_8hpp_1a8d88d925f0c8a77c597d46e7b073aba7`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a9a1dc66df690a01219961c0dff46532e`
 
@@ -81,7 +81,7 @@ Functions
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a3c71bc5aa2121275620947fff0b8c4fb`
 
-- :ref:`exhale_function_topology_2rips_8hpp_1a1b8a18155dcdf33385902ce4eee29b84`
-
 - :ref:`exhale_function_topology_2rips_8hpp_1af499fa3dcc5c2d190d1e78b4790eb9ec`
+
+- :ref:`exhale_function_topology_2rips_8hpp_1a1b8a18155dcdf33385902ce4eee29b84`
 

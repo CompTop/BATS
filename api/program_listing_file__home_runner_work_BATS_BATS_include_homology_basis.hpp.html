@@ -431,14 +431,14 @@
         <span class="k">auto</span> <span class="n">iperm</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// only worry about boundary[1]</span>
-            <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">ipermute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
+            <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
         <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">maxdim</span><span class="p">())</span> <span class="p">{</span>
             <span class="c1">// only need to worry about rows of U[k]</span>
-            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ipermute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span> <span class="c1">// inverse perm here</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
             <span class="c1">// need to handle boundary[k] and boundary[k+1]</span>
-            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ipermute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">ipermute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span> <span class="c1">// inverse perm here</span>
+            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span> <span class="c1">// regular perm here</span>
         <span class="p">}</span>
         <span class="c1">// at end of this, homology classes are invalidated</span>
     <span class="p">}</span>
