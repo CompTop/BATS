@@ -265,14 +265,14 @@ public:
 		auto iperm = bats::util::inv_perm(perm);
 		if (k == 0) {
 			// only worry about boundary[1]
-			R[1].ipermute_rows(iperm);
+			R[1].permute_rows(iperm);
 		} else if (k == maxdim()) {
 			// only need to worry about rows of U[k]
-			U[k].ipermute_rows(iperm);
+			U[k].permute_rows(iperm); // inverse perm here
 		} else {
 			// need to handle boundary[k] and boundary[k+1]
-			U[k].ipermute_rows(iperm);
-			R[k+1].ipermute_rows(iperm);
+			U[k].permute_rows(iperm); // inverse perm here
+			R[k+1].permute_rows(iperm); // regular perm here
 		}
 		// at end of this, homology classes are invalidated
 	}
