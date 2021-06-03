@@ -9,6 +9,7 @@ Extension functions for right filtrations
 #include "zigzag_filtration.hpp"
 
 namespace bats {
+namespace zigzag {
 
 namespace detail {
 
@@ -190,5 +191,5 @@ ZigzagFiltration<CubicalComplex, T> extend_zigzag_filtration(
 
 }
 
-
+} // namespace zigzag
 } // namespace bats

@@ -12,6 +12,7 @@ Zigzag reduction algorithm
 //#include <persistence/barcode.hpp> // PersistencePair
 
 namespace bats {
+namespace zigzag {
 
 
 // /**
@@ -500,5 +501,5 @@ auto zigzag_barcode_reduction(
 }
 
 
-
+} // namespace zigzag
 } // namespace bats

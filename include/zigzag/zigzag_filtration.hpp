@@ -10,6 +10,7 @@ Right filtrations for complexes
 #include <type_traits>
 
 namespace bats {
+namespace zigzag {
 
 
 
@@ -139,7 +140,7 @@ auto prepare_ChainComplex(
 ) {
 	// chain complex
 	auto C = Chain(F.complex(), FT());
-	
+
 	// compute permutations to order chain complex
 	// order is by decreasing removal time
 	std::vector<std::vector<size_t>> perm(C.maxdim() + 1);
@@ -217,5 +218,5 @@ auto barcode(
 	return zigzag_barcode_reduction(C, filt_order, maxdim, opt_flag(), reduction_flag());
 }
 
-
+} // namespace zigzag
 } // namespace bats
