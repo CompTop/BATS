@@ -11,3 +11,4 @@
 vgcore.*
 debug*
 prof.txt
+gmon.*

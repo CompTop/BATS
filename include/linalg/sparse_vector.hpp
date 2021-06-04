@@ -689,6 +689,9 @@ public:
 			x.nzend(),
 			key_type(firstind, TV(0))
 		);
+		// alternative: try just incrementing to firstind
+		// auto i2 = x.nzbegin();
+		// while (i2 != x.nzend() && i2->ind < firstind) {++i2;}
 		// where to put new vector
 		if (i2 == x.nzend() || !(i2->ind < lastind)) { return; } // nothing to do
 		// something to do...
