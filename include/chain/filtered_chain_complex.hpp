@@ -20,10 +20,9 @@ struct FilteredChainComplex {
 		auto perms = filtration_sortperm(val);
 
 		// step 2: put ChainComplex C in permutation order
-		C.permute_basis(perms);
+		C.ipermute_basis(perms);
 
 		// step 3: store inverse perumutation to map back to original order
-		// iperm = filtration_iperm(perms);
 		perm = perms;
 	}
 
