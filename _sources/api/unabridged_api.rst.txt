@@ -1762,12 +1762,22 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_zigzag_2reduction_8hpp_1ac5368ca8cbba02e11554b51280cb9b3e.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12.rst
 
 .. toctree::
    :maxdepth: 5
 
    function_zigzag_2reduction_8hpp_1a8ab371c68105086fae22b67443d716d7.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_zigzag_2reduction_8hpp_1a3c3271ca36d6fcb8ed80d47ec01394c6.rst
 
 .. toctree::
    :maxdepth: 5

@@ -69,7 +69,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_simplicial__map_8hpp_1a128372bb68bf4282bf0f02aa88cf6772`
-
 - :ref:`exhale_function_simplicial__map_8hpp_1a22d4a5b9ea082175dc1d37ed79f0b45f`
+
+- :ref:`exhale_function_simplicial__map_8hpp_1a128372bb68bf4282bf0f02aa88cf6772`
 

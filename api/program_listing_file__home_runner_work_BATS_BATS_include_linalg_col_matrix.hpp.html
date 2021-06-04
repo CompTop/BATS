@@ -435,9 +435,10 @@
     <span class="c1">// gemv</span>
     <span class="n">TC</span> <span class="n">gemv</span><span class="p">(</span><span class="k">const</span> <span class="n">TC</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="n">TC</span> <span class="n">y</span><span class="p">;</span>  <span class="c1">// zero initializer</span>
+        <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// for use with axpy</span>
         <span class="c1">// loop over nonzero indices of x</span>
         <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">xit</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzbegin</span><span class="p">();</span> <span class="n">xit</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">();</span> <span class="o">++</span><span class="n">xit</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">y</span><span class="p">.</span><span class="n">axpy</span><span class="p">((</span><span class="o">*</span><span class="n">xit</span><span class="p">).</span><span class="n">val</span><span class="p">,</span> <span class="n">col</span><span class="p">[(</span><span class="o">*</span><span class="n">xit</span><span class="p">).</span><span class="n">ind</span><span class="p">]);</span> <span class="c1">// y &lt;- x[j]*A[j]</span>
+            <span class="n">y</span><span class="p">.</span><span class="n">axpy</span><span class="p">((</span><span class="o">*</span><span class="n">xit</span><span class="p">).</span><span class="n">val</span><span class="p">,</span> <span class="n">col</span><span class="p">[(</span><span class="o">*</span><span class="n">xit</span><span class="p">).</span><span class="n">ind</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// y &lt;- x[j]*A[j]</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">y</span><span class="p">;</span>
     <span class="p">}</span>

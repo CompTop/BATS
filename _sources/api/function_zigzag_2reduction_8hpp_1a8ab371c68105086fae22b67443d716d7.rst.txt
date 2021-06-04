@@ -1,7 +1,7 @@
 .. _exhale_function_zigzag_2reduction_8hpp_1a8ab371c68105086fae22b67443d716d7:
 
-Template Function bats::zigzag::reduce_column
-=============================================
+Template Function bats::zigzag::reduce_column(size_t, ColumnMatrix<VecT>&, ColumnMatrix<VecT>&, std::vector<size_t>&, typename VecT::tmp_type&, reduction_flag)
+===============================================================================================================================================================
 
 - Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
 

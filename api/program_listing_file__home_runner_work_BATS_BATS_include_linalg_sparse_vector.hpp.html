@@ -854,6 +854,9 @@
             <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">(),</span>
             <span class="n">key_type</span><span class="p">(</span><span class="n">firstind</span><span class="p">,</span> <span class="n">TV</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="p">);</span>
+        <span class="c1">// alternative: try just incrementing to firstind</span>
+        <span class="c1">// auto i2 = x.nzbegin();</span>
+        <span class="c1">// while (i2 != x.nzend() &amp;&amp; i2-&gt;ind &lt; firstind) {++i2;}</span>
         <span class="c1">// where to put new vector</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">i2</span> <span class="o">==</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">lastind</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// nothing to do</span>
         <span class="c1">// something to do...</span>

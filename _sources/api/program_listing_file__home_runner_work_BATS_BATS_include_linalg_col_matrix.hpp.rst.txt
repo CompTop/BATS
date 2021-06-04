@@ -278,9 +278,10 @@ Program Listing for File col_matrix.hpp
        // gemv
        TC gemv(const TC &x) const {
            TC y;  // zero initializer
+           typename TC::tmp_type tmp; // for use with axpy
            // loop over nonzero indices of x
            for (auto xit = x.nzbegin(); xit != x.nzend(); ++xit) {
-               y.axpy((*xit).val, col[(*xit).ind]); // y <- x[j]*A[j]
+               y.axpy((*xit).val, col[(*xit).ind], tmp); // y <- x[j]*A[j]
            }
            return y;
        }
