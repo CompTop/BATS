@@ -781,15 +781,15 @@
                 <span class="n">TV</span> <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="p">((</span><span class="o">*</span><span class="n">i2</span><span class="p">).</span><span class="n">val</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">).</span><span class="n">val</span><span class="p">;</span>
                 <span class="c1">// std::cout &lt;&lt; &quot;a: &quot; &lt;&lt; a &lt;&lt; &quot; x: &quot; &lt;&lt; ((*i2).val)) &lt;&lt; &quot; y: &quot; &lt;&lt; (*i1).val &lt;&lt; std::endl;</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">!=</span> <span class="n">TV</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
-                    <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">));</span>
+                    <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">));</span>
                 <span class="p">}</span>
                 <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
                 <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
             <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">);</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">);</span>
                 <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)));</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)));</span>
                 <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
@@ -842,7 +842,8 @@
         <span class="k">const</span> <span class="n">TV</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span>
         <span class="k">const</span> <span class="n">SVT</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span>
         <span class="k">const</span> <span class="n">TI</span> <span class="o">&amp;</span><span class="n">firstind</span><span class="p">,</span>
-        <span class="k">const</span> <span class="n">TI</span> <span class="o">&amp;</span><span class="n">lastind</span>
+        <span class="k">const</span> <span class="n">TI</span> <span class="o">&amp;</span><span class="n">lastind</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;&amp;</span> <span class="n">tmp</span>
     <span class="p">)</span> <span class="p">{</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">TV</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span><span class="k">return</span><span class="p">;}</span>
@@ -857,37 +858,38 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">i2</span> <span class="o">==</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">lastind</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// nothing to do</span>
         <span class="c1">// something to do...</span>
         <span class="k">auto</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">indval</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i2</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// std::vector&lt;key_type&gt; tmp;</span>
+        <span class="n">tmp</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i2</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">lastind</span><span class="p">))</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">==</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">TV</span> <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">))</span> <span class="o">+</span> <span class="n">i1</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">!=</span> <span class="n">TV</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
-                    <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">));</span>
+                    <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">val</span><span class="p">));</span>
                 <span class="p">}</span>
                 <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
                 <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">lastind</span><span class="p">))</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+                <span class="c1">// if (!(i2-&gt;ind &lt; lastind)) { break; }</span>
             <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">);</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">);</span>
                 <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
             <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)));</span>
+                <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)));</span>
                 <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">lastind</span><span class="p">))</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+                <span class="c1">// if (!(i2-&gt;ind &lt; lastind)) { break; }</span>
             <span class="p">}</span>
         <span class="p">}</span>
         <span class="c1">// run through rest of entries and dump in</span>
         <span class="c1">// at most one of the loops does anything</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">);</span>
+            <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">i1</span><span class="p">);</span>
             <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">i2</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">lastind</span><span class="p">))</span> <span class="p">{</span>
-            <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)));</span>
+            <span class="n">tmp</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">key_type</span><span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)));</span>
             <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="c1">// copy temp vector to indval</span>
-        <span class="n">indval</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="c1">// swap indval and tmp</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">indval</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -897,7 +899,8 @@
     <span class="kt">void</span> <span class="n">axpy</span><span class="p">(</span>
         <span class="k">const</span> <span class="n">SVT</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span>
         <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">coeff</span><span class="p">,</span>
-        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">inds</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">inds</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;&amp;</span> <span class="n">tmp</span>
     <span class="p">)</span> <span class="p">{</span>
 
         <span class="c1">// set i2 to find first ind &gt;= firstind</span>
@@ -908,7 +911,8 @@
         <span class="k">auto</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">indval</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span> <span class="c1">// iterate over self</span>
         <span class="kt">size_t</span> <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// index for inds</span>
 
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="c1">// std::vector&lt;key_type&gt; tmp;</span>
+        <span class="n">tmp</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i2</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="n">inds</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">ii</span> <span class="o">&lt;</span> <span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span>  <span class="o">&amp;&amp;</span> <span class="n">inds</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// need to increment ii until something happens</span>
@@ -957,7 +961,7 @@
         <span class="p">}</span>
 
         <span class="c1">// copy temp vector to indval</span>
-        <span class="n">indval</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">indval</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
 
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>

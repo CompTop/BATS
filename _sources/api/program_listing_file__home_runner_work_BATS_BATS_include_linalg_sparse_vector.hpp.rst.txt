@@ -624,15 +624,15 @@ Program Listing for File sparse_vector.hpp
                    TV val = (a * ((*i2).val)) + (*i1).val;
                    // std::cout << "a: " << a << " x: " << ((*i2).val)) << " y: " << (*i1).val << std::endl;
                    if (val != TV(0)) {
-                       tmp.push_back(key_type(i1->ind, val));
+                       tmp.emplace_back(key_type(i1->ind, val));
                    }
                    ++i1;
                    ++i2;
                } else if ((i1->ind) < (i2->ind)) {
-                   tmp.push_back(*i1);
+                   tmp.emplace_back(*i1);
                    ++i1;
                } else {
-                   tmp.push_back(key_type(i2->ind, a * (i2->val)));
+                   tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
                    ++i2;
                }
            }
@@ -685,7 +685,8 @@ Program Listing for File sparse_vector.hpp
            const TV &a,
            const SVT &x,
            const TI &firstind,
-           const TI &lastind
+           const TI &lastind,
+           std::vector<key_type>& tmp
        ) {
    
            if (a == TV(0)) {return;}
@@ -700,37 +701,38 @@ Program Listing for File sparse_vector.hpp
            if (i2 == x.nzend() || !(i2->ind < lastind)) { return; } // nothing to do
            // something to do...
            auto i1 = indval.cbegin();
-           std::vector<key_type> tmp;
-           while (i1 != indval.cend() && i2 != x.nzend()) {
+           // std::vector<key_type> tmp;
+           tmp.clear();
+           while (i1 != indval.cend() && i2 != x.nzend() && (i2->ind < lastind)) {
                if (i1->ind == i2->ind) {
                    TV val = (a * (i2->val)) + i1->val;
                    if (val != TV(0)) {
-                       tmp.push_back(key_type(i1->ind, val));
+                       tmp.emplace_back(key_type(i1->ind, val));
                    }
                    ++i1;
                    ++i2;
-                   if (!(i2->ind < lastind)) { break; }
+                   // if (!(i2->ind < lastind)) { break; }
                } else if (i1->ind < i2->ind) {
-                   tmp.push_back(*i1);
+                   tmp.emplace_back(*i1);
                    ++i1;
                } else {
-                   tmp.push_back(key_type(i2->ind, a * (i2->val)));
+                   tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
                    ++i2;
-                   if (!(i2->ind < lastind)) { break; }
+                   // if (!(i2->ind < lastind)) { break; }
                }
            }
            // run through rest of entries and dump in
            // at most one of the loops does anything
            while (i1 != indval.cend()) {
-               tmp.push_back(*i1);
+               tmp.emplace_back(*i1);
                ++i1;
            }
            while (i2 != x.nzend() && (i2->ind < lastind)) {
-               tmp.push_back(key_type(i2->ind, a * (i2->val)));
+               tmp.emplace_back(key_type(i2->ind, a * (i2->val)));
                ++i2;
            }
-           // copy temp vector to indval
-           indval = tmp;
+           // swap indval and tmp
+           std::swap(indval, tmp);
            return;
        }
    
@@ -740,7 +742,8 @@ Program Listing for File sparse_vector.hpp
        void axpy(
            const SVT &x,
            const std::vector<TV> &coeff,
-           const std::vector<TI> &inds
+           const std::vector<TI> &inds,
+           std::vector<key_type>& tmp
        ) {
    
            // set i2 to find first ind >= firstind
@@ -751,7 +754,8 @@ Program Listing for File sparse_vector.hpp
            auto i1 = indval.cbegin(); // iterate over self
            size_t ii = 0; // index for inds
    
-           std::vector<key_type> tmp;
+           // std::vector<key_type> tmp;
+           tmp.clear();
            while (i1 != indval.cend() && i2 != x.nzend() && ii < inds.size()) {
                if (ii < i1->ind  && inds[ii] < i2->ind) {
                    // need to increment ii until something happens
@@ -800,7 +804,7 @@ Program Listing for File sparse_vector.hpp
            }
    
            // copy temp vector to indval
-           indval = tmp;
+           std::swap(indval, tmp);
    
            return;
        }
