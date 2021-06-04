@@ -58,19 +58,21 @@ Namespaces
 
 - :ref:`namespace_bats`
 
+- :ref:`namespace_bats__zigzag`
+
 
 Classes
 -------
 
 
-- :ref:`exhale_class_classbats_1_1ZigzagFiltration`
+- :ref:`exhale_class_classbats_1_1zigzag_1_1ZigzagFiltration`
 
 
 Functions
 ---------
 
 
-- :ref:`exhale_function_zigzag__filtration_8hpp_1ac4ca2b9fad2d3bf9545a4fec8038c2e0`
+- :ref:`exhale_function_zigzag__filtration_8hpp_1acac87fada061f48f6d08dc701e18cb70`
 
-- :ref:`exhale_function_zigzag__filtration_8hpp_1a8b13aa90b2503ce50515a5371fab11fb`
+- :ref:`exhale_function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12`
 

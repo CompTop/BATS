@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2reduction_8hpp_1a10444a23ac8f1a0b5ecafce3ff5e5ff4:
+
+Template Function bats::zigzag::detail::update_bars
+===================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::detail::update_bars(std::vector<ZigzagPair<T>>&, const rfilt_val<T>&, const size_t, MT&, Map&, Map&)

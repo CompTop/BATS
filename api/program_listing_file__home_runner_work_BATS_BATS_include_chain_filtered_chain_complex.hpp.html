@@ -189,10 +189,9 @@
         <span class="k">auto</span> <span class="n">perms</span> <span class="o">=</span> <span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
 
         <span class="c1">// step 2: put ChainComplex C in permutation order</span>
-        <span class="n">C</span><span class="p">.</span><span class="n">permute_basis</span><span class="p">(</span><span class="n">perms</span><span class="p">);</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">ipermute_basis</span><span class="p">(</span><span class="n">perms</span><span class="p">);</span>
 
         <span class="c1">// step 3: store inverse perumutation to map back to original order</span>
-        <span class="c1">// iperm = filtration_iperm(perms);</span>
         <span class="n">perm</span> <span class="o">=</span> <span class="n">perms</span><span class="p">;</span>
     <span class="p">}</span>
 

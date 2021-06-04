@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag__filtration_8hpp_1acac87fada061f48f6d08dc701e18cb70:
+
+Template Function bats::zigzag::barcode
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::barcode(const ZigzagFiltration<CpxT, T>&, ssize_t, FT, opt_flag, reduction_flag)

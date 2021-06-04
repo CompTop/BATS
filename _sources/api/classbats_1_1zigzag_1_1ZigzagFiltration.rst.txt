@@ -1,0 +1,16 @@
+.. _exhale_class_classbats_1_1zigzag_1_1ZigzagFiltration:
+
+Template Class ZigzagFiltration
+===============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: bats::zigzag::ZigzagFiltration
+   :members:
+   :protected-members:
+   :undoc-members:

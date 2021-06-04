@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2extension_8hpp_1a7884580a5b88d1d7d0b5afdf07352883:
+
+Template Function bats::zigzag::extend_levelset
+===============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::extend_levelset(const std::vector<T>&, const CubicalComplex&, const T, const size_t)

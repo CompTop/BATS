@@ -1,0 +1,32 @@
+
+.. _namespace_bats__zigzag__detail:
+
+Namespace bats::zigzag::detail
+==============================
+
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a2a589010f03b8f9e8b9061fcf8edf002`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a2afdab4703f0e85db60eba1ed0dd4356`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a543ab9a14b53cdc79b453beeef021503`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1aa5cd64e0ebaa695daeed5251b72706f4`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71`
+
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a8ed509cd8f8b5ad9c11c440206243e12`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a10444a23ac8f1a0b5ecafce3ff5e5ff4`

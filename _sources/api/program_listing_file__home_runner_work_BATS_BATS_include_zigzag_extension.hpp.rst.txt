@@ -21,6 +21,7 @@ Program Listing for File extension.hpp
    #include "zigzag_filtration.hpp"
    
    namespace bats {
+   namespace zigzag {
    
    namespace detail {
    
@@ -171,5 +172,5 @@ Program Listing for File extension.hpp
    
    }
    
-   
+   } // namespace zigzag
    } // namespace bats

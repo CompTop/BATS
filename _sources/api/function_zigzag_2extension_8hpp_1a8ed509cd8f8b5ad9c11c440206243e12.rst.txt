@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2extension_8hpp_1a8ed509cd8f8b5ad9c11c440206243e12:
+
+Template Function bats::zigzag::detail::simplex_extrema
+=======================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::detail::simplex_extrema(Iterator, const Iterator&, const std::vector<T>&)

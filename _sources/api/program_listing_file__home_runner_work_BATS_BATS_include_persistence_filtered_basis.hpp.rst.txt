@@ -41,39 +41,68 @@ Program Listing for File filtered_basis.hpp
        inline size_t dim(const size_t k) const {return RC.dim(k);}
        inline size_t hdim(const size_t k) const {return RC.hdim(k);}
    
-       // persistence pairs in dimension k
-       std::vector<PersistencePair<T>> persistence_pairs(const size_t k) {
+       std::vector<PersistencePair<T>> persistence_pairs(
+           const size_t k,
+           const bool permuted=false
+       ) {
            std::vector<PersistencePair<T>> pairs;
-           for (size_t i =0; i < dim(k); i++) {
-               if (RC.R[k][i].nnz() == 0) {
-                   // homology generated
-                   if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
-                       // infinite bar
-                       pairs.emplace_back(
-                           PersistencePair(k, i, bats::NO_IND,
-                               val[k][perm[k][i]], std::numeric_limits<T>::infinity()
-                               // val[k][i], std::numeric_limits<T>::infinity()
-                           )
-                       );
-                   } else {
-                       size_t j = RC.p2c[k+1][i];
-                       // finite bar
-                       pairs.emplace_back(
-                           PersistencePair(k, i, j,
-                               val[k][perm[k][i]], val[k+1][perm[k+1][j]]
-                               // val[k][i], val[k+1][j]
-                           )
-                       );
+           if (permuted) {
+               for (size_t i =0; i < dim(k); i++) {
+                   if (RC.R[k][i].nnz() == 0) {
+                       // homology generated
+                       if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
+                           // infinite bar
+                           pairs.emplace_back(
+                               PersistencePair(k, i, bats::NO_IND,
+                                   val[k][perm[k][i]], std::numeric_limits<T>::infinity()
+                               )
+                           );
+                       } else {
+                           size_t j = RC.p2c[k+1][i];
+                           // finite bar
+                           pairs.emplace_back(
+                               PersistencePair(k, i, j,
+                                   val[k][perm[k][i]], val[k+1][perm[k+1][j]]
+                               )
+                           );
+                       }
                    }
                }
-   
+           } else { // undo filtration sort permutation
+               for (size_t i =0; i < dim(k); i++) {
+                   if (RC.R[k][i].nnz() == 0) {
+                       // homology generated
+                       if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
+                           // infinite bar
+                           pairs.emplace_back(
+                               PersistencePair(k, perm[k][i], bats::NO_IND,
+                                   val[k][perm[k][i]], std::numeric_limits<T>::infinity()
+                               )
+                           );
+                       } else {
+                           size_t j = RC.p2c[k+1][i];
+                           // finite bar
+                           pairs.emplace_back(
+                               PersistencePair(k, perm[k][i], perm[k+1][j],
+                                   val[k][perm[k][i]], val[k+1][perm[k+1][j]]
+                               )
+                           );
+                       }
+                   }
+               }
            }
+   
            return pairs;
        }
    
-       // return representative for a pair
-       inline auto representative(const PersistencePair<T>& p) {
-           return RC.U[p.dim][p.birth_ind];
+       inline auto representative(const PersistencePair<T>& p, const bool permuted=false) const {
+           auto v = RC.U[p.dim][p.birth_ind];
+           if (!permuted) {
+               auto it = std::find(perm[p.dim].begin(), perm[p.dim].end(), p.birth_ind);
+               v = RC.U[p.dim][it - perm[p.dim].begin()];
+               v.permute(perm[p.dim]); // undo permutation
+           }
+           return v;
        }
    
        // barcode w/out critical inds

@@ -24,6 +24,7 @@ Program Listing for File reduction.hpp
    //#include <persistence/barcode.hpp> // PersistencePair
    
    namespace bats {
+   namespace zigzag {
    
    
    // /**
@@ -473,5 +474,5 @@ Program Listing for File reduction.hpp
    }
    
    
-   
+   } // namespace zigzag
    } // namespace bats

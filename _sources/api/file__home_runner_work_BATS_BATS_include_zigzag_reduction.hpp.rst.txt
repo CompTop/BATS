@@ -58,31 +58,33 @@ Namespaces
 
 - :ref:`namespace_bats`
 
-- :ref:`namespace_bats__detail`
+- :ref:`namespace_bats__zigzag`
+
+- :ref:`namespace_bats__zigzag__detail`
 
 
 Classes
 -------
 
 
-- :ref:`exhale_struct_structbats_1_1rfilt__val`
+- :ref:`exhale_struct_structbats_1_1zigzag_1_1rfilt__val`
 
-- :ref:`exhale_struct_structbats_1_1ZigzagPair`
+- :ref:`exhale_struct_structbats_1_1zigzag_1_1ZigzagPair`
 
 
 Functions
 ---------
 
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1ad8894aae2042b4cb4da68931864d5845`
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a2a589010f03b8f9e8b9061fcf8edf002`
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1a294495708e8abdd218e3a14c6edb6531`
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a2afdab4703f0e85db60eba1ed0dd4356`
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1a5d988513a6d8c40176b299d2b545f5de`
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71`
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1a0655c2fb5a3639843fb2b6bd4fd76b50`
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a10444a23ac8f1a0b5ecafce3ff5e5ff4`
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1abc0b1c9a8e7a2f7b0f56df12c8a23665`
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a8ab371c68105086fae22b67443d716d7`
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1a09a1c141c1ddcf9e67a42fa4b2196ed4`
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a6c07dee8cee607291cd1be7b87d6b063`
 

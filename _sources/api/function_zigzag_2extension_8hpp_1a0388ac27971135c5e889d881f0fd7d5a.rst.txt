@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2extension_8hpp_1a0388ac27971135c5e889d881f0fd7d5a:
+
+Template Function bats::zigzag::extend_zigzag_filtration(const std::vector<T>&, const CpxT&, const T)
+=====================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::extend_zigzag_filtration(const std::vector<T>&, const CpxT&, const T)

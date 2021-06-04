@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag_2reduction_8hpp_1a2afdab4703f0e85db60eba1ed0dd4356:
+
+Template Function bats::zigzag::detail::boundary_insertion_map
+==============================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::detail::boundary_insertion_map(const std::vector<size_t>&, const size_t, const VecT&)

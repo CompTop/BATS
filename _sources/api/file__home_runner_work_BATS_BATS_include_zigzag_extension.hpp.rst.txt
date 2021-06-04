@@ -56,22 +56,24 @@ Namespaces
 
 - :ref:`namespace_bats`
 
-- :ref:`namespace_bats__detail`
+- :ref:`namespace_bats__zigzag`
+
+- :ref:`namespace_bats__zigzag__detail`
 
 
 Functions
 ---------
 
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1a539d85347c64fc7e705971166a61aa87`
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a543ab9a14b53cdc79b453beeef021503`
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1a157917f4f200c0ec56d1b7c849693d1f`
+- :ref:`exhale_function_zigzag_2extension_8hpp_1aa5cd64e0ebaa695daeed5251b72706f4`
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1a111f868927b728fbc2db34a31458f2dd`
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a8ed509cd8f8b5ad9c11c440206243e12`
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1ad5d02d8d39f74d0ce062b53df7d6f892`
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a7884580a5b88d1d7d0b5afdf07352883`
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1abfa1afde3e577d8977d8286dbf23679d`
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a9aec32f073396f25ec1b0d766b264923`
 
-- :ref:`exhale_function_zigzag_2extension_8hpp_1a25bfa67b704ebd6aff14a567b783c65c`
+- :ref:`exhale_function_zigzag_2extension_8hpp_1a0388ac27971135c5e889d881f0fd7d5a`
 
