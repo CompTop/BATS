@@ -71,7 +71,7 @@ auto gen_cube_zigzag(
     auto f0 = smooth_cube_fn(n);
     bats::CubicalComplex X = bats::CubicalComplex::generate_cube(n);
 
-    return bats::extend_zigzag_filtration(f0, X, eps, n);
+    return bats::zigzag::extend_zigzag_filtration(f0, X, eps, n);
 }
 
 auto gen_rips_cylinder(
@@ -81,6 +81,8 @@ auto gen_rips_cylinder(
     const double eps // levelset radius
 ) {
     auto X = bats::gen_cylinder(n_len, n_cir, 0.3);
+    // add a little noise
+    bats::add_normal_noise(X.data, 0.0, 0.01);
     auto p = bats::coordinate_projection(X, 0);
 
     auto R = bats::RipsComplex<bats::SimplicialComplex>(
@@ -88,7 +90,7 @@ auto gen_rips_cylinder(
     );
     R.print_summary();
 
-    return bats::extend_zigzag_filtration(p, R, eps);
+    return bats::zigzag::extend_zigzag_filtration(p, R, eps);
 }
 
 auto gen_rips_line(
@@ -104,7 +106,7 @@ auto gen_rips_line(
     );
     R.print_summary();
 
-    return bats::extend_zigzag_filtration(p, R, eps);
+    return bats::zigzag::extend_zigzag_filtration(p, R, eps);
 }
 
 // determine Lipschitz constant
@@ -117,10 +119,10 @@ T lipschitz_constant(
     for (size_t i = 0; i < n-1; ++i) {
         for (size_t j = 0; j < n-1; ++j) {
             for (size_t k = 0; k < n-1; ++k) {
-                T cval = bats::detail::cube_val(f0, i, j, k, n);
-                T cvali =bats::detail::cube_val(f0, i+1, j, k, n);
-                T cvalj =bats::detail::cube_val(f0, i, j+1, k, n);
-                T cvalk =bats::detail::cube_val(f0, i, j, k+1, n);
+                T cval = bats::zigzag::detail::cube_val(f0, i, j, k, n);
+                T cvali =bats::zigzag::detail::cube_val(f0, i+1, j, k, n);
+                T cvalj =bats::zigzag::detail::cube_val(f0, i, j+1, k, n);
+                T cvalk =bats::zigzag::detail::cube_val(f0, i, j, k+1, n);
                 lc = std::max(lc, std::abs(cvali - cval));
                 lc = std::max(lc, std::abs(cvalj - cval));
                 lc = std::max(lc, std::abs(cvalk - cval));
@@ -132,7 +134,7 @@ T lipschitz_constant(
 
 int main() {
 
-    bats::ZigzagFiltration<bats::SimplicialComplex> F;
+    bats::zigzag::ZigzagFiltration<bats::SimplicialComplex> F;
 
     std::vector<size_t> spx;
     // create a cycle that persists for a while
@@ -144,7 +146,7 @@ int main() {
         F.complex().print_summary();
 
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, 1, F2(),
+        auto ps = bats::zigzag::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
@@ -165,7 +167,7 @@ int main() {
         F.complex().print_summary();
 
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, 1, F2(),
+        auto ps = bats::zigzag::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
@@ -201,7 +203,7 @@ int main() {
 
         start = std::chrono::steady_clock::now();
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, 0, F2(),
+        auto ps = bats::zigzag::barcode(F, 0, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );
@@ -223,10 +225,10 @@ int main() {
     {
 
         using F2 = ModP<int, 2>;
-        double r = 0.3;
-        double eps = 0.15;
+        double r = 0.16;
+        double eps = 0.08;
         auto start = std::chrono::steady_clock::now();
-        auto F = gen_rips_cylinder(10, 10,  r, eps);
+        auto F = gen_rips_cylinder(32, 32,  r, eps);
         // auto F = gen_rips_line(10, r, eps);
         auto end = std::chrono::steady_clock::now();
         std::cout << "\nSetup: "
@@ -242,7 +244,7 @@ int main() {
 
         start = std::chrono::steady_clock::now();
         using F2 = ModP<int, 2>;
-        auto ps = bats::barcode(F, 1, F2(),
+        auto ps = bats::zigzag::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
             bats::standard_reduction_flag()
         );

@@ -709,6 +709,7 @@ template <class TC>
 TC u_solve(const ColumnMatrix<TC> &U, const TC &y) {
     TC x(y);
     if (x.nnz() == 0) { return x; }
+	typename TC::tmp_type tmp; // for use with axpy
     size_t n = U.ncol();
     //size_t m = U.nrow();
     size_t j = n;
@@ -725,7 +726,7 @@ TC u_solve(const ColumnMatrix<TC> &U, const TC &y) {
         x.replace(xit, a);
         if (j == 0) { break; } // we're done
         // x[0:j-1] -= x[j] * U[0:j-1, j]
-        x.axpy(-a, U[j], 0, j);
+        x.axpy(-a, U[j], 0, j, tmp);
         // get next nonzero
         xit = x.upper_bound(j-1);
     }
@@ -736,6 +737,7 @@ template <class TC>
 TC l_solve(const ColumnMatrix<TC> &L, const TC &y) {
     TC x = y;
     if (x.nnz() == 0) { return x; }
+	typename TC::tmp_type tmp; // for use with axpy
     //size_t n = L.ncol();
     size_t m = L.nrow();
     size_t j = 0;
@@ -748,7 +750,7 @@ TC l_solve(const ColumnMatrix<TC> &L, const TC &y) {
         x.replace(xit, a);
         //*xit = nzpair((*xit).ind, a);
         // x[j+1:] -= x[j] * L[j+1:m, j]
-        x.axpy(-a, L[j], j+1, m);
+        x.axpy(-a, L[j], j+1, m, tmp);
         // get next nonzero
         xit = x.lower_bound(j+1);
     }

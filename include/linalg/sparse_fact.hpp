@@ -81,6 +81,7 @@ void LEUP_inplace(SparseFact<TC> &F) {
     // we'll operate on the transpose of P to keep track of permutations
 
     using val_type = typename TC::val_type;
+    typename TC::tmp_type tmp; // for use with axpy
 
     std::vector<size_t> pivs; // records pivots
     std::vector<val_type> coeff; // records coefficients
@@ -112,7 +113,7 @@ void LEUP_inplace(SparseFact<TC> &F) {
             }
 
             // lazy update U factor
-            F.U[j].axpy(F.E[j], coeff, pivs);
+            F.U[j].axpy(F.E[j], coeff, pivs, tmp);
 
 
             // perform schur complement in lower right-hand block
@@ -125,12 +126,12 @@ void LEUP_inplace(SparseFact<TC> &F) {
             // loop over columns with this pivot starting with second entry
             for (auto jj = ++(p2c[i].cbegin()); jj < p2c[i].cend(); jj++) {
                    auto c = F.E(i, *jj) / a11;
-                   F.E[*jj].axpy(-c, F.E[j], i+1, m); // update block
+                   F.E[*jj].axpy(-c, F.E[j], i+1, m, tmp); // update block
                    update_pivot(F.E, p2c, *jj, i+1); // update pivot
             }
             p2c.erase(i); // clear out old data
 
-            F.L[i].axpy(a11.inv(), F.E[j], i+1, m);
+            F.L[i].axpy(a11.inv(), F.E[j], i+1, m, tmp);
 
 
             // clear out column
@@ -146,7 +147,7 @@ void LEUP_inplace(SparseFact<TC> &F) {
     // now finish lazy updates of U factor
     while (j < n) {
         // lazy update U factor
-        F.U[j].axpy(F.E[j], coeff, pivs);
+        F.U[j].axpy(F.E[j], coeff, pivs, tmp);
         // Clear out column of E
         F.E[j] = TC();
         j++;

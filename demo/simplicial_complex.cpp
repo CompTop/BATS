@@ -2,28 +2,64 @@
 #include <vector>
 #include <iostream>
 
+using namespace bats;
+using CpxT = LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+// using CpxT = SimplicialComplex;
+using FT = ModP<int, 2>;
+
 int main() {
 
-    bats::SimplicialComplex X, Y;
+    CpxT X(100,2); // 4 is the size of vertex set, 2 is the size of maximum simplex dimension
 
-    X.add_recursive({0,1,2});
-    X.print_cells();
-    Y.add_recursive({1,2,3});
-    Y.print_cells();
+    std::vector<size_t> s; //store temporary simplices
 
-    auto I = intersection(X, Y);
-    I.print_cells();
+    s = {0}; X.add(s);
 
-    auto U = simplicial_union(X, Y);
-    U.print_cells();
+    s = {1}; X.add(s);
 
-    auto B = mayer_vietoris_boundary(X, U, I, 0);
-    B.print();
+    s = {2}; X.add(s);
 
-    auto [ind, val] = X.boundary(1, 1);
-    SparseVector(ind, val).print();
+    s = {0,1}; X.add(s);
 
-    X.boundary_csc(1).print();
+    s = {1,2}; X.add(s);
+
+    s = {0,2}; X.add(s);
+
+    s = {0,1,2}; X.add(s);
+
+    //summary of simpilcial complex X
+
+    std::cout << "\nsummary of simpilcial complex X" << std::endl;
+
+    X.print_summary();
+
+    /*
+
+    Now let's exend a filtration
+
+    */
+
+    // filtration value on each simplex
+
+    std::vector<std::vector<double>> vals = {{0.1,0.3,0.2},{5,6,4},{7}};
+
+    /*
+
+    Now let's build a filtration
+
+    */
+
+    auto F = bats::Filtration(X, vals);
+
+    // if you want to change filtration value of a specific simplex
+
+    s = {0,1,3};
+
+    F.add_recursive(3.3, s);
+
+    // print_filtration_info(F);
+
+    auto FCC = bats::Chain(F, FT()); //FilteredChainComplex
 
     return 0;
 }
