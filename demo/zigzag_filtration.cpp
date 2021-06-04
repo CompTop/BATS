@@ -246,7 +246,7 @@ int main() {
         using F2 = ModP<int, 2>;
         auto ps = bats::zigzag::barcode(F, 1, F2(),
             bats::no_optimization_flag(),
-            bats::standard_reduction_flag()
+            bats::extra_reduction_flag()
         );
         end = std::chrono::steady_clock::now();
         std::cout << "\nCompute barcode: "

@@ -96,6 +96,71 @@ size_t reduce_column(
     return j;
 }
 
+/**
+reduce column j past the pivot.
+Heuristic strategy to reduce fill-in during reduction
+*/
+template <class VecT>
+void extra_col_reduction(
+	const size_t j,
+	ColumnMatrix<VecT> &M,
+	ColumnMatrix<VecT>& U,
+	const std::vector<size_t>& p2c,
+	typename VecT::tmp_type& tmp
+) {
+
+	size_t end_offset = 1; // difference from end
+	auto piv = M[j].nzend() - end_offset; // nonzero location
+	while(piv - M[j].nzbegin() > 0) {
+		// while the nonzero we are looking at is in the vector
+		// piv is index-value nzpair
+		size_t k = p2c[piv->ind];
+		if (k != bats::NO_IND && k < j) {
+			// eliminate pivot
+			auto a = piv->val / M[k].lastnz().val;
+			M[j].axpy(-a, M[k], tmp);
+			U[j].axpy(-a, U[k], tmp);
+			piv = M[j].nzend() - end_offset; // next nonzero location
+		} else {
+			// we skip zeroing out this entry
+			// need to increment offset
+			end_offset++;
+			piv--;
+		}
+	}
+
+	return;
+}
+
+template <typename VecT>
+size_t reduce_column(
+	size_t j,
+	ColumnMatrix<VecT>& M,
+	ColumnMatrix<VecT>& U,
+	std::vector<size_t>& p2c,
+	typename VecT::tmp_type& tmp,
+	bats::extra_reduction_flag
+) {
+
+	while(M[j].nnz() > 0) {
+
+		extra_col_reduction(j, M, U, p2c, tmp);
+		if (M[j].nnz() == 0) { break; } // zeroed out column
+		auto piv = M[j].lastnz();
+		size_t k = p2c[piv.ind];
+		if (k != bats::NO_IND && k > j) {
+			// continue reducing column to right which shares pivot
+			p2c[piv.ind] = j;
+			std::swap(k, j);
+		} else {
+			// new pivot
+			p2c[piv.ind] = j;
+			break;
+		}
+	}
+
+    return j;
+}
 
 /**
 A struct that packages information about entries and exits
