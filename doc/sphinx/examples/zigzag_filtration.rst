@@ -3,12 +3,13 @@ Zigzag Filtrations
 
 A zigzag filtration allows cells to enter and exit a complex at specified
 parameters.  Construction is similar to a filtration, but you need to specify
-entry as well as exit time.
+entry as well as exit time.  Zigzag filtration functionality is
+under the :code:`bats::zigzag` namespace.
 
 .. code-block:: cpp
 
 
-   bats::ZigzagFiltration<bats::SimplicialComplex> F;
+   bats::zigzag::ZigzagFiltration<bats::SimplicialComplex> F;
 
    std::vector<size_t> spx;
    // create a cycle that persists for a while
@@ -25,7 +26,7 @@ You can compute a barcode using :code:`bats::barcode`
 .. code-block:: cpp
 
    using F2 = ModP<int, 2>;
-   auto ps = bats::barcode(F, 1, F2(),
+   auto ps = bats::zigzag::barcode(F, 1, F2(),
       bats::no_optimization_flag(),
       bats::standard_reduction_flag()
    );
