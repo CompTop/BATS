@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310:
+
+Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration<bats::SimplicialComplex, T>&, FT)
+=============================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::prepare_ChainComplex(const ZigzagFiltration<bats::SimplicialComplex, T>&, FT)

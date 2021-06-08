@@ -540,7 +540,6 @@
         <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
     <span class="p">}</span>
 
-
     <span class="c1">// return simplices in dimension dim</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">get_simplices</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">simplices</span><span class="p">;</span>
@@ -569,6 +568,43 @@
             <span class="p">}</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">simplices</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="n">lex_cmp</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dimi</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">dimj</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="c1">// std::cout &lt;&lt; &quot;in lex_cmp&quot; &lt;&lt; std::endl;</span>
+        <span class="k">auto</span> <span class="n">iti</span> <span class="o">=</span> <span class="n">simplex_end</span><span class="p">(</span><span class="n">dimi</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="o">--</span><span class="n">iti</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">itj</span> <span class="o">=</span> <span class="n">simplex_end</span><span class="p">(</span><span class="n">dimj</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span> <span class="o">--</span><span class="n">itj</span><span class="p">;</span>
+        <span class="c1">// make quick call</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">iti</span> <span class="o">!=</span> <span class="o">*</span><span class="n">itj</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="o">*</span><span class="n">iti</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">itj</span><span class="p">;}</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">iti</span> <span class="o">!=</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="n">dimi</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">itj</span> <span class="o">!=</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="n">dimj</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">--</span><span class="n">iti</span><span class="p">;</span> <span class="o">--</span><span class="n">itj</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">iti</span> <span class="o">!=</span> <span class="o">*</span><span class="n">itj</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">iti</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">itj</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// we can make a comparison</span>
+            <span class="c1">// else we continue</span>
+        <span class="p">}</span>
+        <span class="c1">// if we make it this far, simplices argree for full postfix of shorter simplex</span>
+        <span class="c1">// if first simplex is shorter, we return true.  Else, we return false</span>
+        <span class="k">return</span> <span class="n">dimj</span> <span class="o">&gt;</span> <span class="n">dimi</span><span class="p">;</span> <span class="c1">// true if second simplex is longer than first simplex</span>
+        <span class="c1">// if both simplices are equal, then will return false</span>
+    <span class="p">}</span>
+
+    <span class="c1">// reverse of above</span>
+    <span class="kt">bool</span> <span class="n">rlex_cmp</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dimi</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">dimj</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="c1">// std::cout &lt;&lt; &quot;in rlex_cmp&quot; &lt;&lt; std::endl;</span>
+        <span class="k">auto</span> <span class="n">iti</span> <span class="o">=</span> <span class="n">simplex_end</span><span class="p">(</span><span class="n">dimi</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="o">--</span><span class="n">iti</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">itj</span> <span class="o">=</span> <span class="n">simplex_end</span><span class="p">(</span><span class="n">dimj</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span> <span class="o">--</span><span class="n">itj</span><span class="p">;</span>
+        <span class="c1">// make quick call</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">iti</span> <span class="o">!=</span> <span class="o">*</span><span class="n">itj</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="o">*</span><span class="n">iti</span> <span class="o">&gt;</span> <span class="o">*</span><span class="n">itj</span><span class="p">;}</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">iti</span> <span class="o">!=</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="n">dimi</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">itj</span> <span class="o">!=</span> <span class="n">simplex_begin</span><span class="p">(</span><span class="n">dimj</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">--</span><span class="n">iti</span><span class="p">;</span> <span class="o">--</span><span class="n">itj</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">iti</span> <span class="o">!=</span> <span class="o">*</span><span class="n">itj</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">iti</span> <span class="o">&gt;</span> <span class="o">*</span><span class="n">itj</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// we can make a comparison</span>
+            <span class="c1">// else we continue</span>
+        <span class="p">}</span>
+        <span class="c1">// if we make it this far, simplices argree for full postfix of shorter simplex</span>
+        <span class="c1">// if first simplex is shorter, we return true.  Else, we return false</span>
+        <span class="k">return</span> <span class="n">dimi</span> <span class="o">&gt;</span> <span class="n">dimj</span><span class="p">;</span> <span class="c1">// true if second simplex is longer than first simplex</span>
+        <span class="c1">// if both simplices are equal, then will return false</span>
     <span class="p">}</span>
 
     <span class="c1">// take union of simplicial complex with Y</span>

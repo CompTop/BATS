@@ -1637,6 +1637,11 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_util_2permutation_8hpp_1a886826968727139b55ae90427edfc3ad.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_util_2permutation_8hpp_1afaa946cde0cd3d5e3d5c95040250793f.rst
 
 .. toctree::
@@ -1768,6 +1773,11 @@ Functions
    :maxdepth: 5
 
    function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310.rst
 
 .. toctree::
    :maxdepth: 5

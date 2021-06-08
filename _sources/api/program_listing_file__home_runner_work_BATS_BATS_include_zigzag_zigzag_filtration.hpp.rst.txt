@@ -107,6 +107,14 @@ Program Listing for File zigzag_filtration.hpp
        // order is by decreasing removal time
        std::vector<std::vector<size_t>> perm(C.maxdim() + 1);
        for (size_t k = 0; k < C.maxdim() + 1; ++k) {
+           // auto& valsk = F.vals(k);
+           // perm[k] = bats::util::sortperm(
+           //  size_t(0),
+           //  valsk.size(),
+           //  [&](const size_t i, const size_t j) {
+           //      return valsk[i].second > valsk[j].second;
+           //  }
+           // );
            perm[k] = bats::util::sortperm(
                F.vals(k).begin(),
                F.vals(k).end(),
@@ -162,6 +170,97 @@ Program Listing for File zigzag_filtration.hpp
                    a.dim > b.dim; // otherwise, we process larger dimension first for removal
                }
        );
+   
+       return std::make_tuple(C, filt_order);
+   
+   }
+   
+   // permute complex to processing order for reduction
+   // and determine order in which to process everything
+   template <typename T, typename FT>
+   auto prepare_ChainComplex(
+       const ZigzagFiltration<bats::SimplicialComplex, T>& F,
+       FT // field for coefficients
+   ) {
+       // chain complex
+       auto C = Chain(F.complex(), FT());
+       auto& X = F.complex(); // underlying complex
+   
+       // compute permutations to order chain complex
+       // order is by decreasing removal time
+       std::vector<std::vector<size_t>> perm(C.maxdim() + 1);
+       for (size_t k = 0; k < C.maxdim() + 1; ++k) {
+           auto& valsk = F.vals(k);
+           perm[k] = bats::util::sortperm(
+               size_t(0),
+               valsk.size(),
+               [&](const size_t i, const size_t j) {
+                   return valsk[i].second == valsk[j].second ? X.rlex_cmp(k, j, k, i) : valsk[i].second > valsk[j].second;
+               }
+           );
+           // perm[k] = bats::util::sortperm(
+           //  F.vals(k).begin(),
+           //  F.vals(k).end(),
+           //  [&](const std::pair<T,T>& a, const std::pair<T,T>& b) {
+           //      return a.second > b.second;
+           //  }
+           // );
+   
+       }
+       C.ipermute_basis(perm);
+   
+       // compute order to process column
+       // at same filtration value:
+       // additions should be in increasing dimension order
+       // removals should be in decreasing dimension order
+       std::vector<rfilt_val<T>> filt_order;
+       filt_order.reserve(F.complex().ncells() * 2);
+       for (size_t k = 0; k < C.maxdim() + 1; ++k) {
+           // auto permk = perm[k];
+           auto permk = bats::util::inv_perm(perm[k]);
+           for (size_t i = 0; i < F.ncells(k); ++i) {
+               auto pair = F.vals(k)[i];
+               filt_order.emplace_back(
+                   rfilt_val(
+                       k, // dimension
+                       permk[i], // index in permuted chain complex
+                       i, // index in original complex
+                       pair.first, // entry time
+                       true // entry
+                   )
+               );
+               filt_order.emplace_back(
+                   rfilt_val(
+                       k, // dimension
+                       permk[i], // index in permuted chain complex
+                       i, // index in original complex
+                       pair.second, // removal time
+                       false // removal
+                   )
+               );
+           }
+       }
+       std::sort(
+           filt_order.begin(),
+           filt_order.end(),
+           [&X](const rfilt_val<T>& a, const rfilt_val<T>& b) {
+               return (a.val != b.val) ?
+                   a.val < b.val : // increasing value order
+                   (a.entry && b.entry) ? // else, if both entries
+                   X.lex_cmp(a.dim, a.cind, b.dim, b.cind) : // use lexicographical comparison
+                   (a.entry ^ b.entry) ? // one entry and one removal
+                   a.entry : // process entry first - doesn't matter
+                   (a.dim == b.dim) ? // else, both are removals - check if dim is the same
+                   a.ind > b.ind : // process later index first
+                   // a.dim > b.dim; // otherwise, we process larger dimension first for removal
+                   X.rlex_cmp(a.dim, a.cind, b.dim, b.cind);
+               }
+       );
+       // std::cout << "filt_order: " << std::endl;
+       // for (auto& rval : filt_order) {
+       //  std::cout << rval << std::endl;
+       // }
+   
    
        return std::make_tuple(C, filt_order);
    

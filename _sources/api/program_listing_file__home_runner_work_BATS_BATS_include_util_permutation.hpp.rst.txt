@@ -96,6 +96,24 @@ Program Listing for File permutation.hpp
        return perm;
    }
    
+   template <class Compare>
+   std::vector<size_t> sortperm(
+       const size_t first,
+       const size_t last,
+       Compare comp
+   ) {
+       std::vector<size_t> perm(last - first);
+       std::iota(perm.begin(), perm.end(), 0);
+       std::sort(
+           perm.begin(),
+           perm.end(),
+           [&](const size_t& a, const size_t& b) {
+               return comp((first+a), (first+b));
+           }
+       );
+       return perm;
+   }
+   
    template <typename T>
    std::vector<size_t> stable_sortperm(const std::vector<T>& data) {
        std::vector<size_t> perm(data.size());

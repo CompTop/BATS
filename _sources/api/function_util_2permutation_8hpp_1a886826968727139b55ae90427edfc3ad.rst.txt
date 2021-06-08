@@ -1,0 +1,13 @@
+.. _exhale_function_util_2permutation_8hpp_1a886826968727139b55ae90427edfc3ad:
+
+Template Function bats::util::sortperm(const size_t, const size_t, Compare)
+===========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::util::sortperm(const size_t, const size_t, Compare)

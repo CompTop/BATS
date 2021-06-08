@@ -327,6 +327,15 @@
     <span class="n">rfilt_val</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">ind</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">cind</span><span class="p">,</span> <span class="n">T</span> <span class="n">val</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">entry</span><span class="p">)</span>\
         <span class="o">:</span> <span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="n">ind</span><span class="p">(</span><span class="n">ind</span><span class="p">),</span> <span class="n">cind</span><span class="p">(</span><span class="n">cind</span><span class="p">),</span> <span class="n">val</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">entry</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="p">{}</span>
 
+    <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">rfilt_val</span><span class="o">&amp;</span> <span class="n">v</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;fval, dim=&quot;</span><span class="o">&lt;&lt;</span><span class="n">v</span><span class="p">.</span><span class="n">dim</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: ind=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">ind</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, cind=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">cind</span>
+            <span class="o">&lt;&lt;</span> <span class="s">&quot;, val=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, entry=&quot;</span><span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">entry</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="p">;</span>
+    <span class="p">}</span>
+
 <span class="p">};</span>
 
 <span class="c1">// store dimension, birth, death, and critical indices of pair</span>
@@ -568,6 +577,7 @@
 
     <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">fval</span> <span class="p">:</span> <span class="n">filt_order</span><span class="p">)</span> <span class="p">{</span>
         <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">fval</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span> <span class="c1">// dimension</span>
+        <span class="c1">// std::cout &lt;&lt; fval &lt;&lt; std::endl;</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">fval</span><span class="p">.</span><span class="n">entry</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// right arrow --&gt;</span>

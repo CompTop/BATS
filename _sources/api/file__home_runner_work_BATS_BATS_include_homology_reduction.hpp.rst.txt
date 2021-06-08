@@ -100,13 +100,13 @@ Functions
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a0101cb1c0bcdbd99d5cbb4db4a9df924`
 
-- :ref:`exhale_function_homology_2reduction_8hpp_1a169cd08c4e2c6c373d76d269bdae7d28`
-
 - :ref:`exhale_function_homology_2reduction_8hpp_1af4e042b9698fb7cb79becce57d089d21`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a5920474e13f38792f5c8fb1d43d0b409`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a8559debe3ecde49f55bff7d92f17d9fb`
+
+- :ref:`exhale_function_homology_2reduction_8hpp_1a169cd08c4e2c6c373d76d269bdae7d28`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1ac0e79a899be3c1d5b4a76ea071fd79bf`
 
@@ -114,9 +114,9 @@ Functions
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a92fe556325d081fbfe03e280c772f281`
 
-- :ref:`exhale_function_homology_2reduction_8hpp_1ac8a60869010cb73b724dda3a2cf703a1`
-
 - :ref:`exhale_function_homology_2reduction_8hpp_1a3068d4e763beee924a79f0bbcdbf2ff2`
+
+- :ref:`exhale_function_homology_2reduction_8hpp_1ac8a60869010cb73b724dda3a2cf703a1`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1ad61c7634820a245686f34152ce49581a`
 

@@ -113,9 +113,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a`
-
 - :ref:`exhale_function_chain__complex_8hpp_1ac2b99b961e41a72ed5680f3170d249ec`
+
+- :ref:`exhale_function_chain__complex_8hpp_1a448b1131113c628332584e7d98e4151a`
 
 - :ref:`exhale_function_functors_8hpp_1a87f0bfc7ef050dbb40707104184ab050`
 
@@ -183,6 +183,8 @@ Functions
 
 - :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
 
+- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
+
 - :ref:`exhale_function_chain__complex_8hpp_1a4b1bb4dbae612ef0621920d07af33a92`
 
 - :ref:`exhale_function_chain__complex_8hpp_1a9056331ab85ea32b5a39e6306f4e3252`
@@ -190,8 +192,6 @@ Functions
 - :ref:`exhale_function_chain__map_8hpp_1ab7c092cc3ee1bb887889d43a4f7f84dd`
 
 - :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
-
-- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
 
 - :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
 
@@ -303,11 +303,11 @@ Functions
 
 - :ref:`exhale_function_neighborhood_8hpp_1ac344ced71c636b9cf05aab03c98bcd85`
 
-- :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
-
 - :ref:`exhale_function_neighborhood_8hpp_1a77dcdce06ffc1e4ccce66cc52a0b490a`
 
 - :ref:`exhale_function_neighborhood_8hpp_1aff67a6b3860df3e9d88f06c96ea05811`
+
+- :ref:`exhale_function_neighborhood_8hpp_1a656c508d4e21ab91ca2d2749c2363a5e`
 
 - :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
 
@@ -345,15 +345,13 @@ Functions
 
 - :ref:`exhale_function_data_8hpp_1a68dcb239df5c2f250100cabcb5489b54`
 
-- :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
-
-- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
-
 - :ref:`exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992`
 
 - :ref:`exhale_function_filtered__basis_8hpp_1ae4a02b7da2c5707112ea3270e9e90cf2`
 
-- :ref:`exhale_function_homology_2reduction_8hpp_1a169cd08c4e2c6c373d76d269bdae7d28`
+- :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
+
+- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a91b11073b2bb54ed0e8ed0e4d3f0a5bf`
 
@@ -364,6 +362,8 @@ Functions
 - :ref:`exhale_function_homology_2reduction_8hpp_1a0101cb1c0bcdbd99d5cbb4db4a9df924`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1a5920474e13f38792f5c8fb1d43d0b409`
+
+- :ref:`exhale_function_homology_2reduction_8hpp_1a169cd08c4e2c6c373d76d269bdae7d28`
 
 - :ref:`exhale_function_homology_2reduction_8hpp_1ac0e79a899be3c1d5b4a76ea071fd79bf`
 
@@ -383,11 +383,11 @@ Functions
 
 - :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
 
+- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
+
 - :ref:`exhale_function_topology_2rips_8hpp_1af82e8143642fb452d49c561a5e84b997`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a8d88d925f0c8a77c597d46e7b073aba7`
-
-- :ref:`exhale_function_filtration_2rips_8hpp_1ac63fc4bbcb48bb4119b74de4607d3fc4`
 
 - :ref:`exhale_function_topology_2rips_8hpp_1a9a1dc66df690a01219961c0dff46532e`
 
@@ -413,17 +413,17 @@ Functions
 
 - :ref:`exhale_function_extras_8hpp_1aa822f034fed3e78558e04be80d6f5790`
 
-- :ref:`exhale_function_simplicial__map_8hpp_1a128372bb68bf4282bf0f02aa88cf6772`
-
 - :ref:`exhale_function_simplicial__map_8hpp_1a22d4a5b9ea082175dc1d37ed79f0b45f`
+
+- :ref:`exhale_function_simplicial__map_8hpp_1a128372bb68bf4282bf0f02aa88cf6772`
 
 - :ref:`exhale_function_filtration_2rips_8hpp_1a994082e3aac3f0ab907933746c5fa5a1`
 
 - :ref:`exhale_function_dowker_8hpp_1a8205e2df24d0850d0a2472770c0da907`
 
-- :ref:`exhale_function_simplicial__complex_8hpp_1a10e21fd6351157149ae42cfae28947dd`
-
 - :ref:`exhale_function_simplicial__complex_8hpp_1adea5ebf11ef869d59081c07746e48d01`
+
+- :ref:`exhale_function_simplicial__complex_8hpp_1a10e21fd6351157149ae42cfae28947dd`
 
 - :ref:`exhale_function_simplicial__complex_8hpp_1a06ea072e08d6be92106ab64bf3f4c3b4`
 

@@ -76,3 +76,5 @@ Functions
 
 - :ref:`exhale_function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12`
 
+- :ref:`exhale_function_zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310`
+

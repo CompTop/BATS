@@ -264,6 +264,14 @@
     <span class="c1">// order is by decreasing removal time</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">perm</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// auto&amp; valsk = F.vals(k);</span>
+        <span class="c1">// perm[k] = bats::util::sortperm(</span>
+        <span class="c1">//  size_t(0),</span>
+        <span class="c1">//  valsk.size(),</span>
+        <span class="c1">//  [&amp;](const size_t i, const size_t j) {</span>
+        <span class="c1">//      return valsk[i].second &gt; valsk[j].second;</span>
+        <span class="c1">//  }</span>
+        <span class="c1">// );</span>
         <span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sortperm</span><span class="p">(</span>
             <span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">(</span><span class="n">k</span><span class="p">).</span><span class="n">begin</span><span class="p">(),</span>
             <span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">(</span><span class="n">k</span><span class="p">).</span><span class="n">end</span><span class="p">(),</span>
@@ -319,6 +327,97 @@
                 <span class="n">a</span><span class="p">.</span><span class="n">dim</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span> <span class="c1">// otherwise, we process larger dimension first for removal</span>
             <span class="p">}</span>
     <span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">filt_order</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="c1">// permute complex to processing order for reduction</span>
+<span class="c1">// and determine order in which to process everything</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">FT</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">prepare_ChainComplex</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">ZigzagFiltration</span><span class="o">&lt;</span><span class="n">bats</span><span class="o">::</span><span class="n">SimplicialComplex</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">F</span><span class="p">,</span>
+    <span class="n">FT</span> <span class="c1">// field for coefficients</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// chain complex</span>
+    <span class="k">auto</span> <span class="n">C</span> <span class="o">=</span> <span class="n">Chain</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">complex</span><span class="p">(),</span> <span class="n">FT</span><span class="p">());</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">X</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">complex</span><span class="p">();</span> <span class="c1">// underlying complex</span>
+
+    <span class="c1">// compute permutations to order chain complex</span>
+    <span class="c1">// order is by decreasing removal time</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">perm</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span><span class="o">&amp;</span> <span class="n">valsk</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+        <span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">sortperm</span><span class="p">(</span>
+            <span class="kt">size_t</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">valsk</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
+            <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">valsk</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">==</span> <span class="n">valsk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">second</span> <span class="o">?</span> <span class="n">X</span><span class="p">.</span><span class="n">rlex_cmp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">:</span> <span class="n">valsk</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">valsk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">);</span>
+        <span class="c1">// perm[k] = bats::util::sortperm(</span>
+        <span class="c1">//  F.vals(k).begin(),</span>
+        <span class="c1">//  F.vals(k).end(),</span>
+        <span class="c1">//  [&amp;](const std::pair&lt;T,T&gt;&amp; a, const std::pair&lt;T,T&gt;&amp; b) {</span>
+        <span class="c1">//      return a.second &gt; b.second;</span>
+        <span class="c1">//  }</span>
+        <span class="c1">// );</span>
+
+    <span class="p">}</span>
+    <span class="n">C</span><span class="p">.</span><span class="n">ipermute_basis</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
+
+    <span class="c1">// compute order to process column</span>
+    <span class="c1">// at same filtration value:</span>
+    <span class="c1">// additions should be in increasing dimension order</span>
+    <span class="c1">// removals should be in decreasing dimension order</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">rfilt_val</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">filt_order</span><span class="p">;</span>
+    <span class="n">filt_order</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">complex</span><span class="p">().</span><span class="n">ncells</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// auto permk = perm[k];</span>
+        <span class="k">auto</span> <span class="n">permk</span> <span class="o">=</span> <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">F</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">pair</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">(</span><span class="n">k</span><span class="p">)[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">filt_order</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span>
+                <span class="n">rfilt_val</span><span class="p">(</span>
+                    <span class="n">k</span><span class="p">,</span> <span class="c1">// dimension</span>
+                    <span class="n">permk</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="c1">// index in permuted chain complex</span>
+                    <span class="n">i</span><span class="p">,</span> <span class="c1">// index in original complex</span>
+                    <span class="n">pair</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="c1">// entry time</span>
+                    <span class="nb">true</span> <span class="c1">// entry</span>
+                <span class="p">)</span>
+            <span class="p">);</span>
+            <span class="n">filt_order</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span>
+                <span class="n">rfilt_val</span><span class="p">(</span>
+                    <span class="n">k</span><span class="p">,</span> <span class="c1">// dimension</span>
+                    <span class="n">permk</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="c1">// index in permuted chain complex</span>
+                    <span class="n">i</span><span class="p">,</span> <span class="c1">// index in original complex</span>
+                    <span class="n">pair</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="c1">// removal time</span>
+                    <span class="nb">false</span> <span class="c1">// removal</span>
+                <span class="p">)</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span>
+        <span class="n">filt_order</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
+        <span class="n">filt_order</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+        <span class="p">[</span><span class="o">&amp;</span><span class="n">X</span><span class="p">](</span><span class="k">const</span> <span class="n">rfilt_val</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">rfilt_val</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">val</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">?</span>
+                <span class="n">a</span><span class="p">.</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="nl">val</span> <span class="p">:</span> <span class="c1">// increasing value order</span>
+                <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">entry</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">entry</span><span class="p">)</span> <span class="o">?</span> <span class="c1">// else, if both entries</span>
+                <span class="n">X</span><span class="p">.</span><span class="n">lex_cmp</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">cind</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">cind</span><span class="p">)</span> <span class="o">:</span> <span class="c1">// use lexicographical comparison</span>
+                <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">entry</span> <span class="o">^</span> <span class="n">b</span><span class="p">.</span><span class="n">entry</span><span class="p">)</span> <span class="o">?</span> <span class="c1">// one entry and one removal</span>
+                <span class="n">a</span><span class="p">.</span><span class="nl">entry</span> <span class="p">:</span> <span class="c1">// process entry first - doesn&#39;t matter</span>
+                <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">dim</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">dim</span><span class="p">)</span> <span class="o">?</span> <span class="c1">// else, both are removals - check if dim is the same</span>
+                <span class="n">a</span><span class="p">.</span><span class="n">ind</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="nl">ind</span> <span class="p">:</span> <span class="c1">// process later index first</span>
+                <span class="c1">// a.dim &gt; b.dim; // otherwise, we process larger dimension first for removal</span>
+                <span class="n">X</span><span class="p">.</span><span class="n">rlex_cmp</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">cind</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">cind</span><span class="p">);</span>
+            <span class="p">}</span>
+    <span class="p">);</span>
+    <span class="c1">// std::cout &lt;&lt; &quot;filt_order: &quot; &lt;&lt; std::endl;</span>
+    <span class="c1">// for (auto&amp; rval : filt_order) {</span>
+    <span class="c1">//  std::cout &lt;&lt; rval &lt;&lt; std::endl;</span>
+    <span class="c1">// }</span>
+
 
     <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">filt_order</span><span class="p">);</span>
 

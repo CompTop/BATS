@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;CpxT, T&gt;&amp;, FT) &mdash; Basic Applied Topology Subprograms  documentation</title>
+  <title>Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;bats::SimplicialComplex, T&gt;&amp;, FT) &mdash; Basic Applied Topology Subprograms  documentation</title>
   
 
   
@@ -45,8 +45,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;bats::SimplicialComplex, T&gt;&amp;, FT)" href="function_zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310.html" />
-    <link rel="prev" title="Template Function bats::zigzag::extra_col_reduction" href="function_zigzag_2reduction_8hpp_1ac5368ca8cbba02e11554b51280cb9b3e.html" /> 
+    <link rel="next" title="Template Function bats::zigzag::reduce_column(size_t, ColumnMatrix&lt;VecT&gt;&amp;, ColumnMatrix&lt;VecT&gt;&amp;, std::vector&lt;size_t&gt;&amp;, typename VecT::tmp_type&amp;, reduction_flag)" href="function_zigzag_2reduction_8hpp_1a8ab371c68105086fae22b67443d716d7.html" />
+    <link rel="prev" title="Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;CpxT, T&gt;&amp;, FT)" href="function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -149,13 +149,13 @@
         
           <li><a href="library_root.html">Library API</a> &raquo;</li>
         
-      <li>Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;CpxT, T&gt;&amp;, FT)</li>
+      <li>Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;bats::SimplicialComplex, T&gt;&amp;, FT)</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/function_zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,16 +168,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="template-function-bats-zigzag-prepare-chaincomplex-const-zigzagfiltration-cpxt-t-ft">
-<span id="exhale-function-zigzag-filtration-8hpp-1ab74e5e892ec32228f76163299f535d12"></span><h1>Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;CpxT, T&gt;&amp;, FT)<a class="headerlink" href="#template-function-bats-zigzag-prepare-chaincomplex-const-zigzagfiltration-cpxt-t-ft" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="template-function-bats-zigzag-prepare-chaincomplex-const-zigzagfiltration-bats-simplicialcomplex-t-ft">
+<span id="exhale-function-zigzag-filtration-8hpp-1a8d16e07e47262ac4fd0043a1b0937310"></span><h1>Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;bats::SimplicialComplex, T&gt;&amp;, FT)<a class="headerlink" href="#template-function-bats-zigzag-prepare-chaincomplex-const-zigzagfiltration-bats-simplicialcomplex-t-ft" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp.html#file-home-runner-work-bats-bats-include-zigzag-zigzag-filtration-hpp"><span class="std std-ref">File zigzag_filtration.hpp</span></a></p></li>
 </ul>
 <div class="section" id="function-documentation">
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I000EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationI4CpxT1TE2FT">
-<span id="_CPPv3I000EN4bats6zigzag20prepare_ChainComplexERK16ZigzagFiltrationI4CpxT1TE2FT"></span><span id="_CPPv2I000EN4bats6zigzag20prepare_ChainComplexERK16ZigzagFiltrationI4CpxT1TE2FT"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CpxT</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">zigzag</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">prepare_ChainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1zigzag_1_1ZigzagFiltration.html#_CPPv4I00EN4bats6zigzag16ZigzagFiltrationE" title="bats::zigzag::ZigzagFiltration"><span class="n"><span class="pre">ZigzagFiltration</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I000EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationI4CpxT1TE2FT" title="bats::zigzag::prepare_ChainComplex::CpxT"><span class="n"><span class="pre">CpxT</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I000EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationI4CpxT1TE2FT" title="bats::zigzag::prepare_ChainComplex::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">F</span></span>, <a class="reference internal" href="#_CPPv4I000EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationI4CpxT1TE2FT" title="bats::zigzag::prepare_ChainComplex::FT"><span class="n"><span class="pre">FT</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I000EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationI4CpxT1TE2FT" title="Permalink to this definition">¶</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationIN4bats17SimplicialComplexE1TE2FT">
+<span id="_CPPv3I00EN4bats6zigzag20prepare_ChainComplexERK16ZigzagFiltrationIN4bats17SimplicialComplexE1TE2FT"></span><span id="_CPPv2I00EN4bats6zigzag20prepare_ChainComplexERK16ZigzagFiltrationIN4bats17SimplicialComplexE1TE2FT"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310"></span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">zigzag</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">prepare_ChainComplex</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="classbats_1_1zigzag_1_1ZigzagFiltration.html#_CPPv4I00EN4bats6zigzag16ZigzagFiltrationE" title="bats::zigzag::ZigzagFiltration"><span class="n"><span class="pre">ZigzagFiltration</span></span></a><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classbats_1_1SimplicialComplex.html#_CPPv4N4bats17SimplicialComplexE" title="bats::SimplicialComplex"><span class="n"><span class="pre">SimplicialComplex</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationIN4bats17SimplicialComplexE1TE2FT" title="bats::zigzag::prepare_ChainComplex::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">F</span></span>, <a class="reference internal" href="#_CPPv4I00EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationIN4bats17SimplicialComplexE1TE2FT" title="bats::zigzag::prepare_ChainComplex::FT"><span class="n"><span class="pre">FT</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4bats6zigzag20prepare_ChainComplexEDaRK16ZigzagFiltrationIN4bats17SimplicialComplexE1TE2FT" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -189,8 +189,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="function_zigzag__filtration_8hpp_1a8d16e07e47262ac4fd0043a1b0937310.html" class="btn btn-neutral float-right" title="Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;bats::SimplicialComplex, T&gt;&amp;, FT)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="function_zigzag_2reduction_8hpp_1ac5368ca8cbba02e11554b51280cb9b3e.html" class="btn btn-neutral float-left" title="Template Function bats::zigzag::extra_col_reduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="function_zigzag_2reduction_8hpp_1a8ab371c68105086fae22b67443d716d7.html" class="btn btn-neutral float-right" title="Template Function bats::zigzag::reduce_column(size_t, ColumnMatrix&lt;VecT&gt;&amp;, ColumnMatrix&lt;VecT&gt;&amp;, std::vector&lt;size_t&gt;&amp;, typename VecT::tmp_type&amp;, reduction_flag)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12.html" class="btn btn-neutral float-left" title="Template Function bats::zigzag::prepare_ChainComplex(const ZigzagFiltration&lt;CpxT, T&gt;&amp;, FT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
