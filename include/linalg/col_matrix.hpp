@@ -124,11 +124,20 @@ public:
     //     return col.size();
     // }
 
-	// append a column to the end
+	/**
+	append a column to the end of the matrix
+
+	calls a column vector constructor on arguments passed in.
+	*/
 	template <class ...Ts>
 	void append_column(Ts (&...args)) { col.emplace_back(TC(args...)); n++; }
 	template <class ...Ts>
 	void append_column(Ts (&&...args)) { col.emplace_back(TC(args...)); n++; }
+
+	/**
+	append an empty row to the end of the matrix
+	*/
+	inline void append_row() { m++; }
 
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}

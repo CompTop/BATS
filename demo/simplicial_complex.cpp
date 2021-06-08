@@ -3,8 +3,8 @@
 #include <iostream>
 
 using namespace bats;
-using CpxT = LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
-// using CpxT = SimplicialComplex;
+// using CpxT = LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+using CpxT = SimplicialComplex;
 using FT = ModP<int, 2>;
 
 int main() {
@@ -60,6 +60,12 @@ int main() {
     // print_filtration_info(F);
 
     auto FCC = bats::Chain(F, FT()); //FilteredChainComplex
+
+    std::cout << X.lex_cmp(1,2, 1, 1) << std::endl; // true
+    std::cout << X.lex_cmp(1,2, 1, 2) << std::endl; // false
+    std::cout << X.lex_cmp(0,0, 1, 0) << std::endl; // true
+    std::cout << X.lex_cmp(2,0, 1, 1) << std::endl; // false
+    std::cout << X.lex_cmp(1,1, 2, 0) << std::endl; // true
 
     return 0;
 }

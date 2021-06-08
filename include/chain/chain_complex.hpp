@@ -58,6 +58,11 @@ struct ChainComplex {
 
 	inline size_t maxdim() const { return boundary.size() - 1; }
 	inline size_t dim(size_t k) const { return boundary[k].ncol(); }
+	size_t dim() const {
+		size_t ret = 0;
+		for (size_t k = 0; k < boundary.size(); ++k) { ret += dim(k); }
+		return ret;
+	}
 
 	// check that ChainComplex is a valid complex
 	// checks that composition of boundary maps is 0

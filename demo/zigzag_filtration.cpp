@@ -82,7 +82,7 @@ auto gen_rips_cylinder(
 ) {
     auto X = bats::gen_cylinder(n_len, n_cir, 0.3);
     // add a little noise
-    bats::add_normal_noise(X.data, 0.0, 0.01);
+    // bats::add_normal_noise(X.data, 0.0, 0.01);
     auto p = bats::coordinate_projection(X, 0);
 
     auto R = bats::RipsComplex<bats::SimplicialComplex>(
@@ -141,6 +141,7 @@ int main() {
     spx = {0,1}; F.add_recursive(0.0, 10.0, spx);
     spx = {0,2}; F.add_recursive(0.0, 10.0, spx);
     spx = {1,2}; F.add_recursive(0.0, 10.0, spx);
+    // std::cout << !(F.complex().lex_cmp(1,2, 0,2)) << std::endl;
 
     {
         F.complex().print_summary();
@@ -162,6 +163,7 @@ int main() {
     // now block cycle for some period of time
     std::cout <<"\nadding block:\n";
     spx = {0,1,2}; F.add(2.0, 4.0, spx);
+    spx = {0,1,2}; F.add(6.0, 8.0, spx); // block for second interval
 
     {
         F.complex().print_summary();

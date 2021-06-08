@@ -50,7 +50,7 @@ auto extend_zigzag_filtration(
     const CpxT& X,
     const T eps
 ) {
-    std::vector<std::vector<std::pair<T,T>>> val(X.maxdim() + 1);
+    std::vector<std::vector<std::vector<std::pair<T,T>>>> val(X.maxdim() + 1);
     for (size_t k = 0; k < X.maxdim() + 1; ++k) {
         val[k].resize(X.ncells(k));
         for (size_t i = 0; i < X.ncells(k); ++i) {
@@ -66,7 +66,7 @@ auto extend_zigzag_filtration(
                 std::cout << minmax.first << ", " << minmax.second << ", eps = " << eps << std::endl;
                 throw std::runtime_error("entry time after removal!");
             }
-            val[k][i] = std::make_pair(entry, removal);
+            val[k][i].emplace_back(std::make_pair(entry, removal));
 
         }
     }
@@ -138,7 +138,7 @@ std::vector<std::vector<std::pair<T,T>>> extend_levelset(
 ) {
 
     // zigzag filtration values
-    std::vector<std::vector<std::pair<T,T>>> val(X.maxdim() + 1);
+    std::vector<std::vector<std::vector<std::pair<T,T>>>> val(X.maxdim() + 1);
 
     std::vector<size_t> cube;
     std::pair<T, T> minmax;
@@ -153,7 +153,7 @@ std::vector<std::vector<std::pair<T,T>>> extend_levelset(
             // removal time is min + eps
             T removal = minmax.first + eps;
             if (entry > removal) {throw std::runtime_error("entry time after removal!");}
-            val[dim][i] = std::make_pair(entry, removal);
+            val[dim][i].emplace_back(std::make_pair(entry, removal));
         }
 
     }
