@@ -178,6 +178,15 @@ struct rfilt_val {
 	rfilt_val(size_t dim, size_t ind, size_t cind, T val, bool entry)\
 		: dim(dim), ind(ind), cind(cind), val(val), entry(entry) {}
 
+	friend std::ostream& operator<<(
+		std::ostream& os,
+		const rfilt_val& v
+	) {
+	    os << "fval, dim="<<v.dim << ": ind=" << v.ind << ", cind=" << v.cind
+			<< ", val=" << v.val << ", entry="<< v.entry;
+	    return os;
+	}
+
 };
 
 // store dimension, birth, death, and critical indices of pair
@@ -442,6 +451,7 @@ auto zigzag_barcode_reduction(
 
 	for (auto& fval : filt_order) {
 		size_t k = fval.dim; // dimension
+		// std::cout << fval << std::endl;
 
 		if (fval.entry) {
 			// right arrow -->

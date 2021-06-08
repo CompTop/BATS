@@ -393,7 +393,6 @@ public:
 		return s;
 	}
 
-
 	// return simplices in dimension dim
 	std::vector<std::vector<size_t>> get_simplices(const size_t dim) const {
 		std::vector<std::vector<size_t>> simplices;
@@ -422,6 +421,55 @@ public:
 			}
 		}
 		return simplices;
+	}
+
+	/**
+	Compare simplices in lexicographical order
+	looking at largest vertex first
+	(v_0,...,v_p) < (w_0,...,w_q) if v_p < w_q
+
+	compare simplex i in dimension dimi with simplex j in dimension dimj
+	@param dimi dimension of first simplex
+	@param i index of first simplex
+	@param dimj dimension of second simplex
+	@param j index of second simplex
+	@return true if first simplex < second simplex, false otherwise
+	*/
+	bool lex_cmp(size_t dimi, size_t i, size_t dimj, size_t j) const {
+		// std::cout << "in lex_cmp" << std::endl;
+		auto iti = simplex_end(dimi, i); --iti;
+		auto itj = simplex_end(dimj, j); --itj;
+		// make quick call
+		if (*iti != *itj) {return *iti < *itj;}
+
+		while (iti != simplex_begin(dimi, i) && itj != simplex_begin(dimj, j)) {
+			--iti; --itj;
+			if (*iti != *itj) { return *iti < *itj; } // we can make a comparison
+			// else we continue
+		}
+		// if we make it this far, simplices argree for full postfix of shorter simplex
+		// if first simplex is shorter, we return true.  Else, we return false
+		return dimj > dimi; // true if second simplex is longer than first simplex
+		// if both simplices are equal, then will return false
+	}
+
+	// reverse of above
+	bool rlex_cmp(size_t dimi, size_t i, size_t dimj, size_t j) const {
+		// std::cout << "in rlex_cmp" << std::endl;
+		auto iti = simplex_end(dimi, i); --iti;
+		auto itj = simplex_end(dimj, j); --itj;
+		// make quick call
+		if (*iti != *itj) {return *iti > *itj;}
+
+		while (iti != simplex_begin(dimi, i) && itj != simplex_begin(dimj, j)) {
+			--iti; --itj;
+			if (*iti != *itj) { return *iti > *itj; } // we can make a comparison
+			// else we continue
+		}
+		// if we make it this far, simplices argree for full postfix of shorter simplex
+		// if first simplex is shorter, we return true.  Else, we return false
+		return dimi > dimj; // true if second simplex is longer than first simplex
+		// if both simplices are equal, then will return false
 	}
 
 	// take union of simplicial complex with Y
