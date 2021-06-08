@@ -27,6 +27,10 @@ Functions
 
 - :ref:`exhale_function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71`
 
+- :ref:`exhale_function_zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1`
+
+- :ref:`exhale_function_zigzag__filtration_8hpp_1a165ca4148b5534f61a940d6443ea08e1`
+
 - :ref:`exhale_function_zigzag_2extension_8hpp_1a8ed509cd8f8b5ad9c11c440206243e12`
 
 - :ref:`exhale_function_zigzag_2reduction_8hpp_1a10444a23ac8f1a0b5ecafce3ff5e5ff4`

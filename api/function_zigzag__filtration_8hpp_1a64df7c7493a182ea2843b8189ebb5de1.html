@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Template Function bats::zigzag::detail::cycle_insertion_map &mdash; Basic Applied Topology Subprograms  documentation</title>
+  <title>Function bats::zigzag::detail::lex_cmp &mdash; Basic Applied Topology Subprograms  documentation</title>
   
 
   
@@ -45,8 +45,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function bats::zigzag::detail::lex_cmp" href="function_zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1.html" />
-    <link rel="prev" title="Template Function bats::zigzag::detail::cube_val" href="function_zigzag_2extension_8hpp_1aa5cd64e0ebaa695daeed5251b72706f4.html" /> 
+    <link rel="next" title="Function bats::zigzag::detail::rlex_cmp" href="function_zigzag__filtration_8hpp_1a165ca4148b5534f61a940d6443ea08e1.html" />
+    <link rel="prev" title="Template Function bats::zigzag::detail::cycle_insertion_map" href="function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -149,13 +149,13 @@
         
           <li><a href="library_root.html">Library API</a> &raquo;</li>
         
-      <li>Template Function bats::zigzag::detail::cycle_insertion_map</li>
+      <li>Function bats::zigzag::detail::lex_cmp</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/api/function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/function_zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,17 +168,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="template-function-bats-zigzag-detail-cycle-insertion-map">
-<span id="exhale-function-zigzag-2reduction-8hpp-1a05372b055183221592c64f8c61ba9e71"></span><h1>Template Function bats::zigzag::detail::cycle_insertion_map<a class="headerlink" href="#template-function-bats-zigzag-detail-cycle-insertion-map" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="function-bats-zigzag-detail-lex-cmp">
+<span id="exhale-function-zigzag-filtration-8hpp-1a64df7c7493a182ea2843b8189ebb5de1"></span><h1>Function bats::zigzag::detail::lex_cmp<a class="headerlink" href="#function-bats-zigzag-detail-lex-cmp" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp.html#file-home-runner-work-bats-bats-include-zigzag-reduction-hpp"><span class="std std-ref">File reduction.hpp</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp.html#file-home-runner-work-bats-bats-include-zigzag-zigzag-filtration-hpp"><span class="std std-ref">File zigzag_filtration.hpp</span></a></p></li>
 </ul>
 <div class="section" id="function-documentation">
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I0EN4bats6zigzag6detail19cycle_insertion_mapE12ColumnMatrixI4VecTERKNSt6vectorI6size_tEEK6size_t">
-<span id="_CPPv3I0EN4bats6zigzag6detail19cycle_insertion_mapERKNSt6vectorI6size_tEEK6size_t"></span><span id="_CPPv2I0EN4bats6zigzag6detail19cycle_insertion_mapERKNSt6vectorI6size_tEEK6size_t"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">VecT</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71"></span><a class="reference internal" href="classColumnMatrix.html#_CPPv4I0E12ColumnMatrix" title="ColumnMatrix"><span class="n"><span class="pre">ColumnMatrix</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats6zigzag6detail19cycle_insertion_mapE12ColumnMatrixI4VecTERKNSt6vectorI6size_tEEK6size_t" title="bats::zigzag::detail::cycle_insertion_map::VecT"><span class="n"><span class="pre">VecT</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">zigzag</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">cycle_insertion_map</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">I</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats6zigzag6detail19cycle_insertion_mapE12ColumnMatrixI4VecTERKNSt6vectorI6size_tEEK6size_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N4bats6zigzag6detail7lex_cmpERKN4bats17SimplicialComplexE6size_t6size_t6size_t6size_t">
+<span id="_CPPv3N4bats6zigzag6detail7lex_cmpERKN4bats17SimplicialComplexE6size_t6size_t6size_t6size_t"></span><span id="_CPPv2N4bats6zigzag6detail7lex_cmpERKN4bats17SimplicialComplexE6size_t6size_t6size_t6size_t"></span><span id="bats::zigzag::detail::lex_cmp__bats::SimplicialComplexCR.s.s.s.s"></span><span class="target" id="zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">zigzag</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">detail</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">lex_cmp</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classbats_1_1SimplicialComplex.html#_CPPv4N4bats17SimplicialComplexE" title="bats::SimplicialComplex"><span class="n"><span class="pre">SimplicialComplex</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">X</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dimi</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">i</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dimj</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">j</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4bats6zigzag6detail7lex_cmpERKN4bats17SimplicialComplexE6size_t6size_t6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compare simplices in lexicographical order looking at largest vertex first (v_0,…,v_p) &lt; (w_0,…,w_q) if v_p &lt; w_q</p>
+<p>compare simplex i in dimension dimi with simplex j in dimension dimj </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – simplicial complex </p></li>
+<li><p><strong>dimi</strong> – dimension of first simplex </p></li>
+<li><p><strong>i</strong> – index of first simplex </p></li>
+<li><p><strong>dimj</strong> – dimension of second simplex </p></li>
+<li><p><strong>j</strong> – index of second simplex </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if first simplex &lt; second simplex, false otherwise </p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </div>
@@ -189,8 +205,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="function_zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1.html" class="btn btn-neutral float-right" title="Function bats::zigzag::detail::lex_cmp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="function_zigzag_2extension_8hpp_1aa5cd64e0ebaa695daeed5251b72706f4.html" class="btn btn-neutral float-left" title="Template Function bats::zigzag::detail::cube_val" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="function_zigzag__filtration_8hpp_1a165ca4148b5534f61a940d6443ea08e1.html" class="btn btn-neutral float-right" title="Function bats::zigzag::detail::rlex_cmp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71.html" class="btn btn-neutral float-left" title="Template Function bats::zigzag::detail::cycle_insertion_map" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -1,0 +1,13 @@
+.. _exhale_function_zigzag__filtration_8hpp_1a165ca4148b5534f61a940d6443ea08e1:
+
+Function bats::zigzag::detail::rlex_cmp
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag::detail::rlex_cmp(const bats::SimplicialComplex&, size_t, size_t, size_t, size_t)

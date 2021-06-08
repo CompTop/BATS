@@ -60,10 +60,14 @@ Namespaces
 
 - :ref:`namespace_bats__zigzag`
 
+- :ref:`namespace_bats__zigzag__detail`
+
 
 Classes
 -------
 
+
+- :ref:`exhale_struct_structbats_1_1zigzag_1_1ZigzagChainComplex`
 
 - :ref:`exhale_class_classbats_1_1zigzag_1_1ZigzagFiltration`
 
@@ -73,6 +77,10 @@ Functions
 
 
 - :ref:`exhale_function_zigzag__filtration_8hpp_1acac87fada061f48f6d08dc701e18cb70`
+
+- :ref:`exhale_function_zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1`
+
+- :ref:`exhale_function_zigzag__filtration_8hpp_1a165ca4148b5534f61a940d6443ea08e1`
 
 - :ref:`exhale_function_zigzag__filtration_8hpp_1ab74e5e892ec32228f76163299f535d12`
 

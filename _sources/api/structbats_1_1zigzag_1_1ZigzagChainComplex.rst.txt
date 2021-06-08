@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1zigzag_1_1ZigzagChainComplex:
+
+Template Struct ZigzagChainComplex
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::zigzag::ZigzagChainComplex
+   :members:
+   :protected-members:
+   :undoc-members:

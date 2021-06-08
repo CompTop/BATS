@@ -293,11 +293,12 @@
     <span class="c1">//     return col.size();</span>
     <span class="c1">// }</span>
 
-    <span class="c1">// append a column to the end</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="p">...</span><span class="n">Ts</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="n">append_column</span><span class="p">(</span><span class="n">Ts</span> <span class="p">(</span><span class="o">&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">))</span> <span class="p">{</span> <span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">TC</span><span class="p">(</span><span class="n">args</span><span class="p">...));</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="p">...</span><span class="n">Ts</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="n">append_column</span><span class="p">(</span><span class="n">Ts</span> <span class="p">(</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">))</span> <span class="p">{</span> <span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">TC</span><span class="p">(</span><span class="n">args</span><span class="p">...));</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">append_row</span><span class="p">()</span> <span class="p">{</span> <span class="n">m</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="kr">inline</span> <span class="n">TC</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">col</span><span class="p">[</span><span class="n">index</span><span class="p">];}</span>
     <span class="kr">inline</span> <span class="k">const</span> <span class="n">TC</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">col</span><span class="p">[</span><span class="n">index</span><span class="p">];}</span>

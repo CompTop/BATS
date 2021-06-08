@@ -63,9 +63,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
-
 - :ref:`exhale_function_neighborhood_8hpp_1ac344ced71c636b9cf05aab03c98bcd85`
+
+- :ref:`exhale_function_neighborhood_8hpp_1aab44b10333aaf273aa45e0b78bcebc79`
 
 - :ref:`exhale_function_neighborhood_8hpp_1a77dcdce06ffc1e4ccce66cc52a0b490a`
 

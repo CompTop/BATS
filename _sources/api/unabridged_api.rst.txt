@@ -228,6 +228,11 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
+   structbats_1_1zigzag_1_1ZigzagChainComplex.rst
+
+.. toctree::
+   :maxdepth: 5
+
    structbats_1_1zigzag_1_1ZigzagPair.rst
 
 .. toctree::
@@ -1738,6 +1743,16 @@ Functions
    :maxdepth: 5
 
    function_zigzag_2reduction_8hpp_1a05372b055183221592c64f8c61ba9e71.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_zigzag__filtration_8hpp_1a64df7c7493a182ea2843b8189ebb5de1.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_zigzag__filtration_8hpp_1a165ca4148b5534f61a940d6443ea08e1.rst
 
 .. toctree::
    :maxdepth: 5
