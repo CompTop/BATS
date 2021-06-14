@@ -335,7 +335,7 @@
   <span class="p">}</span>
 
   <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">%</span> <span class="n">P</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">%</span> <span class="n">P</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="c1">// ModP operator=(const int &amp;a) {</span>
@@ -506,7 +506,7 @@
   <span class="p">}</span>
 
   <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="k">const</span> <span class="n">ModP</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>

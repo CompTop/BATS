@@ -1,0 +1,13 @@
+.. _exhale_function_homology_2reduction_8hpp_1af4bb824ad013fbac602dd09e357e5782:
+
+Template Function bats::sparsify_basis(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&)
+================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::sparsify_basis(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&)

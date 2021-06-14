@@ -41,6 +41,8 @@ Includes
 
 - ``iostream``
 
+- ``map`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
+
 - ``random``
 
 - ``sstream``

@@ -184,6 +184,7 @@
 <span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;random&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;field.hpp&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;abstract_vector.hpp&quot;</span><span class="cp"></span>
 
@@ -700,13 +701,62 @@
     <span class="c1">//  }</span>
     <span class="c1">// }</span>
 
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">SVT</span><span class="o">&gt;</span>
+    <span class="kt">size_t</span> <span class="n">nnz_intersection</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">SVT</span><span class="o">&amp;</span> <span class="n">x</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="mi">0</span><span class="p">;}</span>
+
+        <span class="kt">size_t</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">nzbegin</span><span class="p">();</span>
+        <span class="k">auto</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzbegin</span><span class="p">();</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">nzend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i2</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">==</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
+                <span class="o">++</span><span class="n">ct</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
+                <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// i2-&gt;ind &lt; i1-&gt;ind</span>
+                <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ct</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">SVT</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">coeff_intersection</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">SVT</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">TV</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">ct</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+
+        <span class="k">auto</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">nzbegin</span><span class="p">();</span>
+        <span class="k">auto</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzbegin</span><span class="p">();</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">nzend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i2</span> <span class="o">!=</span> <span class="n">x</span><span class="p">.</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">==</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">i1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+                <span class="o">++</span><span class="p">(</span><span class="n">ct</span><span class="p">[</span><span class="n">c</span><span class="p">]);</span>
+                <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
+                <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">i2</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
+                <span class="o">++</span><span class="n">i1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// i2-&gt;ind &lt; i1-&gt;ind</span>
+                <span class="o">++</span><span class="n">i2</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
     <span class="c1">// set</span>
     <span class="c1">// y &lt;- ax + y</span>
     <span class="c1">// uses pre-allocated temporary vector</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">SVT</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="n">axpy</span><span class="p">(</span>
-        <span class="k">const</span> <span class="n">TV</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span>
-        <span class="k">const</span> <span class="n">SVT</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">TV</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">SVT</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">key_type</span><span class="o">&gt;&amp;</span> <span class="n">tmp</span>
     <span class="p">)</span> <span class="p">{</span>
 

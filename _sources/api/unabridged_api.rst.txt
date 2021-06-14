@@ -14,6 +14,11 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
+   namespace_bats__detail.rst
+
+.. toctree::
+   :maxdepth: 5
+
    namespace_bats__future.rst
 
 .. toctree::
@@ -199,6 +204,11 @@ Classes and Structs
    :maxdepth: 5
 
    structbats_1_1RPCosineDist.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1sparse__reduction__flag.rst
 
 .. toctree::
    :maxdepth: 5
@@ -787,6 +797,11 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_homology_2reduction_8hpp_1a7e2446e8991e36d8bb219998bc76736e.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_zigzag__zoo_8hpp_1a346839e705eec218bde8fee4864d9a31.rst
 
 .. toctree::
@@ -1237,6 +1252,11 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_homology_2reduction_8hpp_1ac75fe3894c0e3c21c480649f2348a236.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_homology_2reduction_8hpp_1a91b11073b2bb54ed0e8ed0e4d3f0a5bf.rst
 
 .. toctree::
@@ -1298,6 +1318,11 @@ Functions
    :maxdepth: 5
 
    function_homology_2reduction_8hpp_1a38c3a3e30e0973b5736dc47da0bbcd25.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_homology_2reduction_8hpp_1acdde3d53d8668aa615acf961aeb4bc0b.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1398,6 +1423,16 @@ Functions
    :maxdepth: 5
 
    function_filtration_2rips_8hpp_1a994082e3aac3f0ab907933746c5fa5a1.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_homology_2reduction_8hpp_1af0dd0945cd365317aa534753b7ad9264.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_homology_2reduction_8hpp_1af4bb824ad013fbac602dd09e357e5782.rst
 
 .. toctree::
    :maxdepth: 5

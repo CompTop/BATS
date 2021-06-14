@@ -456,6 +456,18 @@
         <span class="n">set_indices</span><span class="p">();</span> <span class="c1">// update homology indices</span>
     <span class="p">}</span>
 
+    <span class="kt">void</span> <span class="n">sparsify_basis</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">sparsify_basis</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">remove_extra_cycles</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">bats</span><span class="o">::</span><span class="n">remove_extra_cycles</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
     <span class="c1">// put vector/matrix in homology-revealing basis in dimension k</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span>
     <span class="kr">inline</span> <span class="n">TV</span> <span class="n">to_hom_basis</span><span class="p">(</span><span class="k">const</span> <span class="n">TV</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>

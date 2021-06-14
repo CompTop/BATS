@@ -1,0 +1,13 @@
+.. _exhale_function_homology_2reduction_8hpp_1a7e2446e8991e36d8bb219998bc76736e:
+
+Template Function bats::detail::pivot_coeff
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::detail::pivot_coeff(const TVec&, const TVec&)

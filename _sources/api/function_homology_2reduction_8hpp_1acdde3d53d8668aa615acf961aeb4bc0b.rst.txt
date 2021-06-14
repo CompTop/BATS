@@ -1,0 +1,13 @@
+.. _exhale_function_homology_2reduction_8hpp_1acdde3d53d8668aa615acf961aeb4bc0b:
+
+Template Function bats::remove_extra_cycles
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::remove_extra_cycles(const ColumnMatrix<TVec>&, ColumnMatrix<TVec>&)

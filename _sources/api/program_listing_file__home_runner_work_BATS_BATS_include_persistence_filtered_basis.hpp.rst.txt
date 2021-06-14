@@ -137,6 +137,14 @@ Program Listing for File filtered_basis.hpp
    
        }
    
+       inline void sparsify_basis() {
+           RC.sparsify_basis();
+       }
+   
+       inline void remove_extra_cycles() {
+           RC.remove_extra_cycles();
+       }
+   
        // get subcomplex
        ReducedFilteredChainComplex get_subcomplex() const;
    
