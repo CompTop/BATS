@@ -566,8 +566,8 @@ auto zigzag_barcode_reduction(
 
 				// this column should not have been recorded in p2c
 			}
-			F.R[fval.dim][fval.ind].clear();
-			F.U[fval.dim][fval.ind].clear();
+			F.R[fval.dim][fval.ind].clear_dealloc();
+			F.U[fval.dim][fval.ind].clear_dealloc();
 		}
 	}
 

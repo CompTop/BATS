@@ -227,10 +227,10 @@ int main() {
     {
 
         using F2 = ModP<int, 2>;
-        double r = 0.16;
-        double eps = 0.08;
+        double r = 0.02;
+        double eps = 0.01;
         auto start = std::chrono::steady_clock::now();
-        auto F = gen_rips_cylinder(32, 32,  r, eps);
+        auto F = gen_rips_cylinder(256, 256,  r, eps);
         // auto F = gen_rips_line(10, r, eps);
         auto end = std::chrono::steady_clock::now();
         std::cout << "\nSetup: "
@@ -238,11 +238,12 @@ int main() {
             << "\u03BCs" << std::endl;
         F.complex().print_summary();
 
-        auto R = bats::Reduce(F.complex(), F2());
-        for (size_t k = 0; k < R.maxdim()+1; ++k) {
-            std::cout <<"betti " << k << ": " << R.hdim(k) << std::endl;
-        }
-
+        // {
+        //     auto R = bats::Reduce(F.complex(), F2());
+        //     for (size_t k = 0; k < R.maxdim()+1; ++k) {
+        //         std::cout <<"betti " << k << ": " << R.hdim(k) << std::endl;
+        //     }
+        // }
 
         start = std::chrono::steady_clock::now();
         using F2 = ModP<int, 2>;

@@ -166,7 +166,7 @@ public:
   }
 
   inline bool operator<( const ModP &b) const {
-    return true;
+    return (val % P) < (b.val % P);
   }
 
   // ModP operator=(const int &a) {
@@ -337,7 +337,7 @@ public:
   }
 
   inline bool operator<( const ModP &b) const {
-    return true;
+    return (val & 0x1) < (b.val & 0x1);
   }
 
   friend std::ostream& operator<<( std::ostream& os, const ModP &x) {

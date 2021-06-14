@@ -141,6 +141,20 @@ struct ReducedFilteredChainComplex {
 
 	}
 
+	/**
+	greedily introduce sparsity into basis
+	*/
+	inline void sparsify_basis() {
+		RC.sparsify_basis();
+	}
+
+	/**
+	remove extra cycles from U[k]
+	*/
+	inline void remove_extra_cycles() {
+		RC.remove_extra_cycles();
+	}
+
 	// get subcomplex
 	ReducedFilteredChainComplex get_subcomplex() const;
 

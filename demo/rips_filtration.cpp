@@ -14,7 +14,7 @@ int main (int argc, char* argv[]) {
 
 	// maximum simplex dimension
 	size_t d = bats::util::io::parse_argv(argc, argv, "-dim", 2); // dimension of Euclidean Space
-	size_t n = bats::util::io::parse_argv(argc, argv, "-npoints", 30);
+	size_t n = bats::util::io::parse_argv(argc, argv, "-npoints", 50);
     size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 2);
     double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 3.0);
 
@@ -81,11 +81,18 @@ int main (int argc, char* argv[]) {
 
 		RFC.print_summary();
 		// std::cout << "hdim(1) = " << RFC.RC.hdim(1) << std::endl;
+		start = std::chrono::steady_clock::now();
+		RFC.sparsify_basis();
+		end = std::chrono::steady_clock::now();
+	    std::cout << "Sparsify basis: "
+	        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	        << "ms" << std::endl;
+		RFC.print_summary();
 
-		auto& R1 = RFC.RC.R[1];
-		for (size_t j = 0; j < R1.ncol(); ++j) {
-			R1[j].print();
-		}
+		// auto& R1 = RFC.RC.R[1];
+		// for (size_t j = 0; j < R1.ncol(); ++j) {
+		// 	R1[j].print();
+		// }
 
 		// // persistence pairs for H1
 		// auto ps = RFC.persistence_pairs(1);

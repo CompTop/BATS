@@ -290,6 +290,24 @@ public:
 		set_indices(); // update homology indices
 	}
 
+	/**
+	greedily introduce sparsity into basis
+	*/
+	void sparsify_basis() {
+		for (size_t k = 0; k < maxdim() + 1; ++k) {
+			bats::sparsify_basis(R[k], U[k]);
+		}
+	}
+
+	/**
+	remove extra cycles from U[k]
+	*/
+	void remove_extra_cycles() {
+		for (size_t k = 0; k < maxdim() + 1; ++k) {
+			bats::remove_extra_cycles(R[k], U[k]);
+		}
+	}
+
 	// put vector/matrix in homology-revealing basis in dimension k
 	template <typename TV>
 	inline TV to_hom_basis(const TV &v, size_t k) const {

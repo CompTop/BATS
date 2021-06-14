@@ -3,6 +3,7 @@
 #include <map>
 #include <unordered_map>
 #include <set>
+#include <utility>
 #include <linalg/sparse_vector.hpp>
 #include <linalg/col_matrix.hpp>
 // #include "tsl/hopscotch_map.h"
@@ -42,6 +43,7 @@ struct no_apparent_pairs_flag {};
 // flags for selecting algorithms
 struct standard_reduction_flag {};
 struct extra_reduction_flag {};
+struct sparse_reduction_flag {};
 
 
 // perform reduction algorithm on a column matrix in-place
@@ -187,7 +189,6 @@ p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 
 	// loop over columns
 	for (size_t j = 0; j < M.ncol(); j++) {
-		bool found_pivot = false;
 		size_t end_offset = 1;
 		auto piv = M[j].nzend() - end_offset; // nonzero location
 		while(piv - M[j].nzbegin() > 0) {
@@ -202,17 +203,16 @@ p2c_type reduce_matrix_extra(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U) {
 				M[j].axpy(-a, M[k], tmp);
 				U[j].axpy(-a, U[k], tmp); // update change of basis
 				piv = M[j].nzend() - end_offset; // next nonzero location
-			} else if (!found_pivot) {
+			} else if (end_offset == 1) {
 				// new pivot
 				pivot_to_col[piv->ind] = j;
-				found_pivot = true;
-				end_offset++;
-				piv--;
+				++end_offset;
+				--piv;
 			} else {
 				// we skip zeroing out this entry
 				// need to increment offset
-				end_offset++;
-				piv--;
+				++end_offset;
+				--piv;
 			}
 		}
 	}
@@ -233,6 +233,156 @@ inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U, bats
 template <class TVec>
 inline p2c_type reduce_matrix(ColumnMatrix<TVec> &M, ColumnMatrix<TVec> &U, bats::extra_reduction_flag) {
 	return reduce_matrix_extra(M, U);
+}
+
+/**
+greedily introduce sparsity into column j of M
+using columns k < j
+has the effect of reducing column j if not already reduced.
+
+@param M matrix
+@param j column to reduce
+@param pivot_to_col maps pivots to columns
+@param coeff preallocated map to use when sparsifying.
+@param tmp preallocated to use with axpy
+*/
+template <typename TVec, typename F>
+void reduce_column_sparsify(
+	ColumnMatrix<TVec>& M,
+	const size_t j,
+	p2c_type& pivot_to_col,
+	std::map<F, size_t>& coeff,
+	typename TVec::tmp_type& tmp
+) {
+	size_t end_offset = 1; // start looking at last nonzero
+	auto piv = M[j].nzend() - end_offset; // nonzero location
+	while (piv - M[j].nzbegin() > 0) {
+		if (pivot_to_col[piv->ind] == j) {
+			// do nothing, because this is already a pivot
+			++end_offset;
+			--piv;
+		} else if (pivot_to_col[piv->ind] < j && end_offset == 1) {
+			// we simply eliminate this non-zero
+			size_t k = pivot_to_col[piv->ind];
+			auto a = piv->val / M[k].lastnz().val;
+			M[j].axpy(-a, M[k], tmp);
+			piv = M[j].nzend() - end_offset; // next nonzero location
+		} else if (pivot_to_col[piv->ind] < j) {
+			// determine if we should eliminate this non-zero
+			size_t i = piv->ind;
+			size_t k = pivot_to_col[i];
+			// determine largest number of non-zeros we might eliminate
+			coeff.clear();
+			M[j].coeff_intersection(M[k], coeff); // calculate intersections
+			F a(0);
+			size_t ct = 0;
+			for (auto it : coeff) {
+				if (it.second > ct) {
+					ct = it.second;
+					a = it.first;
+				}
+			}
+			// determine whether or not we would introduce more non-zeros than we eliminate
+			if (ct > (M[k].nnz() / 2)) {
+				M[j].axpy(-a, M[k], tmp);
+			}
+			piv = M[j].nzend() - end_offset; // next nonzero location
+			if (piv->ind == i) {++end_offset; --piv;} // if we didn't eliminate this nonzero, continue
+		} else if (end_offset == 1) {
+			// we can set a new pivot
+			pivot_to_col[piv->ind] = j;
+			++end_offset;
+			--piv;
+		} else {
+			// we skip zeroing out this entry
+			// need to increment offset
+			++end_offset;
+			--piv;
+		}
+	}
+	return;
+}
+
+/**
+greedily introduce sparsity into columns j of U and R
+using columns k < j
+assumes columns k <= j are already reduced
+
+objective to greedily minimize is nnz(U[j]) + nnz(R[j])
+
+@param R reduced matrix
+@param U change of basis matrix
+@param j column
+@param coeff preallocated map to use when sparsifying.
+@param tmp preallocated to use with axpy
+*/
+template <typename TVec, typename F>
+void sparsify_basis(
+	ColumnMatrix<TVec>& R,
+	ColumnMatrix<TVec>& U,
+	const size_t j,
+	std::map<F, size_t>& coeff,
+	typename TVec::tmp_type& tmp
+) {
+	size_t end_offset = 2; // entry above diagonal in U[j]
+	auto piv = U[j].nzend() - end_offset; // nonzero location
+	while (piv - U[j].nzbegin() > 0) {
+		size_t k = piv->ind;
+		// std::cout << k << std::endl;
+		if (R[k].nnz() == 0 || R[k].lastnz().ind < j) {
+			// can potentially modify using this entry
+			coeff.clear();
+			U[j].coeff_intersection(U[k], coeff); // calculate intersections
+			R[j].coeff_intersection(R[k], coeff); // add counts for matrix R
+			F a(0);
+			size_t ct = 0;
+			for (auto it : coeff) {
+				if (it.second > ct) {
+					ct = it.second;
+					a = it.first;
+				}
+			}
+			// determine whether or not we would introduce more non-zeros than we eliminate
+			if (ct > ((U[k].nnz() + R[k].nnz()) / 2)) {
+				U[j].axpy(-a, U[k], tmp);
+				R[j].axpy(-a, R[k], tmp);
+			}
+			piv = U[j].nzend() - end_offset; // next nonzero location
+			if (piv->ind == k) {++end_offset; --piv;} // if we didn't eliminate this nonzero, continue
+		} else {
+			++end_offset;
+			--piv;
+		}
+	}
+	return;
+}
+
+/**
+greedily introduce sparsity into columns of U and R
+assumes R is already reduced
+
+objective to greedily minimize is nnz(U[j]) + nnz(R[j])
+
+@param R reduced matrix
+@param U change of basis matrix
+*/
+template <typename TVec>
+void sparsify_basis(
+	ColumnMatrix<TVec>& R,
+	ColumnMatrix<TVec>& U
+) {
+
+	if (R.ncol() != U.ncol()) {throw std::runtime_error("Number of columns are not the same!");}
+
+	using F = typename TVec::val_type;
+	std::map<F, size_t> coeff;
+	typename TVec::tmp_type tmp;
+
+	for (size_t j = 0; j < R.ncol(); ++j) {
+		sparsify_basis(R, U, j, coeff, tmp);
+	}
+
+	return;
 }
 
 // get clearing indices from pivots
@@ -320,6 +470,76 @@ p2c_type reduce_matrix_compression(
 	return reduce_matrix(M, U, flag());
 }
 // TODO: add flags
+
+
+
+/**
+Update change of basis matrix to not be as dense by
+removing lower grade cycles from U.
+
+Let j1 < j2, and R[j1] = 0
+Then, we can add a linear combination of U[j1] to U[j2]
+without changing the matrix invatiant B*U = R
+
+@param R reduced matrix
+@param U change of basis matrix
+*/
+template <class TVec>
+void remove_extra_cycles(
+	const ColumnMatrix<TVec> &R,
+	ColumnMatrix<TVec> &U
+) {
+
+	if (R.ncol() != U.ncol()) {throw std::runtime_error("Number of columns are not the same!");}
+
+	// create a temporary vector for use in axpys
+	typename TVec::tmp_type tmp;
+
+	size_t n = U.ncol(); // number of columns
+	for (size_t j = 0; j < n; ++j) {
+		size_t end_offset = 2; // entry above diagonal
+		auto piv = U[j].nzend() - end_offset; // nonzero location
+		while (piv - U[j].nzbegin() > 0) {
+			size_t k = piv->ind;
+			if (R[k].nnz() == 0) {
+				// we can eliminate entry
+				auto a = piv->val / U[k].lastnz().val;
+				U[j].axpy(-a, U[k], tmp); // update change of basis
+				// R[j].axpy(R[k]) does nothing because R[k] = 0
+				piv = U[j].nzend() - end_offset; // next nonzero location
+			} else {
+				// we skip zeroing out this entry
+				// need to increment offset
+				end_offset++;
+				piv--;
+			}
+		}
+	}
+
+}
+
+// TODO: write a function on SparseVector which
+// will calculate the coefficient to use to greedily reduce the nnz
+// by adding another vector (may be zero)
+
+// might also write a function that will try to minimize
+// nnz(U) + nnz(R)
+// since we can add copies of columns of R with smaller pivots as well
+
+namespace detail {
+
+/**
+Calculate
+
+@return c coefficient for a += c*b
+@return d difference in number of nonzeros of a using this coefficient
+*/
+template <typename TVec>
+auto pivot_coeff(const TVec& a, const TVec& b) {
+
+}
+
+} // namespace detail
 
 
 

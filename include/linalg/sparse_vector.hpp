@@ -15,6 +15,7 @@ maintains indices in sorted order
 #include <utility>
 #include <random>
 #include <chrono>
+#include <map>
 #include "field.hpp"
 #include "abstract_vector.hpp"
 
@@ -535,13 +536,76 @@ public:
 	// 	}
 	// }
 
+	/**
+	calculate the number of non-zeros common to two vectors
+
+	@param x sparse vector for comparison
+	@return ct number of non-zeros common to both this vector and x
+	*/
+	template <class SVT>
+	size_t nnz_intersection(
+		const SVT& x
+	) const {
+
+		if (x.nnz() == 0) {return 0;}
+
+		size_t ct = 0;
+		auto i1 = nzbegin();
+		auto i2 = x.nzbegin();
+
+		while (i1 != nzend() && i2 != x.nzend()) {
+			if (i1->ind == i2->ind) {
+				++ct;
+				++i1;
+				++i2;
+			} else if (i1->ind < i2->ind) {
+				++i1;
+			} else { // i2->ind < i1->ind
+				++i2;
+			}
+		}
+		return ct;
+	}
+
+	/**
+	calculate the number of non-zeros common with c * x
+	where c ranges over any possible value
+
+	@param x sparse vector for comparison
+	@param ct map from coefficient c to number of identical nonzeros with c*x
+	ct is not cleared in the function.
+	*/
+	template <class SVT>
+	void coeff_intersection(
+		const SVT& x,
+		std::map<TV, size_t>& ct
+	) const {
+
+		auto i1 = nzbegin();
+		auto i2 = x.nzbegin();
+
+		while (i1 != nzend() && i2 != x.nzend()) {
+			if (i1->ind == i2->ind) {
+				auto c = i1->val / i2->val;
+				++(ct[c]);
+				++i1;
+				++i2;
+			} else if (i1->ind < i2->ind) {
+				++i1;
+			} else { // i2->ind < i1->ind
+				++i2;
+			}
+		}
+		return;
+	}
+
 	// set
 	// y <- ax + y
 	// uses pre-allocated temporary vector
 	template <class SVT>
 	void axpy(
-		const TV &a,
-		const SVT &x,
+		const TV& a,
+		const SVT& x,
 		std::vector<key_type>& tmp
 	) {
 
