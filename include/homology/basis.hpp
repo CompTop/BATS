@@ -6,6 +6,7 @@ compute homology-revealing bases for a chain complex
 #include <set>
 #include <chain/chain_complex.hpp>
 #include "reduction.hpp"
+#include "parallel.hpp"
 #include <chrono>
 
 namespace bats {
@@ -381,8 +382,10 @@ public:
 			std::cout << "\tdim " << k << ": " << dim(k)
 			<< ", betti_" << k << ": " << hdim(k);
 			if (print_nnz) {
-				std::cout << " nnz(R): " << R[k].nnz()
-							<<" nnz(U): " << U[k].nnz();
+				std::cout << " nnz(R): " << R[k].nnz();
+				if (U.size() > k) { // handle if basis not computed
+					std::cout << " nnz(U): " << U[k].nnz();
+				}
 			}
 			std::cout << "\n";
 		}
