@@ -82,6 +82,58 @@ void add_dimension_recursive_flag(
 }
 
 
+// template over filtration type
+// TODO: can do unsafe simplex add
+template <typename CpxT, typename T, typename NT>
+void add_dimension_recursive_flag_extension(
+    Filtration<T, CpxT> &F,
+    const NT &nbrs, // lists of neighbors
+    const size_t d, // dimension
+    const size_t maxd, // max dimension
+    const std::vector<size_t> &iter_idxs,
+    std::vector<size_t> &spx_idxs,
+    const T &t,
+    const size_t index_of_edge,
+    std::vector<std::vector<size_t>> &inds
+) {
+    // sorted simplices will end up here
+    std::vector<size_t> spx_idxs2(spx_idxs.size() + 1);
+    if (d == maxd) {
+        // no recursion - we're adding maximal dimension cells
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
+
+            // add to F
+            F.add(t, spx_idxs2);
+            inds[spx_idxs2.size()-1].emplace_back(index_of_edge);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    } else { // d < maxd
+        // recursion
+        std::vector<size_t> iter_idxs2; // indices for recursing on
+        iter_idxs2.reserve(iter_idxs.size());
+        for (auto k : iter_idxs) {
+            // append k to spx_idxs, sort
+            spx_idxs.push_back(k);
+            bats::util::sort_into(spx_idxs, spx_idxs2);
+
+            // add to F
+            F.add(t, spx_idxs2);
+            inds[spx_idxs2.size()-1].emplace_back(index_of_edge);
+
+            // recurse
+            bats::util::intersect_sorted_lt(iter_idxs, nbrs[k], k, iter_idxs2);
+            add_dimension_recursive_flag_extension(F, nbrs, d+1, maxd, iter_idxs2, spx_idxs2, t, index_of_edge, inds);
+
+            // pop k off spx_idxs
+            spx_idxs.pop_back();
+        }
+    }
+}
 
 template <typename CpxT, typename T, typename NT>
 void add_dimension_recursive_flag_unsafe(
@@ -283,6 +335,74 @@ Filtration<T, CpxT> FlagFiltration(
 
     return F;
 }
+
+
+// Flag filtration will also return inds used to inverse map
+template <typename CpxT, typename T>
+auto FlagFiltration_extension(
+    std::vector<filtered_edge<T>> &edges,
+    const size_t n, // number of 0-cells
+    const size_t maxdim,
+    const T t0
+) {
+    std::vector<std::vector<size_t>> inds(maxdim + 1);
+
+    std::sort(edges.begin(), edges.end());
+
+    // check that dimensions agree
+    size_t m = edges.size();
+
+    // X = SimplicialComplex(maxdim);
+    // F = Filtration<T, SimplicialComplex>(X);
+    // reset simplicial complex
+    CpxT X(n, maxdim);
+    Filtration<T, CpxT> F(X);
+
+    // sets 0-cells
+    inds[0].reserve(n);
+    std::vector<size_t> spx_idxs(1); // simplex in the form of indices eg {0,2}
+    for (size_t k = 0; k < n; k++) {
+        spx_idxs[0] = k;
+        F.add(t0, spx_idxs); // don't need to try to pair since 0-cells
+        inds[0].emplace_back(k);
+    }
+
+    std::vector<std::vector<size_t>> nbrs(n);
+
+    spx_idxs.resize(2); // now time to add edges
+    std::vector<size_t> iter_idxs; // intersection vertex indices 
+    iter_idxs.reserve(n); // maximum size
+    inds[1].reserve(m);
+
+    for (size_t k = 0; k < m; k++) {
+        size_t i = edges[k].s;
+        size_t j = edges[k].t;
+        T t = edges[k].r; // filtration value of cuurent edge
+        spx_idxs[0] = i;
+        spx_idxs[1] = j;
+        std::sort(spx_idxs.begin(), spx_idxs.end());
+        F.add(t, spx_idxs); 
+        inds[1].emplace_back(k);
+
+        bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
+
+        if (!iter_idxs.empty()) { // start from dimension 2 to add simplices
+            add_dimension_recursive_flag_extension(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t, k, inds);
+        }
+
+        // TODO: use std::set for neighbors - insertion is log(n)
+        // nbrs[i].emplace(j);
+        // nbrs[j].emplace(i);
+        // TODO: insertion sort
+        nbrs[i].emplace_back(j);
+        std::sort(nbrs[i].begin(), nbrs[i].end());
+        nbrs[j].emplace_back(i);
+        std::sort(nbrs[j].begin(), nbrs[j].end());
+    }
+
+    return std::make_tuple(F, inds);
+}
+
 
 
 // Flag complex using list of edges

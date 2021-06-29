@@ -6,6 +6,7 @@
 #include <homology/basis.hpp>
 #include <util/common.hpp>
 #include "barcode.hpp"
+#include <yuan/update_information.hpp>
 
 namespace bats {
 
@@ -39,7 +40,7 @@ struct ReducedFilteredChainComplex {
 	std::vector<PersistencePair<T>> persistence_pairs(
 		const size_t k,
 		const bool permuted=false
-	) {
+	)const {
 		std::vector<PersistencePair<T>> pairs;
 		if (permuted) {
 			for (size_t i =0; i < dim(k); i++) {
@@ -139,6 +140,40 @@ struct ReducedFilteredChainComplex {
 		// store values as well
 		val = newval;
 
+	}
+
+	// update filtration fast version
+	template <typename Information_type>
+	void update_filtration_general(const Information_type & updating_information) {
+		// step 1: apply permutation updates to ReducedChainComplex RC
+		RC.update_basis_general(updating_information);
+
+		// step 2: store new permutation
+		perm = updating_information.F_Y_perms;
+
+		// store values as well
+		val = updating_information.F_Y_vals;
+
+	}
+
+	// get nnz of U
+	std::vector<size_t> get_nnz_U(){
+		std::vector<size_t> U_nnz;
+		U_nnz.reserve(maxdim());
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			U_nnz.emplace_back(RC.U[k].nnz());
+		}
+		return U_nnz;
+	}
+
+	// get nnz of R
+	std::vector<size_t> get_nnz_R(){
+		std::vector<size_t> R_nnz;
+		R_nnz.reserve(maxdim());
+		for (size_t k = 0; k < maxdim() + 1; k++) {
+			R_nnz.emplace_back(RC.R[k].nnz());
+		}
+		return R_nnz;
 	}
 
 	/**
