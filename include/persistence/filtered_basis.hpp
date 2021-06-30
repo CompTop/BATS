@@ -158,13 +158,18 @@ struct ReducedFilteredChainComplex {
 	// get subcomplex
 	ReducedFilteredChainComplex get_subcomplex() const;
 
-	void print_summary() const {
+	void print_summary(bool print_nnz=false) const {
 		std::cout << "ReducedFilteredChainComplex with " << maxdim() << " dimensions:" << std::endl;
 		for (size_t k = 0; k < maxdim() + 1; k++) {
 			std::cout << "\tdim " << k << ": " << dim(k)
-			<< ", betti_" << k << ": " << hdim(k)
-			<< " nnz(R): " << RC.R[k].nnz()
-			<<" nnz(U): " << RC.U[k].nnz() << "\n";
+			<< ", betti_" << k << ": " << hdim(k);
+			if (print_nnz) {
+				std::cout << " nnz(R): " << RC.R[k].nnz();
+				if (RC.U.size() > k) { // handle if basis not computed
+					std::cout << " nnz(U): " << RC.U[k].nnz();
+				}
+			}
+			std::cout << "\n";
 		}
 	}
 

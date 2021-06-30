@@ -63,31 +63,73 @@ int main (int argc, char* argv[]) {
 			std::cout << F.ncells(i) << " in dim " << i << std::endl;
 		}
 
-		start = std::chrono::steady_clock::now();
-		auto FC = bats::Chain(F, FT());
 
-		auto RFC = bats::ReducedFilteredChainComplex(
-			FC,
-			bats::extra_reduction_flag(),
-			// bats::standard_reduction_flag(),
-			// bats::compression_flag(),
-			bats::compute_basis_flag()
-		);
-		end = std::chrono::steady_clock::now();
-	    std::cout << "Chain and reduction: "
-	        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-	        << "ms" << std::endl;
-		// auto RFC = __ReducedFilteredChainComplex(F, FT());
 
-		RFC.print_summary();
+		{
+			std::cout << "\nstandard reduction\n";
+			start = std::chrono::steady_clock::now();
+			auto FC = bats::Chain(F, FT());
+			// FC.C.clear_compress_apparent_pairs();
+			auto RFC = bats::ReducedFilteredChainComplex(
+				FC,
+				bats::standard_reduction_flag() //,
+				//bats::compute_basis_flag()
+			);
+			end = std::chrono::steady_clock::now();
+		    std::cout << "reduction: "
+		        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+		        << "ms" << std::endl;
+			// auto RFC = __ReducedFilteredChainComplex(F, FT());
+
+			RFC.print_summary(true);
+		}
+
+
+		if constexpr (false) {
+			std::cout << "\nextra reduction\n";
+			start = std::chrono::steady_clock::now();
+			auto FC = bats::Chain(F, FT());
+			// FC.C.clear_compress_apparent_pairs();
+			auto RFC = bats::ReducedFilteredChainComplex(
+				FC,
+				bats::extra_reduction_flag()
+			);
+			end = std::chrono::steady_clock::now();
+		    std::cout << "Chain and reduction: "
+		        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+		        << "ms" << std::endl;
+			// auto RFC = __ReducedFilteredChainComplex(F, FT());
+
+			RFC.print_summary(true);
+		}
+
+
+		{
+			std::cout << "\ndq reduction\n";
+			start = std::chrono::steady_clock::now();
+			auto FC = bats::Chain(F, FT());
+			// FC.C.clear_compress_apparent_pairs();
+			auto RFC = bats::ReducedFilteredChainComplex(
+				FC,
+				bats::divide_conquer_flag()
+			);
+			end = std::chrono::steady_clock::now();
+		    std::cout << "Chain and reduction: "
+		        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+		        << "ms" << std::endl;
+			// auto RFC = __ReducedFilteredChainComplex(F, FT());
+
+			RFC.print_summary(true);
+		}
+
 		// std::cout << "hdim(1) = " << RFC.RC.hdim(1) << std::endl;
-		start = std::chrono::steady_clock::now();
-		RFC.sparsify_basis();
-		end = std::chrono::steady_clock::now();
-	    std::cout << "Sparsify basis: "
-	        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-	        << "ms" << std::endl;
-		RFC.print_summary();
+		// start = std::chrono::steady_clock::now();
+		// RFC.sparsify_basis();
+		// end = std::chrono::steady_clock::now();
+	    // std::cout << "Sparsify basis: "
+	    //     << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	    //     << "ms" << std::endl;
+		// RFC.print_summary();
 
 		// auto& R1 = RFC.RC.R[1];
 		// for (size_t j = 0; j < R1.ncol(); ++j) {
