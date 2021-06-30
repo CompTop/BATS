@@ -6,7 +6,6 @@
 #include <math.h>
 #include <chrono>
 #include <random>
-#include <yuan/update_information.hpp>
 
 using FT = ModP<int, 2>;
 
@@ -105,7 +104,7 @@ int main() {
 
 
     std::cout << "\nUpdate FilteredChainComplex";
-    auto UI = Update_info(F, F_Y); // get unfiltered information
+    auto UI = bats::Update_info(F, F_Y); // get unfiltered information
 
     // if cells infiltration was not sorted by filtration values when construction,
     // then we need to get filtered information.

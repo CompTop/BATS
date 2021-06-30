@@ -4,7 +4,7 @@ class to store a chain complex
 */
 #include <vector>
 #include <util/permutation.hpp>
-#include <yuan/update_information.hpp>
+#include <filtration/update_information.hpp>
 
 namespace bats {
 

@@ -3,7 +3,7 @@
 #include <functional>
 #include <vector>
 #include <utility>
-#include <bats.hpp>
+
 /*
 extend filtrations
 */
@@ -40,28 +40,3 @@ auto lower_star_filtration(
     };
     return extend_filtration(X, filtfn);
 }
-
-
-// // template over data type>
-// template <typename CpxT, typename DT, typename T, typename M>
-// auto RipsFiltration_extension(
-//     const DT &X,
-//     const M &dist,
-//     T rmax,
-//     size_t dmax
-// ) {
-//     size_t n = X.size(); // number of points
-//     auto edges = rips_filtration_edges(X, dist, rmax);
-//     return FlagFiltration_extension<CpxT>(edges, n, dmax, T(0));
-// }
-
-// template <typename CpxT, typename MT,typename T>
-// auto RipsFiltration_extension(
-//     const MT &pdist,
-//     T rmax,
-//     size_t dmax
-// ) {
-//     size_t n = pdist.ncol(); // number of points
-//     auto redges = rips_filtration_edges(pdist, rmax);
-//     return FlagFiltration_extension<CpxT>(redges, n, dmax, T(0));
-// }

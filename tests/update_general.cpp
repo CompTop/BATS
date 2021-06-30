@@ -6,7 +6,6 @@
 #include <math.h>
 #include <chrono>
 #include <random>
-#include <yuan/update_information.hpp>
 
 using FT = ModP<int, 2>;
 
@@ -111,7 +110,7 @@ int main() {
         auto start = std::chrono::steady_clock::now();
         F_Y = bats::Filtration(Y, vals_Y); // build new filtration
 
-        auto UI = Update_info(F, F_Y); // get unfiltered information
+        auto UI = bats::Update_info(F, F_Y); // get unfiltered information
 
         // if cells infiltration was not sorted by filtration values when construction,
         // then we need to get filtered information,
@@ -147,7 +146,7 @@ int main() {
         auto start = std::chrono::steady_clock::now();
         F_Y = bats::Filtration(Y, vals_Y);
         
-        auto UI = Update_info(F, F_Y); // get unfiltered information
+        auto UI = bats::Update_info(F, F_Y); // get unfiltered information
         // necessary to get filtered information,
         // if cells infiltration was not sorted by filtration values when construction
         UI.filtered_info(FCC.perm);  

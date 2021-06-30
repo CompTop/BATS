@@ -6,7 +6,7 @@
 #include <homology/basis.hpp>
 #include <util/common.hpp>
 #include "barcode.hpp"
-#include <yuan/update_information.hpp>
+#include <filtration/update_information.hpp>
 
 namespace bats {
 
@@ -204,6 +204,42 @@ struct ReducedFilteredChainComplex {
 	}
 
 };
+
+// check if two RFCC are the same 
+// (can be modified into new == operator of RFCC class)
+template<typename T>
+bool test_reduce_result(const T& RFCC2, const T& RFCC){
+
+    auto R = RFCC.RC.R;
+    auto R2 = RFCC2.RC.R;
+    auto U = RFCC.RC.U;
+    auto U2 = RFCC2.RC.U;
+
+
+    // check persistent homology information
+    bool test_result = true;
+    for(size_t k =0; k < RFCC2.maxdim(); k++){
+        auto R_ps_k = RFCC.persistence_pairs(k);
+        auto R2_ps_k = RFCC2.persistence_pairs(k);
+        bool test_result_k = barcode_equality(R2_ps_k, R_ps_k);
+        if(!test_result_k){
+            test_result = false;
+            std::cout << "\ntwo RFCC are different!!" << std::endl;
+        }
+    }
+    
+    // check RU factorization
+    for(size_t k = 0; k < RFCC2.maxdim(); k++){
+        auto U_inv_k = u_inv(U[k]); 
+        auto U2_inv_k = u_inv(U2[k]); 
+        if(!(R[k] * U_inv_k == R2[k] * U2_inv_k)){
+            test_result = false;
+            std::cout << "\ntwo RFCC are different!!" << std::endl;
+        }
+    }
+    
+    return test_result;
+}
 
 // defualt return
 template <typename FT, typename T, typename CpxT, typename... Args>

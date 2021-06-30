@@ -6,7 +6,6 @@
 #include <math.h>
 #include <chrono>
 #include <random>
-#include <yuan/update_information.hpp>
 
 using FT = ModP<int, 2>;
 

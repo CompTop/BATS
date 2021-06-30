@@ -1,14 +1,13 @@
 #pragma once
-#include <bats.hpp>
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <numeric>
-#include <yuan/utility.hpp>
-
-
-/*
-We need to specfy what is the conventional usage of permutation in bats!!
+#include "util/print.hpp"
+#include "util/permutation.hpp"
+/**
+We need to specify what is the conventional usage of permutation in bats!!
 [2, 0, 1] apply to [2.0 , 1.0 ,5.0] 
 a) is [5.0, 2.0, 1.0] in matrix permutation notation 
 b) is [1.0, 5.0 ,2.0] in traditioanl notation(in book From Mathematics to Generic Programming)
@@ -19,6 +18,7 @@ Check before use!!!
 Since the above two notations are inverse to each other, inverse them if needed!
 */
 
+namespace bats{
 
 // two filtration dimensions are assumed to be the same!!
 template <class FiltrationType>
@@ -344,3 +344,5 @@ struct Update_info{
         }
     }
 };
+
+} // namespace bats

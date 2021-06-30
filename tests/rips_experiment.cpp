@@ -6,7 +6,6 @@
 #include <math.h>
 #include <chrono>
 #include <random>
-#include <yuan/update_information.hpp>
 #include <fstream>
 
 using FT = ModP<int, 2>;
@@ -28,7 +27,7 @@ int main(int argc, char* argv[]) {
     
     myFile << "build_Filtration,build_updating_information,build/update_FCC,build/update_RFCC,whole\n";
     
-    std::vector<size_t> num_pts = {25, 50, 75, 100};
+    std::vector<size_t> num_pts = {5, 10, 15, 20};
     for(auto& n: num_pts){
         myFile << "N = "<< n <<"\n";
         // std::vector<std::vector<std::vector<size_t>>> Splx_3;
@@ -92,7 +91,7 @@ int main(int argc, char* argv[]) {
             myFile << time_elapse(t1,t0) <<",";
 
             t0 = std::chrono::steady_clock::now();
-            auto UI = Update_info(F_X, F_Y);
+            auto UI = bats::Update_info(F_X, F_Y);
             t1 = std::chrono::steady_clock::now();
             myFile << time_elapse(t1,t0) <<",";
 
@@ -126,7 +125,7 @@ int main(int argc, char* argv[]) {
             myFile << time_elapse(t1,t0) <<",";
 
             t0 = std::chrono::steady_clock::now();
-            auto UI = Update_info(F_X, F_Y); 
+            auto UI = bats::Update_info(F_X, F_Y); 
             t1 = std::chrono::steady_clock::now();
             myFile << time_elapse(t1,t0) <<",";
             

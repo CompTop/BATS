@@ -6,7 +6,7 @@
 #include <math.h>
 #include <chrono>
 #include <random>
-#include <yuan/update_information.hpp>
+#include <util/print.hpp>
 
 using FT = ModP<int, 2>;
 
@@ -70,7 +70,7 @@ int main() {
     */
     auto F = bats::Filtration(X, vals);
     std::cout << "\nFiltration information of F_X" << std::endl;
-    print_filtration_info(F);
+    bats::print_filtration_info(F);
     auto FCC = bats::Chain(F, FT());  //Build FilteredChainComplex
     auto RFCC = bats::Reduce(FCC); // Build ReducedFilteredChainComplex
     // RFCC.print_summary();
@@ -85,7 +85,7 @@ int main() {
     std::cout << "\nFiltration information of F_Y" << std::endl;
     print_filtration_info(F_Y);
     // find update information needed 
-    auto UI = Update_info(F, F_Y); // get unfiltered information
+    auto UI = bats::Update_info(F, F_Y); // get unfiltered information
     std::cout << "\nPrint the summary of unfiltered information" << std::endl;
     UI.print_detail();
 

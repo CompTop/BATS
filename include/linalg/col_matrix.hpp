@@ -139,11 +139,13 @@ public:
 	*/
 	inline void append_row() { m++; }
 
-	// Do not recommend,
-	// because if we want to insert multiple columns, 
-	// the index will change after the first insertion.
-	// Thus the important thing we need to assume is 
-	// the index list are in ascending order!
+	/**
+	Do not recommend,
+	because if we want to insert multiple columns, 
+	the index will change after the first insertion.
+	Thus the important thing we need to assume is 
+	the index list are in ascending order!
+	*/ 
 	template <class ...Ts>
 	void insert_column(const size_t& index, Ts (&&...args)){ 
 		// first append a row to the end

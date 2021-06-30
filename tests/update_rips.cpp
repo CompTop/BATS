@@ -6,7 +6,6 @@
 #include <math.h>
 #include <chrono>
 #include <random>
-#include <yuan/update_information.hpp>
 
 using FT = ModP<int, 2>;
 
@@ -78,7 +77,7 @@ int main(int argc, char* argv[]) {
         F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax, maxdim);
 
         t0 = std::chrono::steady_clock::now();
-        auto UI = Update_info(F_X, F_Y); // unfiltered information
+        auto UI = bats::Update_info(F_X, F_Y); // unfiltered information
         // get filtered information, 
         // If we know the complex has been sorted by filtration value in advance
         // in the filtration construction step, then we do not need this step! 
@@ -133,7 +132,7 @@ int main(int argc, char* argv[]) {
         
         t0 = std::chrono::steady_clock::now();
 
-        auto UI = Update_info(F_X, F_Y); // get unfiltered information
+        auto UI = bats::Update_info(F_X, F_Y); // get unfiltered information
         // UI.filtered_info(FCC.perm); // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
 
         t1 = std::chrono::steady_clock::now();
