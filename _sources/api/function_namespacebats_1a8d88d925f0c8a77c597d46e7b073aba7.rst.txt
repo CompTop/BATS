@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a8d88d925f0c8a77c597d46e7b073aba7:
+
+Template Function bats::rips_edges(const Matrix<T>&, const T)
+=============================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::rips_edges(const Matrix<T>&, const T)

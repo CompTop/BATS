@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ab7c092cc3ee1bb887889d43a4f7f84dd:
+
+Template Function bats::Chain(const CellularMap&, T)
+====================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Chain(const CellularMap&, T)

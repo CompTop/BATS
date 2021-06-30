@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a8d27f560303a5e8697dd1ef19c54267f:
+
+Template Function bats::interval
+================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::interval(const T, const T, const size_t)

@@ -19,6 +19,7 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_util_common.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_util_io.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_util_print.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_util_simplex.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_util_sorted.hpp`

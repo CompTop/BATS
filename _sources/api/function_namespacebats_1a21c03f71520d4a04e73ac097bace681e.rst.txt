@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a21c03f71520d4a04e73ac097bace681e:
+
+Template Function bats::FlagFiltration_extension
+================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::FlagFiltration_extension(std::vector<filtered_edge<T>>&, const size_t, const size_t, const T)

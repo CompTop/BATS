@@ -63,5 +63,5 @@ Variables
 ---------
 
 
-- :ref:`exhale_variable_common_8hpp_1a09043c720b1e2e010c598dbd652035ca`
+- :ref:`exhale_variable_namespacebats_1a09043c720b1e2e010c598dbd652035ca`
 

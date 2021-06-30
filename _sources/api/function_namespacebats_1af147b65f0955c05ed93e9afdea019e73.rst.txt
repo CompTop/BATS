@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1af147b65f0955c05ed93e9afdea019e73:
+
+Template Function bats::__FilteredChainComplex
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::__FilteredChainComplex(const Filtration<FT, CpxT>&, T)

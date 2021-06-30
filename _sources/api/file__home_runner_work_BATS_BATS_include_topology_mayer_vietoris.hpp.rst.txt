@@ -55,5 +55,5 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_mayer__vietoris_8hpp_1a01414af58faae33245d8ea1477fe833a`
+- :ref:`exhale_function_namespacebats_1a01414af58faae33245d8ea1477fe833a`
 

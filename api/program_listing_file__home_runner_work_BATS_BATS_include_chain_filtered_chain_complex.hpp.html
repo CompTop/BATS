@@ -226,6 +226,18 @@
 
     <span class="p">}</span>
 
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">I</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">update_filtration_general</span><span class="p">(</span><span class="k">const</span> <span class="n">I</span> <span class="o">&amp;</span> <span class="n">updating_information</span><span class="p">){</span>
+        <span class="c1">// step 1: update ChainComplex C by new filtered filtration information</span>
+        <span class="n">C</span><span class="p">.</span><span class="n">update_basis_general</span><span class="p">(</span><span class="n">updating_information</span><span class="p">);</span>
+
+        <span class="c1">// step 2: store new permutation</span>
+        <span class="n">perm</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_perms</span><span class="p">;</span>
+
+        <span class="c1">// store values as well</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_vals</span><span class="p">;</span>
+    <span class="p">}</span>
+
 <span class="p">};</span>
 
 <span class="c1">// defualt return</span>

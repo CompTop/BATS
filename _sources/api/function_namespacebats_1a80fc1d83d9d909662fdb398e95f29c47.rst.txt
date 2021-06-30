@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a80fc1d83d9d909662fdb398e95f29c47:
+
+Template Function bats::add_normal_noise(DataSet<T>&, const T, const T)
+=======================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_normal_noise(DataSet<T>&, const T, const T)

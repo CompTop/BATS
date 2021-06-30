@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ac72e3c70890b0fce105aee7399eebf68:
+
+Template Function bats::barcode_from_barcode_form
+=================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::barcode_from_barcode_form(const std::vector<TM>&, const Diagram<TN, TM>&)

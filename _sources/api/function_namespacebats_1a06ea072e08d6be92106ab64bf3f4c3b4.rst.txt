@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a06ea072e08d6be92106ab64bf3f4c3b4:
+
+Template Function bats::TriangulatedProduct(const CpxT&, const CpxT&)
+=====================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::TriangulatedProduct(const CpxT&, const CpxT&)

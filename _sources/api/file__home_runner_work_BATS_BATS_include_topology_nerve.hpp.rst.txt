@@ -65,7 +65,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_nerve_8hpp_1a478328b5591ff8fb8be8dcf8e06c258e`
+- :ref:`exhale_function_namespacebats_1a478328b5591ff8fb8be8dcf8e06c258e`
 
-- :ref:`exhale_function_nerve_8hpp_1a98421dc44f6d6a48c33e11600b6d31d4`
+- :ref:`exhale_function_namespacebats_1a98421dc44f6d6a48c33e11600b6d31d4`
 

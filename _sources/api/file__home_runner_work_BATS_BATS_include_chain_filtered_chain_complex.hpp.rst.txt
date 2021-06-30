@@ -64,7 +64,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_filtered__chain__complex_8hpp_1af147b65f0955c05ed93e9afdea019e73`
+- :ref:`exhale_function_namespacebats_1af147b65f0955c05ed93e9afdea019e73`
 
-- :ref:`exhale_function_filtered__chain__complex_8hpp_1a9c29c2067c7bb5041375fc7e5f7105fa`
+- :ref:`exhale_function_namespacebats_1a9c29c2067c7bb5041375fc7e5f7105fa`
 

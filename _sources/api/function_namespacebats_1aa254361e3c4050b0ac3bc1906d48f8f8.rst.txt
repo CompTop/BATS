@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1aa254361e3c4050b0ac3bc1906d48f8f8:
+
+Function bats::extension_perm
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::extension_perm(const std::vector<size_t>&, const size_t&)

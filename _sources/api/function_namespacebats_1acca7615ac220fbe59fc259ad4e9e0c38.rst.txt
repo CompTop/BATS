@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1acca7615ac220fbe59fc259ad4e9e0c38:
+
+Template Function bats::kron_index
+==================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::kron_index(const CpxT&, std::vector<std::vector<size_t>>&, const CpxT&, std::vector<std::vector<size_t>>&, size_t)

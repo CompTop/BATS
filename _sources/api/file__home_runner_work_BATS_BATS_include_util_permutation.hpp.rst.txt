@@ -47,6 +47,8 @@ Included By
 -----------
 
 
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
@@ -74,6 +76,18 @@ Namespaces
 Functions
 ---------
 
+
+- :ref:`exhale_function_namespacebats_1aa254361e3c4050b0ac3bc1906d48f8f8`
+
+- :ref:`exhale_function_namespacebats_1ad41ac1fdb260cbbcfb2a331ab9dcb39b`
+
+- :ref:`exhale_function_namespacebats_1a6201e20b7f966db15113f83cf3e31c61`
+
+- :ref:`exhale_function_namespacebats_1a05fd421ec62ebde015de5a6e0f160971`
+
+- :ref:`exhale_function_namespacebats_1a3d0c0b657042e77796cca82438130e8a`
+
+- :ref:`exhale_function_namespacebats_1a0e21415316959e5cc073ad500f7f7d22`
 
 - :ref:`exhale_function_util_2permutation_8hpp_1ae98f4fd7114c627f9d066ad1c9bb2293`
 

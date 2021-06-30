@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ad005b6662ef8e749f61a63c25949b6ce:
+
+Template Function bats::LowerStarFiltration
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_star.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::LowerStarFiltration(TC, std::vector<TF>)

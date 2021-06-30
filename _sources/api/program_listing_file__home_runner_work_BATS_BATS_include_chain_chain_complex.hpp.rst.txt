@@ -16,6 +16,7 @@ Program Listing for File chain_complex.hpp
    */
    #include <vector>
    #include <util/permutation.hpp>
+   #include <filtration/update_information.hpp>
    
    namespace bats {
    
@@ -166,6 +167,138 @@ Program Listing for File chain_complex.hpp
        void ipermute_basis(const std::vector<std::vector<size_t>> &perm) {
            for (size_t k = 0; k < perm.size(); k++) {
                ipermute_basis(k, perm[k]);
+           }
+       }
+   
+   template <typename Information_type>
+       void update_basis_general(size_t k, const Information_type &UI) {
+           using VectT = typename MT::col_type; // column vector type of boundary matrix
+           using ValT = typename VectT::val_type;
+   
+   
+           std::vector<size_t> PI_row = UI.permutations[k]; // row permutation information
+           std::vector<size_t> PI_col = UI.permutations[k+1]; // column permutation information
+           std::vector<size_t> del_ind_row = UI.deletion_indices[k]; // row deletion indices
+           std::vector<size_t> del_ind_col = UI.deletion_indices[k+1]; // column addition indices
+           std::vector<size_t> add_ind_row = UI.addition_indices[k]; // row addition indices
+           std::vector<size_t> add_ind_col = UI.addition_indices[k+1]; // column addition indices
+           
+           // if k == 0, boundary[0] are all zeros
+           if (k == 0) { 
+               // step 1. delete columns
+               if (!del_ind_row.empty()){
+                   // std::cout << "do deletion" << std::endl;
+                   for (size_t i = 0; i < del_ind_row.size(); i++){
+                       boundary[0].erase_column();
+                   }
+               }
+               // step 2. permute columns(no need here since are all zeros)
+   
+               // step 3. addition
+               if (!add_ind_row.empty()){
+                   // std::cout << "do addition" << std::endl;
+                   for (size_t i = 0; i < add_ind_row.size(); i++){
+                       boundary[0].append_column();
+                   }
+               }
+           }
+           // std::cout << "\nafter modification of boundary[0]" << std::endl;
+           // boundary[0].print();
+   
+           // Start for boundary[k+1]:
+           // Step 1. delete columns(we assume the deletion indices in A are in ascending order)
+           if (!del_ind_col.empty()){
+               // std::cout << "do deletion of column: ";
+               // print_1D_vectors(del_ind_col);
+   
+               // find the permutation that will permute 
+               // the column that is going to remove to the end
+               std::vector<size_t> perm = perm_to_the_end(del_ind_col, boundary[k+1].ncol());
+               boundary[k+1].permute_cols(perm); // permute 
+               for(size_t i = 0; i < del_ind_col.size(); i++){
+                   // size_t current_index = ind - i;
+                   boundary[k+1].erase_column(); // erase the last column
+                   // i++;
+               }
+               // std::cout << "\n";
+           }
+           // std::cout << "\nafter deletion of columns" << std::endl;
+           // boundary[k+1].print();
+   
+           // 2. delete rows(we assume the deletion indices in A are in ascending order)
+           if (!del_ind_row.empty()){
+               // std::cout << "do deletion of row: ";
+               // print_1D_vectors(del_ind_row);
+   
+               std::vector<size_t> perm = perm_to_the_end(del_ind_row, boundary[k+1].nrow());
+               boundary[k+1].permute_rows(perm); // permute 
+               for(size_t i = 0; i < del_ind_row.size(); i++){
+                   boundary[k+1].erase_row(); // erase the last row
+               }
+           }
+           // std::cout << "\nafter deletion of rows" << std::endl;
+           // boundary[k+1].print();
+   
+           // 3. permute rows of boundary[k+1]
+           if(!PI_row.empty() && PI_row != identity_perm(PI_row.size())){
+               // std::cout << "permute rows with permutation" << std::endl;
+               // print_1D_vectors(PI_row);
+               boundary[k+1].ipermute_rows(bats::util::inv_perm(PI_row));
+           }
+   
+           // std::cout << "\nafter permutation of rows" << std::endl;
+           // boundary[k+1].print();
+   
+           // 4. permute columns of boundary[k+1]
+           if(!PI_col.empty() && PI_col != identity_perm(PI_col.size())){
+               // std::cout << "permute columns with permutation" << std::endl;
+               // print_1D_vectors(PI_col);
+   
+               boundary[k+1].ipermute_cols(PI_col); // permutation defintion confict with bats
+           }
+           // std::cout << "\nafter permutation of columns" << std::endl;
+           // boundary[k+1].print();
+   
+           // 5. add rows
+           if(!add_ind_row.empty()){
+               // std::cout << "do addition of row ";
+               // print_1D_vectors(add_ind_row);
+               for(auto ind: add_ind_row){
+                   boundary[k+1].insert_row(ind);
+               }
+           }
+           // std::cout << "\nafter addition of row "<< std::endl;
+           // boundary[k+1].print();
+   
+           // 6. add columns
+           if(!add_ind_col.empty()){
+               // std::cout << "do addition of column\n";
+   
+               auto bd_info = UI.boundary_indices[k+1];
+               for(size_t i = 0; i < add_ind_col.size(); i++){
+                   // we will add a column to the boundary matrix
+                   auto simplex_bd_inds = bd_info[i]; // the indices of its boundaries
+                   std::sort(simplex_bd_inds.begin(), simplex_bd_inds.end()); // sort indices for now
+   
+                   // std::cout << "at index "<< add_ind_col[i] << std::endl;
+                   // std::cout << "and its boundary index is ";
+                   // print_1D_vectors(simplex_bd_inds);
+   
+                   // create a vector of ones
+                   std::vector<ValT> vect_one(simplex_bd_inds.size(), 1);
+                   auto vect = VectT(simplex_bd_inds, vect_one); // the added vector for the column
+                   boundary[k+1].insert_column(add_ind_col[i], vect);
+               }
+               // std::cout << "\n";
+           }
+           // std::cout << "after addition of column "<< std::endl;
+           // boundary[k+1].print();
+       }
+   
+       template <typename Information_type>
+       void update_basis_general(const Information_type &UI_fast) {
+           for (size_t k = 0; k < UI_fast.max_dim; k++) {
+               update_basis_general(k, UI_fast);   
            }
        }
    

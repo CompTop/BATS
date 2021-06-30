@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1Update__info:
+
+Template Struct Update_info
+===========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::Update_info
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a0e21415316959e5cc073ad500f7f7d22:
+
+Template Function bats::sort_indexes
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::sort_indexes(const std::vector<T>&)

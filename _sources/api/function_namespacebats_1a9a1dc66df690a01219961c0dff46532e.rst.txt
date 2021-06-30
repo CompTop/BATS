@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a9a1dc66df690a01219961c0dff46532e:
+
+Template Function bats::rips_filtration_edges(const DataSet<T>&, const M&, const T)
+===================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::rips_filtration_edges(const DataSet<T>&, const M&, const T)

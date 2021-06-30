@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a6d4ddf45bf8647327628b0dff472d534:
+
+Template Function bats::add_uniform_noise(DataSet<T>&, const T, const T)
+========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_uniform_noise(DataSet<T>&, const T, const T)

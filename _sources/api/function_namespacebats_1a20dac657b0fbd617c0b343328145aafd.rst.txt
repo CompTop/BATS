@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a20dac657b0fbd617c0b343328145aafd:
+
+Template Function bats::reduce_block_dq(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const size_t, const size_t, const size_t)
+===========================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_block_dq(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const size_t, const size_t, const size_t)

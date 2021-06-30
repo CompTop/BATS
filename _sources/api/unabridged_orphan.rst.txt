@@ -415,6 +415,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file__home_runner_work_BATS_BATS_include_util_print.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file__home_runner_work_BATS_BATS_include_quiver.hpp.rst
 
 .. toctree::
@@ -531,6 +536,11 @@ Files
    :maxdepth: 5
 
    file__home_runner_work_BATS_BATS_include_util_trie.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp.rst
 
 .. toctree::
    :maxdepth: 5

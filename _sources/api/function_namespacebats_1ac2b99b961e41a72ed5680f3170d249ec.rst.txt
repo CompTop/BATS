@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ac2b99b961e41a72ed5680f3170d249ec:
+
+Template Function bats::__ChainComplex(const CpxT&, T)
+======================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::__ChainComplex(const CpxT&, T)

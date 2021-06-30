@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a56b394737e3f3b7512052e9398fd5b22:
+
+Template Function bats::test_reduce_result
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::test_reduce_result(const T&, const T&)

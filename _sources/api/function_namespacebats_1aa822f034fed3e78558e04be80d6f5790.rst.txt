@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1aa822f034fed3e78558e04be80d6f5790:
+
+Function bats::serpinski_diagram
+================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_extras.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::serpinski_diagram(size_t)

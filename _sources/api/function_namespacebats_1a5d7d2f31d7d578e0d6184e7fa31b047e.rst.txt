@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a5d7d2f31d7d578e0d6184e7fa31b047e:
+
+Template Function bats::witness_edge_param
+==========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::witness_edge_param(const DataSet<T>&, const DataSet<T>&, const M&, const size_t)

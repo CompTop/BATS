@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ac0e79a899be3c1d5b4a76ea071fd79bf:
+
+Template Function bats::reduce_matrix_clearing
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_matrix_clearing(ColumnMatrix<TVec>&, const std::vector<size_t>&, flag)

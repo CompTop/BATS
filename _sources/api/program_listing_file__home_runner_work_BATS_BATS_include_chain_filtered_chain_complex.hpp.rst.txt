@@ -69,6 +69,18 @@ Program Listing for File filtered_chain_complex.hpp
    
        }
    
+       template <typename I>
+       void update_filtration_general(const I & updating_information){
+           // step 1: update ChainComplex C by new filtered filtration information
+           C.update_basis_general(updating_information);
+           
+           // step 2: store new permutation
+           perm = updating_information.F_Y_perms;
+   
+           // store values as well
+           val = updating_information.F_Y_vals;
+       }
+   
    };
    
    // defualt return

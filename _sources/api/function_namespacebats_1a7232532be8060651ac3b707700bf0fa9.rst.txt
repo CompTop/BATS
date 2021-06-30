@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a7232532be8060651ac3b707700bf0fa9:
+
+Template Function bats::Rips(const Diagram<std::set<size_t>, std::vector<size_t>>&, const DataSet<T>&, const M&, const std::vector<T>&, const size_t)
+=====================================================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Rips(const Diagram<std::set<size_t>, std::vector<size_t>>&, const DataSet<T>&, const M&, const std::vector<T>&, const size_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ad88072c4439b7ba583d632f15ba680af:
+
+Template Function bats::kron_homology
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::kron_homology(const size_t, const ReducedCpx&, const size_t, const ReducedCpx&, const ReducedCpx&)

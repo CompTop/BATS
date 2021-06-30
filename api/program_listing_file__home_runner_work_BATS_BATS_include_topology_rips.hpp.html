@@ -319,6 +319,31 @@
     <span class="k">return</span> <span class="n">FlagFiltration</span><span class="o">&lt;</span><span class="n">CpxT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">redges</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dmax</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 <span class="p">}</span>
 
+
+<span class="c1">// template over data type&gt;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">M</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">RipsFiltration_extension</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">DataSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">X</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">M</span> <span class="o">&amp;</span><span class="n">dist</span><span class="p">,</span>
+    <span class="n">T</span> <span class="n">rmax</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">dmax</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// number of points</span>
+    <span class="k">auto</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">rips_filtration_edges</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">rmax</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">FlagFiltration_extension</span><span class="o">&lt;</span><span class="n">CpxT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dmax</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">RipsFiltration_extension</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">pdist</span><span class="p">,</span>
+    <span class="n">T</span> <span class="n">rmax</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">dmax</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pdist</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="c1">// number of points</span>
+    <span class="k">auto</span> <span class="n">redges</span> <span class="o">=</span> <span class="n">rips_filtration_edges</span><span class="p">(</span><span class="n">pdist</span><span class="p">,</span> <span class="n">rmax</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">FlagFiltration_extension</span><span class="o">&lt;</span><span class="n">CpxT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">redges</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dmax</span><span class="p">,</span> <span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+
 <span class="p">}</span> <span class="c1">// namespace bats</span>
 </pre></div>
 </div>

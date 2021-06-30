@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a6dbfd4aa24984b83d3bbba45f69da797:
+
+Template Function bats::barcode_sparse
+======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::barcode_sparse(const Diagram<NT, TM>&, size_t)

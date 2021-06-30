@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a02204eecf1d35d518e2e3b33e96e54eb:
+
+Template Function bats::add_dimension_recursive_flag_unsafe
+===========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_dimension_recursive_flag_unsafe(Filtration<T, CpxT>&, const NT&, const size_t, const size_t, const std::vector<size_t>&, std::vector<size_t>&, const T)

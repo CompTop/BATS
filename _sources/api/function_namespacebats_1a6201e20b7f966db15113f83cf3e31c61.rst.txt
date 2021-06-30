@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a6201e20b7f966db15113f83cf3e31c61:
+
+Function bats::identity_perm
+============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::identity_perm(const size_t&)

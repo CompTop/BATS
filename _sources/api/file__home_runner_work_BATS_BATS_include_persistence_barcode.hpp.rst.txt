@@ -68,5 +68,5 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_persistence_2barcode_8hpp_1ab6a5a5e287f1aa3400548761fcaa8a9d`
+- :ref:`exhale_function_namespacebats_1ab6a5a5e287f1aa3400548761fcaa8a9d`
 

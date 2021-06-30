@@ -300,6 +300,109 @@
 
     <span class="kr">inline</span> <span class="kt">void</span> <span class="n">append_row</span><span class="p">()</span> <span class="p">{</span> <span class="n">m</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
 
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="p">...</span><span class="n">Ts</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">insert_column</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">,</span> <span class="n">Ts</span> <span class="p">(</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="n">args</span><span class="p">)){</span>
+        <span class="c1">// first append a row to the end</span>
+        <span class="n">append_column</span><span class="p">(</span><span class="n">args</span><span class="p">...);</span>
+
+        <span class="c1">// second permute it</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">colperm</span><span class="p">;</span>
+        <span class="n">colperm</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="n">colperm</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">ipermute_cols</span><span class="p">(</span><span class="n">colperm</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// append a zero column at the end</span>
+    <span class="kt">void</span> <span class="n">append_column</span><span class="p">(){</span> <span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">TC</span><span class="p">());</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">// insert a zero column at position index</span>
+    <span class="kt">void</span> <span class="n">insert_column</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">){</span>
+        <span class="c1">// first append a row to the end</span>
+        <span class="n">append_column</span><span class="p">();</span>
+        <span class="c1">// second permute it</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">colperm</span><span class="p">;</span>
+        <span class="n">colperm</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="n">colperm</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">permute_cols</span><span class="p">(</span><span class="n">colperm</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// append a row a specified value</span>
+    <span class="kt">void</span> <span class="n">append_row</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">val_type</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">ncol</span><span class="p">()){</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">!=</span> <span class="n">val_type</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+                <span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">m</span> <span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="o">++</span><span class="n">m</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Unable to add row, since the dimension does not match&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">insert_row</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">val_type</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">row</span><span class="p">){</span>
+        <span class="c1">// first append a row to the end</span>
+        <span class="n">append_row</span><span class="p">(</span><span class="n">row</span><span class="p">);</span>
+        <span class="c1">// second permute it</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">rowperm</span><span class="p">;</span>
+        <span class="n">rowperm</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">m</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="n">rowperm</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">permute_rows</span><span class="p">(</span><span class="n">rowperm</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// insert a zero row</span>
+    <span class="kt">void</span> <span class="n">insert_row</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">){</span>
+        <span class="c1">// first append a row to the end</span>
+        <span class="n">append_row</span><span class="p">();</span>
+        <span class="c1">// second permute it</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">rowperm</span><span class="p">;</span>
+        <span class="n">rowperm</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">m</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="mi">-1</span><span class="p">;</span>
+            <span class="n">rowperm</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">permute_rows</span><span class="p">(</span><span class="n">rowperm</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">erase_column</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">){</span>
+        <span class="n">col</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">col</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="o">+</span><span class="n">index</span><span class="p">);</span>
+        <span class="o">--</span><span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">erase_column</span><span class="p">(){</span>
+        <span class="n">col</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="o">--</span><span class="n">col</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="o">--</span><span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">erase_row</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">){</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">erase_for_matrix</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="o">--</span><span class="n">m</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">erase_row</span><span class="p">(){</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">erase_last_row_of_matrix</span><span class="p">(</span><span class="n">m</span><span class="mi">-1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="o">--</span><span class="n">m</span><span class="p">;</span>
+    <span class="p">}</span>
+
     <span class="kr">inline</span> <span class="n">TC</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">col</span><span class="p">[</span><span class="n">index</span><span class="p">];}</span>
     <span class="kr">inline</span> <span class="k">const</span> <span class="n">TC</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">col</span><span class="p">[</span><span class="n">index</span><span class="p">];}</span>
 

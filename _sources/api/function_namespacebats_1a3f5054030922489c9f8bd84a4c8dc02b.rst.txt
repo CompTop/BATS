@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a3f5054030922489c9f8bd84a4c8dc02b:
+
+Template Function bats::flag_filtration_edges
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::flag_filtration_edges(const Matrix<T>&, const T)

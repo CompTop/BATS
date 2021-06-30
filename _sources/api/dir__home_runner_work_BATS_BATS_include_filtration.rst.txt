@@ -20,5 +20,6 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_filtration_star.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp`
 
 

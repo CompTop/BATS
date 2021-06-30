@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1af0dd0945cd365317aa534753b7ad9264:
+
+Template Function bats::sparsify_basis(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const size_t, std::map<F, size_t>&, typename TVec::tmp_type&)
+==============================================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::sparsify_basis(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const size_t, std::map<F, size_t>&, typename TVec::tmp_type&)

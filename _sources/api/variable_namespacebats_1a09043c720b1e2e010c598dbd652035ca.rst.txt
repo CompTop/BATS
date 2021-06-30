@@ -1,0 +1,13 @@
+.. _exhale_variable_namespacebats_1a09043c720b1e2e010c598dbd652035ca:
+
+Variable bats::NO_IND
+=====================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_common.hpp`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: bats::NO_IND

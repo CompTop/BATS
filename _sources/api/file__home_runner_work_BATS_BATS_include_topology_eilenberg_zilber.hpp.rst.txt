@@ -59,15 +59,15 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_eilenberg__zilber_8hpp_1afeb9ea6f0eaf382cbcda6054a45a93ba`
+- :ref:`exhale_function_namespacebats_1a3ca83a60634b52af4cbb334e989168c0`
 
-- :ref:`exhale_function_eilenberg__zilber_8hpp_1a3ca83a60634b52af4cbb334e989168c0`
+- :ref:`exhale_function_namespacebats_1afeb9ea6f0eaf382cbcda6054a45a93ba`
 
-- :ref:`exhale_function_eilenberg__zilber_8hpp_1a743da3c95354d85f3f883c0dff297bf6`
+- :ref:`exhale_function_namespacebats_1a743da3c95354d85f3f883c0dff297bf6`
 
-- :ref:`exhale_function_eilenberg__zilber_8hpp_1a9f6f7e434ac1da90b6f811afe2c414bc`
+- :ref:`exhale_function_namespacebats_1a9f6f7e434ac1da90b6f811afe2c414bc`
 
-- :ref:`exhale_function_eilenberg__zilber_8hpp_1ad88072c4439b7ba583d632f15ba680af`
+- :ref:`exhale_function_namespacebats_1ad88072c4439b7ba583d632f15ba680af`
 
-- :ref:`exhale_function_eilenberg__zilber_8hpp_1acca7615ac220fbe59fc259ad4e9e0c38`
+- :ref:`exhale_function_namespacebats_1acca7615ac220fbe59fc259ad4e9e0c38`
 

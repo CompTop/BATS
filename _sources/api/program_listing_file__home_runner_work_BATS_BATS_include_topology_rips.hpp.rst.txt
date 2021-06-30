@@ -162,4 +162,29 @@ Program Listing for File rips.hpp
        return FlagFiltration<CpxT>(redges, n, dmax, T(0));
    }
    
+   
+   // template over data type>
+   template <typename CpxT, typename T, typename M>
+   auto RipsFiltration_extension(
+       const DataSet<T> &X,
+       const M &dist,
+       T rmax,
+       size_t dmax
+   ) {
+       size_t n = X.size(); // number of points
+       auto edges = rips_filtration_edges(X, dist, rmax);
+       return FlagFiltration_extension<CpxT>(edges, n, dmax, T(0));
+   }
+   
+   template <typename CpxT, typename T>
+   auto RipsFiltration_extension(
+       const Matrix<T> &pdist,
+       T rmax,
+       size_t dmax
+   ) {
+       size_t n = pdist.ncol(); // number of points
+       auto redges = rips_filtration_edges(pdist, rmax);
+       return FlagFiltration_extension<CpxT>(redges, n, dmax, T(0));
+   }
+   
    } // namespace bats

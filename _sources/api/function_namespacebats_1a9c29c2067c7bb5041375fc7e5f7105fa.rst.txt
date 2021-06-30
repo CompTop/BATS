@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a9c29c2067c7bb5041375fc7e5f7105fa:
+
+Template Function bats::Chain(const Filtration<FT, CpxT>&, T)
+=============================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Chain(const Filtration<FT, CpxT>&, T)

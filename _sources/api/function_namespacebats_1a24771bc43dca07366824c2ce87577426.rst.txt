@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a24771bc43dca07366824c2ce87577426:
+
+Template Function bats::landmark_cover
+======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::landmark_cover(const DataSet<T>&, const DataSet<T>&, const M&, size_t)

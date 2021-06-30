@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a5a3d53745a6383725062763dce12592d:
+
+Template Function bats::coordinate_projection
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::coordinate_projection(const DataSet<T>&, const size_t)

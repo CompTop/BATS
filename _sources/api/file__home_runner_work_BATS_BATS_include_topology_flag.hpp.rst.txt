@@ -49,7 +49,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_topology_2flag_8hpp_1a85161d655d3fe9f727bc5a743d6ba05f`
+- :ref:`exhale_function_namespacebats_1a85161d655d3fe9f727bc5a743d6ba05f`
 
-- :ref:`exhale_function_topology_2flag_8hpp_1ab87246425b9cd728720f10b5251a3092`
+- :ref:`exhale_function_namespacebats_1ab87246425b9cd728720f10b5251a3092`
 

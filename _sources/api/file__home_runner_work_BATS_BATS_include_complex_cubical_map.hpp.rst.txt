@@ -67,5 +67,5 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_cubical__map_8hpp_1a51c796239cb41f2376336b0b40e93d2c`
+- :ref:`exhale_function_namespacebats_1a51c796239cb41f2376336b0b40e93d2c`
 

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a4647997c9f432516b4e6934dda0af1f8:
+
+Template Function bats::barcode_form_rightleft
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::barcode_form_rightleft(const Diagram<NT, TM>&)

@@ -64,5 +64,5 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_cochain__complex_8hpp_1aa0050812850d1ff8afa88f7a08f8891a`
+- :ref:`exhale_function_namespacebats_1aa0050812850d1ff8afa88f7a08f8891a`
 

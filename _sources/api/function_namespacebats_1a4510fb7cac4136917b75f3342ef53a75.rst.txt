@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a4510fb7cac4136917b75f3342ef53a75:
+
+Template Function bats::RipsComplex(const DataSet<T>&, const M&, T, size_t)
+===========================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::RipsComplex(const DataSet<T>&, const M&, T, size_t)

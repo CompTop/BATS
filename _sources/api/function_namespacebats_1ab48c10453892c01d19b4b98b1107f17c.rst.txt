@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ab48c10453892c01d19b4b98b1107f17c:
+
+Template Function bats::filtration_sortperm(const std::vector<T>&)
+==================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::filtration_sortperm(const std::vector<T>&)

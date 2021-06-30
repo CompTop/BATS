@@ -71,33 +71,33 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_dowker_8hpp_1a23ca68d796335aa26f5c409c19552eaa`
+- :ref:`exhale_function_namespacebats_1a23ca68d796335aa26f5c409c19552eaa`
 
-- :ref:`exhale_function_dowker_8hpp_1a0da9365fb3683b70807f04db8b87997e`
+- :ref:`exhale_function_namespacebats_1a0da9365fb3683b70807f04db8b87997e`
 
-- :ref:`exhale_function_dowker_8hpp_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
+- :ref:`exhale_function_namespacebats_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
 
-- :ref:`exhale_function_dowker_8hpp_1a883880c5732d01b74451cc68e47021fa`
+- :ref:`exhale_function_namespacebats_1a883880c5732d01b74451cc68e47021fa`
 
-- :ref:`exhale_function_dowker_8hpp_1a3f5054030922489c9f8bd84a4c8dc02b`
+- :ref:`exhale_function_namespacebats_1a3f5054030922489c9f8bd84a4c8dc02b`
 
-- :ref:`exhale_function_dowker_8hpp_1a164b4ce4784b210ae2974698fc123919`
+- :ref:`exhale_function_namespacebats_1a164b4ce4784b210ae2974698fc123919`
 
-- :ref:`exhale_function_dowker_8hpp_1a6a51348e96dfa650f338be8de8a558e5`
+- :ref:`exhale_function_namespacebats_1a6a51348e96dfa650f338be8de8a558e5`
 
-- :ref:`exhale_function_dowker_8hpp_1a8205e2df24d0850d0a2472770c0da907`
+- :ref:`exhale_function_namespacebats_1a8205e2df24d0850d0a2472770c0da907`
 
-- :ref:`exhale_function_dowker_8hpp_1a5d7d2f31d7d578e0d6184e7fa31b047e`
+- :ref:`exhale_function_namespacebats_1a5d7d2f31d7d578e0d6184e7fa31b047e`
 
-- :ref:`exhale_function_dowker_8hpp_1a0bd7eb73704a85f07010b5712c5de557`
+- :ref:`exhale_function_namespacebats_1a6cdef17cd321bc8a3cb0fbf0dbb117e0`
 
-- :ref:`exhale_function_dowker_8hpp_1a6cdef17cd321bc8a3cb0fbf0dbb117e0`
+- :ref:`exhale_function_namespacebats_1a0bd7eb73704a85f07010b5712c5de557`
 
-- :ref:`exhale_function_dowker_8hpp_1aaffcfba1c34ddde5779274d7f906691f`
+- :ref:`exhale_function_namespacebats_1aaffcfba1c34ddde5779274d7f906691f`
 
-- :ref:`exhale_function_dowker_8hpp_1a23acfc39d756b06e831460a102476555`
+- :ref:`exhale_function_namespacebats_1a38d9cc69576f3fbcbf759fb030ee690e`
 
-- :ref:`exhale_function_dowker_8hpp_1a38d9cc69576f3fbcbf759fb030ee690e`
+- :ref:`exhale_function_namespacebats_1a23acfc39d756b06e831460a102476555`
 
-- :ref:`exhale_function_dowker_8hpp_1a94f0bcbebf3d87620de0accd4231a9a1`
+- :ref:`exhale_function_namespacebats_1a94f0bcbebf3d87620de0accd4231a9a1`
 

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a346839e705eec218bde8fee4864d9a31:
+
+Template Function bats::DiscreteMorozovZigzag
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::DiscreteMorozovZigzag(const DataSet<T>&, const M&, T, size_t)

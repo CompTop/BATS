@@ -175,6 +175,7 @@
 <span class="cp">#include</span> <span class="cpf">&lt;homology/basis.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;util/common.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;barcode.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;filtration/update_information.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
 
@@ -201,7 +202,7 @@
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">persistence_pairs</span><span class="p">(</span>
         <span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">,</span>
         <span class="k">const</span> <span class="kt">bool</span> <span class="n">permuted</span><span class="o">=</span><span class="nb">false</span>
-    <span class="p">)</span> <span class="p">{</span>
+    <span class="p">)</span><span class="k">const</span> <span class="p">{</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PersistencePair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">pairs</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">permuted</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dim</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -294,16 +295,50 @@
 
     <span class="p">}</span>
 
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">sparsify_basis</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// update filtration fast version</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Information_type</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">update_filtration_general</span><span class="p">(</span><span class="k">const</span> <span class="n">Information_type</span> <span class="o">&amp;</span> <span class="n">updating_information</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// step 1: apply permutation updates to ReducedChainComplex RC</span>
+        <span class="n">RC</span><span class="p">.</span><span class="n">update_basis_general</span><span class="p">(</span><span class="n">updating_information</span><span class="p">);</span>
+
+        <span class="c1">// step 2: store new permutation</span>
+        <span class="n">perm</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_perms</span><span class="p">;</span>
+
+        <span class="c1">// store values as well</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_vals</span><span class="p">;</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// get nnz of U</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_nnz_U</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">U_nnz</span><span class="p">;</span>
+        <span class="n">U_nnz</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">maxdim</span><span class="p">());</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">U_nnz</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">RC</span><span class="p">.</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">U_nnz</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// get nnz of R</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_nnz_R</span><span class="p">(){</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">R_nnz</span><span class="p">;</span>
+        <span class="n">R_nnz</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">maxdim</span><span class="p">());</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">R_nnz</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">RC</span><span class="p">.</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">R_nnz</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">sparsify_basis</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">RC</span><span class="p">.</span><span class="n">sparsify_basis</span><span class="p">();</span>
     <span class="p">}</span>
 
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">remove_extra_cycles</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">remove_extra_cycles</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">RC</span><span class="p">.</span><span class="n">remove_extra_cycles</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="c1">// get subcomplex</span>
-    <span class="n">ReducedFilteredChainComplex</span> <span class="nf">get_subcomplex</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">ReducedFilteredChainComplex</span> <span class="n">get_subcomplex</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 
     <span class="kt">void</span> <span class="nf">print_summary</span><span class="p">(</span><span class="kt">bool</span> <span class="n">print_nnz</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ReducedFilteredChainComplex with &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">maxdim</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; dimensions:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -321,6 +356,42 @@
     <span class="p">}</span>
 
 <span class="p">};</span>
+
+<span class="c1">// check if two RFCC are the same</span>
+<span class="c1">// (can be modified into new == operator of RFCC class)</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">bool</span> <span class="n">test_reduce_result</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">RFCC2</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">RFCC</span><span class="p">){</span>
+
+    <span class="k">auto</span> <span class="n">R</span> <span class="o">=</span> <span class="n">RFCC</span><span class="p">.</span><span class="n">RC</span><span class="p">.</span><span class="n">R</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">R2</span> <span class="o">=</span> <span class="n">RFCC2</span><span class="p">.</span><span class="n">RC</span><span class="p">.</span><span class="n">R</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">U</span> <span class="o">=</span> <span class="n">RFCC</span><span class="p">.</span><span class="n">RC</span><span class="p">.</span><span class="n">U</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">U2</span> <span class="o">=</span> <span class="n">RFCC2</span><span class="p">.</span><span class="n">RC</span><span class="p">.</span><span class="n">U</span><span class="p">;</span>
+
+
+    <span class="c1">// check persistent homology information</span>
+    <span class="kt">bool</span> <span class="n">test_result</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">RFCC2</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">auto</span> <span class="n">R_ps_k</span> <span class="o">=</span> <span class="n">RFCC</span><span class="p">.</span><span class="n">persistence_pairs</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">R2_ps_k</span> <span class="o">=</span> <span class="n">RFCC2</span><span class="p">.</span><span class="n">persistence_pairs</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+        <span class="kt">bool</span> <span class="n">test_result_k</span> <span class="o">=</span> <span class="n">barcode_equality</span><span class="p">(</span><span class="n">R2_ps_k</span><span class="p">,</span> <span class="n">R_ps_k</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">test_result_k</span><span class="p">){</span>
+            <span class="n">test_result</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">two RFCC are different!!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// check RU factorization</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">RFCC2</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">auto</span> <span class="n">U_inv_k</span> <span class="o">=</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="k">auto</span> <span class="n">U2_inv_k</span> <span class="o">=</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">U2</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">U_inv_k</span> <span class="o">==</span> <span class="n">R2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">U2_inv_k</span><span class="p">)){</span>
+            <span class="n">test_result</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">two RFCC are different!!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">test_result</span><span class="p">;</span>
+<span class="p">}</span>
 
 <span class="c1">// defualt return</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>

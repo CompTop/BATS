@@ -94,12 +94,12 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_data_8hpp_1a68dcb239df5c2f250100cabcb5489b54`
+- :ref:`exhale_function_namespacebats_1a68dcb239df5c2f250100cabcb5489b54`
 
 
 Typedefs
 --------
 
 
-- :ref:`exhale_typedef_data_8hpp_1ac356228f0a1762127fac0c90af20ad1b`
+- :ref:`exhale_typedef_namespacebats_1ac356228f0a1762127fac0c90af20ad1b`
 

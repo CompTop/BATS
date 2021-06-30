@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a8205e2df24d0850d0a2472770c0da907:
+
+Template Function bats::StrictWitnessComplex
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::StrictWitnessComplex(const DataSet<T>&, const DataSet<T>&, const M&, const size_t, const T, const size_t)

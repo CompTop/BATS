@@ -72,51 +72,51 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_sparse_8hpp_1a23389c313645876b11d690d575d5aff4`
+- :ref:`exhale_function_namespacebats_1a23389c313645876b11d690d575d5aff4`
 
-- :ref:`exhale_function_sparse_8hpp_1ac1bb532265595d2b8bd304081df415ad`
+- :ref:`exhale_function_namespacebats_1ac1bb532265595d2b8bd304081df415ad`
 
-- :ref:`exhale_function_sparse_8hpp_1af0abb56a53fc704da282ce656a866178`
+- :ref:`exhale_function_namespacebats_1af0abb56a53fc704da282ce656a866178`
 
-- :ref:`exhale_function_sparse_8hpp_1a4647997c9f432516b4e6934dda0af1f8`
+- :ref:`exhale_function_namespacebats_1a4647997c9f432516b4e6934dda0af1f8`
 
-- :ref:`exhale_function_sparse_8hpp_1ac72e3c70890b0fce105aee7399eebf68`
+- :ref:`exhale_function_namespacebats_1ac72e3c70890b0fce105aee7399eebf68`
 
-- :ref:`exhale_function_sparse_8hpp_1a6dbfd4aa24984b83d3bbba45f69da797`
+- :ref:`exhale_function_namespacebats_1a6dbfd4aa24984b83d3bbba45f69da797`
 
-- :ref:`exhale_function_sparse_8hpp_1a53f3d220031e4c7f180bf0801ed21d92`
+- :ref:`exhale_function_namespacebats_1a53f3d220031e4c7f180bf0801ed21d92`
 
-- :ref:`exhale_function_sparse_8hpp_1a55fdc27b8a7237f9f20aa6972263011d`
+- :ref:`exhale_function_namespacebats_1a55fdc27b8a7237f9f20aa6972263011d`
 
-- :ref:`exhale_function_sparse_8hpp_1ae8389bee8a8a614f9a3636d6c3c5ad45`
+- :ref:`exhale_function_namespacebats_1ae8389bee8a8a614f9a3636d6c3c5ad45`
 
-- :ref:`exhale_function_sparse_8hpp_1a1aae54e14396d951f0958797eb677863`
+- :ref:`exhale_function_namespacebats_1a1aae54e14396d951f0958797eb677863`
 
-- :ref:`exhale_function_sparse_8hpp_1ae418d092c47362291232dc789e384792`
+- :ref:`exhale_function_namespacebats_1ae418d092c47362291232dc789e384792`
 
-- :ref:`exhale_function_sparse_8hpp_1a1aa577688f2980cd27a0485319a3a674`
+- :ref:`exhale_function_namespacebats_1a1aa577688f2980cd27a0485319a3a674`
 
-- :ref:`exhale_function_sparse_8hpp_1acebaf3e5995be2a3649d921c2c878fdf`
+- :ref:`exhale_function_namespacebats_1acebaf3e5995be2a3649d921c2c878fdf`
 
-- :ref:`exhale_function_sparse_8hpp_1abb61fb3fd3ac515d0ee89e91822974b5`
+- :ref:`exhale_function_namespacebats_1abb61fb3fd3ac515d0ee89e91822974b5`
 
-- :ref:`exhale_function_sparse_8hpp_1a1b5eee85d79749ff30d758129ac42ae1`
+- :ref:`exhale_function_namespacebats_1a1b5eee85d79749ff30d758129ac42ae1`
 
-- :ref:`exhale_function_sparse_8hpp_1a9309a94417fd7417d336239003ccffa2`
+- :ref:`exhale_function_namespacebats_1a9309a94417fd7417d336239003ccffa2`
 
-- :ref:`exhale_function_sparse_8hpp_1a608e64a805471197a73e26452487d7c2`
+- :ref:`exhale_function_namespacebats_1a608e64a805471197a73e26452487d7c2`
 
-- :ref:`exhale_function_sparse_8hpp_1a0818a039d02f945e027b35d0b877176a`
+- :ref:`exhale_function_namespacebats_1a0818a039d02f945e027b35d0b877176a`
 
-- :ref:`exhale_function_sparse_8hpp_1a09a1b094c53daf6ca34c1731221a7f97`
+- :ref:`exhale_function_namespacebats_1a09a1b094c53daf6ca34c1731221a7f97`
 
-- :ref:`exhale_function_sparse_8hpp_1a7c408c84d2355f70ccf97b43d1592e34`
+- :ref:`exhale_function_namespacebats_1a7c408c84d2355f70ccf97b43d1592e34`
 
-- :ref:`exhale_function_sparse_8hpp_1a9e5dd4d5a6e0517caff4459025fd89d6`
+- :ref:`exhale_function_namespacebats_1a9e5dd4d5a6e0517caff4459025fd89d6`
 
-- :ref:`exhale_function_sparse_8hpp_1a176d91dd5e281fdf9d1f0797027d74ad`
+- :ref:`exhale_function_namespacebats_1a176d91dd5e281fdf9d1f0797027d74ad`
 
-- :ref:`exhale_function_sparse_8hpp_1a03301a2ba626da435f78604431d12866`
+- :ref:`exhale_function_namespacebats_1a03301a2ba626da435f78604431d12866`
 
-- :ref:`exhale_function_sparse_8hpp_1a2d700b73d64b210f4d9ab2526305d3dd`
+- :ref:`exhale_function_namespacebats_1a2d700b73d64b210f4d9ab2526305d3dd`
 

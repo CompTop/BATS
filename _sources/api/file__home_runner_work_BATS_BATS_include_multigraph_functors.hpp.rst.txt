@@ -77,17 +77,17 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_functors_8hpp_1a87f0bfc7ef050dbb40707104184ab050`
+- :ref:`exhale_function_namespacebats_1a87f0bfc7ef050dbb40707104184ab050`
 
-- :ref:`exhale_function_functors_8hpp_1af16b0e2a23ec8a98605c51a9307520b1`
+- :ref:`exhale_function_namespacebats_1af16b0e2a23ec8a98605c51a9307520b1`
 
-- :ref:`exhale_function_functors_8hpp_1a477da14f55877a021b2a08035715ceac`
+- :ref:`exhale_function_namespacebats_1a477da14f55877a021b2a08035715ceac`
 
-- :ref:`exhale_function_functors_8hpp_1a5178d1d29e8f42549c22417206aadd53`
+- :ref:`exhale_function_namespacebats_1a5178d1d29e8f42549c22417206aadd53`
 
-- :ref:`exhale_function_functors_8hpp_1a34195cbd7255715ec0ea3d394859b230`
+- :ref:`exhale_function_namespacebats_1a34195cbd7255715ec0ea3d394859b230`
 
-- :ref:`exhale_function_functors_8hpp_1a7232532be8060651ac3b707700bf0fa9`
+- :ref:`exhale_function_namespacebats_1a0f99b26c184a52dddf196d766faa695a`
 
-- :ref:`exhale_function_functors_8hpp_1a0f99b26c184a52dddf196d766faa695a`
+- :ref:`exhale_function_namespacebats_1a7232532be8060651ac3b707700bf0fa9`
 

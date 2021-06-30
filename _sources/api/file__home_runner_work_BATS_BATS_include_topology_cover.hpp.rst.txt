@@ -83,26 +83,26 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_cover_8hpp_1a69e0d0acd1785129547c97f16477fd36`
+- :ref:`exhale_function_namespacebats_1a69e0d0acd1785129547c97f16477fd36`
 
-- :ref:`exhale_function_cover_8hpp_1a81f34ad49c42e6abd8a175940307e1cc`
+- :ref:`exhale_function_namespacebats_1a81f34ad49c42e6abd8a175940307e1cc`
 
-- :ref:`exhale_function_cover_8hpp_1a72273db2abf2fcfd0bc3720f8f4da908`
+- :ref:`exhale_function_namespacebats_1a72273db2abf2fcfd0bc3720f8f4da908`
 
-- :ref:`exhale_function_cover_8hpp_1a5a3d53745a6383725062763dce12592d`
+- :ref:`exhale_function_namespacebats_1a5a3d53745a6383725062763dce12592d`
 
-- :ref:`exhale_function_cover_8hpp_1a3b8d8382e801abec0d7b373f1d124d2a`
+- :ref:`exhale_function_namespacebats_1a3b8d8382e801abec0d7b373f1d124d2a`
 
-- :ref:`exhale_function_cover_8hpp_1a24771bc43dca07366824c2ce87577426`
+- :ref:`exhale_function_namespacebats_1a24771bc43dca07366824c2ce87577426`
 
-- :ref:`exhale_function_cover_8hpp_1a0feed29e1a159a924edd025c623b4633`
+- :ref:`exhale_function_namespacebats_1a0feed29e1a159a924edd025c623b4633`
 
-- :ref:`exhale_function_cover_8hpp_1a7f31dac13834a3f0a48e0c61b18f6d39`
+- :ref:`exhale_function_namespacebats_1a7f31dac13834a3f0a48e0c61b18f6d39`
 
 
 Typedefs
 --------
 
 
-- :ref:`exhale_typedef_cover_8hpp_1a1b2e5d3f8a89d778d6da9d63fb884edd`
+- :ref:`exhale_typedef_namespacebats_1a1b2e5d3f8a89d778d6da9d63fb884edd`
 

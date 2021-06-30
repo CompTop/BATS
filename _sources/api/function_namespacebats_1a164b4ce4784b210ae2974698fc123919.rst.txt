@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a164b4ce4784b210ae2974698fc123919:
+
+Template Function bats::get_m
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::get_m(const Matrix<T>&, size_t)

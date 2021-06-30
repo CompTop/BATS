@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a9909a17191b6dedb4e9eaf3e0e548746:
+
+Template Function bats::print_1D_vectors
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_print.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::print_1D_vectors(const T&)

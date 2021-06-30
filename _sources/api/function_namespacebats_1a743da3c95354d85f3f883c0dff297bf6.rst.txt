@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a743da3c95354d85f3f883c0dff297bf6:
+
+Template Function bats::kron_chain_shift
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::kron_chain_shift(const size_t, const ChainCpx&, const size_t, const ChainCpx&)

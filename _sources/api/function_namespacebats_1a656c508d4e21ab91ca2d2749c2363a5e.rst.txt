@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a656c508d4e21ab91ca2d2749c2363a5e:
+
+Template Function bats::neighborhoods(const Matrix<T>&, const T)
+================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::neighborhoods(const Matrix<T>&, const T)

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a478328b5591ff8fb8be8dcf8e06c258e:
+
+Function bats::add_dimension_recursive_nerve
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_nerve.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_dimension_recursive_nerve(SimplicialComplex&, std::vector<size_t>, const bats::Cover&, std::vector<size_t>, const size_t)

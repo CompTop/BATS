@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a09a1b094c53daf6ca34c1731221a7f97:
+
+Template Function bats::type_A_dq_EL
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::type_A_dq_EL(const Diagram<NT, TM>&, std::vector<SparseFact<TC>>&, std::vector<TM>&, ssize_t, ssize_t)

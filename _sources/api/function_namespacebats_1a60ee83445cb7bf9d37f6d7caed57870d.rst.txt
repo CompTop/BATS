@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a60ee83445cb7bf9d37f6d7caed57870d:
+
+Template Function bats::print_simplex
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_print.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::print_simplex(const T&)

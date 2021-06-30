@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a1db3b24adac0bd7a95b7475285c057ee:
+
+Template Function bats::CompleteFlagFiltration
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::CompleteFlagFiltration(const std::vector<size_t>&, const std::vector<T>&, const size_t, const size_t, const T)

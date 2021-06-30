@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a9309a94417fd7417d336239003ccffa2:
+
+Template Function bats::pass_U_right
+====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::pass_U_right(const Diagram<NT, TM>&, std::vector<SparseFact<TC>>&, ssize_t)

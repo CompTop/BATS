@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ac344ced71c636b9cf05aab03c98bcd85:
+
+Template Function bats::neighborhood(const VectorView<T>&, const DataSet<T>&, const M&, const size_t)
+=====================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::neighborhood(const VectorView<T>&, const DataSet<T>&, const M&, const size_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a046e96f52a9cdedccc958752139cbf7c:
+
+Template Function bats::make_edge
+=================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::make_edge(TI, TI, TF)

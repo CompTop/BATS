@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a50249ab44cc103c73c3f7b178fdf7caa:
+
+Template Function bats::get_compression_inds
+============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::get_compression_inds(const ColumnMatrix<TVec>&)

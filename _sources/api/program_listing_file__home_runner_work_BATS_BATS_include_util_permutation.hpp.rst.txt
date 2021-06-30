@@ -376,4 +376,124 @@ Program Listing for File permutation.hpp
    }
    
    } // namespace util
+   
+   // The following functions when called will not need to use bats::util::function_name
+   
+   // Return an identity permutation, k is its length
+   std::vector<size_t> identity_perm(const size_t& k){
+       std::vector<size_t> l(k);
+       std::iota(l.begin(), l.end(), 0);
+       return l;
+   }
+   
+   /*
+   If we sort vector v, this function will return the indices of sorted values 
+   */
+   template <typename T>
+   std::vector<size_t> sort_indexes(const std::vector<T> &v) {
+   
+       // initialize original index locations
+       std::vector<size_t> idx(v.size());
+       // fill the vector with increasing numbers starting from 0
+       std::iota(idx.begin(), idx.end(), 0); 
+   
+       // sort indexes based on comparing values in v
+       // using std::stable_sort instead of std::sort
+       // to avoid unnecessary index re-orderings
+       // when v contains elements of equal values 
+       std::stable_sort(idx.begin(), idx.end(),
+           [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});
+   
+       return idx;
+   }
+   
+   /*
+   Make indices list to permutation, e.g., [5 0 2] to [2 0 1]
+   
+   Given a list of correpsonding old indices of permutations, find the permutation
+   e.g., given [5 0 2], which is the corresponding old indices of an old vector v_old 
+   for a new vector v: 
+   v[0] = v_old[5]
+   v[1] = v_old[0]
+   v[2] = v_old[2]
+   need to find the permutation [2 0 1]
+   */
+   template <typename T>
+   std::vector<size_t> find_perm_from_vector(const std::vector<T> &v) {
+   
+       // initialize original index locations
+       std::vector<size_t> idx(v.size());
+       // fill the vector with increasing numbers starting from 0
+       std::iota(idx.begin(), idx.end(), 0); 
+   
+       // sort indexes based on comparing values in v
+       std::stable_sort(idx.begin(), idx.end(),
+           [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});
+   
+       // get the desired permutation
+       std::vector<size_t> perm(v.size());
+       for(size_t i = 0; i < v.size(); i++){
+           perm[idx[i]] = i;
+       }
+       return perm;
+   }
+   
+   
+   // get the permutation for permuting i-th element to the end 
+   std::vector<size_t> perm_to_the_end(const size_t& index, const size_t& length){
+       std::vector<size_t> v;
+       v.reserve(length);
+   
+       for(size_t i = 0; i < length; i++){
+           if(i!=index)v.emplace_back(i);
+       }
+       v.emplace_back(index);
+       return v;
+   }
+   
+   // get the permutation for permuting elements, with their indices in a list, to the end 
+   // the index_list should be sorted 
+   std::vector<size_t> perm_to_the_end(const std::vector<size_t>& index_list, const size_t& length){
+       std::vector<size_t> v;
+       v.reserve(length);
+       auto it = index_list.begin();
+       for(size_t i = 0; i < length; i++){
+           if(i != *it){
+               v.emplace_back(i);
+           }else{
+               it++;
+           }
+       }
+   
+       for(auto& element: index_list){
+           v.emplace_back(element);
+       }
+       return v;
+   }
+   
+   // extend a permutation to a desired lenght 
+   // with the elements appended unmoved, e.g.
+   // (2 0 1) to (2 0 1 3 4 5)
+   std::vector<size_t> extension_perm(const std::vector<size_t>& perm, const size_t& length){
+       if(!perm.empty()){
+           std::vector<size_t> v;
+           v.reserve(length);
+           size_t i = 0;
+           for(auto& element: perm){
+               v.emplace_back(element);
+               i++;
+           }
+           while (i<length)
+           {
+               v.emplace_back(i);
+               i++;
+           }
+           return v;
+       }else
+       {
+           return identity_perm(length);
+       }
+       
+   }
+   
    } // namespace bats

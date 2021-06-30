@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ad41ac1fdb260cbbcfb2a331ab9dcb39b:
+
+Template Function bats::find_perm_from_vector
+=============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_permutation.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::find_perm_from_vector(const std::vector<T>&)

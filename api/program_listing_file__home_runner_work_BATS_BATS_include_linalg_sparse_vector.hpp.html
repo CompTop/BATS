@@ -637,6 +637,38 @@
         <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 
+    <span class="c1">//deletetion of the last row of a column of a matrix</span>
+    <span class="c1">//the index i is provided to check if i is the index of</span>
+    <span class="c1">//the last the non-zero elements</span>
+    <span class="kt">void</span> <span class="n">erase_last_row_of_matrix</span><span class="p">(</span><span class="k">const</span> <span class="n">TI</span> <span class="n">i</span><span class="p">){</span>
+        <span class="c1">// first check if it is an empty vector!!!!!!</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nzend</span><span class="p">()</span> <span class="o">!=</span> <span class="n">nzbegin</span><span class="p">()){</span>
+            <span class="c1">// if the last non-zero term&#39;s index is i</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">indval</span><span class="p">.</span><span class="n">end</span><span class="p">()</span><span class="mi">-1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">){</span>
+                <span class="n">indval</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">//deletetion of row i , the indices after i should minus one</span>
+    <span class="kt">void</span> <span class="n">erase_for_matrix</span><span class="p">(</span><span class="k">const</span> <span class="n">TI</span> <span class="n">i</span><span class="p">){</span>
+        <span class="c1">// if it is an empty vector, do nothing</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nzend</span><span class="p">()</span> <span class="o">==</span> <span class="n">nzbegin</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
+
+        <span class="k">auto</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pi</span> <span class="o">!=</span> <span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
+            <span class="c1">// if the i-th row is non-zero (or find it)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">==</span><span class="n">i</span><span class="p">){</span>
+                <span class="n">indval</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">pi</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="c1">// decrement the indices after i</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">pi</span> <span class="o">&lt;</span> <span class="n">nzend</span><span class="p">()){</span>
+                <span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span><span class="o">--</span><span class="p">;</span>
+                <span class="n">pi</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
     <span class="c1">// mix row entries</span>
     <span class="c1">// apply matrix</span>
     <span class="c1">// [a b]</span>

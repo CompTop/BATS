@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a0fbb8ec9180d4d2ad3fc988589171557:
+
+Template Function bats::operator<
+=================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::operator<(const tedge<TF, TI>&, const tedge<TF, TI>&)

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1aac217dd95bcc561e763da7df40aca6f2:
+
+Template Function bats::approx_center
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::approx_center(const DataSet<T>&, const M&, size_t, size_t)

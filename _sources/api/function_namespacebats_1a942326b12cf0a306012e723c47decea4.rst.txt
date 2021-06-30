@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a942326b12cf0a306012e723c47decea4:
+
+Function bats::linear_cover_intersection_diagram
+================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::linear_cover_intersection_diagram(std::vector<std::set<size_t>>&)

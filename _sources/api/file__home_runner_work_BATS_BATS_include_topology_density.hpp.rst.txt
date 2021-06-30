@@ -57,5 +57,5 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_density_8hpp_1ad36c3db1679822d758daa07fd249077b`
+- :ref:`exhale_function_namespacebats_1ad36c3db1679822d758daa07fd249077b`
 

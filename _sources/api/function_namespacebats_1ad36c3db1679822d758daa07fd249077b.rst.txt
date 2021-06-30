@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ad36c3db1679822d758daa07fd249077b:
+
+Template Function bats::kdist
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_density.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::kdist(const DataSet<T>&, const M&, const size_t)

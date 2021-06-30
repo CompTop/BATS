@@ -68,5 +68,5 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_cohom__basis_8hpp_1a9cbf6d6953888b8fd4c3605120073ed3`
+- :ref:`exhale_function_namespacebats_1a9cbf6d6953888b8fd4c3605120073ed3`
 

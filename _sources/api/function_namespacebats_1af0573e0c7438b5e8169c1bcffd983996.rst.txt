@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1af0573e0c7438b5e8169c1bcffd983996:
+
+Template Function bats::partial_reduce_parallel(ColumnMatrix<TVec>&, const size_t)
+==================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::partial_reduce_parallel(ColumnMatrix<TVec>&, const size_t)

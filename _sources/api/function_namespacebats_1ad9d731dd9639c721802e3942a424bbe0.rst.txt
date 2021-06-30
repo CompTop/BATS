@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1ad9d731dd9639c721802e3942a424bbe0:
+
+Template Function bats::print_summary_of_filtration
+===================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_util_print.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::print_summary_of_filtration(const CpxT&, std::function<T(const std::vector<size_t>&)>&)

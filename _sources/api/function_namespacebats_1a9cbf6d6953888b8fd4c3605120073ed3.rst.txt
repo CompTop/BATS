@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a9cbf6d6953888b8fd4c3605120073ed3:
+
+Template Function bats::__ReducedCochainComplex
+===============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::__ReducedCochainComplex(const CpxT&, T, Args...)

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a883880c5732d01b74451cc68e47021fa:
+
+Template Function bats::DowkerFiltration(const DataSet<T>&, const DataSet<T>&, const M&, T, size_t)
+===================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_dowker.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::DowkerFiltration(const DataSet<T>&, const DataSet<T>&, const M&, T, size_t)

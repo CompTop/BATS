@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1abe3574fd3e4e003b0fa239a1cd23422e:
+
+Template Function bats::RipsFiltration_extension(const Matrix<T>&, T, size_t)
+=============================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_rips.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::RipsFiltration_extension(const Matrix<T>&, T, size_t)

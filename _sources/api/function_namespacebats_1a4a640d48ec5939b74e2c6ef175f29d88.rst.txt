@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a4a640d48ec5939b74e2c6ef175f29d88:
+
+Template Function bats::add_uniform_noise(Matrix<T>&, unsigned, const T, const T)
+=================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::add_uniform_noise(Matrix<T>&, unsigned, const T, const T)

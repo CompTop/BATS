@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a7f31dac13834a3f0a48e0c61b18f6d39:
+
+Template Function bats::uniform_interval_cover
+==============================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_cover.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::uniform_interval_cover(const std::vector<T>&, const size_t)

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a824f0c04e6ccb686c4ec229a9926abf6:
+
+Template Function bats::reduce_block_sequential(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const size_t, const size_t)
+=====================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_block_sequential(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, const size_t, const size_t)

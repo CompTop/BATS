@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1afeb9ea6f0eaf382cbcda6054a45a93ba:
+
+Template Function bats::EilenbergZilber(const CpxT&, const CpxT&, const size_t, T)
+==================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::EilenbergZilber(const CpxT&, const CpxT&, const size_t, T)

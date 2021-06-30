@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a4579e599b40f46a7047e1a37afac31be:
+
+Template Function bats::circle
+==============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_data_gen.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::circle(const T, const size_t)

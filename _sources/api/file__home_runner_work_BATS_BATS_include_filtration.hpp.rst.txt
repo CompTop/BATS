@@ -35,6 +35,8 @@ Includes
 
 - ``filtration/flag.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_flag.hpp`)
 
+- ``filtration/update_information.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp`)
+
 
 
 Included By
