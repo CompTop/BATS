@@ -139,6 +139,116 @@ public:
 	*/
 	inline void append_row() { m++; }
 
+	/**
+	Do not recommend,
+	because if we want to insert multiple columns, 
+	the index will change after the first insertion.
+	Thus the important thing we need to assume is 
+	the index list are in ascending order!
+	*/ 
+	template <class ...Ts>
+	void insert_column(const size_t& index, Ts (&&...args)){ 
+		// first append a row to the end
+		append_column(args...); 
+		
+		// second permute it 
+		std::vector<size_t> colperm;
+		colperm.reserve(n);
+		for (size_t i = 0; i < n ; i++){
+			size_t j = i ;
+			if (i == index) j = n-1;
+			if (i > index) j = i-1;
+			colperm.emplace_back(j);
+		}
+		ipermute_cols(colperm);
+	}
+	// append a zero column at the end
+	void append_column(){ col.emplace_back(TC()); n++; }
+
+	// insert a zero column at position index
+	void insert_column(const size_t& index){
+		// first append a row to the end
+		append_column(); 
+		// second permute it 
+		std::vector<size_t> colperm;
+		colperm.reserve(n);
+		for (size_t i = 0; i < n ; i++){
+			size_t j = i ;
+			if (i == index) j = n-1;
+			if (i > index) j = i-1;
+			colperm.emplace_back(j);
+		}
+		permute_cols(colperm);
+	}
+
+	// append a row a specified value
+	void append_row(const std::vector<val_type> & row) {
+		if (row.size() == ncol()){
+			for (size_t j = 0; j < ncol(); j++) {
+				if (row[j]!= val_type(0))
+				col[j].emplace_back(m , row[j]);
+			}
+			++m;
+		}else{
+			std::cout << "\nUnable to add row, since the dimension does not match" << std::endl;
+		}
+	}
+
+	void insert_row(const size_t& index, const std::vector<val_type> & row){
+		// first append a row to the end
+		append_row(row);
+		// second permute it 
+		std::vector<size_t> rowperm;
+		rowperm.reserve(m);
+		for (size_t i = 0; i < m ; i++){
+			size_t j = i;
+			if (i == index) j = m-1;
+			if (i > index) j = i-1;
+			rowperm.emplace_back(j);
+		}
+		permute_rows(rowperm);
+	}
+
+	// insert a zero row
+	void insert_row(const size_t& index){
+		// first append a row to the end
+		append_row();
+		// second permute it 
+		std::vector<size_t> rowperm;
+		rowperm.reserve(m);
+		for (size_t i = 0; i < m ; i++){
+			size_t j = i;
+			if (i == index) j = m-1;
+			if (i > index) j = i-1;
+			rowperm.emplace_back(j);
+		}
+		permute_rows(rowperm);
+	}
+
+	void erase_column(const size_t& index){
+    	col.erase(col.begin()+index);
+		--n;
+	}
+	
+	void erase_column(){
+    	col.erase(--col.end());
+		--n;
+	}
+
+	void erase_row(const size_t& index){
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].erase_for_matrix(index);
+		}
+		--m;
+	}
+
+	void erase_row(){
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].erase_last_row_of_matrix(m-1);
+		}
+		--m;
+	}
+
     inline TC& operator[](size_t index) { return col[index];}
     inline const TC& operator[](size_t index) const { return col[index];}
 

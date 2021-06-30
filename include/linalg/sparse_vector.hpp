@@ -472,6 +472,38 @@ public:
 		return;
 	}
 
+	//deletetion of the last row of a column of a matrix
+	//the index i is provided to check if i is the index of
+	//the last the non-zero elements 
+	void erase_last_row_of_matrix(const TI i){
+		// first check if it is an empty vector!!!!!!
+		if(nzend() != nzbegin()){
+			// if the last non-zero term's index is i
+			if(i == (indval.end()-1)->ind){ 
+				indval.pop_back();
+			}
+		}
+	}
+
+	//deletetion of row i , the indices after i should minus one
+	void erase_for_matrix(const TI i){
+		// if it is an empty vector, do nothing
+		if (nzend() == nzbegin()) return;
+
+		auto pi = lower_bound(i);
+		if (pi != nzend()) {
+			// if the i-th row is non-zero (or find it)
+			if (pi->ind ==i){ 
+				indval.erase(pi);
+			}
+			// decrement the indices after i
+			while(pi < nzend()){ 
+				(pi->ind)--;
+				pi++;
+			}
+		}
+	}
+
 	// mix row entries
 	// apply matrix
 	// [a b]
