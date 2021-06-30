@@ -339,4 +339,45 @@ inline p2c_type reduce_matrix(
 	return pivot_to_col;
 }
 
+/**
+do an initial parallel sweep to zero out columns as possible
+
+@param M matrix to reduce
+@param block_size size of column blocks to be processed in parallel
+*/
+template <typename TVec>
+void partial_reduce_parallel(
+	ColumnMatrix<TVec>& M,
+	const size_t block_size
+) {
+	size_t n = M.ncol();
+
+	#pragma omp parallel for
+	for (size_t j = 0; j < n-block_size; j+=block_size) {
+		reduce_block_sequential(M, j, j+block_size);
+	}
+	return;
+}
+/**
+do an initial parallel sweep to zero out columns as possible
+
+@param M matrix to reduce
+@param U change of basis
+@param block_size size of column blocks to be processed in parallel
+*/
+template <typename TVec>
+void partial_reduce_parallel(
+	ColumnMatrix<TVec>& M,
+	ColumnMatrix<TVec>& U,
+	const size_t block_size
+) {
+	size_t n = M.ncol();
+
+	#pragma omp parallel for
+	for (size_t j = 0; j < n-block_size; j+=block_size) {
+		reduce_block_sequential(M, U, j, j+block_size);
+	}
+	return;
+}
+
 } // namespace bats

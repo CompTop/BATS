@@ -88,6 +88,7 @@ public:
 		for (size_t k = 0; k < dmax; k++) {
 			U[k] = MT::identity(C.dim(k));
 			R[k] = C.boundary[k];
+			// partial_reduce_parallel(R[k], U[k], 1024);
 			p2c[k] = reduce_matrix(R[k], U[k]);
 		}
 
@@ -107,6 +108,7 @@ public:
 		// TODO: can parallelize this
 		for (size_t k = 0; k < dmax; k++) {
 			R[k] = C.boundary[k];
+			// partial_reduce_parallel(R[k], 1024);
 			p2c[k] = reduce_matrix(R[k], algflag());
 		}
 
