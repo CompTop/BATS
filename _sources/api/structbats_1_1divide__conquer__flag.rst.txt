@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1divide__conquer__flag:
+
+Struct divide_conquer_flag
+==========================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::divide_conquer_flag
+   :members:
+   :protected-members:
+   :undoc-members:

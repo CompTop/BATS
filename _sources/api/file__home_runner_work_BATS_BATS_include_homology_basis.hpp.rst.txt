@@ -33,6 +33,8 @@ Includes
 
 - ``chrono``
 
+- ``parallel.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`)
+
 - ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
 
 - ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
@@ -80,9 +82,9 @@ Functions
 
 - :ref:`exhale_function_basis_8hpp_1aceb6dccb131821e8dd2082e427df43d0`
 
-- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
-
 - :ref:`exhale_function_basis_8hpp_1a0f4abde0bed5309801ab587b4256d92a`
+
+- :ref:`exhale_function_basis_8hpp_1ab9bea3263b69bcab24330449ec9ecea5`
 
 - :ref:`exhale_function_filtered__basis_8hpp_1ab9a44e52c27bddad113540c75501c992`
 

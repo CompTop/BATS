@@ -79,6 +79,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_extract.hpp`

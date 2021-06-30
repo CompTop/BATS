@@ -83,6 +83,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_zigzag_reduction.hpp`
@@ -113,9 +115,9 @@ Functions
 
 - :ref:`exhale_function_col__matrix_8hpp_1a50704c02bec41743e03f7f74b4a6a8b2`
 
-- :ref:`exhale_function_col__matrix_8hpp_1a312149207447447ab25c9f57d630dc8d`
-
 - :ref:`exhale_function_col__matrix_8hpp_1af1e32562e5c5435c628a2dbaceb64e3c`
+
+- :ref:`exhale_function_col__matrix_8hpp_1a312149207447447ab25c9f57d630dc8d`
 
 - :ref:`exhale_function_col__matrix_8hpp_1ace18822d7157109c7049f4d8ec1824b2`
 

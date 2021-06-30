@@ -1,0 +1,13 @@
+.. _exhale_function_parallel_8hpp_1afdfb6494e22e073d36d944eedcc8d00c:
+
+Template Function bats::reduce_column_extra
+===========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_column_extra(ColumnMatrix<TVec>&, const size_t, std::unordered_map<size_t, size_t>&, typename TVec::tmp_type&)

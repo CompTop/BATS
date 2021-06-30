@@ -1,0 +1,13 @@
+.. _exhale_function_parallel_8hpp_1a489815390f5766170108b2636b852bda:
+
+Template Function bats::reduce_matrix(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, divide_conquer_flag)
+====================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::reduce_matrix(ColumnMatrix<TVec>&, ColumnMatrix<TVec>&, divide_conquer_flag)

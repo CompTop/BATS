@@ -118,6 +118,11 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
+   structbats_1_1divide__conquer__flag.rst
+
+.. toctree::
+   :maxdepth: 5
+
    structbats_1_1Euclidean.rst
 
 .. toctree::
@@ -1172,6 +1177,16 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_parallel_8hpp_1af0573e0c7438b5e8169c1bcffd983996.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a84feebc4e52a45f44b1c3f01a0454805.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_sparse_8hpp_1a1aa577688f2980cd27a0485319a3a674.rst
 
 .. toctree::
@@ -1252,7 +1267,52 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_parallel_8hpp_1a20dac657b0fbd617c0b343328145aafd.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a599812e7ef18150876ebc91f9abcb8a7.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a824f0c04e6ccb686c4ec229a9926abf6.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1ad7421a8fba02beaef7b0ed47077b9a46.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1afdfb6494e22e073d36d944eedcc8d00c.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_homology_2reduction_8hpp_1ac75fe3894c0e3c21c480649f2348a236.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a71d2a7167b638e2a1087732119fdf665.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a5a916d5fa24e378eef3cf2773accf28b.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a489815390f5766170108b2636b852bda.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_parallel_8hpp_1a9abb4f810bbd5b15b41ed1322ed8499e.rst
 
 .. toctree::
    :maxdepth: 5

@@ -385,6 +385,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file__home_runner_work_BATS_BATS_include_homology_parallel.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file__home_runner_work_BATS_BATS_include_future_permutation.hpp.rst
 
 .. toctree::
