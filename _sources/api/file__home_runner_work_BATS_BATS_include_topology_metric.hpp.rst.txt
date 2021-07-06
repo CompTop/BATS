@@ -35,6 +35,8 @@ Includes
 
 - ``data.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_data.hpp`)
 
+- ``limits``
+
 - ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
 
 
@@ -84,4 +86,11 @@ Classes
 - :ref:`exhale_struct_structbats_1_1RPAngleDist`
 
 - :ref:`exhale_struct_structbats_1_1RPCosineDist`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_namespacebats_1a51882d4ec3b83afa3f63f72957a5cd75`
 

@@ -296,10 +296,13 @@
     <span class="p">}</span>
 
     <span class="c1">// update filtration fast version</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Information_type</span><span class="o">&gt;</span>
-    <span class="kt">void</span> <span class="n">update_filtration_general</span><span class="p">(</span><span class="k">const</span> <span class="n">Information_type</span> <span class="o">&amp;</span> <span class="n">updating_information</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Information_type</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">update_filtration_general</span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">Information_type</span> <span class="o">&amp;</span> <span class="n">updating_information</span><span class="p">,</span>
+        <span class="n">Args</span> <span class="p">...</span><span class="n">args</span>
+    <span class="p">)</span> <span class="p">{</span>
         <span class="c1">// step 1: apply permutation updates to ReducedChainComplex RC</span>
-        <span class="n">RC</span><span class="p">.</span><span class="n">update_basis_general</span><span class="p">(</span><span class="n">updating_information</span><span class="p">);</span>
+        <span class="n">RC</span><span class="p">.</span><span class="n">update_basis_general</span><span class="p">(</span><span class="n">updating_information</span><span class="p">,</span> <span class="n">args</span><span class="p">...);</span>
 
         <span class="c1">// step 2: store new permutation</span>
         <span class="n">perm</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_perms</span><span class="p">;</span>

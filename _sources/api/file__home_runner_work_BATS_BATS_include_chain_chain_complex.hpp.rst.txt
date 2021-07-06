@@ -74,9 +74,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_namespacebats_1ac2b99b961e41a72ed5680f3170d249ec`
-
 - :ref:`exhale_function_namespacebats_1a448b1131113c628332584e7d98e4151a`
+
+- :ref:`exhale_function_namespacebats_1ac2b99b961e41a72ed5680f3170d249ec`
 
 - :ref:`exhale_function_namespacebats_1a4b1bb4dbae612ef0621920d07af33a92`
 

@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a51882d4ec3b83afa3f63f72957a5cd75:
+
+Template Function bats::enclosing_radius
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::enclosing_radius(const Matrix<T>&)

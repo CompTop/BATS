@@ -233,6 +233,17 @@
     <span class="k">return</span> <span class="n">X</span><span class="p">;</span>
 <span class="p">}</span>
 
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">DataSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">add_normal_noise</span><span class="p">(</span>
+    <span class="n">DataSet</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">X</span><span class="p">,</span>
+    <span class="kt">unsigned</span> <span class="n">seed</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">T</span> <span class="n">mu</span><span class="o">=</span><span class="n">T</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="k">const</span> <span class="n">T</span> <span class="n">sigma</span><span class="o">=</span><span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">add_normal_noise</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">;</span>
+<span class="p">}</span>
+
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">add_uniform_noise</span><span class="p">(</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">X</span><span class="p">,</span>
@@ -265,7 +276,8 @@
     <span class="k">const</span> <span class="n">T</span> <span class="n">lb</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="mi">-1</span><span class="p">),</span>
     <span class="k">const</span> <span class="n">T</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">add_uniform_noise</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">);</span>
+    <span class="n">add_uniform_noise</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">;</span>
 <span class="p">}</span>
 
 

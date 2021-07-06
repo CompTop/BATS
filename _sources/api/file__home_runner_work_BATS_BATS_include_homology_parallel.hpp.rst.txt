@@ -72,9 +72,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_namespacebats_1af0573e0c7438b5e8169c1bcffd983996`
-
 - :ref:`exhale_function_namespacebats_1a84feebc4e52a45f44b1c3f01a0454805`
+
+- :ref:`exhale_function_namespacebats_1af0573e0c7438b5e8169c1bcffd983996`
 
 - :ref:`exhale_function_namespacebats_1a599812e7ef18150876ebc91f9abcb8a7`
 
@@ -90,7 +90,7 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a71d2a7167b638e2a1087732119fdf665`
 
-- :ref:`exhale_function_namespacebats_1a489815390f5766170108b2636b852bda`
-
 - :ref:`exhale_function_namespacebats_1a9abb4f810bbd5b15b41ed1322ed8499e`
+
+- :ref:`exhale_function_namespacebats_1a489815390f5766170108b2636b852bda`
 

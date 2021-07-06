@@ -471,19 +471,18 @@
         <span class="kt">size_t</span> <span class="n">max_dim</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">max_dim</span><span class="p">;</span>
 
         <span class="c1">// we want to extract permutation and deletion information first</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">max_dim</span> <span class="o">+</span><span class="mi">1</span> <span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">max_dim</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// step 1.1 find the permutation used to permute simplices</span>
             <span class="c1">// that is going to be deleted to the end</span>
-            <span class="c1">// std::vector&lt;size_t&gt; perm_deletion = informations_in_each_dim[k].permutation_deletion_end();</span>
-            <span class="c1">// std::vector&lt;size_t&gt; perm_deletion = UI.permutation_deletion_end(k);</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm_deletion</span> <span class="o">=</span> <span class="n">identity_perm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">());</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm_deletion</span><span class="p">;</span>
             <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">UI</span><span class="p">.</span><span class="n">deletion_indices</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">empty</span><span class="p">()){</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm_deletion</span> <span class="o">=</span> <span class="n">perm_to_the_end</span><span class="p">(</span><span class="n">UI</span><span class="p">.</span><span class="n">deletion_indices</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">());</span>
+                <span class="n">perm_deletion</span> <span class="o">=</span> <span class="n">perm_to_the_end</span><span class="p">(</span><span class="n">UI</span><span class="p">.</span><span class="n">deletion_indices</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">());</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="n">perm_deletion</span> <span class="o">=</span> <span class="n">identity_perm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">());</span>
             <span class="p">}</span>
+
             <span class="c1">// step 1.2 find the permutation used to permute</span>
-            <span class="c1">// intersection of simplices</span>
-            <span class="c1">// std::vector&lt;size_t&gt; perm_intersect = extension_perm(informations_in_each_dim[k].permutation_of_intersection,</span>
-            <span class="c1">// informations_in_each_dim[k].n_A);</span>
+            <span class="c1">// intersection of simplices and leave the ones in the end unmoved</span>
             <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">perm_intersect</span> <span class="o">=</span> <span class="n">extension_perm</span><span class="p">(</span><span class="n">UI</span><span class="p">.</span><span class="n">permutations</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">());</span>
 
             <span class="c1">// step 1.3 Combine the above 2 permutations together, i.e.,</span>
@@ -497,12 +496,12 @@
         <span class="p">}</span>
 
         <span class="c1">// step 2: next we update the factorizations</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">max_dim</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// for each dimension</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">max_dim</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// for each dimension</span>
             <span class="c1">// step 2.1 make U reduced</span>
             <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
 
             <span class="c1">// step 2.2 sort columns of U - apply same operations to R</span>
-            <span class="c1">// to make U upper-triangle</span>
+            <span class="c1">// to make U upper-triangular</span>
             <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dim</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// swap correct column if necessary</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
@@ -519,47 +518,41 @@
             <span class="c1">// std::cout &lt;&lt; &quot;\nstep 2.3 delete columns in the end:&quot; &lt;&lt; std::endl;</span>
             <span class="c1">// step 2.3 delete columns in the end</span>
             <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">UI</span><span class="p">.</span><span class="n">deletion_indices</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="c1">//for(auto&amp; v:informations_in_each_dim[k].deletion_of_simplices){</span>
                 <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">erase_column</span><span class="p">();</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">erase_row</span><span class="p">();</span>
+                <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">erase_row_unsafe</span><span class="p">();</span> <span class="c1">// after column deletion, safe to erase</span>
                 <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">erase_column</span><span class="p">();</span>
             <span class="p">}</span>
 
             <span class="c1">// step 2.4 delete rows in the end</span>
             <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
                 <span class="c1">// find the # of deletion</span>
-                <span class="c1">// size_t count = informations_in_each_dim[k-1].deletion_of_simplices.size();</span>
                 <span class="kt">size_t</span> <span class="n">count</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">deletion_indices</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
                 <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-                <span class="c1">// for(auto&amp; v:informations_in_each_dim[k-1].deletion_of_simplices){</span>
-                    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">erase_row</span><span class="p">();</span>
+                    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">erase_row_unsafe</span><span class="p">();</span>
                 <span class="p">}</span>
             <span class="p">}</span>
 
 
             <span class="c1">// step 2.5 add rows to the specified location</span>
             <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
-
-                <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">ind</span><span class="p">:</span> <span class="n">UI</span><span class="p">.</span><span class="n">addition_indices</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">]){</span>
-                <span class="c1">// for(auto&amp; v: informations_in_each_dim[k-1].addition_of_simplices){</span>
-                    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_row</span><span class="p">(</span><span class="n">ind</span><span class="p">);</span> <span class="c1">// insert zero rows</span>
-                <span class="p">}</span>
+                <span class="c1">// for(auto&amp; ind: UI.addition_indices[k-1]){</span>
+                <span class="c1">//  R[k].insert_row(ind); // insert zero rows</span>
+                <span class="c1">// }</span>
+                <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">UI</span><span class="p">.</span><span class="n">addition_indices</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">]);</span>
             <span class="p">}</span>
 
 
             <span class="c1">// step 2.6 addition of columns</span>
             <span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
                 <span class="c1">// find the index of the rightmost column of U</span>
-                <span class="c1">// size_t final_ind_of_U = informations_in_each_dim[k].n_A - 1;</span>
                 <span class="kt">size_t</span> <span class="n">final_ind_of_U</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ncol</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
 
                 <span class="c1">// find the # of addition</span>
-                <span class="c1">// size_t count = informations_in_each_dim[k].addition_of_simplices.size();</span>
                 <span class="kt">size_t</span> <span class="n">count</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">addition_indices</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
 
                 <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
                     <span class="c1">// change R</span>
-                    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">append_column</span><span class="p">();</span> <span class="c1">// insert zero rows</span>
+                    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">append_column</span><span class="p">();</span> <span class="c1">// insert zero columns</span>
                     <span class="c1">// change U</span>
                     <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">append_row</span><span class="p">();</span>
                     <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">append_column</span><span class="p">(</span><span class="n">VectT</span><span class="p">({</span><span class="kt">size_t</span><span class="p">(</span><span class="n">final_ind_of_U</span><span class="p">)},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}));</span>
@@ -567,35 +560,57 @@
                 <span class="p">}</span>
             <span class="p">}</span><span class="k">else</span><span class="p">{</span>
                 <span class="c1">// boundary information</span>
-                <span class="c1">// auto bd_info = informations_in_each_dim[k].index_of_boundary_add_simplex;</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">bd_info</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">boundary_indices</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;&amp;</span> <span class="n">bd_info</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">boundary_indices</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
 
                 <span class="c1">// addition information</span>
-                <span class="c1">// auto AI_col = informations_in_each_dim[k].addition_of_simplices;</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">add_inds</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">addition_indices</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">add_inds</span> <span class="o">=</span> <span class="n">UI</span><span class="p">.</span><span class="n">addition_indices</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
 
+                <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">add_inds</span><span class="p">);</span>
+
+                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VectT</span><span class="o">&gt;</span> <span class="n">Rcol</span><span class="p">(</span><span class="n">add_inds</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VectT</span><span class="o">&gt;</span> <span class="n">Ucol</span><span class="p">(</span><span class="n">add_inds</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
                 <span class="c1">// Then change U and R coming from the effect of</span>
                 <span class="c1">// adding a column to the boundary matrix.</span>
                 <span class="c1">// loop over each simplex that needs to be added</span>
                 <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">add_inds</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
                     <span class="c1">// the indices of its boundaries</span>
                     <span class="k">auto</span> <span class="n">simplex_bd_ind</span> <span class="o">=</span> <span class="n">bd_info</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-                    <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">simplex_bd_ind</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">simplex_bd_ind</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+                    <span class="c1">// std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());</span>
                     <span class="c1">// simplex index</span>
                     <span class="k">auto</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">add_inds</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
                     <span class="c1">// create a vector of ones with length</span>
-                    <span class="c1">// equal to the boundary size  (filed F_2 for now)</span>
+                    <span class="c1">// equal to the boundary size  (Field F_2 for now)</span>
                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ValT</span><span class="o">&gt;</span> <span class="n">vect_one</span><span class="p">(</span><span class="n">simplex_bd_ind</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">1</span><span class="p">);</span>
                     <span class="c1">// creat the column vector</span>
-                    <span class="k">auto</span> <span class="n">vect</span> <span class="o">=</span> <span class="n">VectT</span><span class="p">(</span><span class="n">simplex_bd_ind</span><span class="p">,</span> <span class="n">vect_one</span><span class="p">);</span>
-                    <span class="c1">// insert the column at postion in B (position in new filtration)</span>
-                    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_column</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">vect</span><span class="p">);</span>
-
-                    <span class="c1">// correspondingly, U[k] will add a zero block</span>
-                    <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_row</span><span class="p">(</span><span class="n">ind</span><span class="p">);</span>
-                    <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_column</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">VectT</span><span class="p">({</span><span class="kt">size_t</span><span class="p">(</span><span class="n">ind</span><span class="p">)},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}));</span>
+                    <span class="n">Rcol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">VectT</span><span class="p">(</span><span class="n">simplex_bd_ind</span><span class="p">,</span> <span class="n">vect_one</span><span class="p">);</span>
+                    <span class="n">Ucol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">VectT</span><span class="p">({</span><span class="kt">size_t</span><span class="p">(</span><span class="n">ind</span><span class="p">)},</span> <span class="p">{</span><span class="mi">1</span><span class="p">});</span>
                 <span class="p">}</span>
+                <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_columns</span><span class="p">(</span><span class="n">add_inds</span><span class="p">,</span> <span class="n">Rcol</span><span class="p">);</span>
+                <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">insert_columns</span><span class="p">(</span><span class="n">add_inds</span><span class="p">,</span> <span class="n">Ucol</span><span class="p">);</span>
+
+                <span class="c1">// // Then change U and R coming from the effect of</span>
+                <span class="c1">// // adding a column to the boundary matrix.</span>
+                <span class="c1">// // loop over each simplex that needs to be added</span>
+                <span class="c1">// for(size_t i = 0; i &lt; add_inds.size(); i++){</span>
+                <span class="c1">//  // the indices of its boundaries</span>
+                <span class="c1">//  auto simplex_bd_ind = bd_info[i];</span>
+                <span class="c1">//  // std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());</span>
+                <span class="c1">//  // simplex index</span>
+                <span class="c1">//  auto ind = add_inds[i];</span>
+                <span class="c1">//</span>
+                <span class="c1">//  // create a vector of ones with length</span>
+                <span class="c1">//  // equal to the boundary size  (Field F_2 for now)</span>
+                <span class="c1">//  std::vector&lt;ValT&gt; vect_one(simplex_bd_ind.size(), 1);</span>
+                <span class="c1">//  // creat the column vector</span>
+                <span class="c1">//  auto vect = VectT(simplex_bd_ind, vect_one);</span>
+                <span class="c1">//  // insert the column at postion in B (position in new filtration)</span>
+                <span class="c1">//  R[k].insert_column(ind, vect);</span>
+                <span class="c1">//</span>
+                <span class="c1">//  // correspondingly, U[k] will add a zero block</span>
+                <span class="c1">//  // U[k].insert_row(ind);</span>
+                <span class="c1">//  U[k].insert_column(ind, VectT({size_t(ind)}, {1}));</span>
+                <span class="c1">// }</span>
             <span class="p">}</span>
 
             <span class="c1">// step 2.7, make R[k] reduced</span>

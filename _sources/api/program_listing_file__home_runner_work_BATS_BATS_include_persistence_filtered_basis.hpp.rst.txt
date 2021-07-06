@@ -139,10 +139,13 @@ Program Listing for File filtered_basis.hpp
        }
    
        // update filtration fast version
-       template <typename Information_type>
-       void update_filtration_general(const Information_type & updating_information) {
+       template <typename Information_type, typename... Args>
+       void update_filtration_general(
+           const Information_type & updating_information,
+           Args ...args
+       ) {
            // step 1: apply permutation updates to ReducedChainComplex RC
-           RC.update_basis_general(updating_information);
+           RC.update_basis_general(updating_information, args...);
    
            // step 2: store new permutation
            perm = updating_information.F_Y_perms;
@@ -200,7 +203,7 @@ Program Listing for File filtered_basis.hpp
    
    };
    
-   // check if two RFCC are the same 
+   // check if two RFCC are the same
    // (can be modified into new == operator of RFCC class)
    template<typename T>
    bool test_reduce_result(const T& RFCC2, const T& RFCC){
@@ -222,17 +225,17 @@ Program Listing for File filtered_basis.hpp
                std::cout << "\ntwo RFCC are different!!" << std::endl;
            }
        }
-       
+   
        // check RU factorization
        for(size_t k = 0; k < RFCC2.maxdim(); k++){
-           auto U_inv_k = u_inv(U[k]); 
-           auto U2_inv_k = u_inv(U2[k]); 
+           auto U_inv_k = u_inv(U[k]);
+           auto U2_inv_k = u_inv(U2[k]);
            if(!(R[k] * U_inv_k == R2[k] * U2_inv_k)){
                test_result = false;
                std::cout << "\ntwo RFCC are different!!" << std::endl;
            }
        }
-       
+   
        return test_result;
    }
    
