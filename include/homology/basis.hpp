@@ -305,16 +305,15 @@ public:
 		for (size_t k = 0; k < max_dim +1 ; k++) {
 			// step 1.1 find the permutation used to permute simplices 
 			// that is going to be deleted to the end
-			// std::vector<size_t> perm_deletion = informations_in_each_dim[k].permutation_deletion_end();
-			// std::vector<size_t> perm_deletion = UI.permutation_deletion_end(k);
-			std::vector<size_t> perm_deletion = identity_perm(R[k].ncol());
+			std::vector<size_t> perm_deletion;
 			if(!UI.deletion_indices[k].empty()){
-				std::vector<size_t> perm_deletion = perm_to_the_end(UI.deletion_indices[k], R[k].ncol());
+				perm_deletion = perm_to_the_end(UI.deletion_indices[k], R[k].ncol());
+			}else{
+				perm_deletion = identity_perm(R[k].ncol());
 			}
+			
 			// step 1.2 find the permutation used to permute 
-			// intersection of simplices 
-			// std::vector<size_t> perm_intersect = extension_perm(informations_in_each_dim[k].permutation_of_intersection, 
-			// informations_in_each_dim[k].n_A);
+			// intersection of simplices and leave the ones in the end unmoved 
 			std::vector<size_t> perm_intersect = extension_perm(UI.permutations[k], R[k].ncol());
 
 			// step 1.3 Combine the above 2 permutations together, i.e.,
@@ -350,7 +349,6 @@ public:
 			// std::cout << "\nstep 2.3 delete columns in the end:" << std::endl;
 			// step 2.3 delete columns in the end 
 			for (size_t i = 0; i < UI.deletion_indices[k].size(); i++){
-			//for(auto& v:informations_in_each_dim[k].deletion_of_simplices){
 				U[k].erase_column();
 				U[k].erase_row();
 				R[k].erase_column();
@@ -359,10 +357,8 @@ public:
 			// step 2.4 delete rows in the end
 			if(k!=0){
 				// find the # of deletion
-				// size_t count = informations_in_each_dim[k-1].deletion_of_simplices.size();
 				size_t count = UI.deletion_indices[k-1].size();
 				for (size_t i = 0; i < count; i++){
-				// for(auto& v:informations_in_each_dim[k-1].deletion_of_simplices){
 					R[k].erase_row();
 				}
 			}
@@ -370,9 +366,7 @@ public:
 
 			// step 2.5 add rows to the specified location
 			if(k!=0){
-				
 				for(auto& ind: UI.addition_indices[k-1]){
-				// for(auto& v: informations_in_each_dim[k-1].addition_of_simplices){
 					R[k].insert_row(ind); // insert zero rows
 				}
 			}
@@ -380,17 +374,15 @@ public:
 			
 			// step 2.6 addition of columns 
 			if(k==0){
-				// find the index of the rightmost column of U 
-				// size_t final_ind_of_U = informations_in_each_dim[k].n_A - 1;
+				// find the index of the rightmost column of U
 				size_t final_ind_of_U = U[k].ncol() - 1;
 
 				// find the # of addition
-				// size_t count = informations_in_each_dim[k].addition_of_simplices.size();
 				size_t count = UI.addition_indices[k].size();
 
 				for (size_t i = 0; i < count; i++){
 					// change R
-					R[k].append_column(); // insert zero rows
+					R[k].append_column(); // insert zero columns
 					// change U
 					U[k].append_row();
 					U[k].append_column(VectT({size_t(final_ind_of_U)}, {1}));
@@ -398,11 +390,9 @@ public:
 				}
 			}else{
 				// boundary information
-				// auto bd_info = informations_in_each_dim[k].index_of_boundary_add_simplex;
 				std::vector<std::vector<size_t>> bd_info = UI.boundary_indices[k];
 				
 				// addition information
-				// auto AI_col = informations_in_each_dim[k].addition_of_simplices;
 				std::vector<size_t> add_inds = UI.addition_indices[k];
 				
 				// Then change U and R coming from the effect of 
@@ -411,12 +401,12 @@ public:
 				for(size_t i = 0; i < add_inds.size(); i++){
 					// the indices of its boundaries
 					auto simplex_bd_ind = bd_info[i];
-					std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
+					// std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
 					// simplex index
 					auto ind = add_inds[i];
 
 					// create a vector of ones with length 
-					// equal to the boundary size  (filed F_2 for now)
+					// equal to the boundary size  (Field F_2 for now)
 					std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
 					// creat the column vector
 					auto vect = VectT(simplex_bd_ind, vect_one); 
