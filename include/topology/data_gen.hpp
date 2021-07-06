@@ -64,6 +64,17 @@ inline DataSet<T>& add_normal_noise(
     return X;
 }
 
+template <typename T>
+inline DataSet<T>& add_normal_noise(
+    DataSet<T> &X,
+    unsigned seed,
+    const T mu=T(0),
+    const T sigma=T(1)
+) {
+    add_normal_noise(X.data, seed, mu, sigma);
+    return X;
+}
+
 
 template <typename T>
 Matrix<T>& add_uniform_noise(Matrix<T> &X,
@@ -96,7 +107,8 @@ inline DataSet<T>& add_uniform_noise(
     const T lb = T(-1),
     const T ub = T(1)
 ) {
-    return add_uniform_noise(X.data, lb, ub);
+    add_uniform_noise(X.data, lb, ub);
+    return X;
 }
 
 

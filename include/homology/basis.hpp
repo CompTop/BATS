@@ -6,6 +6,7 @@ compute homology-revealing bases for a chain complex
 #include <set>
 #include <chain/chain_complex.hpp>
 #include "reduction.hpp"
+#include "parallel.hpp"
 #include <chrono>
 
 namespace bats {
@@ -87,6 +88,7 @@ public:
 		for (size_t k = 0; k < dmax; k++) {
 			U[k] = MT::identity(C.dim(k));
 			R[k] = C.boundary[k];
+			// partial_reduce_parallel(R[k], U[k], 1024);
 			p2c[k] = reduce_matrix(R[k], U[k]);
 		}
 
@@ -106,6 +108,7 @@ public:
 		// TODO: can parallelize this
 		for (size_t k = 0; k < dmax; k++) {
 			R[k] = C.boundary[k];
+			// partial_reduce_parallel(R[k], 1024);
 			p2c[k] = reduce_matrix(R[k], algflag());
 		}
 
@@ -517,8 +520,10 @@ public:
 			std::cout << "\tdim " << k << ": " << dim(k)
 			<< ", betti_" << k << ": " << hdim(k);
 			if (print_nnz) {
-				std::cout << " nnz(R): " << R[k].nnz()
-							<<" nnz(U): " << U[k].nnz();
+				std::cout << " nnz(R): " << R[k].nnz();
+				if (U.size() > k) { // handle if basis not computed
+					std::cout << " nnz(U): " << U[k].nnz();
+				}
 			}
 			std::cout << "\n";
 		}
