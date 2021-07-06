@@ -197,9 +197,9 @@ Program Listing for File metric.hpp
    
    template <typename T>
    T enclosing_radius(const Matrix<T>& D) {
-       T r_enc = std::numeric_limits<T>::max();
-       T r_row = T(0);
+       T r_enc = std::numeric_limits<T>::max(); // smallest largest entry
        for (size_t i = 0; i < D.nrow(); ++i) {
+           T r_row = T(0); // largest entry in row
            for (size_t j = 0; j < D.ncol(); ++j) {
                r_row = (r_row < D(i,j)) ? D(i,j) : r_row;
            }

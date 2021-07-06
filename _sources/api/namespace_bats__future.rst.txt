@@ -60,17 +60,17 @@ Functions
 
 - :ref:`exhale_function_dense_8hpp_1a2b1d22ad3812d61e25eb9d218c19c59d`
 
-- :ref:`exhale_function_dense_8hpp_1a9332d7fe49c847a1f7cc4ddf33423172`
-
 - :ref:`exhale_function_dense_8hpp_1a02f3fc22ee4d0ae25388f8577ecc29dc`
+
+- :ref:`exhale_function_dense_8hpp_1a9332d7fe49c847a1f7cc4ddf33423172`
 
 - :ref:`exhale_function_lu_8hpp_1a812da078290cceea16e1cb13b115576b`
 
 - :ref:`exhale_function_lu_8hpp_1a35c25dc1326940a439d0481111aefc9e`
 
-- :ref:`exhale_function_lu_8hpp_1a92372bd3ad0f90eb82d372ef5c805707`
-
 - :ref:`exhale_function_lu_8hpp_1a2ee2201909147eba3d910a264e7a33ee`
+
+- :ref:`exhale_function_lu_8hpp_1a92372bd3ad0f90eb82d372ef5c805707`
 
 - :ref:`exhale_function_lu_8hpp_1ab1eb91e8c28175c1b1e54c99f482e36f`
 
