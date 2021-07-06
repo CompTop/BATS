@@ -8,6 +8,7 @@ TODO: add pairwise function
 #include <cstddef>
 #include <cmath>
 #include <vector>
+#include <limits>
 #include "data.hpp"
 
 namespace bats {
@@ -44,6 +45,18 @@ struct AbstractMetric {
         for (size_t i = 0; i < X.size(); i++) {
             for (size_t j = 0; j < Y.size(); j++) {
                 dists(i,j) = static_cast<const D*>(this)->dist(X[i], Y[j]);
+            }
+        }
+        return dists;
+    }
+
+    // all pair distances
+    template <typename T>
+    Matrix<T> operator()(const DataSet<T> &X) const {
+        Matrix<T> dists(X.size(), X.size());
+        for (size_t i = 0; i < X.size(); i++) {
+            for (size_t j = 0; j < X.size(); j++) {
+                dists(i,j) = static_cast<const D*>(this)->dist(X[i], X[j]);
             }
         }
         return dists;
@@ -169,5 +182,24 @@ struct RPAngleDist : AbstractMetric<RPAngleDist> {
     }
 
 };
+
+/**
+compute the enclosing radius from matrix of pairwise distances
+
+this is the minimum of the largest entry of each row
+*/
+template <typename T>
+T enclosing_radius(const Matrix<T>& D) {
+    T r_enc = std::numeric_limits<T>::max();
+    T r_row = T(0);
+    for (size_t i = 0; i < D.nrow(); ++i) {
+        for (size_t j = 0; j < D.ncol(); ++j) {
+            r_row = (r_row < D(i,j)) ? D(i,j) : r_row;
+        }
+        r_enc = (r_enc < r_row) ? r_enc : r_row;
+    }
+
+    return r_enc;
+}
 
 } // namespace bats
