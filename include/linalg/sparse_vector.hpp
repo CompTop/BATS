@@ -474,12 +474,12 @@ public:
 
 	//deletetion of the last row of a column of a matrix
 	//the index i is provided to check if i is the index of
-	//the last the non-zero elements 
+	//the last the non-zero elements
 	void erase_last_row_of_matrix(const TI i){
 		// first check if it is an empty vector!!!!!!
 		if(nzend() != nzbegin()){
 			// if the last non-zero term's index is i
-			if(i == (indval.end()-1)->ind){ 
+			if(i == (indval.end()-1)->ind){
 				indval.pop_back();
 			}
 		}
@@ -493,11 +493,11 @@ public:
 		auto pi = lower_bound(i);
 		if (pi != nzend()) {
 			// if the i-th row is non-zero (or find it)
-			if (pi->ind ==i){ 
+			if (pi->ind ==i){
 				indval.erase(pi);
 			}
 			// decrement the indices after i
-			while(pi < nzend()){ 
+			while(pi < nzend()){
 				(pi->ind)--;
 				pi++;
 			}
@@ -548,6 +548,32 @@ public:
 			}
 			if (b*vj != 0) indval.insert(pi, nzpair(i, b*vj));
 
+		}
+	}
+
+	/**
+	insert row indices at specified locations
+	assumes that list of rows is in sorted order
+	*/
+	void insert_rows(const std::vector<size_t>& r_inds) {
+		size_t offset = 0;
+		auto iv = indval.begin();
+		auto ri = r_inds.begin();
+		while (iv != indval.end() && ri != r_inds.end()) {
+			if (iv->ind < *ri) {
+				// nz ind is before next insertion
+				iv->ind += offset;
+				++iv;
+			} else {
+				// we are inserting a row
+				++ri;
+				++offset;
+			}
+		}
+		// only need to modify subsequent indices
+		while (iv != indval.end()) {
+			iv->ind += offset;
+			++iv;
 		}
 	}
 

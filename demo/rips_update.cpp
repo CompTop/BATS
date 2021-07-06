@@ -14,7 +14,7 @@ int main (int argc, char* argv[]) {
 
 	// maximum simplex dimension
 	size_t d = bats::util::io::parse_argv(argc, argv, "-dim", 2); // dimension of Euclidean Space
-	size_t n = bats::util::io::parse_argv(argc, argv, "-npoints", 55);
+	size_t n = bats::util::io::parse_argv(argc, argv, "-npoints", 100);
     size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 2);
     double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 3.0);
 
@@ -65,7 +65,7 @@ int main (int argc, char* argv[]) {
 
 
 		// Now, let's perturb the data set
-		bats::add_normal_noise(X, 0, 0.0, 0.1);
+		bats::add_normal_noise(X, 0, 0.0, 0.05);
 		D = dist(X); // create distance matrix
 		r_enc = bats::enclosing_radius(D);
 		std::cout << "\n\nenclosing radius = " << r_enc << std::endl;
@@ -90,9 +90,9 @@ int main (int argc, char* argv[]) {
 
 		// Compute update
 		start = std::chrono::steady_clock::now();
-		RFC.update_filtration_general(uinfo);
+		RFC.update_filtration_general(uinfo, bats::standard_reduction_flag());
 		end = std::chrono::steady_clock::now();
-		std::cout << "\nConstruction of Update info: "
+		std::cout << "\nApplication of update: "
 			<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
 			<< "ms" << std::endl;
 	}

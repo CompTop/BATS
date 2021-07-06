@@ -299,14 +299,14 @@ public:
 		using VectT = typename MT::col_type; // column vector type
 		using ValT = typename VectT::val_type;
 
-		// step 1. compute the permutation that 
-		// (a) move the deleted rows/columns to the end 
-		// (b) permute the intersection part of two filtrations 
+		// step 1. compute the permutation that
+		// (a) move the deleted rows/columns to the end
+		// (b) permute the intersection part of two filtrations
 		size_t max_dim = UI.max_dim;
 
 		// we want to extract permutation and deletion information first
-		for (size_t k = 0; k < max_dim +1 ; k++) {
-			// step 1.1 find the permutation used to permute simplices 
+		for (size_t k = 0; k < max_dim +1; ++k) {
+			// step 1.1 find the permutation used to permute simplices
 			// that is going to be deleted to the end
 			std::vector<size_t> perm_deletion;
 			if(!UI.deletion_indices[k].empty()){
@@ -314,9 +314,9 @@ public:
 			}else{
 				perm_deletion = identity_perm(R[k].ncol());
 			}
-			
-			// step 1.2 find the permutation used to permute 
-			// intersection of simplices and leave the ones in the end unmoved 
+
+			// step 1.2 find the permutation used to permute
+			// intersection of simplices and leave the ones in the end unmoved
 			std::vector<size_t> perm_intersect = extension_perm(UI.permutations[k], R[k].ncol());
 
 			// step 1.3 Combine the above 2 permutations together, i.e.,
@@ -325,17 +325,17 @@ public:
 			// We will use the perm_deletion to store the result.
 			bats::util::apply_perm(perm_deletion, perm_intersect);
 
-			// 1.4 permute U and R 
+			// 1.4 permute U and R
 			permute_matrices(k, perm_deletion);
 		}
-		
+
 		// step 2: next we update the factorizations
-		for (size_t k = 0; k < max_dim+1; k++) { // for each dimension
+		for (size_t k = 0; k < max_dim+1; ++k) { // for each dimension
 			// step 2.1 make U reduced
-			p2c[k] = reduce_matrix_standard(U[k], R[k]); 
+			p2c[k] = reduce_matrix_standard(U[k], R[k]);
 
 			// step 2.2 sort columns of U - apply same operations to R
-			// to make U upper-triangle
+			// to make U upper-triangular
 			for (size_t j = 0; j < dim(k); j++) {
 				// swap correct column if necessary
 				if (p2c[k][j] != j) {
@@ -350,10 +350,10 @@ public:
 			}
 
 			// std::cout << "\nstep 2.3 delete columns in the end:" << std::endl;
-			// step 2.3 delete columns in the end 
+			// step 2.3 delete columns in the end
 			for (size_t i = 0; i < UI.deletion_indices[k].size(); i++){
 				U[k].erase_column();
-				U[k].erase_row();
+				U[k].erase_row_unsafe(); // after column deletion, safe to erase
 				R[k].erase_column();
 			}
 
@@ -362,20 +362,21 @@ public:
 				// find the # of deletion
 				size_t count = UI.deletion_indices[k-1].size();
 				for (size_t i = 0; i < count; i++){
-					R[k].erase_row();
+					R[k].erase_row_unsafe();
 				}
 			}
-			
+
 
 			// step 2.5 add rows to the specified location
 			if(k!=0){
-				for(auto& ind: UI.addition_indices[k-1]){
-					R[k].insert_row(ind); // insert zero rows
-				}
+				// for(auto& ind: UI.addition_indices[k-1]){
+				// 	R[k].insert_row(ind); // insert zero rows
+				// }
+				R[k].insert_rows(UI.addition_indices[k-1]);
 			}
-			
-			
-			// step 2.6 addition of columns 
+
+
+			// step 2.6 addition of columns
 			if(k==0){
 				// find the index of the rightmost column of U
 				size_t final_ind_of_U = U[k].ncol() - 1;
@@ -393,12 +394,16 @@ public:
 				}
 			}else{
 				// boundary information
-				std::vector<std::vector<size_t>> bd_info = UI.boundary_indices[k];
-				
+				const std::vector<std::vector<size_t>>& bd_info = UI.boundary_indices[k];
+
 				// addition information
-				std::vector<size_t> add_inds = UI.addition_indices[k];
-				
-				// Then change U and R coming from the effect of 
+				const std::vector<size_t>& add_inds = UI.addition_indices[k];
+
+				U[k].insert_rows(add_inds);
+
+				std::vector<VectT> Rcol(add_inds.size());
+				std::vector<VectT> Ucol(add_inds.size());
+				// Then change U and R coming from the effect of
 				// adding a column to the boundary matrix.
 				// loop over each simplex that needs to be added
 				for(size_t i = 0; i < add_inds.size(); i++){
@@ -408,18 +413,38 @@ public:
 					// simplex index
 					auto ind = add_inds[i];
 
-					// create a vector of ones with length 
+					// create a vector of ones with length
 					// equal to the boundary size  (Field F_2 for now)
 					std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
 					// creat the column vector
-					auto vect = VectT(simplex_bd_ind, vect_one); 
-					// insert the column at postion in B (position in new filtration)
-					R[k].insert_column(ind, vect);
-					
-					// correspondingly, U[k] will add a zero block
-					U[k].insert_row(ind);
-					U[k].insert_column(ind, VectT({size_t(ind)}, {1}));
+					Rcol[i] = VectT(simplex_bd_ind, vect_one);
+					Ucol[i] = VectT({size_t(ind)}, {1});
 				}
+				R[k].insert_columns(add_inds, Rcol);
+				U[k].insert_columns(add_inds, Ucol);
+
+				// // Then change U and R coming from the effect of
+				// // adding a column to the boundary matrix.
+				// // loop over each simplex that needs to be added
+				// for(size_t i = 0; i < add_inds.size(); i++){
+				// 	// the indices of its boundaries
+				// 	auto simplex_bd_ind = bd_info[i];
+				// 	// std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
+				// 	// simplex index
+				// 	auto ind = add_inds[i];
+				//
+				// 	// create a vector of ones with length
+				// 	// equal to the boundary size  (Field F_2 for now)
+				// 	std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
+				// 	// creat the column vector
+				// 	auto vect = VectT(simplex_bd_ind, vect_one);
+				// 	// insert the column at postion in B (position in new filtration)
+				// 	R[k].insert_column(ind, vect);
+				//
+				// 	// correspondingly, U[k] will add a zero block
+				// 	// U[k].insert_row(ind);
+				// 	U[k].insert_column(ind, VectT({size_t(ind)}, {1}));
+				// }
 			}
 
 			// step 2.7, make R[k] reduced
