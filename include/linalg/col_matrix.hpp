@@ -141,17 +141,17 @@ public:
 
 	/**
 	Do not recommend,
-	because if we want to insert multiple columns, 
+	because if we want to insert multiple columns,
 	the index will change after the first insertion.
-	Thus the important thing we need to assume is 
+	Thus the important thing we need to assume is
 	the index list are in ascending order!
-	*/ 
+	*/
 	template <class ...Ts>
-	void insert_column(const size_t& index, Ts (&&...args)){ 
+	void insert_column(const size_t& index, Ts (&&...args)){
 		// first append a row to the end
-		append_column(args...); 
-		
-		// second permute it 
+		append_column(args...);
+
+		// second permute it
 		std::vector<size_t> colperm;
 		colperm.reserve(n);
 		for (size_t i = 0; i < n ; i++){
@@ -168,8 +168,8 @@ public:
 	// insert a zero column at position index
 	void insert_column(const size_t& index){
 		// first append a row to the end
-		append_column(); 
-		// second permute it 
+		append_column();
+		// second permute it
 		std::vector<size_t> colperm;
 		colperm.reserve(n);
 		for (size_t i = 0; i < n ; i++){
@@ -179,6 +179,52 @@ public:
 			colperm.emplace_back(j);
 		}
 		permute_cols(colperm);
+	}
+
+	/**
+	insert list of columns at list of specified indices
+
+	mutates input inserted columns
+	*/
+	void insert_columns(
+		const std::vector<size_t>& c_inds,
+		std::vector<TC>& insert_col
+	) {
+		n = n + c_inds.size();
+		std::vector<TC> newcol(n);
+
+		size_t i = 0;
+		auto newi = 0;
+		auto oldi = 0;
+		while (oldi < col.size() && newi < insert_col.size()) {
+			if (i == c_inds[newi]) {
+				// insert next new column
+				std::swap(newcol[i], insert_col[newi]);
+				++i;
+				++newi;
+			} else {
+				std::swap(newcol[i], col[oldi]);
+				++i;
+				++oldi;
+			}
+		}
+		// at most one of the next two while-loops will execute
+		// this one just puts the rest of the old columns in
+		while (oldi < col.size()) {
+			std::swap(newcol[i], col[oldi]);
+			++i;
+			++oldi;
+		}
+		// else, we just add rest of new columns to end
+		while (newi < insert_col.size()) {
+			std::swap(newcol[i], insert_col[newi]);
+			++i;
+			++newi;
+		}
+
+		// finally, swap these
+		std::swap(col, newcol);
+
 	}
 
 	// append a row a specified value
@@ -197,7 +243,7 @@ public:
 	void insert_row(const size_t& index, const std::vector<val_type> & row){
 		// first append a row to the end
 		append_row(row);
-		// second permute it 
+		// second permute it
 		std::vector<size_t> rowperm;
 		rowperm.reserve(m);
 		for (size_t i = 0; i < m ; i++){
@@ -213,7 +259,7 @@ public:
 	void insert_row(const size_t& index){
 		// first append a row to the end
 		append_row();
-		// second permute it 
+		// second permute it
 		std::vector<size_t> rowperm;
 		rowperm.reserve(m);
 		for (size_t i = 0; i < m ; i++){
@@ -225,16 +271,29 @@ public:
 		permute_rows(rowperm);
 	}
 
+	/**
+	insert zero rows at specified locations
+	*/
+	void insert_rows(const std::vector<size_t>& r_inds) {
+		for (size_t j = 0; j < n; ++j) {
+			col[j].insert_rows(r_inds);
+		}
+		m = m + r_inds.size();
+	}
+
 	void erase_column(const size_t& index){
     	col.erase(col.begin()+index);
 		--n;
 	}
-	
+
 	void erase_column(){
     	col.erase(--col.end());
 		--n;
 	}
 
+	/**
+	erase specified row
+	*/
 	void erase_row(const size_t& index){
 		for (size_t j = 0; j < ncol(); j++) {
 			col[j].erase_for_matrix(index);
@@ -242,10 +301,21 @@ public:
 		--m;
 	}
 
+	/**
+	erase last row
+	*/
 	void erase_row(){
 		for (size_t j = 0; j < ncol(); j++) {
 			col[j].erase_last_row_of_matrix(m-1);
 		}
+		--m;
+	}
+
+	/**
+	assumes that last row is zero
+	so we only need to decrement number of rows
+	*/
+	void erase_row_unsafe(){
 		--m;
 	}
 

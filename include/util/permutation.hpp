@@ -455,6 +455,7 @@ std::vector<size_t> perm_to_the_end(const size_t& index, const size_t& length){
 
 // get the permutation for permuting elements, with their indices in a list, to the end 
 // the index_list should be sorted 
+// eg. passing ([1,3],5) will return [0,2,4,1,3]
 std::vector<size_t> perm_to_the_end(const std::vector<size_t>& index_list, const size_t& length){
     std::vector<size_t> v;
     v.reserve(length);
@@ -473,9 +474,9 @@ std::vector<size_t> perm_to_the_end(const std::vector<size_t>& index_list, const
     return v;
 }
 
-// extend a permutation to a desired lenght 
+// extend a permutation to a desired length 
 // with the elements appended unmoved, e.g.
-// (2 0 1) to (2 0 1 3 4 5)
+// eg., passing ([2,0,1], 6) return [2,0,1,3,4,5]
 std::vector<size_t> extension_perm(const std::vector<size_t>& perm, const size_t& length){
     if(!perm.empty()){
         std::vector<size_t> v;
@@ -491,8 +492,7 @@ std::vector<size_t> extension_perm(const std::vector<size_t>& perm, const size_t
             i++;
         }
         return v;
-    }else
-    {
+    }else{
         return identity_perm(length);
     }
     
