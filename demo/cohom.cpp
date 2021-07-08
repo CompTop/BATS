@@ -9,6 +9,9 @@
 #define VT SparseVector<FT>
 #define MT ColumnMatrix<VT>
 
+using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
+// using CpxT = bats::SimplicialComplex;
+
 int main(int argc, char* argv[]) {
 
 	if (false) {
@@ -21,17 +24,21 @@ int main(int argc, char* argv[]) {
 		spx = {0,2}; X.add(spx);
 		spx = {1,2}; X.add(spx);
 	}
-	size_t d = 3; // dimension of Euclidean Space
-    size_t n = 1000;
+	size_t d = 2; // dimension of Euclidean Space
+    size_t n = 100;
 
     // maximum simplex dimension
-    size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
+    size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 2);
     double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 0.25);
 
     bats::DataSet<double> x = bats::sample_sphere<double>(d, n);
 
 
-    auto X = bats::RipsComplex(x, bats::LInfDist(), rmax, maxdim);
+    auto X = bats::RipsComplex<CpxT>(x, bats::LInfDist(), rmax, maxdim);
+	// for (size_t k = 0; k < X.maxdim() + 1; ++k) {
+	// 	std::cout << "dim " << k << ": " X.ncells(k)
+	// }
+	X.print_summary();
 
 	{
 		auto start = std::chrono::steady_clock::now();

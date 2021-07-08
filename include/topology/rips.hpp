@@ -25,7 +25,7 @@ std::vector<size_t> rips_edges(const DataSet<T> &X, const M &dist, const T rmax)
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < i; j++) {
             T dij = dist(X[i], X[j]);
-            if (dij < rmax) {
+            if (dij <= rmax) {
                 edges.push_back(j);
                 edges.push_back(i);
             }
@@ -45,7 +45,7 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < i; j++) {
             T dij = dist(X[i], X[j]);
-            if (dij < rmax) {
+            if (dij <= rmax) {
                 edges.emplace_back(filtered_edge(i, j, dij));
             }
         }
@@ -68,7 +68,7 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
     edges.reserve(nedges);
     for (size_t j = 0; j < n; j++) {
         for (size_t i = 0; i < j; i++) {
-            if (pdist(i,j) < rmax) {
+            if (pdist(i,j) <= rmax) {
                 edges.emplace_back(filtered_edge(i, j, pdist(i,j)));
             }
         }
@@ -85,7 +85,7 @@ std::vector<size_t> rips_edges(const Matrix<T> &pdist, const T rmax) {
     edges.reserve(nedges);
     for (size_t j = 0; j < n; j++) {
         for (size_t i = 0; i < j; i++) {
-            if (pdist(i,j) < rmax) {
+            if (pdist(i,j) <= rmax) {
                 edges.push_back(i);
                 edges.push_back(j);
             }
