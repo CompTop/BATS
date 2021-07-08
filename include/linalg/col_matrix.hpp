@@ -684,6 +684,21 @@ public:
 		}
 		return true;
 	}
+
+	// tests to see if matrix is invertible and upper-triangular
+	bool is_upper_invert() const {
+		for (size_t j = 0; j < n; ++j) {
+			auto iv = col[j].nzend();
+			if (iv != col[j].nzbegin()) {
+				--iv;
+				if (iv->ind != j) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	bool is_lower() const {
 		for (size_t j = 0; j < n; j++) {
 			auto iv = col[j].nzbegin();

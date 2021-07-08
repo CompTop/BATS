@@ -227,6 +227,7 @@ struct Update_info{
                     for(size_t j = 0; j < ind_list.size(); j++){
                         ind_list[j] = perms_Y_inv[i-1][ind_list[j]];
                     }
+                    std::sort(ind_list.begin(), ind_list.end()); // sort indices for addition of columns
                 }
             }
 

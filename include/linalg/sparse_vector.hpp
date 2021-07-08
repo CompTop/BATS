@@ -560,18 +560,21 @@ public:
 		auto iv = indval.begin();
 		auto ri = r_inds.begin();
 		while (iv != indval.end() && ri != r_inds.end()) {
-			if (iv->ind < *ri) {
+			if (iv->ind < *ri) { // move to the next iv
 				// nz ind is before next insertion
-				iv->ind += offset;
-				++iv;
-			} else {
+				++iv; // one step forward
+				iv->ind += offset; //add offset fisrt then compare 
+			} else { // modify iv 
 				// we are inserting a row
-				++ri;
 				++offset;
+				iv->ind += 1; // only add one
+				++ri;
 			}
 		}
+
+		++iv; // move to the next 
 		// only need to modify subsequent indices
-		while (iv != indval.end()) {
+		while (iv < indval.end()) {
 			iv->ind += offset;
 			++iv;
 		}
