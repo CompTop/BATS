@@ -1,10 +1,15 @@
 #include<iostream>
 #include<vector>
-#include<yuan/update_information.hpp>
+#include<bats.hpp>
+#define F2 ModP<int, 2>
+
 int main(int argc, char const *argv[])
 {
-    std::vector<std::vector<size_t>> nbrs = {{1,2},{7,8}};
-    std::cout << nbrs[0][1] << std::endl;
+    using VT = SparseVector<F2, size_t>;
 
+    auto v =  VT({1,3,5,7},{1,1,1,1});
+    v.insert_rows({0,1,6,11,12});
+    std::cout << "\nthe final answer is" << std::endl;
+    v.print();
     return 0;
 }
