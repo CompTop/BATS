@@ -556,26 +556,21 @@ public:
 	assumes that list of rows is in sorted order
 	*/
 	void insert_rows(const std::vector<size_t>& r_inds) {
-		size_t offset = 0;
+		// size_t offset = 0;
 		auto iv = indval.begin();
-		auto ri = r_inds.begin();
-		while (iv != indval.end() && ri != r_inds.end()) {
-			if (iv->ind < *ri) { // move to the next iv
-				// nz ind is before next insertion
-				++iv; // one step forward
-				iv->ind += offset; //add offset fisrt then compare 
-			} else { // modify iv 
-				// we are inserting a row
-				++offset;
-				iv->ind += 1; // only add one
-				++ri;
-			}
-		}
+		while (iv != indval.end()) {
+			// search for how many rows will be inserted
+			auto ri = std::lower_bound(r_inds.begin(), r_inds.end(), iv->ind);
+			iv->ind += std::distance(r_inds.begin(), ri);
 
-		++iv; // move to the next 
-		// only need to modify subsequent indices
-		while (iv < indval.end()) {
-			iv->ind += offset;
+			// insert additional rows as necessary
+			while (*ri <= iv->ind && ri != r_inds.end()) {++ri; iv->ind++;}
+
+			++iv;
+		}
+		// we only enter this loop if we already inserted all rows.
+		while (iv != indval.end()) {
+			iv->ind += r_inds.size();
 			++iv;
 		}
 	}

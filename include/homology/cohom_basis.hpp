@@ -20,7 +20,7 @@ public:
 	std::vector<size_t> dim;
 	std::vector<MT> U; // basis matrices
 	std::vector<MT> R; // reduced matrix
-	std::vector<std::set<size_t>> I;
+	std::vector<std::vector<size_t>> I;
 	std::vector<p2c_type> p2c;
 
 	// size of homology vector space in dimension k
