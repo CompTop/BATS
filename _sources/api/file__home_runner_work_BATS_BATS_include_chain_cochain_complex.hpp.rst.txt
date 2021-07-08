@@ -43,6 +43,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_cochain_complex.hpp`
+
 
 
 

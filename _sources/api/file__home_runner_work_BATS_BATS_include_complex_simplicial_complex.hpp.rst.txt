@@ -126,9 +126,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a235fdb8010a7dc627761055d4a5f3100`
 
+- :ref:`exhale_function_namespacebats_1adea5ebf11ef869d59081c07746e48d01`
+
 - :ref:`exhale_function_namespacebats_1a10e21fd6351157149ae42cfae28947dd`
 
 - :ref:`exhale_function_namespacebats_1a06ea072e08d6be92106ab64bf3f4c3b4`
-
-- :ref:`exhale_function_namespacebats_1adea5ebf11ef869d59081c07746e48d01`
 

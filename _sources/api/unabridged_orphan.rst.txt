@@ -265,6 +265,16 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file__home_runner_work_BATS_BATS_include_chain_filtered_cochain_complex.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp.rst
 
 .. toctree::

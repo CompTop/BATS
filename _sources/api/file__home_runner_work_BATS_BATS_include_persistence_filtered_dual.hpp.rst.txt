@@ -1,0 +1,49 @@
+
+.. _file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp:
+
+File filtered_dual.hpp
+======================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_persistence>` (``/home/runner/work/BATS/BATS/include/persistence``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/persistence/filtered_dual.hpp``)
+----------------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``barcode.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp`)
+
+- ``chain/filtered_chain_complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`)
+
+- ``filtration/update_information.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp`)
+
+- ``homology/basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`)
+
+- ``limits``
+
+- ``util/common.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_util_common.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+
+

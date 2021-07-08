@@ -19,5 +19,6 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_cochain_complex.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_cochain_complex.hpp`
 
 

@@ -143,6 +143,11 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
+   structbats_1_1FilteredCochainComplex.rst
+
+.. toctree::
+   :maxdepth: 5
+
    structbats_1_1future_1_1ColumnMajor.rst
 
 .. toctree::

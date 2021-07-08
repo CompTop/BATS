@@ -717,23 +717,21 @@
     <span class="p">}</span>
 
     <span class="kt">void</span> <span class="n">insert_rows</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">r_inds</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">// size_t offset = 0;</span>
         <span class="k">auto</span> <span class="n">iv</span> <span class="o">=</span> <span class="n">indval</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-        <span class="k">auto</span> <span class="n">ri</span> <span class="o">=</span> <span class="n">r_inds</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">iv</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ri</span> <span class="o">!=</span> <span class="n">r_inds</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ri</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// nz ind is before next insertion</span>
-                <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">+=</span> <span class="n">offset</span><span class="p">;</span>
-                <span class="o">++</span><span class="n">iv</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// we are inserting a row</span>
-                <span class="o">++</span><span class="n">ri</span><span class="p">;</span>
-                <span class="o">++</span><span class="n">offset</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="c1">// only need to modify subsequent indices</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">iv</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">+=</span> <span class="n">offset</span><span class="p">;</span>
+            <span class="c1">// search for how many rows will be inserted</span>
+            <span class="k">auto</span> <span class="n">ri</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">r_inds</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">r_inds</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">);</span>
+            <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">+=</span> <span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">r_inds</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">ri</span><span class="p">);</span>
+
+            <span class="c1">// insert additional rows as necessary</span>
+            <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">ri</span> <span class="o">&lt;=</span> <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">&amp;&amp;</span> <span class="n">ri</span> <span class="o">!=</span> <span class="n">r_inds</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span><span class="o">++</span><span class="n">ri</span><span class="p">;</span> <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="o">++</span><span class="p">;}</span>
+
+            <span class="o">++</span><span class="n">iv</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// we only enter this loop if we already inserted all rows.</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">iv</span> <span class="o">!=</span> <span class="n">indval</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">iv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">+=</span> <span class="n">r_inds</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
             <span class="o">++</span><span class="n">iv</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>

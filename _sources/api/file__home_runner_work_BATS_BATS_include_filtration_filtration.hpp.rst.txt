@@ -47,6 +47,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_chain_filtered_cochain_complex.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
 
 
@@ -72,7 +74,7 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1af381546c6d1b032109fd0e09e12a3ec3`
 
-- :ref:`exhale_function_namespacebats_1ab48c10453892c01d19b4b98b1107f17c`
-
 - :ref:`exhale_function_namespacebats_1a7683d2e4cf71230efd2ca92fc8411cc1`
+
+- :ref:`exhale_function_namespacebats_1ab48c10453892c01d19b4b98b1107f17c`
 

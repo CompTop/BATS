@@ -76,9 +76,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a84feebc4e52a45f44b1c3f01a0454805`
 
-- :ref:`exhale_function_namespacebats_1a20dac657b0fbd617c0b343328145aafd`
-
 - :ref:`exhale_function_namespacebats_1a599812e7ef18150876ebc91f9abcb8a7`
+
+- :ref:`exhale_function_namespacebats_1a20dac657b0fbd617c0b343328145aafd`
 
 - :ref:`exhale_function_namespacebats_1a824f0c04e6ccb686c4ec229a9926abf6`
 

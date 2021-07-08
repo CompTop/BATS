@@ -80,7 +80,23 @@ Program Listing for File cochain_complex.hpp
            }
        }
    
+       void ipermute_basis(size_t k, const std::vector<size_t> &perm) {
+           if (k == 0) {
+               // only worry about boundary[1]
+               coboundary[1].permute_rows(bats::util::inv_perm(perm));
+           } else if (k == maxdim()) {
+               coboundary[k].ipermute_cols(perm);
+               // only worry about boundary[maxdim()]
+           } else {
+               // need to handle boundary[k] and boundary[k+1]
+               coboundary[k].ipermute_cols(perm);
+               coboundary[k+1].permute_rows(bats::util::inv_perm(perm));
+           }
+       }
+   
    };
+   
+   
    
    // defualt return
    template <typename T, typename CpxT>

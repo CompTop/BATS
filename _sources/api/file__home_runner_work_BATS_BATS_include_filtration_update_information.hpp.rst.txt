@@ -53,6 +53,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp`
+
 
 
 

@@ -18,6 +18,7 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_barcode.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_extract.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtration.hpp`
 
 

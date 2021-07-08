@@ -59,11 +59,11 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_abstract__vector_8hpp_1a018d5c6df5411da1bde87be37cab6d18`
-
 - :ref:`exhale_function_abstract__vector_8hpp_1a9275f5660ac8ec1148d5da019434df0b`
 
 - :ref:`exhale_function_abstract__vector_8hpp_1ae0d3ad24774664f64f554a64bf0e8a2c`
+
+- :ref:`exhale_function_abstract__vector_8hpp_1a018d5c6df5411da1bde87be37cab6d18`
 
 - :ref:`exhale_function_abstract__vector_8hpp_1aa7ed88a88593671e4e80ad8c42f59df4`
 

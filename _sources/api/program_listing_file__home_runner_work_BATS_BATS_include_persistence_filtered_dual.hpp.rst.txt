@@ -1,0 +1,21 @@
+
+.. _program_listing_file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp:
+
+Program Listing for File filtered_dual.hpp
+==========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_runner_work_BATS_BATS_include_persistence_filtered_dual.hpp>` (``/home/runner/work/BATS/BATS/include/persistence/filtered_dual.hpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include <vector>
+   #include <limits>
+   #include <chain/filtered_chain_complex.hpp>
+   #include <homology/basis.hpp>
+   #include <util/common.hpp>
+   #include "barcode.hpp"
+   #include <filtration/update_information.hpp>
