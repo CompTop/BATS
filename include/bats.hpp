@@ -11,6 +11,7 @@ namespace bats {
 #include "linalg.hpp"
 #include "complex.hpp"
 #include "filtration.hpp"
+#include "dgvs.hpp"
 #include "chain.hpp"
 #include "homology.hpp"
 #include "persistence.hpp"

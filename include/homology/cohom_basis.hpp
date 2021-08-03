@@ -39,9 +39,9 @@ private:
 	void set_indices() {
 		// TODO: can parallelize this
 		for (size_t k = 0; k < maxdim(); k++) {
-			I[k] = extract_basis_indices(R[k+1], p2c[k]);
+			I[k] = extract_basis_indices(R[k], p2c[k+1]);
 		}
-		I[maxdim()] = extract_basis_indices(MT(0, dim[maxdim()]), p2c[maxdim()]);
+		I[maxdim()] = extract_basis_indices(R[maxdim()]);
 	}
 
 public:

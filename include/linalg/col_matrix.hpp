@@ -45,6 +45,13 @@ public:
         col.resize(n, TC());
     }
 
+	/**
+	construct column matrix filled with entry a
+	*/
+	ColumnMatrix(size_t _m, size_t _n, val_type a) : m(_m), n(_n) {
+		col.resize(n, TC(a, m));
+	}
+
     ColumnMatrix(const std::vector<TC> &_col) : col(_col) {
         n = col.size();
     }
@@ -497,6 +504,22 @@ public:
         return ColumnMatrix(m, B.n, colC);
     }
 
+	/**
+	multiplication x^T A
+	*/
+	friend TC operator*(const TC& x, const ColumnMatrix& A) {
+		std::vector<size_t> ind;
+		std::vector<typename TC::val_type> val;
+		for (size_t j = 0; j < A.ncol(); ++j) {
+			auto a = x * A[j];
+			if (a != 0) {
+				ind.emplace_back(j);
+				val.emplace_back(a);
+			}
+		}
+		return TC(ind, val);
+	}
+
 
     ColumnMatrix operator+(const ColumnMatrix &B) const {
         ColumnMatrix C(B); // copy constructor
@@ -872,6 +895,8 @@ public:
 	}
 
 };
+
+
 
 
 

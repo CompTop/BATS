@@ -120,9 +120,19 @@ public:
 	}
 
 
-	// cosntructor that returns indicator in given index
+	// constructor that returns indicator in given index
 	SparseVector(const TI i, const TV v=TV(1)) {
-		indval.push_back(key_type(i, v));
+		indval.emplace_back(key_type(i, v));
+	}
+
+	/**
+	constructor that fills vector with m copies of a
+	*/
+	SparseVector(const TV a, const TI m) {
+		indval.reserve(m);
+		for (size_t i = 0; i < m; ++i) {
+			indval.emplace_back(key_type(i,a));
+		}
 	}
 
 	// construct from line string
@@ -780,7 +790,9 @@ public:
 		return a;
 	}
 
-	// scalar multiplication
+	/**
+	scalar multiplication
+	*/
 	SparseVector operator*(const TV a) const {
 		if (a == 0) { return SparseVector(); }
 		SparseVector av(*this);
@@ -788,6 +800,32 @@ public:
 			ival.val = ival.val * a;
 		}
 		return av;
+	}
+
+	/**
+	dot product
+	*/
+	TV operator*(const SparseVector& x) const {
+		TV a(0);
+
+		// set i2 to first nzind
+		auto i2 = x.nzbegin();
+		// something to do...
+		auto i1 = indval.cbegin();
+		while (i1 != indval.cend() && i2 != x.nzend()) {
+			if ( i1->ind == i2->ind) {
+				a += (i2->val) * (i1->val);
+				++i1;
+				++i2;
+			} else if ((i1->ind) < (i2->ind)) {
+				++i1;
+			} else {
+				++i2;
+			}
+		}
+		// rest of enries are all zero, so nothing to do.
+
+		return a;
 	}
 
 	// return self + ax[firstind:lastind]
