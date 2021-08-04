@@ -72,7 +72,6 @@ public:
 		if (degree == -1) {
 			// homological type
 			for (size_t k = 0; k < maxdim()+1; k++) {
-				R[k].print();
 				I[k] = extract_basis_indices(R[k], p2c[k+1]);
 			}
 			I[maxdim()+1] = extract_basis_indices(R[maxdim()]);

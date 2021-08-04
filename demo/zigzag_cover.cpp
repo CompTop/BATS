@@ -1,7 +1,7 @@
 #include <vector>
 #include <set>
 
-#include <bats.h>
+#include <bats.hpp>
 
 #define FT ModP<int, 2>
 // #define FT Rational<int>
