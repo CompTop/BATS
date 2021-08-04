@@ -71,10 +71,11 @@ public:
 	void set_indices() {
 		if (degree == -1) {
 			// homological type
-			for (size_t k = 0; k < maxdim()-1; k++) {
+			for (size_t k = 0; k < maxdim()+1; k++) {
+				R[k].print();
 				I[k] = extract_basis_indices(R[k], p2c[k+1]);
 			}
-			I[maxdim()] = extract_basis_indices(R[maxdim()]);
+			I[maxdim()+1] = extract_basis_indices(R[maxdim()]);
 		} else if (degree == +1) {
 			// cohomological type
 			for (size_t k = 1; k < maxdim()+2; k++) {
@@ -140,12 +141,15 @@ public:
 	// assumes y is in homology-revealing basis
 	void find_preferred_representative(
 		vect_type &y,
-		const size_t k
+		size_t k
 	) const {
-		if (k == maxdim()) {
+		int dg_offset = (degree == -1) ? 0 : 1;
+		k += dg_offset;
+		if (k == R.size()-1) {
 			// all cycles generate homology, so nothing to do
 			return;
 		}
+
 		// else we need to find the preferred representative
 		// const ColumnMatrix<TVec> &bdry,
 		// const p2c_type &p2c

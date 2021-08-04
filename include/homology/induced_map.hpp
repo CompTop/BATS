@@ -80,4 +80,48 @@ ColumnMatrix<TVec> induced_map(
 	return ColumnMatrix<TVec>(C.I[k].size(), D.I[k].size(), col);
 }
 
+/**
+obtain induced map on cohomology for dimension k
+
+We assume that F is a chain map, so it is dualized before computing the map
+
+@param F ChainMap
+@param C ReducedCoChainComplex
+@param D ReducedCoChainComplex
+@parak k dimension
+*/
+template <class TVec>
+ColumnMatrix<TVec> induced_map(
+	const DGLinearMap<ColumnMatrix<TVec>> &F,
+	const ReducedDGVectorSpace<ColumnMatrix<TVec>> &C,
+	const ReducedDGVectorSpace<ColumnMatrix<TVec>> &D,
+	size_t k
+) {
+
+	if (C.degree != D.degree) {
+		throw std::runtime_error("Degree of DGVectorSpaces must agree!");
+	}
+	int degree = C.degree;
+	int dg_offset = (degree == -1) ? 0 : 1;
+
+	// check dimensions
+	if (F[k].ncol() != C.R[k+dg_offset].ncol() || F[k].nrow() != D.R[k+dg_offset].ncol()) {
+		throw std::runtime_error("ChainMap dimensions do not agree with basis dimensions!");
+	}
+
+	std::vector<TVec> col;
+	col.reserve(C.hdim(k));
+
+	for (auto it = C.I[k+dg_offset].cbegin(); it != C.I[k+dg_offset].cend(); ++it) {
+		// put image in homology revealing basis in D
+		auto y = u_solve(D.U[k+dg_offset], F[k] * C.U[k+dg_offset][*it]);
+		// find preferred representative for homology class
+		D.find_preferred_representative(y, k);
+		// extract indices
+		col.emplace_back(y[D.I[k+dg_offset]]);
+	}
+	return ColumnMatrix<TVec>(D.hdim(k), C.hdim(k), col);
+
+}
+
 } // namespace bats

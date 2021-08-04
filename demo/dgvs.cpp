@@ -38,7 +38,7 @@ int main() {
 		RDG.print_summary();
 
 		std::cout << "\nCohomology-type\n";
-		auto DG2 = bats::DGVectorSpace<MT>(X, +1, true);
+		auto DG2 = bats::DGVectorSpace<MT>(X, +1, false);
 		for (ssize_t k = -1; k < DG2.maxdim()+1; k++) {
 			std::cout << "k = " << k << std::endl;
 			DG2[k].print();
@@ -49,10 +49,28 @@ int main() {
 
 
 		std::cout <<"\nMap\n";
-		auto DF = bats::DGLinearMap<MT>(f, +1);
+		bats::DGLinearMap<MT> DF(f, +1);
 		for (ssize_t k = 0; k < DF.maxdim()+1; ++k) {
 			std::cout << "k = " << k << std::endl;
 			DF[k].print();
+		}
+		for (ssize_t k = 0; k < DF.maxdim()+1; ++k) {
+			auto DFtil = bats::induced_map(DF, RDG, RDG, k);
+			std::cout << "induced map: " << k  << std::endl;
+			DFtil.print();
+		}
+
+
+		std::cout <<"\nDual Map\n";
+		bats::DGLinearMap<MT> DF2(f, -1);
+		for (ssize_t k = 0; k < DF2.maxdim()+1; ++k) {
+			std::cout << "k = " << k << std::endl;
+			DF2[k].print();
+		}
+		for (ssize_t k = 0; k < DF.maxdim()+1; ++k) {
+			auto DFtil = bats::induced_map(DF2, RDG2, RDG2, k);
+			std::cout << "induced map: " << k  << std::endl;
+			DFtil.print();
 		}
 
 
