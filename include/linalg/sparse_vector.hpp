@@ -135,6 +135,21 @@ public:
 		}
 	}
 
+	/**
+	constructor for initializer lists
+
+	@param ind nonzero indices
+	@param val nonzero values
+	*/
+	SparseVector(std::initializer_list<TI> ind, std::initializer_list<TV> val) {
+		std::vector<TI> inds(ind);
+		std::vector<TV> vals(val);
+		TI m = inds.size();
+		for (size_t i = 0; i < m; ++i) {
+			indval.emplace_back(key_type(inds[i], vals[i]));
+		}
+	}
+
 	// construct from line string
 	SparseVector(std::string &line) {
 		std::string token;
