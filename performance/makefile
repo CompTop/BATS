@@ -6,7 +6,7 @@ OPFLAGS = -O3 -DBATS_OPCOUNT
 CXX ?= g++
 IFLAGS = -I../include
 
-default: divide_conquer.out zigzag_circle.out zigzag_cube.out
+default: divide_conquer.out zigzag_circle.out zigzag_cube.out scaling.out
 
 %.out: %.cpp
 	$(CXX) -o $@ $< $(IFLAGS) $(CXXFLAGS) $(OUTFLAGS)

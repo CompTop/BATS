@@ -449,7 +449,7 @@ auto barcode_form_divide_conquer(const Diagram<NT, TM> &dgm) {
     size_t m = dgm.nedge();
 
     // compute number of levels of recursion to use
-    int nthreads = (int) omp_get_num_threads();
+    int nthreads = (int) omp_get_max_threads();
     int nlevels = 0;
     while (nthreads >>= 1) nlevels++;
 
