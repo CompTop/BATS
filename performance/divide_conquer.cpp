@@ -3,11 +3,15 @@
 #include <string>
 #include <random>
 #include <fstream> // write to file
+#include <sstream>
+#include <iomanip>
+#include <ctime>
 
 #include <bats.hpp>
-#include <util/set.h>
+// #include <util/set.h>
 
 #include <omp.h>
+using namespace bats;
 
 #define FT2 ModP<int, 2>
 #define VT2 SparseVector<FT2>
@@ -74,7 +78,13 @@ void time_barcode_seq(
 
 int main() {
 
-	std::ofstream outfile1("dq1_f2.csv");
+	// generate file with timestamp
+	auto t = std::time(nullptr);
+	auto tm = *std::localtime(&t);
+	std::ostringstream oss1;
+	oss1 << "dq1_f2_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
+	std::cout << "writing to " << oss1.str() << std::endl;
+	std::ofstream outfile1(oss1.str());
 	// write header
 	outfile1 << "n, dim, threads, time\n";
 
@@ -89,14 +99,17 @@ int main() {
 		outfile1 << n << ", " << dim << ", " << 0 << ", ";
 		time_barcode_seq(Q, outfile1);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32}) {
+		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
 			outfile1 << n << ", " << dim << ", " << nthreads << ", ";
 			omp_set_num_threads(nthreads);
 			time_barcode_dq(Q, outfile1);
 		}
 	}
 
-	std::ofstream outfile2("dq2_f2.csv");
+	std::ostringstream oss2;
+	oss2 << "dq2_f2_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
+	std::cout << "writing to " << oss2.str() << std::endl;
+	std::ofstream outfile2(oss2.str());
 	// write header
 	outfile2 << "n, dim, threads, time\n";
 
@@ -110,14 +123,18 @@ int main() {
 		outfile2 << n << ", " << dim << ", " << 0 << ", ";
 		time_barcode_seq(Q, outfile2);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32}) {
+		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
 			outfile2 << n << ", " << dim << ", " << nthreads << ", ";
 			omp_set_num_threads(nthreads);
 			time_barcode_dq(Q, outfile2);
 		}
 	}
 
-	std::ofstream outfile3("dq1_f3.csv");
+	std::ostringstream oss3;
+	oss3 << "dq1_f3_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
+	std::cout << "writing to " << oss3.str() << std::endl;
+	std::ofstream outfile3(oss3.str());
+	// std::ofstream outfile3("dq1_f3.csv");
 	// write header
 	outfile3 << "n, dim, threads, time\n";
 
@@ -132,14 +149,18 @@ int main() {
 		outfile3 << n << ", " << dim << ", " << 0 << ", ";
 		time_barcode_seq(Q, outfile3);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32}) {
+		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
 			outfile3 << n << ", " << dim << ", " << nthreads << ", ";
 			omp_set_num_threads(nthreads);
 			time_barcode_dq(Q, outfile3);
 		}
 	}
 
-	std::ofstream outfile4("dq2_f3.csv");
+	std::ostringstream oss4;
+	oss4 << "dq2_f3_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
+	std::cout << "writing to " << oss4.str() << std::endl;
+	std::ofstream outfile4(oss4.str());
+	// std::ofstream outfile4("dq2_f3.csv");
 	// write header
 	outfile4 << "n, dim, threads, time\n";
 
@@ -153,7 +174,7 @@ int main() {
 		outfile4 << n << ", " << dim << ", " << 0 << ", ";
 		time_barcode_seq(Q, outfile4);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32}) {
+		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
 			outfile4 << n << ", " << dim << ", " << nthreads << ", ";
 			omp_set_num_threads(nthreads);
 			time_barcode_dq(Q, outfile4);

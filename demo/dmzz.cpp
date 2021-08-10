@@ -1,4 +1,5 @@
-#include <bats.h>
+#include <bats.hpp>
+using namespace bats;
 
 int main() {
 

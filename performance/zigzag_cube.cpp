@@ -3,11 +3,13 @@
 #include <string>
 #include <random>
 #include <fstream> // write to file
+#include <sstream>
+#include <iomanip>
+#include <ctime>
 
 #include <bats.hpp>
-#include <util/set.h>
-
 #include <omp.h>
+using namespace bats;
 
 #define FT ModP<int, 2>
 // #define FT Rational<int>
@@ -41,7 +43,7 @@ void run_problem(
 		// landmark sets
 		std::vector<std::set<size_t>> subset;
 		for (size_t i =0; i < nsets; i++) {
-			subset.emplace_back(random_subset(n, ns));
+			subset.emplace_back(bats::util::random_subset(n, ns));
 		}
 		// Diagram of Sets and inclusions
 		auto SetDgm = linear_subset_union_diagram(subset);
@@ -54,7 +56,7 @@ void run_problem(
 
 	start = omp_get_wtime();
 		// diagram in Chain
-		auto ChainDgm = Chain<MT>(TopDgm);
+		auto ChainDgm = Chain(TopDgm, FT());
 
 		// diagram in Homology
 		auto HkDgm = Hom(ChainDgm, hdim);
@@ -79,14 +81,20 @@ void run_problem(
 
 int main() {
 
-	std::ofstream outfile("zigzag_cube.csv");
+	auto t = std::time(nullptr);
+	auto tm = *std::localtime(&t);
+	std::ostringstream oss;
+	oss << "zigzag_cube_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
+	std::cout << "writing to " << oss.str() << std::endl;
+	std::ofstream outfile(oss.str());
+	// std::ofstream outfile("zigzag_cube.csv");
 	// write header
 	outfile << "subsets, points, threads, setup, chain/hom, sequential, divide/conquer\n";
 
 	size_t nsets = 128;
 	size_t ns = 400; // number of points in each subset
 
-	for (size_t nthread: {1, 2, 4, 8, 16, 24}){
+	for (size_t nthread: {1, 2, 4, 8, 16, 24, 32, 48, 64}){
 		run_problem(nsets, ns, nthread, 0, outfile);
 	}
 
