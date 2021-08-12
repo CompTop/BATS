@@ -154,6 +154,12 @@ Diagram<ChainComplex<TM>, ChainMap<TM>> ChainFunctor(const DT &D) {
 	return CD;
 }
 
+template <typename TF, typename DT>
+inline auto ChainFunctor(const DT &D, TF) {
+	using TM = ColumnMatrix<SparseVector<TF>>;
+	return ChainFunctor<TM>(D);
+}
+
 // easy chain functor
 template <typename DT, typename T>
 inline auto __ChainFunctor(const DT &D, T) {
