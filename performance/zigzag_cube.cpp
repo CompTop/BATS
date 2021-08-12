@@ -89,13 +89,16 @@ int main() {
 	std::ofstream outfile(oss.str());
 	// std::ofstream outfile("zigzag_cube.csv");
 	// write header
-	outfile << "subsets, points, threads, setup, chain/hom, sequential, divide/conquer\n";
+	outfile << "subsets,points,threads,setup,chain/hom,sequential,divide/conquer\n";
 
 	size_t nsets = 128;
 	size_t ns = 400; // number of points in each subset
+	size_t NREP = 10; // number of repetitions
 
 	for (size_t nthread: {1, 2, 4, 8, 16, 24, 32, 48, 64}){
-		run_problem(nsets, ns, nthread, 0, outfile);
+		for (size_t rep = 0; rep < NREP; ++rep) {
+			run_problem(nsets, ns, nthread, 0, outfile);
+		}	
 	}
 
 

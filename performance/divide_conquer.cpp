@@ -27,6 +27,9 @@ struct VectorSpace {};
 // seed for deterministic number generation
 #define SEED 0
 
+// number of times to duplicate experiments
+#define NREPS 10
+
 // persistence-type quiver
 template <typename MatT>
 Diagram<VectorSpace, MatT> random_quiver(
@@ -86,23 +89,26 @@ int main() {
 	std::cout << "writing to " << oss1.str() << std::endl;
 	std::ofstream outfile1(oss1.str());
 	// write header
-	outfile1 << "n, dim, threads, time\n";
+	outfile1 << "n,dim,field,alg,threads,time\n";
 
 
 	for (size_t dim: {10, 100, 200})
 	{
 		size_t n = 256;
-		std::cout << "\nn= " << n << " dim = " << dim << std::endl;
-		auto Q = random_quiver(n, dim, MT2(), 0.5);
+		for (size_t rep = 0; rep < NREPS; ++rep) {
+			std::cout << "\nn= " << n << " dim = " << dim << std::endl;
+			auto Q = random_quiver(n, dim, MT2(), 0.5);
+			
 
-		// 0 threads = sequential
-		outfile1 << n << ", " << dim << ", " << 0 << ", ";
-		time_barcode_seq(Q, outfile1);
+			// 0 threads = sequential
+			outfile1 << n << ", " << dim << ", F2, seq, 0, ";
+			time_barcode_seq(Q, outfile1);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
-			outfile1 << n << ", " << dim << ", " << nthreads << ", ";
-			omp_set_num_threads(nthreads);
-			time_barcode_dq(Q, outfile1);
+			for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
+				outfile1 << n << ", " << dim << ", F2, dq, " << nthreads << ", ";
+				omp_set_num_threads(nthreads);
+				time_barcode_dq(Q, outfile1);
+			}
 		}
 	}
 
@@ -111,22 +117,24 @@ int main() {
 	std::cout << "writing to " << oss2.str() << std::endl;
 	std::ofstream outfile2(oss2.str());
 	// write header
-	outfile2 << "n, dim, threads, time\n";
+	outfile2 << "n,dim,field,alg,threads,time\n";
 
 	for (size_t n: {8, 16, 32, 64, 128})
 	{
 		size_t dim = 100;
-		std::cout << "\nn= " << n << " dim = " << dim << std::endl;
-		auto Q = random_quiver(n, dim, MT2(), 0.5);
+		for (size_t rep = 0; rep < NREPS; ++rep) {
+			std::cout << "\nn= " << n << " dim = " << dim << std::endl;
+			auto Q = random_quiver(n, dim, MT2(), 0.5);
 
-		// 0 threads = sequential
-		outfile2 << n << ", " << dim << ", " << 0 << ", ";
-		time_barcode_seq(Q, outfile2);
+			// 0 threads = sequential
+			outfile2 << n << ", " << dim << ", F2, seq, 0, ";
+			time_barcode_seq(Q, outfile2);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
-			outfile2 << n << ", " << dim << ", " << nthreads << ", ";
-			omp_set_num_threads(nthreads);
-			time_barcode_dq(Q, outfile2);
+			for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
+				outfile2 << n << ", " << dim << ", F2, dq, " << nthreads << ", ";
+				omp_set_num_threads(nthreads);
+				time_barcode_dq(Q, outfile2);
+			}
 		}
 	}
 
@@ -136,23 +144,25 @@ int main() {
 	std::ofstream outfile3(oss3.str());
 	// std::ofstream outfile3("dq1_f3.csv");
 	// write header
-	outfile3 << "n, dim, threads, time\n";
+	outfile3 << "n,dim,field,alg,threads,time\n";
 
 
 	for (size_t dim: {10, 100, 200})
 	{
 		size_t n = 256;
-		std::cout << "\nn= " << n << " dim = " << dim << std::endl;
-		auto Q = random_quiver(n, dim, MT3(), 0.5);
+		for (size_t rep = 0; rep < NREPS; ++rep) {
+			std::cout << "\nn= " << n << " dim = " << dim << std::endl;
+			auto Q = random_quiver(n, dim, MT3(), 0.5);
 
-		// 0 threads = sequential
-		outfile3 << n << ", " << dim << ", " << 0 << ", ";
-		time_barcode_seq(Q, outfile3);
+			// 0 threads = sequential
+			outfile3 << n << ", " << dim << ", F3, seq, 0, ";
+			time_barcode_seq(Q, outfile3);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
-			outfile3 << n << ", " << dim << ", " << nthreads << ", ";
-			omp_set_num_threads(nthreads);
-			time_barcode_dq(Q, outfile3);
+			for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
+				outfile3 << n << ", " << dim << ", F3, dq, " << nthreads << ", ";
+				omp_set_num_threads(nthreads);
+				time_barcode_dq(Q, outfile3);
+			}
 		}
 	}
 
@@ -162,22 +172,24 @@ int main() {
 	std::ofstream outfile4(oss4.str());
 	// std::ofstream outfile4("dq2_f3.csv");
 	// write header
-	outfile4 << "n, dim, threads, time\n";
+	outfile4 << "n,dim,field,alg,threads,time\n";
 
 	for (size_t n: {8, 16, 32, 64, 128})
 	{
 		size_t dim = 100;
-		std::cout << "\nn= " << n << " dim = " << dim << std::endl;
-		auto Q = random_quiver(n, dim, MT3(), 0.5);
+		for (size_t rep = 0; rep < NREPS; ++rep) {
+			std::cout << "\nn= " << n << " dim = " << dim << std::endl;
+			auto Q = random_quiver(n, dim, MT3(), 0.5);
 
-		// 0 threads = sequential
-		outfile4 << n << ", " << dim << ", " << 0 << ", ";
-		time_barcode_seq(Q, outfile4);
+			// 0 threads = sequential
+			outfile4 << n << ", " << dim << ", F3, seq, 0, ";
+			time_barcode_seq(Q, outfile4);
 
-		for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
-			outfile4 << n << ", " << dim << ", " << nthreads << ", ";
-			omp_set_num_threads(nthreads);
-			time_barcode_dq(Q, outfile4);
+			for (size_t nthreads: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
+				outfile4 << n << ", " << dim << ", F3, dq, " << nthreads << ", ";
+				omp_set_num_threads(nthreads);
+				time_barcode_dq(Q, outfile4);
+			}
 		}
 	}
 
