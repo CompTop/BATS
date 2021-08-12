@@ -82,6 +82,7 @@ int main() {
 
 	size_t nsets = 128;
 	size_t ns = 100; // number of points in each subset
+	size_t NREP = 10; // number of repetitions per experiment
 
 	// generate file with timestamp
 	auto t = std::time(nullptr);
@@ -92,11 +93,14 @@ int main() {
 	std::ofstream outfile(oss.str());
 	// std::ofstream outfile("zigzag_circle.csv");
 	// write header
-	outfile << "subsets, points, threads, setup, chain/hom, sequential, divide/conquer\n";
+	outfile << "subsets,points,threads,setup,chain/hom,sequential,divide/conquer\n";
 
 
-	for (size_t nthread: {1, 2, 4, 8, 16, 24, 32, 48, 64})
-	run_problem(nsets, ns, nthread, 1, outfile);
+	for (size_t nthread: {1, 2, 4, 8, 16, 24, 32, 48, 64}) {
+		for (size_t rep = 0; rep < NREP; ++rep) {
+			run_problem(nsets, ns, nthread, 1, outfile);
+		}
+	}
 
 	return 0;
 }

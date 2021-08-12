@@ -21,6 +21,9 @@ using namespace bats;
 #define VT3 SparseVector<FT3>
 #define MT3 ColumnMatrix<VT3>
 
+// number of repetitions per experiment
+#define NREPS 10
+
 // dummy struct for node type
 struct VectorSpace {};
 
@@ -86,22 +89,25 @@ int main() {
 	std::cout << "writing to " << oss1.str() << std::endl;
 	std::ofstream outfile1(oss1.str());
 	// write header
-	outfile1 << "n, dim, threads, time\n";
+	outfile1 << "n,dim,field,alg,threads,time\n";
 
 
 	for (size_t dim: {128, 256})
 	{
 		for (size_t n: {4, 8, 16, 32, 48, 64, 96, 128, 144, 192, 240, 256, 288, 512, 768, 1024}) {
-			std::cout << "\nn= " << n << " dim = " << dim << std::endl;
-			auto Q = random_quiver(n, dim, MT2(), 0.5);
+			for (size_t rep = 0; rep < NREPS; ++rep) {
+				std::cout << "\nn= " << n << " dim = " << dim << ", F2" << std::endl;
+				auto Q = random_quiver(n, dim, MT2(), 0.5);
 
-			// 0 threads = sequential
-			outfile1 << n << ", " << dim << ", " << 0 << ", ";
-			time_barcode_seq(Q, outfile1);
+				// 0 threads = sequential
+				outfile1 << n << ", " << dim << ", F2, seq, 0, ";
+				time_barcode_seq(Q, outfile1);
 
-			auto nthread = omp_get_max_threads();
-			outfile1 << n << ", " << dim << ", " << nthread << ", ";
-			time_barcode_dq(Q, outfile1);
+				auto nthread = omp_get_max_threads();
+				outfile1 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
+				time_barcode_dq(Q, outfile1);
+			}
+			
 		}
 
 	}
@@ -111,21 +117,23 @@ int main() {
 	std::cout << "writing to " << oss2.str() << std::endl;
 	std::ofstream outfile2(oss2.str());
 	// write header
-	outfile2 << "n, dim, threads, time\n";
+	outfile2 << "n,dim,field,alg,threads,time\n";
 
 	for (size_t n: {256, 512})
 	{
 		for (size_t dim: {2, 4, 8, 16, 32, 64, 128, 256}) {
-			std::cout << "\nn= " << n << " dim = " << dim << std::endl;
-			auto Q = random_quiver(n, dim, MT2(), 0.5);
+			for (size_t rep = 0; rep < NREPS; ++rep) {
+				std::cout << "\nn= " << n << " dim = " << dim << std::endl;
+				auto Q = random_quiver(n, dim, MT2(), 0.5);
 
-			// 0 threads = sequential
-			outfile2 << n << ", " << dim << ", " << 0 << ", ";
-			time_barcode_seq(Q, outfile2);
+				// 0 threads = sequential
+				outfile2 << n << ", " << dim << ", F2, seq, 0, ";
+				time_barcode_seq(Q, outfile2);
 
-			auto nthread = omp_get_max_threads();
-			outfile2 << n << ", " << dim << ", " << nthread << ", ";
-			time_barcode_dq(Q, outfile2);
+				auto nthread = omp_get_max_threads();
+				outfile2 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
+				time_barcode_dq(Q, outfile2);
+			}
 		}
 	}
 
