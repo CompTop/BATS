@@ -19,3 +19,4 @@
 #include "topology/eilenberg_zilber.hpp"
 #include "topology/mayer_vietoris.hpp"
 #include "topology/extras.hpp"
+#include "topology/grid.hpp"
