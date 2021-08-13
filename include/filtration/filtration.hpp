@@ -76,7 +76,7 @@ public:
 
 	/**
 	Initialization which passes arguments to initialize the underlying complex
-	
+
 	@param args...	passed to complex initialization
 	*/
 	template <class ...Ts>
@@ -165,6 +165,23 @@ public:
 	// get sort permutation for filtration in all dimensions
 	inline std::vector<std::vector<size_t>> sortperm() const {
 		return filtration_sortperm(val);
+	}
+
+	/**
+	Get sub-levelset of filtration (-inf, a]
+
+	@param a upper bound of levelset
+	*/
+	CpxT sublevelset(const TF a) const {
+		CpxT Y(X.ncells(0), X.maxdim()); // initialize new complex
+		for (size_t k = 0; k < maxdim() + 1; ++k) {
+			for (size_t i = 0; i < ncells(k); ++i) {
+				if (val[k][i] <= a) {
+					Y.add(X.get_cell(k, i));
+				}
+			}
+		}
+		return Y;
 	}
 
 };

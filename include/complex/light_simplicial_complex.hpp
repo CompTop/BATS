@@ -224,6 +224,8 @@ public:
 		return key_to_simplex(dim, index_to_key[dim][i]);
 	}
 
+	inline auto get_cell(size_t dim, size_t i) const {return get_simplex(dim, i);}
+
 	std::vector<std::vector<index_type>> get_simplices(const size_t dim) const {
 		std::vector<std::vector<index_type>> simplices(ncells(dim));
 		for (size_t i = 0; i < ncells(dim); i++) {

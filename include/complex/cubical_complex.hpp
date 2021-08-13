@@ -367,6 +367,8 @@ public:
 		return s;
 	}
 
+	inline auto get_cell(size_t dim, size_t i) const {return get_cube(dim, i);}
+
 	// return cubes in dimension dim
 	std::vector<std::vector<size_t>> get_cubes(const size_t dim) const {
 		std::vector<std::vector<size_t>> cubes;

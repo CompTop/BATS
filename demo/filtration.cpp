@@ -1,5 +1,7 @@
-#include <bats.h>
+#include <bats.hpp>
 #include <iostream>
+
+using namespace bats;
 
 #define FT ModP<int, 3>
 #define VT SparseVector<FT>
@@ -26,6 +28,9 @@ int main() {
 	for (auto p : ps) {
 		std::cout << p.str() << std::endl;
 	}
+
+	auto X = F.sublevelset(0.5);
+	X.print_summary();
 
 
 	return 0;
