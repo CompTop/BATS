@@ -582,6 +582,7 @@ public:
 	*/
 	void insert_rows(const std::vector<size_t>& r_inds) {
 		// size_t offset = 0;
+		if (r_inds.begin() == r_inds.end()) return;
 		auto iv = indval.begin();
 		while (iv != indval.end()) {
 			// search for how many rows will be inserted
