@@ -18,6 +18,16 @@ and extend to a map on all simplices
 namespace bats {
 
 // construct simplicial map from X to Y
+// no initial data is specified - assume inclusion map
+template <typename CpxT> // template over type of complex
+inline CellularMap SimplicialMap(
+	const CpxT &X,
+	const CpxT &Y
+) {
+	return CellularMap(X, Y);
+}
+
+// construct simplicial map from X to Y
 // send vertex set of X to vertex set of Y using f0
 template <typename CpxT> // template over type of complex
 CellularMap SimplicialMap(
@@ -59,32 +69,6 @@ CellularMap SimplicialMap(
 }
 
 
-// construct simplicial map from X to Y
-// no initial data is specified - assume inclusion map
-template <typename CpxT> // template over type of complex
-CellularMap SimplicialMap(
-	const CpxT &X,
-	const CpxT &Y
-) {
-	std::vector<size_t> s; // simplex
-	size_t maxd = X.maxdim();
-	CellularMap f(maxd);
-	for (size_t k = 0; k < maxd+1; k++) {
-		std::vector<SparseVector<int, size_t>> col;
-		for (size_t i = 0; i < X.ncells(k); i++) {
-			// fill s with image of simplex i in dimension k
-			s = X.get_simplex(k, i);
 
-			size_t j = Y.find_idx(s);
-			if (j == bats::NO_IND) {
-				throw std::out_of_range("No existing target simplex!");
-			}
-			col.emplace_back(SparseVector<int, size_t>({j}, {1}));
-		}
-		f[k] = ColumnMatrix<SparseVector<int, size_t>>(Y.ncells(k), X.ncells(k), col);
-	}
-
-	return f;
-}
 
 } // namespace bats

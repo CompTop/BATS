@@ -267,6 +267,9 @@ public:
     // constructor that initializes to set dimension
     CubicalComplex(size_t maxdim) { reserve(maxdim); }
 
+	// constructor that initializes to set dimension
+	CubicalComplex(size_t n, size_t maxdim) {reserve(maxdim); reserve(0,n);}
+
 
     // returns index of simplex
     // TODO: find a way to do this with a single traversal of spx_to_idx
@@ -367,6 +370,7 @@ public:
 		return s;
 	}
 
+	inline auto get_cell(size_t dim, size_t i, std::vector<size_t>& s) const {return get_cube(dim, i, s);}
 	inline auto get_cell(size_t dim, size_t i) const {return get_cube(dim, i);}
 
 	// return cubes in dimension dim

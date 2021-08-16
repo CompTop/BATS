@@ -20,3 +20,4 @@
 #include "topology/mayer_vietoris.hpp"
 #include "topology/extras.hpp"
 #include "topology/grid.hpp"
+#include "topology/levelset.hpp"

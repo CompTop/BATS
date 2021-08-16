@@ -276,4 +276,78 @@ CubicalComplex Cube(
     return X;
 }
 
+/**
+Freudenthal Triangulation of CubicalComplex
+
+@param X cubical complex
+@param n1 1st dimension grid size
+@param n2 2nd dimension grid size
+@param n3 3rd dimension grid size
+*/
+template <typename CpxT>
+CpxT Freudenthal(const CubicalComplex& X, size_t n1, size_t n2, size_t n3) {
+    if (X.maxdim() != 3) {throw std::runtime_error("CubicalComplex must be 3D");}
+    // declare complex
+    CpxT F(n1*n2*n3, 3);
+
+    // declare index helpers
+    size_t s1, s2, s3, s4, s5, s6, s7, s8;
+    std::vector<size_t> c;
+
+    // 0-cells
+    for (size_t i = 0; i < X.ncells(0); ++i) {
+        X.get_cube(0, i, c); // put cube in c
+        s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
+        F.add({s1});
+    }
+
+    // 1-cells
+    for (size_t i = 0; i < X.ncells(1); ++i) {
+        X.get_cube(1, i, c);
+        s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
+        s2 = rowmajor::get_idx(c[1], c[3], c[5], n1, n2);
+        F.add({s1});
+    }
+
+    // 2-cells
+    for (size_t i = 0; i < X.ncells(2); ++i) {
+        X.get_cube(2, i, c);
+        s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
+        if (c[0] == c[1]) {
+            s2 = rowmajor::get_idx(c[0], c[3], c[4], n1, n2);
+            s3 = rowmajor::get_idx(c[0], c[2], c[5], n1, n2);
+        } else if (c[2] == c[3]) {
+            s2 = rowmajor::get_idx(c[1], c[2], c[4], n1, n2);
+            s3 = rowmajor::get_idx(c[0], c[2], c[5], n1, n2);
+        } else { // c[4] == c[5]
+            s2 = rowmajor::get_idx(c[1], c[2], c[4], n1, n2);
+            s3 = rowmajor::get_idx(c[0], c[3], c[4], n1, n2);
+        }
+        s4 = rowmajor::get_idx(c[1], c[3], c[5], n1, n2);
+        F.add_recursive({s1, s2, s4});
+        F.add_recursive({s1, s3, s4});
+    }
+
+    // 3-cells
+    for (size_t i = 0; i < X.ncells(3); ++i) {
+        X.get_cube(3, i, c);
+        s1 = rowmajor::get_idx(c[0],c[2],c[4], n1, n2);
+        s2 = rowmajor::get_idx(c[0],c[2],c[5], n1, n2);
+        s3 = rowmajor::get_idx(c[0],c[3],c[4], n1, n2);
+        s4 = rowmajor::get_idx(c[1],c[2],c[4], n1, n2);
+        s5 = rowmajor::get_idx(c[0],c[3],c[5], n1, n2);
+        s6 = rowmajor::get_idx(c[1],c[2],c[5], n1, n2);
+        s7 = rowmajor::get_idx(c[1],c[3],c[4], n1, n2);
+        s8 = rowmajor::get_idx(c[1],c[3],c[5], n1, n2);
+        F.add_recursive({s1,s2,s5,s8}); // k, j, i
+        F.add_recursive({s1,s2,s6,s8}); // k, i, j
+        F.add_recursive({s1,s4,s7,s8}); // i, j, k
+        F.add_recursive({s1,s4,s6,s8}); // i, k, j
+        F.add_recursive({s1,s3,s7,s8}); // j, i, k
+        F.add_recursive({s1,s3,s5,s8}); // j, k, i
+    }
+    return F;
+
+}
+
 } // namespace bats

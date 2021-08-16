@@ -205,17 +205,27 @@ public:
         return key;
     }
 
-	// get simplex corresponding to a particular key
-	std::vector<index_type> key_to_simplex(
+	void key_to_simplex(
 		const size_t dim,
-		index_type key
+		index_type key,
+		std::vector<index_type>& s
 	) const {
-		std::vector<index_type> s(dim+1);
+		s.resize(dim+1);
 		for (size_t d = dim; d > 0; d--) {
 			s[d] = max_vertex(key, d);
 			key -= s[d] * offset(d);
 		}
 		s[0] = key;
+		return;
+	}
+
+	// get simplex corresponding to a particular key
+	inline std::vector<index_type> key_to_simplex(
+		const size_t dim,
+		index_type key
+	) const {
+		std::vector<index_type> s(dim+1);
+		key_to_simplex(dim , key, s);
 		return s;
 	}
 
@@ -223,7 +233,11 @@ public:
 	inline std::vector<index_type> get_simplex(const size_t dim, const size_t i) const {
 		return key_to_simplex(dim, index_to_key[dim][i]);
 	}
+	inline void get_simplex(const size_t dim, const size_t i, std::vector<index_type>& s) const {
+		return key_to_simplex(dim, index_to_key[dim][i], s);
+	}
 
+	inline auto get_cell(size_t dim, size_t i, std::vector<index_type>& s) const {return get_simplex(dim, i, s);}
 	inline auto get_cell(size_t dim, size_t i) const {return get_simplex(dim, i);}
 
 	std::vector<std::vector<index_type>> get_simplices(const size_t dim) const {

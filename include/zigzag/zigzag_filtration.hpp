@@ -109,6 +109,12 @@ public:
 		val[ret.dim][ret.ind].emplace_back(std::make_pair(entry, exit));
 		return ret;
 	}
+	inline cell_ind add(const T entry, const T exit, std::vector<size_t>&& s) {
+		cell_ind ret = X.add(s);
+		reserve(ret.dim, ret.ind+1);
+		val[ret.dim][ret.ind].emplace_back(std::make_pair(entry, exit));
+		return ret;
+	}
 
 	/**
 	Add recursively to right filtration.  Any cells added will take same entry
@@ -126,6 +132,37 @@ public:
 			val[r.dim][r.ind].emplace_back(std::make_pair(entry, exit));
 		}
 		return ret;
+	}
+	std::vector<cell_ind> add_recursive(const T entry, const T exit, std::vector<size_t>&& s) {
+		std::vector<cell_ind> ret = X.add_recursive(s);
+		for (auto &r : ret) {
+			reserve(r.dim, r.ind+1);
+			val[r.dim][r.ind].emplace_back(std::make_pair(entry, exit));
+		}
+		return ret;
+	}
+
+	/**
+	Return thickened levelset f^{-1}([s0,s1])
+	adds a cell to levelset if [b,d] \cap [s0,s1] is non-empty
+
+	@param s0 lower bound of levelset
+	@param s1 upper bound of levelset
+	*/
+	CpxT levelset(T s0, T s1) const {
+		CpxT Y(X.ncells(0), X.maxdim());
+
+		// loop over dimension
+		for (size_t k = 0; k < X.maxdim() + 1; ++k) {
+			for (size_t i = 0; i < X.ncells(k); ++i) {
+				// assume only one interval
+				if ((s0 < val[k][i][0].first && val[k][i][0].first < s1) || (s0 < val[k][i][0].second && val[k][i][0].second < s1)) {
+					Y.add(X.get_cell(k, i));
+				}
+			}
+		}
+
+		return Y;
 	}
 
 };

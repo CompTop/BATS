@@ -384,17 +384,27 @@ public:
     }
 
 	/**
+	fill s with simple i in dimension dim
+	*/
+	void get_simplex(size_t dim, size_t i, std::vector<size_t>& s) const {
+		s.clear();
+		for (auto it = simplex_begin(dim, i); it != simplex_end(dim, i); it++) {
+			s.emplace_back(*it);
+		}
+		return;
+	}
+
+	/**
 	return simplex i in dimension dim
 	*/
 	std::vector<size_t> get_simplex(size_t dim, size_t i) const {
 		std::vector<size_t> s;
 		s.reserve(dim+1);
-		for (auto it = simplex_begin(dim, i); it != simplex_end(dim, i); it++) {
-			s.emplace_back(*it);
-		}
+		get_simplex(dim, i, s);
 		return s;
 	}
 
+	inline auto get_cell(size_t dim, size_t i, std::vector<size_t>& s) const {return get_simplex(dim, i, s);}
 	inline auto get_cell(size_t dim, size_t i) const {return get_simplex(dim, i);}
 
 	// return simplices in dimension dim
