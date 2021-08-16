@@ -306,7 +306,7 @@ CpxT Freudenthal(const CubicalComplex& X, size_t n1, size_t n2, size_t n3) {
         X.get_cube(1, i, c);
         s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
         s2 = rowmajor::get_idx(c[1], c[3], c[5], n1, n2);
-        F.add({s1});
+        F.add({s1, s2});
     }
 
     // 2-cells
@@ -347,7 +347,6 @@ CpxT Freudenthal(const CubicalComplex& X, size_t n1, size_t n2, size_t n3) {
         F.add_recursive({s1,s3,s5,s8}); // j, k, i
     }
     return F;
-
 }
 
 } // namespace bats
