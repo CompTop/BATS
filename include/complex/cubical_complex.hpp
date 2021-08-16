@@ -77,7 +77,7 @@ private:
         if ( spx.size() < maxdim + 1 ) { spx.resize(maxdim + 1); }
         if ( faces.size() < maxdim ) { faces.resize(maxdim); }
         if ( coeff.size() < maxdim ) { coeff.resize(maxdim); }
-		__maxdim = maxdim;
+		if (__maxdim < maxdim) {__maxdim = maxdim;}
         return;
     }
 
@@ -262,13 +262,15 @@ private:
 public:
 
     // default constructor
-    CubicalComplex() { reserve(0); }
+    CubicalComplex() : __maxdim(0) { reserve(0); }
 
     // constructor that initializes to set dimension
-    CubicalComplex(size_t maxdim) { reserve(maxdim); }
+    CubicalComplex(size_t maxdim) : __maxdim(maxdim) { reserve(maxdim); }
 
 	// constructor that initializes to set dimension
-	CubicalComplex(size_t n, size_t maxdim) {reserve(maxdim); reserve(0,n);}
+	CubicalComplex(size_t n, size_t maxdim) : __maxdim(maxdim) {
+		reserve(maxdim); reserve(0,n);
+	}
 
 
     // returns index of simplex
