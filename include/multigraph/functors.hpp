@@ -245,8 +245,8 @@ auto RipsHom(
 		// handle nodes
 		auto Is = get_subset(X, D.node[s]);
 		auto It = get_subset(X, D.node[t]);
-		auto Xs = RipsComplex<CpxT>(Is, dist, rmax[i], hdim+1);
-		auto Xt = RipsComplex<CpxT>(It, dist, rmax[i], hdim+1);
+		auto Xs = RipsComplex<CpxT>(Is, dist, rmax[s], hdim+1);
+		auto Xt = RipsComplex<CpxT>(It, dist, rmax[t], hdim+1);
 		// skip chain construction in memory
 		auto Rs = Reduce(Xs, FT());
 		auto Rt = Reduce(Xt, FT());
