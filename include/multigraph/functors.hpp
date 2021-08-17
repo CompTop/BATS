@@ -211,6 +211,70 @@ Diagram<ReducedChainComplex<TM>, TM> Hom(
 
 }
 
+// Create diagram of Rips complexes from subsets
+// uses a different rips parameter for each node
+template <typename T, typename M, typename FT>
+auto RipsHom(
+	const Diagram<std::set<size_t>, std::vector<size_t>> &D,
+	const DataSet<T> &X,
+	const M &dist, // distance
+	const std::vector<T> &rmax, // maximum radius for each node
+	const size_t hdim, // homology dimension
+	FT // field
+) {
+
+	using VT = SparseVector<FT, size_t>;
+	using MT = ColumnMatrix<VT>;
+	using CpxT = SimplicialComplex;
+
+	size_t n = D.nnode();
+	size_t m = D.nedge();
+	// Diagram of dimensions and induced maps
+	Diagram<size_t, MT> TD(n, m);
+
+	// apply functor to edges
+	// note this will do every node computation twice
+	// but the parallelization is trivial
+	#pragma omp parallel for
+	for (size_t i = 0; i < m; i++) {
+	    auto s = D.elist[i].src;
+	    auto t = D.elist[i].targ;
+		if (rmax[t] < rmax[s]) {
+			throw std::range_error("Rips parameter must be non-decreasing from source to target.");
+		}
+		// handle nodes
+		auto Is = get_subset(X, D.node[s]);
+		auto It = get_subset(X, D.node[t]);
+		auto Xs = RipsComplex<CpxT>(Is, dist, rmax[i], hdim+1);
+		auto Xt = RipsComplex<CpxT>(It, dist, rmax[i], hdim+1);
+		// skip chain construction in memory
+		auto Rs = Reduce(Xs, FT());
+		auto Rt = Reduce(Xt, FT());
+
+		// handle edge
+		auto F = SimplicialMap(Xs , Xt, D.edata[i]);
+		auto CF = ChainMap<MT>(F);
+		auto HF = induced_map(CF, Rs, Rt, hdim);
+
+	    TD.set_edge(i, s, t, HF);
+	}
+
+	// extract dimensions for nodes
+	// we do this by iterating over edges
+	// do this sequentially to avoid race conditions
+	for (size_t i = 0; i < m; i++) {
+		auto s = D.elist[i].src;
+	    auto t = D.elist[i].targ;
+		auto ds = TD.edata[i].ncol();
+		auto dt = TD.edata[i].nrow();
+		TD.set_node(s, ds);
+		TD.set_node(t, dt);
+	}
+
+	return TD;
+}
+
+
 /**
 Functor from topological category to category of
 differential graded vector spaces
