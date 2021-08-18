@@ -49,6 +49,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_complex_cubical_map.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgmap.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_extras.hpp`

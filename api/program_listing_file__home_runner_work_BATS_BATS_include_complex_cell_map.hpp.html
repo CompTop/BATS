@@ -172,91 +172,116 @@
 <span class="cm">Cellular map f: X-&gt;Y</span>
 <span class="cm">data is how cells in X map to cells in Y</span>
 <span class="cm">essentially a chain map</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">class</span> <span class="nc">CellularMap</span>
-<span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="k">using</span> <span class="n">vec_type</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
-    <span class="k">using</span> <span class="n">map_type</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">vec_type</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">CellularMap</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">vec_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">vec_type</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// store image of k-cells as linear combination of k-cells</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">map_type</span><span class="o">&gt;</span> <span class="n">cell_map</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// store image of k-cells as linear combination of k-cells</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">map_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cell_map</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">_resize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="p">{</span> <span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="p">}</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">_safe_resize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">dim</span> <span class="o">&gt;=</span> <span class="n">cell_map</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span> <span class="n">_resize</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span> <span class="p">}</span> <span class="p">}</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">_resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">_safe_resize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dim</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">cell_map</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_resize</span><span class="p">(</span><span class="n">dim</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-<span class="k">public</span><span class="o">:</span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
 
-    <span class="n">CellularMap</span><span class="p">()</span> <span class="p">{}</span>
+<span class="w">    </span><span class="n">CellularMap</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-    <span class="c1">// allocate for dim dimensions</span>
-    <span class="n">CellularMap</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// allocate for dim dimensions</span>
+<span class="w">    </span><span class="n">CellularMap</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">CellularMap</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="nf">file</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
-            <span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span> <span class="c1">// TODO: should be CellularMap</span>
-            <span class="c1">// keep putting cell_maps on back</span>
-            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span> <span class="p">{</span>
-                <span class="n">cell_map</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">map_type</span><span class="p">(</span><span class="n">file</span><span class="p">));</span>
-            <span class="p">}</span>
-            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to read CellularMap from &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">fname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">CellularMap</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="w"> </span><span class="nf">file</span><span class="w"> </span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">in</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">line</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">);</span><span class="w"> </span><span class="c1">// TODO: should be CellularMap</span>
+<span class="w">            </span><span class="c1">// keep putting cell_maps on back</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">cell_map</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">map_type</span><span class="p">(</span><span class="n">file</span><span class="p">));</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;unable to read CellularMap from &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fname</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">cell_map</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">CellularMap</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CpxT</span><span class="o">&amp;</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CpxT</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">cell_map</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">map_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">_safe_resize</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dim</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">col</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">col</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">));</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// fill s with image of cell i in dimension k</span>
+<span class="w">                </span><span class="n">X</span><span class="p">.</span><span class="n">get_cell</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Y</span><span class="p">.</span><span class="n">find_idx</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"></span>
 
-    <span class="kr">inline</span> <span class="k">const</span> <span class="n">map_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-    <span class="p">}</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">(</span><span class="s">&quot;No existing target cell!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">({</span><span class="n">j</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">}));</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">Y</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// identity map</span>
-    <span class="c1">// template over complex type</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
-    <span class="k">static</span> <span class="n">CellularMap</span> <span class="n">identity</span><span class="p">(</span><span class="k">const</span> <span class="n">CpxT</span> <span class="o">&amp;</span><span class="n">X</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">maxk</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span>
-        <span class="n">CellularMap</span> <span class="nf">M</span><span class="p">(</span><span class="n">maxk</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">map_type</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">));</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">M</span><span class="p">;</span>
-    <span class="p">}</span>
 
-    <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="c1">// save each cellmap in the same file</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="nf">file</span> <span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">file</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;CellularMap</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">M</span> <span class="p">:</span> <span class="n">cell_map</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">M</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to write CellularMap to &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">fname</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">};</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">cell_map</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="w">    </span><span class="n">map_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">_safe_resize</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">map_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cell_map</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// identity map</span>
+<span class="w">    </span><span class="c1">// template over complex type</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">CellularMap</span><span class="w"> </span><span class="n">identity</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CpxT</span><span class="w"> </span><span class="o">&amp;</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">maxk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">CellularMap</span><span class="w"> </span><span class="nf">M</span><span class="p">(</span><span class="n">maxk</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_type</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">save</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fname</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// save each cellmap in the same file</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">ofstream</span><span class="w"> </span><span class="nf">file</span><span class="w"> </span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">file</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;CellularMap</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="nl">M</span> <span class="p">:</span><span class="w"> </span><span class="n">cell_map</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">M</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">file</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;unable to write CellularMap to &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fname</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="p">};</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

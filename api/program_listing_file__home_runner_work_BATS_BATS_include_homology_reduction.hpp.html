@@ -169,12 +169,12 @@
 <p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_homology_reduction.hpp.html#file-home-runner-work-bats-bats-include-homology-reduction-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/homology/reduction.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
 <span class="c1">// #include &quot;tsl/hopscotch_map.h&quot;</span>
 <span class="c1">// #include &quot;tsl/robin_map.h&quot;</span>
 <span class="c1">// #include &quot;tsl/sparse_map.h&quot;</span>
@@ -200,448 +200,448 @@
 <span class="cp">#define p2c_type std::vector&lt;size_t&gt;</span>
 
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="c1">// flags for selecting optimizations</span>
-<span class="k">struct</span> <span class="nc">no_optimization_flag</span> <span class="p">{};</span>
-<span class="k">struct</span> <span class="nc">clearing_flag</span> <span class="p">{};</span>
-<span class="k">struct</span> <span class="nc">compression_flag</span> <span class="p">{};</span>
-<span class="k">struct</span> <span class="nc">apparent_pairs_flag</span> <span class="p">{};</span>
-<span class="k">struct</span> <span class="nc">no_apparent_pairs_flag</span> <span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">no_optimization_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">clearing_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">compression_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">apparent_pairs_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">no_apparent_pairs_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
 
 <span class="c1">// flags for selecting algorithms</span>
-<span class="k">struct</span> <span class="nc">standard_reduction_flag</span> <span class="p">{};</span>
-<span class="k">struct</span> <span class="nc">extra_reduction_flag</span> <span class="p">{};</span>
-<span class="k">struct</span> <span class="nc">sparse_reduction_flag</span> <span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">standard_reduction_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">extra_reduction_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">sparse_reduction_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
 
 
 <span class="c1">// perform reduction algorithm on a column matrix in-place</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="c1">// p2c_type pivot_to_col;</span>
-    <span class="n">p2c_type</span> <span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
-    <span class="c1">// create a temporary vector for use in axpys</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// p2c_type pivot_to_col;</span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="w"> </span><span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create a temporary vector for use in axpys</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// loop over columns</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot;;</span>
-            <span class="c1">// M[j].print_row();</span>
-            <span class="c1">// piv is index-value nzpair</span>
-            <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span>
-            <span class="c1">// if (pivot_to_col.count(piv.ind) &gt; 0) {</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// eliminate pivot</span>
-                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span>
-                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="p">.</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// new pivot</span>
-                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// loop over columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot;;</span>
+<span class="w">            </span><span class="c1">// M[j].print_row();</span>
+<span class="w">            </span><span class="c1">// piv is index-value nzpair</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// if (pivot_to_col.count(piv.ind) &gt; 0) {</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// eliminate pivot</span>
+<span class="w">                </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// new pivot</span>
+<span class="w">                </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// perform reduction algorithm on a column matrix in-place</span>
 <span class="c1">// do extra reduction to eliminate nonzeros even after pivot has been found</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="c1">// p2c_type pivot_to_col;</span>
-    <span class="n">p2c_type</span> <span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
-    <span class="c1">// create a temporary vector for use in axpys</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// p2c_type pivot_to_col;</span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="w"> </span><span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create a temporary vector for use in axpys</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// loop over columns</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">bool</span> <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// while the nonzero we are looking at is in the vector</span>
-            <span class="c1">// piv is index-value nzpair</span>
-            <span class="c1">// auto piv = M[j].lastnz();</span>
-            <span class="c1">// if (pivot_to_col.count(piv-&gt;ind) &gt; 0) {</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// eliminate pivot</span>
-                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
-                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-                <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found_pivot</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// new pivot</span>
-                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-                <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
-                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// we skip zeroing out this entry</span>
-                <span class="c1">// need to increment offset</span>
-                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
-                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// loop over columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">found_pivot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// nonzero location</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// while the nonzero we are looking at is in the vector</span>
+<span class="w">            </span><span class="c1">// piv is index-value nzpair</span>
+<span class="w">            </span><span class="c1">// auto piv = M[j].lastnz();</span>
+<span class="w">            </span><span class="c1">// if (pivot_to_col.count(piv-&gt;ind) &gt; 0) {</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// eliminate pivot</span>
+<span class="w">                </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">found_pivot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// new pivot</span>
+<span class="w">                </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">found_pivot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">end_offset</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">piv</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// we skip zeroing out this entry</span>
+<span class="w">                </span><span class="c1">// need to increment offset</span>
+<span class="w">                </span><span class="n">end_offset</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">piv</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// default behavior</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="c1">// behavior with standard flag</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">standard_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">standard_reduction_flag</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="c1">// behavior with extra flag</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">extra_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">extra_reduction_flag</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">M</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// perform reduction algorithm on a column matrix in-place</span>
 <span class="c1">// apply change of basis to U</span>
 <span class="c1">// invariant M * U = R</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">!=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span><span class="w"></span>
 
-    <span class="c1">// p2c_type pivot_to_col;</span>
-    <span class="n">p2c_type</span> <span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
-    <span class="c1">// create a temporary vector for use in axpys</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// p2c_type pivot_to_col;</span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create a temporary vector for use in axpys</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// loop over columns</span>
-    <span class="c1">// size_t ct = 0;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// ++ct;</span>
-            <span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot;;</span>
-            <span class="c1">// M[j].print_row();</span>
-            <span class="c1">// piv is index-value nzpair</span>
-            <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span>
-            <span class="c1">// if (pivot_to_col.count(piv.ind) &gt; 0) {</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// eliminate pivot</span>
-                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span>
-                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="p">.</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update change of basis</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// new pivot</span>
-                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="c1">// std::cout &lt;&lt; &quot;# iterations = &quot; &lt;&lt; ct &lt;&lt; std::endl;</span>
-    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// loop over columns</span>
+<span class="w">    </span><span class="c1">// size_t ct = 0;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// ++ct;</span>
+<span class="w">            </span><span class="c1">// std::cout &lt;&lt; j &lt;&lt; &quot; : &quot;;</span>
+<span class="w">            </span><span class="c1">// M[j].print_row();</span>
+<span class="w">            </span><span class="c1">// piv is index-value nzpair</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// if (pivot_to_col.count(piv.ind) &gt; 0) {</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// eliminate pivot</span>
+<span class="w">                </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"> </span><span class="c1">// update change of basis</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// new pivot</span>
+<span class="w">                </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;# iterations = &quot; &lt;&lt; ct &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">!=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span><span class="w"></span>
 
-    <span class="c1">// p2c_type pivot_to_col;</span>
-    <span class="n">p2c_type</span> <span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
-    <span class="c1">// create a temporary vector for use in axpys</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// p2c_type pivot_to_col;</span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create a temporary vector for use in axpys</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// loop over columns</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// while the nonzero we are looking at is in the vector</span>
-            <span class="c1">// piv is index-value nzpair</span>
-            <span class="c1">// auto piv = M[j].lastnz();</span>
-            <span class="c1">// if (pivot_to_col.count(piv-&gt;ind) &gt; 0) {</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// eliminate pivot</span>
-                <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
-                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update change of basis</span>
-                <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">end_offset</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// new pivot</span>
-                <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-                <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-                <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// we skip zeroing out this entry</span>
-                <span class="c1">// need to increment offset</span>
-                <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-                <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// loop over columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// nonzero location</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// while the nonzero we are looking at is in the vector</span>
+<span class="w">            </span><span class="c1">// piv is index-value nzpair</span>
+<span class="w">            </span><span class="c1">// auto piv = M[j].lastnz();</span>
+<span class="w">            </span><span class="c1">// if (pivot_to_col.count(piv-&gt;ind) &gt; 0) {</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// eliminate pivot</span>
+<span class="w">                </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"> </span><span class="c1">// update change of basis</span>
+<span class="w">                </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">end_offset</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// new pivot</span>
+<span class="w">                </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// we skip zeroing out this entry</span>
+<span class="w">                </span><span class="c1">// need to increment offset</span>
+<span class="w">                </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// default behavior</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="c1">// behavior with standard flag</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">standard_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">standard_reduction_flag</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="c1">// behavior with extra flag</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span> <span class="n">bats</span><span class="o">::</span><span class="n">extra_reduction_flag</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">extra_reduction_flag</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix_extra</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">reduce_column_sparsify</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span>
-    <span class="n">p2c_type</span><span class="o">&amp;</span> <span class="n">pivot_to_col</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">coeff</span><span class="p">,</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span> <span class="n">tmp</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// start looking at last nonzero</span>
-    <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// do nothing, because this is already a pivot</span>
-            <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">end_offset</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// we simply eliminate this non-zero</span>
-            <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
-            <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-            <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// determine if we should eliminate this non-zero</span>
-            <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
-            <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-            <span class="c1">// determine largest number of non-zeros we might eliminate</span>
-            <span class="n">coeff</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">coeff_intersection</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">coeff</span><span class="p">);</span> <span class="c1">// calculate intersections</span>
-            <span class="n">F</span> <span class="nf">a</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="kt">size_t</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">coeff</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">ct</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">ct</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-                    <span class="n">a</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="c1">// determine whether or not we would introduce more non-zeros than we eliminate</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">ct</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span> <span class="o">--</span><span class="n">piv</span><span class="p">;}</span> <span class="c1">// if we didn&#39;t eliminate this nonzero, continue</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">end_offset</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// we can set a new pivot</span>
-            <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-            <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// we skip zeroing out this entry</span>
-            <span class="c1">// need to increment offset</span>
-            <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">F</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">reduce_column_sparsify</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">coeff</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// start looking at last nonzero</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// nonzero location</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// do nothing, because this is already a pivot</span>
+<span class="w">            </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// we simply eliminate this non-zero</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// determine if we should eliminate this non-zero</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// determine largest number of non-zeros we might eliminate</span>
+<span class="w">            </span><span class="n">coeff</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">coeff_intersection</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">coeff</span><span class="p">);</span><span class="w"> </span><span class="c1">// calculate intersections</span>
+<span class="w">            </span><span class="n">F</span><span class="w"> </span><span class="nf">a</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="nl">it</span> <span class="p">:</span><span class="w"> </span><span class="n">coeff</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ct</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// determine whether or not we would introduce more non-zeros than we eliminate</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ct</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="o">--</span><span class="n">piv</span><span class="p">;}</span><span class="w"> </span><span class="c1">// if we didn&#39;t eliminate this nonzero, continue</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">end_offset</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// we can set a new pivot</span>
+<span class="w">            </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// we skip zeroing out this entry</span>
+<span class="w">            </span><span class="c1">// need to increment offset</span>
+<span class="w">            </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">sparsify_basis</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">R</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">coeff</span><span class="p">,</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span> <span class="n">tmp</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// entry above diagonal in U[j]</span>
-    <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
-        <span class="c1">// std::cout &lt;&lt; k &lt;&lt; std::endl;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">ind</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// can potentially modify using this entry</span>
-            <span class="n">coeff</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-            <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">coeff_intersection</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">coeff</span><span class="p">);</span> <span class="c1">// calculate intersections</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">coeff_intersection</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">coeff</span><span class="p">);</span> <span class="c1">// add counts for matrix R</span>
-            <span class="n">F</span> <span class="nf">a</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="kt">size_t</span> <span class="n">ct</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">coeff</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">ct</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">ct</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-                    <span class="n">a</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="c1">// determine whether or not we would introduce more non-zeros than we eliminate</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">ct</span> <span class="o">&gt;</span> <span class="p">((</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-                <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="n">piv</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span> <span class="o">--</span><span class="n">piv</span><span class="p">;}</span> <span class="c1">// if we didn&#39;t eliminate this nonzero, continue</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">F</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">sparsify_basis</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">coeff</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// entry above diagonal in U[j]</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// nonzero location</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// std::cout &lt;&lt; k &lt;&lt; std::endl;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// can potentially modify using this entry</span>
+<span class="w">            </span><span class="n">coeff</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">coeff_intersection</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">coeff</span><span class="p">);</span><span class="w"> </span><span class="c1">// calculate intersections</span>
+<span class="w">            </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">coeff_intersection</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">coeff</span><span class="p">);</span><span class="w"> </span><span class="c1">// add counts for matrix R</span>
+<span class="w">            </span><span class="n">F</span><span class="w"> </span><span class="nf">a</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="nl">it</span> <span class="p">:</span><span class="w"> </span><span class="n">coeff</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ct</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// determine whether or not we would introduce more non-zeros than we eliminate</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ct</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">((</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="o">--</span><span class="n">piv</span><span class="p">;}</span><span class="w"> </span><span class="c1">// if we didn&#39;t eliminate this nonzero, continue</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">sparsify_basis</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">R</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span>
-<span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">sparsify_basis</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">!=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span><span class="w"></span>
 
-    <span class="k">using</span> <span class="n">F</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">coeff</span><span class="p">;</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coeff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">sparsify_basis</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">sparsify_basis</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">coeff</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// get clearing indices from pivots</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">get_clearing_inds</span><span class="p">(</span><span class="k">const</span> <span class="n">p2c_type</span> <span class="o">&amp;</span><span class="n">p2c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">inds</span><span class="p">;</span>
-    <span class="n">inds</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">p2c</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-        <span class="c1">// put keys into indices - these are the clearing indices for</span>
-        <span class="c1">// one dimension down.</span>
-        <span class="c1">// inds.emplace_back(it-&gt;first);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">it</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span> <span class="n">inds</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="p">}</span>
-        <span class="n">it</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">inds</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">inds</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-    <span class="k">return</span> <span class="n">inds</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_clearing_inds</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inds</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">inds</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">p2c</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// put keys into indices - these are the clearing indices for</span>
+<span class="w">        </span><span class="c1">// one dimension down.</span>
+<span class="w">        </span><span class="c1">// inds.emplace_back(it-&gt;first);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">inds</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">it</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">inds</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">inds</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">inds</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// perform reduction algorithm on a column matrix in-place</span>
 <span class="c1">// use clearing optimization</span>
 <span class="c1">// assume clear_inds is in sorted order</span>
 <span class="c1">// also known as the twist algorithm</span>
 <span class="c1">// get clearing indices from one dimension above</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_clearing</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">clear_inds</span><span class="p">,</span>
-    <span class="n">flag</span>
-<span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_clearing</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">clear_inds</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">flag</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="c1">// std::cout &lt;&lt; &quot;clearing cols&quot; &lt;&lt; std::endl;</span>
-    <span class="c1">// just zero-out columns ahead of time</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">cind</span> <span class="p">:</span> <span class="n">clear_inds</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// we hit an index we want to clear</span>
-        <span class="n">M</span><span class="p">[</span><span class="n">cind</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// just zero out column without doing work</span>
-    <span class="p">}</span>
-    <span class="c1">// std::cout &lt;&lt; &quot;reducing matrix&quot; &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;clearing cols&quot; &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="c1">// just zero-out columns ahead of time</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="nl">cind</span> <span class="p">:</span><span class="w"> </span><span class="n">clear_inds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// we hit an index we want to clear</span>
+<span class="w">        </span><span class="n">M</span><span class="p">[</span><span class="n">cind</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// just zero out column without doing work</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;reducing matrix&quot; &lt;&lt; std::endl;</span>
 
-    <span class="c1">// now run standard reduction algorithm with flag</span>
-    <span class="k">return</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">flag</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// now run standard reduction algorithm with flag</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">flag</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// get compression indices from reduced matrix R</span>
 <span class="c1">// compression indices are column indices</span>
 <span class="c1">// where column has not been zeroed out.</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">get_compression_inds</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">R</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">inds</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">inds</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">inds</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">get_compression_inds</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">R</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inds</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">inds</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">inds</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// reduce matrix using compression</span>
 <span class="c1">// comp_inds hold indices of rows which will never be pivots</span>
 <span class="c1">// we zero-out these rows to reduce number of operations</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_compression</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">comp_inds</span><span class="p">,</span>
-    <span class="n">flag</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// first zero-out rows designated by comp_inds</span>
-    <span class="n">M</span><span class="p">.</span><span class="n">clear_rows</span><span class="p">(</span><span class="n">comp_inds</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_compression</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">comp_inds</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">flag</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// first zero-out rows designated by comp_inds</span>
+<span class="w">    </span><span class="n">M</span><span class="p">.</span><span class="n">clear_rows</span><span class="p">(</span><span class="n">comp_inds</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// then run standard reduction algorithm</span>
-    <span class="k">return</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">flag</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// then run standard reduction algorithm</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">flag</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span>
-<span class="n">p2c_type</span> <span class="n">reduce_matrix_compression</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span>
-    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">comp_inds</span><span class="p">,</span>
-    <span class="n">flag</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// first zero-out rows designated by comp_inds</span>
-    <span class="n">M</span><span class="p">.</span><span class="n">clear_rows</span><span class="p">(</span><span class="n">comp_inds</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">flag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix_compression</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">comp_inds</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">flag</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// first zero-out rows designated by comp_inds</span>
+<span class="w">    </span><span class="n">M</span><span class="p">.</span><span class="n">clear_rows</span><span class="p">(</span><span class="n">comp_inds</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// we can still record basis.</span>
-    <span class="k">return</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">flag</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// we can still record basis.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">flag</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="c1">// TODO: add flags</span>
 
 
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">remove_extra_cycles</span><span class="p">(</span>
-    <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">R</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span>
-<span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">remove_extra_cycles</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">R</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span> <span class="o">!=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span> <span class="p">{</span><span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">ncol</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;Number of columns are not the same!&quot;</span><span class="p">);}</span><span class="w"></span>
 
-    <span class="c1">// create a temporary vector for use in axpys</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// create a temporary vector for use in axpys</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="c1">// number of columns</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// entry above diagonal</span>
-        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// we can eliminate entry</span>
-                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update change of basis</span>
-                <span class="c1">// R[j].axpy(R[k]) does nothing because R[k] = 0</span>
-                <span class="n">piv</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="c1">// we skip zeroing out this entry</span>
-                <span class="c1">// need to increment offset</span>
-                <span class="n">end_offset</span><span class="o">++</span><span class="p">;</span>
-                <span class="n">piv</span><span class="o">--</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="c1">// number of columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// entry above diagonal</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// nonzero location</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// we can eliminate entry</span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"> </span><span class="c1">// update change of basis</span>
+<span class="w">                </span><span class="c1">// R[j].axpy(R[k]) does nothing because R[k] = 0</span>
+<span class="w">                </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// we skip zeroing out this entry</span>
+<span class="w">                </span><span class="c1">// need to increment offset</span>
+<span class="w">                </span><span class="n">end_offset</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">piv</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// TODO: write a function on SparseVector which</span>
 <span class="c1">// will calculate the coefficient to use to greedily reduce the nnz</span>
@@ -651,14 +651,14 @@
 <span class="c1">// nnz(U) + nnz(R)</span>
 <span class="c1">// since we can add copies of columns of R with smaller pivots as well</span>
 
-<span class="k">namespace</span> <span class="nn">detail</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">detail</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">pivot_coeff</span><span class="p">(</span><span class="k">const</span> <span class="n">TVec</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">TVec</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">pivot_coeff</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace detail</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace detail</span>
 
 
 
@@ -666,49 +666,49 @@
 <span class="c1">// Rk - reduced boundary matrix</span>
 <span class="c1">// p2ck1 - p2c returned by reduction of B{k+1}</span>
 <span class="c1">// dimk - number of cells in dimension k</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">extract_basis_indices</span><span class="p">(</span><span class="k">const</span> <span class="n">MT</span><span class="o">&amp;</span> <span class="n">Rk</span><span class="p">,</span> <span class="k">const</span> <span class="n">p2c_type</span> <span class="o">&amp;</span><span class="n">p2ck1</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extract_basis_indices</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MT</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Rk</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2ck1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">I</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">dimk</span> <span class="o">=</span> <span class="n">Rk</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dimk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rk</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dimk</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">Rk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// column is zero</span>
-            <span class="c1">// if (p2ck1.count(j) == 0) {</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">p2ck1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// column is not a pivot, so add</span>
-                <span class="n">I</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="c1">// TODO: can use emplace_hint with pointer to back</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dimk</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Rk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// column is zero</span>
+<span class="w">            </span><span class="c1">// if (p2ck1.count(j) == 0) {</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2ck1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// column is not a pivot, so add</span>
+<span class="w">                </span><span class="n">I</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="c1">// TODO: can use emplace_hint with pointer to back</span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">I</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// extract indices for homology-revealing basis</span>
 <span class="c1">// Rk - reduced boundary matrix</span>
 <span class="c1">// no p2c for dimension above</span>
 <span class="c1">// dimk - number of cells in dimension k</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">extract_basis_indices</span><span class="p">(</span><span class="k">const</span> <span class="n">MT</span> <span class="o">&amp;</span><span class="n">Rk</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extract_basis_indices</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MT</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Rk</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">I</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">dimk</span> <span class="o">=</span> <span class="n">Rk</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
-    <span class="c1">// I.reserve(dimk);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dimk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rk</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// I.reserve(dimk);</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dimk</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">Rk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// column is zero</span>
-            <span class="c1">// column is not a pivot, so add</span>
-            <span class="n">I</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="c1">// TODO: can use emplace_hint with pointer to back</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dimk</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Rk</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// column is zero</span>
+<span class="w">            </span><span class="c1">// column is not a pivot, so add</span>
+<span class="w">            </span><span class="n">I</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="c1">// TODO: can use emplace_hint with pointer to back</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">I</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">I</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

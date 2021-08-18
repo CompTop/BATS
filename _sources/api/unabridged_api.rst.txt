@@ -24,6 +24,11 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
+   namespace_bats__rowmajor.rst
+
+.. toctree::
+   :maxdepth: 5
+
    namespace_bats__util.rst
 
 .. toctree::
@@ -109,6 +114,16 @@ Classes and Structs
    :maxdepth: 5
 
    structbats_1_1DataSet.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1DGLinearMap.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1DGVectorSpace.rst
 
 .. toctree::
    :maxdepth: 5
@@ -199,6 +214,11 @@ Classes and Structs
    :maxdepth: 5
 
    structbats_1_1PersistencePair.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1ReducedDGVectorSpace.rst
 
 .. toctree::
    :maxdepth: 5
@@ -802,6 +822,11 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_namespacebats_1aecb52659e56f9d87d8c6525fa7f9819e.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_namespacebats_1a4579e599b40f46a7047e1a37afac31be.rst
 
 .. toctree::
@@ -817,12 +842,32 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_namespacebats_1acca580f20f66ecf655c360bf788a008b.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1ab18f90938894bd28d4b962f357b1658d.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a65fd1ad3f2154979fa8a7b44d4ee8222.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_namespacebats_1a51c796239cb41f2376336b0b40e93d2c.rst
 
 .. toctree::
    :maxdepth: 5
 
    function_homology_2reduction_8hpp_1a7e2446e8991e36d8bb219998bc76736e.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a03cb4f7ab2e3c73a3b3f629094014a30.rst
 
 .. toctree::
    :maxdepth: 5
@@ -948,6 +993,26 @@ Functions
    :maxdepth: 5
 
    function_namespacebats_1a08a88fae7181466a53760d17f786a071.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a4602cae83d34635b1797fa5d2f458915.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a28f381ca981a168bbc1cd3274bb3eff2.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1adde180a44afa25aea101dd6f988251d4.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a5fa712e00214a76d722d00c16f342d83.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1082,6 +1147,11 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_namespacebats_1aa98ade0c810c489cb343d1483991331a.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_namespacebats_1a6201e20b7f966db15113f83cf3e31c61.rst
 
 .. toctree::
@@ -1093,6 +1163,16 @@ Functions
    :maxdepth: 5
 
    function_namespacebats_1a77750544358124fd5b9d47f1bb416305.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a9e8165f923d8bcd327d53646a16c9b69.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a68b01c797daa8817cc7381fb97a2475d.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1213,6 +1293,11 @@ Functions
    :maxdepth: 5
 
    function_namespacebats_1acc910da92ca8a22cb56e46643faf7ca3.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a2844a6b1b7dc694eae77bd2a9cb017df.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1542,6 +1627,21 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_namespacebats_1a14fb6e116b98e925f4a4260605882954.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_grid_8hpp_1a2cb6deb8fce663963003ef7e58461123.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_grid_8hpp_1a7cd7b8cd318520035d909efeab60931c.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_namespacebats_1a8d60f6854ea11bddda8a4a26b77a20fb.rst
 
 .. toctree::
@@ -1562,12 +1662,12 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_namespacebats_1a22d4a5b9ea082175dc1d37ed79f0b45f.rst
+   function_namespacebats_1a128372bb68bf4282bf0f02aa88cf6772.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_namespacebats_1a128372bb68bf4282bf0f02aa88cf6772.rst
+   function_namespacebats_1a22d4a5b9ea082175dc1d37ed79f0b45f.rst
 
 .. toctree::
    :maxdepth: 5
@@ -2007,6 +2107,16 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_namespacebats_1a06a002f8dd6be76ed335f4a3e03c08ac.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1adbb783f5dcf1ab98b73cd019f191224c.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_persistence_2filtration_8hpp_1a93e6d14720ddf4a4987a0f1fcc7cb7be.rst
 
 .. toctree::
@@ -2147,6 +2257,16 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_filtration_2extension_8hpp_1a3e4fbc7c3b1a7a36bc4b651e99a975ec.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_filtration_2extension_8hpp_1aa06b1768d2ada6e6cc07688a8819fdc9.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_sparse__fact_8hpp_1af211da6246ce8372b1225afbeb5d0f94.rst
 
 .. toctree::
@@ -2183,6 +2303,16 @@ Functions
    :maxdepth: 5
 
    function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_filtration_2extension_8hpp_1a276e570489b4feb223e4131c8bfa5392.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_filtration_2extension_8hpp_1a99e0c43dc36d0cbf034c0a8cc5ac7fbb.rst
 
 .. toctree::
    :maxdepth: 5

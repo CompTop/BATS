@@ -178,7 +178,20 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4I0EN4bats14get_dM_ZZ_indsENSt6vectorI6size_tEERKNSt6vectorI1TEEK1TK1T">
 <span id="_CPPv3I0EN4bats14get_dM_ZZ_indsERKNSt6vectorI1TEEK1TK1T"></span><span id="_CPPv2I0EN4bats14get_dM_ZZ_indsERKNSt6vectorI1TEEK1TK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacebats_1a0ac7df6b08aa32689f3ebbcffd884627"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">bats</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">get_dM_ZZ_inds</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN4bats14get_dM_ZZ_indsENSt6vectorI6size_tEERKNSt6vectorI1TEEK1TK1T" title="bats::get_dM_ZZ_inds::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">hds</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats14get_dM_ZZ_indsENSt6vectorI6size_tEERKNSt6vectorI1TEEK1TK1T" title="bats::get_dM_ZZ_inds::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">rho</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4bats14get_dM_ZZ_indsENSt6vectorI6size_tEERKNSt6vectorI1TEEK1TK1T" title="bats::get_dM_ZZ_inds::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">theta</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4bats14get_dM_ZZ_indsENSt6vectorI6size_tEERKNSt6vectorI1TEEK1TK1T" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>determine set of indices to use for dM-ZZ construction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hds</strong> – hausdorff distance of each point to point set. assume in decreasing order. </p></li>
+<li><p><strong>rho</strong> – rips multiplier - should be &gt;10 [OS15 thm 4.6] </p></li>
+<li><p><strong>theta</strong> – depends on dimension of data. In [0.5, 1/sqrt(2))[OS15 eq. 1]<ul>
+<li><p>if unsure, set to 0.5 for finer discretization </p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 </div>

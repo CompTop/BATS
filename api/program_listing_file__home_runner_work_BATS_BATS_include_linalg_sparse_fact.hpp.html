@@ -174,480 +174,480 @@
 <span class="cm">LEUP, PUEL, UELP, PLEU</span>
 
 <span class="cm">as well as shape commutation relations</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;col_matrix.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;col_matrix.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span><span class="cp"></span>
 
 
 <span class="c1">// factorization struct</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">SparseFact</span> <span class="p">{</span>
-    <span class="c1">// struct to hold factorization LEUP, PUEL, etc.</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">L</span><span class="p">;</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">E</span><span class="p">;</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">U</span><span class="p">;</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">P</span><span class="p">;</span>
-
-    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">LEUP_prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">L</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">U</span> <span class="o">*</span> <span class="n">P</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">PLEU_prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">P</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">U</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">UELP_prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">U</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">P</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">PUEL_prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">P</span> <span class="o">*</span> <span class="n">U</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">L</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">LQU_prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">L</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">U</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">UQL_prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">U</span> <span class="o">*</span> <span class="n">E</span> <span class="o">*</span> <span class="n">L</span><span class="p">;</span>
-    <span class="p">}</span>
-
-
-<span class="p">};</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="n">update_pivot</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">p2c</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// update pivot for column j, looking past row i0</span>
-    <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">piv</span> <span class="o">!=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);}</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="n">delete_pivot</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">p2c</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// update pivot for column j, looking past row i0</span>
-    <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">piv</span> <span class="o">!=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">it</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span> <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">get_pivots</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">piv2cols</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">update_pivot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">piv2cols</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">piv2cols</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// first do LEUP in-place on E matrix</span>
-    <span class="c1">// we&#39;ll operate on the transpose of P to keep track of permutations</span>
-
-    <span class="k">using</span> <span class="n">val_type</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span>
-    <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// for use with axpy</span>
-
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">pivs</span><span class="p">;</span> <span class="c1">// records pivots</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">val_type</span><span class="o">&gt;</span> <span class="n">coeff</span><span class="p">;</span> <span class="c1">// records coefficients</span>
-
-    <span class="k">auto</span> <span class="n">p2c</span> <span class="o">=</span> <span class="n">get_pivots</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">);</span>
-    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
-
-    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-
-            <span class="c1">// get pivot column</span>
-            <span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">j2</span> <span class="o">!=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// delete previous pivot for j</span>
-                <span class="n">delete_pivot</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
-
-                <span class="c1">// swap with column j</span>
-                <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
-                <span class="c1">// update pivot for j2 since we swapped</span>
-                <span class="n">update_pivot</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// update pivot</span>
-
-                <span class="c1">// apply to permutation as well</span>
-                <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j2</span><span class="p">);</span>
-            <span class="p">}</span>
-
-            <span class="c1">// lazy update U factor</span>
-            <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">pivs</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">SparseFact</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// struct to hold factorization LEUP, PUEL, etc.</span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">U</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LEUP_prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PLEU_prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">U</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">UELP_prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">P</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PUEL_prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LQU_prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">U</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">UQL_prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">update_pivot</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// update pivot for column j, looking past row i0</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">delete_pivot</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// update pivot for column j, looking past row i0</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">].</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">get_pivots</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">piv2cols</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">update_pivot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">piv2cols</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">piv2cols</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// first do LEUP in-place on E matrix</span>
+<span class="w">    </span><span class="c1">// we&#39;ll operate on the transpose of P to keep track of permutations</span>
+
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">val_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"> </span><span class="c1">// for use with axpy</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pivs</span><span class="p">;</span><span class="w"> </span><span class="c1">// records pivots</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">val_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coeff</span><span class="p">;</span><span class="w"> </span><span class="c1">// records coefficients</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">p2c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_pivots</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// get pivot column</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// delete previous pivot for j</span>
+<span class="w">                </span><span class="n">delete_pivot</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                </span><span class="c1">// swap with column j</span>
+<span class="w">                </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// update pivot for j2 since we swapped</span>
+<span class="w">                </span><span class="n">update_pivot</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// update pivot</span>
+
+<span class="w">                </span><span class="c1">// apply to permutation as well</span>
+<span class="w">                </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">swap_cols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// lazy update U factor</span>
+<span class="w">            </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">coeff</span><span class="p">,</span><span class="w"> </span><span class="n">pivs</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
 
 
-            <span class="c1">// perform schur complement in lower right-hand block</span>
-            <span class="k">auto</span> <span class="n">a11</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// perform schur complement in lower right-hand block</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">a11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w"></span>
 
-            <span class="c1">// we pivot on row i</span>
-            <span class="n">pivs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-            <span class="n">coeff</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">a11</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span> <span class="c1">// store for later</span>
+<span class="w">            </span><span class="c1">// we pivot on row i</span>
+<span class="w">            </span><span class="n">pivs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">coeff</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">a11</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span><span class="w"> </span><span class="c1">// store for later</span>
 
-            <span class="c1">// loop over columns with this pivot starting with second entry</span>
-            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">jj</span> <span class="o">=</span> <span class="o">++</span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cbegin</span><span class="p">());</span> <span class="n">jj</span> <span class="o">&lt;</span> <span class="n">p2c</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cend</span><span class="p">();</span> <span class="n">jj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                   <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">jj</span><span class="p">)</span> <span class="o">/</span> <span class="n">a11</span><span class="p">;</span>
-                   <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="o">*</span><span class="n">jj</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update block</span>
-                   <span class="n">update_pivot</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="o">*</span><span class="n">jj</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// update pivot</span>
-            <span class="p">}</span>
-            <span class="n">p2c</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="c1">// clear out old data</span>
+<span class="w">            </span><span class="c1">// loop over columns with this pivot starting with second entry</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cbegin</span><span class="p">());</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cend</span><span class="p">();</span><span class="w"> </span><span class="n">jj</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                   </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">jj</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">a11</span><span class="p">;</span><span class="w"></span>
+<span class="w">                   </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="o">*</span><span class="n">jj</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"> </span><span class="c1">// update block</span>
+<span class="w">                   </span><span class="n">update_pivot</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">jj</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// update pivot</span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// clear out old data</span>
 
-            <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">a11</span><span class="p">.</span><span class="n">inv</span><span class="p">(),</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
+<span class="w">            </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">a11</span><span class="p">.</span><span class="n">inv</span><span class="p">(),</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
 
 
-            <span class="c1">// clear out column</span>
-            <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">TC</span><span class="p">();</span>
-            <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a11</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// clear out column</span>
+<span class="w">            </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TC</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">a11</span><span class="p">);</span><span class="w"></span>
 
-            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="c1">// now finish lazy updates of U factor</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// lazy update U factor</span>
-        <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">pivs</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-        <span class="c1">// Clear out column of E</span>
-        <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">TC</span><span class="p">();</span>
-        <span class="n">j</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">j</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// now finish lazy updates of U factor</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// lazy update U factor</span>
+<span class="w">        </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">coeff</span><span class="p">,</span><span class="w"> </span><span class="n">pivs</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Clear out column of E</span>
+<span class="w">        </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TC</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">j</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// transpose the permutation matrix P</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// transpose the permutation matrix P</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">transpose</span><span class="p">();</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">LEUP</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// LEUP factorization of matrix A</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LEUP</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// LEUP factorization of matrix A</span>
 
-    <span class="k">using</span> <span class="n">MatT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MatT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">F</span><span class="p">;</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">F</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">PLEU_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">PLEU_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span> <span class="c1">// take transpose</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"> </span><span class="c1">// take transpose</span>
 
-    <span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// take transposes of everything</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span> <span class="c1">// because terms become transposed</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// take transposes of everything</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"> </span><span class="c1">// because terms become transposed</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">PLEU</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// LEUP factorization of matrix A</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PLEU</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// LEUP factorization of matrix A</span>
 
-    <span class="k">auto</span> <span class="n">At</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">At</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">At</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LEUP</span><span class="p">(</span><span class="n">At</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// take transposes of everything</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span> <span class="c1">// because terms become transposed</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// take transposes of everything</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"> </span><span class="c1">// because terms become transposed</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">F</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">UELP_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">UELP_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span> <span class="c1">// conjugation</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"> </span><span class="c1">// conjugation</span>
 
-    <span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// take J conjugates of everything</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span> <span class="c1">// because terms swap triangular shape</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// take J conjugates of everything</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"> </span><span class="c1">// because terms swap triangular shape</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">UELP</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// LEUP factorization of matrix A</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">UELP</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// LEUP factorization of matrix A</span>
 
-    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LEUP</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">());</span><span class="w"></span>
 
-    <span class="c1">// take J conjugates of everything</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span> <span class="c1">// because terms swap triangular shape</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// take J conjugates of everything</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"> </span><span class="c1">// because terms swap triangular shape</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">F</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">PUEL_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">PUEL_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span> <span class="c1">// conjugation and transpose</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span><span class="w"> </span><span class="c1">// conjugation and transpose</span>
 
-    <span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LEUP_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// take transposes and J conjugates of everything</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span>
-    <span class="c1">// don&#39;t need to swap</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// take transposes and J conjugates of everything</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// don&#39;t need to swap</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">().</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">PUEL</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// LEUP factorization of matrix A</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PUEL</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// LEUP factorization of matrix A</span>
 
-    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LEUP</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">().</span><span class="n">T</span><span class="p">());</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LEUP</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">().</span><span class="n">T</span><span class="p">());</span><span class="w"></span>
 
-    <span class="c1">// take transposes and J conjugates of everything</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span>
-    <span class="c1">// don&#39;t need to swap</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// take transposes and J conjugates of everything</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">P</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// don&#39;t need to swap</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">F</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="cm">/*</span>
 <span class="cm">EL commutation and related functions</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 
 
 <span class="c1">// return pivot of column j in E matrix</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">pivot_ind</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">E</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">it</span> <span class="o">==</span> <span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="o">?</span> <span class="n">bats</span><span class="o">::</span><span class="nl">NO_IND</span> <span class="p">:</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">pivot_ind</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="nl">NO_IND</span> <span class="p">:</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// normalize E matrix to have unit entries</span>
 <span class="c1">// return scaling of rows to recover original matrix</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">extract_row_scale</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// assume pivot structure</span>
-    <span class="k">using</span> <span class="n">val_type</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">extract_row_scale</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">E</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// assume pivot structure</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">val_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span> <span class="nc">TC</span><span class="o">::</span><span class="n">val_type</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">E</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">E</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">E</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">val_type</span><span class="o">&gt;</span> <span class="n">coeff</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">val_type</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">coeff</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
-            <span class="n">it</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">val_type</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">val_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coeff</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">val_type</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">coeff</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val_type</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">coeff</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">coeff</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// produce matrix Ltilde so Ltilde * EL = EL * L</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">EL_L_commute</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">E</span><span class="p">,</span> <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EL_L_commute</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="k">using</span> <span class="n">MatT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MatT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">MatT</span> <span class="nf">EL</span><span class="p">(</span><span class="n">E</span><span class="p">);</span> <span class="c1">// create copy</span>
-    <span class="k">auto</span> <span class="n">coeff</span> <span class="o">=</span> <span class="n">extract_row_scale</span><span class="p">(</span><span class="n">EL</span><span class="p">);</span> <span class="c1">// extract row scale</span>
-    <span class="c1">// for unit EL, we have EL * L = Ltil * EL</span>
-    <span class="c1">// with diagonal row scaling, use D EL L = D Ltil D^{-1} D EL</span>
+<span class="w">    </span><span class="n">MatT</span><span class="w"> </span><span class="nf">EL</span><span class="p">(</span><span class="n">E</span><span class="p">);</span><span class="w"> </span><span class="c1">// create copy</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">coeff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extract_row_scale</span><span class="p">(</span><span class="n">EL</span><span class="p">);</span><span class="w"> </span><span class="c1">// extract row scale</span>
+<span class="w">    </span><span class="c1">// for unit EL, we have EL * L = Ltil * EL</span>
+<span class="w">    </span><span class="c1">// with diagonal row scaling, use D EL L = D Ltil D^{-1} D EL</span>
 
 
-    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">EL</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">EL</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EL</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EL</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="c1">// first build map of indices</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">idx_map</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">idx_map</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">pivot_ind</span><span class="p">(</span><span class="n">EL</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// first build map of indices</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">idx_map</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">idx_map</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pivot_ind</span><span class="p">(</span><span class="n">EL</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">Ltilde</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-    <span class="c1">// loop over columns of EL</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">ell</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ell</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">ell</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">j_ell</span> <span class="o">=</span> <span class="n">idx_map</span><span class="p">[</span><span class="n">ell</span><span class="p">];</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">j_ell</span> <span class="o">==</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// EL structure puts NO_INDS at end</span>
-        <span class="n">Ltilde</span><span class="p">[</span><span class="n">j_ell</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span> <span class="c1">// clear contents</span>
-        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">ell</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">L</span><span class="p">[</span><span class="n">ell</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">idx_map</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">Ltilde</span><span class="p">[</span><span class="n">j_ell</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">idx_map</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">],</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span> <span class="c1">// Ltilde(idx_map[i], idx_map[j]) = L[i,j]</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">Ltilde</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// loop over columns of EL</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">ell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ell</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">ell</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j_ell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idx_map</span><span class="p">[</span><span class="n">ell</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j_ell</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// EL structure puts NO_INDS at end</span>
+<span class="w">        </span><span class="n">Ltilde</span><span class="p">[</span><span class="n">j_ell</span><span class="p">].</span><span class="n">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// clear contents</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">ell</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">ell</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">idx_map</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">Ltilde</span><span class="p">[</span><span class="n">j_ell</span><span class="p">].</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">idx_map</span><span class="p">[</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">],</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span><span class="w"> </span><span class="c1">// Ltilde(idx_map[i], idx_map[j]) = L[i,j]</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">Ltilde</span><span class="p">.</span><span class="n">row_scale</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span> <span class="c1">// scale rows</span>
-    <span class="n">Ltilde</span><span class="p">.</span><span class="n">col_inv_scale</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span> <span class="c1">// scale columns by inverse</span>
+<span class="w">    </span><span class="n">Ltilde</span><span class="p">.</span><span class="n">row_scale</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span><span class="w"> </span><span class="c1">// scale rows</span>
+<span class="w">    </span><span class="n">Ltilde</span><span class="p">.</span><span class="n">col_inv_scale</span><span class="p">(</span><span class="n">coeff</span><span class="p">);</span><span class="w"> </span><span class="c1">// scale columns by inverse</span>
 
-    <span class="c1">// auto Ltilde = E * L * EL.T();</span>
-    <span class="k">return</span> <span class="n">Ltilde</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// auto Ltilde = E * L * EL.T();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Ltilde</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// produce matrix Ltilde so L * ELhat = ELhat * Ltilde</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">L_EL_commute</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">L</span><span class="p">,</span> <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">EL</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">EL_L_commute</span><span class="p">(</span><span class="n">EL</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation_inplace</span><span class="p">(),</span> <span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation_inplace</span><span class="p">()).</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">L_EL_commute</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">EL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EL_L_commute</span><span class="p">(</span><span class="n">EL</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation_inplace</span><span class="p">(),</span><span class="w"> </span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation_inplace</span><span class="p">()).</span><span class="n">T</span><span class="p">().</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 <span class="c1">// produce matrix Utilde so U * EU = EU * Utilde</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">U_EU_commute</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">,</span> <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">EU</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">EL_L_commute</span><span class="p">(</span><span class="n">EU</span><span class="p">.</span><span class="n">T</span><span class="p">(),</span> <span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">()).</span><span class="n">T</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">U_EU_commute</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">EU</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EL_L_commute</span><span class="p">(</span><span class="n">EU</span><span class="p">.</span><span class="n">T</span><span class="p">(),</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">()).</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 <span class="c1">// produce matrix Utilde so EUhat * U = Utilde * EUhat</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">EU_U_commute</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">EU</span><span class="p">,</span> <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">EL_L_commute</span><span class="p">(</span><span class="n">EU</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">(),</span> <span class="n">U</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">()).</span><span class="n">J_conjugation</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EU_U_commute</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">EU</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EL_L_commute</span><span class="p">(</span><span class="n">EU</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">(),</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">()).</span><span class="n">J_conjugation</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">CU_inplace</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">,</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">U</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// produce factorization CU^{-1}</span>
-    <span class="c1">// where U is upper triangular.</span>
-    <span class="c1">// everything to right of a high pivot is eliminated</span>
-    <span class="c1">// columns of C are scaled so pivots are 1</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">CU_inplace</span><span class="p">(</span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// produce factorization CU^{-1}</span>
+<span class="w">    </span><span class="c1">// where U is upper triangular.</span>
+<span class="w">    </span><span class="c1">// everything to right of a high pivot is eliminated</span>
+<span class="w">    </span><span class="c1">// columns of C are scaled so pivots are 1</span>
 
-    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">ssize_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">-1</span><span class="p">);</span> <span class="c1">// initialize pivots to -1</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">ssize_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">);</span><span class="w"> </span><span class="c1">// initialize pivots to -1</span>
 
-    <span class="c1">// loop over columns</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">bool</span> <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="kt">size_t</span> <span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="c1">// loop over entries in column C[j]</span>
-        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">piv</span> <span class="o">!=</span> <span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">i0</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
-            <span class="k">auto</span> <span class="n">v</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">-1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if pivot index is pivot in previous column - eliminate</span>
+<span class="w">    </span><span class="c1">// loop over columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">found_pivot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// loop over entries in column C[j]</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">i0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// if pivot index is pivot in previous column - eliminate</span>
 
-                <span class="c1">// eliminate entry in C[j]</span>
-                <span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]]);</span> <span class="c1">// pivot has been scaled to 1</span>
-                <span class="c1">// update U[j]</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]]);</span> <span class="c1">// inverse operation to columns of U</span>
+<span class="w">                </span><span class="c1">// eliminate entry in C[j]</span>
+<span class="w">                </span><span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]]);</span><span class="w"> </span><span class="c1">// pivot has been scaled to 1</span>
+<span class="w">                </span><span class="c1">// update U[j]</span>
+<span class="w">                </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]]);</span><span class="w"> </span><span class="c1">// inverse operation to columns of U</span>
 
-                <span class="n">piv</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span> <span class="c1">// go to next nonzero</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found_pivot</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// we have found pivot for this column</span>
-                <span class="n">found_pivot</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// found the pivot</span>
-                <span class="c1">// record pivot</span>
-                <span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-                <span class="c1">// scale column so pivot is 1</span>
-                <span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span>
-                <span class="c1">// scale U with inverse operation</span>
-                <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span>
-                <span class="o">++</span><span class="n">piv</span><span class="p">;</span> <span class="c1">// go to next nonzero</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="o">++</span><span class="n">piv</span><span class="p">;</span> <span class="c1">// go to next nonzero</span>
-            <span class="p">}</span>
+<span class="w">                </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">i0</span><span class="p">);</span><span class="w"> </span><span class="c1">// go to next nonzero</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">found_pivot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// we have found pivot for this column</span>
+<span class="w">                </span><span class="n">found_pivot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// found the pivot</span>
+<span class="w">                </span><span class="c1">// record pivot</span>
+<span class="w">                </span><span class="n">p2c</span><span class="p">[</span><span class="n">i0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// scale column so pivot is 1</span>
+<span class="w">                </span><span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// scale U with inverse operation</span>
+<span class="w">                </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">scale_inplace</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">inv</span><span class="p">());</span><span class="w"></span>
+<span class="w">                </span><span class="o">++</span><span class="n">piv</span><span class="p">;</span><span class="w"> </span><span class="c1">// go to next nonzero</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="o">++</span><span class="n">piv</span><span class="p">;</span><span class="w"> </span><span class="c1">// go to next nonzero</span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
 
-        <span class="p">}</span>
-        <span class="c1">// U = u_inv(U);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// U = u_inv(U);</span>
 
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">LQU_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// TODO</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">LQU_inplace</span><span class="p">(</span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// TODO</span>
 
-    <span class="c1">// first, do a CU factorization in-place on A and U.</span>
-    <span class="n">CU_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// first, do a CU factorization in-place on A and U.</span>
+<span class="w">    </span><span class="n">CU_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"></span>
 
 
-    <span class="c1">// now do a CU factorization on A^T to get L factor.</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span>
-    <span class="n">CU_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span> <span class="c1">// A is now a pivot matrix</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">();</span> <span class="c1">// take transpose to get L factor.</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// now do a CU factorization on A^T to get L factor.</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">CU_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"> </span><span class="c1">// A is now a pivot matrix</span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">T</span><span class="p">();</span><span class="w"> </span><span class="c1">// take transpose to get L factor.</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">LQU</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// LQU factorization of matrix A</span>
-    <span class="c1">// E is used for Q matrix</span>
-    <span class="c1">// P is unused</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LQU</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// LQU factorization of matrix A</span>
+<span class="w">    </span><span class="c1">// E is used for Q matrix</span>
+<span class="w">    </span><span class="c1">// P is unused</span>
 
-    <span class="k">using</span> <span class="n">MatT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MatT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">F</span><span class="p">;</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MatT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">LQU_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LQU_inplace</span><span class="p">(</span><span class="n">F</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">F</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">UQL</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">Aj</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">();</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">SparseFact</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">UQL</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">Aj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">J_conjugation</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LQU</span><span class="p">(</span><span class="n">Aj</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span> <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
-    <span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LQU</span><span class="p">(</span><span class="n">Aj</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">.</span><span class="n">J_conjugation_inplace</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">F</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// invert A using LQU factorization</span>
 <span class="c1">// assume Q is full rank</span>
 <span class="c1">// A = LQU -&gt; A^{-1} = U^{-1} Q^T L^{-1}</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span>
-<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="n">inv</span><span class="p">(</span><span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TC</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inv</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TC</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">F</span> <span class="o">=</span> <span class="n">LQU</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">u_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">)</span> <span class="o">*</span> <span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">()</span> <span class="o">*</span> <span class="n">l_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LQU</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">u_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">U</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F</span><span class="p">.</span><span class="n">E</span><span class="p">.</span><span class="n">T</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">l_inv</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">L</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

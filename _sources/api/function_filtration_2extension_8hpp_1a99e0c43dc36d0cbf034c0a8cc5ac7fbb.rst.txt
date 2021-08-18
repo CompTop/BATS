@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2extension_8hpp_1a99e0c43dc36d0cbf034c0a8cc5ac7fbb:
+
+Template Function max_cube_val(const std::vector<size_t>&, const std::vector<std::vector<std::vector<T>>>&)
+===========================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: max_cube_val(const std::vector<size_t>&, const std::vector<std::vector<std::vector<T>>>&)

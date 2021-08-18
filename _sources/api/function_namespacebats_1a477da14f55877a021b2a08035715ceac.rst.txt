@@ -1,7 +1,7 @@
 .. _exhale_function_namespacebats_1a477da14f55877a021b2a08035715ceac:
 
-Template Function bats::ChainFunctor
-====================================
+Template Function bats::ChainFunctor(const DT&)
+===============================================
 
 - Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
 

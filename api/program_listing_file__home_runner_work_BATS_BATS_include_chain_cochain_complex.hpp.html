@@ -170,101 +170,101 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 <span class="cm">/*</span>
 <span class="cm">class to store a chain complex</span>
-<span class="cm">*/</span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;util/permutation.hpp&gt;</span><span class="cp"></span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;util/permutation.hpp&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 
 <span class="c1">// template over matrix type</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">CochainComplex</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">dim</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="n">coboundary</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">CochainComplex</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coboundary</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">CochainComplex</span><span class="p">()</span> <span class="p">{}</span>
+<span class="w">    </span><span class="n">CochainComplex</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-    <span class="n">CochainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dim</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">coboundary</span><span class="p">)</span> <span class="o">:</span> <span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="n">coboundary</span><span class="p">(</span><span class="n">coboundary</span><span class="p">)</span> <span class="p">{}</span>
+<span class="w">    </span><span class="n">CochainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dim</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">coboundary</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span><span class="w"> </span><span class="n">coboundary</span><span class="p">(</span><span class="n">coboundary</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-    <span class="c1">// produce a cochain complex from a simplicial or cell complex</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
-    <span class="n">CochainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">CpxT</span><span class="o">&amp;</span> <span class="n">X</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dim</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="n">coboundary</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">MT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="p">]).</span><span class="n">transpose</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">MT</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">boundary_csc</span><span class="p">(</span><span class="n">k</span><span class="p">)).</span><span class="n">transpose</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// produce a cochain complex from a simplicial or cell complex</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">CochainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CpxT</span><span class="o">&amp;</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">dim</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">coboundary</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">X</span><span class="p">.</span><span class="n">ncells</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="p">]).</span><span class="n">transpose</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MT</span><span class="p">(</span><span class="n">X</span><span class="p">.</span><span class="n">boundary_csc</span><span class="p">(</span><span class="n">k</span><span class="p">)).</span><span class="n">transpose</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// ChainComplex(const ChainComplex &amp;C) : dim(C.dim), boundary(C.boundary) {}</span>
+<span class="w">    </span><span class="c1">// ChainComplex(const ChainComplex &amp;C) : dim(C.dim), boundary(C.boundary) {}</span>
 
-    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-    <span class="c1">//inline size_t dim(size_t k) const { return dim[k]; }</span>
-    <span class="c1">//inline MT&amp; boundary(size_t k) { return boundary[k]; }</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//inline size_t dim(size_t k) const { return dim[k]; }</span>
+<span class="w">    </span><span class="c1">//inline MT&amp; boundary(size_t k) { return boundary[k]; }</span>
 
-    <span class="n">MT</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
-            <span class="c1">// throw error</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">MT</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// throw error</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// permute basis in dimension k</span>
-    <span class="kt">void</span> <span class="n">permute_basis</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// only worry about boundary[1]</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">maxdim</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()].</span><span class="n">permute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
-            <span class="c1">// only worry about boundary[maxdim()]</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// need to handle boundary[k] and boundary[k+1]</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">permute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">));</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// permute basis in dimension k</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">permute_basis</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// only worry about boundary[1]</span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxdim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()].</span><span class="n">permute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// only worry about boundary[maxdim()]</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// need to handle boundary[k] and boundary[k+1]</span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">permute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// permute basis in all dimensions</span>
-    <span class="kt">void</span> <span class="n">permute_basis</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">perm</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">permute_basis</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// permute basis in all dimensions</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">permute_basis</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">perm</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">permute_basis</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">perm</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kt">void</span> <span class="n">ipermute_basis</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// only worry about boundary[1]</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">));</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">maxdim</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ipermute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
-            <span class="c1">// only worry about boundary[maxdim()]</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// need to handle boundary[k] and boundary[k+1]</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ipermute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
-            <span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">));</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">ipermute_basis</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">perm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// only worry about boundary[1]</span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxdim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ipermute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// only worry about boundary[maxdim()]</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// need to handle boundary[k] and boundary[k+1]</span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ipermute_cols</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">inv_perm</span><span class="p">(</span><span class="n">perm</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">};</span>
+<span class="p">};</span><span class="w"></span>
 
 
 
 <span class="c1">// defualt return</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="k">auto</span> <span class="n">__CochainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">CpxT</span> <span class="o">&amp;</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
-    <span class="k">using</span> <span class="n">MT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">__CochainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CpxT</span><span class="w"> </span><span class="o">&amp;</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">VT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">X</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">X</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

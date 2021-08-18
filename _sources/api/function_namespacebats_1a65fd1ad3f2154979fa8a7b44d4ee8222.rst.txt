@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a65fd1ad3f2154979fa8a7b44d4ee8222:
+
+Function bats::Cube(size_t, size_t, size_t, size_t, size_t, size_t, size_t, size_t, size_t)
+===========================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Cube(size_t, size_t, size_t, size_t, size_t, size_t, size_t, size_t, size_t)

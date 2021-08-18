@@ -12,6 +12,7 @@ Subdirectories
 
 - :ref:`dir__home_runner_work_BATS_BATS_include_chain`
 - :ref:`dir__home_runner_work_BATS_BATS_include_complex`
+- :ref:`dir__home_runner_work_BATS_BATS_include_dgvs`
 - :ref:`dir__home_runner_work_BATS_BATS_include_filtration`
 - :ref:`dir__home_runner_work_BATS_BATS_include_future`
 - :ref:`dir__home_runner_work_BATS_BATS_include_homology`
@@ -31,6 +32,7 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_bats.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_chain.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_complex.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_dgvs.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_filtration.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_future.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`

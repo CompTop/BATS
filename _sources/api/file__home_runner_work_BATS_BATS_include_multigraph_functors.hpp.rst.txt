@@ -37,9 +37,15 @@ Includes
 
 - ``complex/simplicial_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_simplicial_map.hpp`)
 
+- ``dgvs/dgmap.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgmap.hpp`)
+
+- ``dgvs/dgvs.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp`)
+
 - ``diagram.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp`)
 
 - ``homology/basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_basis.hpp`)
+
+- ``homology/dgbasis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_dgbasis.hpp`)
 
 - ``homology/induced_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`)
 
@@ -81,7 +87,13 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1af16b0e2a23ec8a98605c51a9307520b1`
 
+- :ref:`exhale_function_namespacebats_1aecb52659e56f9d87d8c6525fa7f9819e`
+
 - :ref:`exhale_function_namespacebats_1a477da14f55877a021b2a08035715ceac`
+
+- :ref:`exhale_function_namespacebats_1a03cb4f7ab2e3c73a3b3f629094014a30`
+
+- :ref:`exhale_function_namespacebats_1aa98ade0c810c489cb343d1483991331a`
 
 - :ref:`exhale_function_namespacebats_1a5178d1d29e8f42549c22417206aadd53`
 
@@ -90,4 +102,6 @@ Functions
 - :ref:`exhale_function_namespacebats_1a0f99b26c184a52dddf196d766faa695a`
 
 - :ref:`exhale_function_namespacebats_1a7232532be8060651ac3b707700bf0fa9`
+
+- :ref:`exhale_function_namespacebats_1a14fb6e116b98e925f4a4260605882954`
 

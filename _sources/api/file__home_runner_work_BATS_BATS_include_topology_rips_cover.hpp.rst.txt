@@ -39,7 +39,7 @@ Includes
 
 - ``metric.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`)
 
-- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`)
 
 - ``tuple``
 

@@ -173,63 +173,63 @@
 
 <span class="cm">Naive algorithm:</span>
 <span class="cm">c.f. Dummit &amp; Foote section 12.2</span>
-<span class="cm">*/</span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;sparse_vector.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;col_matrix.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;polynomial.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;pid.hpp&quot;</span><span class="cp"></span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sparse_vector.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;col_matrix.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;polynomial.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pid.hpp&quot;</span><span class="cp"></span>
 
 <span class="c1">// generate basis for k[T] module</span>
 <span class="c1">// from R factor of Smith factorization of A</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">generating_basis</span><span class="p">(</span>
-    <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;&gt;&amp;</span> <span class="n">R</span><span class="p">,</span>
-    <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">A</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span> <span class="n">col</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">VT</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)));</span> <span class="c1">// Cj = R[i,j](A) * ei</span>
-            <span class="n">p</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ColumnMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">col</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">generating_basis</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;&gt;&amp;</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">VT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">col</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">VT</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)));</span><span class="w"> </span><span class="c1">// Cj = R[i,j](A) * ei</span>
+<span class="w">            </span><span class="n">p</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="c1">// Sanity check: if smith form S(j,j) = 1,</span>
 <span class="c1">// then basis vector j should be 0.</span>
 
 <span class="c1">// generate whole basis for RCF</span>
 <span class="c1">// S is smith form of xI - A</span>
 <span class="c1">// B is generating basis for k[A]</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">RCF_basis</span><span class="p">(</span>
-    <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;&gt;&amp;</span> <span class="n">S</span><span class="p">,</span>
-    <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">,</span>
-    <span class="k">const</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">B</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">RCF_basis</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">UnivariatePolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;&gt;&amp;</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">B</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">VT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">S</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span> <span class="n">col</span><span class="p">;</span>
-    <span class="n">col</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
-    <span class="c1">// loop over columns of R</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">degree</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">auto</span> <span class="n">v</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-            <span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">degree</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">v</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>
-                <span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">col</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">col</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// loop over columns of R</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">degree</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">S</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">).</span><span class="n">degree</span><span class="p">();</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">col</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">ColumnMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">col</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

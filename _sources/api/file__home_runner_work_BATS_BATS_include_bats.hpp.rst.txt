@@ -33,6 +33,8 @@ Includes
 
 - ``complex.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_abstract_complex.hpp`)
 
+- ``dgvs.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp`)
+
 - ``filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_filtration_filtration.hpp`)
 
 - ``future.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_future.hpp`)

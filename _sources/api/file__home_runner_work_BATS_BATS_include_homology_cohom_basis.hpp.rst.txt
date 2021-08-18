@@ -35,7 +35,7 @@ Includes
 
 - ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
 
-- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`)
 
 - ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
 
@@ -44,6 +44,8 @@ Includes
 Included By
 -----------
 
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`
 

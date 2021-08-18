@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a5fa712e00214a76d722d00c16f342d83:
+
+Template Function bats::Freudenthal(const CubicalComplex&, size_t, size_t, size_t)
+==================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Freudenthal(const CubicalComplex&, size_t, size_t, size_t)

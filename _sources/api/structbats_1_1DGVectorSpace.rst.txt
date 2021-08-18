@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1DGVectorSpace:
+
+Template Struct DGVectorSpace
+=============================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::DGVectorSpace
+   :members:
+   :protected-members:
+   :undoc-members:

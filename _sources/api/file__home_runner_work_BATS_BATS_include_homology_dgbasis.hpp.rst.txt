@@ -1,0 +1,69 @@
+
+.. _file__home_runner_work_BATS_BATS_include_homology_dgbasis.hpp:
+
+File dgbasis.hpp
+================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_homology>` (``/home/runner/work/BATS/BATS/include/homology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/homology/dgbasis.hpp``)
+-------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_homology_dgbasis.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``chrono``
+
+- ``dgvs/dgvs.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp`)
+
+- ``parallel.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_parallel.hpp`)
+
+- ``reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)
+
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`)
+
+- ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_homology.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1ReducedDGVectorSpace`
+

@@ -33,7 +33,7 @@ Includes
 
 - ``complex/cell_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_complex_cell_map.hpp`)
 
-- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_util_set.hpp`)
+- ``set`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`)
 
 - ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)
 

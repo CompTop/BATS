@@ -60,6 +60,31 @@ Program Listing for File cell_map.hpp
            }
        }
    
+       template <typename CpxT>
+       CellularMap(const CpxT& X, const CpxT& Y) {
+           size_t dim = X.maxdim();
+           cell_map.resize(dim+1);
+           std::vector<size_t> s;
+   
+           for (size_t k = 0; k < dim+1; k++) {
+               std::vector<SparseVector<int, size_t>> col;
+               col.reserve(X.ncells(k));
+               for (size_t i = 0; i < X.ncells(k); i++) {
+                   // fill s with image of cell i in dimension k
+                   X.get_cell(k, i, s);
+                   size_t j = Y.find_idx(s);
+   
+                   if (j == bats::NO_IND) {
+                       throw std::out_of_range("No existing target cell!");
+                   }
+                   col.emplace_back(SparseVector<int, size_t>({j}, {1}));
+               }
+               cell_map[k] = ColumnMatrix<SparseVector<int, size_t>>(Y.ncells(k), X.ncells(k), col);
+           }
+   
+   
+       }
+   
        inline size_t maxdim() const { return cell_map.size() - 1; }
    
        map_type& operator[](size_t k) {

@@ -1,0 +1,63 @@
+
+.. _file__home_runner_work_BATS_BATS_include_topology_levelset.hpp:
+
+File levelset.hpp
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_runner_work_BATS_BATS_include_topology>` (``/home/runner/work/BATS/BATS/include/topology``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/runner/work/BATS/BATS/include/topology/levelset.hpp``)
+--------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_runner_work_BATS_BATS_include_topology_levelset.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``grid.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`)
+
+- ``limits``
+
+- ``zigzag/zigzag_filtration.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_zigzag_zigzag_filtration.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_runner_work_BATS_BATS_include_topology.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_bats`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_namespacebats_1a06a002f8dd6be76ed335f4a3e03c08ac`
+
+- :ref:`exhale_function_namespacebats_1adbb783f5dcf1ab98b73cd019f191224c`
+

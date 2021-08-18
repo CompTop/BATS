@@ -131,6 +131,18 @@ Program Listing for File filtration.hpp
            return filtration_sortperm(val);
        }
    
+       CpxT sublevelset(const TF a) const {
+           CpxT Y(X.ncells(0), X.maxdim()); // initialize new complex
+           for (size_t k = 0; k < maxdim() + 1; ++k) {
+               for (size_t i = 0; i < ncells(k); ++i) {
+                   if (val[k][i] <= a) {
+                       Y.add(X.get_cell(k, i));
+                   }
+               }
+           }
+           return Y;
+       }
+   
    };
    
    } // namespace bats

@@ -169,83 +169,83 @@
 <p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_future_similarity.hpp.html#file-home-runner-work-bats-bats-include-future-similarity-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/future/similarity.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="nn">future</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">future</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="c1">// TODO: template over matrix type.</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">SimilarityTransform</span> <span class="p">{</span>
-    <span class="cm">/*</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">SimilarityTransform</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*</span>
 <span class="cm">    struct to hold similarity transformation of matrix A</span>
 <span class="cm">    Maintains invariant A0 = S * A * Sinv</span>
-<span class="cm">    */</span>
-    <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">S</span><span class="p">;</span>
-    <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">A</span><span class="p">;</span>
-    <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Sinv</span><span class="p">;</span>
+<span class="cm">    */</span><span class="w"></span>
+<span class="w">    </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">S</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sinv</span><span class="p">;</span><span class="w"></span>
 
 
-    <span class="c1">// TODO: check that A is square</span>
-    <span class="n">SimilarityTransform</span><span class="p">(</span><span class="k">const</span> <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">A0</span><span class="p">)</span> <span class="o">:</span> \
-    <span class="n">S</span><span class="p">(</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">identity</span><span class="p">(</span><span class="n">A0</span><span class="p">.</span><span class="n">nrow</span><span class="p">())),</span>
-    <span class="n">A</span><span class="p">(</span><span class="n">A0</span><span class="p">),</span>
-    <span class="n">Sinv</span><span class="p">(</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">identity</span><span class="p">(</span><span class="n">A0</span><span class="p">.</span><span class="n">nrow</span><span class="p">()))</span> <span class="p">{}</span>
+<span class="w">    </span><span class="c1">// TODO: check that A is square</span>
+<span class="w">    </span><span class="n">SimilarityTransform</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">A0</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">S</span><span class="p">(</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">identity</span><span class="p">(</span><span class="n">A0</span><span class="p">.</span><span class="n">nrow</span><span class="p">())),</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="p">(</span><span class="n">A0</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">Sinv</span><span class="p">(</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">identity</span><span class="p">(</span><span class="n">A0</span><span class="p">.</span><span class="n">nrow</span><span class="p">()))</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();}</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">nrow</span><span class="p">();}</span><span class="w"></span>
 
-    <span class="c1">// const access data</span>
-    <span class="kr">inline</span> <span class="n">T</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);}</span>
+<span class="w">    </span><span class="c1">// const access data</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);}</span><span class="w"></span>
 
-    <span class="kt">void</span> <span class="n">print_info</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[&quot;</span> <span class="o">&lt;&lt;</span> <span class="k">this</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;] : &quot;</span> <span class="o">&lt;&lt;</span> \
-        <span class="s">&quot; SimilarityTransform&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">void</span> <span class="n">print</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="n">print_info</span><span class="p">();</span>
-        <span class="n">S</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
-        <span class="n">Sinv</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">print_info</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span>\
+<span class="w">        </span><span class="s">&quot; SimilarityTransform&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">print</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">print_info</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">S</span><span class="p">.</span><span class="n">print</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">print</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">Sinv</span><span class="p">.</span><span class="n">print</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">prod</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="p">((</span><span class="n">S</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="n">Sinv</span><span class="p">);</span> <span class="p">}</span>
+<span class="w">    </span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prod</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">((</span><span class="n">S</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Sinv</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// swap rows/columns</span>
-    <span class="kt">void</span> <span class="n">swap_rows</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i0</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// have to do everything symmetric</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">swap_columns</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
-        <span class="n">S</span><span class="p">.</span><span class="n">swap_columns</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
-        <span class="n">Sinv</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">swap_columns</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j0</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j1</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">swap_rows</span><span class="p">(</span><span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span> <span class="p">}</span>
+<span class="w">    </span><span class="c1">// swap rows/columns</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">swap_rows</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// have to do everything symmetric</span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">swap_columns</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">S</span><span class="p">.</span><span class="n">swap_columns</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Sinv</span><span class="p">.</span><span class="n">swap_rows</span><span class="p">(</span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">swap_columns</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">swap_rows</span><span class="p">(</span><span class="n">j0</span><span class="p">,</span><span class="w"> </span><span class="n">j1</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// add a * row(i1) to row(i0)</span>
-    <span class="kt">void</span> <span class="n">add_row</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i1</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i0</span><span class="p">);</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">add_column</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
-        <span class="n">S</span><span class="p">.</span><span class="n">add_column</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
-        <span class="n">Sinv</span><span class="p">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i0</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// add a * row(i1) to row(i0)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">add_row</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">add_column</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">S</span><span class="p">.</span><span class="n">add_column</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Sinv</span><span class="p">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">i1</span><span class="p">,</span><span class="w"> </span><span class="n">i0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kt">void</span> <span class="n">scale_row</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">T</span> <span class="n">ai</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">inv</span><span class="p">();</span>
-        <span class="n">S</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span>
-        <span class="n">Sinv</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">scale_row</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">inv</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">S</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Sinv</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kt">void</span> <span class="n">scale_column</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">T</span> <span class="n">ai</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">inv</span><span class="p">();</span>
-        <span class="n">S</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span>
-        <span class="n">A</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-        <span class="n">Sinv</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">scale_column</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">inv</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">S</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">column</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Sinv</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">scale</span><span class="p">(</span><span class="n">ai</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">};</span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="p">}</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

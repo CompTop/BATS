@@ -33,6 +33,8 @@ Includes
 
 - ``chain/chain_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`)
 
+- ``cohom_basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`)
+
 - ``iostream``
 
 - ``linalg/col_matrix.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_col_matrix.hpp`)
@@ -65,5 +67,9 @@ Functions
 ---------
 
 
+- :ref:`exhale_function_namespacebats_1a68b01c797daa8817cc7381fb97a2475d`
+
 - :ref:`exhale_function_namespacebats_1a77750544358124fd5b9d47f1bb416305`
+
+- :ref:`exhale_function_namespacebats_1a9e8165f923d8bcd327d53646a16c9b69`
 

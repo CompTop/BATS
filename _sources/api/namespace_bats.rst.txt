@@ -17,7 +17,11 @@ Detailed Description
 
 We need to specify what is the conventional usage of permutation in bats!! [2, 0, 1] apply to [2.0 , 1.0 ,5.0] a) is [5.0, 2.0, 1.0] in matrix permutation notation b) is [1.0, 5.0 ,2.0] in traditioanl notation(in book From Mathematics to Generic Programming)
 
-We take the frist notation here, but notice that BATs, sometimes, will mix the two notations!!! Check before use!!! Since the above two notations are inverse to each other, inverse them if needed! 
+We take the frist notation here, but notice that BATs, sometimes, will mix the two notations!!! Check before use!!! Since the above two notations are inverse to each other, inverse them if needed!
+
+Constructions on a grid
+
+Freudenthal triangulation 
 
 
 
@@ -30,6 +34,8 @@ Namespaces
 - :ref:`namespace_bats__detail`
 
 - :ref:`namespace_bats__future`
+
+- :ref:`namespace_bats__rowmajor`
 
 - :ref:`namespace_bats__util`
 
@@ -64,6 +70,10 @@ Classes
 
 - :ref:`exhale_struct_structbats_1_1DataSet`
 
+- :ref:`exhale_struct_structbats_1_1DGLinearMap`
+
+- :ref:`exhale_struct_structbats_1_1DGVectorSpace`
+
 - :ref:`exhale_struct_structbats_1_1Diagram_1_1Edge`
 
 - :ref:`exhale_struct_structbats_1_1divide__conquer__flag`
@@ -89,6 +99,8 @@ Classes
 - :ref:`exhale_struct_structbats_1_1no__optimization__flag`
 
 - :ref:`exhale_struct_structbats_1_1PersistencePair`
+
+- :ref:`exhale_struct_structbats_1_1ReducedDGVectorSpace`
 
 - :ref:`exhale_struct_structbats_1_1ReducedFilteredChainComplex`
 
@@ -149,9 +161,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a4bb6b250a088ddf81546cf9e225819fa`
 
-- :ref:`exhale_function_namespacebats_1af9b2781bd3d42f4ec2abc965707c5ce4`
-
 - :ref:`exhale_function_namespacebats_1a85161d655d3fe9f727bc5a743d6ba05f`
+
+- :ref:`exhale_function_namespacebats_1af9b2781bd3d42f4ec2abc965707c5ce4`
 
 - :ref:`exhale_function_namespacebats_1a3354ec1103ef97dd0c11b1007156e382`
 
@@ -161,13 +173,13 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a478328b5591ff8fb8be8dcf8e06c258e`
 
-- :ref:`exhale_function_namespacebats_1a1f47f63ff24dbd590481527564ed9b3f`
-
 - :ref:`exhale_function_namespacebats_1a5043f25417b021629dd6935aa7b970f5`
 
 - :ref:`exhale_function_namespacebats_1a80fc1d83d9d909662fdb398e95f29c47`
 
 - :ref:`exhale_function_namespacebats_1a6cfe25cd1ba6603b8d35093c9b04cf5d`
+
+- :ref:`exhale_function_namespacebats_1a1f47f63ff24dbd590481527564ed9b3f`
 
 - :ref:`exhale_function_namespacebats_1a4a640d48ec5939b74e2c6ef175f29d88`
 
@@ -207,8 +219,6 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a72273db2abf2fcfd0bc3720f8f4da908`
 
-- :ref:`exhale_function_namespacebats_1af16b0e2a23ec8a98605c51a9307520b1`
-
 - :ref:`exhale_function_namespacebats_1a4b1bb4dbae612ef0621920d07af33a92`
 
 - :ref:`exhale_function_namespacebats_1a9056331ab85ea32b5a39e6306f4e3252`
@@ -217,7 +227,11 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a9c29c2067c7bb5041375fc7e5f7105fa`
 
+- :ref:`exhale_function_namespacebats_1af16b0e2a23ec8a98605c51a9307520b1`
+
 - :ref:`exhale_function_namespacebats_1a477da14f55877a021b2a08035715ceac`
+
+- :ref:`exhale_function_namespacebats_1aecb52659e56f9d87d8c6525fa7f9819e`
 
 - :ref:`exhale_function_namespacebats_1a4579e599b40f46a7047e1a37afac31be`
 
@@ -225,7 +239,15 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a5a3d53745a6383725062763dce12592d`
 
+- :ref:`exhale_function_namespacebats_1acca580f20f66ecf655c360bf788a008b`
+
+- :ref:`exhale_function_namespacebats_1ab18f90938894bd28d4b962f357b1658d`
+
+- :ref:`exhale_function_namespacebats_1a65fd1ad3f2154979fa8a7b44d4ee8222`
+
 - :ref:`exhale_function_namespacebats_1a51c796239cb41f2376336b0b40e93d2c`
+
+- :ref:`exhale_function_namespacebats_1a03cb4f7ab2e3c73a3b3f629094014a30`
 
 - :ref:`exhale_function_namespacebats_1a346839e705eec218bde8fee4864d9a31`
 
@@ -245,9 +267,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1ab0ff4928102e869d085645ca47383869`
 
-- :ref:`exhale_function_namespacebats_1afeb9ea6f0eaf382cbcda6054a45a93ba`
-
 - :ref:`exhale_function_namespacebats_1a3ca83a60634b52af4cbb334e989168c0`
+
+- :ref:`exhale_function_namespacebats_1afeb9ea6f0eaf382cbcda6054a45a93ba`
 
 - :ref:`exhale_function_namespacebats_1a51882d4ec3b83afa3f63f72957a5cd75`
 
@@ -277,6 +299,14 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a08a88fae7181466a53760d17f786a071`
 
+- :ref:`exhale_function_namespacebats_1a4602cae83d34635b1797fa5d2f458915`
+
+- :ref:`exhale_function_namespacebats_1a28f381ca981a168bbc1cd3274bb3eff2`
+
+- :ref:`exhale_function_namespacebats_1adde180a44afa25aea101dd6f988251d4`
+
+- :ref:`exhale_function_namespacebats_1a5fa712e00214a76d722d00c16f342d83`
+
 - :ref:`exhale_function_namespacebats_1ad8f7933b7f032c10735171e68d829583`
 
 - :ref:`exhale_function_namespacebats_1a764dd99ed0c79342a1cf68c6f73804c8`
@@ -299,9 +329,15 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a5178d1d29e8f42549c22417206aadd53`
 
+- :ref:`exhale_function_namespacebats_1aa98ade0c810c489cb343d1483991331a`
+
 - :ref:`exhale_function_namespacebats_1a6201e20b7f966db15113f83cf3e31c61`
 
 - :ref:`exhale_function_namespacebats_1a6a51348e96dfa650f338be8de8a558e5`
+
+- :ref:`exhale_function_namespacebats_1a9e8165f923d8bcd327d53646a16c9b69`
+
+- :ref:`exhale_function_namespacebats_1a68b01c797daa8817cc7381fb97a2475d`
 
 - :ref:`exhale_function_namespacebats_1a77750544358124fd5b9d47f1bb416305`
 
@@ -352,6 +388,8 @@ Functions
 - :ref:`exhale_function_namespacebats_1a0fbb8ec9180d4d2ad3fc988589171557`
 
 - :ref:`exhale_function_namespacebats_1acc910da92ca8a22cb56e46643faf7ca3`
+
+- :ref:`exhale_function_namespacebats_1a2844a6b1b7dc694eae77bd2a9cb017df`
 
 - :ref:`exhale_function_namespacebats_1a3188a1bcdf5d9c4efab5d19855c4e75d`
 
@@ -457,9 +495,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a7232532be8060651ac3b707700bf0fa9`
 
-- :ref:`exhale_function_namespacebats_1af82e8143642fb452d49c561a5e84b997`
-
 - :ref:`exhale_function_namespacebats_1ac63fc4bbcb48bb4119b74de4607d3fc4`
+
+- :ref:`exhale_function_namespacebats_1af82e8143642fb452d49c561a5e84b997`
 
 - :ref:`exhale_function_namespacebats_1a8d88d925f0c8a77c597d46e7b073aba7`
 
@@ -483,6 +521,8 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1abe3574fd3e4e003b0fa239a1cd23422e`
 
+- :ref:`exhale_function_namespacebats_1a14fb6e116b98e925f4a4260605882954`
+
 - :ref:`exhale_function_namespacebats_1a8d60f6854ea11bddda8a4a26b77a20fb`
 
 - :ref:`exhale_function_namespacebats_1a102d2dd30445a0bd7934af5793631da9`
@@ -491,9 +531,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1aa822f034fed3e78558e04be80d6f5790`
 
-- :ref:`exhale_function_namespacebats_1a22d4a5b9ea082175dc1d37ed79f0b45f`
-
 - :ref:`exhale_function_namespacebats_1a128372bb68bf4282bf0f02aa88cf6772`
+
+- :ref:`exhale_function_namespacebats_1a22d4a5b9ea082175dc1d37ed79f0b45f`
 
 - :ref:`exhale_function_namespacebats_1a994082e3aac3f0ab907933746c5fa5a1`
 
@@ -544,6 +584,10 @@ Functions
 - :ref:`exhale_function_namespacebats_1a23acfc39d756b06e831460a102476555`
 
 - :ref:`exhale_function_namespacebats_1a94f0bcbebf3d87620de0accd4231a9a1`
+
+- :ref:`exhale_function_namespacebats_1a06a002f8dd6be76ed335f4a3e03c08ac`
+
+- :ref:`exhale_function_namespacebats_1adbb783f5dcf1ab98b73cd019f191224c`
 
 
 Typedefs

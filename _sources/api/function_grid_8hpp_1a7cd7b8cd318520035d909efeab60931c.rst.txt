@@ -1,0 +1,13 @@
+.. _exhale_function_grid_8hpp_1a7cd7b8cd318520035d909efeab60931c:
+
+Template Function bats::rowmajor::get_idx(T, T, T, T, T)
+========================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::rowmajor::get_idx(T, T, T, T, T)

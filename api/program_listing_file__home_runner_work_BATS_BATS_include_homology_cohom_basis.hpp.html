@@ -170,281 +170,281 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 <span class="cm">/*</span>
 <span class="cm">compute cohomology-revealing bases for a cochain complex</span>
-<span class="cm">*/</span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;chain/cochain_complex.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;reduction.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;basis.hpp&quot;</span><span class="cp"></span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chain/cochain_complex.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reduction.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;basis.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
-
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">ReducedCochainComplex</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-
-    <span class="k">using</span> <span class="n">cochain_type</span> <span class="o">=</span> <span class="k">typename</span> <span class="nc">MT</span><span class="o">::</span><span class="n">col_type</span><span class="p">;</span>
-
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">dim</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="n">U</span><span class="p">;</span> <span class="c1">// basis matrices</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="n">R</span><span class="p">;</span> <span class="c1">// reduced matrix</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">I</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">p2c_type</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">;</span>
-
-    <span class="c1">// size of homology vector space in dimension k</span>
-    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="nf">hdim</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="p">}</span>
-    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="nf">maxdim</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="n">MT</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&gt;=</span> <span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
-            <span class="c1">// throw error</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-    <span class="p">}</span>
-
-<span class="k">private</span><span class="o">:</span>
-    <span class="c1">// set cohomology indices after reduction is completed</span>
-    <span class="kt">void</span> <span class="n">set_indices</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// TODO: can parallelize this</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxdim</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">extract_basis_indices</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-        <span class="p">}</span>
-        <span class="n">I</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()]</span> <span class="o">=</span> <span class="n">extract_basis_indices</span><span class="p">(</span><span class="n">MT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()]),</span> <span class="n">p2c</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()]);</span>
-    <span class="p">}</span>
-
-<span class="k">public</span><span class="o">:</span>
-
-    <span class="n">ReducedCochainComplex</span><span class="p">()</span> <span class="p">{}</span>
-
-    <span class="c1">// compute reduced chain complex from chain complex</span>
-    <span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span>
-        <span class="n">U</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-
-        <span class="c1">// TODO: can parallelize this</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">dmax</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">]);</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-        <span class="p">}</span>
-
-        <span class="n">set_indices</span><span class="p">();</span>
-
-    <span class="p">}</span>
-
-    <span class="c1">// compute reduced boundary matrices only with flags</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span>
-    <span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">,</span> <span class="n">algflag</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span>
-        <span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-
-        <span class="c1">// TODO: can parallelize this</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">dmax</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">algflag</span><span class="p">());</span>
-        <span class="p">}</span>
-
-        <span class="n">set_indices</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="c1">// compute reduced boundary matrices and basis with flags</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span>
-    <span class="n">ReducedCochainComplex</span><span class="p">(</span>
-        <span class="k">const</span> <span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">,</span>
-        <span class="n">algflag</span><span class="p">,</span>
-        <span class="n">bats</span><span class="o">::</span><span class="n">compute_basis_flag</span>
-    <span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span>
-        <span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">U</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-
-        <span class="c1">// TODO: can parallelize this</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">dmax</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-            <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">]);</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">algflag</span><span class="p">());</span>
-        <span class="p">}</span>
-
-        <span class="n">set_indices</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span>
-    <span class="n">ReducedCochainComplex</span><span class="p">(</span>
-        <span class="k">const</span> <span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">,</span>
-        <span class="n">algflag</span><span class="p">,</span>
-        <span class="n">bats</span><span class="o">::</span><span class="n">clearing_flag</span>
-    <span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span>
-        <span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-
-        <span class="c1">// do bottom dimension normally</span>
-        <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-        <span class="n">p2c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">algflag</span><span class="p">());</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">clear_inds</span> <span class="o">=</span> <span class="n">get_clearing_inds</span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">dmax</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix_clearing</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">clear_inds</span><span class="p">,</span> <span class="n">algflag</span><span class="p">());</span>
-            <span class="n">clear_inds</span> <span class="o">=</span> <span class="n">get_clearing_inds</span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-        <span class="p">}</span>
-
-        <span class="n">set_indices</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span>
-    <span class="n">ReducedCochainComplex</span><span class="p">(</span>
-        <span class="k">const</span> <span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">C</span><span class="p">,</span>
-        <span class="n">algflag</span><span class="p">,</span>
-        <span class="n">bats</span><span class="o">::</span><span class="n">compression_flag</span>
-    <span class="p">)</span> <span class="p">{</span>
-        <span class="kt">size_t</span> <span class="n">dmax</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span>
-        <span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-        <span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span>
-
-        <span class="c1">// do top dimension normally</span>
-        <span class="n">R</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">];</span>
-        <span class="n">p2c</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">],</span> <span class="n">algflag</span><span class="p">());</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">comp_inds</span> <span class="o">=</span> <span class="n">get_compression_inds</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">]);</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="kt">ssize_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">dmax</span><span class="mi">-2</span><span class="p">;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduce_matrix_compression</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">comp_inds</span><span class="p">,</span> <span class="n">algflag</span><span class="p">());</span>
-            <span class="n">comp_inds</span> <span class="o">=</span> <span class="n">get_compression_inds</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-        <span class="p">}</span>
-
-        <span class="n">set_indices</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="c1">// TODO: FIX THIS</span>
-    <span class="c1">// compute reduced boundary matrices and basis with flags</span>
-    <span class="c1">// template &lt;typename algflag&gt;</span>
-    <span class="c1">// ReducedCochainComplex(</span>
-    <span class="c1">//  const CochainComplex&lt;MT&gt; &amp;C,</span>
-    <span class="c1">//  algflag,</span>
-    <span class="c1">//  bats::compression_flag,</span>
-    <span class="c1">//  bats::compute_basis_flag</span>
-    <span class="c1">// ) {</span>
-    <span class="c1">//  size_t dmax = C.maxdim() + 1;</span>
-    <span class="c1">//  dim = C.dim;</span>
-    <span class="c1">//  R.resize(dmax);</span>
-    <span class="c1">//  U.resize(dmax);</span>
-    <span class="c1">//  p2c.resize(dmax);</span>
-    <span class="c1">//  I.resize(dmax);</span>
-    <span class="c1">//</span>
-    <span class="c1">//  // do bottom dimension normally</span>
-    <span class="c1">//  R[0] = C.coboundary[0];</span>
-    <span class="c1">//  U[0] = MT::identity(C.dim[0]);</span>
-    <span class="c1">//  p2c[0] = reduce_matrix(R[0], U[0], algflag());</span>
-    <span class="c1">//  std::vector&lt;bool&gt; comp_inds = get_compression_inds(R[0]);</span>
-    <span class="c1">//  for (ssize_t k = 1; k &lt; dmax; k++) {</span>
-    <span class="c1">//      R[k] = C.coboundary[k];</span>
-    <span class="c1">//      U[k] = MT::identity(C.dim[k]);</span>
-    <span class="c1">//      p2c[k] = reduce_matrix_compression(R[k], U[k], comp_inds, algflag());</span>
-    <span class="c1">//      comp_inds = get_compression_inds(R[k]);</span>
-    <span class="c1">//  }</span>
-    <span class="c1">//</span>
-    <span class="c1">//  set_indices();</span>
-    <span class="c1">// }</span>
-
-    <span class="c1">// put vector/matrix in homology-revealing basis in dimension k</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span>
-    <span class="kr">inline</span> <span class="n">TV</span> <span class="n">to_hom_basis</span><span class="p">(</span><span class="k">const</span> <span class="n">TV</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">u_solve</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span>
-    <span class="kr">inline</span> <span class="n">TV</span> <span class="n">from_hom_basis</span><span class="p">(</span><span class="k">const</span> <span class="n">TV</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span> <span class="nc">ReducedCochainComplex</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
 
-    <span class="c1">// get preferred representative i in dimension k</span>
-    <span class="n">cochain_type</span> <span class="n">get_preferred_representative</span><span class="p">(</span>
-        <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span>
-        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span>
-    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">Iptr</span> <span class="o">=</span> <span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">Iptr</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">i</span><span class="o">--</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="o">*</span><span class="n">Iptr</span><span class="p">];</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">cochain_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">typename</span> <span class="nc">MT</span><span class="o">::</span><span class="n">col_type</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// modify y in-place to be preferred representative for homology class in dimension k</span>
-    <span class="c1">// assumes y is in homology-revealing basis</span>
-    <span class="kt">void</span> <span class="n">find_preferred_representative</span><span class="p">(</span>
-        <span class="k">typename</span> <span class="nc">MT</span><span class="o">::</span><span class="n">col_type</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">,</span>
-        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span>
-    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">maxdim</span><span class="p">())</span> <span class="p">{</span>
-            <span class="c1">// all cycles generate homology, so nothing to do</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="c1">// else we need to find the preferred representative</span>
-        <span class="c1">// const ColumnMatrix&lt;TVec&gt; &amp;bdry,</span>
-        <span class="c1">// const p2c_type &amp;p2c</span>
-        <span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">nrow</span><span class="p">();</span>
-        <span class="k">auto</span> <span class="n">yit</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="c1">// find iterator past last nonzero</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">yit</span> <span class="o">!=</span> <span class="n">y</span><span class="p">.</span><span class="n">nzbegin</span><span class="p">())</span> <span class="p">{</span>
-            <span class="o">--</span><span class="n">yit</span><span class="p">;</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="n">yit</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span>
-            <span class="c1">// find if j is a pivot of bdry</span>
-            <span class="c1">// if (p2c[k+1].count(j) &gt; 0) {</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">at</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">U</span><span class="p">;</span><span class="w"> </span><span class="c1">// basis matrices</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"> </span><span class="c1">// reduced matrix</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">p2c_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">;</span><span class="w"></span>
 
-                <span class="c1">// form column i of boundary in homology revealing basis</span>
-                <span class="k">auto</span> <span class="n">bdri</span> <span class="o">=</span> <span class="n">u_solve</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
-                <span class="k">auto</span> <span class="n">ipiv</span> <span class="o">=</span> <span class="n">bdri</span><span class="p">.</span><span class="n">lastnz</span><span class="p">();</span>
-                <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">yit</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">/</span> <span class="n">ipiv</span><span class="p">.</span><span class="n">val</span><span class="p">;</span>
-                <span class="n">y</span><span class="p">.</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">bdri</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// size of homology vector space in dimension k</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">hdim</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">maxdim</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-                <span class="c1">// get next nonzero</span>
-                <span class="n">yit</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">j</span><span class="mi">-1</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="c1">// else j is a preferred representative</span>
-            <span class="c1">// so we do nothing</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">MT</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">dim</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// throw error</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// find the preferred representative for a k-chain</span>
-    <span class="n">cochain_type</span> <span class="n">chain_preferred_representative</span><span class="p">(</span>
-        <span class="k">const</span> <span class="n">cochain_type</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">k</span>
-    <span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">to_hom_basis</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-        <span class="n">find_preferred_representative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">from_hom_basis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// set cohomology indices after reduction is completed</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set_indices</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// TODO: can parallelize this</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxdim</span><span class="p">();</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extract_basis_indices</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">I</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extract_basis_indices</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">maxdim</span><span class="p">()]);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ReducedCochainComplex</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// compute reduced chain complex from chain complex</span>
+<span class="w">    </span><span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">U</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// TODO: can parallelize this</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dmax</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">            </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">set_indices</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// compute reduced boundary matrices only with flags</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">algflag</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// TODO: can parallelize this</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dmax</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">algflag</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">set_indices</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// compute reduced boundary matrices and basis with flags</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">algflag</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">bats</span><span class="o">::</span><span class="n">compute_basis_flag</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">U</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// TODO: can parallelize this</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dmax</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MT</span><span class="o">::</span><span class="n">identity</span><span class="p">(</span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">algflag</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">set_indices</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">algflag</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">bats</span><span class="o">::</span><span class="n">clearing_flag</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// do bottom dimension normally</span>
+<span class="w">        </span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">algflag</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">clear_inds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_clearing_inds</span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">ssize_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dmax</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix_clearing</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">clear_inds</span><span class="p">,</span><span class="w"> </span><span class="n">algflag</span><span class="p">());</span><span class="w"></span>
+<span class="w">            </span><span class="n">clear_inds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_clearing_inds</span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">set_indices</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">algflag</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">algflag</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">bats</span><span class="o">::</span><span class="n">compression_flag</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">maxdim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">R</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">I</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dmax</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// do top dimension normally</span>
+<span class="w">        </span><span class="n">R</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">p2c</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">],</span><span class="w"> </span><span class="n">algflag</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comp_inds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_compression_inds</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">dmax</span><span class="mi">-1</span><span class="p">]);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">ssize_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dmax</span><span class="mi">-2</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">coboundary</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_matrix_compression</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">comp_inds</span><span class="p">,</span><span class="w"> </span><span class="n">algflag</span><span class="p">());</span><span class="w"></span>
+<span class="w">            </span><span class="n">comp_inds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_compression_inds</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">set_indices</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// TODO: FIX THIS</span>
+<span class="w">    </span><span class="c1">// compute reduced boundary matrices and basis with flags</span>
+<span class="w">    </span><span class="c1">// template &lt;typename algflag&gt;</span>
+<span class="w">    </span><span class="c1">// ReducedCochainComplex(</span>
+<span class="w">    </span><span class="c1">//  const CochainComplex&lt;MT&gt; &amp;C,</span>
+<span class="w">    </span><span class="c1">//  algflag,</span>
+<span class="w">    </span><span class="c1">//  bats::compression_flag,</span>
+<span class="w">    </span><span class="c1">//  bats::compute_basis_flag</span>
+<span class="w">    </span><span class="c1">// ) {</span>
+<span class="w">    </span><span class="c1">//  size_t dmax = C.maxdim() + 1;</span>
+<span class="w">    </span><span class="c1">//  dim = C.dim;</span>
+<span class="w">    </span><span class="c1">//  R.resize(dmax);</span>
+<span class="w">    </span><span class="c1">//  U.resize(dmax);</span>
+<span class="w">    </span><span class="c1">//  p2c.resize(dmax);</span>
+<span class="w">    </span><span class="c1">//  I.resize(dmax);</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">//  // do bottom dimension normally</span>
+<span class="w">    </span><span class="c1">//  R[0] = C.coboundary[0];</span>
+<span class="w">    </span><span class="c1">//  U[0] = MT::identity(C.dim[0]);</span>
+<span class="w">    </span><span class="c1">//  p2c[0] = reduce_matrix(R[0], U[0], algflag());</span>
+<span class="w">    </span><span class="c1">//  std::vector&lt;bool&gt; comp_inds = get_compression_inds(R[0]);</span>
+<span class="w">    </span><span class="c1">//  for (ssize_t k = 1; k &lt; dmax; k++) {</span>
+<span class="w">    </span><span class="c1">//      R[k] = C.coboundary[k];</span>
+<span class="w">    </span><span class="c1">//      U[k] = MT::identity(C.dim[k]);</span>
+<span class="w">    </span><span class="c1">//      p2c[k] = reduce_matrix_compression(R[k], U[k], comp_inds, algflag());</span>
+<span class="w">    </span><span class="c1">//      comp_inds = get_compression_inds(R[k]);</span>
+<span class="w">    </span><span class="c1">//  }</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">//  set_indices();</span>
+<span class="w">    </span><span class="c1">// }</span>
+
+<span class="w">    </span><span class="c1">// put vector/matrix in homology-revealing basis in dimension k</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">TV</span><span class="w"> </span><span class="n">to_hom_basis</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TV</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">u_solve</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">v</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="n">TV</span><span class="w"> </span><span class="n">from_hom_basis</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TV</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+
+
+<span class="w">    </span><span class="c1">// get preferred representative i in dimension k</span>
+<span class="w">    </span><span class="n">cochain_type</span><span class="w"> </span><span class="n">get_preferred_representative</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">Iptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">Iptr</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">i</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="o">*</span><span class="n">Iptr</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// modify y in-place to be preferred representative for homology class in dimension k</span>
+<span class="w">    </span><span class="c1">// assumes y is in homology-revealing basis</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">find_preferred_representative</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">typename</span> <span class="nc">MT</span><span class="o">::</span><span class="n">col_type</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxdim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// all cycles generate homology, so nothing to do</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// else we need to find the preferred representative</span>
+<span class="w">        </span><span class="c1">// const ColumnMatrix&lt;TVec&gt; &amp;bdry,</span>
+<span class="w">        </span><span class="c1">// const p2c_type &amp;p2c</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">nrow</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">yit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="c1">// find iterator past last nonzero</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">yit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">nzbegin</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">yit</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yit</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// find if j is a pivot of bdry</span>
+<span class="w">            </span><span class="c1">// if (p2c[k+1].count(j) &gt; 0) {</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">].</span><span class="n">at</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                </span><span class="c1">// form column i of boundary in homology revealing basis</span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">bdri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u_solve</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">ipiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bdri</span><span class="p">.</span><span class="n">lastnz</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">yit</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ipiv</span><span class="p">.</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">y</span><span class="p">.</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bdri</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                </span><span class="c1">// get next nonzero</span>
+<span class="w">                </span><span class="n">yit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">j</span><span class="mi">-1</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// else j is a preferred representative</span>
+<span class="w">            </span><span class="c1">// so we do nothing</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// find the preferred representative for a k-chain</span>
+<span class="w">    </span><span class="n">cochain_type</span><span class="w"> </span><span class="n">chain_preferred_representative</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">cochain_type</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to_hom_basis</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">find_preferred_representative</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">from_hom_basis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
 
 <span class="c1">// defualt return</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="k">auto</span> <span class="n">__ReducedCochainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">CpxT</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
-    <span class="k">using</span> <span class="n">MT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">CpxT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">__ReducedCochainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">CpxT</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Args</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">VT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">F</span><span class="p">),</span> <span class="n">args</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ReducedCochainComplex</span><span class="p">(</span><span class="n">CochainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">F</span><span class="p">),</span><span class="w"> </span><span class="n">args</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

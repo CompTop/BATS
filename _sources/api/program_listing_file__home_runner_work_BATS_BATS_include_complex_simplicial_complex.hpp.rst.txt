@@ -373,15 +373,23 @@ Program Listing for File simplicial_complex.hpp
            return spx[dim].cbegin() + ((dim + 1) * (i+1));
        }
    
-       // return simplex i in dimension dim
-       std::vector<size_t> get_simplex(size_t dim, size_t i) const {
-           std::vector<size_t> s;
-           s.reserve(dim+1);
+       void get_simplex(size_t dim, size_t i, std::vector<size_t>& s) const {
+           s.clear();
            for (auto it = simplex_begin(dim, i); it != simplex_end(dim, i); it++) {
                s.emplace_back(*it);
            }
+           return;
+       }
+   
+       std::vector<size_t> get_simplex(size_t dim, size_t i) const {
+           std::vector<size_t> s;
+           s.reserve(dim+1);
+           get_simplex(dim, i, s);
            return s;
        }
+   
+       inline auto get_cell(size_t dim, size_t i, std::vector<size_t>& s) const {return get_simplex(dim, i, s);}
+       inline auto get_cell(size_t dim, size_t i) const {return get_simplex(dim, i);}
    
        // return simplices in dimension dim
        std::vector<std::vector<size_t>> get_simplices(const size_t dim) const {

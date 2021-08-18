@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1aa98ade0c810c489cb343d1483991331a:
+
+Template Function bats::Hom(const Diagram<DGVectorSpace<TM>, DGLinearMap<TM>>&, size_t)
+=======================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Hom(const Diagram<DGVectorSpace<TM>, DGLinearMap<TM>>&, size_t)

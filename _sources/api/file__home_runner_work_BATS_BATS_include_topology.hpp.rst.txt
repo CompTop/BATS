@@ -47,9 +47,13 @@ Includes
 
 - ``topology/flag.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_flag.hpp`)
 
+- ``topology/grid.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`)
+
 - ``topology/inclusion.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`)
 
 - ``topology/landmark.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`)
+
+- ``topology/levelset.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`)
 
 - ``topology/mayer_vietoris.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp`)
 

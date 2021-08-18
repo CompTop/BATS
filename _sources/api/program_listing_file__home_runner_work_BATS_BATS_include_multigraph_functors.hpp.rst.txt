@@ -25,6 +25,9 @@ Program Listing for File functors.hpp
    #include <chain/chain_map.hpp>
    #include <homology/basis.hpp>
    #include <homology/induced_map.hpp>
+   #include <dgvs/dgvs.hpp>
+   #include <dgvs/dgmap.hpp>
+   #include <homology/dgbasis.hpp>
    
    #include <stdexcept>
    
@@ -163,6 +166,12 @@ Program Listing for File functors.hpp
        return CD;
    }
    
+   template <typename TF, typename DT>
+   inline auto ChainFunctor(const DT &D, TF) {
+       using TM = ColumnMatrix<SparseVector<TF>>;
+       return ChainFunctor<TM>(D);
+   }
+   
    // easy chain functor
    template <typename DT, typename T>
    inline auto __ChainFunctor(const DT &D, T) {
@@ -198,6 +207,128 @@ Program Listing for File functors.hpp
        #pragma omp parallel for
        for (size_t i = 0; i < n; i++) {
            HD.set_node(i, ReducedChainComplex<TM>(D.node[i]));
+       }
+   
+       // apply hom functor to edges
+       #pragma omp parallel for
+       for (size_t j = 0; j < m; j++) {
+           auto s = D.elist[j].src;
+           auto t = D.elist[j].targ;
+           HD.set_edge(j, s, t,
+               induced_map(D.edata[j], HD.node[s], HD.node[t], k)
+           );
+       }
+   
+       return HD;
+   
+   }
+   
+   // Create diagram of Rips complexes from subsets
+   // uses a different rips parameter for each node
+   template <typename T, typename M, typename FT>
+   auto RipsHom(
+       const Diagram<std::set<size_t>, std::vector<size_t>> &D,
+       const DataSet<T> &X,
+       const M &dist, // distance
+       const std::vector<T> &rmax, // maximum radius for each node
+       const size_t hdim, // homology dimension
+       FT // field
+   ) {
+   
+       using VT = SparseVector<FT, size_t>;
+       using MT = ColumnMatrix<VT>;
+       using CpxT = SimplicialComplex;
+   
+       size_t n = D.nnode();
+       size_t m = D.nedge();
+       // Diagram of dimensions and induced maps
+       Diagram<size_t, MT> TD(n, m);
+   
+       // apply functor to edges
+       // note this will do every node computation twice
+       // but the parallelization is trivial
+       #pragma omp parallel for
+       for (size_t i = 0; i < m; i++) {
+           auto s = D.elist[i].src;
+           auto t = D.elist[i].targ;
+           if (rmax[t] < rmax[s]) {
+               throw std::range_error("Rips parameter must be non-decreasing from source to target.");
+           }
+           // handle nodes
+           auto Is = get_subset(X, D.node[s]);
+           auto It = get_subset(X, D.node[t]);
+           auto Xs = RipsComplex<CpxT>(Is, dist, rmax[s], hdim+1);
+           auto Xt = RipsComplex<CpxT>(It, dist, rmax[t], hdim+1);
+           // skip chain construction in memory
+           auto Rs = Reduce(Xs, FT());
+           auto Rt = Reduce(Xt, FT());
+   
+           // handle edge
+           auto F = SimplicialMap(Xs , Xt, D.edata[i]);
+           auto CF = ChainMap<MT>(F);
+           auto HF = induced_map(CF, Rs, Rt, hdim);
+   
+           TD.set_edge(i, s, t, HF);
+       }
+   
+       // extract dimensions for nodes
+       // we do this by iterating over edges
+       // do this sequentially to avoid race conditions
+       for (size_t i = 0; i < m; i++) {
+           auto s = D.elist[i].src;
+           auto t = D.elist[i].targ;
+           auto ds = TD.edata[i].ncol();
+           auto dt = TD.edata[i].nrow();
+           TD.set_node(s, ds);
+           TD.set_node(t, dt);
+       }
+   
+       return TD;
+   }
+   
+   
+   template <typename TM, typename DT>
+   Diagram<DGVectorSpace<TM>, DGLinearMap<TM>> DGLinearFunctor(
+       const DT &D,
+       int degree=-1
+   ) {
+       size_t n = D.nnode();
+       size_t m = D.nedge();
+       // Diagram of chain complexes and chain maps
+       Diagram<DGVectorSpace<TM>, DGLinearMap<TM>> DGD(n, m);
+   
+       // apply chain functor to nodes
+       #pragma omp parallel for
+       for (size_t i = 0; i < n; i++) {
+           DGD.set_node(i, DGVectorSpace<TM>(D.node[i], degree));
+       }
+   
+       // apply chain functor to edges
+       #pragma omp parallel for
+       for (size_t j = 0; j < m; j++) {
+           auto s = (degree == -1) ? D.elist[j].src : D.elist[j].targ;
+           auto t = (degree == -1) ? D.elist[j].targ : D.elist[j].src;
+           DGD.set_edge(j, s, t, DGLinearMap<TM>(D.edata[j], degree));
+       }
+   
+       return DGD;
+   }
+   
+   template <typename TM>
+   Diagram<ReducedDGVectorSpace<TM>, TM> Hom(
+       const Diagram<DGVectorSpace<TM>, DGLinearMap<TM>> &D,
+       size_t k
+   ) {
+   
+       size_t n = D.nnode();
+       size_t m = D.nedge();
+       // Diagram of chain complexes and chain maps
+       Diagram<ReducedDGVectorSpace<TM>, TM> HD(n, m);
+   
+       // apply hom functor to nodes
+       #pragma omp parallel for
+       for (size_t i = 0; i < n; i++) {
+           HD.set_node(i, ReducedDGVectorSpace<TM>(D.node[i]));
        }
    
        // apply hom functor to edges

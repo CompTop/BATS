@@ -33,6 +33,8 @@ Includes
 
 - ``homology/cohom_basis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_cohom_basis.hpp`)
 
+- ``homology/dgbasis.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_dgbasis.hpp`)
+
 - ``homology/induced_map.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`)
 
 - ``homology/reduction.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_homology_reduction.hpp`)

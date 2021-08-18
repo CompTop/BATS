@@ -26,6 +26,11 @@ Directories
 .. toctree::
    :maxdepth: 5
 
+   dir__home_runner_work_BATS_BATS_include_dgvs.rst
+
+.. toctree::
+   :maxdepth: 5
+
    dir__home_runner_work_BATS_BATS_include_filtration.rst
 
 .. toctree::
@@ -210,6 +215,26 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file__home_runner_work_BATS_BATS_include_homology_dgbasis.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_dgvs_dgmap.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_dgvs.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file__home_runner_work_BATS_BATS_include_multigraph_diagram.hpp.rst
 
 .. toctree::
@@ -310,6 +335,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file__home_runner_work_BATS_BATS_include_topology_grid.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file__home_runner_work_BATS_BATS_include_homology.hpp.rst
 
 .. toctree::
@@ -331,6 +361,11 @@ Files
    :maxdepth: 5
 
    file__home_runner_work_BATS_BATS_include_topology_landmark.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_runner_work_BATS_BATS_include_topology_levelset.hpp.rst
 
 .. toctree::
    :maxdepth: 5

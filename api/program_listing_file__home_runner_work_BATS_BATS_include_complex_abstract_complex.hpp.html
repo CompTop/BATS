@@ -170,29 +170,29 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 <span class="cm">/*</span>
 <span class="cm">  Abstract cell complex class that all derived complexes should inherit from</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 
 <span class="c1">// #include &lt;vector&gt;</span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;sstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span><span class="cp"></span>
 
 <span class="c1">// indicates dimension and index of a cell</span>
-<span class="k">struct</span> <span class="nc">cell_ind</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">size_t</span> <span class="n">dim</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">ind</span><span class="p">;</span>
+<span class="k">struct</span> <span class="nc">cell_ind</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ind</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">cell_ind</span><span class="p">()</span> <span class="p">{}</span>
-    <span class="n">cell_ind</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">ind</span><span class="p">)</span> <span class="o">:</span> <span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="n">ind</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="p">{}</span>
+<span class="w">    </span><span class="n">cell_ind</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="n">cell_ind</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ind</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dim</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span><span class="w"> </span><span class="n">ind</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
-        <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;(&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">dim</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;,&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">ind</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;)&#39;</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">oss</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">oss</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;(&#39;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;,&#39;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;)&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
 <span class="c1">// //#include &quot;csc_matrix.h&quot;</span>
 <span class="c1">// //#include &quot;sparse_vector.h&quot;</span>

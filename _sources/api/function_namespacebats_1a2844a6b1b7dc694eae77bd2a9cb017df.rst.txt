@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a2844a6b1b7dc694eae77bd2a9cb017df:
+
+Template Function bats::OscillatingRipsZigzagSets
+=================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_zigzag_zoo.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::OscillatingRipsZigzagSets(const DataSet<T>&, const M&, T, T)

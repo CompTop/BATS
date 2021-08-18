@@ -174,7 +174,7 @@
 <span class="cm">/*</span>
 <span class="cm">TODO:</span>
 <span class="cm">specify functions that any matrix class should implement</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 
 
 <span class="cm">/*</span>
@@ -182,26 +182,26 @@
 
 <span class="cm">Provides a CRTP base class that specifies operations that all matrix</span>
 <span class="cm">implementations should support</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 <span class="c1">//template &lt;class Derived&gt;</span>
-<span class="k">class</span> <span class="nc">AbstractMatrix</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
+<span class="k">class</span> <span class="nc">AbstractMatrix</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
 
-  <span class="c1">// one constructor should take in a csc matrix</span>
+<span class="w">  </span><span class="c1">// one constructor should take in a csc matrix</span>
 
-  <span class="c1">// should support getindex</span>
+<span class="w">  </span><span class="c1">// should support getindex</span>
 
-  <span class="c1">// should be able to dump to dense array</span>
+<span class="w">  </span><span class="c1">// should be able to dump to dense array</span>
 
-  <span class="c1">// matrix-vector multiply</span>
-  <span class="c1">// template &lt;class VecT&gt;</span>
-  <span class="c1">// VecT matvec(VecT &amp;v) {</span>
-  <span class="c1">//   return static_cast&lt;Derived *&gt;(this)-&gt;matvec(v);</span>
-  <span class="c1">// }</span>
+<span class="w">  </span><span class="c1">// matrix-vector multiply</span>
+<span class="w">  </span><span class="c1">// template &lt;class VecT&gt;</span>
+<span class="w">  </span><span class="c1">// VecT matvec(VecT &amp;v) {</span>
+<span class="w">  </span><span class="c1">//   return static_cast&lt;Derived *&gt;(this)-&gt;matvec(v);</span>
+<span class="w">  </span><span class="c1">// }</span>
 
 
-<span class="p">};</span>
+<span class="p">};</span><span class="w"></span>
 
 <span class="c1">// identity matrix</span>
 <span class="c1">// template &lt;class TM&gt;</span>

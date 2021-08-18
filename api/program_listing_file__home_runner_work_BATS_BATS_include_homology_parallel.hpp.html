@@ -168,303 +168,303 @@
 <span id="program-listing-file-home-runner-work-bats-bats-include-homology-parallel-hpp"></span><h1>Program Listing for File parallel.hpp<a class="headerlink" href="#program-listing-for-file-parallel-hpp" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_homology_parallel.hpp.html#file-home-runner-work-bats-bats-include-homology-parallel-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/homology/parallel.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
-<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;reduction.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linalg/sparse_vector.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linalg/col_matrix.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;reduction.hpp&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;omp.h&gt;</span><span class="c1"> // openMP header</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span><span class="c1"> // openMP header</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">struct</span> <span class="nc">divide_conquer_flag</span> <span class="p">{};</span>
-
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">reduce_column_standard</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">p2c</span><span class="p">,</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span> <span class="n">tmp</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// piv is index-value nzpair</span>
-        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// eliminate pivot</span>
-            <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span>
-            <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="p">.</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-            <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span> <span class="c1">// update change of basis</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// new pivot</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">reduce_block_sequential</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j0</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j1</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">nzcol</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">;</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// preallocate</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">j1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">nzcol</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nzcol</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">struct</span> <span class="nc">divide_conquer_flag</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
 
 
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">reduce_column_standard</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// piv is index-value nzpair</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">reduce_block_dq</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j0</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j1</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">max_block_size</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// determine if we should run base case</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">j1</span> <span class="o">-</span> <span class="n">j0</span> <span class="o">&lt;</span> <span class="n">max_block_size</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// eliminate pivot</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"> </span><span class="c1">// update change of basis</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// new pivot</span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// else we divide and conquer</span>
-    <span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="p">(</span><span class="n">j0</span> <span class="o">+</span> <span class="n">j1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// midpoint</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">nzcol1</span><span class="p">,</span> <span class="n">nzcol2</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">reduce_block_sequential</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j1</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nzcol</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"> </span><span class="c1">// preallocate</span>
 
-    <span class="c1">// left half</span>
-    <span class="c1">// TODO: OMP task</span>
-    <span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j0 &lt;&lt; &quot; -- &quot; &lt;&lt; j2 &lt;&lt; std::endl;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nzcol1</span><span class="p">)</span> <span class="o">=</span> <span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">max_block_size</span><span class="p">);</span>
-    <span class="c1">// right half</span>
-    <span class="c1">// TODO: OMP task</span>
-    <span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j2 &lt;&lt; &quot; -- &quot; &lt;&lt; j1 &lt;&lt; std::endl;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ignore</span><span class="p">,</span> <span class="n">nzcol2</span><span class="p">)</span> <span class="o">=</span> <span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">j1</span><span class="p">,</span> <span class="n">max_block_size</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">j1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nzcol</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// now we combine</span>
-    <span class="c1">// can simply iterate over the right block adding to the data for the</span>
-    <span class="c1">// left block</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// preallocate</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">j</span> <span class="p">:</span> <span class="n">nzcol2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">nzcol1</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nzcol1</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
-<span class="c1">// behavior with divide conquer flag</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span><span class="p">,</span>
-    <span class="n">divide_conquer_flag</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
 
-    <span class="kt">size_t</span> <span class="n">max_block_size</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j1</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_block_size</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// determine if we should run base case</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j0</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"> </span><span class="n">j1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ignore</span><span class="p">)</span> <span class="o">=</span> <span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">max_block_size</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// else we divide and conquer</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">j0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// midpoint</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// fill in return vector</span>
-    <span class="n">p2c_type</span> <span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">p2c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// left half</span>
+<span class="w">    </span><span class="c1">// TODO: OMP task</span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j0 &lt;&lt; &quot; -- &quot; &lt;&lt; j2 &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">,</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// right half</span>
+<span class="w">    </span><span class="c1">// TODO: OMP task</span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j2 &lt;&lt; &quot; -- &quot; &lt;&lt; j1 &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ignore</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">,</span><span class="w"> </span><span class="n">j1</span><span class="p">,</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">);</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">reduce_column_standard</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">p2c</span><span class="p">,</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span> <span class="n">tmp</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// piv is index-value nzpair</span>
-        <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// now we combine</span>
+<span class="w">    </span><span class="c1">// can simply iterate over the right block adding to the data for the</span>
+<span class="w">    </span><span class="c1">// left block</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"> </span><span class="c1">// preallocate</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="nl">j</span> <span class="p">:</span><span class="w"> </span><span class="n">nzcol2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// eliminate pivot</span>
-            <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span>
-            <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="p">.</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// new pivot</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">reduce_column_extra</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">p2c</span><span class="p">,</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span> <span class="n">tmp</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">end_offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// nonzero location</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">piv</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// piv is index-value nzpair</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// eliminate pivot</span>
-            <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span>
-            <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span>
-            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">tmp</span><span class="p">);</span>
-            <span class="n">piv</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span> <span class="o">-</span> <span class="n">end_offset</span><span class="p">;</span> <span class="c1">// next nonzero location</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">end_offset</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
-            <span class="c1">// new pivot</span>
-            <span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-            <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">end_offset</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">piv</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">reduce_block_sequential</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j0</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j1</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">nzcol</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">;</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// preallocate</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">j1</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-        <span class="c1">// reduce_column_extra(M, j, p2c, tmp);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">nzcol</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nzcol</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">reduce_block_dq</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j0</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">j1</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">max_block_size</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">level</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">max_depth</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// std::cout &lt;&lt; j0 &lt;&lt; &quot; -- &quot; &lt;&lt; j1 &lt;&lt; &quot;\t level=&quot; &lt;&lt; level &lt;&lt; &quot;/&quot; &lt;&lt; max_depth &lt;&lt; std::endl;</span>
-    <span class="c1">// determine if we should run base case</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">j1</span> <span class="o">-</span> <span class="n">j0</span> <span class="o">&lt;</span> <span class="n">max_block_size</span> <span class="o">||</span> <span class="n">level</span> <span class="o">&gt;</span> <span class="n">max_depth</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j1</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">// else we divide and conquer</span>
-    <span class="kt">size_t</span> <span class="n">j2</span> <span class="o">=</span> <span class="p">(</span><span class="n">j0</span> <span class="o">+</span> <span class="n">j1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// midpoint</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">nzcol1</span><span class="p">,</span> <span class="n">nzcol2</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">p2c_ignore</span><span class="p">;</span>
-
-    <span class="c1">// left half</span>
-    <span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j0 &lt;&lt; &quot; -- &quot; &lt;&lt; j2 &lt;&lt; std::endl;</span>
-    <span class="cp">#pragma omp task shared(M) shared(p2c, nzcol1) firstprivate(j0, j2, max_block_size, level, max_depth)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nzcol1</span><span class="p">)</span> <span class="o">=</span> <span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j0</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">max_block_size</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">);</span>
-    <span class="c1">// right half</span>
-    <span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j2 &lt;&lt; &quot; -- &quot; &lt;&lt; j1 &lt;&lt; std::endl;</span>
-    <span class="cp">#pragma omp task shared(M) shared(nzcol2, p2c_ignore) firstprivate(j2, j1, max_block_size, level, max_depth)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c_ignore</span><span class="p">,</span> <span class="n">nzcol2</span><span class="p">)</span> <span class="o">=</span> <span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">j1</span><span class="p">,</span> <span class="n">max_block_size</span><span class="p">,</span> <span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">);</span>
-    <span class="cp">#pragma omp taskwait</span>
-
-    <span class="c1">// now we combine</span>
-    <span class="c1">// can simply iterate over the right block adding to the data for the</span>
-    <span class="c1">// left block</span>
-    <span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// preallocate</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">j</span> <span class="p">:</span> <span class="n">nzcol2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">p2c</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">nzcol1</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span> <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nzcol1</span><span class="p">);</span>
-<span class="p">}</span>
 
 <span class="c1">// behavior with divide conquer flag</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="n">p2c_type</span> <span class="n">reduce_matrix</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">M</span><span class="p">,</span>
-    <span class="n">divide_conquer_flag</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">divide_conquer_flag</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">max_block_size</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">max_depth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_block_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">p2c</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">nz_ignore</span><span class="p">;</span>
-    <span class="c1">// begin parallel region</span>
-    <span class="cp">#pragma omp parallel default(none) shared(p2c, nz_ignore, M, n, max_block_size, max_depth)</span>
-    <span class="p">{</span>
-        <span class="cp">#pragma omp single nowait</span>
-        <span class="p">{</span>
-            <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span> <span class="n">nz_ignore</span><span class="p">)</span> <span class="o">=</span> <span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">max_block_size</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ignore</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// fill in return vector</span>
-    <span class="n">p2c_type</span> <span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">p2c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pivot_to_col</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">pivot_to_col</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// fill in return vector</span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="w"> </span><span class="nf">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="nl">it</span> <span class="p">:</span><span class="w"> </span><span class="n">p2c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">partial_reduce_parallel</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">block_size</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">reduce_column_standard</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// piv is index-value nzpair</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">lastnz</span><span class="p">();</span><span class="w"></span>
 
-    <span class="cp">#pragma omp parallel for</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="n">block_size</span><span class="p">;</span> <span class="n">j</span><span class="o">+=</span><span class="n">block_size</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="n">block_size</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">partial_reduce_parallel</span><span class="p">(</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">M</span><span class="p">,</span>
-    <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span> <span class="n">U</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">block_size</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// eliminate pivot</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// new pivot</span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="p">.</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-    <span class="cp">#pragma omp parallel for</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="n">block_size</span><span class="p">;</span> <span class="n">j</span><span class="o">+=</span><span class="n">block_size</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="n">block_size</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">reduce_column_extra</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// nonzero location</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">piv</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzbegin</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// piv is index-value nzpair</span>
 
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p2c</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// eliminate pivot</span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">val</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">lastnz</span><span class="p">().</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">axpy</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">piv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nzend</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">end_offset</span><span class="p">;</span><span class="w"> </span><span class="c1">// next nonzero location</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">end_offset</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">){</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// new pivot</span>
+<span class="w">            </span><span class="n">p2c</span><span class="p">[</span><span class="n">piv</span><span class="o">-&gt;</span><span class="n">ind</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">end_offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">piv</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">reduce_block_sequential</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j1</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nzcol</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"> </span><span class="c1">// preallocate</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">j1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// reduce_column_extra(M, j, p2c, tmp);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nzcol</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j1</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_depth</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; j0 &lt;&lt; &quot; -- &quot; &lt;&lt; j1 &lt;&lt; &quot;\t level=&quot; &lt;&lt; level &lt;&lt; &quot;/&quot; &lt;&lt; max_depth &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="c1">// determine if we should run base case</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j0</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">max_block_size</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_depth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"> </span><span class="n">j1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// else we divide and conquer</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">j2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">j0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// midpoint</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">p2c_ignore</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// left half</span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j0 &lt;&lt; &quot; -- &quot; &lt;&lt; j2 &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="cp">#pragma omp task shared(M) shared(p2c, nzcol1) firstprivate(j0, j2, max_block_size, level, max_depth)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">j0</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">,</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">max_depth</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// right half</span>
+<span class="w">    </span><span class="c1">// std::cout &lt;&lt; &quot;dq: &quot; &lt;&lt; j2 &lt;&lt; &quot; -- &quot; &lt;&lt; j1 &lt;&lt; std::endl;</span>
+<span class="w">    </span><span class="cp">#pragma omp task shared(M) shared(nzcol2, p2c_ignore) firstprivate(j2, j1, max_block_size, level, max_depth)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c_ignore</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">j2</span><span class="p">,</span><span class="w"> </span><span class="n">j1</span><span class="p">,</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">max_depth</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="cp">#pragma omp taskwait</span>
+
+<span class="w">    </span><span class="c1">// now we combine</span>
+<span class="w">    </span><span class="c1">// can simply iterate over the right block adding to the data for the</span>
+<span class="w">    </span><span class="c1">// left block</span>
+<span class="w">    </span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">::</span><span class="n">tmp_type</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"> </span><span class="c1">// preallocate</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="nl">j</span> <span class="p">:</span><span class="w"> </span><span class="n">nzcol2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">reduce_column_standard</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">nnz</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nzcol1</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// behavior with divide conquer flag</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">reduce_matrix</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">divide_conquer_flag</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_block_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p2c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nz_ignore</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// begin parallel region</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel default(none) shared(p2c, nz_ignore, M, n, max_block_size, max_depth)</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="cp">#pragma omp single nowait</span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">p2c</span><span class="p">,</span><span class="w"> </span><span class="n">nz_ignore</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reduce_block_dq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">max_block_size</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">max_depth</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// fill in return vector</span>
+<span class="w">    </span><span class="n">p2c_type</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">(</span><span class="n">M</span><span class="p">.</span><span class="n">nrow</span><span class="p">(),</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="nl">it</span> <span class="p">:</span><span class="w"> </span><span class="n">p2c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">pivot_to_col</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pivot_to_col</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">partial_reduce_parallel</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">block_size</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="cp">#pragma omp parallel for</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="n">block_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">+=</span><span class="n">block_size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">+</span><span class="n">block_size</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TVec</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">partial_reduce_parallel</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">TVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">block_size</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">M</span><span class="p">.</span><span class="n">ncol</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="cp">#pragma omp parallel for</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="n">block_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">+=</span><span class="n">block_size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">reduce_block_sequential</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">+</span><span class="n">block_size</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

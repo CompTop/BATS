@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a03cb4f7ab2e3c73a3b3f629094014a30:
+
+Template Function bats::DGLinearFunctor
+=======================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::DGLinearFunctor(const DT&, int)

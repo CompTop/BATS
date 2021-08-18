@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a4602cae83d34635b1797fa5d2f458915:
+
+Template Function bats::Freudenthal(size_t, size_t)
+===================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Freudenthal(size_t, size_t)

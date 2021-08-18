@@ -170,140 +170,140 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 <span class="cm">/*</span>
 <span class="cm">Some operations on sorted containers</span>
-<span class="cm">*/</span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;permutation.hpp&quot;</span><span class="cp"></span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;permutation.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="nn">util</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">util</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="cm">/*</span>
 <span class="cm">sets c = intersection(a, b)</span>
 <span class="cm">over-writes c</span>
 <span class="cm">TODO: template over container type as well</span>
-<span class="cm">*/</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">intersect_sorted</span><span class="p">(</span><span class="k">const</span> <span class="n">C1</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">C2</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">c</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ia</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ib</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ia</span> <span class="o">!=</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ib</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ib</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ia</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">intersect_sorted</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C2</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-            <span class="n">c</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="p">);</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">intersect_sorted</span><span class="p">(</span><span class="k">const</span> <span class="n">C1</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">C2</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">c</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ia</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ib</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ic</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ia</span> <span class="o">!=</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ib</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ib</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ia</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">intersect_sorted</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C2</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-            <span class="n">ic</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">emplace_hint</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span> <span class="o">*</span><span class="n">ia</span><span class="p">);</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">            </span><span class="n">ic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">emplace_hint</span><span class="p">(</span><span class="n">ic</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 <span class="c1">// return true if intersection intersect_sorted would have something</span>
 <span class="c1">// template over container types</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span>
-<span class="kt">bool</span> <span class="n">has_intersect_sorted</span><span class="p">(</span><span class="k">const</span> <span class="n">C1</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">C2</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">ia</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ib</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ia</span> <span class="o">!=</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ib</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ib</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ia</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// *ia == *ib</span>
-            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">has_intersect_sorted</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C2</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// *ia == *ib</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="cm">/*</span>
 <span class="cm">sets c = intersection(a, b, (-inf, maxval))</span>
 <span class="cm">over-writes c</span>
 <span class="cm">TODO: template over container type as well</span>
-<span class="cm">*/</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">intersect_sorted_lt</span><span class="p">(</span><span class="k">const</span> <span class="n">C1</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">C2</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="n">maxval</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">c</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ia</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ib</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ia</span> <span class="o">!=</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ib</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ib</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">ia</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="n">maxval</span><span class="p">))</span> <span class="p">{</span><span class="k">break</span><span class="p">;}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ia</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">ib</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="n">maxval</span><span class="p">))</span> <span class="p">{</span><span class="k">break</span><span class="p">;}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// *ia == *ib</span>
-            <span class="n">c</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="p">);</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-          <span class="k">if</span> <span class="p">(</span><span class="n">ia</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">||</span> <span class="n">ib</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="n">maxval</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="n">maxval</span><span class="p">))</span> <span class="p">{</span><span class="k">break</span><span class="p">;}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="cm">*/</span><span class="w"></span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">intersect_sorted_lt</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C2</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">maxval</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxval</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="k">break</span><span class="p">;}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ib</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxval</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="k">break</span><span class="p">;}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// *ia == *ib</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxval</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxval</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="k">break</span><span class="p">;}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// return true if intersection intersect_sorted_lt would have something</span>
 <span class="c1">// template over container types</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span>
-<span class="kt">bool</span> <span class="n">has_intersect_sorted_lt</span><span class="p">(</span><span class="k">const</span> <span class="n">C1</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">C2</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="n">maxval</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">ia</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ib</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ia</span> <span class="o">!=</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ib</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ib</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ia</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">ia</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span> <span class="o">&lt;</span> <span class="n">maxval</span><span class="p">))</span> <span class="p">{</span><span class="k">break</span><span class="p">;}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="o">*</span><span class="n">ia</span><span class="p">)</span> <span class="p">{</span>
-            <span class="o">++</span><span class="n">ib</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">ib</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ib</span> <span class="o">&lt;</span> <span class="n">maxval</span><span class="p">))</span> <span class="p">{</span><span class="k">break</span><span class="p">;}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// *ia == *ib</span>
-            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C1</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">C2</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">has_intersect_sorted_lt</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C2</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">maxval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cbegin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ib</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ia</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ia</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxval</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="k">break</span><span class="p">;}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">ib</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ib</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">cend</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxval</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="k">break</span><span class="p">;}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// *ia == *ib</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 <span class="c1">// copy x into y, then sort y</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">sort_into</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// copy x into y</span>
-    <span class="n">y</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
-    <span class="c1">// sort y</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">sort_into</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// copy x into y</span>
+<span class="w">    </span><span class="n">y</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// sort y</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 
@@ -315,94 +315,94 @@
 <span class="c1">// )</span>
 
 <span class="c1">// sort and reduce ind and val</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TI</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">sort_sum_reduce</span><span class="p">(</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ind</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">offset</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">perm</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">tmpind</span><span class="p">,</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">tmpval</span>
-<span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// sort ind and val simultaneously</span>
-    <span class="n">fill_sortperm</span><span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">ind</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="n">perm</span><span class="p">);</span>
-    <span class="n">apply_perm</span><span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">tmpind</span><span class="p">,</span> <span class="n">perm</span><span class="p">);</span>
-    <span class="n">apply_perm</span><span class="p">(</span><span class="n">val</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">tmpval</span><span class="p">,</span> <span class="n">perm</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">TI</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">TV</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">sort_sum_reduce</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ind</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">val</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">perm</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TI</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tmpind</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TV</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tmpval</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// sort ind and val simultaneously</span>
+<span class="w">    </span><span class="n">fill_sortperm</span><span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">ind</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="w"> </span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">apply_perm</span><span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">tmpind</span><span class="p">,</span><span class="w"> </span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">apply_perm</span><span class="p">(</span><span class="n">val</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">tmpval</span><span class="p">,</span><span class="w"> </span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">fill_ptr</span> <span class="o">=</span> <span class="n">offset</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">look_ptr</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span> <span class="o">+</span> <span class="n">look_ptr</span> <span class="o">&lt;</span> <span class="n">ind</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">ind</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">]</span> <span class="o">==</span> <span class="n">ind</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">])</span> <span class="p">{</span>
-            <span class="c1">// keep adding to index at fill_ptr</span>
-            <span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">];</span>
-            <span class="o">++</span><span class="n">look_ptr</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// if accumulation was zero, start accumulating at same spot</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">fill_ptr</span><span class="o">++</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="c1">// start accumulating at new next fill_ptr</span>
-            <span class="n">ind</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">];</span>
-            <span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">];</span>
-            <span class="o">++</span><span class="n">look_ptr</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">fill_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">offset</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">look_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">cbegin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">look_ptr</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ind</span><span class="p">.</span><span class="n">cend</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ind</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ind</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// keep adding to index at fill_ptr</span>
+<span class="w">            </span><span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">val</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">look_ptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// if accumulation was zero, start accumulating at same spot</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">fill_ptr</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// start accumulating at new next fill_ptr</span>
+<span class="w">            </span><span class="n">ind</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ind</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">[</span><span class="n">look_ptr</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="o">++</span><span class="n">look_ptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// resize to fill_ptr</span>
-    <span class="c1">// if last accumulation is zero, ignore</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">fill_ptr</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">ind</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">fill_ptr</span><span class="p">);</span>
-    <span class="n">val</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">fill_ptr</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// resize to fill_ptr</span>
+<span class="w">    </span><span class="c1">// if last accumulation is zero, ignore</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">fill_ptr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">fill_ptr</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">ind</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">fill_ptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">val</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">fill_ptr</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
 
 <span class="c1">// find nonzero index of last element with index &lt; i</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">TI</span><span class="o">&gt;</span>
-<span class="kt">size_t</span> <span class="n">find_sorted_lt</span><span class="p">(</span><span class="k">const</span> <span class="n">TI</span> <span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span> <span class="k">const</span> <span class="n">TI</span> <span class="o">&amp;</span><span class="n">end</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">begin</span> <span class="o">==</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span> <span class="p">}</span>
-    <span class="n">TI</span> <span class="n">it</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span>
-        <span class="n">begin</span><span class="p">,</span>
-        <span class="n">end</span><span class="p">,</span>
-        <span class="n">v</span>
-    <span class="p">);</span>
-    <span class="n">it</span><span class="o">--</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">it</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">it</span> <span class="o">-</span> <span class="n">begin</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span>
-    <span class="c1">//return it--;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">TI</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">find_sorted_lt</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">TI</span><span class="w"> </span><span class="o">&amp;</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TI</span><span class="w"> </span><span class="o">&amp;</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">TI</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">begin</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">end</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">v</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">it</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bats</span><span class="o">::</span><span class="n">NO_IND</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//return it--;</span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// return complement of sorted vector in range [0,n)</span>
 <span class="c1">// assume vector ind is sorted</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">sorted_complement</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ind</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">cind</span><span class="p">;</span>
-    <span class="n">cind</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">ind</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">ind</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">ip</span> <span class="o">!=</span> <span class="n">ind</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">ip</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// we do not append i to the complement</span>
-            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">ip</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// we append i to the complement</span>
-            <span class="n">cind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// fill in the rest</span>
-        <span class="n">cind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">cind</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sorted_complement</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ind</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cind</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">cind</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ind</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ind</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">ip</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ind</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ip</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// we do not append i to the complement</span>
+<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">ip</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// we append i to the complement</span>
+<span class="w">            </span><span class="n">cind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// fill in the rest</span>
+<span class="w">        </span><span class="n">cind</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cind</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace util</span>
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace util</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

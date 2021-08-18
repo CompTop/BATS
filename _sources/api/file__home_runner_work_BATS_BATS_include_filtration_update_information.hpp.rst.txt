@@ -49,6 +49,8 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_filtration.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_persistence_filtered_basis.hpp`

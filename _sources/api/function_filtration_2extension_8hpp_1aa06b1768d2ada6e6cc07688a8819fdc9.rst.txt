@@ -1,0 +1,13 @@
+.. _exhale_function_filtration_2extension_8hpp_1aa06b1768d2ada6e6cc07688a8819fdc9:
+
+Template Function lower_star_filtration(const bats::CubicalComplex&, const std::vector<std::vector<std::vector<T>>>&)
+=====================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_filtration_extension.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: lower_star_filtration(const bats::CubicalComplex&, const std::vector<std::vector<std::vector<T>>>&)

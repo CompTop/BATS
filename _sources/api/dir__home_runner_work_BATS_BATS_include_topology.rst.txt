@@ -24,8 +24,10 @@ Files
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_eilenberg_zilber.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_extras.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_flag.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_grid.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_inclusion.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_landmark.hpp`
+- :ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_mayer_vietoris.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_metric.hpp`
 - :ref:`file__home_runner_work_BATS_BATS_include_topology_neighborhood.hpp`

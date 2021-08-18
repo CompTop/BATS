@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a06a002f8dd6be76ed335f4a3e03c08ac:
+
+Template Function bats::zigzag_levelsets
+========================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag_levelsets(const zigzag::ZigzagFiltration<CpxT, T>&, T, T, T)

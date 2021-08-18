@@ -49,6 +49,10 @@ Included By
 
 - :ref:`file__home_runner_work_BATS_BATS_include_filtration_update_information.hpp`
 
+- :ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgvs.hpp`
+
+- :ref:`file__home_runner_work_BATS_BATS_include_dgvs_dgmap.hpp`
+
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_complex.hpp`
 
 - :ref:`file__home_runner_work_BATS_BATS_include_chain_chain_map.hpp`
@@ -83,9 +87,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a6201e20b7f966db15113f83cf3e31c61`
 
-- :ref:`exhale_function_namespacebats_1a05fd421ec62ebde015de5a6e0f160971`
-
 - :ref:`exhale_function_namespacebats_1a3d0c0b657042e77796cca82438130e8a`
+
+- :ref:`exhale_function_namespacebats_1a05fd421ec62ebde015de5a6e0f160971`
 
 - :ref:`exhale_function_namespacebats_1a0e21415316959e5cc073ad500f7f7d22`
 

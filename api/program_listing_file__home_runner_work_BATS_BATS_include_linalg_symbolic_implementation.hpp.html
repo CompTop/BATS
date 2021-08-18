@@ -169,14 +169,14 @@
 <p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_linalg_symbolic_implementation.hpp.html#file-home-runner-work-bats-bats-include-linalg-symbolic-implementation-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/linalg/symbolic_implementation.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;matrix_interface.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;matrix_interface.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">struct</span> <span class="nc">SI</span><span class="p">{};</span>
+<span class="k">struct</span> <span class="nc">SI</span><span class="p">{};</span><span class="w"></span>
 
 <span class="cp">#define IMPL_COUT(M) \</span>
 <span class="cp">std::ostream &amp; operator &lt;&lt; (std::ostream &amp;out, M&lt;SI&gt; &amp;c) \</span>
@@ -185,14 +185,14 @@
 <span class="cp">    return out; \</span>
 <span class="cp">}</span>
 
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EL</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EU</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">ELH</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EUH</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
-<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">U</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EL</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EU</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">ELH</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">EUH</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_COUT</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
 
 
 <span class="cp">#define MM(A,B,C) \</span>
@@ -204,11 +204,11 @@
 <span class="cp">};</span>
 
 
-<span class="n">MM</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
-<span class="n">MM</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
-<span class="n">MM</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
-<span class="n">MM</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
-<span class="n">MM</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">MM</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+<span class="n">MM</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="p">)</span><span class="w"></span>
+<span class="n">MM</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span><span class="w"></span>
+<span class="n">MM</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span><span class="w"></span>
+<span class="n">MM</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
 
 
 <span class="cp">#define APPLY_INVERSE_ON_LEFT(A,B,C) \</span>
@@ -219,10 +219,10 @@
 <span class="cp">    return c;\</span>
 <span class="cp">};</span>
 
-<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
-<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
-<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
-<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span><span class="w"></span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span><span class="w"></span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+<span class="n">APPLY_INVERSE_ON_LEFT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
 
 
 <span class="cp">#define APPLY_INVERSE_ON_RIGHT(A,B,C) \</span>
@@ -233,10 +233,10 @@
 <span class="cp">    return c;\</span>
 <span class="cp">};</span>
 
-<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
-<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
-<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
-<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="p">)</span><span class="w"></span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">U</span><span class="p">)</span><span class="w"></span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
+<span class="n">APPLY_INVERSE_ON_RIGHT</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp">#define IMPL_FACT(TYPE,F1,F2,F3,F4,f1,f2,f3,f4) \</span>
 <span class="cp">std::tuple&lt;F1&lt;SI&gt; , F2&lt;SI&gt; , F3&lt;SI&gt; , F4&lt;SI&gt;&gt; TYPE##_fact(A&lt;SI&gt; a){ \</span>
@@ -255,19 +255,19 @@
 <span class="cp">    return std::make_tuple( f1,f2,f3,f4);\</span>
 <span class="cp">}</span>
 
-<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">LEUP</span><span class="p">,</span>  <span class="n">L</span><span class="p">,</span><span class="n">EL</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">,</span>  <span class="n">l</span><span class="p">,</span><span class="n">el</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
-<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">PLEU</span><span class="p">,</span>  <span class="n">P</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">EU</span><span class="p">,</span><span class="n">U</span><span class="p">,</span>  <span class="n">p</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">eu</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
-<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">UELP</span><span class="p">,</span>  <span class="n">U</span><span class="p">,</span><span class="n">EUH</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">P</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span><span class="n">euh</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
-<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">PUEL</span><span class="p">,</span>  <span class="n">P</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">ELH</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">elh</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">LEUP</span><span class="p">,</span><span class="w">  </span><span class="n">L</span><span class="p">,</span><span class="n">EL</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="w">  </span><span class="n">l</span><span class="p">,</span><span class="n">el</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">PLEU</span><span class="p">,</span><span class="w">  </span><span class="n">P</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">EU</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="w">  </span><span class="n">p</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">eu</span><span class="p">,</span><span class="n">u</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">UELP</span><span class="p">,</span><span class="w">  </span><span class="n">U</span><span class="p">,</span><span class="n">EUH</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="n">euh</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="n">IMPL_FACT</span><span class="p">(</span><span class="n">PUEL</span><span class="p">,</span><span class="w">  </span><span class="n">P</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">ELH</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">elh</span><span class="p">,</span><span class="n">l</span><span class="p">)</span><span class="w"></span>
 
 
 
-<span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">commute</span><span class="p">(</span> <span class="n">EL</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">el1</span><span class="p">,</span> <span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">l1</span> <span class="p">){</span>
-    <span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span> <span class="n">l</span><span class="p">;</span>
-    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">l1</span><span class="p">;</span>
-    <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">el1</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">commute</span><span class="p">(</span><span class="w"> </span><span class="n">EL</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">el1</span><span class="p">,</span><span class="w"> </span><span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">L</span><span class="o">&lt;</span><span class="n">SI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">l1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="n">el1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

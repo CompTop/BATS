@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1a68b01c797daa8817cc7381fb97a2475d:
+
+Template Function bats::induced_map(const DGLinearMap<ColumnMatrix<TVec>>&, const ReducedDGVectorSpace<ColumnMatrix<TVec>>&, const ReducedDGVectorSpace<ColumnMatrix<TVec>>&, size_t)
+=====================================================================================================================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_homology_induced_map.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::induced_map(const DGLinearMap<ColumnMatrix<TVec>>&, const ReducedDGVectorSpace<ColumnMatrix<TVec>>&, const ReducedDGVectorSpace<ColumnMatrix<TVec>>&, size_t)

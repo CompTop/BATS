@@ -169,92 +169,92 @@
 <p>↰ <a class="reference internal" href="file__home_runner_work_BATS_BATS_include_chain_filtered_chain_complex.hpp.html#file-home-runner-work-bats-bats-include-chain-filtered-chain-complex-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/runner/work/BATS/BATS/include/chain/filtered_chain_complex.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;chain_complex.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;filtration/filtration.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;chain_complex.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;filtration/filtration.hpp&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="nn">bats</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">bats</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="c1">// template over filtration and matrix type</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">FilteredChainComplex</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;</span> <span class="n">val</span><span class="p">;</span> <span class="c1">// stored in original order</span>
-    <span class="n">ChainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">;</span> <span class="c1">// stored in permutation order</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span> <span class="n">perm</span><span class="p">;</span> <span class="c1">// map from column order in chain complex to val</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">MT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">FilteredChainComplex</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="c1">// stored in original order</span>
+<span class="w">    </span><span class="n">ChainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">;</span><span class="w"> </span><span class="c1">// stored in permutation order</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">perm</span><span class="p">;</span><span class="w"> </span><span class="c1">// map from column order in chain complex to val</span>
 
-    <span class="n">FilteredChainComplex</span><span class="p">()</span> <span class="p">{}</span>
+<span class="w">    </span><span class="n">FilteredChainComplex</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
-    <span class="n">FilteredChainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">()),</span> <span class="n">C</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">complex</span><span class="p">())</span> <span class="p">{</span>
-        <span class="c1">// step 1: compute permutation to put val in order</span>
-        <span class="k">auto</span> <span class="n">perms</span> <span class="o">=</span> <span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="n">FilteredChainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span><span class="w"> </span><span class="n">CpxT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">val</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">vals</span><span class="p">()),</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="n">F</span><span class="p">.</span><span class="n">complex</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// step 1: compute permutation to put val in order</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">perms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
 
-        <span class="c1">// step 2: put ChainComplex C in permutation order</span>
-        <span class="n">C</span><span class="p">.</span><span class="n">ipermute_basis</span><span class="p">(</span><span class="n">perms</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// step 2: put ChainComplex C in permutation order</span>
+<span class="w">        </span><span class="n">C</span><span class="p">.</span><span class="n">ipermute_basis</span><span class="p">(</span><span class="n">perms</span><span class="p">);</span><span class="w"></span>
 
-        <span class="c1">// step 3: store inverse perumutation to map back to original order</span>
-        <span class="n">perm</span> <span class="o">=</span> <span class="n">perms</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="c1">// step 3: store inverse perumutation to map back to original order</span>
+<span class="w">        </span><span class="n">perm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">perms</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">dim</span><span class="p">(</span><span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="p">}</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dim</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="p">.</span><span class="n">dim</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kr">inline</span> <span class="k">const</span> <span class="n">ChainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;&amp;</span> <span class="n">complex</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span><span class="k">return</span> <span class="n">C</span><span class="p">;}</span>
-    <span class="kr">inline</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vals</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">val</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ChainComplex</span><span class="o">&lt;</span><span class="n">MT</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">complex</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="p">;}</span><span class="w"></span>
+<span class="w">    </span><span class="kr">inline</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vals</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">val</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// update filtration</span>
-    <span class="kt">void</span> <span class="n">update_filtration</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;</span> <span class="n">newval</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// step 1: determine permutation order for newval</span>
-        <span class="k">auto</span> <span class="n">perms</span> <span class="o">=</span> <span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">newval</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// update filtration</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">update_filtration</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// step 1: determine permutation order for newval</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">perms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filtration_sortperm</span><span class="p">(</span><span class="n">newval</span><span class="p">);</span><span class="w"></span>
 
-        <span class="c1">// get inverse permutation for current permutation</span>
-        <span class="k">auto</span> <span class="n">iperm</span> <span class="o">=</span> <span class="n">filtration_iperm</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// get inverse permutation for current permutation</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">iperm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filtration_iperm</span><span class="p">(</span><span class="n">perm</span><span class="p">);</span><span class="w"></span>
 
-        <span class="c1">// step 2: determine update to old permutation</span>
-        <span class="c1">// iperm[k] will hold the updated permutation temporarily</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// temporary vector</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">iperm</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span><span class="n">iperm</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">data</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">perms</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="c1">// step 2: determine update to old permutation</span>
+<span class="w">        </span><span class="c1">// iperm[k] will hold the updated permutation temporarily</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">FT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"> </span><span class="c1">// temporary vector</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">iperm</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">bats</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">apply_perm</span><span class="p">(</span><span class="n">iperm</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">perms</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-        <span class="c1">// step 3: apply permutation updates to ChainComplex C</span>
-        <span class="n">C</span><span class="p">.</span><span class="n">permute_basis</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// step 3: apply permutation updates to ChainComplex C</span>
+<span class="w">        </span><span class="n">C</span><span class="p">.</span><span class="n">permute_basis</span><span class="p">(</span><span class="n">iperm</span><span class="p">);</span><span class="w"></span>
 
-        <span class="c1">// step 4: store new permutation</span>
-        <span class="n">perm</span> <span class="o">=</span> <span class="n">perms</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// step 4: store new permutation</span>
+<span class="w">        </span><span class="n">perm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">perms</span><span class="p">;</span><span class="w"></span>
 
-        <span class="c1">// store values as well</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">newval</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// store values as well</span>
+<span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newval</span><span class="p">;</span><span class="w"></span>
 
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">I</span><span class="o">&gt;</span>
-    <span class="kt">void</span> <span class="n">update_filtration_general</span><span class="p">(</span><span class="k">const</span> <span class="n">I</span> <span class="o">&amp;</span> <span class="n">updating_information</span><span class="p">){</span>
-        <span class="c1">// step 1: update ChainComplex C by new filtered filtration information</span>
-        <span class="n">C</span><span class="p">.</span><span class="n">update_basis_general</span><span class="p">(</span><span class="n">updating_information</span><span class="p">);</span>
+<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">I</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">update_filtration_general</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">updating_information</span><span class="p">){</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// step 1: update ChainComplex C by new filtered filtration information</span>
+<span class="w">        </span><span class="n">C</span><span class="p">.</span><span class="n">update_basis_general</span><span class="p">(</span><span class="n">updating_information</span><span class="p">);</span><span class="w"></span>
 
-        <span class="c1">// step 2: store new permutation</span>
-        <span class="n">perm</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_perms</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// step 2: store new permutation</span>
+<span class="w">        </span><span class="n">perm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_perms</span><span class="p">;</span><span class="w"></span>
 
-        <span class="c1">// store values as well</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_vals</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="c1">// store values as well</span>
+<span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">updating_information</span><span class="p">.</span><span class="n">F_Y_vals</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="p">};</span>
-
-<span class="c1">// defualt return</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="k">auto</span> <span class="n">__FilteredChainComplex</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">VT</span> <span class="o">=</span> <span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span>
-    <span class="k">using</span> <span class="n">MT</span> <span class="o">=</span> <span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="n">FilteredChainComplex</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="p">};</span><span class="w"></span>
 
 <span class="c1">// defualt return</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="k">auto</span> <span class="n">Chain</span><span class="p">(</span><span class="k">const</span> <span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span> <span class="n">CpxT</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">__FilteredChainComplex</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">());}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">__FilteredChainComplex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span><span class="w"> </span><span class="n">CpxT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">VT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SparseVector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ColumnMatrix</span><span class="o">&lt;</span><span class="n">VT</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">FilteredChainComplex</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span><span class="w"> </span><span class="n">MT</span><span class="o">&gt;</span><span class="p">(</span><span class="n">F</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// defualt return</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">FT</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span> <span class="nc">CpxT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">Chain</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Filtration</span><span class="o">&lt;</span><span class="n">FT</span><span class="p">,</span><span class="w"> </span><span class="n">CpxT</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">__FilteredChainComplex</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">());}</span><span class="w"></span>
 
 
-<span class="p">}</span> <span class="c1">// namespace bats</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace bats</span>
 </pre></div>
 </div>
 </div>

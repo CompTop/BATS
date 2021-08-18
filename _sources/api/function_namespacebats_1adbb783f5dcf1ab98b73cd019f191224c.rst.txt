@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1adbb783f5dcf1ab98b73cd019f191224c:
+
+Template Function bats::zigzag_toplex
+=====================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_topology_levelset.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::zigzag_toplex(const std::vector<std::vector<std::vector<T>>>&)
