@@ -587,37 +587,107 @@ std::vector<PersistencePair<size_t>> bars_to_pairs(
     return pairs;
 }
 
-template <typename NT, typename TM>
-std::vector<PersistencePair<size_t>> barcode_sparse(const Diagram<NT, TM> &dgm, size_t hdim) {
-    auto mats = barcode_form_leftright(dgm);
-    auto bars = barcode_from_barcode_form(mats, dgm);
-    return bars_to_pairs(bars, hdim);
-}
+namespace flags {
+/**
+Flag to choose a divide and conquer algorithm
+*/
+struct divide_conquer {};
 
-template <typename NT, typename TM>
-std::vector<PersistencePair<size_t>> barcode_sparse_rightleft(const Diagram<NT, TM> &dgm, size_t hdim) {
-    auto mats = barcode_form_rightleft(dgm);
-    auto bars = barcode_from_barcode_form(mats, dgm);
-    return bars_to_pairs(bars, hdim);
-}
+/**
+Flag to choose rightward algorithm
+*/
+struct rightward {};
 
-template <typename NT, typename TM>
-std::vector<PersistencePair<size_t>> barcode_sparse_leftright(const Diagram<NT, TM> &dgm, size_t hdim) {
-    auto mats = barcode_form_leftright(dgm);
-    auto bars = barcode_from_barcode_form(mats, dgm);
-    return bars_to_pairs(bars, hdim);
-}
+/**
+Flag to choose leftward algorithm
+*/
+struct leftward {};
 
+} // namespace flags
+
+/**
+Compute barcode from diagram of vector spaces and linear maps
+
+Uses divide and conquer algorithm by default.
+*/
 template <typename NT, typename TM>
-std::vector<PersistencePair<size_t>> barcode_sparse_divide_conquer(const Diagram<NT, TM> &dgm, size_t hdim) {
+inline auto barcode(const Diagram<NT, TM> &dgm, size_t hdim) {
     auto mats = barcode_form_divide_conquer(dgm);
     auto bars = barcode_from_barcode_form(mats, dgm);
     return bars_to_pairs(bars, hdim);
 }
 
+/**
+Compute barcode from diagram of vector spaces and linear maps
+
+Uses divide and conquer algorithm
+*/
 template <typename NT, typename TM>
-inline auto barcode(const Diagram<NT, TM> &dgm, size_t hdim) {
-    return barcode_sparse_divide_conquer(dgm, hdim);
+inline auto barcode(const Diagram<NT, TM> &dgm, size_t hdim, flags::divide_conquer) {
+    auto mats = barcode_form_divide_conquer(dgm);
+    auto bars = barcode_from_barcode_form(mats, dgm);
+    return bars_to_pairs(bars, hdim);
 }
+
+/**
+Compute barcode from diagram of vector spaces and linear maps
+
+Uses rightward algorithm (sweeps right to left)
+*/
+template <typename NT, typename TM>
+inline auto barcode(const Diagram<NT, TM> &dgm, size_t hdim, flags::leftward) {
+    auto mats = barcode_form_rightleft(dgm);
+    auto bars = barcode_from_barcode_form(mats, dgm);
+    return bars_to_pairs(bars, hdim);
+}
+
+/**
+Compute barcode from diagram of vector spaces and linear maps
+
+Uses leftward algorithm (sweeps left to right)
+*/
+template <typename NT, typename TM>
+inline auto barcode(const Diagram<NT, TM> &dgm, size_t hdim, flags::rightward) {
+    auto mats = barcode_form_leftright(dgm);
+    auto bars = barcode_from_barcode_form(mats, dgm);
+    return bars_to_pairs(bars, hdim);
+}
+
+
+/**
+extracts dimenion k from a diagram with stacked dimensions
+*/
+template <typename NT, typename TM>
+auto extract_dimension(const Diagram<NT, std::vector<TM>>& D, size_t k) {
+    size_t n = D.nnode();
+	size_t m = D.nedge();
+
+    Diagram<void*, TM> TD(n, m);
+    #pragma omp parallel for
+    for (size_t i = 0; i < m; ++i) {
+        auto s = D.elist[i].src;
+		auto t = D.elist[i].targ;
+        TD.set_edge(i, s, t, D.edata[i][k]);
+    }
+
+    return TD;
+
+}
+
+/**
+Compute barcode in all dimensions of diagram
+*/
+template <typename NT, typename TM, typename ...Args>
+inline auto barcode(const Diagram<NT, std::vector<TM>>& dgm, Args ...args) {
+    size_t maxdim = dgm.edata[0].size();
+    std::vector<PersistencePair<size_t>> pairs;
+    for (size_t k = 0; k < maxdim; ++k) {
+        auto dgmk = extract_dimension(dgm, k);
+        auto pairsk = barcode(dgmk, k, args...);
+        pairs.insert(pairs.end(), pairsk.begin(), pairsk.end());
+    }
+    return pairs;
+}
+
 
 } // namespace bats

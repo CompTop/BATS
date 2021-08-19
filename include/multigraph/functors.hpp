@@ -178,8 +178,10 @@ inline auto Chain(const Diagram<CpxT, CellularMap>& D, T) {
 }
 
 
-// Homology functor for dimension k
-// template over matrix type
+/**
+Homology functor for dimension k
+template over matrix type
+*/
 template <typename TM>
 Diagram<ReducedChainComplex<TM>, TM> Hom(
 	const Diagram<ChainComplex<TM>, ChainMap<TM>> &D,
@@ -208,7 +210,53 @@ Diagram<ReducedChainComplex<TM>, TM> Hom(
 	}
 
 	return HD;
+}
 
+/**
+Homology functor in all dimensions
+template over matrix type
+
+@param D diagram of ChainComplexes and ChainMaps
+@param topd (optional, default: false) if true will compute top dimensional homology.
+
+when topd is true, a k-dimensional Chain complex will be assumed to be 0 in dimension k+1
+and H_k will be computed.
+
+Assumes that all chain complexes have same dimension.
+*/
+template <typename TM>
+Diagram<ReducedChainComplex<TM>, std::vector<TM>> Hom(
+	const Diagram<ChainComplex<TM>, ChainMap<TM>> &D,
+	bool topd=false
+) {
+
+	size_t n = D.nnode();
+	size_t m = D.nedge();
+	// Diagram of chain complexes and chain maps
+	Diagram<ReducedChainComplex<TM>, std::vector<TM>> HD(n, m);
+	size_t maxdim = D.node_data(0).maxdim();
+	maxdim = topd ? maxdim + 1 : maxdim; // compute 1-dimension higher if topd is true
+	if (maxdim == 0) { throw std::runtime_error("No homology to compute!");}
+
+	// apply hom functor to nodes
+	#pragma omp parallel for
+	for (size_t i = 0; i < n; i++) {
+		HD.set_node(i, ReducedChainComplex<TM>(D.node[i]));
+	}
+
+	// apply hom functor to edges
+	#pragma omp parallel for
+	for (size_t j = 0; j < m; j++) {
+		auto s = D.elist[j].src;
+		auto t = D.elist[j].targ;
+		std::vector<TM> F(maxdim);
+		for (size_t k = 0; k < maxdim; ++k) {
+			F[k] = induced_map(D.edata[j], HD.node[s], HD.node[t], k);
+		}
+		HD.set_edge(j, s, t, F);
+	}
+
+	return HD;
 }
 
 // Create diagram of Rips complexes from subsets

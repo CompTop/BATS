@@ -76,16 +76,20 @@ public:
     }
 
     // set preallocated edge e
-    void set_edge(size_t i, size_t s, size_t t, ET &data) {
+    // void set_edge(size_t i, size_t s, size_t t, ET &data) {
+    //     edata[i] = data;
+    //     elist[i] = Edge(s, t);
+    // }
+    void set_edge(size_t i, size_t s, size_t t, const ET &data) {
         edata[i] = data;
         elist[i] = Edge(s, t);
     }
 
     // set preallocated edge e
-    void set_edge(size_t i, size_t s, size_t t, ET &&data) {
-        edata[i] = data;
-        elist[i] = Edge(s, t);
-    }
+    // void set_edge(size_t i, size_t s, size_t t, ET &&data) {
+    //     edata[i] = data;
+    //     elist[i] = Edge(s, t);
+    // }
 
     void save_metadata(std::string &fname) const {
         std::ofstream file (fname, std::ios::out);
