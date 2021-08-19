@@ -74,23 +74,23 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_namespacebats_1a84feebc4e52a45f44b1c3f01a0454805`
-
 - :ref:`exhale_function_namespacebats_1af0573e0c7438b5e8169c1bcffd983996`
+
+- :ref:`exhale_function_namespacebats_1a84feebc4e52a45f44b1c3f01a0454805`
 
 - :ref:`exhale_function_namespacebats_1a599812e7ef18150876ebc91f9abcb8a7`
 
 - :ref:`exhale_function_namespacebats_1a20dac657b0fbd617c0b343328145aafd`
 
-- :ref:`exhale_function_namespacebats_1ad7421a8fba02beaef7b0ed47077b9a46`
-
 - :ref:`exhale_function_namespacebats_1a824f0c04e6ccb686c4ec229a9926abf6`
+
+- :ref:`exhale_function_namespacebats_1ad7421a8fba02beaef7b0ed47077b9a46`
 
 - :ref:`exhale_function_namespacebats_1afdfb6494e22e073d36d944eedcc8d00c`
 
-- :ref:`exhale_function_namespacebats_1a71d2a7167b638e2a1087732119fdf665`
-
 - :ref:`exhale_function_namespacebats_1a5a916d5fa24e378eef3cf2773accf28b`
+
+- :ref:`exhale_function_namespacebats_1a71d2a7167b638e2a1087732119fdf665`
 
 - :ref:`exhale_function_namespacebats_1a9abb4f810bbd5b15b41ed1322ed8499e`
 

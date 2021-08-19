@@ -1,0 +1,24 @@
+
+.. _namespace_bats__flags:
+
+Namespace bats::flags
+=====================
+
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbats_1_1flags_1_1divide__conquer`
+
+- :ref:`exhale_struct_structbats_1_1flags_1_1leftward`
+
+- :ref:`exhale_struct_structbats_1_1flags_1_1rightward`

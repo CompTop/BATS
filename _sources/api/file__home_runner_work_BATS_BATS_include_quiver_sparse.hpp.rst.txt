@@ -60,6 +60,8 @@ Namespaces
 
 - :ref:`namespace_bats`
 
+- :ref:`namespace_bats__flags`
+
 
 Classes
 -------
@@ -67,12 +69,26 @@ Classes
 
 - :ref:`exhale_struct_structbats_1_1bar`
 
+- :ref:`exhale_struct_structbats_1_1flags_1_1divide__conquer`
+
+- :ref:`exhale_struct_structbats_1_1flags_1_1leftward`
+
+- :ref:`exhale_struct_structbats_1_1flags_1_1rightward`
+
 
 Functions
 ---------
 
 
+- :ref:`exhale_function_namespacebats_1aab2065bb672eb10c1e1224e9b714472f`
+
 - :ref:`exhale_function_namespacebats_1a23389c313645876b11d690d575d5aff4`
+
+- :ref:`exhale_function_namespacebats_1ab4f8763ea3c90492147c2eb8be894aa7`
+
+- :ref:`exhale_function_namespacebats_1a80e1d4f4638686c36e488324813d3254`
+
+- :ref:`exhale_function_namespacebats_1ae45e3f2110162be78c6d999886365f81`
 
 - :ref:`exhale_function_namespacebats_1ac1bb532265595d2b8bd304081df415ad`
 
@@ -82,15 +98,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1ac72e3c70890b0fce105aee7399eebf68`
 
-- :ref:`exhale_function_namespacebats_1a6dbfd4aa24984b83d3bbba45f69da797`
-
-- :ref:`exhale_function_namespacebats_1a53f3d220031e4c7f180bf0801ed21d92`
-
-- :ref:`exhale_function_namespacebats_1a55fdc27b8a7237f9f20aa6972263011d`
-
-- :ref:`exhale_function_namespacebats_1ae8389bee8a8a614f9a3636d6c3c5ad45`
-
 - :ref:`exhale_function_namespacebats_1a1aae54e14396d951f0958797eb677863`
+
+- :ref:`exhale_function_namespacebats_1a0d5c8d4c7168604c37a0b577187cae60`
 
 - :ref:`exhale_function_namespacebats_1ae418d092c47362291232dc789e384792`
 

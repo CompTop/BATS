@@ -19,6 +19,11 @@ Namespaces
 .. toctree::
    :maxdepth: 5
 
+   namespace_bats__flags.rst
+
+.. toctree::
+   :maxdepth: 5
+
    namespace_bats__future.rst
 
 .. toctree::
@@ -159,6 +164,21 @@ Classes and Structs
    :maxdepth: 5
 
    structbats_1_1FilteredCochainComplex.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1flags_1_1divide__conquer.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1flags_1_1leftward.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   structbats_1_1flags_1_1rightward.rst
 
 .. toctree::
    :maxdepth: 5
@@ -737,6 +757,26 @@ Functions
 .. toctree::
    :maxdepth: 5
 
+   function_namespacebats_1ab4f8763ea3c90492147c2eb8be894aa7.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a80e1d4f4638686c36e488324813d3254.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1ae45e3f2110162be78c6d999886365f81.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1aab2065bb672eb10c1e1224e9b714472f.rst
+
+.. toctree::
+   :maxdepth: 5
+
    function_namespacebats_1ab6a5a5e287f1aa3400548761fcaa8a9d.rst
 
 .. toctree::
@@ -758,26 +798,6 @@ Functions
    :maxdepth: 5
 
    function_namespacebats_1ac72e3c70890b0fce105aee7399eebf68.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_namespacebats_1a6dbfd4aa24984b83d3bbba45f69da797.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_namespacebats_1a53f3d220031e4c7f180bf0801ed21d92.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_namespacebats_1a55fdc27b8a7237f9f20aa6972263011d.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   function_namespacebats_1ae8389bee8a8a614f9a3636d6c3c5ad45.rst
 
 .. toctree::
    :maxdepth: 5
@@ -948,6 +968,11 @@ Functions
    :maxdepth: 5
 
    function_namespacebats_1a862049151ea00a23c55aca9e68b5b036.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1a0d5c8d4c7168604c37a0b577187cae60.rst
 
 .. toctree::
    :maxdepth: 5
@@ -1143,6 +1168,11 @@ Functions
    :maxdepth: 5
 
    function_namespacebats_1a5178d1d29e8f42549c22417206aadd53.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_namespacebats_1acb6bffe6f8b24477b665fd4d158c4028.rst
 
 .. toctree::
    :maxdepth: 5

@@ -1,0 +1,16 @@
+.. _exhale_struct_structbats_1_1flags_1_1rightward:
+
+Struct rightward
+================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_quiver_sparse.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: bats::flags::rightward
+   :members:
+   :protected-members:
+   :undoc-members:

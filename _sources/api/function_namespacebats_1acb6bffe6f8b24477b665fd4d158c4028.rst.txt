@@ -1,0 +1,13 @@
+.. _exhale_function_namespacebats_1acb6bffe6f8b24477b665fd4d158c4028:
+
+Template Function bats::Hom(const Diagram<ChainComplex<TM>, ChainMap<TM>>&, bool)
+=================================================================================
+
+- Defined in :ref:`file__home_runner_work_BATS_BATS_include_multigraph_functors.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: bats::Hom(const Diagram<ChainComplex<TM>, ChainMap<TM>>&, bool)
