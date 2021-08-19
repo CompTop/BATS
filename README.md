@@ -1,6 +1,6 @@
 # BATS: Basic Applied Topology Subprograms
 
-[![Build Status](https://travis-ci.com/bnels/BATS.svg?branch=master)](https://travis-ci.com/bnels/BATS)
+[![Build Status](https://travis-ci.com/CompTop/BATS.svg?branch=master)](https://travis-ci.com/CompTop/BATS)
 
 This repository contains header files for
 * Representing topological spaces on a computer
