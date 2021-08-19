@@ -9,9 +9,9 @@ This repository contains header files for
 The contents of this repository were originally developed to implement the computational framework in the paper
 [Persistent and Zigzag Homology: A Matrix Factorization Viewpoint](https://arxiv.org/abs/1911.10693) by Gunnar Carlsson, Anjan Dwaraknath, and Bradley J. Nelson.  Portions of the code base is still under development - please contact the authors (or submit an issue) if you would like to have certain functionality to support an application!
 
-Python bindings for a subset of BATS can be found in a separate repository: [BATS.py](https://github.com/bnels/BATS.py).  
+Python bindings for a subset of BATS can be found in a separate repository: [BATS.py](https://github.com/CompTop/BATS.py).  
 
-Documentation is being migrated to [bnels.github.io/BATS](https://bnels.github.io/BATS).  You can find an API reference there.
+Documentation is being migrated to [comptop.github.io/BATS](https://comptop.github.io/BATS).  You can find an API reference there.
 
 ## Features
 
