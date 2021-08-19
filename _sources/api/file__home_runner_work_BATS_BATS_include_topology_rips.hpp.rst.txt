@@ -69,13 +69,13 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_namespacebats_1a8d88d925f0c8a77c597d46e7b073aba7`
-
 - :ref:`exhale_function_namespacebats_1af82e8143642fb452d49c561a5e84b997`
 
-- :ref:`exhale_function_namespacebats_1a1457c1fcfb0265e8572db0310c518854`
+- :ref:`exhale_function_namespacebats_1a8d88d925f0c8a77c597d46e7b073aba7`
 
 - :ref:`exhale_function_namespacebats_1a9a1dc66df690a01219961c0dff46532e`
+
+- :ref:`exhale_function_namespacebats_1a1457c1fcfb0265e8572db0310c518854`
 
 - :ref:`exhale_function_namespacebats_1a3c71bc5aa2121275620947fff0b8c4fb`
 

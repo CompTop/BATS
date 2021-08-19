@@ -257,7 +257,7 @@ of homology spaces and maps between them
    using F3 = ModP<int, 3>;
    auto CD = bats::Chain(D, F3());
 
-   auto HD = bats::Hom(CD, 1); // homology in dimension 1
+   auto HD = bats::Hom(CD, (size_t) 1); // homology in dimension 1
 
 Finally, we extract the barcode from the homology diagram
 
