@@ -39,9 +39,9 @@ TEST_CASE_TEMPLATE("Square", T, F2, F3, F5) {
 			}
 
 			// compute barcode
-			auto ps1 = bats::barcode_sparse_rightleft(A, 0);
-			auto ps2 = bats::barcode_sparse_leftright(A, 0);
-			auto ps3 = bats::barcode_sparse_divide_conquer(A, 0);
+			auto ps1 = bats::barcode(A, 0, flags::rightward());
+			auto ps2 = bats::barcode(A, 0, flags::leftward());
+			auto ps3 = bats::barcode(A, 0, flags::divide_conquer());
 
 			CHECK(bats::barcode_equality(ps1, ps2));
 			CHECK(bats::barcode_equality(ps1, ps3));
@@ -66,9 +66,9 @@ TEST_CASE_TEMPLATE("Square", T, F2, F3, F5) {
 			}
 
 			// compute barcode
-			auto ps1 = bats::barcode_sparse_rightleft(A, 0);
-			auto ps2 = bats::barcode_sparse_leftright(A, 0);
-			auto ps3 = bats::barcode_sparse_divide_conquer(A, 0);
+			auto ps1 = bats::barcode(A, 0, flags::rightward());
+			auto ps2 = bats::barcode(A, 0, flags::leftward());
+			auto ps3 = bats::barcode(A, 0, flags::divide_conquer());
 
 			CHECK(bats::barcode_equality(ps1, ps2));
 			CHECK(bats::barcode_equality(ps1, ps3));
@@ -100,9 +100,9 @@ TEST_CASE_TEMPLATE("Square", T, F2, F3, F5) {
 			}
 
 			// compute barcode
-			auto ps1 = bats::barcode_sparse_rightleft(A, 0);
-			auto ps2 = bats::barcode_sparse_leftright(A, 0);
-			auto ps3 = bats::barcode_sparse_divide_conquer(A, 0);
+			auto ps1 = bats::barcode(A, 0, flags::rightward());
+			auto ps2 = bats::barcode(A, 0, flags::leftward());
+			auto ps3 = bats::barcode(A, 0, flags::divide_conquer());
 
 			CHECK(bats::barcode_equality(ps1, ps2));
 			CHECK(bats::barcode_equality(ps1, ps3));
