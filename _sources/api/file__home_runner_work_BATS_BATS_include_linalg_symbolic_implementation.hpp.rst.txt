@@ -83,12 +83,6 @@ Functions
 
 - :ref:`exhale_function_symbolic__implementation_8hpp_1a5ea1560a24375b05d40b3fe3ef700464`
 
-- :ref:`exhale_function_symbolic__implementation_8hpp_1a73d3e20b22c8ef5a87c8fce9782a210b`
-
-- :ref:`exhale_function_symbolic__implementation_8hpp_1a089ba383ac92cf4dc6a29439f00acba1`
-
-- :ref:`exhale_function_symbolic__implementation_8hpp_1aab8f20dd44c870ad5d6a685c3cf35e06`
-
 - :ref:`exhale_function_symbolic__implementation_8hpp_1aa71e711b460701044e6e5b616f010391`
 
 - :ref:`exhale_function_symbolic__implementation_8hpp_1a89e947e99565109e5392a2dfc18ceca9`
@@ -98,6 +92,12 @@ Functions
 - :ref:`exhale_function_symbolic__implementation_8hpp_1ae7fcc1404fba4d8325dd0157222bcc6e`
 
 - :ref:`exhale_function_symbolic__implementation_8hpp_1a2c699a4acd723807e4f9710ed912a65f`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a73d3e20b22c8ef5a87c8fce9782a210b`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1a089ba383ac92cf4dc6a29439f00acba1`
+
+- :ref:`exhale_function_symbolic__implementation_8hpp_1aab8f20dd44c870ad5d6a685c3cf35e06`
 
 - :ref:`exhale_function_symbolic__implementation_8hpp_1a115591423db049b1c4a6cec0f7f5eb4f`
 
