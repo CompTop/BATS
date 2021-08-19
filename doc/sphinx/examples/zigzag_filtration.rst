@@ -1,5 +1,5 @@
 Zigzag Filtrations
-===============
+==================
 
 A zigzag filtration allows cells to enter and exit a complex at specified
 parameters.  Construction is similar to a filtration, but you need to specify
