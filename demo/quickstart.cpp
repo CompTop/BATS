@@ -93,9 +93,9 @@ int main() {
         using F3 = ModP<int, 3>;
         auto CD = bats::Chain(D, F3());
 
-        auto HD = bats::Hom(CD, 1); // homology in dimension 1
+        auto HD = bats::Hom(CD, (size_t) 1); // homology in dimension 1
 
-        auto ps = barcode(HD, 1);
+        auto ps = bats::barcode(HD, 1);
     	for (auto p : ps) {
     		std::cout << p.str() << std::endl;
     	}
