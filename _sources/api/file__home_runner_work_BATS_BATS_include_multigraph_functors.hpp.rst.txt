@@ -93,11 +93,11 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a03cb4f7ab2e3c73a3b3f629094014a30`
 
-- :ref:`exhale_function_namespacebats_1acb6bffe6f8b24477b665fd4d158c4028`
-
 - :ref:`exhale_function_namespacebats_1a5178d1d29e8f42549c22417206aadd53`
 
 - :ref:`exhale_function_namespacebats_1aa98ade0c810c489cb343d1483991331a`
+
+- :ref:`exhale_function_namespacebats_1acb6bffe6f8b24477b665fd4d158c4028`
 
 - :ref:`exhale_function_namespacebats_1a34195cbd7255715ec0ea3d394859b230`
 

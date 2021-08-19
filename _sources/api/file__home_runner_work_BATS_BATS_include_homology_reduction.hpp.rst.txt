@@ -132,9 +132,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a3068d4e763beee924a79f0bbcdbf2ff2`
 
-- :ref:`exhale_function_namespacebats_1a38c3a3e30e0973b5736dc47da0bbcd25`
-
 - :ref:`exhale_function_namespacebats_1ad61c7634820a245686f34152ce49581a`
+
+- :ref:`exhale_function_namespacebats_1a38c3a3e30e0973b5736dc47da0bbcd25`
 
 - :ref:`exhale_function_namespacebats_1acdde3d53d8668aa615acf961aeb4bc0b`
 

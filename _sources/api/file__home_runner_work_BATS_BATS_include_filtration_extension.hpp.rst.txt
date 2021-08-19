@@ -60,7 +60,7 @@ Functions
 
 - :ref:`exhale_function_filtration_2extension_8hpp_1aa06b1768d2ada6e6cc07688a8819fdc9`
 
-- :ref:`exhale_function_filtration_2extension_8hpp_1a99e0c43dc36d0cbf034c0a8cc5ac7fbb`
-
 - :ref:`exhale_function_filtration_2extension_8hpp_1a276e570489b4feb223e4131c8bfa5392`
+
+- :ref:`exhale_function_filtration_2extension_8hpp_1a99e0c43dc36d0cbf034c0a8cc5ac7fbb`
 
