@@ -89,15 +89,15 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a5d7d2f31d7d578e0d6184e7fa31b047e`
 
-- :ref:`exhale_function_namespacebats_1a6cdef17cd321bc8a3cb0fbf0dbb117e0`
-
 - :ref:`exhale_function_namespacebats_1a0bd7eb73704a85f07010b5712c5de557`
+
+- :ref:`exhale_function_namespacebats_1a6cdef17cd321bc8a3cb0fbf0dbb117e0`
 
 - :ref:`exhale_function_namespacebats_1aaffcfba1c34ddde5779274d7f906691f`
 
-- :ref:`exhale_function_namespacebats_1a38d9cc69576f3fbcbf759fb030ee690e`
-
 - :ref:`exhale_function_namespacebats_1a23acfc39d756b06e831460a102476555`
+
+- :ref:`exhale_function_namespacebats_1a38d9cc69576f3fbcbf759fb030ee690e`
 
 - :ref:`exhale_function_namespacebats_1a94f0bcbebf3d87620de0accd4231a9a1`
 

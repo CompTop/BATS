@@ -163,11 +163,11 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a4bb6b250a088ddf81546cf9e225819fa`
 
-- :ref:`exhale_function_namespacebats_1a3354ec1103ef97dd0c11b1007156e382`
-
 - :ref:`exhale_function_namespacebats_1a85161d655d3fe9f727bc5a743d6ba05f`
 
 - :ref:`exhale_function_namespacebats_1af9b2781bd3d42f4ec2abc965707c5ce4`
+
+- :ref:`exhale_function_namespacebats_1a3354ec1103ef97dd0c11b1007156e382`
 
 - :ref:`exhale_function_namespacebats_1a510644065bf9f3228dccdf17d05cff9c`
 
@@ -175,13 +175,13 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a478328b5591ff8fb8be8dcf8e06c258e`
 
-- :ref:`exhale_function_namespacebats_1a1f47f63ff24dbd590481527564ed9b3f`
-
 - :ref:`exhale_function_namespacebats_1a5043f25417b021629dd6935aa7b970f5`
 
 - :ref:`exhale_function_namespacebats_1a80fc1d83d9d909662fdb398e95f29c47`
 
 - :ref:`exhale_function_namespacebats_1a6cfe25cd1ba6603b8d35093c9b04cf5d`
+
+- :ref:`exhale_function_namespacebats_1a1f47f63ff24dbd590481527564ed9b3f`
 
 - :ref:`exhale_function_namespacebats_1a4a640d48ec5939b74e2c6ef175f29d88`
 
@@ -197,15 +197,15 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a81f34ad49c42e6abd8a175940307e1cc`
 
-- :ref:`exhale_function_namespacebats_1a80e1d4f4638686c36e488324813d3254`
-
 - :ref:`exhale_function_namespacebats_1ae45e3f2110162be78c6d999886365f81`
+
+- :ref:`exhale_function_namespacebats_1aab2065bb672eb10c1e1224e9b714472f`
 
 - :ref:`exhale_function_namespacebats_1a23389c313645876b11d690d575d5aff4`
 
 - :ref:`exhale_function_namespacebats_1ab4f8763ea3c90492147c2eb8be894aa7`
 
-- :ref:`exhale_function_namespacebats_1aab2065bb672eb10c1e1224e9b714472f`
+- :ref:`exhale_function_namespacebats_1a80e1d4f4638686c36e488324813d3254`
 
 - :ref:`exhale_function_namespacebats_1ab6a5a5e287f1aa3400548761fcaa8a9d`
 
@@ -227,9 +227,9 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a9c29c2067c7bb5041375fc7e5f7105fa`
 
-- :ref:`exhale_function_namespacebats_1a4b1bb4dbae612ef0621920d07af33a92`
-
 - :ref:`exhale_function_namespacebats_1af16b0e2a23ec8a98605c51a9307520b1`
+
+- :ref:`exhale_function_namespacebats_1a4b1bb4dbae612ef0621920d07af33a92`
 
 - :ref:`exhale_function_namespacebats_1a477da14f55877a021b2a08035715ceac`
 
@@ -261,13 +261,13 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a1e29de611c7e3d8a915abf091330edc5`
 
+- :ref:`exhale_function_namespacebats_1ab0ff4928102e869d085645ca47383869`
+
 - :ref:`exhale_function_namespacebats_1a0491ab17f837b9b1ca9ad6a0ec0fffe1`
 
 - :ref:`exhale_function_namespacebats_1a883880c5732d01b74451cc68e47021fa`
 
 - :ref:`exhale_function_namespacebats_1a4aca2e42336131f789fe822b1f7d2e87`
-
-- :ref:`exhale_function_namespacebats_1ab0ff4928102e869d085645ca47383869`
 
 - :ref:`exhale_function_namespacebats_1afeb9ea6f0eaf382cbcda6054a45a93ba`
 
@@ -331,21 +331,21 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a3fb8dbb4034809fa0a83af95e7f53681`
 
-- :ref:`exhale_function_namespacebats_1acb6bffe6f8b24477b665fd4d158c4028`
-
 - :ref:`exhale_function_namespacebats_1aa98ade0c810c489cb343d1483991331a`
 
 - :ref:`exhale_function_namespacebats_1a5178d1d29e8f42549c22417206aadd53`
+
+- :ref:`exhale_function_namespacebats_1acb6bffe6f8b24477b665fd4d158c4028`
 
 - :ref:`exhale_function_namespacebats_1a6201e20b7f966db15113f83cf3e31c61`
 
 - :ref:`exhale_function_namespacebats_1a6a51348e96dfa650f338be8de8a558e5`
 
-- :ref:`exhale_function_namespacebats_1a68b01c797daa8817cc7381fb97a2475d`
-
 - :ref:`exhale_function_namespacebats_1a77750544358124fd5b9d47f1bb416305`
 
 - :ref:`exhale_function_namespacebats_1a9e8165f923d8bcd327d53646a16c9b69`
+
+- :ref:`exhale_function_namespacebats_1a68b01c797daa8817cc7381fb97a2475d`
 
 - :ref:`exhale_function_namespacebats_1a8d27f560303a5e8697dd1ef19c54267f`
 
@@ -453,19 +453,27 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a599812e7ef18150876ebc91f9abcb8a7`
 
-- :ref:`exhale_function_namespacebats_1a824f0c04e6ccb686c4ec229a9926abf6`
-
 - :ref:`exhale_function_namespacebats_1ad7421a8fba02beaef7b0ed47077b9a46`
+
+- :ref:`exhale_function_namespacebats_1a824f0c04e6ccb686c4ec229a9926abf6`
 
 - :ref:`exhale_function_namespacebats_1afdfb6494e22e073d36d944eedcc8d00c`
 
 - :ref:`exhale_function_namespacebats_1ac75fe3894c0e3c21c480649f2348a236`
 
-- :ref:`exhale_function_namespacebats_1a71d2a7167b638e2a1087732119fdf665`
-
 - :ref:`exhale_function_namespacebats_1a5a916d5fa24e378eef3cf2773accf28b`
 
+- :ref:`exhale_function_namespacebats_1a71d2a7167b638e2a1087732119fdf665`
+
+- :ref:`exhale_function_namespacebats_1a489815390f5766170108b2636b852bda`
+
+- :ref:`exhale_function_namespacebats_1a9abb4f810bbd5b15b41ed1322ed8499e`
+
 - :ref:`exhale_function_namespacebats_1a91b11073b2bb54ed0e8ed0e4d3f0a5bf`
+
+- :ref:`exhale_function_namespacebats_1a5920474e13f38792f5c8fb1d43d0b409`
+
+- :ref:`exhale_function_namespacebats_1a169cd08c4e2c6c373d76d269bdae7d28`
 
 - :ref:`exhale_function_namespacebats_1af4e042b9698fb7cb79becce57d089d21`
 
@@ -473,27 +481,19 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a0101cb1c0bcdbd99d5cbb4db4a9df924`
 
-- :ref:`exhale_function_namespacebats_1a5920474e13f38792f5c8fb1d43d0b409`
-
-- :ref:`exhale_function_namespacebats_1a169cd08c4e2c6c373d76d269bdae7d28`
-
-- :ref:`exhale_function_namespacebats_1a489815390f5766170108b2636b852bda`
-
-- :ref:`exhale_function_namespacebats_1a9abb4f810bbd5b15b41ed1322ed8499e`
-
 - :ref:`exhale_function_namespacebats_1ac0e79a899be3c1d5b4a76ea071fd79bf`
 
 - :ref:`exhale_function_namespacebats_1a1f615afaac832b9d0cf895060f8f0e2e`
 
 - :ref:`exhale_function_namespacebats_1a92fe556325d081fbfe03e280c772f281`
 
-- :ref:`exhale_function_namespacebats_1a3068d4e763beee924a79f0bbcdbf2ff2`
-
 - :ref:`exhale_function_namespacebats_1ac8a60869010cb73b724dda3a2cf703a1`
 
-- :ref:`exhale_function_namespacebats_1a38c3a3e30e0973b5736dc47da0bbcd25`
+- :ref:`exhale_function_namespacebats_1a3068d4e763beee924a79f0bbcdbf2ff2`
 
 - :ref:`exhale_function_namespacebats_1ad61c7634820a245686f34152ce49581a`
+
+- :ref:`exhale_function_namespacebats_1a38c3a3e30e0973b5736dc47da0bbcd25`
 
 - :ref:`exhale_function_namespacebats_1acdde3d53d8668aa615acf961aeb4bc0b`
 
@@ -501,17 +501,17 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a7232532be8060651ac3b707700bf0fa9`
 
+- :ref:`exhale_function_namespacebats_1a8d88d925f0c8a77c597d46e7b073aba7`
+
 - :ref:`exhale_function_namespacebats_1ac63fc4bbcb48bb4119b74de4607d3fc4`
 
 - :ref:`exhale_function_namespacebats_1af82e8143642fb452d49c561a5e84b997`
 
-- :ref:`exhale_function_namespacebats_1a8d88d925f0c8a77c597d46e7b073aba7`
+- :ref:`exhale_function_namespacebats_1a7b6d50a75f0c1b925dfac2cd15a3f2ac`
 
 - :ref:`exhale_function_namespacebats_1a9a1dc66df690a01219961c0dff46532e`
 
 - :ref:`exhale_function_namespacebats_1a1457c1fcfb0265e8572db0310c518854`
-
-- :ref:`exhale_function_namespacebats_1a7b6d50a75f0c1b925dfac2cd15a3f2ac`
 
 - :ref:`exhale_function_namespacebats_1a4510fb7cac4136917b75f3342ef53a75`
 
@@ -553,11 +553,11 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a56b394737e3f3b7512052e9398fd5b22`
 
+- :ref:`exhale_function_namespacebats_1adea5ebf11ef869d59081c07746e48d01`
+
 - :ref:`exhale_function_namespacebats_1a10e21fd6351157149ae42cfae28947dd`
 
 - :ref:`exhale_function_namespacebats_1a06ea072e08d6be92106ab64bf3f4c3b4`
-
-- :ref:`exhale_function_namespacebats_1adea5ebf11ef869d59081c07746e48d01`
 
 - :ref:`exhale_function_namespacebats_1a0818a039d02f945e027b35d0b877176a`
 
