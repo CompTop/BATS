@@ -61,11 +61,11 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a5fa712e00214a76d722d00c16f342d83`
 
-- :ref:`exhale_function_namespacebats_1a4602cae83d34635b1797fa5d2f458915`
-
 - :ref:`exhale_function_namespacebats_1adde180a44afa25aea101dd6f988251d4`
 
-- :ref:`exhale_function_grid_8hpp_1a2cb6deb8fce663963003ef7e58461123`
+- :ref:`exhale_function_namespacebats_1a4602cae83d34635b1797fa5d2f458915`
 
 - :ref:`exhale_function_grid_8hpp_1a7cd7b8cd318520035d909efeab60931c`
+
+- :ref:`exhale_function_grid_8hpp_1a2cb6deb8fce663963003ef7e58461123`
 

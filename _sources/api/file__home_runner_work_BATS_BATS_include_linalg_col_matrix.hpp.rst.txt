@@ -49,6 +49,8 @@ Includes
 
 - ``random``
 
+- ``sstream``
+
 - ``string``
 
 - ``vector`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_abstract_vector.hpp`)

@@ -19,6 +19,7 @@ Program Listing for File col_matrix.hpp
    #include <algorithm>
    #include <string>
    #include <fstream>
+   #include <sstream>
    #include <random>
    #include <chrono>
    #include "abstract_matrix.hpp"

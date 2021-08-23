@@ -92,7 +92,7 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1a71d2a7167b638e2a1087732119fdf665`
 
-- :ref:`exhale_function_namespacebats_1a489815390f5766170108b2636b852bda`
-
 - :ref:`exhale_function_namespacebats_1a9abb4f810bbd5b15b41ed1322ed8499e`
+
+- :ref:`exhale_function_namespacebats_1a489815390f5766170108b2636b852bda`
 

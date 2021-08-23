@@ -39,6 +39,8 @@ Includes
 
 - ``matrix_interface.hpp`` (:ref:`file__home_runner_work_BATS_BATS_include_linalg_matrix_interface.hpp`)
 
+- ``sstream``
+
 - ``string``
 
 - ``unordered_map``
