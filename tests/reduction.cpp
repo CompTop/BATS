@@ -47,7 +47,7 @@ TEST_CASE_TEMPLATE("Ones Reduction", F, F2, F3, F5, Q) {
 	CHECK(p2c[1] == 0);
 	cols = {VT({0,1}, {1,1}), VT()};
 	CHECK(R == MatT(2,2,cols));
-	cols = {VT({0},{1}), VT({0,1},{-1,1})};
+	cols = {VT(0), VT({0,1},{-1,1})};
 	CHECK(U == MatT(2,2,cols));
 
 }

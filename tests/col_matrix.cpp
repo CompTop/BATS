@@ -81,7 +81,7 @@ TEST_CASE_TEMPLATE("Shapes", F, F2, F3, F5, Q) {
 	}
 
 	SUBCASE("Upper") {
-		std::vector<VT> col{VT({0}, {1}), VT({0,1}, {1,1})};
+		std::vector<VT> col{VT(0), VT({0,1}, {1,1})};
 		MatT U(2,2,col);
 		CHECK(U.is_upper());
 		CHECK(!(U.is_lower()));
@@ -92,7 +92,7 @@ TEST_CASE_TEMPLATE("Shapes", F, F2, F3, F5, Q) {
 		CHECK(!(U.is_EUhat()));
 	}
 	SUBCASE("Lower") {
-		std::vector<VT> col{VT({0,1}, {1,1}), VT({1}, {1})};
+		std::vector<VT> col{VT({0,1}, {1,1}), VT(1)};
 		MatT L(2,2,col);
 		CHECK(L.is_lower());
 		CHECK(!(L.is_upper()));
@@ -103,27 +103,27 @@ TEST_CASE_TEMPLATE("Shapes", F, F2, F3, F5, Q) {
 		CHECK(!(L.is_EUhat()));
 	}
 	SUBCASE("Pivot") {
-		std::vector<VT> col{VT({1}, {1}), VT({0}, {1}), VT()};
+		std::vector<VT> col{VT(1), VT(0), VT()};
 		MatT A(3,3,col);
 		CHECK(A.is_pivot_matrix());
 	}
 	SUBCASE("EL") {
-		std::vector<VT> col{VT({0}, {1}), VT({2}, {1}), VT()};
+		std::vector<VT> col{VT(0), VT(2), VT()};
 		MatT A(4,3,col);
 		CHECK(A.is_EL());
 	}
 	SUBCASE("EU") {
-		std::vector<VT> col{VT({0}, {1}), VT(), VT({1}, {1}), VT()};
+		std::vector<VT> col{VT(0), VT(), VT(1), VT()};
 		MatT A(3,4,col);
 		CHECK(A.is_EU());
 	}
 	SUBCASE("ELhat") {
-		std::vector<VT> col{VT(), VT({2}, {1}), VT(), VT({3},{1})};
+		std::vector<VT> col{VT(), VT(2), VT(), VT(3)};
 		MatT A(4,4,col);
 		CHECK(A.is_ELhat());
 	}
 	SUBCASE("EUhat") {
-		std::vector<VT> col{ VT(), VT({1}, {1}), VT({3},{1})};
+		std::vector<VT> col{ VT(), VT(1), VT(3)};
 		MatT A(4,3,col);
 		CHECK(A.is_EUhat());
 	}
