@@ -86,9 +86,9 @@ Functions
 
 - :ref:`exhale_function_zigzag_2reduction_8hpp_1ac5368ca8cbba02e11554b51280cb9b3e`
 
-- :ref:`exhale_function_zigzag_2reduction_8hpp_1a3c3271ca36d6fcb8ed80d47ec01394c6`
-
 - :ref:`exhale_function_zigzag_2reduction_8hpp_1a8ab371c68105086fae22b67443d716d7`
+
+- :ref:`exhale_function_zigzag_2reduction_8hpp_1a3c3271ca36d6fcb8ed80d47ec01394c6`
 
 - :ref:`exhale_function_zigzag_2reduction_8hpp_1a6c07dee8cee607291cd1be7b87d6b063`
 

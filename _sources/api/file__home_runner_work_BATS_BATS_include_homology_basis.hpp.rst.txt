@@ -84,7 +84,7 @@ Functions
 
 - :ref:`exhale_function_namespacebats_1aceb6dccb131821e8dd2082e427df43d0`
 
-- :ref:`exhale_function_namespacebats_1a0f4abde0bed5309801ab587b4256d92a`
-
 - :ref:`exhale_function_namespacebats_1ab9bea3263b69bcab24330449ec9ecea5`
+
+- :ref:`exhale_function_namespacebats_1a0f4abde0bed5309801ab587b4256d92a`
 
