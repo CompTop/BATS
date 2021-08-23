@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <random>
 #include <chrono>
 #include "abstract_matrix.hpp"

@@ -21,13 +21,13 @@ int main() {
 
 		// diagram in Homology
 		std::cout << "Homology functor" << std::endl;
-		auto HkDgm = Hom(ChainDgm, 1);
+		auto HkDgm = Hom(ChainDgm, (size_t) 1);
 		std::cout << HkDgm.nnode() << "," << HkDgm.nedge() << std::endl;
 
 		HkDgm.edge_data(1000).print();
 
 		std::cout << "barcode" << std::endl;
-		auto ps = barcode_sparse_rightleft(HkDgm, 1);
+		auto ps = barcode(HkDgm, 1, flags::divide_conquer());
 		std::cout << ps.size() << std::endl;
 
 		std::cout << "success" << std::endl;
@@ -41,7 +41,7 @@ int main() {
 		HkDgm.edge_data(1000).print();
 
 		std::cout << "barcode" << std::endl;
-		auto ps = barcode_sparse_rightleft(HkDgm, 1);
+		auto ps = barcode(HkDgm, 1, flags::divide_conquer());
 		std::cout << ps.size() << std::endl;
 
 		std::cout << "success" << std::endl;

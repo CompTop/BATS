@@ -5,6 +5,7 @@
 #include <vector>
 #include <util/common.hpp>
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 #include "matrix_interface.hpp"
 #include <string>
