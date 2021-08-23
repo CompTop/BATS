@@ -389,7 +389,7 @@ public:
 					R[k].append_column(); // insert zero columns
 					// change U
 					U[k].append_row();
-					U[k].append_column(VectT({size_t(final_ind_of_U)}, {1}));
+					U[k].append_column(VectT(size_t(final_ind_of_U)));
 					final_ind_of_U++;
 				}
 			}else{
@@ -418,7 +418,7 @@ public:
 					std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
 					// creat the column vector
 					Rcol[i] = VectT(simplex_bd_ind, vect_one);
-					Ucol[i] = VectT({size_t(ind)}, {1});
+					Ucol[i] = VectT(size_t(ind));
 				}
 				R[k].insert_columns(add_inds, Rcol);
 				U[k].insert_columns(add_inds, Ucol);
