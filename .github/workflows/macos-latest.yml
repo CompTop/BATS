@@ -1,0 +1,22 @@
+name: macos-latest
+on: [push, pull_request]
+jobs:
+  run-all-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: brew install libomp
+      - name: Run from test directory
+        run: |
+          cd tests
+          make test
+  run-demos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brew install libomp
+      - name: Run quickstart demo
+        run: |
+          cd demo
+          make quickstart.out
+          ./quickstart.out
