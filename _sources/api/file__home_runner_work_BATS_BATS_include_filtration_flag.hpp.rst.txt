@@ -82,9 +82,9 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_namespacebats_1af9b2781bd3d42f4ec2abc965707c5ce4`
-
 - :ref:`exhale_function_namespacebats_1a3354ec1103ef97dd0c11b1007156e382`
+
+- :ref:`exhale_function_namespacebats_1af9b2781bd3d42f4ec2abc965707c5ce4`
 
 - :ref:`exhale_function_namespacebats_1a510644065bf9f3228dccdf17d05cff9c`
 
