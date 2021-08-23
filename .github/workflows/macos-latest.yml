@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: brew install libomp
+      - run: brew install libomp
       - name: Run quickstart demo
         run: |
           cd demo
