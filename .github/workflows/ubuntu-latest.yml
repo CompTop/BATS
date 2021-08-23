@@ -1,4 +1,4 @@
-name: run-tests
+name: ubuntu-latest
 on: [push, pull_request]
 jobs:
   run-all-tests:

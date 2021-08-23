@@ -1,7 +1,8 @@
 # BATS: Basic Applied Topology Subprograms
 
 [![Build Status](https://travis-ci.com/CompTop/BATS.svg?branch=master)](https://travis-ci.com/CompTop/BATS)
-[![CI](https://github.com/CompTop/BATS/workflows/run-tests/badge.svg)](https://github.com/CompTop/BATS/actions)
+[![CI](https://github.com/CompTop/BATS/workflows/ubuntu-latest/badge.svg)](https://github.com/CompTop/BATS/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository contains header files for
 * Representing topological spaces on a computer
