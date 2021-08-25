@@ -67,13 +67,13 @@ void run_problem(
 	std::cout << HkDgm.node_data(0).hdim(0) << std::endl;
 
 	start = omp_get_wtime();
-		auto ps1 = barcode_sparse_rightleft(HkDgm, hdim);
+		auto ps1 = barcode(HkDgm, hdim, flags::rightward());
 	end = omp_get_wtime();
 	std::cout << "\tbarcode sequential: " << end - start << "sec. " << std::endl;
 	f << end - start << ", ";
 
 	start = omp_get_wtime();
-		auto ps2 = barcode_sparse_divide_conquer(HkDgm, hdim);
+		auto ps2 = barcode(HkDgm, hdim, flags::divide_conquer());
 	end = omp_get_wtime();
 	std::cout << "\tbarcode divide conquer: " << end - start << "sec. " << std::endl;
 	f << end - start << std::endl;

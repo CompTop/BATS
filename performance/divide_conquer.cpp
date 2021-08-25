@@ -60,7 +60,7 @@ void time_barcode_dq(
 	auto nthread = omp_get_max_threads();
 	std::cout << nthread << " threads)" << std::endl;
 	auto start = omp_get_wtime();
-	auto ps = barcode_sparse_divide_conquer(Q, 0);
+	auto ps = barcode(Q, 0, flags::divide_conquer());
 	auto end = omp_get_wtime();
 	std::cout << "\ttime elapsed: " << end - start << "sec. " << std::endl;
 	f << end - start << std::endl;
@@ -73,7 +73,7 @@ void time_barcode_seq(
 ) {
 	std::cout << "sequential" << std::endl;
 	auto start = omp_get_wtime();
-	auto ps = barcode_sparse_rightleft(Q, 0);
+	auto ps = barcode(Q, 0, flags::rightward());
 	auto end = omp_get_wtime();
 	std::cout << "\ttime elapsed: " << end - start << "sec. " << std::endl;
 	f << end - start << std::endl;
