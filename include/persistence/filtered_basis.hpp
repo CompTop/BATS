@@ -49,7 +49,7 @@ struct ReducedFilteredChainComplex {
 					if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
 						// infinite bar
 						pairs.emplace_back(
-							PersistencePair(k, i, bats::NO_IND,
+							PersistencePair<T>(k, i, bats::NO_IND,
 								val[k][perm[k][i]], std::numeric_limits<T>::infinity()
 							)
 						);
@@ -57,7 +57,7 @@ struct ReducedFilteredChainComplex {
 						size_t j = RC.p2c[k+1][i];
 						// finite bar
 						pairs.emplace_back(
-							PersistencePair(k, i, j,
+							PersistencePair<T>(k, i, j,
 								val[k][perm[k][i]], val[k+1][perm[k+1][j]]
 							)
 						);
@@ -71,7 +71,7 @@ struct ReducedFilteredChainComplex {
 					if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
 						// infinite bar
 						pairs.emplace_back(
-							PersistencePair(k, perm[k][i], bats::NO_IND,
+							PersistencePair<T>(k, perm[k][i], bats::NO_IND,
 								val[k][perm[k][i]], std::numeric_limits<T>::infinity()
 							)
 						);
@@ -79,7 +79,7 @@ struct ReducedFilteredChainComplex {
 						size_t j = RC.p2c[k+1][i];
 						// finite bar
 						pairs.emplace_back(
-							PersistencePair(k, perm[k][i], perm[k+1][j],
+							PersistencePair<T>(k, perm[k][i], perm[k+1][j],
 								val[k][perm[k][i]], val[k+1][perm[k+1][j]]
 							)
 						);
@@ -255,7 +255,7 @@ inline auto __ReducedFilteredChainComplex(const Filtration<FT, CpxT> &F, T, Args
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
-	return ReducedFilteredChainComplex(FilteredChainComplex<FT, MT>(F), args...);
+	return ReducedFilteredChainComplex<FT, MT>(FilteredChainComplex<FT, MT>(F), args...);
 }
 
 template <typename FT, typename T, typename CpxT, typename... Args>
@@ -265,7 +265,7 @@ inline auto Reduce(const Filtration<FT, CpxT> &F, T, Args ...args) {
 
 template <typename T, typename MT, typename... Args>
 inline auto Reduce(const FilteredChainComplex<T, MT>& C, Args ...args) {
-	return ReducedFilteredChainComplex(C, args...);
+	return ReducedFilteredChainComplex<T, MT>(C, args...);
 }
 
 

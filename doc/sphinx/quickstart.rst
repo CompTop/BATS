@@ -11,7 +11,7 @@ Simplicial Complexes and Homology
 ---------------------------------
 
 BATS offers two implementations of simplicial complexes: SimplicialComplex
-and LightSimplicialComplex.  While the interenal representations differ, they
+and LightSimplicialComplex.  While the internal representations differ, they
 both have the same interface which can be used.  When dealing with stand-alone
 simplices, BATS uses :code:`std::vector<size_t>` to represent simplices, from which
 the vertex set and dimension of the simplex can be extracted.

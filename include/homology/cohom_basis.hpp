@@ -272,7 +272,7 @@ inline auto __ReducedCochainComplex(const CpxT &F, T, Args... args) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
-	return ReducedCochainComplex(CochainComplex<MT>(F), args...);
+	return ReducedCochainComplex<MT>(CochainComplex<MT>(F), args...);
 }
 
 } // namespace bats

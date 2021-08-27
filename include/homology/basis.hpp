@@ -562,7 +562,7 @@ inline auto __ReducedChainComplex(const CpxT &F, T, Args ...args) {
 	using VT = SparseVector<T, size_t>;
 	using MT = ColumnMatrix<VT>;
 
-	return ReducedChainComplex(ChainComplex<MT>(F), args...);
+	return ReducedChainComplex<MT>(ChainComplex<MT>(F), args...);
 }
 
 template <typename T, typename CpxT, typename... Args>
@@ -572,7 +572,7 @@ inline auto Reduce(const CpxT &F, T, Args ...args) {
 
 template <typename MT, typename... Args>
 inline auto Reduce(const ChainComplex<MT>& C, Args ...args) {
-	return ReducedChainComplex(C, args...);
+	return ReducedChainComplex<MT>(C, args...);
 }
 
 

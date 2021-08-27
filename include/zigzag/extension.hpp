@@ -71,7 +71,7 @@ auto extend_zigzag_filtration(
         }
     }
 
-    return ZigzagFiltration(X, val);
+    return ZigzagFiltration<CpxT, T>(X, val);
 }
 
 

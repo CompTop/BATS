@@ -141,7 +141,7 @@ public:
 				i1 = indval.erase(i1);
                 if (!(val == 0)) {
                     // put new value with this index
-                    i1 = indval.emplace_hint(i1, nzpair((*i2).ind, val));
+                    i1 = indval.emplace_hint(i1, key_type((*i2).ind, val));
 					++i1;
                 }
                 ++i2;
@@ -150,13 +150,13 @@ public:
                 ++i1;
             } else {
                 // i2 has lower index
-                i1 = indval.emplace_hint(i1, nzpair((*i2).ind, a * (*i2).val) );
+                i1 = indval.emplace_hint(i1, key_type((*i2).ind, a * (*i2).val) );
                 ++i2;
             }
         }
         // run through rest of entries in i2
         while (i2 != x.nzend()) {
-            i1 = indval.emplace_hint(i1, nzpair((*i2).ind, a * (*i2).val) );
+            i1 = indval.emplace_hint(i1, key_type((*i2).ind, a * (*i2).val) );
             ++i2;
         }
         return;
@@ -203,7 +203,7 @@ public:
 		}
 		// run through rest of entries in i2
 		while (i2 != x.nzend() && !((*i2).ind < lastind)) {
-			i1 = indval.emplace_hint(i1, nzpair((*i2).ind, a * (*i2).val) );
+			i1 = indval.emplace_hint(i1, key_type((*i2).ind, a * (*i2).val) );
 			++i2;
 		}
 		return;

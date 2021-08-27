@@ -395,7 +395,7 @@ public:
 		auto p = bats::util::sortperm(ind);
 		bats::util::apply_perm(ind, p);
 		bats::util::apply_perm(val, p);
-		return std::tuple(ind, val);
+		return std::make_tuple(ind, val);
 	}
 
 

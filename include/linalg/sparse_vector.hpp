@@ -555,7 +555,7 @@ public:
 			} else {
 				pi->val = a * vi;
 				if (c*vi != 0) {
-					indval.insert(pj, nzpair(j, c*vi));
+					indval.insert(pj, key_type(j, c*vi));
 					pi = lower_bound(i);
 				}
 			}
@@ -571,7 +571,7 @@ public:
 			} else {
 				indval.erase(pj);
 			}
-			if (b*vj != 0) indval.insert(pi, nzpair(i, b*vj));
+			if (b*vj != 0) indval.insert(pi, key_type(i, b*vj));
 
 		}
 	}
@@ -1068,7 +1068,7 @@ public:
 			while (Bit != other.nzend()) {
 				size_t ind = m*(Ait->ind) + Bit->ind;
 				TV val = (Ait->val) * Bit->val;
-				nzs.emplace_back(nzpair(ind, val));
+				nzs.emplace_back(key_type(ind, val));
 				Bit++;
 			}
 			Ait++;

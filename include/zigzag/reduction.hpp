@@ -261,7 +261,7 @@ ColumnMatrix<VecT> cycle_insertion_map(
 			col[k] = VecT(k+1);
 		}
 	}
-	return ColumnMatrix(m, n, col);
+	return ColumnMatrix<VecT>(m, n, col);
 }
 
 // create map induced by insertion of boundary that removed index i from HRB
@@ -290,7 +290,7 @@ ColumnMatrix<VecT> boundary_insertion_map(
 		// if last HRB is boundary pivot
 		col[m] = v; // insert v
 	}
-	return ColumnMatrix(m, n, col);
+	return ColumnMatrix<VecT>(m, n, col);
 }
 
 // apply change of basis to matrix A

@@ -286,7 +286,7 @@ public:
 		}
 		cols[n-1] = SparseVector<T>(ind, val);
 
-		return ColumnMatrix(n,n,cols);
+		return ColumnMatrix<SparseVector<T>>(n,n,cols);
 	}
 
 

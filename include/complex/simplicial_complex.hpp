@@ -257,7 +257,7 @@ private:
         // check if simplex is already in complex
         if (spx_to_idx.count(s) > 0) {
             // simplex is already in complex
-            return std::vector{cell_ind(dim, spx_to_idx[s])};
+            return std::vector<cell_ind>{cell_ind(dim, spx_to_idx[s])};
         }
         // we're clear to add
 		std::vector<cell_ind> ci;
@@ -518,7 +518,7 @@ public:
 			ind.emplace_back(faces[dim-1][i]);
 			val.emplace_back(coeff[dim-1][i]);
 		}
-		return std::tuple(ind, val);
+		return std::make_tuple(ind, val);
 	}
 
 

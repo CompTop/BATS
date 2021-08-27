@@ -331,7 +331,7 @@ auto prepare_ChainComplex(
 		for (size_t i = 0; i < ZC.dim(k); ++i) {
 			auto pair = ZC.vals(k)[i];
 			filt_order.emplace_back(
-				rfilt_val(
+				rfilt_val<T>(
 					k, // dimension
 					permk[i], // index in permuted chain complex
 					i, // index in original complex
@@ -340,7 +340,7 @@ auto prepare_ChainComplex(
 				)
 			);
 			filt_order.emplace_back(
-				rfilt_val(
+				rfilt_val<T>(
 					k, // dimension
 					permk[i], // index in permuted chain complex
 					i, // index in original complex
@@ -472,7 +472,7 @@ auto prepare_ChainComplex(
 		for (size_t i = 0; i < ZC.dim(k); ++i) {
 			auto pair = ZC.vals(k)[i];
 			filt_order.emplace_back(
-				rfilt_val(
+				rfilt_val<T>(
 					k, // dimension
 					permk[i], // index in permuted chain complex
 					i, // index in original complex
@@ -481,7 +481,7 @@ auto prepare_ChainComplex(
 				)
 			);
 			filt_order.emplace_back(
-				rfilt_val(
+				rfilt_val<T>(
 					k, // dimension
 					permk[i], // index in permuted chain complex
 					i, // index in original complex

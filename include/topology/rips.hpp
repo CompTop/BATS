@@ -46,7 +46,7 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
         for (size_t j = 0; j < i; j++) {
             T dij = dist(X[i], X[j]);
             if (dij <= rmax) {
-                edges.emplace_back(filtered_edge(i, j, dij));
+                edges.emplace_back(filtered_edge<T>(i, j, dij));
             }
         }
     }
@@ -69,7 +69,7 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
     for (size_t j = 0; j < n; j++) {
         for (size_t i = 0; i < j; i++) {
             if (pdist(i,j) <= rmax) {
-                edges.emplace_back(filtered_edge(i, j, pdist(i,j)));
+                edges.emplace_back(filtered_edge<T>(i, j, pdist(i,j)));
             }
         }
     }

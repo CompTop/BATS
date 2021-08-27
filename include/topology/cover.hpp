@@ -113,7 +113,7 @@ DataSet<T> get_subset(
         }
 		i++;
     }
-    return DataSet(XS);
+    return DataSet<T>(XS);
 }
 
 /*

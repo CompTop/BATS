@@ -251,7 +251,7 @@ private:
         // check if cube is already in complex
         if (spx_to_idx.count(s) > 0) {
             // simplex is already in complex
-            return std::vector{cell_ind(cube_dim(s), spx_to_idx[s])};
+            return std::vector<cell_ind>{cell_ind(cube_dim(s), spx_to_idx[s])};
         }
         // we're clear to add
 		std::vector<cell_ind> ci;

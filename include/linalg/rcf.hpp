@@ -28,7 +28,7 @@ ColumnMatrix<SparseVector<T>> generating_basis(
             p++;
         }
     }
-    return ColumnMatrix(m, m, col);
+    return ColumnMatrix<SparseVector<T>>(m, m, col);
 }
 // Sanity check: if smith form S(j,j) = 1,
 // then basis vector j should be 0.
@@ -59,5 +59,5 @@ ColumnMatrix<SparseVector<T>> RCF_basis(
         }
 
     }
-    return ColumnMatrix(m, m, col);
+    return ColumnMatrix<SparseVector<T>>(m, m, col);
 }
