@@ -30,7 +30,7 @@ gprof -q simplicial_complex.prof gmon.out > prof.txt # gall graph analysis
 
 ## Static analysis
 
-An ongoing effort is to do static code analysis using `clang-tidy`.
+An ongoing effort is to do static code analysis using [`clang-tidy`](https://clang.llvm.org/extra/clang-tidy/).
 
 The following will perform the static code analysis on `quickstart.cpp`.
 ```

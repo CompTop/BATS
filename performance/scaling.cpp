@@ -84,6 +84,7 @@ int main() {
 	// generate file with timestamp
 	auto t = std::time(nullptr);
 	auto tm = *std::localtime(&t);
+
 	std::ostringstream oss1;
 	oss1 << "scale_n_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
 	std::cout << "writing to " << oss1.str() << std::endl;
@@ -103,11 +104,15 @@ int main() {
 				outfile1 << n << ", " << dim << ", F2, seq, 0, ";
 				time_barcode_seq(Q, outfile1);
 
-				auto nthread = omp_get_max_threads();
-				outfile1 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
-				time_barcode_dq(Q, outfile1);
+				for (int nproc : {1, 8, 48}) {
+					omp_set_num_threads(nproc);
+					auto nthread = omp_get_max_threads();
+					outfile1 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
+					time_barcode_dq(Q, outfile1);
+				}
+
 			}
-			
+
 		}
 
 	}
@@ -130,9 +135,39 @@ int main() {
 				outfile2 << n << ", " << dim << ", F2, seq, 0, ";
 				time_barcode_seq(Q, outfile2);
 
+				for (int nproc : {1, 8, 48}) {
+					omp_set_num_threads(nproc);
+					auto nthread = omp_get_max_threads();
+					outfile2 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
+					time_barcode_dq(Q, outfile2);
+				}
+			}
+		}
+	}
+
+	std::ostringstream oss3;
+	oss3 << "scale_p_" << std::put_time(&tm, "%Y_%m_%d_%H") << ".csv";
+	std::cout << "writing to " << oss3.str() << std::endl;
+	std::ofstream outfile3(oss3.str());
+	// write header
+	outfile3 << "n,dim,field,alg,threads,time\n";
+
+	for (size_t dim: {64, 128})
+	{
+		size_t n = 512; // length of quiver
+		for (int nproc: {1, 2, 4, 8, 12, 16, 24, 32, 48}) {
+			omp_set_num_threads(nproc);
+			for (size_t rep = 0; rep < NREPS; ++rep) {
+				std::cout << "\nn= " << n << " dim = " << dim << std::endl;
+				auto Q = random_quiver(n, dim, MT2(), 0.5);
+
+				// 0 threads = sequential
+				outfile3 << n << ", " << dim << ", F2, seq, 0, ";
+				time_barcode_seq(Q, outfile3);
+
 				auto nthread = omp_get_max_threads();
-				outfile2 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
-				time_barcode_dq(Q, outfile2);
+				outfile3 << n << ", " << dim << ", F2, dq, " << nthread << ", ";
+				time_barcode_dq(Q, outfile3);
 			}
 		}
 	}
