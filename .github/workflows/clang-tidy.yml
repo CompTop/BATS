@@ -3,16 +3,11 @@ on: [push, pull_request]
 jobs:
   quickstart:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v2
       - uses: egor-tensin/setup-gcc@v1
       - run: sudo apt-get update -y
       - run: sudo apt-get install -y clang-tidy
-      - name: Full Analysis
-        run: |
-          cd demo
-          clang-tidy quickstart.cpp -checks=clang-analyzer-*,openmp-*,bugprone-*,performance-*,cppcoreguidelines-* -- -I../include -std=c++17
       - name: OpenMP Analysis
         run: |
           cd demo
@@ -25,3 +20,7 @@ jobs:
         run: |
           cd demo
           clang-tidy quickstart.cpp -checks=-*,cppcoreguidelines-* -- -I../include -std=c++17
+      - name: Full Analysis
+        run: |
+          cd demo
+          clang-tidy quickstart.cpp -checks=clang-analyzer-*,openmp-*,bugprone-*,performance-*,cppcoreguidelines-* -- -I../include -std=c++17
