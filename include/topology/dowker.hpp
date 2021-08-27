@@ -272,7 +272,7 @@ std::vector<filtered_edge<T>> flag_filtration_edges(
         for (size_t j = 0; j < i; j++) {
             T dij = pdist(i,j);
             if (dij < rmax) {
-                edges.emplace_back(filtered_edge(i, j, dij));
+                edges.emplace_back(filtered_edge<T>(i, j, dij));
             }
         }
     }

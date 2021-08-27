@@ -34,5 +34,15 @@ An ongoing effort is to do static code analysis using `clang-tidy`.
 
 The following will perform the static code analysis on `quickstart.cpp`.
 ```
-clang-tidy quickstart.cpp -checks=clang-analyzer-*,openmp-*,bugprone-*,performance-*,cppcoreguidelines- -- -I../include
+clang-tidy quickstart.cpp -checks=clang-analyzer-*,openmp-*,bugprone-*,performance-*,cppcoreguidelines-* -- -I../include -std=c++17
+```
+To perform only a subset of the checks, you can remove the default checks and just add the ones you want
+
+OpenMP:
+```
+clang-tidy quickstart.cpp -checks=-*,openmp-* -- -I../include -std=c++17
+```
+Performance
+```
+clang-tidy quickstart.cpp -checks=-*,performance-* -- -I../include -std=c++17
 ```

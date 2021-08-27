@@ -126,13 +126,15 @@ public:
 	}
 
 	/**
-	constructor that fills vector with m copies of a
+	static constructor that fills vector with m copies of a
 	*/
-	SparseVector(const TV a, const TI m) {
-		indval.reserve(m);
+	static SparseVector dense(const TV a, const TI m) {
+		std::vector<key_type> vindval;
+		vindval.reserve(m);
 		for (size_t i = 0; i < m; ++i) {
-			indval.emplace_back(key_type(i,a));
+			vindval.emplace_back(key_type(i,a));
 		}
+		return SparseVector(vindval);
 	}
 
 	/**

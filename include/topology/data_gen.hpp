@@ -26,7 +26,7 @@ Matrix<T>& add_normal_noise(
 ) {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator(seed);
-    std::normal_distribution distribution(mu,sigma);
+    std::normal_distribution<T> distribution(mu,sigma);
 
     #pragma omp simd
     for (size_t i = 0; i < X.size(); i++) {
@@ -45,7 +45,7 @@ Matrix<T>& add_normal_noise(
     const T sigma=T(1)
 ) {
     std::default_random_engine generator(seed);
-    std::normal_distribution distribution(mu,sigma);
+    std::normal_distribution<T> distribution(mu,sigma);
 
     #pragma omp simd
     for (size_t i = 0; i < X.size(); i++) {
@@ -83,7 +83,7 @@ Matrix<T>& add_uniform_noise(Matrix<T> &X,
     const T ub = T(1)
 ) {
     std::default_random_engine generator(seed);
-    std::uniform_real_distribution distribution(lb, ub);
+    std::uniform_real_distribution<T> distribution(lb, ub);
 
     #pragma omp simd
     for (size_t i = 0; i < X.size(); i++) {
@@ -143,7 +143,7 @@ DataSet<T> product_space(
             ++k;
         }
     }
-    return DataSet(Z);
+    return DataSet<T>(Z);
 }
 
 
@@ -166,7 +166,7 @@ DataSet<T> sample_sphere(
         X.r(j) /= vnorm;
     }
 
-    return DataSet(X);
+    return DataSet<T>(X);
 
 }
 
@@ -178,7 +178,7 @@ DataSet<T> sample_cube(
 ) {
     Matrix<T> X(n, d);
     add_uniform_noise(X);
-    return DataSet(X);
+    return DataSet<T>(X);
 }
 
 // sample n points uniformly at random from d dimensional cube
@@ -190,7 +190,7 @@ DataSet<T> sample_cube(
 ) {
     Matrix<T> X(n, d);
     add_uniform_noise(X, seed);
-    return DataSet(X);
+    return DataSet<T>(X);
 }
 
 // n equispaced points between min and max
@@ -206,7 +206,7 @@ DataSet<T> interval(
     for (size_t i = 1; i < n; i++) {
         x(i) = x(i-1) + stride;
     }
-    return DataSet(x);
+    return DataSet<T>(x);
 }
 
 // circle embedded in 2d on n points
@@ -223,7 +223,7 @@ DataSet<T> circle(
         x(i, 1) = rad * std::sin(theta);
         theta += dtheta;
     }
-    return DataSet(x);
+    return DataSet<T>(x);
 }
 
 /*

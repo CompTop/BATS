@@ -8,8 +8,8 @@
 #include "util/permutation.hpp"
 /**
 We need to specify what is the conventional usage of permutation in bats!!
-[2, 0, 1] apply to [2.0 , 1.0 ,5.0] 
-a) is [5.0, 2.0, 1.0] in matrix permutation notation 
+[2, 0, 1] apply to [2.0 , 1.0 ,5.0]
+a) is [5.0, 2.0, 1.0] in matrix permutation notation
 b) is [1.0, 5.0 ,2.0] in traditioanl notation(in book From Mathematics to Generic Programming)
 
 
@@ -23,29 +23,29 @@ namespace bats{
 // two filtration dimensions are assumed to be the same!!
 template <class FiltrationType>
 struct Update_info{
-    // addition information: 
+    // addition information:
     // a vector stores the indices of simplices in all dimensions
     // that will be added to the new filtration Y
     // (in ascending order of Y)
     std::vector<std::vector<size_t>> addition_indices;
-    // alse need the indices of boundaries for k-simplex, 
+    // alse need the indices of boundaries for k-simplex,
     // i.e., the indices of (k-1)-simplice are boundaries of a k-simplex
-    std::vector<std::vector<std::vector<size_t>>> boundary_indices; 
+    std::vector<std::vector<std::vector<size_t>>> boundary_indices;
 
-    // deletion information: 
+    // deletion information:
     // a vector stores the indices of simplices in all dimensions
     // that will be deleted from the old filtration X
     // (in ascending order of X)
     std::vector<std::vector<size_t>> deletion_indices;
 
-    // permutation information: 
+    // permutation information:
     // a vector that will permute the intersected simplices in the new filration B
     // to the correct position
     std::vector<std::vector<size_t>> permutations;
     std::vector<std::vector<size_t>> intersection_indices_Y; // intersection indices in Y (sorted order)
     std::vector<std::vector<size_t>> intersection_indices_X; // their corresponding indices in X
 
-    // max dimension of the new filtration = size of permutations -1 
+    // max dimension of the new filtration = size of permutations -1
     size_t max_dim;
 
     // Filtration values and permutations
@@ -58,7 +58,7 @@ struct Update_info{
 
     FiltrationType F_old;
     FiltrationType F_new;
-    bool filtered_boolean = false; 
+    bool filtered_boolean = false;
 
     Update_info(const FiltrationType& F_X, const FiltrationType& F_Y){
 
@@ -77,18 +77,18 @@ struct Update_info{
         auto smcplex_Y = F_Y.complex();
 
         for (size_t i = 0; i <= max_dim; i++){
-            // addition information: 
+            // addition information:
             // a vector stores the indices of simplices in dimension i
             // that will be added to the new filtration Y
             std::vector<size_t> addition_in_i;
             std::vector<std::vector<size_t>> boundary_indices_in_i;
 
-            // deletion information: 
+            // deletion information:
             // a vector stores the indices of simplices in dimension i
             // that will be deleted from the old filtration X
             std::vector<size_t> deletion_in_i;
 
-            // permutation information: 
+            // permutation information:
             // a vector that will permute the intersected simplices in the new filration B
             // to the correct position
             std::vector<size_t> intersection_in_i_X;
@@ -100,13 +100,13 @@ struct Update_info{
             auto simplices_X = smcplex_X.get_simplices(i);
 
             // create a vector of boolean resutls of comparison
-            // default values is false, which means a simplex in A is not in B 
+            // default values is false, which means a simplex in A is not in B
             std::vector<bool> bool_results_i(simplices_X.size(), false);
 
             // loop over each simplex in Y
             for (size_t j = 0; j < simplices_Y.size(); j++){
                 // find intersecting indices in X
-                auto index = smcplex_X.find_idx(simplices_Y[j]); 
+                auto index = smcplex_X.find_idx(simplices_Y[j]);
                 // if the simplex can be found in X (intersection information)
                 if(index != bats::NO_IND){
                     bool_results_i[index] = true;
@@ -121,7 +121,7 @@ struct Update_info{
                     }
                 }
             }
-            
+
             // find the permutation information
             perm_in_i = find_perm_from_vector(intersection_in_i_X);
 
@@ -170,8 +170,8 @@ struct Update_info{
         // step 2: determine the deletion indices in X(old filtration) after permutation
 
         // Note, for the considertation of addtion and deletion convenience,
-        // we need to sort the addition by ascending order and, 
-        // deletion indices by descending order!!! 
+        // we need to sort the addition by ascending order and,
+        // deletion indices by descending order!!!
         for (size_t i = 0; i < perms_X_inv.size(); i++)
         {
             // get the list of new indices
@@ -181,19 +181,19 @@ struct Update_info{
             for (size_t j = 0; j < deletion_indices[i].size(); j++){
                 deletion_indices[i][j] = perm_inv_X[deletion_indices[i][j]];
             }
-            
+
             // step 3: determine the addition indices in Y(new filtration) after permutation
             // get the list of new indices
             auto perm_inv_Y = perms_Y_inv[i];
-            
+
             // set new indices
             for (size_t j = 0; j < addition_indices[i].size(); j++){
                 addition_indices[i][j] = perm_inv_Y[addition_indices[i][j]];
             }
-            
+
             // step 4: determine the permutation of intersection between X and Y (filtered)
             // first, get the list of new indices of intersection in X after filtration sort
-            // "filtration sort": means to sort simplices in filtration by their filtration values 
+            // "filtration sort": means to sort simplices in filtration by their filtration values
             std::vector<size_t> ind_X_i = intersection_indices_X[i];
 
             std::vector<size_t> ind_X_i_sorted;
@@ -233,7 +233,7 @@ struct Update_info{
 
             // step 6, for the convenience of adding and deleting,
             // we sort their indices
-            
+
             // sort deletion indices by ascending order
             std::sort(deletion_indices[i].begin(), deletion_indices[i].end());
 
@@ -256,10 +256,10 @@ struct Update_info{
             // bats::util::apply_perm_swap(addition_indices[i], bats::util::inv_perm(p));
             // if(i>0)
             // bats::util::apply_perm_swap(boundary_indices[i], bats::util::inv_perm(p));
-            
-        }         
+
+        }
     }
-    
+
     // return the permutation used to move deletion simplices in dimension i
     // to the end of the list of simplices
     std::vector<size_t> permutation_deletion_end(size_t i){
@@ -271,7 +271,7 @@ struct Update_info{
         {
             return identity_perm(F_X_vals[i].size());
         }
-        
+
     }
 
     // print summary of updating information
@@ -282,7 +282,7 @@ struct Update_info{
             print_1D_vectors(deletion_indices[i]);
             std::cout << "Addition information:" << std::endl;
             print_1D_vectors(addition_indices[i]);
-            if(i>0){    
+            if(i>0){
                 std::cout << ",and the boundary indices are" << std::endl;
                 print_2D_vectors(boundary_indices[i]);
             }
@@ -310,7 +310,7 @@ struct Update_info{
                 print_simplex(simplices_X[deletion_indices[i][j]]);
                 std::cout << "with index "<< deletion_indices[i][j] << std::endl;
             }
-            
+
             std::cout << "Addition information:" << std::endl;
             for(size_t j = 0; j < addition_indices[i].size(); j++){
                 std::cout << "\t";
@@ -326,7 +326,7 @@ struct Update_info{
                 std::cout << "\n";
             }
 
-            // if(i>0){    
+            // if(i>0){
             //     std::cout << ",and the boundary indices are" << std::endl;
             //     print_2D_vectors(boundary_indices[i]);
             // }
@@ -335,7 +335,7 @@ struct Update_info{
             for(size_t j = 0; j < intersection_indices_X[i].size(); j++){
                 std::cout << "\t";
                 print_simplex(simplices_X[intersection_indices_X[i][j]]);
-                std::cout << " "<< intersection_indices_X[i][j]; 
+                std::cout << " "<< intersection_indices_X[i][j];
                 std::cout << " "<< intersection_indices_Y[i][j];
                 std::cout << "\n";
             }

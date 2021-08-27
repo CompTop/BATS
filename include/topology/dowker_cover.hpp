@@ -38,7 +38,7 @@ std::vector<filtered_edge<T>> dowker_filtration_edges(
             while (jit != nbhd.cend()) {
                 T dij = dowker_edge_param(pdist, *iit, *jit);
                 if (dij < rmax) {
-                    eset.emplace(filtered_edge(*iit, *jit, dij));
+                    eset.emplace(filtered_edge<T>(*iit, *jit, dij));
                 }
                 jit++;
             }

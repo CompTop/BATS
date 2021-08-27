@@ -108,7 +108,7 @@ auto EilenbergZilber(
 	for (size_t dim = 0; dim <=maxdim; dim++) {
 		F[dim].set_nrow(XY.ncells(dim));
 	}
-    return std::tuple(CXCY, F, XY);
+    return std::make_tuple(CXCY, F, XY);
 }
 
 // compute shift for kronecker product of
@@ -278,7 +278,7 @@ auto EilenbergZilber(
 
 	auto RF = F.relative_map(Rinds, ABinds);
 
-    return std::tuple(RCXCY, RF, RCXY);
+    return std::make_tuple(RCXCY, RF, RCXY);
 }
 
 } // namespace bats

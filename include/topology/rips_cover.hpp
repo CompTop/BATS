@@ -34,7 +34,7 @@ std::vector<filtered_edge<T>> rips_filtration_edges(
             while (jit != nbhd.cend()) {
                 T dij = dist(X[*iit], X[*jit]);
                 if (dij < rmax) {
-                    eset.emplace(filtered_edge(*iit, *jit, dij));
+                    eset.emplace(filtered_edge<T>(*iit, *jit, dij));
                 }
                 jit++;
             }
