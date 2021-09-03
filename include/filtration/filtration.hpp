@@ -94,7 +94,12 @@ public:
 	*/
 	Filtration(const CpxT& C, const std::vector<std::vector<TF>>& vals) : X(C), val(vals) {}
 
+	/**
+	update filtration values
 
+	@param vals2	new filtration values
+	*/
+	void update_filtration(const std::vector<std::vector<TF>>& vals2) { val=vals2; return;}
 
 	/**
 	return const reference to underlying complex
