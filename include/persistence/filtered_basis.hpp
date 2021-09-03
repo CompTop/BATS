@@ -42,6 +42,7 @@ struct ReducedFilteredChainComplex {
 		const bool permuted=false
 	)const {
 		std::vector<PersistencePair<T>> pairs;
+		pairs.reserve(RC.R[k].ncol());
 		if (permuted) {
 			for (size_t i =0; i < dim(k); i++) {
 				if (RC.R[k][i].nnz() == 0) {
@@ -89,6 +90,30 @@ struct ReducedFilteredChainComplex {
 		}
 
 		return pairs;
+	}
+
+	/**
+	return persistence pairs in vector format
+
+	returns flattened vectors
+	bd - birth-death pairs
+	inds - critical indices
+	*/
+	std::tuple<std::vector<T>, std::vector<size_t>> persistence_pairs_vec(
+		const size_t k,
+		const bool permuted=false
+	) const {
+		std::vector<PersistencePair<T>> pairs = persistence_pairs(k, permuted);
+		std::vector<T> bd(2*pairs.size());
+		std::vector<size_t> inds(2*pairs.size());
+		for (size_t i = 0; i < pairs.size(); ++i) {
+			auto& p = pairs[i];
+			inds[2*i] = p.birth_ind;
+			inds[2*i + 1] = p.death_ind;
+			bd[2*i] = p.birth;
+			bd[2*i + 1] = p.death;
+		}
+		return std::make_tuple(bd, inds);
 	}
 
 	/**

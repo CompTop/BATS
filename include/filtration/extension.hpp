@@ -45,11 +45,19 @@ auto lower_star_filtration(
 /**
 Helper function for computing a gradient on function that is extended
 in lower star filtration from gradient on persistence pairs
+
+@param grad_dgms gradient of persistence diagrams
+@param bdinds birth-death indices of each pair
+@param imap map from simplices to critical vertex in filtration
+
+grad_dgms and bdinds should be flattened in each dimension
+grad_dgms[dim][k] is gradient of birth of pair k//2
+grad_dgms[dim][k+1] is gradinet of death of pair k//2
 */
 template <typename T>
 std::vector<T> lower_star_backwards(
-    const std::vector<std::vector<std::vector<T>>>& grad_dgms,
-    const std::vector<std::vector<std::vector<int>>>& bdinds,
+    const std::vector<std::vector<T>>& grad_dgms,
+    const std::vector<std::vector<int>>& bdinds,
     const std::vector<std::vector<size_t>>& imap
 ) {
     // determine size of return
@@ -59,14 +67,16 @@ std::vector<T> lower_star_backwards(
     // loop over dimension
     for (size_t dim = 0; dim < grad_dgms.size(); ++dim) {
         // loop over pairs in dimension
-        for (size_t k = 0; k < grad_dgms[dim].size(); ++k) {
+        for (size_t k = 0; k < grad_dgms[dim].size(); k+=2) {
             // gradient wrt birth
-            if (bdinds[dim][k][0] != -1) {
-                df[imap[dim][bdinds[dim][k][0]]] += grad_dgms[dim][k][0];
+            auto i = bdinds[dim][k];
+            if (i != -1) {
+                df[imap[dim][i]] += grad_dgms[dim][k];
             }
             // gradient wrt death
-            if (bdinds[dim][k][1] != -1) {
-                df[imap[dim+1][bdinds[dim][k][1]]] += grad_dgms[dim][k][1];
+            i = bdinds[dim][k+1];
+            if (i != -1) {
+                df[imap[dim+1][i]] += grad_dgms[dim][k+1];
             }
         }
     }
