@@ -43,6 +43,38 @@ auto lower_star_filtration(
 }
 
 /**
+Helper function for computing a gradient on function that is extended
+in lower star filtration from gradient on persistence pairs
+*/
+template <typename T>
+std::vector<T> lower_star_backwards(
+    const std::vector<std::vector<std::vector<T>>>& grad_dgms,
+    const std::vector<std::vector<std::vector<int>>>& bdinds,
+    const std::vector<std::vector<size_t>>& imap
+) {
+    // determine size of return
+    size_t n = imap[0].size();
+    std::vector<T> df(n, T(0)); // initialize zero gradient
+
+    // loop over dimension
+    for (size_t dim = 0; dim < grad_dgms.size(); ++dim) {
+        // loop over pairs in dimension
+        for (size_t k = 0; k < grad_dgms[dim].size(); ++k) {
+            // gradient wrt birth
+            if (bdinds[dim][k][0] != -1) {
+                df[imap[dim][bdinds[dim][k][0]]] += grad_dgms[dim][k][0];
+            }
+            // gradient wrt death
+            if (bdinds[dim][k][1] != -1) {
+                df[imap[dim+1][bdinds[dim][k][1]]] += grad_dgms[dim][k][1];
+            }
+        }
+    }
+
+    return df;
+}
+
+/**
 return maximum vertex value on a cube c
 assume 2 dimensions
 */
