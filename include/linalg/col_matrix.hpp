@@ -50,7 +50,7 @@ public:
 	construct column matrix filled with entry a
 	*/
 	ColumnMatrix(size_t _m, size_t _n, val_type a) : m(_m), n(_n) {
-		col.resize(n, TC(a, m));
+		col.resize(n, TC::dense(a, m));
 	}
 
     ColumnMatrix(const std::vector<TC> &_col) : col(_col) {
