@@ -23,5 +23,6 @@ jobs:
       - name: Run Rips demo
         run: |
           cd demo
-          make rips.out
+          make rips.out rips_filtration.out
           ./rips.out
+          ./rips_filtration.out
