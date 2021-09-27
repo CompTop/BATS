@@ -41,6 +41,6 @@ A Rips filtration can be constructed with an almost identical call.  The differe
 is that now you keep track of the parameter at which each simplex appears in the filtration
 and can compute persistent homology.
 
-... code-block:: cpp
+.. code-block:: cpp
 
    auto F = bats::RipsFiltration<CpxT>(X, dist, rmax, maxdim);
