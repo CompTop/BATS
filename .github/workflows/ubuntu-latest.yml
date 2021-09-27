@@ -20,3 +20,8 @@ jobs:
           cd demo
           make quickstart.out
           ./quickstart.out
+      - name: Run Rips demo
+        run: |
+          cd demo
+          make rips.out
+          ./rips.out
