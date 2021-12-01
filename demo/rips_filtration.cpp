@@ -49,6 +49,7 @@ int main (int argc, char* argv[]) {
 		// std::cout << "non-filtered homology: " << RC.hdim(1) << "\n\n";
 	}
 
+
 	// generate a cover
 	// auto L = greedy_landmarks(X, 10, dist);
 	// auto cover = landmark_cover(X, L, dist, 3);
@@ -64,6 +65,18 @@ int main (int argc, char* argv[]) {
 		}
 
 
+		{
+			std::cout << "\nUnion Find\n";
+
+			auto FC = bats::Chain(F, FT());
+			// FC.C.clear_compress_apparent_pairs();
+			start = std::chrono::steady_clock::now();
+			auto pairs = bats::union_find_pairs(FC);
+			end = std::chrono::steady_clock::now();
+			std::cout << "runtime: "
+		        << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+		        << "mus" << std::endl;
+		}
 
 		{
 			std::cout << "\nstandard reduction\n";
