@@ -319,7 +319,7 @@ Filtration<T, CpxT> FlagFiltration(
         // std::cout << ret.second << std::endl;
         bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
-        if (!iter_idxs.empty()) {
+        if (!iter_idxs.empty() && maxdim > 1) {
             add_dimension_recursive_flag(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t);
         }
 
@@ -370,7 +370,7 @@ auto FlagFiltration_extension(
     std::vector<std::vector<size_t>> nbrs(n);
 
     spx_idxs.resize(2); // now time to add edges
-    std::vector<size_t> iter_idxs; // intersection vertex indices 
+    std::vector<size_t> iter_idxs; // intersection vertex indices
     iter_idxs.reserve(n); // maximum size
     inds[1].reserve(m);
 
@@ -381,12 +381,12 @@ auto FlagFiltration_extension(
         spx_idxs[0] = i;
         spx_idxs[1] = j;
         std::sort(spx_idxs.begin(), spx_idxs.end());
-        F.add(t, spx_idxs); 
+        F.add(t, spx_idxs);
         inds[1].emplace_back(k);
 
         bats::util::intersect_sorted(nbrs[i], nbrs[j], iter_idxs);
 
-        if (!iter_idxs.empty()) { // start from dimension 2 to add simplices
+        if (!iter_idxs.empty() && maxdim > 1) { // start from dimension 2 to add simplices
             add_dimension_recursive_flag_extension(F, nbrs, 2, maxdim, iter_idxs, spx_idxs, t, k, inds);
         }
 
