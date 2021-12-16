@@ -35,10 +35,15 @@ std::vector<PersistencePair<T>> union_find_pairs(
 	// first get boundary in dimension 1
 	// assumed to be sorted in filtration order
 	auto& B = F.complex()[1];
-	auto& vals = F.vals();
+	// vals are not stored in filtraiton order
+	const auto& val = F.val;
+	// perm is used for mapping
+	const auto& perm = F.perm;
 
 	size_t N = B.nrow();
 	size_t M = B.ncol();
+
+
 
 	// initialize parent vector
 	std::vector<size_t> parent(N);
@@ -52,7 +57,7 @@ std::vector<PersistencePair<T>> union_find_pairs(
 			0,
 			k,
 			bats::NO_IND,
-			vals[0][k],
+			val[0][perm[0][k]],
 			std::numeric_limits<T>::infinity()
 		));
 	}
@@ -74,13 +79,14 @@ std::vector<PersistencePair<T>> union_find_pairs(
 		if (pi == pj) { continue; }
 
 		// get birth times in filtration order
-		float bi = pairs[pi].birth;
-		float bj = pairs[pj].birth;
-		if (bi < bj) {
+		// float bi = pairs[pi].birth;
+		// float bj = pairs[pj].birth;
+		if (pi < pj) { // bi < bj || (bi == bj && pi < pj)
+			// should be ok because boundary is in filtration order
 			// component with j merges into component with i
 			// kill bar at pj
 			pairs[pj].death_ind = k;
-			pairs[pj].death = vals[1][k];
+			pairs[pj].death = val[1][perm[1][k]];
 
 			// merge components
 			parent[pj] = pi;
@@ -89,7 +95,7 @@ std::vector<PersistencePair<T>> union_find_pairs(
 			// component with i merges into component with j
 			// kill bar at pi
 			pairs[pi].death_ind = k;
-			pairs[pi].death = vals[1][k];
+			pairs[pi].death = val[1][perm[1][k]];
 
 			// merge components
 			parent[pi] = pj;
