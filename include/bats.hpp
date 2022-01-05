@@ -4,7 +4,8 @@ Single header file to include all functionality
 */
 #ifdef BATS_OPCOUNT
 namespace bats {
-    unsigned global_ops;
+    unsigned field_ops; // global counter for field operations
+    unsigned column_ops; // global counter for column operations
 }
 #endif
 

@@ -695,6 +695,10 @@ public:
 
 		if (a == TV(0)) {clear_zeros(); return;}
 
+		#ifdef BATS_OPCOUNT
+	    ++bats::column_ops;
+	    #endif
+
 		// set i2 to find first ind >= firstind
 		auto i2 = x.nzbegin();
 		// where to put new vector
@@ -751,6 +755,10 @@ public:
 	) {
 
 		if (a == TV(0)) {clear_zeros(); return;}
+
+		#ifdef BATS_OPCOUNT
+	    ++bats::column_ops;
+	    #endif
 
 		// set i2 to find first ind >= firstind
 		auto i2 = x.nzbegin();
@@ -826,6 +834,10 @@ public:
 	TV operator*(const SparseVector& x) const {
 		TV a(0);
 
+		#ifdef BATS_OPCOUNT
+		++bats::column_ops;
+		#endif
+
 		// set i2 to first nzind
 		auto i2 = x.nzbegin();
 		// something to do...
@@ -858,6 +870,10 @@ public:
 	) {
 
 		if (a == TV(0)) {return;}
+
+		#ifdef BATS_OPCOUNT
+	    ++bats::column_ops;
+	    #endif
 
 		// set i2 to find first ind >= firstind
 		auto i2 = std::lower_bound(
@@ -916,6 +932,10 @@ public:
 		const std::vector<TI> &inds,
 		std::vector<key_type>& tmp
 	) {
+
+		#ifdef BATS_OPCOUNT
+		++bats::column_ops;
+		#endif
 
 		// set i2 to find first ind >= firstind
 		auto i2 = x.nzbegin(); // iterate over x
@@ -988,6 +1008,9 @@ public:
 			it->val = (it->val * coeff[it->ind]);
 			++it;
 		}
+		#ifdef BATS_OPCOUNT
+		++bats::column_ops;
+		#endif
 	}
 
 	// scale vector by c
@@ -997,11 +1020,17 @@ public:
 			it->val = it->val * c;
 			++it;
 		}
+		#ifdef BATS_OPCOUNT
+		++bats::column_ops;
+		#endif
 	}
 
 	SparseVector scale(const TV c) const {
 		SparseVector vc(*this);
 		vc.scale_inplace(c);
+		#ifdef BATS_OPCOUNT
+		++bats::column_ops;
+		#endif
 		return vc;
 	}
 
