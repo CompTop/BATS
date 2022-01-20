@@ -141,7 +141,7 @@ inline T k_choose_2(T k) { return (k * (k-1)) >> 1; }
 returns next smallest k such that k-choose-2 is >= targ
 */
 inline size_t k_choose_2_inv(size_t targ){
-	return (size_t) ceil((1 + (size_t) sqrt((double)(1 + 8*targ))) / 2);
+	return (size_t) ceil((1.0 + sqrt((1 + 8.0*targ))) / 2);
 }
 
 /**
@@ -221,6 +221,8 @@ std::vector<PersistencePair<T>> rips_union_find_pairs(
 		// calulate i, j from edge index ei
 		auto ei = inds[k];
 		auto [i, j] = binom_to_inds(ei, N);
+
+		// std::cout << ei << ", " << N << ": " << i << ", " << j << std::endl;
 
 		size_t pi = find_parent(parent, i);
 		size_t pj = find_parent(parent, j);
