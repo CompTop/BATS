@@ -214,6 +214,9 @@ std::vector<PersistencePair<T>> rips_union_find_pairs(
 	std::vector<size_t> parent(N);
 	std::iota(parent.begin(), parent.end(), 0);
 
+	// initialize rank vector
+	std::vector<size_t> rank(N, 0);
+
 	// loop over columns of boundary matrix
 	size_t nfinite = 0; // number of finite bars
 	for (size_t k = 0; k < inds.size(); ++k) {
@@ -230,11 +233,9 @@ std::vector<PersistencePair<T>> rips_union_find_pairs(
 		// if parents are same, H1 created.  Nothing to do here.
 		if (pi == pj) { continue; }
 
-		// get birth times in filtration order
-		// float bi = pairs[pi].birth;
-		// float bj = pairs[pj].birth;
-		if (pi < pj) { // bi < bj || (bi == bj && pi < pj)
-			// should be ok because boundary is in filtration order
+		//union by rank.
+		// this makes sense because birth times are all 0
+		if (rank[pj] < rank[pi]) { // bi < bj || (bi == bj && pi < pj)
 			// component with j merges into component with i
 			// kill bar at pj
 			pairs[pj].death_ind = k;
@@ -243,6 +244,7 @@ std::vector<PersistencePair<T>> rips_union_find_pairs(
 			// merge components
 			parent[pj] = pi;
 			parent[j] = pi;
+
 		} else {
 			// component with i merges into component with j
 			// kill bar at pi
@@ -252,6 +254,9 @@ std::vector<PersistencePair<T>> rips_union_find_pairs(
 			// merge components
 			parent[pi] = pj;
 			parent[i] = pj;
+			if (rank[pi] == rank[pj]) {
+				++rank[pj]; // increase rank[pj]
+			}
 		}
 		nfinite++;
 		// if we've found spanning tree, then break
