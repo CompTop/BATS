@@ -99,14 +99,14 @@ public:
 
   ModP operator+( const ModP &b) const {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val + b.val);
   }
 
   ModP& operator+=( const ModP &b) {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     val = (val + b.val) % P;
     return *this;
@@ -114,14 +114,14 @@ public:
 
   ModP operator-( const ModP &b) const  {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val - b.val + P);
   }
 
   ModP& operator-=( const ModP &b) {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     val = (val - b.val + P) % P;
     return *this;
@@ -129,21 +129,21 @@ public:
 
   ModP operator-() const {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(P - val);
   }
 
   ModP operator*( const ModP &b) const {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val * b.val);
   }
 
   ModP& operator*=( const ModP &b) {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     val = (val * b.val) % P;
     return *this;
@@ -179,7 +179,7 @@ public:
     if (b.val == 0) {throw std::invalid_argument("division by 0");}
     ModP binv = b.inv();
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return (val * binv.val);
   }
@@ -189,7 +189,7 @@ public:
     ModP binv = b.inv();
     val = (val * binv.val) % P;
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return *this;
   }
@@ -220,6 +220,13 @@ IntT ff_inv(const IntT val) {
   return b;
 }
 
+// specialize for F3
+// template <>
+// int ff_inv<int, 3>(const int val) {
+//   if (val == 0) {throw std::invalid_argument("inversion of 0");}
+//   return val == 1 ? 1 : int;
+// }
+
 
 // implementation of field inversion
 template<typename IntT, unsigned P>
@@ -242,14 +249,14 @@ public:
 
   ModP operator+( const ModP &b) const {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val ^ b.val); // xor
   }
 
   ModP& operator+=( const ModP &b ) {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     val = val ^ b.val; // xor
     return *this;
@@ -257,14 +264,14 @@ public:
 
   ModP operator-( const ModP &b) const {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val ^ b.val); // xor
   }
 
   ModP& operator-=( const ModP &b ) {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     val = val ^ b.val; // xor
     return *this;
@@ -276,14 +283,14 @@ public:
 
   ModP operator*(const ModP &b) const {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val & b.val); // or
   }
 
   ModP& operator*=(const ModP &b) {
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     val = val & b.val; // or
     return *this;
@@ -292,7 +299,7 @@ public:
   ModP operator/(const ModP &b) const {
     if ((b.val & 0x1) == 0) {throw std::runtime_error("Division by zero!");}
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return ModP(val); // or
   }
@@ -300,7 +307,7 @@ public:
   ModP& operator/=(const ModP &b) {
     if ((b.val & 0x1) == 0) {throw std::runtime_error("Division by zero!");}
     #ifdef BATS_OPCOUNT
-    bats::global_ops++;
+    ++bats::field_ops;
     #endif
     return *this; // no-op
   }
