@@ -43,6 +43,37 @@ int main(int argc, char* argv[]) {
         << "ms" << std::endl;
     X.print_summary();
 
+    auto F = RipsFiltration<CpxT>(x, LInfDist(), rmax, maxdim);
+    // F.print_summary();
+
+    {
+        std::cout << "DGVS(-1)" << std::endl;
+        auto CX = FilteredDGVectorSpace<double, MT>(F, -1);
+        auto RX = ReducedFilteredDGVectorSpace(CX);
+        for (int k = 0; k < 3; ++k) {
+            std::cout << "\t hdim " << k << ": " << RX.hdim(k) << std::endl;
+        }
+    }
+
+    {
+        std::cout << "DGVS(+1)" << std::endl;
+        auto CX = FilteredDGVectorSpace<double, MT>(F, +1);
+        auto RX = ReducedFilteredDGVectorSpace(CX);
+        for (int k = 0; k < 3; ++k) {
+            std::cout << "\t hdim " << k << ": " << RX.hdim(k) << std::endl;
+        }
+    }
+
+
+    // {
+    //     std::cout << "DGVS(+1)" << std::endl;
+    //     auto CX = DGVectorSpace<MT>(X, +1);
+    //     auto RX = ReducedDGVectorSpace(CX);
+    //     for (int k = 0; k < 2; ++k) {
+    //         std::cout << "\t hdim " << k << ": " << RX.hdim(k) << std::endl;
+    //     }
+    // }
+
     auto CX = ChainComplex<MT>(X);
 
     {

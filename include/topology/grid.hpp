@@ -15,8 +15,8 @@ namespace rowmajor {
     inline T get_idx(T i, T j, T n) {return j + n * i;}
 
     template <typename T>
-    inline T get_idx(T i, T j, T k, T n1, T n2) {
-        return k + n2 * (j + i * n1);
+    inline T get_idx(T i, T j, T k, T n2, T n3) {
+        return k + n3 * (j + i * n2);
     }
 }
 
@@ -79,14 +79,14 @@ CpxT Freudenthal(size_t n1, size_t n2, size_t n3) {
     for (size_t i = 0; i < n1-1; ++i) {
         for (size_t j = 0; j < n2-1; ++j) {
             for (size_t k = 0; k < n3-1; ++k) {
-                auto s1 = rowmajor::get_idx(i,j,k, n1, n2);
-                auto s2 = rowmajor::get_idx(i,j,k+1, n1, n2);
-                auto s3 = rowmajor::get_idx(i,j+1,k, n1, n2);
-                auto s4 = rowmajor::get_idx(i+1,j,k, n1, n2);
-                auto s5 = rowmajor::get_idx(i,j+1,k+1, n1, n2);
-                auto s6 = rowmajor::get_idx(i+1,j,k+1, n1, n2);
-                auto s7 = rowmajor::get_idx(i+1,j+1,k, n1, n2);
-                auto s8 = rowmajor::get_idx(i+1,j+1,k+1, n1, n2);
+                auto s1 = rowmajor::get_idx(i,j,k, n2, n3);
+                auto s2 = rowmajor::get_idx(i,j,k+1, n2, n3);
+                auto s3 = rowmajor::get_idx(i,j+1,k, n2, n3);
+                auto s4 = rowmajor::get_idx(i+1,j,k, n2, n3);
+                auto s5 = rowmajor::get_idx(i,j+1,k+1, n2, n3);
+                auto s6 = rowmajor::get_idx(i+1,j,k+1, n2, n3);
+                auto s7 = rowmajor::get_idx(i+1,j+1,k, n2, n3);
+                auto s8 = rowmajor::get_idx(i+1,j+1,k+1, n2, n3);
                 X.add_recursive({s1,s2,s5,s8}); // k, j, i
                 X.add_recursive({s1,s2,s6,s8}); // k, i, j
                 X.add_recursive({s1,s4,s7,s8}); // i, j, k
@@ -151,10 +151,10 @@ CpxT Freudenthal(
         for (size_t j = j0; j < j1-1; ++j) {
             for (size_t k = k0; k < k1; ++k) {
                 // i-j plane
-                s1 = rowmajor::get_idx(i,   j,   k,   n1, n2);
-                s2 = rowmajor::get_idx(i+1, j,   k,   n1, n2);
-                s3 = rowmajor::get_idx(i,   j+1, k,   n1, n2);
-                s4 = rowmajor::get_idx(i+1, j+1, k,   n1, n2);
+                s1 = rowmajor::get_idx(i,   j,   k,   n2, n3);
+                s2 = rowmajor::get_idx(i+1, j,   k,   n2, n3);
+                s3 = rowmajor::get_idx(i,   j+1, k,   n2, n3);
+                s4 = rowmajor::get_idx(i+1, j+1, k,   n2, n3);
                 X.add_recursive({s1, s2, s4});
                 X.add_recursive({s1, s3, s4});
             }
@@ -165,10 +165,10 @@ CpxT Freudenthal(
         for (size_t j = j0; j < j1-1; ++j) {
             for (size_t k = k0; k < k1-1; ++k) {
                 // j-k plane
-                s1 = rowmajor::get_idx(i,   j,   k,   n1, n2);
-                s2 = rowmajor::get_idx(i,   j+1, k,   n1, n2);
-                s3 = rowmajor::get_idx(i,   j,   k+1, n1, n2);
-                s4 = rowmajor::get_idx(i,   j+1, k+1, n1, n2);
+                s1 = rowmajor::get_idx(i,   j,   k,   n2, n3);
+                s2 = rowmajor::get_idx(i,   j+1, k,   n2, n3);
+                s3 = rowmajor::get_idx(i,   j,   k+1, n2, n3);
+                s4 = rowmajor::get_idx(i,   j+1, k+1, n2, n3);
                 X.add_recursive({s1, s2, s4});
                 X.add_recursive({s1, s3, s4});
             }
@@ -179,10 +179,10 @@ CpxT Freudenthal(
         for (size_t j = j0; j < j1; ++j) {
             for (size_t k = k0; k < k1-1; ++k) {
                 // i-k plane
-                s1 = rowmajor::get_idx(i,   j,   k,   n1, n2);
-                s2 = rowmajor::get_idx(i+1, j,   k,   n1, n2);
-                s3 = rowmajor::get_idx(i,   j,   k+1, n1, n2);
-                s4 = rowmajor::get_idx(i+1, j,   k+1, n1, n2);
+                s1 = rowmajor::get_idx(i,   j,   k,   n2, n3);
+                s2 = rowmajor::get_idx(i+1, j,   k,   n2, n3);
+                s3 = rowmajor::get_idx(i,   j,   k+1, n2, n3);
+                s4 = rowmajor::get_idx(i+1, j,   k+1, n2, n3);
                 X.add_recursive({s1, s2, s4});
                 X.add_recursive({s1, s3, s4});
             }
@@ -193,14 +193,14 @@ CpxT Freudenthal(
     for (size_t i = i0; i < i1-1; ++i) {
         for (size_t j = j0; j < j1-1; ++j) {
             for (size_t k = k0; k < k1-1; ++k) {
-                s1 = rowmajor::get_idx(i,j,k, n1, n2);
-                s2 = rowmajor::get_idx(i,j,k+1, n1, n2);
-                s3 = rowmajor::get_idx(i,j+1,k, n1, n2);
-                s4 = rowmajor::get_idx(i+1,j,k, n1, n2);
-                s5 = rowmajor::get_idx(i,j+1,k+1, n1, n2);
-                s6 = rowmajor::get_idx(i+1,j,k+1, n1, n2);
-                s7 = rowmajor::get_idx(i+1,j+1,k, n1, n2);
-                s8 = rowmajor::get_idx(i+1,j+1,k+1, n1, n2);
+                s1 = rowmajor::get_idx(i,j,k, n2, n3);
+                s2 = rowmajor::get_idx(i,j,k+1, n2, n3);
+                s3 = rowmajor::get_idx(i,j+1,k, n2, n3);
+                s4 = rowmajor::get_idx(i+1,j,k, n2, n3);
+                s5 = rowmajor::get_idx(i,j+1,k+1, n2, n3);
+                s6 = rowmajor::get_idx(i+1,j,k+1, n2, n3);
+                s7 = rowmajor::get_idx(i+1,j+1,k, n2, n3);
+                s8 = rowmajor::get_idx(i+1,j+1,k+1, n2, n3);
                 X.add_recursive({s1,s2,s5,s8}); // k, j, i
                 X.add_recursive({s1,s2,s6,s8}); // k, i, j
                 X.add_recursive({s1,s4,s7,s8}); // i, j, k
@@ -297,33 +297,33 @@ CpxT Freudenthal(const CubicalComplex& X, size_t n1, size_t n2, size_t n3) {
     // 0-cells
     for (size_t i = 0; i < X.ncells(0); ++i) {
         X.get_cube(0, i, c); // put cube in c
-        s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
+        s1 = rowmajor::get_idx(c[0], c[2], c[4], n2, n3);
         F.add({s1});
     }
 
     // 1-cells
     for (size_t i = 0; i < X.ncells(1); ++i) {
         X.get_cube(1, i, c);
-        s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
-        s2 = rowmajor::get_idx(c[1], c[3], c[5], n1, n2);
+        s1 = rowmajor::get_idx(c[0], c[2], c[4], n2, n3);
+        s2 = rowmajor::get_idx(c[1], c[3], c[5], n2, n3);
         F.add({s1, s2});
     }
 
     // 2-cells
     for (size_t i = 0; i < X.ncells(2); ++i) {
         X.get_cube(2, i, c);
-        s1 = rowmajor::get_idx(c[0], c[2], c[4], n1, n2);
+        s1 = rowmajor::get_idx(c[0], c[2], c[4], n2, n3);
         if (c[0] == c[1]) {
-            s2 = rowmajor::get_idx(c[0], c[3], c[4], n1, n2);
-            s3 = rowmajor::get_idx(c[0], c[2], c[5], n1, n2);
+            s2 = rowmajor::get_idx(c[0], c[3], c[4], n2, n3);
+            s3 = rowmajor::get_idx(c[0], c[2], c[5], n2, n3);
         } else if (c[2] == c[3]) {
-            s2 = rowmajor::get_idx(c[1], c[2], c[4], n1, n2);
-            s3 = rowmajor::get_idx(c[0], c[2], c[5], n1, n2);
+            s2 = rowmajor::get_idx(c[1], c[2], c[4], n2, n3);
+            s3 = rowmajor::get_idx(c[0], c[2], c[5], n2, n3);
         } else { // c[4] == c[5]
-            s2 = rowmajor::get_idx(c[1], c[2], c[4], n1, n2);
-            s3 = rowmajor::get_idx(c[0], c[3], c[4], n1, n2);
+            s2 = rowmajor::get_idx(c[1], c[2], c[4], n2, n3);
+            s3 = rowmajor::get_idx(c[0], c[3], c[4], n2, n3);
         }
-        s4 = rowmajor::get_idx(c[1], c[3], c[5], n1, n2);
+        s4 = rowmajor::get_idx(c[1], c[3], c[5], n2, n3);
         F.add_recursive({s1, s2, s4});
         F.add_recursive({s1, s3, s4});
     }
@@ -331,14 +331,14 @@ CpxT Freudenthal(const CubicalComplex& X, size_t n1, size_t n2, size_t n3) {
     // 3-cells
     for (size_t i = 0; i < X.ncells(3); ++i) {
         X.get_cube(3, i, c);
-        s1 = rowmajor::get_idx(c[0],c[2],c[4], n1, n2);
-        s2 = rowmajor::get_idx(c[0],c[2],c[5], n1, n2);
-        s3 = rowmajor::get_idx(c[0],c[3],c[4], n1, n2);
-        s4 = rowmajor::get_idx(c[1],c[2],c[4], n1, n2);
-        s5 = rowmajor::get_idx(c[0],c[3],c[5], n1, n2);
-        s6 = rowmajor::get_idx(c[1],c[2],c[5], n1, n2);
-        s7 = rowmajor::get_idx(c[1],c[3],c[4], n1, n2);
-        s8 = rowmajor::get_idx(c[1],c[3],c[5], n1, n2);
+        s1 = rowmajor::get_idx(c[0],c[2],c[4], n2, n3);
+        s2 = rowmajor::get_idx(c[0],c[2],c[5], n2, n3);
+        s3 = rowmajor::get_idx(c[0],c[3],c[4], n2, n3);
+        s4 = rowmajor::get_idx(c[1],c[2],c[4], n2, n3);
+        s5 = rowmajor::get_idx(c[0],c[3],c[5], n2, n3);
+        s6 = rowmajor::get_idx(c[1],c[2],c[5], n2, n3);
+        s7 = rowmajor::get_idx(c[1],c[3],c[4], n2, n3);
+        s8 = rowmajor::get_idx(c[1],c[3],c[5], n2, n3);
         F.add_recursive({s1,s2,s5,s8}); // k, j, i
         F.add_recursive({s1,s2,s6,s8}); // k, i, j
         F.add_recursive({s1,s4,s7,s8}); // i, j, k

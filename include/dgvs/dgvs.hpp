@@ -95,6 +95,68 @@ struct DGVectorSpace {
 		return (this->operator[](k)).ncol();
 	}
 
+	// permute basis in dimension k
+	void permute_basis(size_t k, const std::vector<size_t> &perm) {
+		// TODO: this assumes that degree = -1
+		if (k == 0) {
+			// only worry about boundary[1]
+			differential[1].permute_rows(perm);
+		} else if (k == maxdim()) {
+			differential[k].permute_cols(perm);
+			// only worry about boundary[maxdim()]
+		} else {
+			// need to handle boundary[k] and boundary[k+1]
+			differential[k].permute_cols(perm);
+			differential[k+1].permute_rows(perm);
+			// boundary[k+1].ipermute_rows(bats::util::inv_perm(perm));
+		}
+	}
+
+	// permute basis in all dimensions
+	void permute_basis(const std::vector<std::vector<size_t>> &perm) {
+		for (size_t k = 0; k < perm.size(); k++) {
+			permute_basis(k, perm[k]);
+		}
+	}
+
+	void ipermute_basis(size_t k, const std::vector<size_t> &perm) {
+		// TODO: this assumes that degree = -1
+		if (degree == -1) {
+			if (k == 0) {
+				// only worry about boundary[1]
+				differential[1].permute_rows(bats::util::inv_perm(perm));
+			} else if (k == maxdim()) {
+				differential[k].ipermute_cols(perm);
+				// only worry about boundary[maxdim()]
+			} else {
+				// need to handle boundary[k] and boundary[k+1]
+				differential[k].ipermute_cols(perm);
+				differential[k+1].permute_rows(bats::util::inv_perm(perm));
+			}
+		} else { // degree == +1
+			// differential[0] : * -> C^0
+			// differential[k] : C^k -> C^{k+1}
+			if (k == 0) {
+				// only worry about boundary[1]
+				differential[1].ipermute_cols(perm);
+			} else if (k == maxdim()) {
+				differential[k].permute_rows(bats::util::inv_perm(perm));
+				// only worry about boundary[maxdim()]
+			} else {
+				// need to handle boundary[k] and boundary[k+1]
+				differential[k+1].ipermute_cols(perm);
+				differential[k].permute_rows(bats::util::inv_perm(perm));
+			}
+		}
+
+	}
+
+	void ipermute_basis(const std::vector<std::vector<size_t>> &perm) {
+		for (size_t k = 0; k < perm.size(); k++) {
+			ipermute_basis(k, perm[k]);
+		}
+	}
+
 };
 
 
