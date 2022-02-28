@@ -89,7 +89,7 @@ int main() {
     std::cout << "\nPrint the summary of unfiltered information" << std::endl;
     UI.print_detail();
 
-    // if cells infiltration was not sorted by filtration values when construction,
+    // if cells in a filtration was not sorted by filtration values when construction,
     // then we need to get filtered information,
     UI.filtered_info(FCC.perm);
 

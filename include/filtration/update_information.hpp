@@ -44,7 +44,8 @@ struct Update_info{
     std::vector<std::vector<size_t>> permutations;
     std::vector<std::vector<size_t>> intersection_indices_Y; // intersection indices in Y (sorted order)
     std::vector<std::vector<size_t>> intersection_indices_X; // their corresponding indices in X
-
+    std::vector<size_t> kendall_tau_dists;
+    
     // max dimension of the new filtration = size of permutations -1
     size_t max_dim;
 
@@ -137,6 +138,7 @@ struct Update_info{
             intersection_indices_X.emplace_back(intersection_in_i_X);
             intersection_indices_Y.emplace_back(intersection_in_i_Y);
             permutations.emplace_back(perm_in_i);
+            kendall_tau_dists.emplace_back(Kendall_tau(perm_in_i));
 
             addition_indices.emplace_back(addition_in_i);
             boundary_indices.emplace_back(boundary_indices_in_i);
@@ -219,6 +221,7 @@ struct Update_info{
             bats::util::apply_perm_swap(ind_Y_i_sorted, bats::util::inv_perm(p));
             // finally, get the permutation for filtred filtration
             permutations[i] = bats::util::sortperm(ind_Y_i_sorted);
+            kendall_tau_dists[i]= Kendall_tau(permutations[i]);
 
             // step 5, find the boundary indices
             if(i>0){
@@ -251,12 +254,6 @@ struct Update_info{
                     boundary_indices[i][j] = (sv.nzbegin()+j)->val;
                 }
             }
-
-            // p = sort_indexes(addition_indices[i]);
-            // bats::util::apply_perm_swap(addition_indices[i], bats::util::inv_perm(p));
-            // if(i>0)
-            // bats::util::apply_perm_swap(boundary_indices[i], bats::util::inv_perm(p));
-
         }
     }
 
@@ -288,6 +285,8 @@ struct Update_info{
             }
             std::cout << "Permutation information:" << std::endl;
             print_1D_vectors(permutations[i]);
+            std::cout << "Kendall tau distance: ";
+            std::cout << kendall_tau_dists[i] << std::endl;
         }
     }
 
@@ -326,10 +325,6 @@ struct Update_info{
                 std::cout << "\n";
             }
 
-            // if(i>0){
-            //     std::cout << ",and the boundary indices are" << std::endl;
-            //     print_2D_vectors(boundary_indices[i]);
-            // }
             std::cout << "Intersection Information" << std::endl;
             std::cout << "\t(simplex, index in old and new filtration)" << std::endl;
             for(size_t j = 0; j < intersection_indices_X[i].size(); j++){
@@ -342,6 +337,8 @@ struct Update_info{
 
             std::cout << "Transformed to Permutation:";
             print_1D_vectors(permutations[i]);
+            std::cout << "Kendall tau distance: ";
+            std::cout << kendall_tau_dists[i] << std::endl;
         }
     }
 };
