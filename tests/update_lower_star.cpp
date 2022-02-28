@@ -4,6 +4,8 @@
 #include <math.h>
 #include <chrono>
 #include <random>
+#include "util/permutation.hpp"
+#include "util/print.hpp"
 
 using FT = ModP<int, 2>;
 
@@ -101,8 +103,11 @@ int main() {
     {
         C = bats::Chain(F, FT());
         R = bats::Reduce(C);
+        auto perms = bats::filtration_sortperm(vals);
+        std::vector<size_t> ken_dis = bats::Kendall_tau(perms);
+        bats::print_1D_vectors(ken_dis);
         R.update_filtration(vals);
-
+        
         if(test_reduce_result(R_Y, R)){
             std::cout << "By compare two RFCC, this method success!!"  << std::endl;
         }
@@ -112,9 +117,11 @@ int main() {
         C = bats::Chain(F, FT());
         R = bats::Reduce(C);
 
-        auto UI = Update_info(F, F_Y);
+        auto UI = bats::Update_info(F, F_Y);
         //the complex in a lower star filtration is not sorted by their filtration values
         UI.filtered_info(C.perm); 
+        std::vector<size_t> ken_dis = UI.kendall_tau_dists;
+        bats::print_1D_vectors(ken_dis);
 
         R.update_filtration_general(UI);
 
