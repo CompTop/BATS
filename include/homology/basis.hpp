@@ -10,8 +10,6 @@ compute homology-revealing bases for a chain complex
 #include <chrono>
 
 namespace bats {
-// flag to indicate that basis should be computed
-struct compute_basis_flag {};
 
 
 /*

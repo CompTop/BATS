@@ -109,6 +109,127 @@ public:
 
 	}
 
+	// compute reduced boundary matrices only with flags
+	template <typename algflag>
+	ReducedDGVectorSpace(const DGVectorSpace<MT> &C, algflag) {
+		size_t dmax = C.differential.size();
+		//dim = C.dim;
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// TODO: can parallelize this
+		for (size_t k = 0; k < dmax; k++) {
+			R[k] = C.differential[k];
+			// partial_reduce_parallel(R[k], 1024);
+			p2c[k] = reduce_matrix(R[k], algflag());
+		}
+
+		set_indices();
+	}
+
+	// compute reduced boundary matrices with basis and flags
+	template <typename algflag>
+	ReducedDGVectorSpace(
+		const DGVectorSpace<MT> &C,
+		 algflag,
+		 bats::compute_basis_flag
+	 ) {
+		size_t dmax = C.differential.size();
+		//dim = C.dim;
+		U.resize(dmax);
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// TODO: can parallelize this
+		for (size_t k = 0; k < dmax; k++) {
+			size_t dimk = C.differential[k].ncol();
+			U[k] = MT::identity(dimk);
+			R[k] = C.differential[k];
+			// partial_reduce_parallel(R[k], 1024);
+			p2c[k] = reduce_matrix(R[k], U[k], algflag());
+		}
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedDGVectorSpace(
+		const DGVectorSpace<MT> &C,
+		algflag,
+		bats::clearing_flag
+	) {
+		size_t dmax = C.differential.size();
+		// dim = C.dim;
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		if (degree == -1) {
+			// do top dimension normally
+			R[dmax-1] = C.differential[dmax-1];
+			p2c[dmax-1] = reduce_matrix(R[dmax-1], algflag());
+			std::vector<size_t> clear_inds = get_clearing_inds(p2c[dmax-1]);
+			for (ssize_t k = dmax-2; k >= 0; --k) {
+				R[k] = C.differential[k];
+				p2c[k] = reduce_matrix_clearing(R[k], clear_inds, algflag());
+				clear_inds = get_clearing_inds(p2c[k]);
+			}
+		} else { // degree == +1
+			// do bottom dimension normally
+			R[0] = C.differential[0];
+			p2c[0] = reduce_matrix(R[0], algflag());
+			std::vector<size_t> clear_inds = get_clearing_inds(p2c[0]);
+			for (ssize_t k = 1; k < dmax; ++k) {
+				R[k] = C.differential[k];
+				p2c[k] = reduce_matrix_clearing(R[k], clear_inds, algflag());
+				clear_inds = get_clearing_inds(p2c[k]);
+			}
+		}
+
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedDGVectorSpace(
+		const DGVectorSpace<MT> &C,
+		algflag,
+		bats::compression_flag
+	) {
+		size_t dmax = C.differential.size();
+		// dim = C.dim;
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		if (degree == -1) {
+			// do bottom dimension normally
+			R[0] = C.differential[0];
+			p2c[0] = reduce_matrix(R[0], algflag());
+			std::vector<bool> comp_inds = get_compression_inds(R[0]);
+			for (size_t k = 1; k < dmax; k++) {
+				R[k] = C.differential[k];
+				p2c[k] = reduce_matrix_compression(R[k], comp_inds, algflag());
+				comp_inds = get_compression_inds(R[k]);
+			}
+		} else { // degree == +1
+			// do top dimension normally
+			R[dmax-1] = C.differential[dmax-1];
+			p2c[dmax-1] = reduce_matrix(R[dmax-1], algflag());
+			std::vector<bool> comp_inds = get_compression_inds(R[dmax-1]);
+			for (ssize_t k = dmax-2; k >= 0; --k) {
+				R[k] = C.differential[k];
+				p2c[k] = reduce_matrix_compression(R[k], comp_inds, algflag());
+				comp_inds = get_compression_inds(R[k]);
+			}
+		}
+
+
+		set_indices();
+	}
+
 
 	/**
 	put vector/matrix in homology-revealing basis in dimension k

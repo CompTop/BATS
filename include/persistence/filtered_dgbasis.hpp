@@ -34,8 +34,6 @@ struct ReducedFilteredDGVectorSpace {
 	persistence pairs in dimension k
 
 	@param k	homology dimension
-	@param permuted	set to true to return critical indices permuted by filtration parameter
-	set to false to return with indices in original order.  Default: false
 	*/
 	std::vector<PersistencePair<T>> persistence_pairs(
 		const size_t k
@@ -47,7 +45,7 @@ struct ReducedFilteredDGVectorSpace {
 				if (RC.R[k][i].nnz() == 0) {
 					// homology generated
 					if (k == maxdim() || RC.p2c[k+1][i] == bats::NO_IND)  {
-						// infinite bar
+						// infinite bar.
 						pairs.emplace_back(
 							PersistencePair<T>(k, perm[k][i], bats::NO_IND,
 								val[k][perm[k][i]], std::numeric_limits<T>::infinity()
@@ -65,28 +63,72 @@ struct ReducedFilteredDGVectorSpace {
 				}
 			}
 		} else { // degree == +1
-			pairs.reserve(RC.R[k+1].ncol());
-			for (size_t i =0; i < dim(k); i++) {
-				if (RC.R[k+1][i].nnz() == 0) {
-					// homology generated
-					if (RC.p2c[k][i] == bats::NO_IND)  {
-						// infinite bar
+			/*
+			TODO: this is actually *relative* relative barcode
+			Should maybe have persistence_pairs_relative
+
+			See "Dualitites in persistent (co)homology" DeSilva et al 2011
+			Section 3.4
+			*/
+			for (size_t i = 0; i < dim(k); ++i) {
+				if (RC.R[k+1][i].nnz() > 0) {
+					// kills bar
+					size_t j = RC.R[k+1][i].lastnz().ind;
+					pairs.emplace_back(
+						PersistencePair<T>(
+							k,
+							perm[k][i], // birth in filtration is cohomology death
+							perm[k+1][j], // death in filtration is cohomology birth
+							val[k][perm[k][i]], // birth in filtration is cohomology death
+							val[k+1][perm[k+1][j]] // death in filtration is cohomology birth
+						)
+					);
+				} else {
+					// check to see if infinte bar
+					size_t j = RC.p2c[k][i];
+					if (j == bats::NO_IND) {
 						pairs.emplace_back(
-							PersistencePair<T>(k, perm[k+1][i], bats::NO_IND,
-								val[k+1][perm[k+1][i]], std::numeric_limits<T>::infinity()
-							)
-						);
-					} else {
-						size_t j = RC.p2c[k][i];
-						// finite bar
-						pairs.emplace_back(
-							PersistencePair<T>(k, perm[k+1][i], perm[k][j],
-								val[k+1][perm[k+1][i]], val[k][perm[k][j]]
+							PersistencePair<T>(
+								k,
+								perm[k][i],
+								bats::NO_IND,
+								val[k][perm[k][i]],
+								std::numeric_limits<T>::infinity()
 							)
 						);
 					}
 				}
 			}
+			// pairs.reserve(RC.R[k+2].ncol());
+			// for (size_t i =0; i < dim(k+1); i++) {
+			// 	if (RC.R[k+2][i].nnz() == 0) {
+			// 		// homology generated
+			// 		size_t j = RC.p2c[k+1][i];
+			// 		if (j == bats::NO_IND)  {
+			// 			// infinite bar.  Born at column index RC.R[k+1][i]
+			// 			pairs.emplace_back(
+			// 				PersistencePair<T>(
+			// 					k,
+			// 					perm[k+1][i],
+			// 					bats::NO_IND,
+			// 					val[k+1][perm[k+1][i]],
+			// 					std::numeric_limits<T>::infinity()
+			// 				)
+			// 			);
+			// 		} else {
+			// 			// finite bar.  Dies at column index RC[k][j]
+			// 			pairs.emplace_back(
+			// 				PersistencePair<T>(
+			// 					k,
+			// 					perm[k][j], // birth in filtration is cohomology death
+			// 					perm[k+1][i], // death in filtration is cohomology birth
+			// 					val[k][perm[k][j]], // birth in filtration is cohomology death
+			// 					val[k+1][perm[k+1][i]] // death in filtration is cohomology birth
+			// 				)
+			// 			);
+			// 		}
+			// 	}
+			// }
 		}
 
 		return pairs;

@@ -34,6 +34,7 @@ struct FilteredDGVectorSpace {
 
 	inline size_t dim(const size_t k) { return C.dim(k); }
 
+	inline DGVectorSpace<MT>& complex() {return C;}
 	inline const DGVectorSpace<MT>& complex() const {return C;}
 	inline const std::vector<std::vector<FT>>& vals() const { return val; }
 

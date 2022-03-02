@@ -139,11 +139,15 @@ struct DGVectorSpace {
 			if (k == 0) {
 				// only worry about boundary[1]
 				differential[1].ipermute_cols(perm);
+				// std::cout << "d_k = " << k+1 << ": cols " << differential[1].ncol() << ", " << perm.size() << std::endl;
 			} else if (k == maxdim()) {
 				differential[k].permute_rows(bats::util::inv_perm(perm));
+				// std::cout << "d_k = " << k << ": rows " << differential[k].nrow() << ", " << perm.size() << std::endl;
 				// only worry about boundary[maxdim()]
 			} else {
 				// need to handle boundary[k] and boundary[k+1]
+				// std::cout << "d_k = " << k << ": rows " << differential[k].nrow() << ", " << perm.size() << std::endl << std::endl;
+				// std::cout << "d_k = " << k+1 << ": cols " << differential[k+1].ncol() << ", " << perm.size() << std::endl;
 				differential[k+1].ipermute_cols(perm);
 				differential[k].permute_rows(bats::util::inv_perm(perm));
 			}
@@ -155,6 +159,13 @@ struct DGVectorSpace {
 		for (size_t k = 0; k < perm.size(); k++) {
 			ipermute_basis(k, perm[k]);
 		}
+	}
+
+	/**
+	checks that d_{k-degree} d_k = 0
+	*/
+	bool is_differential(size_t k) {
+		return (differential[k+degree] * differential[k]).is_zero();
 	}
 
 };

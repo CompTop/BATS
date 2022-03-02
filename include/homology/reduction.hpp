@@ -45,6 +45,9 @@ struct standard_reduction_flag {};
 struct extra_reduction_flag {};
 struct sparse_reduction_flag {};
 
+// flag to indicate that basis should be computed
+struct compute_basis_flag {};
+
 
 // perform reduction algorithm on a column matrix in-place
 template <class TVec>

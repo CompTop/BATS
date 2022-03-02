@@ -4,7 +4,7 @@ namespace bats {
 
 // create a lower-star filtraiton on a cell complex of type TC
 template <class TC, typename TF>
-Filtration<TC,TF> LowerStarFiltration(TC cpx, std::vector<TF> f) {
+Filtration<TC,TF> LowerStarFiltration(TC& cpx, std::vector<TF> f) {
 
   // assert f.size() == cpx.ncells(0);
 
