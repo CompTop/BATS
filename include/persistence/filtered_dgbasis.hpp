@@ -134,6 +134,40 @@ struct ReducedFilteredDGVectorSpace {
 		return pairs;
 	}
 
+	// update filtration
+	void update_filtration(const std::vector<std::vector<T>> newval) {
+		// step 1: determine permutation order for newval
+		auto perms = filtration_sortperm(newval);
+
+		// if degree is +1, reverse
+		if (RC.degree == +1) {
+			// for cohomology reverse rows and columns
+			for (auto& pi : perms) {
+				std::reverse(pi.begin(), pi.end());
+			}
+		}
+
+		// get inverse permutation for current permutation
+		auto iperm = filtration_iperm(perm);
+
+		// step 2: determine update to old permutation
+		// iperm[k] will hold the updated permutation temporarily
+		std::vector<size_t> tmp; // temporary vector
+		for (size_t k = 0; k < iperm.size(); k++) {
+			bats::util::apply_perm(iperm[k].data(), tmp, perms[k]);
+		}
+
+		// step 3: apply permutation updates to ReducedChainComplex RC
+		RC.permute_basis(iperm);
+
+		// step 4: store new permutation
+		perm = perms;
+
+		// store values as well
+		val = newval;
+
+	}
+
 };
 
 } // namespace bats

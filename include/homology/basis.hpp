@@ -177,8 +177,9 @@ public:
 		I.resize(dmax);
 
 		// do top dimension normally
+		U[dmax-1] = MT::identity(C.dim(dmax-1));
 		R[dmax-1] = C.boundary[dmax-1];
-		p2c[dmax-1] = reduce_matrix(R[dmax-1], algflag());
+		p2c[dmax-1] = reduce_matrix(R[dmax-1], U[dmax-1], algflag());
 		for (ssize_t k = dmax-2; k >= 0; k--) {
 			R[k] = C.boundary[k];
 			U[k] = MT::identity(C.dim(k));

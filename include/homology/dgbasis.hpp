@@ -111,7 +111,7 @@ public:
 
 	// compute reduced boundary matrices only with flags
 	template <typename algflag>
-	ReducedDGVectorSpace(const DGVectorSpace<MT> &C, algflag) {
+	ReducedDGVectorSpace(const DGVectorSpace<MT> &C, algflag) : degree(C.degree) {
 		size_t dmax = C.differential.size();
 		//dim = C.dim;
 		R.resize(dmax);
@@ -134,7 +134,7 @@ public:
 		const DGVectorSpace<MT> &C,
 		 algflag,
 		 bats::compute_basis_flag
-	 ) {
+	 ) : degree(C.degree) {
 		size_t dmax = C.differential.size();
 		//dim = C.dim;
 		U.resize(dmax);
@@ -159,7 +159,7 @@ public:
 		const DGVectorSpace<MT> &C,
 		algflag,
 		bats::clearing_flag
-	) {
+	) : degree(C.degree) {
 		size_t dmax = C.differential.size();
 		// dim = C.dim;
 		R.resize(dmax);
@@ -196,8 +196,50 @@ public:
 	ReducedDGVectorSpace(
 		const DGVectorSpace<MT> &C,
 		algflag,
+		bats::clearing_flag,
+		bats::compute_basis_flag
+	) : degree(C.degree) {
+		size_t dmax = C.differential.size();
+		// dim = C.dim;
+		U.resize(dmax);
+		R.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		if (degree == -1) {
+			// do top dimension normally
+			U[dmax-1] = MT::identity(C.differential[dmax-1].ncol());
+			R[dmax-1] = C.differential[dmax-1];
+			p2c[dmax-1] = reduce_matrix(R[dmax-1], U[dmax-1], algflag());
+			for (ssize_t k = dmax-2; k >= 0; --k) {
+				size_t dimk = C.differential[k].ncol();
+				U[k] = MT::identity(dimk);
+				R[k] = C.differential[k];
+				p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k+1], p2c[k+1], algflag());
+			}
+		} else { // degree == +1
+			// do bottom dimension normally
+			U[0] = MT::identity(C.differential[0].ncol());
+			R[0] = C.differential[0];
+			p2c[0] = reduce_matrix(R[0], U[0], algflag());
+			for (ssize_t k = 1; k < dmax; ++k) {
+				size_t dimk = C.differential[k].ncol();
+				U[k] = MT::identity(dimk);
+				R[k] = C.differential[k];
+				p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k-1], p2c[k-1], algflag());
+			}
+		}
+
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedDGVectorSpace(
+		const DGVectorSpace<MT> &C,
+		algflag,
 		bats::compression_flag
-	) {
+	) : degree(C.degree) {
 		size_t dmax = C.differential.size();
 		// dim = C.dim;
 		R.resize(dmax);
@@ -320,6 +362,86 @@ public:
 			std::cout << "\n";
 		}
 	}
+
+	template <typename... Args>
+	void update_reduction2(size_t k, Args ...args) {
+
+		size_t k_ind = degree == -1 ? k : k + 1;
+		// step 1: make U[k] upper-triangular.  Similar to UQL factorization
+		// but we apply updates to R[k] instead of factorizing
+		// we can actually use the standard reduction algorithm on U
+		// then put it in increasing pivot order
+		p2c[k_ind] = reduce_matrix_standard(U[k_ind], R[k_ind]); // we want standard reduction
+		// p2c[k] can be used since it will just be updated later.
+
+		// sort columns of U - apply same operations to R
+		for (size_t j = 0; j < dim(k); j++) {
+			// swap correct column if necessary
+			if (p2c[k_ind][j] != j) {
+				// get pivot - we'll swap so this pivot is in correct location
+				size_t pj = U[k_ind][j].lastnz().ind; // pivot of column j
+				size_t p = p2c[k_ind][j]; // location of desired pivot
+				U[k_ind].swap_cols(p, j);
+				R[k_ind].swap_cols(p, j);
+				p2c[k_ind][j] = j; // we've put the pivot in the right place
+				p2c[k_ind][pj] = p; // set pivot lookup to j
+			}
+		}
+
+		// step 2: finish reduction of matrix R[k]
+		p2c[k_ind] = reduce_matrix(R[k_ind], U[k_ind], args...);
+	}
+
+	// permute basis in dimension k
+	// B_k U_k = R_k, so when we permute columns of B_k, we must permute rows of U_k
+	// we also permute rows of R_{k+1}
+	void permute_matrices(size_t k, const std::vector<size_t> &perm) {
+		auto iperm = bats::util::inv_perm(perm);
+		if (degree == -1) {
+			if (k == 0) {
+				// only worry about boundary[1]
+				R[1].permute_rows(iperm);
+			} else if (k == maxdim()) {
+				// only need to worry about rows of U[k]
+				U[k].permute_rows(iperm); // inverse perm here
+			} else {
+				// need to handle boundary[k] and boundary[k+1]
+				U[k].permute_rows(iperm); // inverse perm here
+				R[k+1].permute_rows(iperm); // regular perm here
+			}
+		} else { // degree == +1
+			// permute rows of U^k = U[k+1]
+			// permute rows of R^{k-1} = R[k]
+			if (k == 0) {
+				// only worry about differential[1]
+				U[1].permute_rows(iperm);
+			} else if (k == maxdim()) {
+				// only need to worry about differential[k]
+				R[k].permute_rows(iperm); // inverse perm here
+			} else {
+				// need to handle boundary[k] and boundary[k+1]
+				U[k+1].permute_rows(iperm); // inverse perm here
+				R[k].permute_rows(iperm); // regular perm here
+			}
+		}
+
+		// at end of this, homology classes are invalidated
+	}
+
+	// update basis in all dimensions
+	template <typename... Args>
+	void permute_basis(const std::vector<std::vector<size_t>> &perm, Args ...args) {
+		for (size_t k = 0; k < perm.size(); k++) {
+			permute_matrices(k, perm[k]);
+		}
+		// next we update the factorizations
+		for (size_t k = 0; k < perm.size(); k++) {
+			update_reduction2(k, args...);
+		}
+		set_indices(); // update homology indices
+	}
+
+
 };
 
 
