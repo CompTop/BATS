@@ -166,6 +166,32 @@ public:
 	ReducedChainComplex(
 		const ChainComplex<MT> &C,
 		algflag,
+		bats::clearing_flag,
+		bats::compute_basis_flag
+	) {
+		size_t dmax = C.maxdim() + 1;
+		// dim = C.dim;
+		R.resize(dmax);
+		U.resize(dmax);
+		p2c.resize(dmax);
+		I.resize(dmax);
+
+		// do top dimension normally
+		R[dmax-1] = C.boundary[dmax-1];
+		p2c[dmax-1] = reduce_matrix(R[dmax-1], algflag());
+		for (ssize_t k = dmax-2; k >= 0; k--) {
+			R[k] = C.boundary[k];
+			U[k] = MT::identity(C.dim(k));
+			p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k+1], p2c[k+1], algflag());
+		}
+
+		set_indices();
+	}
+
+	template <typename algflag>
+	ReducedChainComplex(
+		const ChainComplex<MT> &C,
+		algflag,
 		bats::compression_flag
 	) {
 		size_t dmax = C.maxdim() + 1;

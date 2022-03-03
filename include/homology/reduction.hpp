@@ -406,11 +406,13 @@ std::vector<size_t> get_clearing_inds(const p2c_type &p2c) {
 	return inds;
 }
 
-// perform reduction algorithm on a column matrix in-place
-// use clearing optimization
-// assume clear_inds is in sorted order
-// also known as the twist algorithm
-// get clearing indices from one dimension above
+/*
+perform reduction algorithm on a column matrix in-place
+use clearing optimization
+assume clear_inds is in sorted order
+also known as the twist algorithm
+get clearing indices from one dimension above
+*/
 template <class TVec, typename flag>
 p2c_type reduce_matrix_clearing(
 	ColumnMatrix<TVec> &M,
@@ -428,6 +430,48 @@ p2c_type reduce_matrix_clearing(
 
 	// now run standard reduction algorithm with flag
 	return reduce_matrix(M, flag());
+}
+
+/*
+perform reduction algorithm on a column matrix in-place
+use clearing optimization
+assume clear_inds is in sorted order
+also known as the twist algorithm
+get clearing indices from one dimension above
+
+@param M - matrix to be reduced
+@param U - upper triangular matrix to reduce
+@param R - reduced matrix one dimension up
+@param p2c - pivot-to-column map one dimension up
+*/
+template <class TVec, typename flag>
+p2c_type reduce_matrix_clearing(
+	ColumnMatrix<TVec> &M,
+	ColumnMatrix<TVec> &U,
+	const ColumnMatrix<TVec> &R,
+	const p2c_type& p2c,
+	flag
+) {
+
+	// just zero-out columns ahead of time
+	size_t i = 0;
+	auto it = p2c.begin();
+	while (it != p2c.end()) {
+		// put keys into indices - these are the clearing indices for
+		// one dimension down.
+		// inds.emplace_back(it->first);
+		size_t j = *it;
+		if (j != bats::NO_IND) {
+			M[i].clear(); // zero out column with this pivot
+			U[i] = R[j]; // this is valid representative - see Bauer paper on Ripser
+		}
+		++it;
+		++i;
+	}
+	// std::cout << "reducing matrix" << std::endl;
+
+	// now run standard reduction algorithm with flag
+	return reduce_matrix(M, U, flag());
 }
 
 // get compression indices from reduced matrix R
