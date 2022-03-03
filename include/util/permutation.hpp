@@ -389,7 +389,7 @@ std::vector<size_t> identity_perm(const size_t& k){
 }
 
 /*
-If we sort vector v, this function will return the indices of sorted values 
+If we sort vector v, this function will return the indices of sorted values
 */
 template <typename T>
 std::vector<size_t> sort_indexes(const std::vector<T> &v) {
@@ -397,12 +397,12 @@ std::vector<size_t> sort_indexes(const std::vector<T> &v) {
     // initialize original index locations
     std::vector<size_t> idx(v.size());
     // fill the vector with increasing numbers starting from 0
-    std::iota(idx.begin(), idx.end(), 0); 
+    std::iota(idx.begin(), idx.end(), 0);
 
     // sort indexes based on comparing values in v
     // using std::stable_sort instead of std::sort
     // to avoid unnecessary index re-orderings
-    // when v contains elements of equal values 
+    // when v contains elements of equal values
     std::stable_sort(idx.begin(), idx.end(),
         [&v](size_t i1, size_t i2) {return v[i1] < v[i2];});
 
@@ -413,8 +413,8 @@ std::vector<size_t> sort_indexes(const std::vector<T> &v) {
 Make a list of indices to permutation that will sort, e.g., [5 0 2] to [2 0 1]
 
 Given a list of correpsonding old indices of permutations, find the permutation
-e.g., given [5 0 2], which is the corresponding old indices of an old vector v_old 
-for a new vector v: 
+e.g., given [5 0 2], which is the corresponding old indices of an old vector v_old
+for a new vector v:
 v[0] = v_old[5]
 v[1] = v_old[0]
 v[2] = v_old[2]
@@ -426,7 +426,7 @@ std::vector<size_t> find_perm_from_vector(const std::vector<T> &v) {
     // initialize original index locations
     std::vector<size_t> idx(v.size());
     // fill the vector with increasing numbers starting from 0
-    std::iota(idx.begin(), idx.end(), 0); 
+    std::iota(idx.begin(), idx.end(), 0);
 
     // sort indexes based on comparing values in v
     std::stable_sort(idx.begin(), idx.end(),
@@ -441,7 +441,7 @@ std::vector<size_t> find_perm_from_vector(const std::vector<T> &v) {
 }
 
 
-// get the permutation for permuting i-th element to the end 
+// get the permutation for permuting i-th element to the end
 std::vector<size_t> perm_to_the_end(const size_t& index, const size_t& length){
     std::vector<size_t> v;
     v.reserve(length);
@@ -453,8 +453,8 @@ std::vector<size_t> perm_to_the_end(const size_t& index, const size_t& length){
     return v;
 }
 
-// get the permutation for permuting elements, with their indices in a list, to the end 
-// the index_list should be sorted 
+// get the permutation for permuting elements, with their indices in a list, to the end
+// the index_list should be sorted
 // eg. passing ([1,3],5) will return [0,2,4,1,3]
 std::vector<size_t> perm_to_the_end(const std::vector<size_t>& index_list, const size_t& length){
     std::vector<size_t> v;
@@ -474,7 +474,7 @@ std::vector<size_t> perm_to_the_end(const std::vector<size_t>& index_list, const
     return v;
 }
 
-// extend a permutation to a desired length 
+// extend a permutation to a desired length
 // with the elements appended unmoved, e.g.
 // eg., passing ([2,0,1], 6) return [2,0,1,3,4,5]
 std::vector<size_t> extension_perm(const std::vector<size_t>& perm, const size_t& length){
@@ -495,33 +495,34 @@ std::vector<size_t> extension_perm(const std::vector<size_t>& perm, const size_t
     }else{
         return identity_perm(length);
     }
-    
+
 }
 
 
 // Merges two subarrays of array[].
 // First subarray is arr[begin..mid]
 // Second subarray is arr[mid+1..end]
-size_t Kendall_tau_merge(int array[], int const left, int const mid, int const right)
+template <typename TI>
+size_t Kendall_tau_merge(TI array[], int const left, int const mid, int const right)
 {
     size_t num_inv = 0;
     auto const subArrayOne = mid - left + 1;
     auto const subArrayTwo = right - mid;
-  
+
     // Create temp arrays
     auto *leftArray = new int[subArrayOne],
          *rightArray = new int[subArrayTwo];
-  
+
     // Copy data to temp arrays leftArray[] and rightArray[]
     for (auto i = 0; i < subArrayOne; i++)
         leftArray[i] = array[left + i];
     for (auto j = 0; j < subArrayTwo; j++)
         rightArray[j] = array[mid + 1 + j];
-  
+
     auto indexOfSubArrayOne = 0, // Initial index of first sub-array
         indexOfSubArrayTwo = 0; // Initial index of second sub-array
     int indexOfMergedArray = left; // Initial index of merged array
-  
+
     // Merge the temp arrays back into array[left..right]
     while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
         if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo]) {
@@ -551,15 +552,16 @@ size_t Kendall_tau_merge(int array[], int const left, int const mid, int const r
     }
     return num_inv;
 }
-  
-// Using merge sort to compute Kendal tau distance 
+
+// Using merge sort to compute Kendal tau distance
 // array will be sorted in place
-size_t Kendall_tau_inplace(int array[], int const begin, int const end)
+template <typename TI>
+size_t Kendall_tau_inplace(TI array[], int const begin, int const end)
 {
     size_t num_inv = 0;
     if (begin >= end)
         return 0; // Returns recursively
-    
+
     auto mid = begin + (end - begin) / 2;
     num_inv += Kendall_tau_inplace(array, begin, mid);
     num_inv += Kendall_tau_inplace(array, mid + 1, end);
@@ -567,6 +569,10 @@ size_t Kendall_tau_inplace(int array[], int const begin, int const end)
     return num_inv;
 }
 
+
+/**
+Kendall-Tau distance between permutation and identity
+*/
 template<typename T>
 size_t Kendall_tau(const std::vector<T>& perm)
 {
@@ -577,6 +583,31 @@ size_t Kendall_tau(const std::vector<T>& perm)
     for (size_t i = 0; i < len; i++)
         arr[i] = perm[i];
     size_t num_inv = Kendall_tau_inplace(arr, 0, len - 1);
+
+    delete[] arr;
+
+    return num_inv;
+}
+
+/**
+Kendall-Tau distance between two permutations
+*/
+template<typename T>
+size_t Kendall_tau(
+    const std::vector<T>& perm1,
+    const std::vector<T>& perm2
+)
+{
+    // figure out how to get perm2 from perm1
+    auto iperm2 = bats::util::inv_perm(perm2);
+    std::vector<size_t> tmp; // temporary vector
+
+    // iperm2 will hold the updated permutation
+    bats::util::apply_perm(iperm2.data(), tmp, perm1);
+    // compute K-T distance
+    size_t len = iperm2.size();
+
+    size_t num_inv = Kendall_tau_inplace(iperm2.data(), 0, len - 1);
 
     return num_inv;
 }
