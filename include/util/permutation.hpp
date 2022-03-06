@@ -550,6 +550,8 @@ size_t Kendall_tau_merge(TI array[], int const left, int const mid, int const ri
         indexOfSubArrayTwo++;
         indexOfMergedArray++;
     }
+    delete [] rightArray;
+    delete [] leftArray;
     return num_inv;
 }
 
