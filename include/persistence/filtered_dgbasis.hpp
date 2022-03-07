@@ -168,6 +168,24 @@ struct ReducedFilteredDGVectorSpace {
 
 	}
 
+	// update filtration fast version
+	// TODO: make update general work for cohomology
+	template <typename Information_type, typename... Args>
+	void update_filtration_general(
+		const Information_type & updating_information,
+		Args ...args
+	) {
+		// step 1: apply permutation updates to ReducedChainComplex RC
+		RC.update_basis_general(updating_information, args...);
+
+		// step 2: store new permutation
+		perm = updating_information.F_Y_perms;
+
+		// store values as well
+		val = updating_information.F_Y_vals;
+
+	}
+
 };
 
 } // namespace bats
