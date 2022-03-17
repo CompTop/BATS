@@ -61,7 +61,10 @@ struct Update_info{
     FiltrationType F_new;
     bool filtered_boolean = false;
 
-    Update_info(const FiltrationType& F_X, const FiltrationType& F_Y){
+    // degree for DGVectorSpace
+    int degree = -1;
+
+    Update_info(const FiltrationType& F_X, const FiltrationType& F_Y, int degree = -1){
 
         F_old = F_X;
         F_new = F_Y;
@@ -147,9 +150,14 @@ struct Update_info{
 
 
 
-    void filtered_info(const std::vector<std::vector<size_t>>&perms_X){
+    void filtered_info(const std::vector<std::vector<size_t>>&perms_X, const int& degree = -1){
         // step 1: determine permutation order for new filtration values
         F_X_perms = perms_X;
+        if (degree == +1){
+            for (auto& pi : F_X_perms) {
+				std::reverse(pi.begin(), pi.end());
+			}
+        }
 
         // Check if filtration is sorted when construction.
         // If so, we do not need this step!

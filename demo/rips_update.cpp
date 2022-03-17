@@ -20,7 +20,7 @@ using CpxT = LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
 int main(int argc, char* argv[]) {
 
     size_t d = 2; // dimension of Euclidean Space
-    size_t n = 350;
+    size_t n = 100;
 
     // maximum simplex dimension
     size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
@@ -64,47 +64,80 @@ int main(int argc, char* argv[]) {
         << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
         << "ms" << std::endl;
 
-    // compare different options
-	{
-        // standard reduction
-		start = std::chrono::steady_clock::now();
-		auto FC = bats::Chain(F, FT());
-		auto RFC = bats::ReducedFilteredChainComplex(
-			FC,
-			bats::standard_reduction_flag(),
-			bats::compute_basis_flag()
-		);
-		end = std::chrono::steady_clock::now();
-	    std::cout << "reduction: "
-	        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-	        << "ms" << std::endl;
-		RFC.print_summary(true);
+    // // compare different options
+	// {
+    //     // standard reduction
+	// 	start = std::chrono::steady_clock::now();
+	// 	auto FC = bats::Chain(F, FT());
+	// 	auto RFC = bats::ReducedFilteredChainComplex(
+	// 		FC,
+	// 		bats::standard_reduction_flag(),
+	// 		bats::compute_basis_flag()
+	// 	);
+	// 	end = std::chrono::steady_clock::now();
+	//     std::cout << "reduction: "
+	//         << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	//         << "ms" << std::endl;
+	// 	RFC.print_summary(true);
 
-		// Compute update info
-		start = std::chrono::steady_clock::now();
-		auto uinfo = bats::Update_info(F, F2);
-		end = std::chrono::steady_clock::now();
-	    std::cout << "\nConstruction of Update info: "
-	        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-	        << "ms" << std::endl;
+	// 	// Compute update info
+	// 	start = std::chrono::steady_clock::now();
+	// 	auto uinfo = bats::Update_info(F, F2);
+	// 	end = std::chrono::steady_clock::now();
+	//     std::cout << "\nConstruction of Update info: "
+	//         << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	//         << "ms" << std::endl;
 
-		// Compute update
-		start = std::chrono::steady_clock::now();
-		RFC.update_filtration_general(uinfo, bats::standard_reduction_flag());
-		end = std::chrono::steady_clock::now();
-		std::cout << "\nUpdate persistence: "
-			<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-			<< "ms" << std::endl;
+	// 	// Compute update
+	// 	start = std::chrono::steady_clock::now();
+	// 	RFC.update_filtration_general(uinfo, bats::standard_reduction_flag());
+	// 	end = std::chrono::steady_clock::now();
+	// 	std::cout << "\nUpdate persistence: "
+	// 		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	// 		<< "ms" << std::endl;
 
-        if(test_reduce_result(RFC , RFC2)){
-            std::cout << "By compare two RFCC, update on RFCC success!!" << std::endl;
-        }
-	}
+    //     if(test_reduce_result(RFC , RFC2)){
+    //         std::cout << "By compare two RFCC, update on RFCC success!!" << std::endl;
+    //     }
+	// }
 
-    // homology
-    { 
-        std::cout << "DGVS(-1)" << std::endl;
-        auto CX = FilteredDGVectorSpace<double, MT>(F, -1);
+    // // homology
+    // { 
+    //     std::cout << "DGVS(-1)" << std::endl;
+    //     auto CX = FilteredDGVectorSpace<double, MT>(F, -1);
+    //     auto RX = ReducedFilteredDGVectorSpace(CX);
+    //     for (int k = 0; k < 3; ++k) {
+    //         std::cout << "\t hdim " << k << ": " << RX.hdim(k) << std::endl;
+    //     }
+
+    //     // Compute update info
+	// 	start = std::chrono::steady_clock::now();
+	// 	auto uinfo = bats::Update_info(F, F2);
+	// 	end = std::chrono::steady_clock::now();
+	//     std::cout << "\nConstruction of Update info: "
+	//         << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	//         << "ms" << std::endl;
+
+	// 	// Compute update
+	// 	start = std::chrono::steady_clock::now();
+	// 	RX.update_filtration_general(uinfo, bats::standard_reduction_flag());
+	// 	end = std::chrono::steady_clock::now();
+	// 	std::cout << "Update persistence: "
+	// 		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	// 		<< "ms" << std::endl;
+
+    //     // check result
+    //     auto CX2 = FilteredDGVectorSpace<double, MT>(F2, -1);
+    //     auto RX2 = ReducedFilteredDGVectorSpace(CX2);
+    //     if(test_reduce_result(RX , RX2)){
+    //         std::cout << "By compare two RFCC, update on RFCC success!!" << std::endl;
+    //     }
+    // }
+
+    // cohomology
+    {
+        std::cout << "DGVS(+1)" << std::endl;
+        auto CX = FilteredDGVectorSpace<double, MT>(F, +1);
         auto RX = ReducedFilteredDGVectorSpace(CX);
         for (int k = 0; k < 3; ++k) {
             std::cout << "\t hdim " << k << ": " << RX.hdim(k) << std::endl;
@@ -131,16 +164,6 @@ int main(int argc, char* argv[]) {
         auto RX2 = ReducedFilteredDGVectorSpace(CX2);
         if(test_reduce_result(RX , RX2)){
             std::cout << "By compare two RFCC, update on RFCC success!!" << std::endl;
-        }
-    }
-
-    // cohomology
-    {
-        std::cout << "DGVS(+1)" << std::endl;
-        auto CX = FilteredDGVectorSpace<double, MT>(F, +1);
-        auto RX = ReducedFilteredDGVectorSpace(CX);
-        for (int k = 0; k < 3; ++k) {
-            std::cout << "\t hdim " << k << ": " << RX.hdim(k) << std::endl;
         }
     }
 

@@ -179,7 +179,15 @@ struct ReducedFilteredDGVectorSpace {
 		RC.update_basis_general(updating_information, args...);
 
 		// step 2: store new permutation
-		perm = updating_information.F_Y_perms;
+		auto new_perm = updating_information.F_Y_perms;
+		// if degree is +1, reverse
+		if (RC.degree == +1) {
+			// for cohomology reverse rows and columns
+			for (auto& pi : new_perm) {
+				std::reverse(pi.begin(), pi.end());
+			}
+		}
+		perm = new_perm;
 
 		// store values as well
 		val = updating_information.F_Y_vals;

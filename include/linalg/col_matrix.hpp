@@ -236,44 +236,70 @@ public:
 	}
 
 	// append a row a specified value
+	// TODO: sparse way to store new row vector
 	void append_row(const std::vector<val_type> & row) {
-		if (row.size() == ncol()){
-			for (size_t j = 0; j < ncol(); j++) {
-				if (row[j]!= val_type(0))
-				col[j].emplace_back(m , row[j]);
+		assert (row.size() == ncol());
+		++m;
+		for (size_t j = 0; j < ncol(); j++) {
+			if (row[j]!= val_type(0)) {
+				col[j].emplace_back(m-1, row[j]);
 			}
-			++m;
-		}else{
-			std::cout << "\nUnable to add row, since the dimension does not match" << std::endl;
 		}
 	}
 
-	void insert_row(const size_t& index, const std::vector<val_type> & row){
+	// // append a row in the last coloumn input 
+	// void append_row(const std::vector<size_t> & c_ind, const std::vector<val_type> & row_vals) {
+	// 	++m;
+	// 	for (size_t j: c_ind) {
+	// 		col[j].emplace_back();
+	// 	}
+	// }
+
+	// TODO: permute all rows at once
+	void insert_row(const size_t& ind, const std::vector<val_type> & row){
 		// first append a row to the end
 		append_row(row);
 		// second permute it
 		std::vector<size_t> rowperm;
 		rowperm.reserve(m);
 		for (size_t i = 0; i < m ; i++){
-			size_t j = i;
-			if (i == index) j = m-1;
-			if (i > index) j = i-1;
+			size_t j = i; // j is the new index of all rows, rows above ind keep the same
+			if (i >= ind) j = i+1; // rows above ind will add up one
+			if (i == m-1) j = ind; // the last one will be permuted the desired ind 
 			rowperm.emplace_back(j);
 		}
 		permute_rows(rowperm);
 	}
 
+
+	// insert rows, e.g., 
+	// r_inds = [1,3]
+	// r_col_inds = [[2,4,6], [1,3,6]]
+	// r_col_vals = [[1,2,1], [1,2,2]]
+	// will add 
+	void insert_rows(
+		const std::vector<size_t>& r_inds,
+		const std::vector<std::vector<size_t>>& r_col_inds,
+		const std::vector<std::vector<val_type>>& r_col_vals
+	) {
+		for (size_t i = 0; i < r_inds.size(); i++){
+			for (size_t j= 0; j < r_col_inds.size(); j++){
+				col[j].insert_rows({r_col_inds[i][j]}, {r_col_vals[i][j]});
+			}
+		}
+	}
+
 	// insert a zero row
-	void insert_row(const size_t& index){
+	void insert_row(const size_t& ind){
 		// first append a row to the end
-		append_row();
+		m++;
 		// second permute it
 		std::vector<size_t> rowperm;
 		rowperm.reserve(m);
 		for (size_t i = 0; i < m ; i++){
-			size_t j = i;
-			if (i == index) j = m-1;
-			if (i > index) j = i-1;
+			size_t j = i; // j is the new index of all rows, rows above ind keep the same
+			if (i >= ind) j = i+1; // rows above ind will add up one
+			if (i == m-1) j = ind; // the last one will be permuted the desired ind 
 			rowperm.emplace_back(j);
 		}
 		permute_rows(rowperm);
@@ -288,6 +314,24 @@ public:
 		}
 		m = m + r_inds.size();
 	}
+
+	/**
+	insert zero rows at specified locations
+	new_rows[i] at index r_inds[i]
+	*/
+	// void insert_rows(
+	// 	const std::vector<size_t>& r_inds,
+	// 	std::vector<TC>& new_rows
+	// ) {
+	// 	// new rows to columns 
+	// 	for (auto new_row: new_rows){
+
+	// 	}
+	// 	m = m + r_inds.size();
+	// 	for (size_t j = 0; j < n; ++j) {
+	// 		col[j].insert_rows(r_inds, new_rows[i]);
+	// 	}
+	// }
 
 	void erase_column(const size_t& index){
     	col.erase(col.begin()+index);

@@ -579,7 +579,36 @@ public:
 	}
 
 	/**
+	 * (for matrix row addition usage)
 	insert row indices at specified locations
+	assumes that list of rows is in sorted order
+	*/
+	void insert_rows(const std::vector<size_t>& r_inds, const std::vector<TV>& r_vals) {
+		if (r_inds.begin() == r_inds.end()) return;
+		auto iv = indval.begin();
+		while (iv != indval.end()) {
+			// search for how many rows will be inserted
+			// search for the first iterator in r_inds that is >= iv->ind
+			auto ri = std::lower_bound(r_inds.begin(), r_inds.end(), iv->ind);
+			// find its distance to the begin interator
+			// iv's indices needs to add up the number of indices in r_inds before iv
+			iv->ind += std::distance(r_inds.begin(), ri); 
+
+			// it is possible that after ri there is still indices need to add up
+			while (*ri <= iv->ind && ri != r_inds.end()) {++ri; iv->ind++;}
+
+			++iv;
+		}
+
+		for (size_t i = 0; i < r_inds.size(); i++) {
+			indval.emplace_back(key_type(r_inds[i], r_vals[i]));
+		}
+		sort();
+	}
+
+	/**
+	 * (for matrix row addition usage)
+	insert zero row indices at specified locations
 	assumes that list of rows is in sorted order
 	*/
 	void insert_rows(const std::vector<size_t>& r_inds) {
@@ -596,11 +625,11 @@ public:
 
 			++iv;
 		}
-		// we only enter this loop if we already inserted all rows.
-		while (iv != indval.end()) {
-			iv->ind += r_inds.size();
-			++iv;
-		}
+		// // we only enter this loop if we already inserted all rows.
+		// while (iv != indval.end()) {
+		// 	iv->ind += r_inds.size();
+		// 	++iv;
+		// }
 	}
 
 	// // v[i] <- v[i] + c * v[j]

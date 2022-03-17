@@ -441,7 +441,47 @@ public:
 		set_indices(); // update homology indices
 	}
 
-		// update basis in all dimensions by new filtration information
+	// find the reverse index of simplex in persistent cohomology from homology
+	// where n is the column size
+	size_t find_reverse_index(const size_t& i, const size_t& n){
+		return n - i - 1;
+	}
+
+	// find the reverse indices of several simplices in persistent cohomology from homology
+	std::vector<size_t> find_reverse_index(const std::vector<size_t>& index_list, const size_t& n){
+		std::vector<size_t> v;
+		v.reserve(index_list.size());
+		for(size_t ele: index_list){
+			v.emplace_back(find_reverse_index(ele,n));
+		}
+		return v;
+	}
+
+	// find the reverse indices of boundary simplices 
+	std::vector<std::vector<size_t>> find_reverse_index(const std::vector<std::vector<size_t>> & index_list, const size_t& n){
+		std::vector<std::vector<size_t>> v;
+		v.reserve(index_list.size());
+		for(std::vector<size_t> ele: index_list){
+			v.emplace_back(find_reverse_index(ele,n));
+		}
+		return v;
+	}
+	
+
+	/*
+	General Update factorization DU = R by Updating Information
+	Note: 
+	1) when degree = +1 ,i.e., cohomology, we need to 
+	 modify deletion and addition indices: i <-> n-i-1 , where n is column size
+	2) add/remove rows of (co)boundary matrix do not need to modify U, 
+	while add/remove columns need.
+	3) There are types of permutations used in BATs and I call them:
+			for a vector perm and a vector v
+			i) new_ind_perm: perm[i] is the new index of v[i]
+	 	ii) math_perm: inverse of above
+	, in the following implementation, permutations use math_perm
+	(I know they are confusing, but change it is hard...).
+	**/
 	template <typename Information_type, typename... Args>
 	void update_basis_general(const Information_type &UI, Args ...args){
 		using VectT = typename MT::col_type; // column vector type
@@ -451,152 +491,313 @@ public:
 		// (a) move the deleted rows/columns to the end
 		// (b) permute the intersection part of two filtrations
 		size_t max_dim = UI.max_dim;
+		// std::cout << "before permutation R[1] is" << std::endl;
+		// R[1].print();
+		// std::cout << "and U[1] is"  << std::endl;
+		// U[1].print();
 
 		// we want to extract permutation and deletion information first
-		for (size_t k = 0; k < max_dim +1; ++k) {
+		for (size_t k = 0; k < max_dim + 1; ++k) {
+			size_t m = R[k].nrow();
+			size_t n = R[k].ncol();
 			// step 1.1 find the permutation used to permute simplices
 			// that is going to be deleted to the end
 			std::vector<size_t> perm_deletion;
-			if(!UI.deletion_indices[k].empty()){
-				perm_deletion = perm_to_the_end(UI.deletion_indices[k], R[k].ncol());
+			if (degree == +1){
+				perm_deletion = identity_perm(m); // cohomology need to permute row
 			}else{
-				perm_deletion = identity_perm(R[k].ncol());
+				perm_deletion = identity_perm(n); 
+			}
+			
+			if(!UI.deletion_indices[k].empty()){
+				if (degree == +1) {
+					std::vector<size_t> deletion_inds = find_reverse_index(UI.deletion_indices[k], m);
+					perm_deletion = perm_to_the_end(deletion_inds, m);
+				}else{
+					perm_deletion = perm_to_the_end(UI.deletion_indices[k], n);
+				}
 			}
 
 			// step 1.2 find the permutation used to permute
 			// intersection of simplices and leave the ones in the end unmoved
-			std::vector<size_t> perm_intersect = extension_perm(UI.permutations[k], R[k].ncol());
+			std::vector<size_t> perm_intersect;
+			if (degree == +1) {
+				// auto perm_extended = extension_perm(UI.permutations[k], m);
+				// reverse 
+				std::vector<size_t> perm_rever = find_reverse_index(UI.permutations[k], UI.permutations[k].size());
+				std::reverse(perm_rever.begin(), perm_rever.end());
+				perm_intersect = extension_perm(perm_rever, m);
+			}else{
+				perm_intersect = extension_perm(UI.permutations[k], n);
+			}
+
 
 			// step 1.3 Combine the above 2 permutations together, i.e.,
 			// compute the permutation that first do deletion permutation,
-			// and then do inersection permutation.
+			// and then do inersection permutation (it is valid since they are disjoint).
 			// We will use the perm_deletion to store the result.
 			bats::util::apply_perm(perm_deletion, perm_intersect);
 
 			// 1.4 permute U and R
 			permute_matrices(k, perm_deletion);
 		}
+		
+		// std::cout << "after permutation, R[1] is" << std::endl;
+		// R[1].print();
+		// std::cout << "and U[1] is"  << std::endl;
+		// U[1].print();
+		// std::cout << "check R[1] U[1]^{-1} is " << std::endl;
 
 		// step 2: next we update the factorizations
 		for (size_t k = 0; k < max_dim+1; ++k) { // for each dimension
 			// step 2.1 make U reduced
 			p2c[k] = reduce_matrix_standard(U[k], R[k]);
+			// if (k == 1){
+			// 	std::cout << "step2.1 after reduce U[1], R[1] is" << std::endl;
+			// 	R[1].print();
+			// 	std::cout << "and U[1] is"  << std::endl;
+			// 	U[1].print();
+			// }
+
 
 			// step 2.2 sort columns of U - apply same operations to R
 			// to make U upper-triangular
-			for (size_t j = 0; j < dim(k); j++) {
-				// swap correct column if necessary
-				if (p2c[k][j] != j) {
-					// get pivot - we'll swap so this pivot is in correct location
-					size_t pj = U[k][j].lastnz().ind; // pivot of column j
-					size_t p = p2c[k][j]; // location of desired pivot
-					U[k].swap_cols(p, j);
-					R[k].swap_cols(p, j);
-					p2c[k][j] = j; // we've put the pivot in the right place
-					p2c[k][pj] = p; // set pivot look up to j
+			if (!p2c[k].empty()){
+				for (size_t j = 0; j < U[k].ncol(); j++) {
+					// swap correct column if necessary
+					if (p2c[k][j] != j) {
+						// get pivot - we'll swap so this pivot is in correct location
+						size_t pj = U[k][j].lastnz().ind; // pivot of column j
+						size_t p = p2c[k][j]; // location of desired pivot
+						U[k].swap_cols(p, j);
+						R[k].swap_cols(p, j);
+						p2c[k][j] = j; // we've put the pivot in the right place
+						p2c[k][pj] = p; // set pivot look up to j
+					}
 				}
 			}
 
-			// std::cout << "\nstep 2.3 delete columns in the end:" << std::endl;
-			// step 2.3 delete columns in the end
+			// if (k == 1){
+			// 	std::cout << "step2.2 after make U[1] upper-triangle, R[1] is" << std::endl;
+			// 	R[1].print();
+			// 	std::cout << "and U[1] is"  << std::endl;
+			// 	U[1].print();
+			// }
+
+			// step 2.3 delete k-simplices in the end(column for homology and row for cohomology)
 			for (size_t i = 0; i < UI.deletion_indices[k].size(); i++){
-				U[k].erase_column();
-				U[k].erase_row_unsafe(); // after column deletion, safe to erase
-				R[k].erase_column();
-			}
-
-			// step 2.4 delete rows in the end
-			if(k!=0){
-				// find the # of deletion
-				size_t count = UI.deletion_indices[k-1].size();
-				for (size_t i = 0; i < count; i++){
-					R[k].erase_row_unsafe();
+				if (degree == -1){
+					U[k].erase_column();
+					U[k].erase_row_unsafe(); // after column deletion, safe to erase
+					R[k].erase_column();
+				}else{ // cohomology remove rows
+					R[k].erase_row();
 				}
 			}
+			// if(k==1){
+			// 	std::cout << "step2.3 after removing the last "<< UI.deletion_indices[k].size() << " rows of R[1]" << std::endl;
+			// 	R[1].print();
+			// }
+			
+			
+
+			// step 2.4 delete (k-1)-simplices in the end(row for homology and column for cohomology)
+			if(k!=0 and UI.deletion_indices[k-1].size() > 0){
+				if (degree == -1){
+					// find the # of deletion
+					size_t count = UI.deletion_indices[k-1].size();
+					for (size_t i = 0; i < count; i++){
+						R[k].erase_row_unsafe();
+					}
+				}else{
+					// std::cout << "before removing the last columns of R[k]" << std::endl;
+					// R[k].print();
+					// std::cout << "and U[k] is"  << std::endl;
+					// U[k].print();
+					for (size_t i = 0; i < UI.deletion_indices[k-1].size(); i++){
+						
+						U[k].erase_column();
+						U[k].erase_row(); 
+						R[k].erase_column();
+					}
+					if(k == 1){
+						// std::cout << "step2.4 Delete last "<< UI.deletion_indices[k-1].size()<< " columns of R[1] " << std::endl;
+						// std::cout << "after removing the last columns of R[k]" << std::endl;
+						// R[k].print();
+						// std::cout << "and U[k] is"  << std::endl;
+						// U[k].print();
+					}
+				}
+				
+			}
+			
+
+			// step 2.5 add (k-1)-simplices (zero rows for homology and columns for cohomology) 
+			// to the specified locations in updating information
+			if(k!=0 and  UI.addition_indices[k-1].size() > 0){
+				std::vector<size_t> add_inds = UI.addition_indices[k-1];
+				if (degree == +1){ // cohomology add zero columns in R and 1 block in U
+					// std::cout << "\nstep2.5 need to insert new 1 block to U[k]" << std::endl;
 
 
-			// step 2.5 add rows to the specified location
-			if(k!=0){
-				// for(auto& ind: UI.addition_indices[k-1]){
-				// 	R[k].insert_row(ind); // insert zero rows
-				// }
-				R[k].insert_rows(UI.addition_indices[k-1]);
+					add_inds = find_reverse_index(add_inds, R[k].ncol() + add_inds.size()); // reverse it
+					std::sort(add_inds.begin(), add_inds.end()); // sort indices before insert
+
+					// std::cout << "addition indices are" << std::endl;
+					// print_1D_vectors(add_inds);
+
+					std::vector<vect_type> zero_cols(add_inds.size());
+					R[k].insert_columns(add_inds, zero_cols);
+
+					std::vector<VectT> Ucols(add_inds.size()); 
+					for(size_t i = 0; i < add_inds.size(); i++){
+						// U[k] needs a new one block
+						U[k].insert_row(add_inds[i]); //insert zero row of U
+						Ucols[i] = VectT(size_t(add_inds[i]));
+					}
+					U[k].insert_columns(add_inds, Ucols);
+				}else{ // homology insert zero rows at specified locations
+					R[k].insert_rows(add_inds);
+				}
+				// R[1].print(); U[1].print();
 			}
 
-
-			// step 2.6 addition of columns
-			if(k==0){
-				// find the index of the rightmost column of U
-				size_t final_ind_of_U = U[k].ncol() - 1;
-
-				// find the # of addition
-				size_t count = UI.addition_indices[k].size();
-
-				for (size_t i = 0; i < count; i++){
-					// change R
-					R[k].append_column(); // insert zero columns
-					// change U
-					U[k].append_row();
+			// step 2.6 add k-simplices (columns for homology, row for cohomology)
+			if (!UI.addition_indices[k].empty()){
+				if(k==0){
+					// find the # of addition
+					size_t count = UI.addition_indices[k].size();
+					if (degree == -1){ // homology add columns
+						// find the index of the rightmost column of U
+						size_t final_ind_of_U = U[k].ncol() - 1;
+						// append zero columns
+						for (size_t i = 0; i < count; i++){
+							R[k].append_column(); 
+							U[k].append_row();
+							// create an indicator (one) column vector at a given index
+							U[k].append_column(VectT(size_t(final_ind_of_U))); 
 					U[k].append_column(VectT(size_t(final_ind_of_U)));
-					final_ind_of_U++;
+							U[k].append_column(VectT(size_t(final_ind_of_U))); 
+							final_ind_of_U++;
+						}
+					}else{ // cohomology append zero rows
+						for (size_t i = 0; i < count; i++){
+							R[k].append_row();
+						}
+					}
+				}else{ // k >= 1
+					std::vector<std::vector<size_t>> bd_info; // boundary information
+					std::vector<size_t> add_inds; // addition indices 
+					if (degree == -1){ // homology add columns
+						bd_info = UI.boundary_indices[k];
+						add_inds = UI.addition_indices[k]; // ascending order in Y
+
+						U[k].insert_rows(add_inds); //zero rows
+
+						std::vector<VectT> Rcol(add_inds.size());
+						std::vector<VectT> Ucol(add_inds.size());
+						// Then change U and R coming from the effect of
+						// adding a column to the boundary matrix.
+						// loop over each simplex that needs to be added
+						for(size_t i = 0; i < add_inds.size(); i++){
+							// the indices of its boundaries
+							auto simplex_bd_ind = bd_info[i];
+							// std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
+							// simplex index
+							auto ind = add_inds[i];
+
+							// create a vector of ones with length
+							// equal to the boundary size  (Field F_2 for now)
+							std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
+							// creat the column vector
+							Rcol[i] = VectT(simplex_bd_ind, vect_one);
+							Ucol[i] = VectT(size_t(ind));
+						}
+						R[k].insert_columns(add_inds, Rcol);
+						U[k].insert_columns(add_inds, Ucol);
+					}
+					else{ // cohomology add rows (!Notice: need to assert in ascending order of indices)
+						bd_info = find_reverse_index(UI.boundary_indices[k], R[k].ncol());
+						add_inds = find_reverse_index(UI.addition_indices[k], R[k].nrow() + UI.addition_indices[k].size());
+						// we need to sort addition indices and corresponding permute their boundary indices
+						std::vector<size_t> p = bats::util::sortperm(add_inds);
+						bats::util::apply_perm_swap(add_inds, bats::util::inv_perm(p));
+						bats::util::apply_perm_swap(bd_info, bats::util::inv_perm(p));
+
+						// std::sort(add_inds.begin(), add_inds.end());
+						// corresponding, we need to sort boundary indices!!!
+						
+						// if (k == 1){
+						// 	std::cout << "\nWhen k = "<< k << std::endl;
+						// 	std::cout << "Addition column indices" << std::endl;
+						// 	print_1D_vectors(UI.addition_indices[k]);
+						// 	std::cout << "Transformed to Need to add addition row indices" << std::endl;
+						// 	print_1D_vectors(add_inds);
+						// 	std::cout << "Need to add addition boudaries indices(column indices)" << std::endl;
+						// 	print_2D_vectors(bd_info);
+						// 	std::cout << "before addition" << std::endl;
+						// 	std::cout << "R[k]" << std::endl;
+						// 	R[1].print(); 
+						// }
+						
+						
+						for(size_t i = 0; i < add_inds.size(); i++){ 
+							// the indices of its boundaries
+							auto simplex_bd_ind = bd_info[i];
+							// boundary indices are reversed but inserting rows require ascending order of indices
+							std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());  
+							// simplex index
+							auto ind = add_inds[i];
+
+							// create a vector of ones with length
+							// equal to the boundary size  (Field F_2 for now)
+							// std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
+							auto it_bd = simplex_bd_ind.begin();
+							// create the row vectors
+							std::vector<ValT> Rrow((R[k].ncol()));
+							for (size_t j = 0; j < R[k].ncol() and it_bd != simplex_bd_ind.end(); j++){
+								if (j == *it_bd){
+									Rrow[j] = ValT(1);
+									it_bd++;
+								}
+							}
+							// std::cout << "\nWhen k = "<< k << std::endl;
+							// std::cout << "the new added row at index "<< ind << " is" << std::endl;
+							// print_1D_vectors(Rrow);
+							
+							// VectT Rrow = VectT(simplex_bd_ind, vect_one);
+							R[k].insert_row(ind, Rrow);
+							// TODO: write a sparse way to insert rows and permute them at once
+							// R[k].insert_row(ind, simplex_bd_ind);
+							// if (k== 1){
+							// 	std::cout << "after addition" << std::endl;
+							// 	std::cout << "R[1]" << std::endl;
+							// 	R[1].print(); 
+							// }
+							
+							
+						}
+					}
 				}
-			}else{
-				// boundary information
-				const std::vector<std::vector<size_t>>& bd_info = UI.boundary_indices[k];
-
-				// addition information
-				const std::vector<size_t>& add_inds = UI.addition_indices[k];
-
-				U[k].insert_rows(add_inds);
-
-				std::vector<VectT> Rcol(add_inds.size());
-				std::vector<VectT> Ucol(add_inds.size());
-				// Then change U and R coming from the effect of
-				// adding a column to the boundary matrix.
-				// loop over each simplex that needs to be added
-				for(size_t i = 0; i < add_inds.size(); i++){
-					// the indices of its boundaries
-					auto simplex_bd_ind = bd_info[i];
-					// std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
-					// simplex index
-					auto ind = add_inds[i];
-
-					// create a vector of ones with length
-					// equal to the boundary size  (Field F_2 for now)
-					std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
-					// creat the column vector
-					Rcol[i] = VectT(simplex_bd_ind, vect_one);
-					Ucol[i] = VectT(size_t(ind));
-				}
-				R[k].insert_columns(add_inds, Rcol);
-				U[k].insert_columns(add_inds, Ucol);
-
-				// // Then change U and R coming from the effect of
-				// // adding a column to the boundary matrix.
-				// // loop over each simplex that needs to be added
-				// for(size_t i = 0; i < add_inds.size(); i++){
-				// 	// the indices of its boundaries
-				// 	auto simplex_bd_ind = bd_info[i];
-				// 	// std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
-				// 	// simplex index
-				// 	auto ind = add_inds[i];
-				//
-				// 	// create a vector of ones with length
-				// 	// equal to the boundary size  (Field F_2 for now)
-				// 	std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
-				// 	// creat the column vector
-				// 	auto vect = VectT(simplex_bd_ind, vect_one);
-				// 	// insert the column at postion in B (position in new filtration)
-				// 	R[k].insert_column(ind, vect);
-				//
-				// 	// correspondingly, U[k] will add a zero block
-				// 	// U[k].insert_row(ind);
-				// 	U[k].insert_column(ind, VectT({size_t(ind)}, {1}));
-				// }
 			}
-
+			// if(k == 1){
+			// 	std::cout << "\nWhen k = "<< k << std::endl;
+			// 	std::cout << "after addition" << std::endl;
+			// 	std::cout << "R[k]" << std::endl;
+			// 	R[k].print();
+			// }
+			
 			// step 2.7, make R[k] reduced
 			p2c[k] = reduce_matrix(R[k], U[k], args...);
+		}
+		// std::cout << "\nafter final reduction R[1] = " << std::endl;
+		// R[1].print();
+		
+		//cohomology the highest dimension need add zero columns
+		if(degree == +1){
+			for (size_t i = 0; i < UI.addition_indices[max_dim].size(); i++){
+				R[max_dim+1].append_column();
+			}
 		}
 
 		set_indices(); // update homology indices

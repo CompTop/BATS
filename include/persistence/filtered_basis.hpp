@@ -257,7 +257,7 @@ bool test_reduce_result(const T& RFCC2, const T& RFCC){
         bool test_result_k = barcode_equality(R2_ps_k, R_ps_k);
         if(!test_result_k){
             test_result = false;
-            std::cout << "\ntwo RFCC are different!!" << std::endl;
+            std::cout << "Two Barcode at dim "<< k <<" are different!" << std::endl;
         }
     }
 
@@ -267,7 +267,7 @@ bool test_reduce_result(const T& RFCC2, const T& RFCC){
         auto U2_inv_k = u_inv(U2[k]);
         if(!(R[k] * U_inv_k == R2[k] * U2_inv_k)){
             test_result = false;
-            std::cout << "\ntwo RFCC are different!!" << std::endl;
+            std::cout << "Two Factorization at dim "<< k <<"  are different!" << std::endl;
         }
     }
 
