@@ -30,6 +30,8 @@ deletion_indices:
 permutations:
 addition_indices:
 boundary_indices:
+F_Y_vals:
+F_Y_perms: 
 
 
 
@@ -86,9 +88,8 @@ struct Update_info{
 
         max_dim = F_Y.maxdim();
         F_X_vals = F_X.vals();
-        // F_Y_vals = F_Y.vals();
-        // auto perms_Y = bats::filtration_sortperm(F_Y.vals());
-        // F_Y_perms = perms_Y;
+        F_Y_vals = F_Y.vals(); // needed for update
+        F_Y_perms = bats::filtration_sortperm(F_Y.vals());
 
         // step 2 loop over each cell in the new filtration Y
         // get simplicial complex for two filtrations
