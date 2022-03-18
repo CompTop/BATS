@@ -20,7 +20,22 @@ Since the above two notations are inverse to each other, inverse them if needed!
 
 namespace bats{
 
-// two filtration dimensions are assumed to be the same!!
+/**
+
+Struct to hold information for updating ReducedChainComplex or ReducedDGVectorSpace
+
+FIELDS:
+maxdim:
+deletion_indices:
+permutations:
+addition_indices:
+boundary_indices:
+
+
+
+ASSUMPTIONS:
+ two filtration dimensions are assumed to be the same!!
+*/
 template <class FiltrationType>
 struct Update_info{
     // addition information:
@@ -45,7 +60,7 @@ struct Update_info{
     std::vector<std::vector<size_t>> intersection_indices_Y; // intersection indices in Y (sorted order)
     std::vector<std::vector<size_t>> intersection_indices_X; // their corresponding indices in X
     std::vector<size_t> kendall_tau_dists;
-    
+
     // max dimension of the new filtration = size of permutations -1
     size_t max_dim;
 
@@ -66,19 +81,19 @@ struct Update_info{
 
     Update_info(const FiltrationType& F_X, const FiltrationType& F_Y, int degree = -1){
 
-        F_old = F_X;
-        F_new = F_Y;
+        // F_old = F_X;
+        // F_new = F_Y;
 
         max_dim = F_Y.maxdim();
         F_X_vals = F_X.vals();
-        F_Y_vals = F_Y.vals();
-        auto perms_Y = bats::filtration_sortperm(F_Y_vals);
-        F_Y_perms = perms_Y;
+        // F_Y_vals = F_Y.vals();
+        // auto perms_Y = bats::filtration_sortperm(F_Y.vals());
+        // F_Y_perms = perms_Y;
 
         // step 2 loop over each cell in the new filtration Y
         // get simplicial complex for two filtrations
-        auto smcplex_X = F_X.complex();
-        auto smcplex_Y = F_Y.complex();
+        auto& smcplex_X = F_X.complex();
+        auto& smcplex_Y = F_Y.complex();
 
         for (size_t i = 0; i <= max_dim; i++){
             // addition information:
@@ -96,16 +111,17 @@ struct Update_info{
             // a vector that will permute the intersected simplices in the new filration B
             // to the correct position
             std::vector<size_t> intersection_in_i_X;
-            std::vector<size_t> intersection_in_i_Y;
+            // std::vector<size_t> intersection_in_i_Y;
             std::vector<size_t> perm_in_i;
 
             // find simplices in dimension i for both X and Y
             auto simplices_Y = smcplex_Y.get_simplices(i); // simplices in dimension i
-            auto simplices_X = smcplex_X.get_simplices(i);
+            // auto simplices_X = smcplex_X.get_simplices(i);
 
             // create a vector of boolean resutls of comparison
             // default values is false, which means a simplex in A is not in B
-            std::vector<bool> bool_results_i(simplices_X.size(), false);
+            // std::vector<bool> bool_results_i(simplices_X.size(), false);
+			std::vector<bool> bool_results_i(smcplex_X.ncells(i), false);
 
             // loop over each simplex in Y
             for (size_t j = 0; j < simplices_Y.size(); j++){
@@ -115,7 +131,7 @@ struct Update_info{
                 if(index != bats::NO_IND){
                     bool_results_i[index] = true;
                     intersection_in_i_X.emplace_back(index);
-                    intersection_in_i_Y.emplace_back(j);
+                    // intersection_in_i_Y.emplace_back(j);
                 }else{ // if not in X (addition information)
                     addition_in_i.emplace_back(j); //in ascending order!
                     // find the boundary indices of the simplex that will be added
@@ -138,8 +154,8 @@ struct Update_info{
 
             deletion_indices.emplace_back(deletion_in_i);
 
-            intersection_indices_X.emplace_back(intersection_in_i_X);
-            intersection_indices_Y.emplace_back(intersection_in_i_Y);
+            // intersection_indices_X.emplace_back(intersection_in_i_X);
+            // intersection_indices_Y.emplace_back(intersection_in_i_Y);
             permutations.emplace_back(perm_in_i);
             kendall_tau_dists.emplace_back(Kendall_tau(perm_in_i));
 
@@ -149,7 +165,9 @@ struct Update_info{
     }
 
 
-
+	/**
+	This function is only called in tests
+	*/
     void filtered_info(const std::vector<std::vector<size_t>>&perms_X, const int& degree = -1){
         // step 1: determine permutation order for new filtration values
         F_X_perms = perms_X;

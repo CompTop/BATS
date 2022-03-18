@@ -440,6 +440,7 @@ public:
 
 					// create a vector of ones with length
 					// equal to the boundary size  (Field F_2 for now)
+					// TODO: this assumes F2.  Should be made more general.
 					std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
 					// creat the column vector
 					Rcol[i] = VectT(simplex_bd_ind, vect_one);
