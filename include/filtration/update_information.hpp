@@ -25,7 +25,7 @@ namespace bats{
 Struct to hold information for updating ReducedChainComplex or ReducedDGVectorSpace
 
 FIELDS:
-maxdim:
+maxdim: maximum dimension of cells in a filtration
 deletion_indices:
 permutations:
 addition_indices:
@@ -112,12 +112,12 @@ struct Update_info{
             // a vector that will permute the intersected simplices in the new filration B
             // to the correct position
             std::vector<size_t> intersection_in_i_X;
-            // std::vector<size_t> intersection_in_i_Y;
+            std::vector<size_t> intersection_in_i_Y;
             std::vector<size_t> perm_in_i;
 
             // find simplices in dimension i for both X and Y
             auto simplices_Y = smcplex_Y.get_simplices(i); // simplices in dimension i
-            // auto simplices_X = smcplex_X.get_simplices(i);
+            auto simplices_X = smcplex_X.get_simplices(i);
 
             // create a vector of boolean resutls of comparison
             // default values is false, which means a simplex in A is not in B
@@ -132,7 +132,7 @@ struct Update_info{
                 if(index != bats::NO_IND){
                     bool_results_i[index] = true;
                     intersection_in_i_X.emplace_back(index);
-                    // intersection_in_i_Y.emplace_back(j);
+                    intersection_in_i_Y.emplace_back(j);
                 }else{ // if not in X (addition information)
                     addition_in_i.emplace_back(j); //in ascending order!
                     // find the boundary indices of the simplex that will be added
@@ -155,8 +155,8 @@ struct Update_info{
 
             deletion_indices.emplace_back(deletion_in_i);
 
-            // intersection_indices_X.emplace_back(intersection_in_i_X);
-            // intersection_indices_Y.emplace_back(intersection_in_i_Y);
+            intersection_indices_X.emplace_back(intersection_in_i_X);
+            intersection_indices_Y.emplace_back(intersection_in_i_Y);
             permutations.emplace_back(perm_in_i);
             kendall_tau_dists.emplace_back(Kendall_tau(perm_in_i));
 

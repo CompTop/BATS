@@ -199,45 +199,45 @@ int main() {
         }
     }
 
-    // // cohomology
-    // {
-    //     std::cout << "\nDGVS(+1)" << std::endl;
-    //     std::cout << "RFCC of X" << std::endl;
-    //     auto CX = FilteredDGVectorSpace<double, MT>(F, +1);
-    //     auto RX = ReducedFilteredDGVectorSpace(CX);
-    //     RX.RC.print_summary();
+    // cohomology
+    {
+        std::cout << "\nDGVS(+1)" << std::endl;
+        std::cout << "RFCC of X" << std::endl;
+        auto CX = FilteredDGVectorSpace<double, MT>(F, +1);
+        auto RX = ReducedFilteredDGVectorSpace(CX);
+        RX.RC.print_summary();
         
-    //     std::cout << "RFCC of Y" << std::endl;
-    //     auto CX2 = FilteredDGVectorSpace<double, MT>(F_Y, +1);
-    //     auto RX2 = ReducedFilteredDGVectorSpace(CX2);
-    //     RX2.RC.print_summary();
+        std::cout << "RFCC of Y" << std::endl;
+        auto CX2 = FilteredDGVectorSpace<double, MT>(F_Y, +1);
+        auto RX2 = ReducedFilteredDGVectorSpace(CX2);
+        RX2.RC.print_summary();
 
-    //     // Compute update info
-	// 	start = std::chrono::steady_clock::now();
-	// 	auto uinfo = bats::Update_info(F, F_Y);
-	// 	end = std::chrono::steady_clock::now();
-	//     std::cout << "\nConstruction of Update info: "
-	//         << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-	//         << "ms" << std::endl;
+        // Compute update info
+		start = std::chrono::steady_clock::now();
+		auto uinfo = bats::Update_info(F, F_Y);
+		end = std::chrono::steady_clock::now();
+	    std::cout << "\nConstruction of Update info: "
+	        << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+	        << "ms" << std::endl;
 
-	// 	// Compute update
-	// 	start = std::chrono::steady_clock::now();
-    //     uinfo.filtered_info(RX.perm, +1); 
-	// 	RX.update_filtration_general(uinfo, bats::standard_reduction_flag());
-	// 	end = std::chrono::steady_clock::now();
-	// 	std::cout << "Update persistence: "
-	// 		<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-	// 		<< "ms" << std::endl;
+		// Compute update
+		start = std::chrono::steady_clock::now();
+        uinfo.filtered_info(RX.perm, +1); 
+		RX.update_filtration_general(uinfo, bats::standard_reduction_flag());
+		end = std::chrono::steady_clock::now();
+		std::cout << "Update persistence: "
+			<< std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+			<< "ms" << std::endl;
 
-    //     std::cout << "\nNew summary of RX" << std::endl;
-    //     RX.RC.print_summary();
+        std::cout << "\nNew summary of RX" << std::endl;
+        RX.RC.print_summary();
 
-    //     // check result
+        // check result
         
-    //     if(test_reduce_result(RX , RX2)){
-    //         std::cout << "By comparing two RFCC, update on RFCC success!!" << std::endl;
-    //     }
-    // }
+        if(test_reduce_result(RX , RX2)){
+            std::cout << "By comparing two RFCC, update on RFCC success!!" << std::endl;
+        }
+    }
 
 
     return EXIT_SUCCESS;

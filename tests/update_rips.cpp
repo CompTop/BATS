@@ -8,10 +8,12 @@
 #include <random>
 
 using FT = ModP<int, 2>;
+#define VT SparseVector<FT>
+#define MT ColumnMatrix<VT>
 
 using CpxT = bats::LightSimplicialComplex<size_t, std::unordered_map<size_t, size_t>>;
 // using CpxT = bats::SimplicialComplex;
-
+using namespace bats;
 
 int main(int argc, char* argv[]) {
     // std::vector<std::vector<std::vector<size_t>>> Splx_3;
@@ -133,8 +135,8 @@ int main(int argc, char* argv[]) {
         t0 = std::chrono::steady_clock::now();
 
         auto UI = bats::Update_info(F_X, F_Y); // get unfiltered information
-        // UI.filtered_info(FCC.perm); // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
-
+        // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
+        // UI.filtered_info(FCC.perm); 
         t1 = std::chrono::steady_clock::now();
         std::cout << "\tbuild Updating Information success and";
         std::cout << " takes "
@@ -158,6 +160,102 @@ int main(int argc, char* argv[]) {
         // check test results
         if(test_reduce_result(RFCC_Y , RFCC)){
             std::cout << "By compare two RFCC, this method success!!"  << std::endl;
+        }
+        
+    }
+
+    /*
+    Option 4, update DGVS -1 (homology)
+    */ 
+    {
+        std::cout << "\nDGVS(-1)" << std::endl;
+        auto CX = FilteredDGVectorSpace<double, MT>(F_X, -1);
+        auto RX = ReducedFilteredDGVectorSpace(CX);
+
+        // FCC = bats::Chain(F_X, FT()); // necessary since last option will modify FCC ??
+        // RFCC = bats::Reduce(FCC);
+
+        start = std::chrono::steady_clock::now();
+        F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax, maxdim);
+        
+        t0 = std::chrono::steady_clock::now();
+        auto UI = bats::Update_info(F_X, F_Y);
+        // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
+        // UI.filtered_info(FCC.perm); 
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tbuild Updating Information success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+        
+
+        t0 = std::chrono::steady_clock::now();
+        RX.update_filtration_general(UI, bats::standard_reduction_flag());
+        // RFCC.update_filtration_general(UI);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tupdate RFCC success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        end = std::chrono::steady_clock::now();
+        std::cout << "\tthe whole process takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+        
+        // check result
+        auto CX2 = FilteredDGVectorSpace<double, MT>(F_Y, -1);
+        auto RX2 = ReducedFilteredDGVectorSpace(CX2);
+        if(test_reduce_result(RX , RX2)){
+            std::cout << "By comparing two RFCC, update on RFCC success!!" << std::endl;
+        }
+        
+    }
+
+    /*
+    Option 5, update DGVS -1 (cohomology)
+    */ 
+    {
+        std::cout << "\nDGVS(+1)" << std::endl;
+        auto CX = FilteredDGVectorSpace<double, MT>(F_X, +1);
+        auto RX = ReducedFilteredDGVectorSpace(CX);
+
+        // FCC = bats::Chain(F_X, FT()); // necessary since last option will modify FCC ??
+        // RFCC = bats::Reduce(FCC);
+
+        start = std::chrono::steady_clock::now();
+        F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax, maxdim);
+        
+        t0 = std::chrono::steady_clock::now();
+        auto UI = bats::Update_info(F_X, F_Y);
+        // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
+        // UI.filtered_info(FCC.perm); 
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tbuild Updating Information success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+        
+
+        t0 = std::chrono::steady_clock::now();
+        RX.update_filtration_general(UI, bats::standard_reduction_flag());
+        // RFCC.update_filtration_general(UI);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tupdate RFCC success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        end = std::chrono::steady_clock::now();
+        std::cout << "\tthe whole process takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+        
+        // check result
+        auto CX2 = FilteredDGVectorSpace<double, MT>(F_Y, +1);
+        auto RX2 = ReducedFilteredDGVectorSpace(CX2);
+        if(test_reduce_result(RX , RX2)){
+            std::cout << "By comparing two RFCC, update on RFCC success!!" << std::endl;
         }
         
     }

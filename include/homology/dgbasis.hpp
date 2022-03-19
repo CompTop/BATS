@@ -474,13 +474,13 @@ public:
 	1) when degree = +1 ,i.e., cohomology, we need to 
 	 modify deletion and addition indices: i <-> n-i-1 , where n is column size
 	2) add/remove rows of (co)boundary matrix do not need to modify U, 
-	while add/remove columns need.
+	while add/remove columns need. However, adding a row requires a mutlplication of it with U matrix. 
 	3) There are types of permutations used in BATs and I call them:
 			for a vector perm and a vector v
 			i) new_ind_perm: perm[i] is the new index of v[i]
 	 	ii) math_perm: inverse of above
 	, in the following implementation, permutations use math_perm
-	(I know they are confusing, but change it is hard...).
+	(I know they are confusing, but changing it is hard...).
 	**/
 	template <typename Information_type, typename... Args>
 	void update_basis_general(const Information_type &UI, Args ...args){
@@ -746,27 +746,23 @@ public:
 							auto simplex_bd_ind = bd_info[i];
 							// boundary indices are reversed but inserting rows require ascending order of indices
 							std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());  
-							// simplex index
+							// index of new added row
 							auto ind = add_inds[i];
 
-							// create a vector of ones with length
-							// equal to the boundary size  (Field F_2 for now)
-							// std::vector<ValT> vect_one(simplex_bd_ind.size(), 1);
-							auto it_bd = simplex_bd_ind.begin();
-							// create the row vectors
-							std::vector<ValT> Rrow((R[k].ncol()));
-							for (size_t j = 0; j < R[k].ncol() and it_bd != simplex_bd_ind.end(); j++){
-								if (j == *it_bd){
-									Rrow[j] = ValT(1);
-									it_bd++;
-								}
+							// create sparse vector of new row in D
+							std::vector<ValT> bd_values(simplex_bd_ind.size());
+							std::fill(bd_values.begin(),bd_values.end(), ValT(1)); //F2 for now
+							SparseVector<ValT, size_t> new_row_in_D(simplex_bd_ind, bd_values);
+
+							std::vector<ValT> new_row_in_R((R[k].ncol())); 
+							for (size_t j = 0; j < R[k].ncol(); j++){
+								// U[k]'s column vectors
+								auto U_cols = U[k].cols();
+								// dot product of sparse vectors
+								new_row_in_R[j] = new_row_in_D * U_cols[j];
 							}
-							// std::cout << "\nWhen k = "<< k << std::endl;
-							// std::cout << "the new added row at index "<< ind << " is" << std::endl;
-							// print_1D_vectors(Rrow);
 							
-							// VectT Rrow = VectT(simplex_bd_ind, vect_one);
-							R[k].insert_row(ind, Rrow);
+							R[k].insert_row(ind, new_row_in_R);
 							// TODO: write a sparse way to insert rows and permute them at once
 							// R[k].insert_row(ind, simplex_bd_ind);
 							// if (k== 1){
