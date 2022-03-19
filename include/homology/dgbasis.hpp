@@ -512,6 +512,7 @@ public:
 			if(!UI.deletion_indices[k].empty()){
 				if (degree == +1) {
 					std::vector<size_t> deletion_inds = find_reverse_index(UI.deletion_indices[k], m);
+					std::sort(deletion_inds.begin(), deletion_inds.end()); // sort it
 					perm_deletion = perm_to_the_end(deletion_inds, m);
 				}else{
 					perm_deletion = perm_to_the_end(UI.deletion_indices[k], n);
