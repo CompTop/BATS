@@ -512,6 +512,27 @@ public:
 		}
 	}
 
+
+	//deletetion of the last row of a column of a matrix
+	//the index i is provided to check if i is the index of
+	//the last the non-zero elements
+	// i: the last row index of a matrix, e.g., if m times n matrix, i is m-1
+	// n_deletions: number of deletions
+	void erase_last_rows_of_matrix(const TI i, size_t n_deletions){
+		// first check if it is an empty vector!!!!!!
+		size_t last_row_ind = i;
+		for (size_t j = 0; j < n_deletions; j++){
+			if(nzend() != nzbegin()){
+				// if the last non-zero term's index is i
+				if(last_row_ind == (indval.end()-1)->ind){
+					indval.pop_back();
+				}
+				last_row_ind--; // the last row index has changed once we have performed one deletion
+			}
+		}
+		
+	}
+
 	//deletetion of row i , the indices after i should minus one
 	void erase_for_matrix(const TI i){
 		// if it is an empty vector, do nothing

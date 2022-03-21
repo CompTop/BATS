@@ -364,6 +364,17 @@ public:
 	}
 
 	/**
+	erase last a few rows
+	*/
+	void erase_rows(size_t n_delete_rows){
+		assert(n_delete_rows <= nrow()); // the number of deleting rows should be less than total
+		for (size_t j = 0; j < ncol(); j++) {
+			col[j].erase_last_rows_of_matrix(m-1, n_delete_rows);
+		}
+		m -= n_delete_rows;
+	}
+
+	/**
 	assumes that last row is zero
 	so we only need to decrement number of rows
 	*/

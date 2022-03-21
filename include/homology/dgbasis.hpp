@@ -497,6 +497,7 @@ public:
 		// U[1].print();
 
 		// we want to extract permutation and deletion information first
+		auto t0 = std::chrono::steady_clock::now();
 		for (size_t k = 0; k < max_dim + 1; ++k) {
 			size_t m = R[k].nrow();
 			size_t n = R[k].ncol();
@@ -542,6 +543,11 @@ public:
 			// 1.4 permute U and R
 			permute_matrices(k, perm_deletion);
 		}
+		auto t1 = std::chrono::steady_clock::now();
+        std::cout << "\tStep 1. Permuting Basis Matrices";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
 		
 		// std::cout << "after permutation, R[1] is" << std::endl;
 		// R[1].print();
@@ -552,7 +558,13 @@ public:
 		// step 2: next we update the factorizations
 		for (size_t k = 0; k < max_dim+1; ++k) { // for each dimension
 			// step 2.1 make U reduced
+			t0 = std::chrono::steady_clock::now();
 			p2c[k] = reduce_matrix_standard(U[k], R[k]);
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\tStep 2.1 Making U["<<k<<"] Reduced takes";
+			std::cout << " takes "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 			// if (k == 1){
 			// 	std::cout << "step2.1 after reduce U[1], R[1] is" << std::endl;
 			// 	R[1].print();
@@ -563,6 +575,7 @@ public:
 
 			// step 2.2 sort columns of U - apply same operations to R
 			// to make U upper-triangular
+			t0 = std::chrono::steady_clock::now();
 			if (!p2c[k].empty()){
 				for (size_t j = 0; j < U[k].ncol(); j++) {
 					// swap correct column if necessary
@@ -577,6 +590,11 @@ public:
 					}
 				}
 			}
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\tStep 2.2 Making U["<<k<<"] Upper triangle takes";
+			std::cout << " takes "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 
 			// if (k == 1){
 			// 	std::cout << "step2.2 after make U[1] upper-triangle, R[1] is" << std::endl;
@@ -584,17 +602,27 @@ public:
 			// 	std::cout << "and U[1] is"  << std::endl;
 			// 	U[1].print();
 			// }
-
+			t0 = std::chrono::steady_clock::now();
 			// step 2.3 delete k-simplices in the end(column for homology and row for cohomology)
-			for (size_t i = 0; i < UI.deletion_indices[k].size(); i++){
-				if (degree == -1){
+			if (degree == -1){	// cohomology remove block
+				for (size_t i = 0; i < UI.deletion_indices[k].size(); i++){
 					U[k].erase_column();
 					U[k].erase_row_unsafe(); // after column deletion, safe to erase
 					R[k].erase_column();
-				}else{ // cohomology remove rows
-					R[k].erase_row();
 				}
 			}
+			if(degree == +1){
+				// for (size_t i = 0; i < UI.deletion_indices[k].size(); i++){
+				// 	R[k].erase_row(); // cohomology remove rows
+				// }
+				R[k].erase_rows(UI.deletion_indices[k].size());
+			}
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\tStep 2.3 Removing "<< k << "-simplices";
+			std::cout << " takes "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
+			
 			// if(k==1){
 			// 	std::cout << "step2.3 after removing the last "<< UI.deletion_indices[k].size() << " rows of R[1]" << std::endl;
 			// 	R[1].print();
@@ -604,6 +632,7 @@ public:
 
 			// step 2.4 delete (k-1)-simplices in the end(row for homology and column for cohomology)
 			if(k!=0 and UI.deletion_indices[k-1].size() > 0){
+				t0 = std::chrono::steady_clock::now();
 				if (degree == -1){
 					// find the # of deletion
 					size_t count = UI.deletion_indices[k-1].size();
@@ -629,13 +658,18 @@ public:
 						// U[k].print();
 					}
 				}
+				t1 = std::chrono::steady_clock::now();
+				std::cout << "\tStep 2.4 Removing "<< k-1 << "-simplices";
+				std::cout << " takes "
+					<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+					<< "ms" << std::endl;
 				
 			}
-			
 
 			// step 2.5 add (k-1)-simplices (zero rows for homology and columns for cohomology) 
 			// to the specified locations in updating information
 			if(k!=0 and  UI.addition_indices[k-1].size() > 0){
+				t0 = std::chrono::steady_clock::now();
 				std::vector<size_t> add_inds = UI.addition_indices[k-1];
 				if (degree == +1){ // cohomology add zero columns in R and 1 block in U
 					// std::cout << "\nstep2.5 need to insert new 1 block to U[k]" << std::endl;
@@ -661,8 +695,15 @@ public:
 					R[k].insert_rows(add_inds);
 				}
 				// R[1].print(); U[1].print();
+				t1 = std::chrono::steady_clock::now();
+				std::cout << "\tStep 2.5 Add "<<k-1<<"-simplices takes";
+				std::cout << " takes "
+					<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+					<< "ms" << std::endl;
 			}
+			
 
+			t0 = std::chrono::steady_clock::now();
 			// step 2.6 add k-simplices (columns for homology, row for cohomology)
 			if (!UI.addition_indices[k].empty()){
 				if(k==0){
@@ -777,6 +818,11 @@ public:
 					}
 				}
 			}
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\tStep 2.6 Add "<<k<<"-simplices takes";
+			std::cout << " takes "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 			// if(k == 1){
 			// 	std::cout << "\nWhen k = "<< k << std::endl;
 			// 	std::cout << "after addition" << std::endl;
@@ -785,7 +831,13 @@ public:
 			// }
 			
 			// step 2.7, make R[k] reduced
+			t0 = std::chrono::steady_clock::now();
 			p2c[k] = reduce_matrix(R[k], U[k], args...);
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\tStep 2.7 Make final redution on dim "<<k<<" takes";
+			std::cout << " takes "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 		}
 		// std::cout << "\nafter final reduction R[1] = " << std::endl;
 		// R[1].print();

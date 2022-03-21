@@ -18,7 +18,7 @@ using namespace bats;
 int main(int argc, char* argv[]) {
     // std::vector<std::vector<std::vector<size_t>>> Splx_3;
 	size_t d = 2; // dimension of Euclidean Space
-	size_t n = 50; // number of points to sample
+	size_t n = 70; // number of points to sample
 
 	// maximum simplex dimension
     size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
@@ -73,11 +73,14 @@ int main(int argc, char* argv[]) {
     */ 
     {
         std::cout << "\nDGVS(-1)" << std::endl;
+        t0 = std::chrono::steady_clock::now();
         auto CX = FilteredDGVectorSpace<double, MT>(F_X, -1);
         auto RX = ReducedFilteredDGVectorSpace(CX);
-
-        // FCC = bats::Chain(F_X, FT()); // necessary since last option will modify FCC ??
-        // RFCC = bats::Reduce(FCC);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tCompute RFCC of X takes";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
 
         start = std::chrono::steady_clock::now();
         F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax - 0.5, maxdim);
@@ -121,12 +124,24 @@ int main(int argc, char* argv[]) {
     */ 
     {
         std::cout << "\nDGVS(+1)" << std::endl;
+        t0 = std::chrono::steady_clock::now();
         auto CX = FilteredDGVectorSpace<double, MT>(F_X, +1);
         auto RX = ReducedFilteredDGVectorSpace(CX);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tCompute RFCC of X takes";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
 
         start = std::chrono::steady_clock::now();
+        t0 = std::chrono::steady_clock::now();
         F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax - 0.5, maxdim);
-        
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tConstruct filtration Y takes";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
         t0 = std::chrono::steady_clock::now();
         auto UI = bats::Update_info(F_X, F_Y);
         // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
