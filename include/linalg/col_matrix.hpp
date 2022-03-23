@@ -343,6 +343,11 @@ public:
 		--n;
 	}
 
+	void erase_final_columns(const size_t& n_dele){
+    	col.erase(col.end()-n_dele,col.end());
+		n-=n_dele;
+	}
+
 	/**
 	erase specified row
 	*/
@@ -369,7 +374,8 @@ public:
 	void erase_rows(size_t n_delete_rows){
 		assert(n_delete_rows <= nrow()); // the number of deleting rows should be less than total
 		for (size_t j = 0; j < ncol(); j++) {
-			col[j].erase_last_rows_of_matrix(m-1, n_delete_rows);
+			// col[j].erase_last_rows_of_matrix(m-1, n_delete_rows);
+			col[j].erase_rows_after(m - n_delete_rows - 1);
 		}
 		m -= n_delete_rows;
 	}
@@ -380,6 +386,15 @@ public:
 	*/
 	void erase_row_unsafe(){
 		--m;
+	}
+
+	/**
+	assumes that last row is zero
+	so we only need to decrement number of rows
+	*/
+	void erase_final_rows_unsafe(size_t n_delete_rows){
+		assert(n_delete_rows <= nrow()); // the number of deleting rows should be less than total
+		m -= n_delete_rows;
 	}
 
     inline TC& operator[](size_t index) { return col[index];}

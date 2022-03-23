@@ -169,7 +169,6 @@ struct ReducedFilteredDGVectorSpace {
 	}
 
 	// update filtration fast version
-	// TODO: make update general work for cohomology
 	template <typename Information_type, typename... Args>
 	void update_filtration_general(
 		const Information_type & updating_information,
@@ -191,7 +190,30 @@ struct ReducedFilteredDGVectorSpace {
 
 		// store values as well
 		val = updating_information.F_Y_vals;
+	}
 
+	// update filtration fast version
+	template <typename Information_type, typename... Args>
+	void update_filtration_general_clearing(
+		const Information_type & updating_information,
+		Args ...args
+	) {
+		// step 1: apply permutation updates to ReducedChainComplex RC
+		RC.update_basis_general_clearing(updating_information, args...);
+
+		// step 2: store new permutation
+		auto new_perm = updating_information.F_Y_perms;
+		// if degree is +1, reverse
+		if (RC.degree == +1) {
+			// for cohomology reverse rows and columns
+			for (auto& pi : new_perm) {
+				std::reverse(pi.begin(), pi.end());
+			}
+		}
+		perm = new_perm;
+
+		// store values as well
+		val = updating_information.F_Y_vals;
 	}
 
 };

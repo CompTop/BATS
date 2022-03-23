@@ -67,6 +67,47 @@ int main(int argc, char* argv[]) {
         << "ms" << std::endl;
 
 
+    /*
+    Option 3, update ReducedFilteredChainComplex 
+    */ 
+    {
+        FCC = bats::Chain(F_X, FT()); // necessary since last option will modify FCC ??
+        RFCC = bats::Reduce(FCC);
+
+        std::cout << "\nUpdate Reduced Filtered Chain Complex "<< std::endl;
+        start = std::chrono::steady_clock::now();
+        
+        t0 = std::chrono::steady_clock::now();
+
+        auto UI = bats::Update_info(F_X, F_Y); // get unfiltered information
+        // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
+        // UI.filtered_info(FCC.perm); 
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tbuild Updating Information success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+        
+
+        t0 = std::chrono::steady_clock::now();
+        RFCC.update_filtration_general(UI);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tupdate RFCC success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        end = std::chrono::steady_clock::now();
+        std::cout << "\tthe whole process takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+        
+        // check test results
+        if(test_reduce_result(RFCC_Y , RFCC)){
+            std::cout << "By compare two RFCC, this method success!!"  << std::endl;
+        }
+        
+    }
 
     /*
     Option 4, update DGVS -1 (homology)
@@ -75,7 +116,8 @@ int main(int argc, char* argv[]) {
         std::cout << "\nDGVS(-1)" << std::endl;
         t0 = std::chrono::steady_clock::now();
         auto CX = FilteredDGVectorSpace<double, MT>(F_X, -1);
-        auto RX = ReducedFilteredDGVectorSpace(CX);
+        auto RX = ReducedFilteredDGVectorSpace(CX, bats::standard_reduction_flag(), 
+                bats::clearing_flag(), bats::compute_basis_flag());
         t1 = std::chrono::steady_clock::now();
         std::cout << "\tCompute RFCC of X takes";
         std::cout << " takes "
@@ -120,13 +162,66 @@ int main(int argc, char* argv[]) {
     }
 
     /*
+    Option 4, update DGVS -1 (homology)
+    */ 
+    {
+        std::cout << "\nDGVS(-1) + clearing update" << std::endl;
+        t0 = std::chrono::steady_clock::now();
+        auto CX = FilteredDGVectorSpace<double, MT>(F_X, -1);
+        auto RX = ReducedFilteredDGVectorSpace(CX, bats::standard_reduction_flag(), 
+                bats::clearing_flag(), bats::compute_basis_flag());
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tCompute RFCC of X takes";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        start = std::chrono::steady_clock::now();
+        F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax - 0.5, maxdim);
+        
+        t0 = std::chrono::steady_clock::now();
+        auto UI = bats::Update_info(F_X, F_Y);
+        // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
+        // UI.filtered_info(FCC.perm); 
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tbuild Updating Information success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+        
+
+        t0 = std::chrono::steady_clock::now();
+        RX.update_filtration_general_clearing(UI, bats::standard_reduction_flag());
+        // RFCC.update_filtration_general(UI);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tupdate RFCC success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        end = std::chrono::steady_clock::now();
+        std::cout << "\tthe whole process takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+        
+        // check result
+        auto CX2 = FilteredDGVectorSpace<double, MT>(F_Y, -1);
+        auto RX2 = ReducedFilteredDGVectorSpace(CX2);
+        if(test_reduce_result(RX , RX2)){
+            std::cout << "By comparing two RFCC, update on RFCC success!!" << std::endl;
+        }
+        
+    }
+
+    /*
     Option 5, update DGVS -1 (cohomology)
     */ 
     {
         std::cout << "\nDGVS(+1)" << std::endl;
         t0 = std::chrono::steady_clock::now();
         auto CX = FilteredDGVectorSpace<double, MT>(F_X, +1);
-        auto RX = ReducedFilteredDGVectorSpace(CX);
+        auto RX = ReducedFilteredDGVectorSpace(CX, bats::standard_reduction_flag(), 
+                bats::clearing_flag(), bats::compute_basis_flag());
         t1 = std::chrono::steady_clock::now();
         std::cout << "\tCompute RFCC of X takes";
         std::cout << " takes "
@@ -154,7 +249,65 @@ int main(int argc, char* argv[]) {
         
 
         t0 = std::chrono::steady_clock::now();
-        RX.update_filtration_general(UI, bats::standard_reduction_flag());
+        RX.update_filtration_general(UI);
+        // RFCC.update_filtration_general(UI);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tupdate RFCC success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        end = std::chrono::steady_clock::now();
+        std::cout << "\tthe whole process takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+            << "ms" << std::endl;
+        
+        // check result
+        auto CX2 = FilteredDGVectorSpace<double, MT>(F_Y, +1);
+        auto RX2 = ReducedFilteredDGVectorSpace(CX2);
+        if(test_reduce_result(RX , RX2)){
+            std::cout << "By comparing two RFCC, update on RFCC success!!" << std::endl;
+        }
+        
+    }
+
+    /*
+    Option 5, update DGVS -1 (cohomology)
+    */ 
+    {
+        std::cout << "\nDGVS(+1) + clearning update" << std::endl;
+        t0 = std::chrono::steady_clock::now();
+        auto CX = FilteredDGVectorSpace<double, MT>(F_X, +1);
+        auto RX = ReducedFilteredDGVectorSpace(CX, bats::standard_reduction_flag(), 
+                bats::clearing_flag(), bats::compute_basis_flag());
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tCompute RFCC of X takes";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        start = std::chrono::steady_clock::now();
+        t0 = std::chrono::steady_clock::now();
+        F_Y = bats::RipsFiltration<CpxT>(Y, dist, rmax - 0.5, maxdim);
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tConstruct filtration Y takes";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+
+        t0 = std::chrono::steady_clock::now();
+        auto UI = bats::Update_info(F_X, F_Y);
+        // get filtered info, this step uncessary if cells in filtration has been sorted by their filtration values
+        // UI.filtered_info(FCC.perm); 
+        t1 = std::chrono::steady_clock::now();
+        std::cout << "\tbuild Updating Information success and";
+        std::cout << " takes "
+            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+            << "ms" << std::endl;
+        
+
+        t0 = std::chrono::steady_clock::now();
+        RX.update_filtration_general_clearing(UI);
         // RFCC.update_filtration_general(UI);
         t1 = std::chrono::steady_clock::now();
         std::cout << "\tupdate RFCC success and";

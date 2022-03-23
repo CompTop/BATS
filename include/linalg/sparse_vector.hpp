@@ -512,10 +512,16 @@ public:
 		}
 	}
 
+	// erase rows of a matrix with index larger than m 
+	void erase_rows_after(const TI m) {
+		while ( nzend() != nzbegin() && (nzend()-1)->ind > m) {
+			indval.pop_back();
+		}
+	}
 
-	//deletetion of the last row of a column of a matrix
-	//the index i is provided to check if i is the index of
-	//the last the non-zero elements
+	// (Slow) Deletetion of the last row of a column of a matrix
+	// the index i is provided to check if i is the index of
+	// the last the non-zero elements
 	// i: the last row index of a matrix, e.g., if m times n matrix, i is m-1
 	// n_deletions: number of deletions
 	void erase_last_rows_of_matrix(const TI i, size_t n_deletions){
