@@ -236,7 +236,6 @@ public:
 	}
 
 	// append a row a specified value
-	// TODO: sparse way to store new row vector
 	void append_row(const std::vector<val_type> & row) {
 		assert (row.size() == ncol());
 		++m;
@@ -247,13 +246,13 @@ public:
 		}
 	}
 
-	// // append a row in the last coloumn input 
-	// void append_row(const std::vector<size_t> & c_ind, const std::vector<val_type> & row_vals) {
-	// 	++m;
-	// 	for (size_t j: c_ind) {
-	// 		col[j].emplace_back();
-	// 	}
-	// }
+	// append a row a specified value
+	void append_sparse_row(const col_type & new_row) {
+		++m;
+		for (auto it = new_row.nzbegin(); it != new_row.nzend(); it++){
+			col[it->ind].emplace_back(m-1, it->val);
+		}
+	}
 
 	// TODO: permute all rows at once
 	void insert_row(const size_t& ind, const std::vector<val_type> & row){
@@ -263,11 +262,46 @@ public:
 		std::vector<size_t> rowperm;
 		rowperm.reserve(m);
 		for (size_t i = 0; i < m ; i++){
-			size_t j = i; // j is the new index of all rows, rows above ind keep the same
+			size_t j = i; // j is the new index, rows above ind keep the same
 			if (i >= ind) j = i+1; // rows above ind will add up one
 			if (i == m-1) j = ind; // the last one will be permuted the desired ind 
 			rowperm.emplace_back(j);
 		}
+		permute_rows(rowperm);
+	}
+
+	/** 
+	 * Insert sparse rows by permutation
+	 * Input: 
+	 * 	r_inds: new row indices
+	 *  new_rows: a vector of sparse row vectors
+	*/
+	void insert_sparse_rows(const std::vector<size_t>& r_inds,
+	const std::vector<col_type> & new_rows){
+		// first append rows to the end
+		for (auto row: new_rows){
+			append_sparse_row(row);
+		}
+		// second permute it
+		auto length_new_rows = r_inds.size();
+		std::vector<size_t> rowperm;
+		rowperm.reserve(m);
+		for (size_t i = 0; i < m-length_new_rows; i++){
+			size_t j = i; // j is the new index, rows above ind keep the same
+			// for(auto ele: r_inds){
+			// 	if(j >= ele) j+=1; // rows above ele will add up one
+			// }
+			// or faster option by std::lower_bound
+			auto it_r_inds = std::lower_bound(r_inds.begin(), r_inds.end(), j); 
+			j += std::distance(r_inds.begin(), it_r_inds); 
+			while (*it_r_inds <= j && it_r_inds != r_inds.end()) {
+				++it_r_inds; 
+				j++;
+			}
+			rowperm.emplace_back(j);
+		}
+		// the last appended rows will be permuted the desired indices in r_inds
+		rowperm.insert(std::end(rowperm), std::begin(r_inds), std::end(r_inds));
 		permute_rows(rowperm);
 	}
 

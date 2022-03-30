@@ -606,35 +606,48 @@ public:
 	}
 
 	/**
-	 * (for matrix row addition usage)
-	insert row indices at specified locations
-	assumes that list of rows is in sorted order
+	(for matrix nonzero row addition usage)
+	Insert row indices at specified locations(assumes indices of rows is in ascending order.)
+	Input: 
+		r_inds: the indices of new non-zero elements
+		r_vals: the values of new non-zero elements
+	The key idea is to 
+	a) first modify all existing non-zero indices
+	b) second add new elements
+	c) sort all indices
+	
+	For example, if indval has inds [3,5] and r_inds = [1,3,4]
+	then for each element in [3,5], say 3,
+	a) find how many indices in r_inds that are smaller than 3, there are 1
+	b) add up: 3+1 = 4
+	c) loop over r_inds, we find 3 < 4, add up 1 => 4+1 = 5; keep going find 4 < 5, add up 1 => 5+1 = 6
+	So, the row with index 3 finally locates at 6.
 	*/
 	void insert_rows(const std::vector<size_t>& r_inds, const std::vector<TV>& r_vals) {
 		if (r_inds.begin() == r_inds.end()) return;
+		// for old elements in indval, we only need to modify its indices
 		auto iv = indval.begin();
-		while (iv != indval.end()) {
+		while (iv != indval.end()) { // each itertion we make iv correct by looping over r_inds
 			// search for how many rows will be inserted
-			// search for the first iterator in r_inds that is >= iv->ind
-			auto ri = std::lower_bound(r_inds.begin(), r_inds.end(), iv->ind);
+			auto it_r_inds = std::lower_bound(r_inds.begin(), r_inds.end(), iv->ind);
 			// find its distance to the begin interator
 			// iv's indices needs to add up the number of indices in r_inds before iv
-			iv->ind += std::distance(r_inds.begin(), ri); 
-
-			// it is possible that after ri there is still indices need to add up
-			while (*ri <= iv->ind && ri != r_inds.end()) {++ri; iv->ind++;}
-
+			iv->ind += std::distance(r_inds.begin(), it_r_inds); 
+			// add up other indices
+			while (*it_r_inds <= iv->ind && it_r_inds != r_inds.end()) {++it_r_inds; iv->ind++;}
+			// go to the next element in indval
 			++iv;
 		}
-
+		// for new inserted elements, we add nzpair
 		for (size_t i = 0; i < r_inds.size(); i++) {
 			indval.emplace_back(key_type(r_inds[i], r_vals[i]));
 		}
+		// sort in the end
 		sort();
 	}
 
 	/**
-	 * (for matrix row addition usage)
+	 * (for matrix zero row addition usage)
 	insert zero row indices at specified locations
 	assumes that list of rows is in sorted order
 	*/

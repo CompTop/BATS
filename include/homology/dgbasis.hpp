@@ -722,8 +722,30 @@ public:
 						bats::util::apply_perm_swap(add_inds, bats::util::inv_perm(p));
 						bats::util::apply_perm_swap(bd_info, bats::util::inv_perm(p));
 
-						// std::sort(add_inds.begin(), add_inds.end());
-						// corresponding, we need to sort boundary indices!!!
+                        auto U_transpose = U[k].T();
+                        std::vector<VectT> new_rows_in_R;
+                        for(size_t i = 0; i < add_inds.size(); i++){ 
+                            // the indices of its boundaries
+                            auto simplex_bd_ind = bd_info[i];
+                            // boundary indices are reversed but inserting rows require ascending order of indices
+                            std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());  
+
+                            // create sparse vector of new row in D
+                            std::vector<ValT> bd_values(simplex_bd_ind.size());
+                            std::fill(bd_values.begin(),bd_values.end(), ValT(1)); //F2 for now
+                            SparseVector<ValT, size_t> new_row_in_D(simplex_bd_ind, bd_values);
+							// compute new rows in R
+                            auto new_row_in_R = U_transpose.gemv(new_row_in_D);
+                            new_rows_in_R.emplace_back(new_row_in_R);
+                        }
+                        R[k].insert_sparse_rows(add_inds, new_rows_in_R);
+
+                        //  // if (k== 1){
+                        //  //  std::cout << "after addition" << std::endl;
+                        //  //  std::cout << "R[1]" << std::endl;
+                        //  //  R[1].print(); 
+                        //  // }
+                        // }						
 
 						// if (k == 1){
 						// 	std::cout << "\nWhen k = "<< k << std::endl;
@@ -738,37 +760,6 @@ public:
 						// 	R[1].print();
 						// }
 
-
-						for(size_t i = 0; i < add_inds.size(); i++){
-							// the indices of its boundaries
-							auto simplex_bd_ind = bd_info[i];
-							// boundary indices are reversed but inserting rows require ascending order of indices
-							std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
-							// index of new added row
-							auto ind = add_inds[i];
-
-							// create sparse vector of new row in D
-							std::vector<ValT> bd_values(simplex_bd_ind.size());
-							std::fill(bd_values.begin(),bd_values.end(), ValT(1)); //F2 for now
-							SparseVector<ValT, size_t> new_row_in_D(simplex_bd_ind, bd_values);
-
-							std::vector<ValT> new_row_in_R((R[k].ncol()));
-							for (size_t j = 0; j < R[k].ncol(); j++){
-								// U[k]'s column vectors
-								auto U_cols = U[k].cols();
-								// dot product of sparse vectors
-								new_row_in_R[j] = new_row_in_D * U_cols[j];
-							}
-
-							R[k].insert_row(ind, new_row_in_R);
-							// TODO: write a sparse way to insert rows and permute them at once
-							// R[k].insert_row(ind, simplex_bd_ind);
-							// if (k== 1){
-							// 	std::cout << "after addition" << std::endl;
-							// 	std::cout << "R[1]" << std::endl;
-							// 	R[1].print();
-							// }
-						}
 					}
 				}
 			}
@@ -1098,46 +1089,48 @@ public:
 						bats::util::apply_perm_swap(add_inds, bats::util::inv_perm(p));
 						bats::util::apply_perm_swap(bd_info, bats::util::inv_perm(p));
 
-						// std::sort(add_inds.begin(), add_inds.end());
-						// corresponding, we need to sort boundary indices!!!
+						auto U_transpose = U[k].T();
+                        std::vector<VectT> new_rows_in_R;
+                        for(size_t i = 0; i < add_inds.size(); i++){ 
+                            // the indices of its boundaries
+                            auto simplex_bd_ind = bd_info[i];
+                            // boundary indices are reversed but inserting rows require ascending order of indices
+                            std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());  
 
-						// if (k == 1){
-						// 	std::cout << "\nWhen k = "<< k << std::endl;
-						// 	std::cout << "Addition column indices" << std::endl;
-						// 	print_1D_vectors(UI.addition_indices[k]);
-						// 	std::cout << "Transformed to Need to add addition row indices" << std::endl;
-						// 	print_1D_vectors(add_inds);
-						// 	std::cout << "Need to add addition boudaries indices(column indices)" << std::endl;
-						// 	print_2D_vectors(bd_info);
-						// 	std::cout << "before addition" << std::endl;
-						// 	std::cout << "R[k]" << std::endl;
-						// 	R[1].print();
+                            // create sparse vector of new row in D
+                            std::vector<ValT> bd_values(simplex_bd_ind.size());
+                            std::fill(bd_values.begin(),bd_values.end(), ValT(1)); //F2 for now
+                            SparseVector<ValT, size_t> new_row_in_D(simplex_bd_ind, bd_values);
+							// compute new rows in R
+                            auto new_row_in_R = U_transpose.gemv(new_row_in_D);
+                            new_rows_in_R.emplace_back(new_row_in_R);
+                        }
+                        R[k].insert_sparse_rows(add_inds, new_rows_in_R);
+
+
+						// for(size_t i = 0; i < add_inds.size(); i++){
+						// 	// the indices of its boundaries
+						// 	auto simplex_bd_ind = bd_info[i];
+						// 	// boundary indices are reversed but inserting rows require ascending order of indices
+						// 	std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
+						// 	// index of new added row
+						// 	auto ind = add_inds[i];
+
+						// 	// create sparse vector of new row in D
+						// 	std::vector<ValT> bd_values(simplex_bd_ind.size());
+						// 	std::fill(bd_values.begin(),bd_values.end(), ValT(1)); //F2 for now
+						// 	SparseVector<ValT, size_t> new_row_in_D(simplex_bd_ind, bd_values);
+
+						// 	std::vector<ValT> new_row_in_R((R[k].ncol()));
+						// 	for (size_t j = 0; j < R[k].ncol(); j++){
+						// 		// U[k]'s column vectors
+						// 		auto U_cols = U[k].cols();
+						// 		// dot product of sparse vectors
+						// 		new_row_in_R[j] = new_row_in_D * U_cols[j];
+						// 	}
+
+						// 	R[k].insert_row(ind, new_row_in_R);
 						// }
-
-
-						for(size_t i = 0; i < add_inds.size(); i++){
-							// the indices of its boundaries
-							auto simplex_bd_ind = bd_info[i];
-							// boundary indices are reversed but inserting rows require ascending order of indices
-							std::sort(simplex_bd_ind.begin(), simplex_bd_ind.end());
-							// index of new added row
-							auto ind = add_inds[i];
-
-							// create sparse vector of new row in D
-							std::vector<ValT> bd_values(simplex_bd_ind.size());
-							std::fill(bd_values.begin(),bd_values.end(), ValT(1)); //F2 for now
-							SparseVector<ValT, size_t> new_row_in_D(simplex_bd_ind, bd_values);
-
-							std::vector<ValT> new_row_in_R((R[k].ncol()));
-							for (size_t j = 0; j < R[k].ncol(); j++){
-								// U[k]'s column vectors
-								auto U_cols = U[k].cols();
-								// dot product of sparse vectors
-								new_row_in_R[j] = new_row_in_D * U_cols[j];
-							}
-
-							R[k].insert_row(ind, new_row_in_R);
-						}
 					}
 				}
 			}
