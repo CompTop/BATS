@@ -378,8 +378,9 @@ public:
 	}
 
 	void erase_final_columns(const size_t& n_dele){
-    	col.erase(col.end()-n_dele,col.end());
+    	// col.erase(col.end()-n_dele,col.end());
 		n-=n_dele;
+		col.resize(n);
 	}
 
 	/**
@@ -409,7 +410,11 @@ public:
 		assert(n_delete_rows <= nrow()); // the number of deleting rows should be less than total
 		for (size_t j = 0; j < ncol(); j++) {
 			// col[j].erase_last_rows_of_matrix(m-1, n_delete_rows);
-			col[j].erase_rows_after(m - n_delete_rows - 1);
+			if (n_delete_rows < nrow()){
+				col[j].erase_rows_after(m - n_delete_rows - 1);
+			}else{
+				col[j].erase_all();
+			}
 		}
 		m -= n_delete_rows;
 	}

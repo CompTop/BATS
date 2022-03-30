@@ -518,6 +518,11 @@ public:
 			indval.pop_back();
 		}
 	}
+	// erase rows of a matrix with index larger than m 
+	void erase_all() {
+		indval.clear();
+	}
+	
 
 	// (Slow) Deletetion of the last row of a column of a matrix
 	// the index i is provided to check if i is the index of

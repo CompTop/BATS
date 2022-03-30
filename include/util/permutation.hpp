@@ -460,12 +460,18 @@ std::vector<size_t> perm_to_the_end(const std::vector<size_t>& index_list, const
     std::vector<size_t> v;
     v.reserve(length);
     auto it = index_list.begin();
-    for(size_t i = 0; i < length; i++){
-        if(i != *it){
+    for(size_t i = 0; i < length ; i++){
+        if(it != index_list.end()){
+            if(i != *it){
+                v.emplace_back(i);
+            }else{
+                it++;
+            }
+        }else{ // it is possible that i == index_list.end() but here we still want to add i
             v.emplace_back(i);
-        }else{
-            it++;
         }
+        
+        
     }
 
     for(auto& element: index_list){
