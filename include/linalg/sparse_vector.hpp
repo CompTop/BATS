@@ -51,6 +51,16 @@ public:
 		// }
 	}
 
+	/**
+	map indices i -> n-i
+	*/
+	void reverse_inds(size_t n) {
+		for (auto& iv : indval) {
+			iv.ind = n - iv.ind;
+		}
+		std::reverse(indval.begin(), indval.end());
+	}
+
 private:
 	void check_sorted() const {
 		if (indval.size() < 2) { return; }
@@ -69,6 +79,19 @@ public:
 		#ifdef BATS_DEBUG
 		check_sorted();
 		#endif
+	}
+
+	template <typename TV2>
+	SparseVector<TV2, TI> cast_values(TV2) const {
+		std::vector<nzpair<TI, TV2>> indval2;
+		indval2.reserve(indval.size());
+		for (size_t i = 0; i < indval.size(); ++i) {
+			TV2 v2 = TV2(indval[i].val);
+			if (v2 != 0) {
+				indval2.emplace_back(nzpair(indval[i].ind, v2));
+			}
+		}
+		return SparseVector<TV2, TI>(indval2);
 	}
 
 	SparseVector(const std::vector<TI> &ind, const std::vector<TV> &val) {
@@ -512,11 +535,35 @@ public:
 		}
 	}
 
-	// erase rows of a matrix with index larger than m 
+	// erase rows of a matrix with index larger than m
 	void erase_rows_after(const TI m) {
 		while ( nzend() != nzbegin() && (nzend()-1)->ind > m) {
 			indval.pop_back();
 		}
+	}
+
+	/**
+	erase the first ndelete rows of the matrix
+
+	decreents all subsequent indices by ndelete
+	*/
+	void erase_initial_rows(const TI ndelete) {
+		size_t i = 0;
+		// loop until we find first index >= ndelete
+		while (i < indval.size()) {
+			if (!(indval[i].ind < ndelete)) { break;}
+			++i;
+		}
+		// move subsequent indices to beginning
+		size_t j = 0;
+		while (i < indval.size()) {
+			indval[j] = key_type(indval[i].ind - ndelete, indval[i].val);
+			++i;
+			++j;
+		}
+		// resize indval
+		indval.resize(j);
+
 	}
 
 	// (Slow) Deletetion of the last row of a column of a matrix
@@ -536,7 +583,7 @@ public:
 				last_row_ind--; // the last row index has changed once we have performed one deletion
 			}
 		}
-		
+
 	}
 
 	//deletetion of row i , the indices after i should minus one
@@ -608,14 +655,14 @@ public:
 	/**
 	(for matrix nonzero row addition usage)
 	Insert row indices at specified locations(assumes indices of rows is in ascending order.)
-	Input: 
+	Input:
 		r_inds: the indices of new non-zero elements
 		r_vals: the values of new non-zero elements
-	The key idea is to 
+	The key idea is to
 	a) first modify all existing non-zero indices
 	b) second add new elements
 	c) sort all indices
-	
+
 	For example, if indval has inds [3,5] and r_inds = [1,3,4]
 	then for each element in [3,5], say 3,
 	a) find how many indices in r_inds that are smaller than 3, there are 1
@@ -632,7 +679,7 @@ public:
 			auto it_r_inds = std::lower_bound(r_inds.begin(), r_inds.end(), iv->ind);
 			// find its distance to the begin interator
 			// iv's indices needs to add up the number of indices in r_inds before iv
-			iv->ind += std::distance(r_inds.begin(), it_r_inds); 
+			iv->ind += std::distance(r_inds.begin(), it_r_inds);
 			// add up other indices
 			while (*it_r_inds <= iv->ind && it_r_inds != r_inds.end()) {++it_r_inds; iv->ind++;}
 			// go to the next element in indval
@@ -655,10 +702,19 @@ public:
 		// size_t offset = 0;
 		if (r_inds.begin() == r_inds.end()) return;
 		auto iv = indval.begin();
+		// keep track of how many rows have already been inserted
+		// this will help when many rows are inserted near beginning
+		size_t ninserted = 0;
 		while (iv != indval.end()) {
 			// search for how many rows will be inserted
-			auto ri = std::lower_bound(r_inds.begin(), r_inds.end(), iv->ind);
-			iv->ind += std::distance(r_inds.begin(), ri);
+			auto targ = iv->ind; // target is original index + number of rows already inserted
+			// ri is first element with value >= targ
+			auto ri = std::lower_bound(r_inds.begin() + ninserted, r_inds.end(), targ);
+			ninserted = std::distance(r_inds.begin(), ri); // number inserted at targ
+			// if (ri != r_inds.end() && *ri > targ) {
+			// 	--ninserted; // if lower bound is > targ, we haven't inserted the last row yet
+			// }
+			iv->ind += ninserted; // this is number inserted to this index
 
 			// insert additional rows as necessary
 			while (*ri <= iv->ind && ri != r_inds.end()) {++ri; iv->ind++;}

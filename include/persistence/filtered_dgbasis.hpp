@@ -168,6 +168,20 @@ struct ReducedFilteredDGVectorSpace {
 
 	}
 
+	void update_basis(
+		UpdateInfo2& UI
+	) {
+		// handle cohomology
+		if (RC.degree == +1) {
+			UI.reverse_for_cohomology();
+		}
+
+		RC.update_basis(UI);
+
+		perm = UI.newperm();
+		val = UI.newval;
+	}
+
 	// update filtration fast version
 	template <typename Information_type, typename... Args>
 	void update_filtration_general(

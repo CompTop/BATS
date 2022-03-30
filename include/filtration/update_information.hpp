@@ -27,7 +27,6 @@ into the RU decomposition of another filtration.
 
 Brad's version
 */
-
 struct UpdateInfo2{
 
 	// number of deletions in each dimension
@@ -44,6 +43,72 @@ struct UpdateInfo2{
 	*/
 	std::vector<std::vector<size_t>> perm;
 
+	// new filtration values
+	std::vector<std::vector<double>> newval;
+
+	// new filtration sortperm
+	std::vector<std::vector<size_t>> perms2;
+
+	bool reversed = false;
+
+	/**
+	new permutation for index
+	*/
+	const std::vector<std::vector<size_t>>& newperm() const {
+		return perms2;
+	}
+
+	/**
+	reverse everything for cohomology
+	*/
+	void reverse_for_cohomology() {
+		if (reversed) {
+			return;
+		}
+
+
+		// reverse final sortperm
+		for (auto& pi : perms2) {
+			std::reverse(pi.begin(), pi.end());
+		}
+
+		// original permutation was reversed, so need to correct perm
+		for (size_t k = 0; k < perm.size(); ++k) {
+			// take into account that original permutaiton was reversed.
+			size_t n1 = perm[k].size() - 1;
+			for (size_t i = 0; i < perm[k].size(); ++i) {
+				perm[k][i] = n1 - perm[k][i];
+			}
+
+			// reverse for output
+			std::reverse(perm[k].begin(), perm[k].end());
+		}
+
+		// handle insertion indices
+		for (size_t k = 0; k < insertion_indices.size(); ++k) {
+			size_t n2 = perm[k].size() - ndeletions[k] + insertion_indices[k].size();
+			size_t n21 = n2 - 1;
+			// insertion indices should be put in reversed order
+			for (size_t i = 0; i < insertion_indices[k].size(); ++i) {
+				insertion_indices[k][i] = n21 -  insertion_indices[k][i];
+			}
+
+			// handle insertion cols - indices should be reversed
+			if (k > 0) {
+				size_t m2 = perm[k-1].size() - ndeletions[k-1] + insertion_indices[k-1].size();
+				size_t m21 = m2 - 1;
+				for (auto& v : insertion_cols[k]) {
+					v.reverse_inds(m21);
+				}
+			}
+			// reverse both so insertion indices are in sorted order
+			std::reverse(insertion_indices[k].begin(), insertion_indices[k].end());
+			std::reverse(insertion_cols[k].begin(), insertion_cols[k].end());
+
+		}
+		reversed = true; // set reversed flag
+	}
+
 	/**
 	Compute update information to turn RU decomposition for F1
 	into RU decomposition for F2
@@ -59,7 +124,7 @@ struct UpdateInfo2{
 		auto& X1 = F1.complex();
 		auto& X2 = F2.complex();
 
-		size_t maxdim = F1.maxdim();
+		size_t maxdim = F1.maxdim() + 1;
 		ndeletions.resize(maxdim);
 		insertion_indices.resize(maxdim);
 		insertion_cols.resize(maxdim);
@@ -70,15 +135,18 @@ struct UpdateInfo2{
 		// iperms1[dim][i] is where index i in X1 gets mapped
 		auto iperms1 = filtration_iperm(perms1);
 		// perms2[dim][i] index of ith largest value in dimension dim
-		auto perms2 = filtration_sortperm(F2.vals());
+		perms2 = filtration_sortperm(F2.vals());
 		// iperms2[dim][i] is where index i in X2 gets mapped
 		auto iperms2 = filtration_iperm(perms2);
+
+		// copy values
+		newval = F2.vals();
 
 		// preallocate for boundary
 		std::vector<nzpair<size_t, int>> bdry;
 
 
-		for (size_t dim = 0; dim < F1.maxdim() + 1; ++dim) {
+		for (size_t dim = 0; dim < maxdim; ++dim) {
 			size_t n1 = X1.ncells(dim);
 			size_t n2 = X2.ncells(dim);
 

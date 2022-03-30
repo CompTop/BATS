@@ -264,15 +264,15 @@ public:
 		for (size_t i = 0; i < m ; i++){
 			size_t j = i; // j is the new index, rows above ind keep the same
 			if (i >= ind) j = i+1; // rows above ind will add up one
-			if (i == m-1) j = ind; // the last one will be permuted the desired ind 
+			if (i == m-1) j = ind; // the last one will be permuted the desired ind
 			rowperm.emplace_back(j);
 		}
 		permute_rows(rowperm);
 	}
 
-	/** 
+	/**
 	 * Insert sparse rows by permutation
-	 * Input: 
+	 * Input:
 	 * 	r_inds: new row indices
 	 *  new_rows: a vector of sparse row vectors
 	*/
@@ -292,10 +292,10 @@ public:
 			// 	if(j >= ele) j+=1; // rows above ele will add up one
 			// }
 			// or faster option by std::lower_bound
-			auto it_r_inds = std::lower_bound(r_inds.begin(), r_inds.end(), j); 
-			j += std::distance(r_inds.begin(), it_r_inds); 
+			auto it_r_inds = std::lower_bound(r_inds.begin(), r_inds.end(), j);
+			j += std::distance(r_inds.begin(), it_r_inds);
 			while (*it_r_inds <= j && it_r_inds != r_inds.end()) {
-				++it_r_inds; 
+				++it_r_inds;
 				j++;
 			}
 			rowperm.emplace_back(j);
@@ -306,11 +306,11 @@ public:
 	}
 
 
-	// insert rows, e.g., 
+	// insert rows, e.g.,
 	// r_inds = [1,3]
 	// r_col_inds = [[2,4,6], [1,3,6]]
 	// r_col_vals = [[1,2,1], [1,2,2]]
-	// will add 
+	// will add
 	void insert_rows(
 		const std::vector<size_t>& r_inds,
 		const std::vector<std::vector<size_t>>& r_col_inds,
@@ -333,7 +333,7 @@ public:
 		for (size_t i = 0; i < m ; i++){
 			size_t j = i; // j is the new index of all rows, rows above ind keep the same
 			if (i >= ind) j = i+1; // rows above ind will add up one
-			if (i == m-1) j = ind; // the last one will be permuted the desired ind 
+			if (i == m-1) j = ind; // the last one will be permuted the desired ind
 			rowperm.emplace_back(j);
 		}
 		permute_rows(rowperm);
@@ -357,7 +357,7 @@ public:
 	// 	const std::vector<size_t>& r_inds,
 	// 	std::vector<TC>& new_rows
 	// ) {
-	// 	// new rows to columns 
+	// 	// new rows to columns
 	// 	for (auto new_row: new_rows){
 
 	// 	}
@@ -377,9 +377,24 @@ public:
 		--n;
 	}
 
-	void erase_final_columns(const size_t& n_dele){
-    	col.erase(col.end()-n_dele,col.end());
-		n-=n_dele;
+	/**
+	deletes ndelete columns at end of matrix
+	*/
+	void erase_final_columns(const size_t& ndelete){
+    	// col.erase(col.end()-n_dele,col.end());//
+		n -= ndelete;
+		col.resize(n); // shrinks to new size
+	}
+
+	/**
+	deletes ndelete columns at beginning of matrix
+	*/
+	void erase_initial_cols(const size_t ndelete) {
+		if ( ndelete == 0 ) { return; } // do nothing
+		// rotate first ndelete columns to end - left rotation by ndelete
+		std::rotate(col.begin(), col.begin() + ndelete, col.end());
+		n -= ndelete;
+		col.resize(n);
 	}
 
 	/**
@@ -429,6 +444,16 @@ public:
 	void erase_final_rows_unsafe(size_t n_delete_rows){
 		assert(n_delete_rows <= nrow()); // the number of deleting rows should be less than total
 		m -= n_delete_rows;
+	}
+
+	/**
+	erases initial rows
+	*/
+	void erase_initial_rows(size_t ndelete) {
+		for (auto& cj : col) {
+			cj.erase_initial_rows(ndelete);
+		}
+		m -= ndelete;
 	}
 
     inline TC& operator[](size_t index) { return col[index];}
