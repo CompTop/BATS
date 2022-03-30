@@ -508,7 +508,9 @@ public:
 		return XY;
 	}
 
-	// return inds, vals in boundary
+	/**
+	indices and values of simplex k in dimension dim
+	*/
 	auto boundary(const size_t dim, const size_t k) const {
 		size_t indbegin = (dim+1) * k;
 		size_t indend = indbegin + dim + 1;

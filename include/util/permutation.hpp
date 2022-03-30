@@ -48,7 +48,11 @@ std::vector<size_t> sortperm(const std::vector<T>& data) {
     return perm;
 }
 
-// fill a vector that will return a sort permutation on data
+/**
+fill a vector that will return a sort permutation on data
+
+perm[i] is the index of the ith largest element in the container.
+*/
 template <typename TI>
 std::vector<size_t> sortperm(
     const TI& begin,

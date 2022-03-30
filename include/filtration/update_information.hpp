@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -19,6 +20,126 @@ Since the above two notations are inverse to each other, inverse them if needed!
 */
 
 namespace bats{
+
+/**
+Struct to hold information to update RU decomposition of one filtration
+into the RU decomposition of another filtration.
+
+Brad's version
+*/
+
+struct UpdateInfo2{
+
+	// number of deletions in each dimension
+	std::vector<size_t> ndeletions;
+
+	// location of index insertions
+	std::vector<std::vector<size_t>> insertion_indices;
+	// columns to insert.  Permuted so indices are in filtration order.
+	std::vector<std::vector<SparseVector<int>>> insertion_cols;
+
+	/*
+	perm[i] is permutation in each dimension.
+	the last ndeletions[i] will be deleted.  The first block will permute indices into correct order
+	*/
+	std::vector<std::vector<size_t>> perm;
+
+	/**
+	Compute update information to turn RU decomposition for F1
+	into RU decomposition for F2
+
+	ASSUME: F1.maxdim() == F2.maxdim()
+	*/
+	template <class FiltrationType>
+	UpdateInfo2(const FiltrationType& F1, const FiltrationType& F2) {
+		if (F1.maxdim() != F2.maxdim()) {
+			throw std::runtime_error("maximum dimensions must be the same");
+		}
+
+		auto& X1 = F1.complex();
+		auto& X2 = F2.complex();
+
+		size_t maxdim = F1.maxdim();
+		ndeletions.resize(maxdim);
+		insertion_indices.resize(maxdim);
+		insertion_cols.resize(maxdim);
+		perm.resize(maxdim);
+
+		// perms1[dim][i] is index of ith largest value in dimension dim
+		auto perms1 = filtration_sortperm(F1.vals());
+		// iperms1[dim][i] is where index i in X1 gets mapped
+		auto iperms1 = filtration_iperm(perms1);
+		// perms2[dim][i] index of ith largest value in dimension dim
+		auto perms2 = filtration_sortperm(F2.vals());
+		// iperms2[dim][i] is where index i in X2 gets mapped
+		auto iperms2 = filtration_iperm(perms2);
+
+		// preallocate for boundary
+		std::vector<nzpair<size_t, int>> bdry;
+
+
+		for (size_t dim = 0; dim < F1.maxdim() + 1; ++dim) {
+			size_t n1 = X1.ncells(dim);
+			size_t n2 = X2.ncells(dim);
+
+			perm[dim].resize(n1);
+
+			// TODO: handle the filtration orders of F1 and F2
+
+
+			// determine if each simplex in X2 is in X1
+			auto X2dim = X2.get_simplices(dim); // simplices in dimension dim
+			std::vector<bool> in_intersection(n1, false);
+			size_t intersection_ct = 0;
+			// loop in filtration order of F2
+			for (size_t fj2 = 0; fj2 < n2; ++fj2) {
+				auto j2 = perms2[dim][fj2]; // index of simplex in X2
+				auto j1 = X1.find_idx(X2dim[j2]); // index of simplex in X1
+				if(j1 != bats::NO_IND) {
+					auto fj1 = iperms1[dim][j1]; // index of i1 in F1
+					// index should get permuted from filtration order in F1 to filtration order in F2
+					// fj1 -> fj2
+					perm[dim][intersection_ct] = fj1; // simplex gets permuted here
+					in_intersection[j1] = true;
+					++intersection_ct;
+				} else {
+					// this simplex is not in X1 - must be inserted
+					insertion_indices[dim].emplace_back(fj2); // this is insertion index
+					auto [ind, val] = X2.boundary(dim, j2);
+
+					// put indices  of boundary in permutation order
+					bdry.clear();
+					if (dim > 0) {
+						for (size_t ii = 0; ii < ind.size(); ++ii) {
+							bdry.emplace_back(nzpair(
+								iperms2[dim-1][ind[ii]], // where index gets mapped in filtration order
+								val[ii]
+							));
+						}
+						std::sort(bdry.begin(), bdry.end());
+					}
+					insertion_cols[dim].emplace_back(SparseVector<int>(bdry));
+				}
+			}
+			auto n_intersect = intersection_ct;
+			ndeletions[dim] = n1 - intersection_ct;
+			// put all simplices not in intersection at end of permutation
+			for (size_t j1 = 0; j1 < n1; ++j1) {
+				if (!in_intersection[j1]) {
+					// needs to be permuted from filtration order in F1
+					perm[dim][intersection_ct] = iperms1[dim][j1]; // fj1
+					++intersection_ct;
+				}
+			}
+			// sort tail end to help reduction
+			std::sort(perm[dim].begin() + n_intersect, perm[dim].end());
+
+		} // end loop over dimensions
+	} // end constructor
+
+
+};
+
 
 /**
 
