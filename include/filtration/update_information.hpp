@@ -31,7 +31,7 @@ permutations:
 addition_indices:
 boundary_indices:
 F_Y_vals:
-F_Y_perms: 
+F_Y_perms:
 
 
 
@@ -80,91 +80,6 @@ struct Update_info{
 
     // degree for DGVectorSpace
     int degree = -1;
-
-    Update_info(const FiltrationType& F_X, const FiltrationType& F_Y, int degree = -1){
-
-        // F_old = F_X;
-        // F_new = F_Y;
-
-        max_dim = F_Y.maxdim();
-        F_X_vals = F_X.vals();
-        F_Y_vals = F_Y.vals(); // needed for update
-        F_Y_perms = bats::filtration_sortperm(F_Y.vals());
-
-        // step 2 loop over each cell in the new filtration Y
-        // get simplicial complex for two filtrations
-        auto& smcplex_X = F_X.complex();
-        auto& smcplex_Y = F_Y.complex();
-
-        for (size_t i = 0; i <= max_dim; i++){
-            // addition information:
-            // a vector stores the indices of simplices in dimension i
-            // that will be added to the new filtration Y
-            std::vector<size_t> addition_in_i;
-            std::vector<std::vector<size_t>> boundary_indices_in_i;
-
-            // deletion information:
-            // a vector stores the indices of simplices in dimension i
-            // that will be deleted from the old filtration X
-            std::vector<size_t> deletion_in_i;
-
-            // permutation information:
-            // a vector that will permute the intersected simplices in the new filration B
-            // to the correct position
-            std::vector<size_t> intersection_in_i_X;
-            std::vector<size_t> intersection_in_i_Y;
-            std::vector<size_t> perm_in_i;
-
-            // find simplices in dimension i for both X and Y
-            auto simplices_Y = smcplex_Y.get_simplices(i); // simplices in dimension i
-            auto simplices_X = smcplex_X.get_simplices(i);
-
-            // create a vector of boolean resutls of comparison
-            // default values is false, which means a simplex in A is not in B
-            // std::vector<bool> bool_results_i(simplices_X.size(), false);
-			std::vector<bool> bool_results_i(smcplex_X.ncells(i), false);
-
-            // loop over each simplex in Y
-            for (size_t j = 0; j < simplices_Y.size(); j++){
-                // find intersecting indices in X
-                auto index = smcplex_X.find_idx(simplices_Y[j]);
-                // if the simplex can be found in X (intersection information)
-                if(index != bats::NO_IND){
-                    bool_results_i[index] = true;
-                    intersection_in_i_X.emplace_back(index);
-                    intersection_in_i_Y.emplace_back(j);
-                }else{ // if not in X (addition information)
-                    addition_in_i.emplace_back(j); //in ascending order!
-                    // find the boundary indices of the simplex that will be added
-                    if(i>0){ // dimension zero has boundary 0
-                        auto [inds,vals] = smcplex_Y.boundary(i, j);
-                        boundary_indices_in_i.emplace_back(inds);
-                    }
-                }
-            }
-
-            // find the permutation information
-            perm_in_i = find_perm_from_vector(intersection_in_i_X);
-
-            // find the deletion indices in X (in ascending order!)
-            for(size_t k = 0; k < bool_results_i.size(); k++){
-                if(!bool_results_i[k]){ // flase, need to deal with deletion information
-                    deletion_in_i.emplace_back(k);
-                }
-            }
-
-            deletion_indices.emplace_back(deletion_in_i);
-
-            intersection_indices_X.emplace_back(intersection_in_i_X);
-            intersection_indices_Y.emplace_back(intersection_in_i_Y);
-            permutations.emplace_back(perm_in_i);
-            kendall_tau_dists.emplace_back(Kendall_tau(perm_in_i));
-
-            addition_indices.emplace_back(addition_in_i);
-            boundary_indices.emplace_back(boundary_indices_in_i);
-        }
-    }
-
 
 	/**
 	This function is only called in tests
@@ -283,6 +198,98 @@ struct Update_info{
             }
         }
     }
+
+    Update_info(const FiltrationType& F_X, const FiltrationType& F_Y, int degree = -1){
+
+        // F_old = F_X;
+        // F_new = F_Y;
+
+        max_dim = F_Y.maxdim();
+        F_X_vals = F_X.vals();
+        F_Y_vals = F_Y.vals(); // needed for update
+
+		// Need to figure out the relative permutation needed.
+		F_X_perms = bats::filtration_sortperm(F_X.vals());
+        F_Y_perms = bats::filtration_sortperm(F_Y.vals());
+
+        // step 2 loop over each cell in the new filtration Y
+        // get simplicial complex for two filtrations
+        auto& smcplex_X = F_X.complex();
+        auto& smcplex_Y = F_Y.complex();
+
+        for (size_t i = 0; i <= max_dim; i++){
+            // addition information:
+            // a vector stores the indices of simplices in dimension i
+            // that will be added to the new filtration Y
+            std::vector<size_t> addition_in_i;
+            std::vector<std::vector<size_t>> boundary_indices_in_i;
+
+            // deletion information:
+            // a vector stores the indices of simplices in dimension i
+            // that will be deleted from the old filtration X
+            std::vector<size_t> deletion_in_i;
+
+            // permutation information:
+            // a vector that will permute the intersected simplices in the new filration B
+            // to the correct position
+            std::vector<size_t> intersection_in_i_X;
+            std::vector<size_t> intersection_in_i_Y;
+            std::vector<size_t> perm_in_i;
+
+            // find simplices in dimension i for both X and Y
+            auto simplices_Y = smcplex_Y.get_simplices(i); // simplices in dimension i
+            auto simplices_X = smcplex_X.get_simplices(i);
+
+            // create a vector of boolean resutls of comparison
+            // default values is false, which means a simplex in A is not in B
+            // std::vector<bool> bool_results_i(simplices_X.size(), false);
+			std::vector<bool> bool_results_i(smcplex_X.ncells(i), false);
+
+            // loop over each simplex in Y
+            for (size_t j = 0; j < simplices_Y.size(); j++){
+                // find intersecting indices in X
+                auto index = smcplex_X.find_idx(simplices_Y[j]);
+                // if the simplex can be found in X (intersection information)
+                if(index != bats::NO_IND){
+                    bool_results_i[index] = true;
+                    intersection_in_i_X.emplace_back(index);
+                    intersection_in_i_Y.emplace_back(j);
+                }else{ // if not in X (addition information)
+                    addition_in_i.emplace_back(j); //in ascending order!
+                    // find the boundary indices of the simplex that will be added
+                    if(i>0){ // dimension zero has boundary 0
+                        auto [inds,vals] = smcplex_Y.boundary(i, j);
+                        boundary_indices_in_i.emplace_back(inds);
+                    }
+                }
+            }
+
+            // find the permutation information
+            perm_in_i = find_perm_from_vector(intersection_in_i_X);
+
+            // find the deletion indices in X (in ascending order!)
+            for(size_t k = 0; k < bool_results_i.size(); k++){
+                if(!bool_results_i[k]){ // flase, need to deal with deletion information
+                    deletion_in_i.emplace_back(k);
+                }
+            }
+
+            deletion_indices.emplace_back(deletion_in_i);
+
+            intersection_indices_X.emplace_back(intersection_in_i_X);
+            intersection_indices_Y.emplace_back(intersection_in_i_Y);
+            permutations.emplace_back(perm_in_i);
+            kendall_tau_dists.emplace_back(Kendall_tau(perm_in_i));
+
+            addition_indices.emplace_back(addition_in_i);
+            boundary_indices.emplace_back(boundary_indices_in_i);
+        }
+
+		filtered_info(F_X_perms);
+    }
+
+
+
 
     // return the permutation used to move deletion simplices in dimension i
     // to the end of the list of simplices
