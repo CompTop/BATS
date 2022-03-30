@@ -925,11 +925,13 @@ public:
 		// std::cout << "\nafter final reduction R[1] = " << std::endl;
 		// R[1].print();
 
-		//cohomology the highest dimension need add zero columns
+		//cohomology the highest dimension need add/remove zero columns(simplices at the highest dimension)
 		if(degree == +1){
+			// TODO: modify U[max_dim+1] as well, but not necessary because R[max_dim+1] is a zero matrix
 			for (size_t i = 0; i < UI.addition_indices[max_dim].size(); i++){
 				R[max_dim+1].append_column();
 			}
+			R[max_dim+1].erase_final_columns(UI.deletion_indices[max_dim].size());
 		}
 
 		t0 = std::chrono::steady_clock::now();
