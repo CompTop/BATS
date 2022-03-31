@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
 
     auto X = bats::sample_sphere<double>(d, n);
     auto X_data = X.data;
-    X_data.swap_rows(0,1);
     auto Y = bats::DataSet(X_data);
+    add_normal_noise(Y, 0, 0.01);
 
 
 	auto dist = bats::Euclidean(); // metric
