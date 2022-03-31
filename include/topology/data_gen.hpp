@@ -153,6 +153,27 @@ DataSet<T> product_space(
 template <typename T>
 DataSet<T> sample_sphere(
     const size_t d,
+    const size_t n,
+    unsigned seed=0
+) {
+
+    // fill with gaussian random numbers
+    Matrix<T> X(n, d);
+    add_normal_noise(X, seed);
+
+    // normalize
+    for (size_t j = 0; j < n; j++) {
+        T vnorm = norm(X.r(j));
+        X.r(j) /= vnorm;
+    }
+
+    return DataSet<T>(X);
+
+}
+
+template <typename T>
+DataSet<T> sample_sphere(
+    const size_t d,
     const size_t n
 ) {
 

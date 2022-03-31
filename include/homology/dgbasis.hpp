@@ -480,138 +480,144 @@ public:
 	}
 
 	/**
+	delete cells in dimension k
+	*/
+	void _delete_cells(size_t k, const UpdateInfo2& UI) {
+		if (UI.ndeletions[k] == 0) { return; } // quick exit
+
+		if (degree == -1) {
+			if (k < UI.perm.size()-1) {
+				R[k+1].erase_final_rows_unsafe(UI.ndeletions[k]);
+			}
+			U[k].erase_final_columns(UI.ndeletions[k]);
+			U[k].erase_final_rows_unsafe(UI.ndeletions[k]);
+			R[k].erase_final_columns(UI.ndeletions[k]);
+		} else { // degree == +1
+			// delete initial columns of R[k+1]
+			R[k+1].erase_initial_cols(UI.ndeletions[k]);
+			// delete initial columns of U[k+1]
+			U[k+1].erase_initial_cols(UI.ndeletions[k]);
+			// delete initial rows of U[k+1]
+			U[k+1].erase_initial_rows(UI.ndeletions[k]);
+
+			// delete rows one dimension down
+			R[k].erase_initial_rows(UI.ndeletions[k]);
+		}
+		return;
+	}
+
+	void _insert_cells(size_t k, const UpdateInfo2& UI) {
+		using VectT = typename MT::col_type; // column vector type
+		using ValT = typename VectT::val_type; // field type
+		if (UI.insertion_indices.size() == 0) { return; } // quick exit
+
+		if (degree == -1) {
+			if ( k < UI.perm.size() - 1 ) {
+				// insert rows one dimension up
+				R[k+1].insert_rows(UI.insertion_indices[k]);
+			}
+
+			// create vectors of columns to insert
+			std::vector<VectT> Ucols;
+			Ucols.reserve(UI.insertion_indices[k].size());
+			std::vector<VectT> Rcols;
+			Rcols.reserve(UI.insertion_indices[k].size());
+			for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
+				Ucols.emplace_back(VectT(size_t(UI.insertion_indices[k][i])));
+				Rcols.emplace_back(UI.insertion_cols[k][i].cast_values(ValT()));
+			}
+
+			R[k].insert_columns(UI.insertion_indices[k], Rcols);
+			U[k].insert_rows(UI.insertion_indices[k]); //zero rows
+			U[k].insert_columns(UI.insertion_indices[k], Ucols);
+
+		} else { // degree == +1
+
+			// insert zero columns into R[k+1]
+			std::vector<VectT> Rcols(UI.insertion_indices[k].size(), VectT());
+			R[k+1].insert_columns(UI.insertion_indices[k], Rcols);
+
+			// row insertion tends to be really slow for cohomology
+			// for now, just do transpose
+			U[k+1].insert_rows(UI.insertion_indices[k]);
+			// U[k+1] = U[k+1].transpose();
+			// std::vector<VectT> Urows(UI.insertion_indices[k].size(), VectT());
+			// U[k+1].insert_columns(UI.insertion_indices[k], Urows);
+			// U[k+1] = U[k+1].transpose();
+
+			// create vectors of columns to insert
+			std::vector<VectT> Ucols;
+			Ucols.reserve(UI.insertion_indices[k].size());
+			for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
+				Ucols.emplace_back(VectT(size_t(UI.insertion_indices[k][i])));
+			}
+
+
+
+			U[k+1].insert_columns(UI.insertion_indices[k], Ucols); // identity columns
+
+
+			// actually need to insert boundary transpose
+			// if we want to insert row di, need to form ri = di V
+			// => ri.T = V.T di.T
+			auto Vt = U[k].transpose();
+			// vector of rows to insert
+			// we'll actually insert as columns of the transpose
+			// std::vector<VectT> Rcols;
+			Rcols.clear();
+			Rcols.reserve(UI.insertion_indices[k].size());
+			for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
+				auto Di = UI.insertion_cols[k][i].cast_values(ValT());
+				Rcols.emplace_back(Vt.gemv(Di));
+			}
+
+
+			R[k] = R[k].transpose(); // take transpose before insertion
+			R[k].insert_columns(UI.insertion_indices[k], Rcols);
+			R[k] = R[k].transpose(); // transpose again so we have inserted rows
+
+		}
+	}
+	/**
 	General update factorization
 	*/
 	void update_basis(
 		const UpdateInfo2& UI
 	) {
-		using VectT = typename MT::col_type; // column vector type
-		using ValT = typename VectT::val_type; // field type
+		// using VectT = typename MT::col_type; // column vector type
+		// using ValT = typename VectT::val_type; // field type
 
 		// step 1: perform permutations
 		for (size_t k = 0; k < UI.perm.size(); ++k) {
 			permute_matrices(k, UI.perm[k]);
 		}
 
-		// step 2: correct U matrices
 		for (size_t k = 0; k < UI.perm.size(); ++k) {
 			size_t k_ind = degree == -1 ? k : k + 1;
-
+			// step 2: correct U matrices
 			_make_U_upper_triangular(k_ind);
+			// step 3: process deletions
+			_delete_cells(k, UI);
+			// step 4: process insertions
+			_insert_cells(k, UI);
 		}
 
-		// step 3: process deletions
+		// finalize reduction
 		if (degree == -1) {
-			// delete rows one dimension up
-			for (size_t k = 0; k < UI.perm.size()-1; ++k) {
-				R[k+1].erase_final_rows_unsafe(UI.ndeletions[k]);
-			}
-			// delete columns
-			for (size_t k = 0; k < UI.perm.size(); ++k) {
-				U[k].erase_final_columns(UI.ndeletions[k]);
-				U[k].erase_final_rows_unsafe(UI.ndeletions[k]);
-				R[k].erase_final_columns(UI.ndeletions[k]);
+			for (int k = UI.perm.size()-1; k >= 0; --k) {
+				if (k < UI.perm.size() - 1) {
+					p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k+1], p2c[k+1], bats::standard_reduction_flag());
+				} else {
+					p2c[k] = reduce_matrix(R[k], U[k]);
+				}
 			}
 		} else { // degree == +1
-			// delete columns for D[k+1]: C^k -> C^{k+1}
-			for (size_t k = 0; k < UI.perm.size(); ++k) {
-				// delete initial columns of R[k+1]
-				R[k+1].erase_initial_cols(UI.ndeletions[k]);
-				// delete initial columns of U[k+1]
-				U[k+1].erase_initial_cols(UI.ndeletions[k]);
-				// delete initial rows of U[k+1]
-				U[k+1].erase_initial_rows(UI.ndeletions[k]);
-
-			}
-			// delete rows for D[k] : C^{k-1} -> C^k
-			for (size_t k = 0; k < UI.perm.size(); ++k) {
-				R[k].erase_initial_rows(UI.ndeletions[k]);
+			p2c[0] = reduce_matrix(R[0], U[0]);
+			for (int k = 1; k < UI.perm.size() + 1; ++k) {
+				p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k-1], p2c[k-1], bats::standard_reduction_flag());
 			}
 		}
 
-
-		// step 4: process insertions
-		if (degree == -1) {
-			// insert rows one dimension up
-			for (size_t k = 0; k < UI.perm.size() - 1; ++k) {
-				// inserts rows with insertion indices
-				R[k+1].insert_rows(UI.insertion_indices[k]);
-			}
-			// insert columns
-			for (size_t k = 0; k < UI.perm.size(); ++k) {
-
-				// create vectors of columns to insert
-				std::vector<VectT> Ucols;
-				Ucols.reserve(UI.insertion_indices[k].size());
-				std::vector<VectT> Rcols;
-				Rcols.reserve(UI.insertion_indices[k].size());
-				for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
-					Ucols.emplace_back(VectT(size_t(UI.insertion_indices[k][i])));
-					Rcols.emplace_back(UI.insertion_cols[k][i].cast_values(ValT()));
-				}
-
-				R[k].insert_columns(UI.insertion_indices[k], Rcols);
-				U[k].insert_rows(UI.insertion_indices[k]); //zero rows
-				U[k].insert_columns(UI.insertion_indices[k], Ucols);
-
-			}
-		} else { // degree == +1
-
-			// insert columns for D[k+1]: C^{k} -> C^{k+1}
-			for (size_t k = 0; k < UI.perm.size(); ++k) {
-
-				// insert zero columns into R[k+1]
-				std::vector<VectT> Rcols(UI.insertion_indices[k].size(), VectT());
-				R[k+1].insert_columns(UI.insertion_indices[k], Rcols);
-
-
-				// create vectors of columns to insert
-				std::vector<VectT> Ucols;
-				Ucols.reserve(UI.insertion_indices[k].size());
-				for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
-					Ucols.emplace_back(VectT(size_t(UI.insertion_indices[k][i])));
-				}
-
-				// row insertion tends to be really slow for cohomology
-				// for now, just do transpose
-				U[k+1] = U[k+1].transpose();
-				std::vector<VectT> Urows(UI.insertion_indices[k].size(), VectT());
-				U[k+1].insert_columns(UI.insertion_indices[k], Urows);
-				U[k+1] = U[k+1].transpose();
-
-				U[k+1].insert_columns(UI.insertion_indices[k], Ucols); // identity columns
-
-
-			}
-			// insert rows for D[k]: C^{k-1} -> C^k
-			for (size_t k = 0; k < UI.perm.size(); ++k) {
-				// actually need to insert boundary transpose
-				// if we want to insert row di, need to form ri = di V
-				// => ri.T = V.T di.T
-				auto Vt = U[k].transpose();
-				// vector of rows to insert
-				// we'll actually insert as columns of the transpose
-				std::vector<VectT> Rcols;
-				Rcols.reserve(UI.insertion_indices[k].size());
-				for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
-					auto Di = UI.insertion_cols[k][i].cast_values(ValT());
-					Rcols.emplace_back(Vt.gemv(Di));
-				}
-
-
-				R[k] = R[k].transpose(); // take transpose before insertion
-				R[k].insert_columns(UI.insertion_indices[k], Rcols);
-				R[k] = R[k].transpose(); // transpose again so we have inserted rows
-
-			}
-		}
-
-		// step 5: complete reduction
-		for (size_t k = 0; k < UI.perm.size(); ++k) {
-			size_t k_ind = degree == -1 ? k : k + 1;
-
-			p2c[k_ind] = reduce_matrix(R[k_ind], U[k_ind]);
-		}
 
 		set_indices(); // update homology indices
 	}

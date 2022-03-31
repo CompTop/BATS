@@ -697,17 +697,19 @@ public:
 	 * (for matrix zero row addition usage)
 	insert zero row indices at specified locations
 	assumes that list of rows is in sorted order
+
+	ninserted is lower bound on number inserted before first element
 	*/
-	void insert_rows(const std::vector<size_t>& r_inds) {
+	void insert_rows(const std::vector<size_t>& r_inds, size_t ninserted = 0) {
 		// size_t offset = 0;
 		if (r_inds.begin() == r_inds.end()) return;
 		auto iv = indval.begin();
 		// keep track of how many rows have already been inserted
 		// this will help when many rows are inserted near beginning
-		size_t ninserted = 0;
+
 		while (iv != indval.end()) {
 			// search for how many rows will be inserted
-			auto targ = iv->ind; // target is original index + number of rows already inserted
+			auto targ = iv->ind + ninserted; // target is original index + number of rows already inserted
 			// ri is first element with value >= targ
 			auto ri = std::lower_bound(r_inds.begin() + ninserted, r_inds.end(), targ);
 			ninserted = std::distance(r_inds.begin(), ri); // number inserted at targ
@@ -717,7 +719,7 @@ public:
 			iv->ind += ninserted; // this is number inserted to this index
 
 			// insert additional rows as necessary
-			while (*ri <= iv->ind && ri != r_inds.end()) {++ri; iv->ind++;}
+			while (*ri <= iv->ind && ri != r_inds.end()) {++ri; iv->ind++; ++ninserted; }
 
 			++iv;
 		}

@@ -343,8 +343,12 @@ public:
 	insert zero rows at specified locations
 	*/
 	void insert_rows(const std::vector<size_t>& r_inds) {
+		// figure out how many are inserted before first row
+		size_t ninserted = 0;
+		while (ninserted < r_inds.size() && r_inds[ninserted] == ninserted) { ++ninserted; }
+
 		for (size_t j = 0; j < n; ++j) {
-			col[j].insert_rows(r_inds);
+			col[j].insert_rows(r_inds, ninserted);
 		}
 		m = m + r_inds.size();
 	}
