@@ -509,7 +509,7 @@ public:
 	void _insert_cells(size_t k, const UpdateInfo2& UI) {
 		using VectT = typename MT::col_type; // column vector type
 		using ValT = typename VectT::val_type; // field type
-		if (UI.insertion_indices.size() == 0) { return; } // quick exit
+		if (UI.insertion_indices[k].size() == 0) { return; } // quick exit
 
 		if (degree == -1) {
 			if ( k < UI.perm.size() - 1 ) {
@@ -586,12 +586,12 @@ public:
 	) {
 		// using VectT = typename MT::col_type; // column vector type
 		// using ValT = typename VectT::val_type; // field type
-
+		
 		// step 1: perform permutations
 		for (size_t k = 0; k < UI.perm.size(); ++k) {
 			permute_matrices(k, UI.perm[k]);
 		}
-
+		
 		for (size_t k = 0; k < UI.perm.size(); ++k) {
 			size_t k_ind = degree == -1 ? k : k + 1;
 			// step 2: correct U matrices
