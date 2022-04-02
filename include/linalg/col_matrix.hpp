@@ -37,6 +37,7 @@ private:
 public:
     using val_type = typename TC::val_type;
 	using col_type = TC;
+	using tmp_type = typename TC::tmp_type; // for use with axpy
 
     // default constructor
     ColumnMatrix() {}
@@ -126,6 +127,22 @@ public:
 
     auto getval(const size_t i, const size_t j) const {
         return col[j].getval(i);
+    }
+
+	// permute rows in-place
+    void permute_rows(const std::vector<size_t> &rowperm) {
+        // // TODO: this is trivially parallelizable
+        for (size_t i = 0; i < col.size(); i++) {
+            col[i].permute(rowperm);
+        }
+    }
+
+	// permute rows in-place
+    void ipermute_rows(const std::vector<size_t> &rowperm) {
+        // // TODO: this is trivially parallelizable
+        for (size_t i = 0; i < col.size(); i++) {
+            col[i].ipermute(rowperm);
+        }
     }
 
     // inline size_t width() {
@@ -351,6 +368,58 @@ public:
 			col[j].insert_rows(r_inds, ninserted);
 		}
 		m = m + r_inds.size();
+	}
+
+	/**
+	insert rows represented by sparse vectors
+	*/
+	void insert_rows(
+		const std::vector<size_t>& r_inds,
+		const std::vector<TC>& rows
+	) {
+		auto t0 = std::chrono::steady_clock::now();
+		size_t iloc = m; // first insert location
+		size_t m0 = m; // inital m
+		m = m + r_inds.size(); // add zero rows to end
+		// first figure out permutation
+		std::vector<size_t> rperm(m);
+		size_t i0 = 0; // original index
+		size_t i1 = 0; // insertion index
+		size_t i = 0; // permutation index
+		while (i < m) {
+			// insert rows until we get to an insertion index
+			while (r_inds[i1] > i0) {
+				rperm[i++] = i0++;
+			}
+			// insert index
+			rperm[i++] = iloc++;
+			++i1;
+		}
+		auto t1 = std::chrono::steady_clock::now();
+		std::cout << "\t\t\t  form perm : "
+			<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+			<< "ms" << std::endl;
+
+		// now insert rows at end of columns
+		t0 = std::chrono::steady_clock::now();
+		for (i1 = 0; i1 < r_inds.size(); ++i1) {
+			for (auto it = rows[i1].nzbegin(); it != rows[i1].nzend(); ++it) {
+				col[it->ind].emplace_back(i1+m0, it->val);
+			}
+		}
+		t1 = std::chrono::steady_clock::now();
+		std::cout << "\t\t\t  append rows : "
+			<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+			<< "ms" << std::endl;
+
+		// finally, apply permuation
+		t0 = std::chrono::steady_clock::now();
+		permute_rows(rperm);
+		t1 = std::chrono::steady_clock::now();
+		std::cout << "\t\t\t  apply perm : "
+			<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+			<< "ms" << std::endl;
+
 	}
 
 	/**
@@ -609,10 +678,20 @@ public:
     // gemv
     TC gemv(const TC &x) const {
         TC y;  // zero initializer
-		typename TC::tmp_type tmp; // for use with axpy
+		tmp_type tmp; // for use with axpy
         // loop over nonzero indices of x
         for (auto xit = x.nzbegin(); xit != x.nzend(); ++xit) {
             y.axpy((*xit).val, col[(*xit).ind], tmp); // y <- x[j]*A[j]
+        }
+        return y;
+    }
+
+
+	TC gemv(const TC &x, tmp_type& tmpx) const {
+        TC y;  // zero initializer
+        // loop over nonzero indices of x
+        for (auto xit = x.nzbegin(); xit != x.nzend(); ++xit) {
+            y.axpy((*xit).val, col[(*xit).ind], tmpx); // y <- x[j]*A[j]
         }
         return y;
     }
@@ -718,21 +797,6 @@ public:
 		col[k].axpy(b, cj);
 	}
 
-    // permute rows in-place
-    void permute_rows(const std::vector<size_t> &rowperm) {
-        // // TODO: this is trivially parallelizable
-        for (size_t i = 0; i < col.size(); i++) {
-            col[i].permute(rowperm);
-        }
-    }
-
-	// permute rows in-place
-    void ipermute_rows(const std::vector<size_t> &rowperm) {
-        // // TODO: this is trivially parallelizable
-        for (size_t i = 0; i < col.size(); i++) {
-            col[i].ipermute(rowperm);
-        }
-    }
 
     // permute both rows and columns
     void permute(const std::vector<size_t> &rowperm,

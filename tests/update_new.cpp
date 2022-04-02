@@ -17,12 +17,14 @@ using namespace bats;
 
 int main(int argc, char* argv[]) {
     // std::vector<std::vector<std::vector<size_t>>> Splx_3;
-    size_t d = 2; // dimension of Euclidean Space
+    size_t d = 3; // dimension of Euclidean Space
     size_t n = 100; // number of points to sample
 
     // maximum simplex dimension
     size_t maxdim = bats::util::io::parse_argv(argc, argv, "-maxdim", 3);
-    double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 2);
+    double rmax = bats::util::io::parse_argv(argc, argv, "-rmax", 1.4);
+    double rdiff = bats::util::io::parse_argv(argc, argv, "-rdiff", 0.2);
+    std::cout << "rmax = " << rmax << "; rdiff = " << rdiff << std::endl;
 
     auto X = bats::sample_sphere<double>(d, n, 0);
     // auto X_data = X.data;
@@ -32,21 +34,24 @@ int main(int argc, char* argv[]) {
 
     auto dist = bats::Euclidean(); // metric
 
-    auto FX = bats::RipsFiltration<CpxT>(X, dist, 20.5, maxdim);
-    auto FY = bats::RipsFiltration<CpxT>(X, dist, 20.7, maxdim);
+    auto FX = bats::RipsFiltration<CpxT>(X, dist, rmax, maxdim);
+    FX.complex().print_summary();
+    auto FY = bats::RipsFiltration<CpxT>(X, dist, rmax + rdiff, maxdim);
+    FY.complex().print_summary();
 
-    
     {
-        auto t0 = std::chrono::steady_clock::now();
-        auto U = bats::UpdateInfo2(FX, FY);
-        auto t1 = std::chrono::steady_clock::now();
-        std::cout << "Construct update info takes "
-            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
-            << "ms" << std::endl;
-        for (int degree : {-1, +1}) {
+
+        for (int degree : {+1, -1}) {
         // for (int degree : {+1}) {
             // int degree = -1;
             std::cout << "degree(" << degree << ")" << std::endl;
+
+            auto t0 = std::chrono::steady_clock::now();
+            auto U = bats::UpdateInfo2(FX, FY);
+            auto t1 = std::chrono::steady_clock::now();
+            std::cout << "\tConstruct update info takes "
+                << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+                << "ms" << std::endl;
 
             t0 = std::chrono::steady_clock::now();
             auto CX = FilteredDGVectorSpace<double, MT>(FX, degree);

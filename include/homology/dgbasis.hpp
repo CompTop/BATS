@@ -510,7 +510,7 @@ public:
 		using VectT = typename MT::col_type; // column vector type
 		using ValT = typename VectT::val_type; // field type
 		if (UI.insertion_indices[k].size() == 0) { return; } // quick exit
-
+		std::cout << "\t\t_insert_cells " << k << std::endl;
 		if (degree == -1) {
 			if ( k < UI.perm.size() - 1 ) {
 				// insert rows one dimension up
@@ -534,48 +534,89 @@ public:
 		} else { // degree == +1
 
 			// insert zero columns into R[k+1]
+			auto t0 = std::chrono::steady_clock::now();
 			std::vector<VectT> Rcols(UI.insertion_indices[k].size(), VectT());
 			R[k+1].insert_columns(UI.insertion_indices[k], Rcols);
+			auto t1 = std::chrono::steady_clock::now();
+	        std::cout << "\t\t  insert Rcol "
+	            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+	            << "ms" << std::endl;
 
 			// row insertion tends to be really slow for cohomology
 			// for now, just do transpose
+			t0 = std::chrono::steady_clock::now();
 			U[k+1].insert_rows(UI.insertion_indices[k]);
+			t1 = std::chrono::steady_clock::now();
+	        std::cout << "\t\t  insert Urow "
+	            << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+	            << "ms" << std::endl;
 			// U[k+1] = U[k+1].transpose();
 			// std::vector<VectT> Urows(UI.insertion_indices[k].size(), VectT());
 			// U[k+1].insert_columns(UI.insertion_indices[k], Urows);
 			// U[k+1] = U[k+1].transpose();
 
 			// create vectors of columns to insert
+			t0 = std::chrono::steady_clock::now();
 			std::vector<VectT> Ucols;
 			Ucols.reserve(UI.insertion_indices[k].size());
 			for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
 				Ucols.emplace_back(VectT(size_t(UI.insertion_indices[k][i])));
 			}
-
-
-
 			U[k+1].insert_columns(UI.insertion_indices[k], Ucols); // identity columns
-
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  insert Ucol "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 
 			// actually need to insert boundary transpose
 			// if we want to insert row di, need to form ri = di V
 			// => ri.T = V.T di.T
+			t0 = std::chrono::steady_clock::now();
 			auto Vt = U[k].transpose();
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  Vt = U[k].transpose(): "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 			// vector of rows to insert
 			// we'll actually insert as columns of the transpose
 			// std::vector<VectT> Rcols;
+			t0 = std::chrono::steady_clock::now();
 			Rcols.clear();
 			Rcols.reserve(UI.insertion_indices[k].size());
+			typename VectT::tmp_type tmp;
 			for (size_t i = 0; i < UI.insertion_indices[k].size(); ++i) {
 				auto Di = UI.insertion_cols[k][i].cast_values(ValT());
-				Rcols.emplace_back(Vt.gemv(Di));
+				Rcols.emplace_back(Vt.gemv(Di, tmp));
 			}
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  form Rrows : "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 
-
+			t0 = std::chrono::steady_clock::now();
 			R[k] = R[k].transpose(); // take transpose before insertion
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  transpose 1 : "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
+			t0 = std::chrono::steady_clock::now();
 			R[k].insert_columns(UI.insertion_indices[k], Rcols);
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  insert Rrows : "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
+			t0 = std::chrono::steady_clock::now();
 			R[k] = R[k].transpose(); // transpose again so we have inserted rows
-
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  transpose 2 : "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
+			// t0 = std::chrono::steady_clock::now();
+			// R[k].insert_rows(UI.insertion_indices[k], Rcols);
+			// t1 = std::chrono::steady_clock::now();
+			// std::cout << "\t\t  insert Rrows : "
+			// 	<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+			// 	<< "ms" << std::endl;
 		}
 	}
 	/**
@@ -586,12 +627,12 @@ public:
 	) {
 		// using VectT = typename MT::col_type; // column vector type
 		// using ValT = typename VectT::val_type; // field type
-		
+
 		// step 1: perform permutations
 		for (size_t k = 0; k < UI.perm.size(); ++k) {
 			permute_matrices(k, UI.perm[k]);
 		}
-		
+
 		for (size_t k = 0; k < UI.perm.size(); ++k) {
 			size_t k_ind = degree == -1 ? k : k + 1;
 			// step 2: correct U matrices
