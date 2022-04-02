@@ -386,7 +386,7 @@ public:
 		size_t i0 = 0; // original index
 		size_t i1 = 0; // insertion index
 		size_t i = 0; // permutation index
-		while (i < m) {
+		while (i1 < r_inds.size() && i < m) {
 			// insert rows until we get to an insertion index
 			while (r_inds[i1] > i0) {
 				rperm[i++] = i0++;
@@ -394,6 +394,10 @@ public:
 			// insert index
 			rperm[i++] = iloc++;
 			++i1;
+		}
+		// insert any remaining rows
+		while (i < m) {
+			rperm[i++] = i0++;
 		}
 		auto t1 = std::chrono::steady_clock::now();
 		std::cout << "\t\t\t  form perm : "
@@ -414,7 +418,8 @@ public:
 
 		// finally, apply permuation
 		t0 = std::chrono::steady_clock::now();
-		permute_rows(rperm);
+		auto irperm = bats::util::sortperm(rperm);
+		permute_rows(irperm);
 		t1 = std::chrono::steady_clock::now();
 		std::cout << "\t\t\t  apply perm : "
 			<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()

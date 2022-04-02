@@ -541,11 +541,11 @@ public:
 			indval.pop_back();
 		}
 	}
-	// erase rows of a matrix with index larger than m 
+	// erase rows of a matrix with index larger than m
 	void erase_all() {
 		indval.clear();
 	}
-	
+
 
 	/**
 	erase the first ndelete rows of the matrix

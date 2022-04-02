@@ -593,30 +593,30 @@ public:
 				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
 				<< "ms" << std::endl;
 
-			t0 = std::chrono::steady_clock::now();
-			R[k] = R[k].transpose(); // take transpose before insertion
-			t1 = std::chrono::steady_clock::now();
-			std::cout << "\t\t  transpose 1 : "
-				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
-				<< "ms" << std::endl;
-			t0 = std::chrono::steady_clock::now();
-			R[k].insert_columns(UI.insertion_indices[k], Rcols);
-			t1 = std::chrono::steady_clock::now();
-			std::cout << "\t\t  insert Rrows : "
-				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
-				<< "ms" << std::endl;
-			t0 = std::chrono::steady_clock::now();
-			R[k] = R[k].transpose(); // transpose again so we have inserted rows
-			t1 = std::chrono::steady_clock::now();
-			std::cout << "\t\t  transpose 2 : "
-				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
-				<< "ms" << std::endl;
 			// t0 = std::chrono::steady_clock::now();
-			// R[k].insert_rows(UI.insertion_indices[k], Rcols);
+			// R[k] = R[k].transpose(); // take transpose before insertion
+			// t1 = std::chrono::steady_clock::now();
+			// std::cout << "\t\t  transpose 1 : "
+			// 	<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+			// 	<< "ms" << std::endl;
+			// t0 = std::chrono::steady_clock::now();
+			// R[k].insert_columns(UI.insertion_indices[k], Rcols);
 			// t1 = std::chrono::steady_clock::now();
 			// std::cout << "\t\t  insert Rrows : "
 			// 	<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
 			// 	<< "ms" << std::endl;
+			// t0 = std::chrono::steady_clock::now();
+			// R[k] = R[k].transpose(); // transpose again so we have inserted rows
+			// t1 = std::chrono::steady_clock::now();
+			// std::cout << "\t\t  transpose 2 : "
+			// 	<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+			// 	<< "ms" << std::endl;
+			t0 = std::chrono::steady_clock::now();
+			R[k].insert_rows(UI.insertion_indices[k], Rcols);
+			t1 = std::chrono::steady_clock::now();
+			std::cout << "\t\t  insert Rrows : "
+				<< std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
+				<< "ms" << std::endl;
 		}
 	}
 	/**
