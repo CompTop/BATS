@@ -77,10 +77,14 @@ int main(int argc, char* argv[]) {
             std::cout << "\treduction from scratch takes "
                 << std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count()
                 << "ms" << std::endl;
-
-            // if(test_reduce_result(RX , RY)){
-            //     std::cout << "By comparing two RFCC, update success!" << std::endl;
-            // }
+            std::cout << "Update on RX to RY gives" << std::endl;
+            RX.RC.print_summary();
+            std::cout << "Recompute RY gives" << std::endl;
+            RY.RC.print_summary();
+            if(test_reduce_result(RX , RY)){
+                std::cout << "By comparing two RFCC, update success!" << std::endl;
+            }
+            std::cout << "\n" << std::endl;
         }
     }
 
