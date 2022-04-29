@@ -63,4 +63,40 @@ Filtration<T, SimplicialComplex> RipsFiltration(
     return FlagFiltration<SimplicialComplex>(edges, n, dmax, T(0));
 }
 
+/**
+Strict Cover Filtration
+*/
+template <typename T, typename CpxT, typename M>
+Filtration<T, CpxT> StrictRipsCoverFiltration(
+    const DataSet<T> &X,
+    const bats::Cover &cover,
+    const M &dist,
+    T rmax,
+    size_t dmax
+) {
+    size_t n = X.size();
+    Filtration<T, CpxT> F(n, dmax);
+    std::vector<filtered_edge<T>> edges;
+
+    for (auto& U : cover) {
+        edges.clear();
+        auto iit = U.cbegin();
+        while (iit != U.cend()) {
+            auto jit = iit;
+            ++jit;
+            while (jit != U.cend()) {
+                T dij = dist(X[*iit], X[*jit]);
+                if (dij < rmax) {
+                    edges.emplace_back(filtered_edge<T>(*iit, *jit, dij));
+                }
+                ++jit;
+            }
+            ++iit;
+        }
+        auto FU = FlagFiltration<CpxT>(edges, n, dmax, T(0)); // filtration over this set
+        F.union_add(FU);
+    }
+    return F;
+}
+
 } // namespace bats

@@ -162,6 +162,19 @@ public:
 		return ret;
 	}
 
+	void union_add(const Filtration& F2) {
+		std::vector<size_t> s;
+		for (size_t dim = 0; dim < F2.maxdim() + 1; ++dim){
+			// loop over simplices in dimension dim
+			for (size_t i=0; i < F2.X.ncells(dim); ++i) {
+				F2.X.get_simplex(dim, i, s);
+				auto ci = X.add(s);
+				reserve(dim, ci.ind+1);
+				val[dim][ci.ind] = F2.val[dim][i];
+			}
+		}
+	}
+
 	// get sort permutation for filtration in dimension dim
 	inline std::vector<size_t> sortperm(size_t dim) const {
 		return filtration_sortperm(val[dim]);
