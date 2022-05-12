@@ -230,7 +230,7 @@ Subset of Cubical complex of 3-dimensional grid on n1 x n2 x n3 vertices
 This function is useful for constructing zigzags through a grid
 */
 CubicalComplex Cube(
-    size_t n1, size_t n2, size_t n3, // dimensions of grid
+    size_t, size_t, size_t, // dimensions of grid - not used
     size_t i0, size_t i1, // range of first index
     size_t j0, size_t j1, // range of second index
     size_t k0, size_t k1  // range of third index

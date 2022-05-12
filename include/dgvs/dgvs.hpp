@@ -96,7 +96,7 @@ struct DGVectorSpace {
 	}
 
 	// permute basis in dimension k
-	void permute_basis(size_t k, const std::vector<size_t> &perm) {
+	void permute_basis(ssize_t k, const std::vector<size_t> &perm) {
 		// TODO: this assumes that degree = -1
 		if (k == 0) {
 			// only worry about boundary[1]
@@ -119,7 +119,7 @@ struct DGVectorSpace {
 		}
 	}
 
-	void ipermute_basis(size_t k, const std::vector<size_t> &perm) {
+	void ipermute_basis(ssize_t k, const std::vector<size_t> &perm) {
 		// TODO: this assumes that degree = -1
 		if (degree == -1) {
 			if (k == 0) {

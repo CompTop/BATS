@@ -154,7 +154,7 @@ template <typename T>
 DataSet<T> sample_sphere(
     const size_t d,
     const size_t n,
-    unsigned seed=0
+    unsigned seed
 ) {
 
     // fill with gaussian random numbers
