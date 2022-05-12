@@ -219,8 +219,8 @@ public:
 		std::vector<TC> newcol(n);
 
 		size_t i = 0;
-		auto newi = 0;
-		auto oldi = 0;
+		size_t newi = 0;
+		size_t oldi = 0;
 		while (oldi < col.size() && newi < insert_col.size()) {
 			if (i == c_inds[newi]) {
 				// insert next new column

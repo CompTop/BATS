@@ -181,7 +181,7 @@ public:
 			R[0] = C.differential[0];
 			p2c[0] = reduce_matrix(R[0], algflag());
 			std::vector<size_t> clear_inds = get_clearing_inds(p2c[0]);
-			for (ssize_t k = 1; k < dmax; ++k) {
+			for (size_t k = 1; k < dmax; ++k) {
 				R[k] = C.differential[k];
 				p2c[k] = reduce_matrix_clearing(R[k], clear_inds, algflag());
 				clear_inds = get_clearing_inds(p2c[k]);
@@ -222,7 +222,7 @@ public:
 			U[0] = MT::identity(C.differential[0].ncol());
 			R[0] = C.differential[0];
 			p2c[0] = reduce_matrix(R[0], U[0], algflag());
-			for (ssize_t k = 1; k < dmax; ++k) {
+			for (size_t k = 1; k < dmax; ++k) {
 				size_t dimk = C.differential[k].ncol();
 				U[k] = MT::identity(dimk);
 				R[k] = C.differential[k];
@@ -645,8 +645,8 @@ public:
 
 		// finalize reduction
 		if (degree == -1) {
-			for (int k = UI.perm.size()-1; k >= 0; --k) {
-				if (k < UI.perm.size() - 1) {
+			for (ssize_t k = UI.perm.size()-1; k >= 0; --k) {
+				if (k < (ssize_t) UI.perm.size() - 1) {
 					p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k+1], p2c[k+1], bats::standard_reduction_flag());
 				} else {
 					p2c[k] = reduce_matrix(R[k], U[k]);
@@ -654,7 +654,7 @@ public:
 			}
 		} else { // degree == +1
 			p2c[0] = reduce_matrix(R[0], U[0]);
-			for (int k = 1; k < UI.perm.size() + 1; ++k) {
+			for (size_t k = 1; k < UI.perm.size() + 1; ++k) {
 				p2c[k] = reduce_matrix_clearing(R[k], U[k], R[k-1], p2c[k-1], bats::standard_reduction_flag());
 			}
 		}

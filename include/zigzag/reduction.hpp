@@ -450,7 +450,7 @@ auto zigzag_barcode_reduction(
 
 
 	for (auto& fval : filt_order) {
-		size_t k = fval.dim; // dimension
+		ssize_t k = fval.dim; // dimension
 		// std::cout << fval << std::endl;
 
 		if (fval.entry) {
