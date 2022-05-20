@@ -152,6 +152,53 @@ std::tuple<std::vector<size_t>, std::vector<T>> greedy_landmarks_hausdorff(
 	return std::make_tuple(inds, hds);
 }
 
+/**
+greedy landmarking
+D - dataset
+dist - Metric struct
+i0 - seed point for landmark set
+k - number of landmarks
+template over data type T and metric M
+return indices of landmarks in order, hausdorff distance to rest of set
+*/
+template <typename T, typename M>
+std::tuple<std::vector<size_t>, std::vector<T>> greedy_landmarks_hausdorff(
+	const DataSet<T> &D,
+	const M &dist,
+	const size_t i0,
+	const size_t k
+) {
+	std::vector<size_t> inds; // index order
+	std::vector<T>      hds; // Hausdorff distance to full data set of indices up that point
+	inds.reserve(k);
+	hds.reserve(k);
+	inds.emplace_back(i0);
+
+	std::vector<T> d = dist(D[i0], D);
+
+	while (inds.size() < k) {
+		// get furthest point from landmark set
+		auto it = std::max_element(d.cbegin(), d.cend());
+		hds.emplace_back(*it); // Hausdorff distance of set up to that point.
+		size_t i = std::distance(d.cbegin(), it);
+
+		// insert new point
+		inds.emplace_back(i);
+
+		// get all distances
+		std::vector<T> di = dist(D[i], D);
+		// update distances from set
+		for (size_t k = 0; k < d.size(); k++) {
+			d[k] = (d[k] < di[k]) ? d[k] : di[k];
+		}
+	}
+
+	auto it = std::max_element(d.cbegin(), d.cend());
+	hds.emplace_back(*it); // Hausdorff distance of set up to that point.
+
+	return std::make_tuple(inds, hds);
+}
+
 // greedy landmarking
 // D is dataset
 // k is number of landmarks
