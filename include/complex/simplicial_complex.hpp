@@ -158,16 +158,13 @@ private:
         return cell_ind(dim, ind);
     }
 
-
-    // add simplex to complex with appropriate checks
-    cell_ind add_safe(std::vector<size_t> &s) {
+    /**
+    add directed or degenerate simplex with some safety checks
+    */
+    cell_ind add_directed_safe(const std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
         // check that we have reserved memory for dimension
         reserve(dim);
-
-        // ensure simplex is sorted
-        std::sort(s.begin(), s.end());
-        // check if simplex is already in complex
         if (spx_to_idx.count(s) > 0) {
             // simplex is already in complex
             return cell_ind(dim, spx_to_idx[s]);
@@ -176,94 +173,108 @@ private:
         return _add_unsafe(s);
     }
 
+
+    // add simplex to complex with appropriate checks
+    cell_ind add_safe(std::vector<size_t> &s) {
+        // ensure simplex is sorted
+        std::sort(s.begin(), s.end());
+        return add_directed_safe(s);
+    }
+
 	// adds a simplex to the complex without doing any checks
     // recurse on faces
 	// put any added cells in ci
-	cell_ind _add_recursive(std::vector<size_t> &s, std::vector<cell_ind> &ci) {
-        size_t dim = s.size() - 1;
+	 cell_ind _add_recursive(const std::vector<size_t> &s, std::vector<cell_ind> &ci) {
+    size_t dim = s.size() - 1;
 
-		// get index of simplex
-        size_t ind = _ncells[dim]++;
+    // get index of simplex
+    size_t ind = _ncells[dim]++;
 
-        // determine faces
-        if (dim > 0){
-            // first we'll add faces
+    // determine faces
+    if (dim > 0){
+      // first we'll add faces
 
-			std::vector<size_t> face; // newly allocated face
+      std::vector<size_t> face; // newly allocated face
 
-            int c = -1;
-            // loop over faces in lexicographical order
-            size_t spx_len = dim + 1;
-            for (size_t k = 0; k < spx_len; k++) {
+      int c = -1;
+      // loop over faces in lexicographical order
+      size_t spx_len = dim + 1;
+      for (size_t k = 0; k < spx_len; k++) {
 
-                size_t k2 = dim-k; // index to skip
-                face.clear();
-                for (size_t j = 0; j < k2; j++) {
-                    face.emplace_back(s[j]);
-                }
-                for (size_t j = k2+1; j < spx_len; j++) {
-                    face.emplace_back(s[j]);
-                }
-
-                size_t ind = find_idx(face);
-                // add face recursively
-                if (ind == bats::NO_IND) {
-					cell_ind fci = _add_recursive(face, ci);
-					ind = fci.ind;
-                }
-                faces[dim-1].emplace_back(ind);
-                coeff[dim-1].emplace_back(c);
-                c = -c;
-            }
-			// if we made it to this point, the simplex will be added
-			// we should sort the faces and coeff
-			bats::util::fill_sortperm(
-				faces[dim-1].begin() + ((dim + 1) * ind),
-				faces[dim-1].begin() + ((dim + 1) * (ind+1)),
-				__perm
-			);
-			bats::util::apply_perm(
-				faces[dim-1].begin() + ((dim + 1) * ind),
-				__face,
-				__perm
-			);
-			bats::util::apply_perm(
-				coeff[dim-1].begin() + ((dim + 1) * ind),
-				__tmpc,
-				__perm
-			);
+        size_t k2 = dim-k; // index to skip
+        face.clear();
+        for (size_t j = 0; j < k2; j++) {
+          face.emplace_back(s[j]);
+        }
+        for (size_t j = k2+1; j < spx_len; j++) {
+          face.emplace_back(s[j]);
         }
 
-        // if we succeeded (faces were present), we add the simplex
-
-        // add to map
-        spx_to_idx.emplace(s, ind);
-        for (auto v : s) {
-            spx[dim].emplace_back(v);
+        size_t ind = find_idx(face);
+        // add face recursively
+        if (ind == bats::NO_IND) {
+          cell_ind fci = _add_recursive(face, ci);
+          ind = fci.ind;
         }
-		ci.emplace_back(cell_ind(dim, ind));
-
-        return cell_ind(dim, ind);
+        faces[dim-1].emplace_back(ind);
+        coeff[dim-1].emplace_back(c);
+        c = -c;
+      }
+      // if we made it to this point, the simplex will be added
+      // we should sort the faces and coeff
+      bats::util::fill_sortperm(
+        faces[dim-1].begin() + ((dim + 1) * ind),
+        faces[dim-1].begin() + ((dim + 1) * (ind+1)),
+        __perm
+      );
+      bats::util::apply_perm(
+        faces[dim-1].begin() + ((dim + 1) * ind),
+        __face,
+        __perm
+      );
+      bats::util::apply_perm(
+        coeff[dim-1].begin() + ((dim + 1) * ind),
+        __tmpc,
+        __perm
+      );
     }
 
-	// add simplex to complex with appropriate checks
-    std::vector<cell_ind> add_safe_recursive(std::vector<size_t> &s) {
+    // if we succeeded (faces were present), we add the simplex
+
+    // add to map
+    spx_to_idx.emplace(s, ind);
+    for (auto v : s) {
+      spx[dim].emplace_back(v);
+    }
+    ci.emplace_back(cell_ind(dim, ind));
+
+    return cell_ind(dim, ind);
+    }
+
+    std::vector<cell_ind> add_directed_recursive_safe(const std::vector<size_t> &s) {
         size_t dim = s.size() - 1;
         // check that we have reserved memory for dimension
         reserve(dim);
 
-        // ensure simplex is sorted
-        std::sort(s.begin(), s.end());
         // check if simplex is already in complex
         if (spx_to_idx.count(s) > 0) {
             // simplex is already in complex
             return std::vector<cell_ind>{cell_ind(dim, spx_to_idx[s])};
         }
         // we're clear to add
-		std::vector<cell_ind> ci;
-		_add_recursive(s, ci);
+        std::vector<cell_ind> ci;
+        _add_recursive(s, ci);
         return ci;
     }
+
+	// add simplex to complex with appropriate checks
+    std::vector<cell_ind> add_safe_recursive(std::vector<size_t> &s) {
+        // ensure simplex is sorted
+        std::sort(s.begin(), s.end());
+        return add_directed_recursive(s);
+    }
+
+
 
 
 public:
@@ -356,12 +367,20 @@ public:
         std::vector<size_t> &&s
     ) { return add_safe(s); }
 
+    inline cell_ind add_directed(
+      const std::vector<size_t> &s
+    ) { return add_directed_safe(s); }
+
 	inline std::vector<cell_ind> add_recursive(
 		std::vector<size_t> &s
 	) { return add_safe_recursive(s); }
 	inline std::vector<cell_ind> add_recursive(
 		std::vector<size_t> &&s
 	) { return add_safe_recursive(s); }
+
+  inline std::vector<cell_ind> add_directed_recursive(
+		std::vector<size_t> &s
+	) { return add_directed_recursive_safe(s); }
     // inline size_t add_vertex() { return _add_vertex(); }
     // inline size_t add_vertices(size_t k) { return _add_vertices(k); }
 

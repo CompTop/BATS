@@ -144,6 +144,21 @@ public:
 		return ret;
 	}
 
+	/**
+	add directed cell to filtration
+
+	@param t		filtration parameter
+	@param ...args	passed to add method of underlying complex
+	*/
+	template <class ...Ts>
+	inline cell_ind add_directed(TF t, Ts (&...args)) {
+		cell_ind ret = X.add_directed(args...);
+		reserve(ret.dim, ret.ind+1);
+		val[ret.dim][ret.ind] = t;
+		return ret;
+	}
+
+
 
 	/**
 	Add recursively to filtration.  Any cells added will take filtration

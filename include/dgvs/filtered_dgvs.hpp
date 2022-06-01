@@ -12,10 +12,10 @@ struct FilteredDGVectorSpace {
 	DGVectorSpace<MT> C; // stored in permutation order
 	std::vector<std::vector<size_t>> perm; // map from column order in chain complex to val
 
-	FilteredDGVectorSpace() {}
-
-	template <typename CpxT>
-	FilteredDGVectorSpace(const Filtration<FT, CpxT> &F, const int deg=-1, const bool augmented=false) : val(F.vals()), C(F.complex(), deg, augmented) {
+	/**
+	put underlying complex in permutation order
+	*/
+	void _set_perms() {
 		// step 1: compute permutation to put val in order
 		auto perms = filtration_sortperm(val);
 		if (C.degree == +1) {
@@ -30,6 +30,17 @@ struct FilteredDGVectorSpace {
 
 		// step 3: store inverse perumutation to map back to original order
 		perm = perms;
+	}
+
+	FilteredDGVectorSpace() {}
+
+	template <typename CpxT>
+	FilteredDGVectorSpace(const Filtration<FT, CpxT> &F, int deg=-1, bool augmented=false) : val(F.vals()), C(F.complex(), deg, augmented) {
+		_set_perms();
+	}
+
+	FilteredDGVectorSpace(const std::vector<MT> &diff, const std::vector<std::vector<FT>> &val, int deg=-1) : val(val), C(diff, deg) {
+		_set_perms();
 	}
 
 	inline size_t dim(const size_t k) { return C.dim(k); }
