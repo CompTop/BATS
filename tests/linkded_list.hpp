@@ -46,16 +46,20 @@ public:
     // copy constructor used for deepcopy
     LinkedList(const LinkedList &ll2) {
         // std::cout << "copy constructor is called." << std::endl;
-        Node* temp2 = ll2.head; 
-        Node* next2 = temp2->next;
-        head = new Node(temp2->data, temp2->index_ptr);
-        Node* temp = head; // for new linkedlist
-        while (temp2->next != NULL){
-            Node* new_node = new Node(next2->data, next2->index_ptr);
-            temp->next = new_node;
-            temp = temp->next;
-            temp2 = next2;
-            next2 = temp2->next;
+        if (ll2.head == NULL) {
+            head = NULL;
+        }else{
+            Node* temp2 = ll2.head;
+            Node* next2 = temp2->next;
+            head = new Node(temp2->data, temp2->index_ptr);
+            Node* temp = head; // for new linkedlist
+            while (temp2->next != NULL){
+                Node* new_node = new Node(next2->data, next2->index_ptr);
+                temp->next = new_node;
+                temp = temp->next;
+                temp2 = next2;
+                next2 = temp2->next;
+            }
         }
     }
 
@@ -74,6 +78,7 @@ public:
     void insert(int val, size_t* ptr);
     void display();
     void clear();
+    int getval(size_t i) const;
 
     // TODO: find y <- ax + y
     // void axpy(int a, LinkedList x){
@@ -107,6 +112,19 @@ void LinkedList::clear() {
         temp = next;
     }
     head = NULL;
+}
+
+// get value give a row index
+int LinkedList::getval (const size_t i) const{
+    Node* temp = head;
+    // iterate over all nodes, might be inefficient
+    while (temp != NULL) { 
+        if (*(temp->index_ptr) == i){
+            return temp->data;
+        }
+        temp = temp->next;
+    }
+    return 0;
 }
 
 // function to display the entire list

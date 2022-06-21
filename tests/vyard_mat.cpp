@@ -31,7 +31,7 @@ int main() {
     cols.emplace_back(b);
 
     VineyardMatrix M (6, 6, cols);
-
+    M.print();
 
     return 0;
 }

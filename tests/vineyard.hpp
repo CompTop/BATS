@@ -18,7 +18,7 @@ private:
     std::vector<size_t *> row_inds_ptr; // pointers of row indices shared by all columns
 public:
     // using val_type = typename TC::val_type;
-	// using col_type = TC;
+	using col_type = LinkedList;
 	// using tmp_type = typename TC::tmp_type; // for use with axpy
 
     // default constructor
@@ -39,7 +39,7 @@ public:
 
     // construct empty matrix.  same as zero matrix
     VineyardMatrix(size_t m, size_t n) : m(m), n(n) {
-        // col.resize(n, TC());
+        // col.reseve(n, TC());
         cols.resize(n);
         // row_inds_ptr.resize(m, *size_t);
     }
@@ -48,9 +48,8 @@ public:
     template <typename TF2> // TF2 : value type (of field) 
     VineyardMatrix(size_t m, size_t n, std::vector<SparseVector<TF2, size_t>> _cols) : m(m), n(n) {
         // assert (TF2 == val_type);
-        // TODO: resize col and row_inds_ptr properly
-        // col.resize(n, TC());
-        // row_inds_ptr.resize(m, *size_t);
+        // TODO: reserve space for col and row_inds_ptr properly
+        cols.reserve(n);
         for (size_t i = 0; i < m; i++){
             row_inds_ptr.emplace_back(new size_t(i));
         }
@@ -60,6 +59,33 @@ public:
                                         other_vec.nzend(), 
                                         row_inds_ptr.cbegin()));
         }
+
+    }
+
+    inline LinkedList& operator[](size_t index) { return cols[index];}
+    inline const LinkedList& operator[](size_t index) const { return cols[index];}
+
+    auto getval(const size_t i, const size_t j) const {
+        return cols[j].getval(i);
+    }
+
+    void print_size() const {
+        std::cout << "[" << this << "] : " << m << " x " << n <<\
+        " VineyardMatrix" << std::endl;
+    }
+
+    void print() const {
+        print_size();
+        // loop over rows
+        for (size_t i = 0; i < m; i++) {
+            for (size_t j = 0; j < n; j++) {
+                std::cout << std::setw(3) << getval(i, j) << " ";
+            }
+            std::cout << std::endl;
+        }
+        return;
+    }
+    void display(){
 
     }
 
