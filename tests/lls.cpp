@@ -19,7 +19,7 @@ int main() {
     list.insert(3, pt3);
     cout << "Linked List 1 data:\n";
     list.display();
-    LinkedList list2 = list;
+    LinkedList list2(list);
     cout << "Linked List 2 data:\n";
     list2.display();
 

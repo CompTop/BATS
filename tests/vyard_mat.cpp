@@ -30,8 +30,12 @@ int main() {
     SparseVector<F, size_t> b(ind, val);
     cols.emplace_back(b);
 
-    VineyardMatrix M (6, 6, cols);
+    VineyardMatrix M (5, 5, cols);
     M.print();
+    std::cout << "after column permutation" << std::endl;
+    M.permute_cols({2,0,1,3,4});
+    M.print();
+
 
     return 0;
 }

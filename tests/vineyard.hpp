@@ -59,7 +59,11 @@ public:
                                         other_vec.nzend(), 
                                         row_inds_ptr.cbegin()));
         }
-
+        if (_cols.size() < n){ // if only given the first non-zero columns
+            for (auto j = _cols.size(); j < n; j++){
+                cols.emplace_back(LinkedList());
+            }
+        }
     }
 
     inline LinkedList& operator[](size_t index) { return cols[index];}
@@ -89,9 +93,19 @@ public:
 
     }
 
-    // TODO: Row permutation (hard)
+    // permute rows in-place
+    // inline void permute_rows(const std::vector<size_t> &rowperm) {
+    //     bats::util::apply_perm_swap(row_inds_ptr, rowperm);
+    // }
 
-    // TODO: Column permutation (easy)
+    // permute columns in-place
+    inline void permute_cols(const std::vector<size_t> &colperm) {
+        bats::util::apply_perm_swap(cols, colperm);
+    }
+
+	inline void ipermute_cols(const std::vector<size_t> &colperm) {
+        bats::util::apply_iperm_swap(cols, colperm);
+    }
 
     // TODO: operator overload eg. indexing []
 
