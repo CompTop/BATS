@@ -4,9 +4,12 @@ using namespace std;
 
 // This is special linked-list used for column of Vineyard matrix, where
 // row index is shared by all lists
+// TODO: current constructor implementation assumes that row index values are in ascending order, 
+// please check it
+template <typename TV>
 class Node { 
 public:
-    int data;
+    TV data;
     size_t* index_ptr; // row index
     Node* next;
     // Defalt constructor
@@ -21,25 +24,51 @@ public:
     }
 
 
-    Node(int data, size_t* ptr) : data(data), index_ptr(ptr), next(nullptr) {
+    Node(TV data, size_t* ptr) : data(data), index_ptr(ptr), next(nullptr) {
         // cout << "Constructed node: " << data << "\n";
     }
 };
 
+template <typename TV> // type of node
 class LinkedList{
+private:
+    Node<TV>* head;
 public:
+    using node_type = Node<TV>;
     LinkedList() { // constructor
         head = nullptr;
     }
 
-    // iterator constructor by
-    // passing into sparse vector and row index pointer
+    // constructor from a sparse vector 
+    // begin_it: begin iterator of sparse vector
+    // end_it: end iterator of sparse vector.
+    // row_it: begin iterator of the row indices vector
     template <typename IT1, typename IT2>
     LinkedList(IT1 begin_it, IT1 end_it, IT2 row_it) {
         head = nullptr;
         for (auto it = begin_it; it < end_it; ++it) {
             // std::cout << "(*it).val = "<< (*it).val << ", row_it+(*it).ind " << row_it+(*it).ind << std::endl;
-            insert((*it).val, *(row_it+(*it).ind));
+            auto r_ptr = *(row_it+ it->ind);
+            insert(it->val, r_ptr);
+        }
+	}
+
+    // Constructor from a column of CSC matrix
+    // rptr: row begin iterator 
+    // vptr: value begin iterator 
+    // row_it: begin iterator of the row indices vector
+    // col_size: the number of (elements) nodes needed in the column
+    template <typename IT1, typename IT2, typename IT3>
+    LinkedList(IT1 rptr, IT2 vptr, IT3 row_it, size_t col_size) {
+        head = nullptr;
+        auto itr = rptr;
+        auto itv = vptr;
+        while(itr < rptr + col_size){
+            if (TV(*itv) != 0){ // zero node is not needed
+                insert(*itv, *(row_it + (*itr)));
+            }
+            itv++;
+            itr++;
         }
 	}
 
@@ -49,12 +78,12 @@ public:
         if (ll2.head == nullptr) {
             head = nullptr;
         }else{
-            Node* temp2 = ll2.head;
-            Node* next2 = temp2->next;
-            head = new Node(temp2->data, temp2->index_ptr);
-            Node* temp = head; // for new linkedlist
+            node_type* temp2 = ll2.head;
+            node_type* next2 = temp2->next;
+            head = new node_type(temp2->data, temp2->index_ptr);
+            node_type* temp = head; // for new linkedlist
             while (temp2->next != nullptr){
-                Node* new_node = new Node(next2->data, next2->index_ptr);
+                node_type* new_node = new node_type(next2->data, next2->index_ptr);
                 temp->next = new_node;
                 temp = temp->next;
                 temp2 = next2;
@@ -77,6 +106,7 @@ public:
     LinkedList& operator=(LinkedList&& other){
         // std::cout << "move assignment operator is called." << std::endl;
         if (this != &other){
+            // TODO: check it delete head is enough or should we delete all nodes like clear() (memory leak) 
             delete head; // delete current object first 
             if (other.head == nullptr) 
                 head = nullptr;
@@ -98,72 +128,58 @@ public:
 
     // destructor
     ~LinkedList() {
-        // std::cout << "call the destructor of LinkedList" << std::endl;
         clear();
     }
-    void insert(int val, size_t* ptr);
-    void display();
-    void clear();
-    int getval(size_t i) const;
+    void insert(TV val, size_t* ptr){
+        node_type* newnode = new node_type(val, ptr);
+        if (head == nullptr) {
+            head = newnode;
+        }
+        else {
+            node_type* temp = head; // head is not nullptr
+            while (temp->next != nullptr) { 
+                temp = temp->next; // go to end of list
+            }
+            temp->next = newnode; // linking to newnode
+        }
+    }
+    void display(){
+        if (head == nullptr) {
+            cout << "List is empty!" << endl;
+        }
+        else {
+            node_type* temp = head;
+            while (temp != nullptr) {
+                cout << "("<< temp->data << ", " << *(temp->index_ptr)<< ") ";
+                temp = temp->next;
+            }
+            cout << endl;
+        }
+    }
+    void clear(){
+        node_type* next; // next node 
+        node_type* temp = head; // current node
+        while (temp != nullptr) {
+            next = temp->next;
+            delete temp;
+            temp = next;
+        }
+        head = nullptr;
+    };
+    TV getval(size_t i) const{
+        node_type* temp = head;
+        // iterate over all nodes, might be inefficient
+        while (temp != nullptr) { 
+            if (*(temp->index_ptr) == i){
+                return temp->data;
+            }
+            temp = temp->next;
+        }
+        return TV(0);
+    };
 
     // TODO: find y <- ax + y
     // void axpy(int a, LinkedList x){
     // }
-private:
-    Node* head;
+
 };
-
-// Add node to a list
-void LinkedList::insert(int val, size_t* ptr) {
-    Node* newnode = new Node(val, ptr);
-    if (head == nullptr) {
-        head = newnode;
-    }
-    else {
-        Node* temp = head; // head is not nullptr
-        while (temp->next != nullptr) { 
-            temp = temp->next; // go to end of list
-        }
-        temp->next = newnode; // linking to newnode
-    }
-}
-
-// Delete the entire list
-void LinkedList::clear() {
-    Node* next; // next node 
-    Node* temp = head; // current node
-    while (temp != nullptr) {
-        next = temp->next;
-        delete temp;
-        temp = next;
-    }
-    head = nullptr;
-}
-
-// get value give a row index
-int LinkedList::getval (const size_t i) const{
-    Node* temp = head;
-    // iterate over all nodes, might be inefficient
-    while (temp != nullptr) { 
-        if (*(temp->index_ptr) == i){
-            return temp->data;
-        }
-        temp = temp->next;
-    }
-    return 0;
-}
-
-// function to display the entire list
-void LinkedList::display() {
-    if (head == nullptr) {
-        cout << "List is empty!" << endl;
-    }
-    else {
-        Node* temp = head;
-        while (temp != nullptr) {
-            cout << "("<< temp->data << ", " << *(temp->index_ptr)<< ") ";
-            temp = temp->next;
-        }
-        cout << endl;
-    }
-}
