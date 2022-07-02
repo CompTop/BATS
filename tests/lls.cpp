@@ -4,22 +4,22 @@
 using namespace std;
 
 int main() {
-    LinkedList list;
+    LinkedList<int> list;
     cout << "Creating List\n";
     size_t ind{0};
-    size_t* pt1{&ind};
+    const size_t* pt1{&ind};
     list.insert(99, pt1);
 
     ind = 2;
-    size_t* pt2{&ind};
+    const size_t* pt2{&ind};
     list.insert(2, pt2);
 
     ind = 4;
-    size_t* pt3{&ind};
+    const size_t* pt3{&ind};
     list.insert(3, pt3);
     cout << "Linked List 1 data:\n";
     list.display();
-    LinkedList list2(list);
+    LinkedList<int> list2(list);
     cout << "Linked List 2 data:\n";
     list2.display();
 

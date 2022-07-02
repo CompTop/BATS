@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <bats.hpp>
+#include <memory>
 #include "linkded_list.hpp"
 
 // forward declarations
@@ -16,6 +17,7 @@ private:
     size_t n = 0; // number of columns
     std::vector<LinkedList<TV>> cols; // vector of columns 
     std::vector<size_t *> row_inds_ptr; // pointers of row indices shared by all columns
+    // std::vector<std::shared_ptr<size_t>> row_inds_ptr;
 public:
     // using val_type = typename TC::val_type;
 	using col_type = LinkedList<TV>;
@@ -41,6 +43,7 @@ public:
     VineyardMatrix(size_t m, size_t n) : m(m), n(n) {
         // col.reseve(n, TC());
         cols.resize(n);
+        initial_row_ptrs(m);
         // row_inds_ptr.resize(m, *size_t);
     }
 
@@ -48,23 +51,21 @@ public:
     template <typename TF2> // TF2 : value type (of field) 
     VineyardMatrix(size_t m, size_t n, std::vector<SparseVector<TF2, size_t>> _cols) : m(m), n(n) {
         // assert (TF2 == val_type);
-        // TODO: reserve space for col and row_inds_ptr properly
         cols.reserve(n);
         initial_row_ptrs(m);
         for (auto other_vec: _cols){
-            cols.emplace_back(col_type(other_vec.nzbegin(),
+            cols.emplace_back(other_vec.nzbegin(),
                                         other_vec.nzend(), 
-                                        row_inds_ptr.cbegin()));
+                                        row_inds_ptr.cbegin());
         }
         if (_cols.size() < n){ // if only given the first non-zero columns
             for (auto j = _cols.size(); j < n; j++){
-                cols.emplace_back(col_type());
+                cols.emplace_back();
             }
         }
     }
 
     // constructor from CSCMatrix over the integers
-    // TODO: CSC to Vineyard 
     VineyardMatrix(const CSCMatrix<int, size_t> &A) : m(A.nrow()), n(A.ncol()) {
         cols.reserve(n);
         initial_row_ptrs(m);
@@ -78,10 +79,10 @@ public:
         for (size_t j = 0; j < n; j++) {
             size_t c_start_ind = colptr[j];
             size_t col_size =  colptr[j+1] - colptr[j];
-            cols.emplace_back(col_type(rptr+c_start_ind, 
+            cols.emplace_back(rptr+c_start_ind, 
                                     vptr+c_start_ind, 
                                     row_inds_ptr.cbegin(),
-                                    col_size));
+                                    col_size);
         }
     }
 
@@ -122,7 +123,9 @@ public:
 
     // permute rows in-place
     inline void permute_rows(const std::vector<size_t> &rowperm) {
-        assert(row_inds_ptr.size() == rowperm.size());
+        if (row_inds_ptr.size() != rowperm.size()){ // TODO: make it a if Debug 
+            assert(row_inds_ptr.size() == rowperm.size());
+        }
         auto it_row = row_inds_ptr.begin();
         auto it_perm = rowperm.begin();
         while (it_row < row_inds_ptr.end()){
@@ -141,11 +144,12 @@ public:
         bats::util::apply_iperm_swap(cols, colperm);
     }
 
-    // TODO: operator overload eg. indexing []
-
     // TODO: Simplicial complex to Vineyard directly without using CSC 
-
     
-
+    void test_func(){
+        // auto c1 = this->[0];
+        // auto c2 = this->[2];
+        cols[0].axpy(2, cols[2]);
+    }
 
 };

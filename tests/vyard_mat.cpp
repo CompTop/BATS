@@ -3,7 +3,7 @@
 #include "vineyard.hpp"
 
 using namespace std;
-#define F ModP<int, 3>
+#define F int
 #define F3 ModP<int, 3>
 
 
@@ -41,8 +41,11 @@ int main() {
     M2.print();
 
     // CSC to Vineyard 
+    std::cout << "\nCSC to Vineyard" << std::endl;
     VineyardMatrix<F> M3(M2);
     M3.print();
 
+    M3.test_func();
+    M3.print();
     return 0;
 }

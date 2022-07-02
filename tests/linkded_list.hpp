@@ -4,13 +4,11 @@ using namespace std;
 
 // This is special linked-list used for column of Vineyard matrix, where
 // row index is shared by all lists
-// TODO: current constructor implementation assumes that row index values are in ascending order, 
-// please check it
 template <typename TV>
 class Node { 
 public:
     TV data;
-    size_t* index_ptr; // row index
+    const size_t* & index_ptr; // row index
     Node* next;
     // Defalt constructor
     Node() : data(0), index_ptr(nullptr), next(nullptr) {
@@ -24,7 +22,7 @@ public:
     }
 
 
-    Node(TV data, size_t* ptr) : data(data), index_ptr(ptr), next(nullptr) {
+    Node(TV data, const size_t* & ptr) : data(data), index_ptr(ptr), next(nullptr) {
         // cout << "Constructed node: " << data << "\n";
     }
 };
@@ -32,9 +30,10 @@ public:
 template <typename TV> // type of node
 class LinkedList{
 private:
-    Node<TV>* head;
+    Node<TV>* head = nullptr;
 public:
     using node_type = Node<TV>;
+    using rptr_type = size_t *;
     LinkedList() { // constructor
         head = nullptr;
     }
@@ -48,7 +47,8 @@ public:
         head = nullptr;
         for (auto it = begin_it; it < end_it; ++it) {
             // std::cout << "(*it).val = "<< (*it).val << ", row_it+(*it).ind " << row_it+(*it).ind << std::endl;
-            auto r_ptr = *(row_it+ it->ind);
+            const rptr_type & r_ptr = *(row_it+ it->ind);
+            // const auto& r_ptr = *(row_it+ it->ind); // const reference to rvalue
             insert(it->val, r_ptr);
         }
 	}
@@ -65,7 +65,8 @@ public:
         auto itv = vptr;
         while(itr < rptr + col_size){
             if (TV(*itv) != 0){ // zero node is not needed
-                insert(*itv, *(row_it + (*itr)));
+                const auto& r_ptr = *(row_it + (*itr)); // const reference to rvalue
+                insert(*itv, r_ptr);
             }
             itv++;
             itr++;
@@ -106,7 +107,6 @@ public:
     LinkedList& operator=(LinkedList&& other){
         // std::cout << "move assignment operator is called." << std::endl;
         if (this != &other){
-            // TODO: check it delete head is enough or should we delete all nodes like clear() (memory leak) 
             delete head; // delete current object first 
             if (other.head == nullptr) 
                 head = nullptr;
@@ -130,7 +130,9 @@ public:
     ~LinkedList() {
         clear();
     }
-    void insert(TV val, size_t* ptr){
+    // template<typename TPtr>
+    // void insert(TV val, TPtr* ptr){
+    void insert(const TV &val, const size_t* & ptr){
         node_type* newnode = new node_type(val, ptr);
         if (head == nullptr) {
             head = newnode;
@@ -178,8 +180,30 @@ public:
         return TV(0);
     };
 
-    // TODO: find y <- ax + y
-    // void axpy(int a, LinkedList x){
-    // }
+    // TODO: find y <- ax + y still onging!
+    // assume x shares the same vector of row index pointers
+    template <typename TV_new>
+    void axpy(TV_new _a, LinkedList<TV> x){
+        LinkedList<TV> temp_ll;
+        TV a = TV(_a);
+        auto yptr = this->head;
+        auto xptr = x.head;
+        while (xptr != nullptr and yptr != nullptr){
+            // compare memory addresses of row pointers instead of their values
+            if (&(xptr->index_ptr) < &(yptr->index_ptr)){
+                temp_ll.insert(a * xptr->data, xptr->index_ptr);
+                xptr = xptr->next; 
+            }else if (&(xptr->index_ptr) > &(yptr->index_ptr)){ 
+                temp_ll.insert(yptr->data, yptr->index_ptr);
+                yptr = yptr->next;
+            }else{
+                temp_ll.insert(yptr->data + a *  xptr->data, yptr->index_ptr);
+                yptr = yptr->next;
+                xptr = xptr->next; 
+            }
+        }
+        this->clear();
+        this->head = temp_ll.head;
+    }
 
 };
