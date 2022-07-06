@@ -3,7 +3,7 @@
 #include "vineyard.hpp"
 
 using namespace std;
-#define F int
+#define F ModP<int, 5>
 #define F3 ModP<int, 3>
 
 
@@ -24,12 +24,14 @@ int main() {
 
     VineyardMatrix<F> M (5, 5, cols);
     M.print();
-    std::cout << "after column permutation" << std::endl;
-    M.permute_cols({2,0,1,3,4});
-    M.print();
-    std::cout << "after row permutation" << std::endl;
-    M.permute_rows({0,2,1,3,4});
-    M.print();
+
+
+    // std::cout << "after column permutation" << std::endl;
+    // M.permute_cols({2,0,1,3,4});
+    // M.print();
+    // std::cout << "after row permutation" << std::endl;
+    // M.permute_rows({0,2,1,3,4});
+    // M.print();
 
     // construct a CSC matrix 
     std::vector<size_t> rowind = {0,0,1,1,2};
@@ -40,11 +42,10 @@ int main() {
     std::cout << "A CSC Matrix" << std::endl;
     M2.print();
 
-    // CSC to Vineyard 
-    std::cout << "\nCSC to Vineyard" << std::endl;
+    std::cout << "CSC to Vineyard" << std::endl;
     VineyardMatrix<F> M3(M2);
     M3.print();
-
+    std::cout << "Add cols[0] += 2 * cols[1] " << std::endl;
     M3.test_func();
     M3.print();
     return 0;

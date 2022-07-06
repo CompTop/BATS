@@ -16,27 +16,14 @@ private:
     size_t m = 0; // number of rows
     size_t n = 0; // number of columns
     std::vector<LinkedList<TV>> cols; // vector of columns 
-    std::vector<size_t *> row_inds_ptr; // pointers of row indices shared by all columns
-    // std::vector<std::shared_ptr<size_t>> row_inds_ptr;
+    std::vector<shared_ptr<size_t>> row_inds_ptr; // pointers of row indices shared by all columns
 public:
-    // using val_type = typename TC::val_type;
-	using col_type = LinkedList<TV>;
-	// using tmp_type = typename TC::tmp_type; // for use with axpy
+	using col_type = LinkedList<TV>; // column type
+    using TC = col_type;
 
     // default constructor
     VineyardMatrix() {}
     
-    ~VineyardMatrix() {
-        clear();
-    }
-    // Delete the entire list
-    void clear() {
-        // delete all pointers in the row index vector
-        for(auto p: row_inds_ptr){
-            delete p;
-        }
-        row_inds_ptr.clear();
-    }
 
 
     // construct empty matrix.  same as zero matrix
@@ -44,7 +31,6 @@ public:
         // col.reseve(n, TC());
         cols.resize(n);
         initial_row_ptrs(m);
-        // row_inds_ptr.resize(m, *size_t);
     }
 
     // construct Vineyard matrix by passing vector of columns(sparse vectors)
@@ -53,10 +39,9 @@ public:
         // assert (TF2 == val_type);
         cols.reserve(n);
         initial_row_ptrs(m);
-        for (auto other_vec: _cols){
+        for (auto other_vec: _cols){ 
             cols.emplace_back(other_vec.nzbegin(),
-                                        other_vec.nzend(), 
-                                        row_inds_ptr.cbegin());
+                            other_vec.nzend(), row_inds_ptr.begin());
         }
         if (_cols.size() < n){ // if only given the first non-zero columns
             for (auto j = _cols.size(); j < n; j++){
@@ -67,22 +52,23 @@ public:
 
     // constructor from CSCMatrix over the integers
     VineyardMatrix(const CSCMatrix<int, size_t> &A) : m(A.nrow()), n(A.ncol()) {
+        // reserve capacity
         cols.reserve(n);
         initial_row_ptrs(m);
 
-        auto colptr = A.get_colptr();
+        auto colptr = A.get_colptr(); // column pointer of CSC
         auto rowind = A.get_rowind();
         auto val = A.get_val();
-        auto rptr = rowind.cbegin();
-        auto vptr = val.cbegin();
+        auto rptr = rowind.cbegin();// row index pointer of CSC
+        auto vptr = val.cbegin(); // value pointer of CSC
         
         for (size_t j = 0; j < n; j++) {
             size_t c_start_ind = colptr[j];
             size_t col_size =  colptr[j+1] - colptr[j];
             cols.emplace_back(rptr+c_start_ind, 
-                                    vptr+c_start_ind, 
-                                    row_inds_ptr.cbegin(),
-                                    col_size);
+                                vptr+c_start_ind, 
+                                row_inds_ptr.cbegin(),
+                                col_size);
         }
     }
 
@@ -90,7 +76,7 @@ public:
     void initial_row_ptrs(size_t m){
         row_inds_ptr.reserve(m);
         for (size_t i = 0; i < m; i++){
-            row_inds_ptr.emplace_back(new size_t(i));
+            row_inds_ptr.emplace_back(std::make_shared<size_t>(i));
         }
     }
 
@@ -144,12 +130,21 @@ public:
         bats::util::apply_iperm_swap(cols, colperm);
     }
 
+    // static methods
+	static VineyardMatrix identity(size_t n) {
+		std::vector<SparseVector<TV>> col(n);
+		for (size_t j = 0; j < n; j++) {
+			col[j] = SparseVector<TV>(j);
+		}
+		return VineyardMatrix(n, n, col);
+	}
+
     // TODO: Simplicial complex to Vineyard directly without using CSC 
     
     void test_func(){
-        // auto c1 = this->[0];
-        // auto c2 = this->[2];
-        cols[0].axpy(2, cols[2]);
+        cols[0].axpy(2, cols[1]);
     }
+
+    inline std::vector<col_type>& get_cols() { return cols; }
 
 };

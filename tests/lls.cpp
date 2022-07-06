@@ -5,30 +5,39 @@ using namespace std;
 
 int main() {
     LinkedList<int> list;
-    cout << "Creating List\n";
-    size_t ind{0};
-    const size_t* pt1{&ind};
+    std::cout << "Creating List\n";
+    std::shared_ptr<size_t> pt1 = std::make_shared<size_t>(0);
     list.insert(99, pt1);
 
-    ind = 2;
-    const size_t* pt2{&ind};
+    std::shared_ptr<size_t> pt2 = std::make_shared<size_t>(2);
     list.insert(2, pt2);
 
-    ind = 4;
-    const size_t* pt3{&ind};
+    std::shared_ptr<size_t> pt3 = std::make_shared<size_t>(4);
     list.insert(3, pt3);
-    cout << "Linked List 1 data:\n";
+    std::cout << "Linked List 1 data:\n";
     list.display();
     LinkedList<int> list2(list);
-    cout << "Linked List 2 data:\n";
+    std::cout << "Linked List 2 data:\n";
     list2.display();
 
-    cout << "Clearing list 1\n";
+    std::cout << "Clearing list 1\n";
     list.clear();
-    cout << "Linked List1 data:\n";
+    std::cout << "Linked List1 data:\n";
     list.display();
 
-    cout << "Linked List 2 data:\n";
+    std::cout << "Linked List 2 data:\n";
+    list2.display();
+
+    std::cout << "Call the move " << std::endl;
+    // LinkedList<int> list3;
+    // std::shared_ptr<size_t> pt4 = std::make_shared<size_t>(1);
+    // list3.insert(1, pt4);
+    // std::shared_ptr<size_t> pt5 = std::make_shared<size_t>(2);
+    // list3.insert(2, pt5);
+
+    // list3 = std::move(list2);
+    LinkedList<int> list3(std::move(list2));
+    list3.display();
     list2.display();
     return 0;
 }
