@@ -26,12 +26,12 @@ int main() {
     M.print();
 
 
-    // std::cout << "after column permutation" << std::endl;
-    // M.permute_cols({2,0,1,3,4});
-    // M.print();
-    // std::cout << "after row permutation" << std::endl;
-    // M.permute_rows({0,2,1,3,4});
-    // M.print();
+    std::cout << "after column permutation" << std::endl;
+    M.permute_cols({2,0,1,3,4});
+    M.print();
+    std::cout << "after row permutation" << std::endl;
+    M.permute_rows({0,2,1,3,4});
+    M.print();
 
     // construct a CSC matrix 
     std::vector<size_t> rowind = {0,0,1,1,2};

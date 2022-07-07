@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <random>
 #include <bats.hpp>
 #include <memory>
 #include "linkded_list.hpp"
@@ -137,6 +138,20 @@ public:
 			col[j] = SparseVector<TV>(j);
 		}
 		return VineyardMatrix(n, n, col);
+	}
+
+	static VineyardMatrix random(size_t m, size_t n, double p, int maxval, std::default_random_engine &generator) {
+		std::vector<SparseVector<TV>> col(n);
+		for (size_t j = 0; j < n; j++) {
+			col[j] = SparseVector<TV>::random(m, p, maxval, generator);
+		}
+		return VineyardMatrix(m, n, col);
+	}
+	static VineyardMatrix random(size_t m, size_t n, double p, int maxval) {
+		// obtain a seed from the system clock:
+		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		std::default_random_engine generator(seed);
+		return random(m, n, p, maxval, generator);
 	}
 
     // TODO: Simplicial complex to Vineyard directly without using CSC 
