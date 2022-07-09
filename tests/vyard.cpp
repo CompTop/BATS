@@ -45,8 +45,5 @@ int main() {
     std::cout << "CSC to Vineyard" << std::endl;
     VineyardMatrix<F> M3(M2);
     M3.print();
-    std::cout << "Add cols[0] += 2 * cols[1] " << std::endl;
-    M3.test_func();
-    M3.print();
     return 0;
 }

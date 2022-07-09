@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <iostream>
+#include <bats.hpp>
 using namespace std;
 
 // This is special linked-list used for column of Vineyard matrix, where
@@ -202,6 +203,34 @@ public:
                 temp = temp->next; // go to end of list
             }
             return temp;
+        }
+    }
+
+	// number of nonzeros
+	size_t nnz() const {
+		size_t ct = 0;
+		if (head == nullptr) {
+            return ct;
+        }else{
+            Node_type* temp = head; // head is not nullptr
+            while (temp->next != nullptr) { 
+                ct++;
+                temp = temp->next; // go to end of list
+            }
+        }
+		return ct;
+	}
+
+    // Return the last non-zero node (tail node)
+    nzpair<size_t, TV> lastnz(){
+        if (head == nullptr) {
+            return nzpair<size_t, TV>();
+        }else {
+            Node_type* temp = head; // head is not nullptr
+            while (temp->next != nullptr) { 
+                temp = temp->next; // go to end of list
+            }
+            return nzpair<size_t, TV>(temp->data, temp->get_ind_val());
         }
     }
 
