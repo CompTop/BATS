@@ -23,14 +23,14 @@ public:
         next = node2.next;
     }
 
-    Node(TV data, const std::shared_ptr<size_t>& ptr_ptr) : data(data), index_ptr(&ptr_ptr), 
-    next(nullptr) {
+    Node(TV data, const std::shared_ptr<size_t>& sptr) : data(data), index_ptr(&sptr), 
+    next(nullptr) {// pass into pointer and store its address
         // cout << "Constructed node: " << data << "\n";
     }
     
     // find row index value of current node 
     inline size_t get_ind_val(){
-        return **index_ptr;
+        return *(get_ind_ptr());
     }
 
     // find the address of row index pointer of current node 
@@ -47,7 +47,7 @@ private:
     Node<TV>* head = nullptr;
 public:
     using Node_type = Node<TV>;
-
+    using tmp_type = LinkedList<TV>;
     LinkedList() { // constructor
         head = nullptr;
     }
@@ -61,7 +61,6 @@ public:
         if (begin_it == end_it){// check empty sparse vector 
             head = nullptr;
         }else{
-            // TODO: clear zero value node 
             auto it = begin_it;
             head = new Node_type(it->val, *(row_it + it->ind));
             Node_type* temp = head;
@@ -72,6 +71,7 @@ public:
                 it++;
             }
         }
+        this->clear_zeros();
 	}
 
     // Constructor from a column of CSC matrix
@@ -178,7 +178,7 @@ public:
     
     // move assignment operator (replace head by other object, where head might not be null)
     LinkedList& operator=(LinkedList&& other) noexcept{
-        std::cout << "move assignment operator is called." << std::endl;
+        // std::cout << "move assignment operator is called." << std::endl;
         if (this != &other){
             this->~LinkedList(); // delete current object first
             head = other.head; // steal temp obj
@@ -212,6 +212,7 @@ public:
 		if (head == nullptr) {
             return ct;
         }else{
+            ct++;
             Node_type* temp = head; // head is not nullptr
             while (temp->next != nullptr) { 
                 ct++;
@@ -226,16 +227,24 @@ public:
         if (head == nullptr) {
             return nzpair<size_t, TV>();
         }else {
+            TV last_data = head->data;
+            size_t last_ind = head->get_ind_val();
             Node_type* temp = head; // head is not nullptr
-            while (temp->next != nullptr) { 
-                temp = temp->next; // go to end of list
+            while (temp->next != nullptr) {
+                temp = temp->next;
+                if (temp->get_ind_val() > last_ind){
+                    last_ind = temp->get_ind_val();
+                    last_data = temp->data;
+                }
             }
-            return nzpair<size_t, TV>(temp->data, temp->get_ind_val());
+            return nzpair<size_t, TV>(last_ind, last_data);
         }
     }
 
     // insert node at the end of linked list 
     void insert(const TV &val, const std::shared_ptr<size_t> & sptr){
+        if(val == TV(0)){return;}
+
         Node_type* newnode = new Node_type(val, sptr);
         if (head == nullptr) {
             head = newnode;
@@ -257,13 +266,64 @@ public:
         }
         else {
             Node_type* temp = head;
+            std::cout << "(index, value): ";
             while (temp != nullptr) {
-                cout << "("<< temp->data << ", " << temp->get_ind_val() << ") ";
+                cout << "("<< temp->get_ind_val() << ", " << temp->data << ") ";
                 temp = temp->next;
             }
             cout << endl;
         }
     }
+
+    void print(){
+        if (head == nullptr) {
+            cout << "List is empty!" << endl;
+        }
+        else {
+            Node_type* temp = head;
+            std::cout << "(index, value): ";
+            while (temp != nullptr) {
+                cout << "("<< temp->get_ind_val() << ", " << temp->data << ") ";
+                temp = temp->next;
+            }
+            cout << endl;
+        }
+    }
+
+    // clear zeros inside
+    void clear_zeros(){
+        if (head == nullptr){return;}
+
+        Node_type* prev_nd; // previous node
+        Node_type* next_nd; // next node 
+        Node_type* temp_nd = head; // current node
+        // find the first non-zero as its new head 
+        while(temp_nd != nullptr){
+            if (temp_nd->data == TV(0)){ 
+                next_nd = temp_nd->next;
+                delete temp_nd;
+                head = next_nd;
+                temp_nd = next_nd;
+            }else{
+                prev_nd = temp_nd;
+                temp_nd = temp_nd->next;
+                break;
+            }
+        }
+
+        while (temp_nd != nullptr) {
+            // if temp is zero, no need to modify previous node
+            if (temp_nd->data == TV(0)){ 
+                next_nd = temp_nd->next;
+                prev_nd->next = next_nd;
+                delete temp_nd;
+                temp_nd = next_nd;
+            }else{
+                prev_nd = temp_nd;
+                temp_nd = temp_nd->next;
+            }
+        }
+    };
 
     void clear(){
         Node_type* next; // next node 
@@ -290,7 +350,7 @@ public:
     // find y <- ax + y by modifying y in-place
     // assume x shares the same vector of row index pointers
     template <typename TV_new>
-    void axpy(TV_new _a, LinkedList<TV> x){
+    void axpy_inplace(TV_new _a, LinkedList<TV> x){
         TV a = TV(_a);
         auto yptr = this->head;
         auto xptr = x.head;
@@ -359,6 +419,162 @@ public:
             }
             // if xptr == nullptr is true, no need to merge
         }
+        this->clear_zeros();
     }
 
+    // find y <- ax + y by using temporary linked list
+    // assume x shares the same vector of row index pointers
+    template <typename TV_new>
+    void axpy(TV_new _a, LinkedList<TV> x){
+        TV a = TV(_a);
+        auto yptr = this->head;
+        auto xptr = x.head;
+
+        if (a == TV(0) or xptr == nullptr){return;}
+        
+        if (yptr == nullptr){
+            // call the copy assignment operator
+            *this = x;
+            auto temp = this->head;
+            while (temp != nullptr){
+                temp->data = a * (temp->data); 
+                temp = temp->next;
+            }
+            this->clear_zeros();
+            return;
+        }
+        
+        // Now, none of x and y are nullptr
+        LinkedList<TV> templl;
+        // find head first
+        auto x_address = xptr->get_ind_ptr(); // address in the shared row indices vector
+        auto y_address = yptr->get_ind_ptr();
+        if (x_address > y_address){ 
+            templl.head = new Node_type(yptr->data, *(yptr->index_ptr));
+            yptr = yptr->next;
+        }else if (x_address < y_address){
+            templl.head = new Node_type(a * xptr->data, *(xptr->index_ptr));
+            xptr = xptr->next;
+        }else{
+            templl.head = new Node_type(yptr->data + a * xptr->data, *(yptr->index_ptr));
+            xptr = xptr->next;
+            yptr = yptr->next;
+        }
+        
+        
+        Node_type* temp_ptr = templl.head;
+        while (xptr != nullptr and yptr != nullptr){ 
+            x_address = xptr->get_ind_ptr(); // address in row indices vector
+            y_address = yptr->get_ind_ptr();
+
+            if (x_address > y_address){ 
+                // only deal with y
+                temp_ptr->next = new Node_type(yptr->data, *(yptr->index_ptr));
+                yptr = yptr->next;
+            }else if (x_address < y_address){
+                temp_ptr->next = new Node_type(a * xptr->data, *(xptr->index_ptr));
+                xptr = xptr->next;
+            }else{
+                temp_ptr->next = new Node_type(yptr->data + a * xptr->data, *(yptr->index_ptr));
+                xptr = xptr->next;
+                yptr = yptr->next;
+            }
+            temp_ptr = temp_ptr->next;
+        }
+        // Now at least one of the x y pointers are nullptr
+        while (xptr != nullptr){ // yptr == nullptr is true 
+            temp_ptr->next = new Node_type(a * xptr->data, *(xptr->index_ptr));
+            xptr = xptr->next;
+            temp_ptr = temp_ptr->next;
+        }
+
+        while (yptr != nullptr){ // xptr == nullptr is true 
+            temp_ptr->next = new Node_type(yptr->data, *(yptr->index_ptr));
+            yptr = yptr->next;
+            temp_ptr = temp_ptr->next;
+        }
+        
+        // std::cout << "\nshould call move assignment operator now" << std::endl;
+        *this = std::move(templl);
+
+        this->clear_zeros();
+    }
+
+    // find y <- ax + y by passing temporary linked list
+    // assume x shares the same vector of row index pointers
+    template <typename TV_new>
+    void axpy(TV_new _a, LinkedList<TV> x, LinkedList<TV> templl){
+        TV a = TV(_a);
+        auto yptr = this->head;
+        auto xptr = x.head;
+
+        if (a == TV(0) or xptr == nullptr){return;}
+        
+        if (yptr == nullptr){
+            // call the copy assignment operator
+            *this = x;
+            auto temp = this->head;
+            while (temp != nullptr){
+                temp->data = a * (temp->data); 
+                temp = temp->next;
+            }
+            this->clear_zeros();
+            return;
+        }
+        
+        // Now, none of x and y are nullptr
+        templl.clear();
+        // find head first
+        auto x_address = xptr->get_ind_ptr(); // address in the shared row indices vector
+        auto y_address = yptr->get_ind_ptr();
+        if (x_address > y_address){ 
+            templl.head = new Node_type(yptr->data, *(yptr->index_ptr));
+            yptr = yptr->next;
+        }else if (x_address < y_address){
+            templl.head = new Node_type(a * xptr->data, *(xptr->index_ptr));
+            xptr = xptr->next;
+        }else{
+            templl.head = new Node_type(yptr->data + a * xptr->data, *(yptr->index_ptr));
+            xptr = xptr->next;
+            yptr = yptr->next;
+        }
+        
+        
+        Node_type* temp_ptr = templl.head;
+        while (xptr != nullptr and yptr != nullptr){ 
+            x_address = xptr->get_ind_ptr(); // address in row indices vector
+            y_address = yptr->get_ind_ptr();
+
+            if (x_address > y_address){ 
+                // only deal with y
+                temp_ptr->next = new Node_type(yptr->data, *(yptr->index_ptr));
+                yptr = yptr->next;
+            }else if (x_address < y_address){
+                temp_ptr->next = new Node_type(a * xptr->data, *(xptr->index_ptr));
+                xptr = xptr->next;
+            }else{
+                temp_ptr->next = new Node_type(yptr->data + a * xptr->data, *(yptr->index_ptr));
+                xptr = xptr->next;
+                yptr = yptr->next;
+            }
+            temp_ptr = temp_ptr->next;
+        }
+        // Now at least one of the x y pointers are nullptr
+        while (xptr != nullptr){ // yptr == nullptr is true 
+            temp_ptr->next = new Node_type(a * xptr->data, *(xptr->index_ptr));
+            xptr = xptr->next;
+            temp_ptr = temp_ptr->next;
+        }
+
+        while (yptr != nullptr){ // xptr == nullptr is true 
+            temp_ptr->next = new Node_type(yptr->data, *(yptr->index_ptr));
+            yptr = yptr->next;
+            temp_ptr = temp_ptr->next;
+        }
+        
+        // std::cout << "\nshould call move assignment operator now" << std::endl;
+        *this = std::move(templl);
+
+        this->clear_zeros();
+    }
 };

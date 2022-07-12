@@ -153,17 +153,17 @@ public:
 
     // TODO: Simplicial complex to Vineyard directly without using CSC 
 
-    // inline size_t nrow() const { return m; }
-    // inline size_t ncol() const { return n; }
-    // inline std::vector<TC>& cols() { return cols; }
-    // inline const std::vector<TC>& cols() const { return cols; }
+    inline size_t nrow() const { return m; }
+    inline size_t ncol() const { return n; }
+    inline std::vector<TC>& cols() { return col; }
+    inline const std::vector<TC>& cols() const { return col; }
 
-    // // number of nonzeros
-	// size_t nnz() const {
-	// 	size_t ct = 0;
-	// 	for (size_t j = 0; j < n; j++) {
-	// 		ct += cols[j].nnz();
-	// 	}
-	// 	return ct;
-	// }
+    // number of nonzeros
+	size_t nnz() const {
+		size_t ct = 0;
+		for (size_t j = 0; j < n; j++) {
+			ct += col[j].nnz();
+		}
+		return ct;
+	}
 };
